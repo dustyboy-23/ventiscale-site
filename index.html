@@ -3,33 +3,155 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Venti Scale — Digital Marketing & Media</title>
+<title>Venti Scale — Digital Marketing & Media Agency</title>
+<meta name="description" content="Venti Scale is a digital marketing and media agency specializing in paid advertising, AI-powered content creation, brand growth, and e-commerce scaling.">
 <style>
 *{margin:0;padding:0;box-sizing:border-box}
-body{font-family:-apple-system,system-ui,sans-serif;background:#0a0a0b;color:#e2e8f0;min-height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:40px 20px}
-.container{max-width:600px;text-align:center}
-h1{font-size:42px;font-weight:700;margin-bottom:8px;background:linear-gradient(135deg,#06b6d4,#8b5cf6);-webkit-background-clip:text;-webkit-text-fill-color:transparent}
-.tagline{font-size:18px;color:#94a3b8;margin-bottom:40px}
-.links{display:flex;gap:24px;justify-content:center;flex-wrap:wrap;margin-top:40px}
-.links a{color:#64748b;font-size:13px;text-decoration:none;transition:color 0.2s}
-.links a:hover{color:#06b6d4}
-.contact{margin-top:40px;padding:24px;border:1px solid rgba(255,255,255,0.06);border-radius:12px;background:rgba(255,255,255,0.02)}
-.contact a{color:#06b6d4;text-decoration:none}
+body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;background:#0a0a0b;color:#e2e8f0}
+a{color:#06b6d4;text-decoration:none}
+a:hover{text-decoration:underline}
+
+/* Nav */
+nav{padding:20px 40px;display:flex;justify-content:space-between;align-items:center;border-bottom:1px solid rgba(255,255,255,0.06)}
+nav .logo{font-size:20px;font-weight:700;background:linear-gradient(135deg,#06b6d4,#8b5cf6);-webkit-background-clip:text;-webkit-text-fill-color:transparent}
+nav .links{display:flex;gap:24px}
+nav .links a{color:#94a3b8;font-size:14px;text-decoration:none;transition:color 0.2s}
+nav .links a:hover{color:#fff}
+
+/* Hero */
+.hero{text-align:center;padding:120px 20px 80px;max-width:800px;margin:0 auto}
+.hero h1{font-size:56px;font-weight:800;line-height:1.1;margin-bottom:20px;background:linear-gradient(135deg,#fff 0%,#06b6d4 50%,#8b5cf6 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent}
+.hero p{font-size:20px;color:#94a3b8;line-height:1.6;max-width:600px;margin:0 auto 40px}
+.hero .cta{display:inline-block;padding:14px 32px;background:linear-gradient(135deg,#06b6d4,#8b5cf6);color:#fff;font-weight:600;font-size:16px;border-radius:8px;transition:opacity 0.2s}
+.hero .cta:hover{opacity:0.9;text-decoration:none}
+
+/* Services */
+.services{padding:80px 40px;max-width:1100px;margin:0 auto}
+.services h2{text-align:center;font-size:32px;margin-bottom:48px;color:#fff}
+.services-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:24px}
+.service-card{padding:32px;border:1px solid rgba(255,255,255,0.06);border-radius:12px;background:rgba(255,255,255,0.02);transition:border-color 0.2s}
+.service-card:hover{border-color:rgba(6,182,212,0.3)}
+.service-card .icon{font-size:28px;margin-bottom:16px}
+.service-card h3{font-size:18px;color:#fff;margin-bottom:8px}
+.service-card p{font-size:14px;color:#94a3b8;line-height:1.6}
+
+/* Results */
+.results{padding:80px 40px;text-align:center}
+.results h2{font-size:32px;margin-bottom:48px;color:#fff}
+.stats{display:flex;justify-content:center;gap:60px;flex-wrap:wrap}
+.stat{text-align:center}
+.stat .number{font-size:48px;font-weight:800;background:linear-gradient(135deg,#06b6d4,#8b5cf6);-webkit-background-clip:text;-webkit-text-fill-color:transparent}
+.stat .label{font-size:14px;color:#94a3b8;margin-top:4px}
+
+/* CTA Section */
+.cta-section{padding:80px 40px;text-align:center;max-width:700px;margin:0 auto}
+.cta-section h2{font-size:32px;margin-bottom:16px;color:#fff}
+.cta-section p{color:#94a3b8;margin-bottom:32px;font-size:16px}
+
+/* Footer */
+footer{padding:40px;border-top:1px solid rgba(255,255,255,0.06);text-align:center}
+footer .links{display:flex;justify-content:center;gap:24px;margin-bottom:16px}
+footer .links a{color:#64748b;font-size:13px}
+footer .copyright{color:#475569;font-size:12px}
+
+@media(max-width:768px){
+  .hero h1{font-size:36px}
+  .stats{gap:32px}
+  .stat .number{font-size:36px}
+  nav{padding:16px 20px}
+  .services,.results,.cta-section{padding:60px 20px}
+}
 </style>
 </head>
 <body>
-<div class="container">
-<h1>Venti Scale</h1>
-<p class="tagline">Digital Marketing & Media</p>
-<div class="contact">
-<p style="color:#94a3b8">Get in touch</p>
-<p style="margin-top:8px"><a href="mailto:ventiscale@gmail.com">ventiscale@gmail.com</a></p>
-</div>
-<div class="links">
-<a href="/privacy.html">Privacy Policy</a>
-<a href="/terms.html">Terms of Service</a>
-<a href="/data-deletion.html">Data Deletion</a>
-</div>
-</div>
+
+<nav>
+  <div class="logo">Venti Scale</div>
+  <div class="links">
+    <a href="#services">Services</a>
+    <a href="#results">Results</a>
+    <a href="#contact">Contact</a>
+  </div>
+</nav>
+
+<section class="hero">
+  <h1>Scale Your Brand With AI-Powered Marketing</h1>
+  <p>We help e-commerce brands and creators grow through paid advertising, AI content production, and data-driven strategy. Real results, not vanity metrics.</p>
+  <a href="mailto:ventiscale@gmail.com" class="cta">Get In Touch</a>
+</section>
+
+<section class="services" id="services">
+  <h2>What We Do</h2>
+  <div class="services-grid">
+    <div class="service-card">
+      <div class="icon">📈</div>
+      <h3>Paid Advertising</h3>
+      <p>Facebook, Instagram, Google Ads, and TikTok campaigns managed end-to-end. We optimize for ROAS and scale what works.</p>
+    </div>
+    <div class="service-card">
+      <div class="icon">🤖</div>
+      <h3>AI Content Production</h3>
+      <p>AI-generated video ads, product photography, UGC-style content, and social media assets at scale. Faster and cheaper than traditional production.</p>
+    </div>
+    <div class="service-card">
+      <div class="icon">📱</div>
+      <h3>Social Media Growth</h3>
+      <p>Brand page management across TikTok, Instagram, YouTube, and Facebook. Viral content strategies that build audiences and drive sales.</p>
+    </div>
+    <div class="service-card">
+      <div class="icon">🎯</div>
+      <h3>E-Commerce Strategy</h3>
+      <p>Full-funnel strategy from awareness to conversion. Landing page optimization, email sequences, retargeting, and conversion rate improvement.</p>
+    </div>
+    <div class="service-card">
+      <div class="icon">🎬</div>
+      <h3>Video Production</h3>
+      <p>Short-form and long-form video content for ads and organic. AI-enhanced editing, voice-over, and music production.</p>
+    </div>
+    <div class="service-card">
+      <div class="icon">📊</div>
+      <h3>Analytics & Reporting</h3>
+      <p>Custom dashboards, weekly performance reports, and actionable insights. Know exactly where every dollar goes and what it returns.</p>
+    </div>
+  </div>
+</section>
+
+<section class="results" id="results">
+  <h2>Results That Matter</h2>
+  <div class="stats">
+    <div class="stat">
+      <div class="number">3.9x</div>
+      <div class="label">Average ROAS</div>
+    </div>
+    <div class="stat">
+      <div class="number">$35</div>
+      <div class="label">Average CPA</div>
+    </div>
+    <div class="stat">
+      <div class="number">900+</div>
+      <div class="label">Conversions Managed</div>
+    </div>
+    <div class="stat">
+      <div class="number">5</div>
+      <div class="label">Active Brand Pages</div>
+    </div>
+  </div>
+</section>
+
+<section class="cta-section" id="contact">
+  <h2>Ready to Scale?</h2>
+  <p>We work with e-commerce brands, creators, and businesses that want real growth — not just impressions.</p>
+  <a href="mailto:ventiscale@gmail.com" class="cta">ventiscale@gmail.com</a>
+</section>
+
+<footer>
+  <div class="links">
+    <a href="/privacy.html">Privacy Policy</a>
+    <a href="/terms.html">Terms of Service</a>
+    <a href="/data-deletion.html">Data Deletion</a>
+  </div>
+  <p class="copyright">© 2026 Venti Scale. All rights reserved.</p>
+</footer>
+
 </body>
 </html>
