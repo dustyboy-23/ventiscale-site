@@ -1,5 +1,10 @@
 import { NextResponse } from "next/server";
-import { runAudit, renderAuditEmail, type AuditResult } from "@/lib/audit";
+import {
+  runAudit,
+  renderAuditEmail,
+  generateMarketingPlan,
+  type AuditResult,
+} from "@/lib/audit";
 
 // Audit lead capture + real audit generation:
 // 1. Validates input
@@ -10,7 +15,7 @@ import { runAudit, renderAuditEmail, type AuditResult } from "@/lib/audit";
 //
 // Brevo API key lives in BREVO_API_KEY (Vercel env). If the key is missing
 // the route still returns 200 so the form never appears broken to a visitor
-// — the lead is preserved in function logs and can be backfilled by hand.
+// the lead is preserved in function logs and can be backfilled by hand.
 
 interface AuditRequest {
   id: string;
@@ -25,14 +30,14 @@ interface AuditRequest {
 }
 
 export const runtime = "nodejs";
-export const maxDuration = 30;
+export const maxDuration = 60;
 
 const NOTIFY_TO = "dustin@ventiscale.com";
 const NOTIFY_FROM_EMAIL = "noreply@ventiscale.com";
 const NOTIFY_FROM_NAME = "Venti Scale Audit";
 
 // In-memory rate limit. Resets on cold start, which is fine as a soft gate
-// against casual abuse — anything serious gets stopped by Vercel's DDoS
+// against casual abuse, anything serious gets stopped by Vercel's DDoS
 // protection upstream. Max 3 submissions per IP per 10 minutes.
 const RATE_LIMIT_MAX = 3;
 const RATE_LIMIT_WINDOW_MS = 10 * 60 * 1000;
@@ -62,7 +67,7 @@ function checkRateLimit(ip: string): boolean {
 async function brevoSend(payload: Record<string, unknown>) {
   const apiKey = process.env.BREVO_API_KEY;
   if (!apiKey) {
-    console.warn("[audit] BREVO_API_KEY not set — skipping email send");
+    console.warn("[audit] BREVO_API_KEY not set, skipping email send");
     return false;
   }
   try {
@@ -159,7 +164,7 @@ async function sendLeadNotification(entry: AuditRequest, result: AuditResult) {
 }
 
 function escapeMarkdown(s: string) {
-  // Telegram Markdown (legacy) parse_mode — escape the reserved chars that
+  // Telegram Markdown (legacy) parse_mode, escape the reserved chars that
   // commonly trip it up. Good enough for our plain-text user inputs.
   return s.replace(/([_*`\[])/g, "\\$1");
 }
@@ -279,7 +284,7 @@ export async function POST(req: Request) {
 
   console.log("[audit] new request", JSON.stringify(entry));
 
-  // Run the audit. Failures here should never fail the response — the lead
+  // Run the audit. Failures here should never fail the response, the lead
   // is still captured and Dusty can follow up manually.
   let result: AuditResult | null = null;
   try {
@@ -287,6 +292,24 @@ export async function POST(req: Request) {
     console.log("[audit] result", entry.id, result.reachable ? `${result.grade} ${result.score}/100` : `UNREACHABLE: ${result.error}`);
   } catch (err) {
     console.error("[audit] runAudit threw", err);
+  }
+
+  // Generate the Claude-powered marketing plan. Never blocks or throws, a
+  // null return falls back to a simpler email inside renderAuditEmail.
+  if (result && result.reachable) {
+    try {
+      result.businessType = business;
+      const plan = await generateMarketingPlan(result, url, business);
+      result.plan = plan;
+      console.log(
+        "[audit] plan",
+        entry.id,
+        plan ? `generated (${plan.length} chars)` : "fallback",
+      );
+    } catch (err) {
+      console.error("[audit] generateMarketingPlan threw", err);
+      result.plan = null;
+    }
   }
 
   // Fire both emails in parallel. Failures are logged, never thrown.

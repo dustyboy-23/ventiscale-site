@@ -5,7 +5,7 @@
  * meta, structured data, accessibility), and returns a scored report
  * plus an HTML email body ready to send via Brevo.
  *
- * Zero external deps — regex parsing on the raw HTML. Good enough for a
+ * Zero external deps, regex parsing on the raw HTML. Good enough for a
  * surface audit; a deeper audit (Lighthouse, real performance metrics,
  * full DOM) belongs in a dedicated job, not a request handler.
  */
@@ -32,6 +32,9 @@ export interface AuditResult {
   grade: "A" | "B" | "C" | "D" | "F";
   reachable: boolean;
   error?: string;
+  bodyText?: string;
+  plan?: string | null;
+  businessType?: string;
 }
 
 const FETCH_TIMEOUT_MS = 10_000;
@@ -104,7 +107,7 @@ function extractMeta(html: string, name: string): string | null {
   );
   const m1 = html.match(re1);
   if (m1) return decodeEntities(m1[1].trim());
-  // content first, then name — less common but valid
+  // content first, then name, less common but valid
   const re2 = new RegExp(
     `<meta[^>]*content=["']([^"']*)["'][^>]*(?:name|property)=["']${esc}["']`,
     "i",
@@ -126,6 +129,77 @@ function decodeEntities(s: string): string {
 function countTag(html: string, tag: string): number {
   const re = new RegExp(`<${tag}\\b`, "gi");
   return (html.match(re) || []).length;
+}
+
+async function probeFreshness(siteUrl: string): Promise<{ date: Date | null; source: string }> {
+  // Best-effort probe of sitemap.xml, then common feed paths. 5s timeout each,
+  // 500KB cap. Swallow all errors, never let this break the audit.
+  let origin: string;
+  try {
+    origin = new URL(siteUrl).origin;
+  } catch {
+    return { date: null, source: "" };
+  }
+
+  const tryPaths: { path: string; label: string }[] = [
+    { path: "/sitemap.xml", label: "sitemap.xml" },
+    { path: "/feed", label: "feed" },
+    { path: "/rss", label: "rss" },
+    { path: "/blog/feed", label: "blog feed" },
+    { path: "/atom.xml", label: "atom feed" },
+  ];
+
+  const FRESH_TIMEOUT_MS = 5000;
+  const MAX_BYTES = 500 * 1024;
+
+  for (const { path, label } of tryPaths) {
+    const controller = new AbortController();
+    const timer = setTimeout(() => controller.abort(), FRESH_TIMEOUT_MS);
+    try {
+      const res = await fetch(origin + path, {
+        headers: { "user-agent": USER_AGENT },
+        signal: controller.signal,
+        redirect: "follow",
+      });
+      if (!res.ok) {
+        clearTimeout(timer);
+        continue;
+      }
+      const buf = await res.arrayBuffer();
+      const sliced = buf.byteLength > MAX_BYTES ? buf.slice(0, MAX_BYTES) : buf;
+      const body = new TextDecoder("utf-8", { fatal: false }).decode(sliced);
+      clearTimeout(timer);
+
+      // Collect all plausible date strings: <lastmod>, <pubDate>, <updated>
+      const dateStrings: string[] = [];
+      const lastmodMatches = body.match(/<lastmod>([^<]+)<\/lastmod>/gi) || [];
+      for (const m of lastmodMatches) {
+        const inner = m.replace(/<\/?lastmod>/gi, "").trim();
+        if (inner) dateStrings.push(inner);
+      }
+      const pubDateMatches = body.match(/<pubDate>([^<]+)<\/pubDate>/gi) || [];
+      for (const m of pubDateMatches) {
+        const inner = m.replace(/<\/?pubDate>/gi, "").trim();
+        if (inner) dateStrings.push(inner);
+      }
+      const updatedMatches = body.match(/<updated>([^<]+)<\/updated>/gi) || [];
+      for (const m of updatedMatches) {
+        const inner = m.replace(/<\/?updated>/gi, "").trim();
+        if (inner) dateStrings.push(inner);
+      }
+
+      let newest: Date | null = null;
+      for (const ds of dateStrings) {
+        const d = new Date(ds);
+        if (!isNaN(d.getTime()) && (!newest || d > newest)) newest = d;
+      }
+      if (newest) return { date: newest, source: label };
+    } catch {
+      clearTimeout(timer);
+      // fall through and try next path
+    }
+  }
+  return { date: null, source: "" };
 }
 
 function stripToText(html: string): string {
@@ -179,7 +253,7 @@ export async function runAudit(rawUrl: string): Promise<AuditResult> {
     label: "HTTPS",
     status: isHttps ? "pass" : "fail",
     detail: isHttps
-      ? "Your site is served over HTTPS. Good — Google penalizes plain HTTP and browsers mark it insecure."
+      ? "Your site is served over HTTPS. Good. Google penalizes plain HTTP and browsers mark it insecure."
       : "Your site is served over plain HTTP.",
     fix: isHttps
       ? undefined
@@ -206,7 +280,7 @@ export async function runAudit(rawUrl: string): Promise<AuditResult> {
       label: "Title tag",
       status: "fail",
       detail: "Your homepage has no <title> tag.",
-      fix: "Add a descriptive title — this is the single most important on-page SEO element.",
+      fix: "Add a descriptive title. This is the single most important on-page SEO element.",
     });
   } else if (title.length < 20) {
     checks.push({
@@ -221,7 +295,7 @@ export async function runAudit(rawUrl: string): Promise<AuditResult> {
       id: "title",
       label: "Title tag",
       status: "warn",
-      detail: `${title.length} chars — Google will truncate this in search. "${title}"`,
+      detail: `${title.length} chars. Google will truncate this in search. "${title}"`,
       fix: "Trim to 50-60 characters.",
     });
   } else {
@@ -248,7 +322,7 @@ export async function runAudit(rawUrl: string): Promise<AuditResult> {
       id: "description",
       label: "Meta description",
       status: "warn",
-      detail: `Only ${desc.length} characters — too thin to rank or sell.`,
+      detail: `Only ${desc.length} characters. Too thin to rank or sell.`,
       fix: "Target 150-160 characters.",
     });
   } else if (desc.length > 170) {
@@ -256,7 +330,7 @@ export async function runAudit(rawUrl: string): Promise<AuditResult> {
       id: "description",
       label: "Meta description",
       status: "warn",
-      detail: `${desc.length} characters — will be truncated in search.`,
+      detail: `${desc.length} characters. Will be truncated in search.`,
       fix: "Trim to 150-160 characters.",
     });
   } else {
@@ -291,7 +365,7 @@ export async function runAudit(rawUrl: string): Promise<AuditResult> {
       id: "h1",
       label: "H1 heading",
       status: "pass",
-      detail: "Exactly one H1 — clean.",
+      detail: "Exactly one H1. Clean.",
     });
   }
 
@@ -303,7 +377,7 @@ export async function runAudit(rawUrl: string): Promise<AuditResult> {
     status: hasViewport ? "pass" : "fail",
     detail: hasViewport
       ? "Viewport meta tag present."
-      : "No viewport meta — your site renders zoomed out on phones.",
+      : "No viewport meta. Your site renders zoomed out on phones.",
     fix: hasViewport
       ? undefined
       : 'Add <meta name="viewport" content="width=device-width, initial-scale=1"> inside your <head>.',
@@ -317,7 +391,7 @@ export async function runAudit(rawUrl: string): Promise<AuditResult> {
     status: ogImage ? "pass" : "warn",
     detail: ogImage
       ? "og:image is set. Social shares will look intentional."
-      : "No og:image — your site shares as a blank card on LinkedIn, Slack, iMessage.",
+      : "No og:image. Your site shares as a blank card on LinkedIn, Slack, iMessage.",
     fix: ogImage
       ? undefined
       : "Add a 1200×630 PNG and reference it with <meta property=\"og:image\" content=\"...\">",
@@ -343,7 +417,7 @@ export async function runAudit(rawUrl: string): Promise<AuditResult> {
     status: hasCanonical ? "pass" : "warn",
     detail: hasCanonical
       ? "Canonical link present."
-      : "No canonical link — risks duplicate content penalties.",
+      : "No canonical link. Risks duplicate content penalties.",
     fix: hasCanonical
       ? undefined
       : 'Add <link rel="canonical" href="..."> pointing to the definitive version of this page.',
@@ -360,7 +434,7 @@ export async function runAudit(rawUrl: string): Promise<AuditResult> {
       : "No structured data.",
     fix: hasSchema
       ? undefined
-      : "Add Organization and Product schema — Google uses this for rich search results.",
+      : "Add Organization and Product schema. Google uses this for rich search results.",
   });
 
   // 11. Favicon
@@ -371,7 +445,7 @@ export async function runAudit(rawUrl: string): Promise<AuditResult> {
     id: "favicon",
     label: "Favicon",
     status: hasFavicon ? "pass" : "warn",
-    detail: hasFavicon ? "Favicon linked." : "No favicon — looks unfinished in browser tabs.",
+    detail: hasFavicon ? "Favicon linked." : "No favicon. Looks unfinished in browser tabs.",
   });
 
   // 12. HTML lang
@@ -410,7 +484,7 @@ export async function runAudit(rawUrl: string): Promise<AuditResult> {
       label: "Image alt text",
       status: "warn",
       detail: `${imgsNoAlt} of ${imgCount} images are missing alt text.`,
-      fix: "Add descriptive alt text to every image. SEO + accessibility — both critical.",
+      fix: "Add descriptive alt text to every image. SEO plus accessibility, both critical.",
     });
   }
 
@@ -421,7 +495,7 @@ export async function runAudit(rawUrl: string): Promise<AuditResult> {
       id: "weight",
       label: "Page weight",
       status: "pass",
-      detail: `${sizeMB.toFixed(2)} MB HTML. Lean — loads fast.`,
+      detail: `${sizeMB.toFixed(2)} MB HTML. Lean, loads fast.`,
     });
   } else if (sizeMB < 2.5) {
     checks.push({
@@ -443,6 +517,7 @@ export async function runAudit(rawUrl: string): Promise<AuditResult> {
 
   // 15. Content depth
   const text = stripToText(html);
+  base.bodyText = text.slice(0, 3000);
   const wordCount = text.split(" ").filter(Boolean).length;
   if (wordCount < 100) {
     checks.push({
@@ -457,7 +532,7 @@ export async function runAudit(rawUrl: string): Promise<AuditResult> {
       id: "content",
       label: "Content depth",
       status: "warn",
-      detail: `~${wordCount} words — a little light.`,
+      detail: `~${wordCount} words. A little light.`,
       fix: "Target 300-500 words with context, benefits, and social proof.",
     });
   } else {
@@ -466,6 +541,203 @@ export async function runAudit(rawUrl: string): Promise<AuditResult> {
       label: "Content depth",
       status: "pass",
       detail: `~${wordCount} words. Enough for Google to understand the page.`,
+    });
+  }
+
+  // ──────────────────────────────────────────────────────────
+  // Marketing-specific detectors (the stuff Venti Scale actually sells)
+  // ──────────────────────────────────────────────────────────
+
+  // 16. Tracking pixels
+  const pixels: string[] = [];
+  if (/fbq\s*\(|connect\.facebook\.net\/en_US\/fbevents\.js/i.test(html)) pixels.push("Meta Pixel");
+  if (/googletagmanager\.com\/gtm\.js/i.test(html)) pixels.push("Google Tag Manager");
+  if (/gtag\s*\(|googletagmanager\.com\/gtag\/js/i.test(html)) pixels.push("Google Analytics (GA4)");
+  if (/analytics\.tiktok\.com/i.test(html)) pixels.push("TikTok Pixel");
+  if (/snap\.licdn\.com/i.test(html)) pixels.push("LinkedIn Insight Tag");
+  if (pixels.length >= 2) {
+    checks.push({
+      id: "pixels",
+      label: "Tracking pixels",
+      status: "pass",
+      detail: `Found: ${pixels.join(", ")}. You can actually measure what's working.`,
+    });
+  } else if (pixels.length === 1) {
+    checks.push({
+      id: "pixels",
+      label: "Tracking pixels",
+      status: "warn",
+      detail: `Only one pixel detected: ${pixels[0]}. You're flying half-blind.`,
+      fix: "Add GA4 and Meta Pixel at minimum. Without measurement, you can't optimize anything.",
+    });
+  } else {
+    checks.push({
+      id: "pixels",
+      label: "Tracking pixels",
+      status: "fail",
+      detail: "No tracking pixels detected. You have zero visibility into what your visitors do.",
+      fix: "Install Google Analytics 4 and a Meta Pixel before you run any paid ads. This is table stakes.",
+    });
+  }
+
+  // 17. Email capture
+  const emailCaptureSignals: string[] = [];
+  // Look for email inputs outside of login/signin context
+  const emailInputs = html.match(/<input\b[^>]*type=["']email["'][^>]*>/gi) || [];
+  const nonLoginEmailInputs = emailInputs.filter((tag) => {
+    return !/(login|sign[- ]?in|log[- ]?in)/i.test(tag);
+  });
+  if (nonLoginEmailInputs.length > 0) emailCaptureSignals.push("email signup form");
+  if (/static\.klaviyo\.com|klaviyo\.js/i.test(html)) emailCaptureSignals.push("Klaviyo");
+  if (/mc\.us\d|chimpstatic\.com|mailchimp/i.test(html)) emailCaptureSignals.push("Mailchimp");
+  if (/ck\.page|convertkit/i.test(html)) emailCaptureSignals.push("ConvertKit");
+  if (/privy\.com|privy-widget/i.test(html)) emailCaptureSignals.push("Privy");
+  if (/justuno/i.test(html)) emailCaptureSignals.push("Justuno");
+  if (/sumo\.com|sumome/i.test(html)) emailCaptureSignals.push("Sumo");
+  if (emailCaptureSignals.length > 0) {
+    checks.push({
+      id: "email_capture",
+      label: "Email capture",
+      status: "pass",
+      detail: `Detected: ${emailCaptureSignals.join(", ")}. You're building a list.`,
+    });
+  } else {
+    checks.push({
+      id: "email_capture",
+      label: "Email capture",
+      status: "fail",
+      detail: "No email capture anywhere on the homepage.",
+      fix: "Add a newsletter signup or a lead magnet opt-in. Email is the highest ROI channel you have, and you're leaving it on the table.",
+    });
+  }
+
+  // 18. Blog / content hub
+  const contentLinkPatterns = [
+    /href=["'][^"']*\/blog\b/i,
+    /href=["'][^"']*\/articles?\b/i,
+    /href=["'][^"']*\/posts?\b/i,
+    /href=["'][^"']*\/resources?\b/i,
+    /href=["'][^"']*\/insights?\b/i,
+    /href=["'][^"']*\/guides?\b/i,
+  ];
+  const hasContentLink = contentLinkPatterns.some((re) => re.test(html));
+  const hasRss = /<link[^>]*type=["']application\/rss\+xml["']|<link[^>]*type=["']application\/atom\+xml["']/i.test(html);
+  if (hasContentLink || hasRss) {
+    checks.push({
+      id: "content_hub",
+      label: "Content engine",
+      status: "pass",
+      detail: hasRss
+        ? "Content hub detected with RSS/Atom feed. You have somewhere to publish."
+        : "Blog or resources section linked from the homepage.",
+    });
+  } else {
+    checks.push({
+      id: "content_hub",
+      label: "Content engine",
+      status: "warn",
+      detail: "No blog, articles, or resources section found on the homepage.",
+      fix: "Content is how you get free traffic and build authority. Even one article a week compounds.",
+    });
+  }
+
+  // 19. Content freshness (sitemap / feed probe)
+  const freshCheck = await probeFreshness(fetched.finalUrl || url);
+  if (freshCheck.date) {
+    const daysOld = (Date.now() - freshCheck.date.getTime()) / (1000 * 60 * 60 * 24);
+    if (daysOld < 30) {
+      checks.push({
+        id: "content_fresh",
+        label: "Content freshness",
+        status: "pass",
+        detail: `Most recent update: ${Math.round(daysOld)} days ago (from ${freshCheck.source}). Actively maintained.`,
+      });
+    } else if (daysOld < 90) {
+      checks.push({
+        id: "content_fresh",
+        label: "Content freshness",
+        status: "warn",
+        detail: `Last update: ~${Math.round(daysOld)} days ago (from ${freshCheck.source}).`,
+        fix: "Publish something fresh this month. Search engines reward recency and so do humans.",
+      });
+    } else {
+      checks.push({
+        id: "content_fresh",
+        label: "Content freshness",
+        status: "fail",
+        detail: `Last update: ${Math.round(daysOld)} days ago (from ${freshCheck.source}). The site looks abandoned.`,
+        fix: "Fresh content signals a living brand. Get on a weekly or biweekly cadence.",
+      });
+    }
+  } else {
+    checks.push({
+      id: "content_fresh",
+      label: "Content freshness",
+      status: "info",
+      detail: "No sitemap or feed detected.",
+    });
+  }
+
+  // 20. Social presence
+  const socialPlatforms = new Set<string>();
+  const hrefMatches = html.match(/href=["']([^"']+)["']/gi) || [];
+  for (const h of hrefMatches) {
+    const lower = h.toLowerCase();
+    if (lower.includes("instagram.com")) socialPlatforms.add("Instagram");
+    else if (lower.includes("facebook.com")) socialPlatforms.add("Facebook");
+    else if (lower.includes("tiktok.com")) socialPlatforms.add("TikTok");
+    else if (lower.includes("x.com") || lower.includes("twitter.com")) socialPlatforms.add("X");
+    else if (lower.includes("linkedin.com")) socialPlatforms.add("LinkedIn");
+    else if (lower.includes("youtube.com")) socialPlatforms.add("YouTube");
+    else if (lower.includes("pinterest.com")) socialPlatforms.add("Pinterest");
+    else if (lower.includes("threads.net")) socialPlatforms.add("Threads");
+  }
+  if (socialPlatforms.size >= 3) {
+    checks.push({
+      id: "social",
+      label: "Social presence",
+      status: "pass",
+      detail: `Linked from the site: ${Array.from(socialPlatforms).join(", ")}.`,
+    });
+  } else if (socialPlatforms.size >= 1) {
+    checks.push({
+      id: "social",
+      label: "Social presence",
+      status: "warn",
+      detail: `Only ${socialPlatforms.size} platform(s) linked: ${Array.from(socialPlatforms).join(", ")}.`,
+      fix: "Pick 2 more channels where your customers actually spend time and show up there consistently.",
+    });
+  } else {
+    checks.push({
+      id: "social",
+      label: "Social presence",
+      status: "fail",
+      detail: "No social platforms linked from the homepage.",
+      fix: "Link your social channels in the footer at minimum. Customers want to see you're real.",
+    });
+  }
+
+  // 21. Conversion tools (live chat, lead capture widgets)
+  const convTools: string[] = [];
+  if (/intercom\.io|widget\.intercom\.io/i.test(html)) convTools.push("Intercom");
+  if (/driftt\.com|js\.driftt\.com/i.test(html)) convTools.push("Drift");
+  if (/tawk\.to|embed\.tawk\.to/i.test(html)) convTools.push("Tawk");
+  if (/crisp\.chat|client\.crisp\.chat/i.test(html)) convTools.push("Crisp");
+  if (/hs-scripts\.com|js\.hs-scripts\.com/i.test(html)) convTools.push("HubSpot");
+  if (/static\.zdassets\.com/i.test(html)) convTools.push("Zendesk");
+  if (convTools.length > 0) {
+    checks.push({
+      id: "conversion",
+      label: "Conversion tools",
+      status: "pass",
+      detail: `Live chat / lead capture widget detected: ${convTools.join(", ")}.`,
+    });
+  } else {
+    checks.push({
+      id: "conversion",
+      label: "Conversion tools",
+      status: "info",
+      detail: "No live chat or conversion widget detected. Optional, but a chat widget often lifts conversion on higher consideration purchases.",
     });
   }
 
@@ -484,6 +756,108 @@ export async function runAudit(rawUrl: string): Promise<AuditResult> {
 }
 
 // ──────────────────────────────────────────────────────────
+// Claude-powered marketing plan generator
+// ──────────────────────────────────────────────────────────
+const ANTHROPIC_TIMEOUT_MS = 45_000;
+
+export async function generateMarketingPlan(
+  result: AuditResult,
+  url: string,
+  businessType: string,
+): Promise<string | null> {
+  const apiKey = process.env.ANTHROPIC_API_KEY;
+  if (!apiKey) {
+    console.warn("[audit] ANTHROPIC_API_KEY not set, skipping plan generation");
+    return null;
+  }
+  if (!result.reachable) return null;
+
+  // Structured findings for the prompt
+  const findings = result.checks
+    .filter((c) => c.status !== "info")
+    .map((c) => `${c.status.toUpperCase()}: ${c.label}. ${c.detail}`)
+    .join("\n");
+
+  const bodyText = result.bodyText || "(no body text extracted)";
+  const domain = result.finalUrl.replace(/^https?:\/\//, "").replace(/\/$/, "");
+
+  const prompt = `You are Dustin Gilmour, founder of Venti Scale, a done-for-you marketing agency for ecommerce brands. You're writing a personalized marketing plan for a prospect who just ran our free AI audit on their website. Write in first person, confident but never salesy. No em dashes. No corporate jargon. Direct. Think: how would a senior marketing operator explain what this business needs, in plain English, to the founder?
+
+URL audited: ${url}
+Business type (as entered by the prospect): ${businessType || "(not specified)"}
+Domain: ${domain}
+
+AUDIT FINDINGS:
+${findings}
+
+WHAT THE HOMEPAGE SAYS ABOUT ITSELF (first 3000 chars of visible text, scripts and styles stripped):
+"""
+${bodyText}
+"""
+
+Output in this exact structure, using markdown headings:
+
+## Where you are right now
+[2-3 sentences assessing their current marketing maturity based on the findings]
+
+## The 3 biggest gaps I see
+1. [Gap with specific reference to the findings]
+2. [Gap with specific reference to the findings]
+3. [Gap with specific reference to the findings]
+
+## What I'd do in your first 30 days with us
+[3-5 specific actions that address the gaps, written as if you're already their marketing team. Reference what they DO have as a starting point, not just what's missing.]
+
+## What I'd do in the 60-90 day window
+[2-3 actions that build on the 30-day foundation]
+
+## The one thing I'd fix this week even without us
+[One high-leverage fix they can do themselves. Earn trust by not gating everything behind hiring you.]
+
+Reference their specific business and what you see on their site. Adapt to what they have. If they already have a blog, don't tell them to start one, tell them to improve it. If they have no email capture, that's the first move. If they have pixels but no analytics, the priority is measurement. Be ADAPTIVE. Never generic. No em dashes anywhere. No pricing numbers. No mention of "free". Write like a real operator, not a marketer.`;
+
+  const controller = new AbortController();
+  const timer = setTimeout(() => controller.abort(), ANTHROPIC_TIMEOUT_MS);
+  try {
+    const res = await fetch("https://api.anthropic.com/v1/messages", {
+      method: "POST",
+      headers: {
+        "x-api-key": apiKey,
+        "anthropic-version": "2023-06-01",
+        "content-type": "application/json",
+      },
+      body: JSON.stringify({
+        model: "claude-sonnet-4-5-20250929",
+        max_tokens: 2500,
+        messages: [{ role: "user", content: prompt }],
+      }),
+      signal: controller.signal,
+    });
+    clearTimeout(timer);
+    if (!res.ok) {
+      const txt = await res.text();
+      console.error("[audit] Anthropic API error", res.status, txt.slice(0, 500));
+      return null;
+    }
+    const data = (await res.json()) as {
+      content?: Array<{ type: string; text?: string }>;
+    };
+    const block = (data.content || []).find((b) => b.type === "text");
+    const text = block?.text?.trim();
+    if (!text) {
+      console.error("[audit] Anthropic response had no text block");
+      return null;
+    }
+    // Final safety sweep, just in case
+    return text.replace(/—/g, ",").replace(/–/g, ",");
+  } catch (err) {
+    clearTimeout(timer);
+    console.error("[audit] generateMarketingPlan threw", err);
+    return null;
+  }
+}
+
+// ──────────────────────────────────────────────────────────
 // Email rendering
 // ──────────────────────────────────────────────────────────
 function escapeHtml(s: string): string {
@@ -495,27 +869,169 @@ function escapeHtml(s: string): string {
     .replace(/'/g, "&#39;");
 }
 
-function statusBadge(status: CheckStatus): string {
+// Dark theme palette matching the ventiscale.com site
+const EMAIL_COLORS = {
+  bg: "#07080C",
+  card: "#11131B",
+  cardAlt: "#14161F",
+  border: "rgba(255,255,255,0.08)",
+  borderStrong: "rgba(255,255,255,0.14)",
+  text: "#FFFFFF",
+  textMid: "rgba(255,255,255,0.70)",
+  textDim: "rgba(255,255,255,0.55)",
+  red: "#C8362B",
+  green: "#10E39A",
+  blue: "#5280FF",
+};
+
+function darkStatusBadge(status: CheckStatus): string {
   const palette: Record<CheckStatus, { bg: string; fg: string; label: string }> = {
-    pass: { bg: "#E8F0EA", fg: "#1F3D2B", label: "PASS" },
-    warn: { bg: "#FBF2DD", fg: "#8A5A00", label: "WARN" },
-    fail: { bg: "#F7E2DD", fg: "#8A1F0F", label: "FAIL" },
-    info: { bg: "#EEEEEE", fg: "#555555", label: "INFO" },
+    pass: { bg: "rgba(16,227,154,0.12)", fg: "#10E39A", label: "PASS" },
+    warn: { bg: "rgba(255,200,80,0.12)", fg: "#FFC850", label: "WARN" },
+    fail: { bg: "rgba(200,54,43,0.14)", fg: "#FF6A5E", label: "FAIL" },
+    info: { bg: "rgba(255,255,255,0.06)", fg: "rgba(255,255,255,0.65)", label: "INFO" },
   };
   const p = palette[status];
   return `<span style="display:inline-block;background:${p.bg};color:${p.fg};font-size:10px;font-weight:700;letter-spacing:0.08em;padding:3px 7px;border-radius:3px;text-transform:uppercase;">${p.label}</span>`;
 }
 
-function gradeBlock(grade: string, score: number): string {
-  const color =
-    grade === "A" ? "#1F3D2B" : grade === "B" ? "#2E5A3F" : grade === "C" ? "#8A5A00" : "#8A1F0F";
-  return `
-    <div style="text-align:center;padding:32px 24px;background:#FAF6EF;border:1px solid rgba(27,27,27,0.10);border-radius:12px;margin:24px 0;">
-      <div style="font-size:11px;font-weight:600;letter-spacing:0.14em;color:#1B1B1B;opacity:0.55;text-transform:uppercase;">Overall grade</div>
-      <div style="font-family:Georgia,'Times New Roman',serif;font-size:72px;font-weight:400;line-height:1;color:${color};margin:12px 0 4px;">${grade}</div>
-      <div style="font-size:14px;color:#1B1B1B;opacity:0.65;">${score} / 100</div>
-    </div>
-  `;
+function renderPlanMarkdown(markdown: string): string {
+  // Simple, email-safe markdown: ## headings, numbered lists, paragraphs.
+  // No nesting, no inline formatting beyond bold (**x**).
+  const lines = markdown.split(/\r?\n/);
+  const out: string[] = [];
+  let inOl = false;
+  let paraBuf: string[] = [];
+
+  const flushPara = () => {
+    if (paraBuf.length === 0) return;
+    const joined = paraBuf.join(" ").trim();
+    if (joined) {
+      out.push(
+        `<p style="margin:0 0 14px;font-size:15px;line-height:1.65;color:${EMAIL_COLORS.textMid};">${inlineFormat(joined)}</p>`,
+      );
+    }
+    paraBuf = [];
+  };
+  const closeList = () => {
+    if (inOl) {
+      out.push("</ol>");
+      inOl = false;
+    }
+  };
+
+  for (const raw of lines) {
+    const line = raw.trimEnd();
+    if (!line.trim()) {
+      flushPara();
+      closeList();
+      continue;
+    }
+    const h2 = line.match(/^##\s+(.*)$/);
+    if (h2) {
+      flushPara();
+      closeList();
+      out.push(
+        `<h2 style="font-family:Fraunces,Georgia,'Times New Roman',serif;font-size:22px;font-weight:500;letter-spacing:-0.01em;color:${EMAIL_COLORS.text};margin:28px 0 12px;line-height:1.25;">${escapeHtml(h2[1])}</h2>`,
+      );
+      continue;
+    }
+    const ol = line.match(/^(\d+)\.\s+(.*)$/);
+    if (ol) {
+      flushPara();
+      if (!inOl) {
+        out.push(
+          `<ol style="margin:0 0 16px;padding-left:22px;color:${EMAIL_COLORS.textMid};font-size:15px;line-height:1.65;">`,
+        );
+        inOl = true;
+      }
+      out.push(`<li style="margin-bottom:8px;">${inlineFormat(ol[2])}</li>`);
+      continue;
+    }
+    // plain line, accumulate into paragraph
+    if (inOl) closeList();
+    paraBuf.push(line.trim());
+  }
+  flushPara();
+  closeList();
+  return out.join("\n");
+}
+
+function inlineFormat(s: string): string {
+  // Escape first, then restore bold.
+  let out = escapeHtml(s);
+  out = out.replace(/\*\*([^*]+)\*\*/g, `<strong style="color:${EMAIL_COLORS.text};">$1</strong>`);
+  return out;
+}
+
+function renderPlanFallback(result: AuditResult): string {
+  // If Claude didn't return anything, build a plan-shaped email from the
+  // findings alone so nothing ever looks broken.
+  const fails = result.checks.filter((c) => c.status === "fail");
+  const warns = result.checks.filter((c) => c.status === "warn");
+  const passes = result.checks.filter((c) => c.status === "pass");
+
+  const lines: string[] = [];
+  lines.push("## Where you are right now");
+  if (fails.length > 3) {
+    lines.push(
+      `I ran ${result.checks.length} checks across your site and found ${fails.length} critical gaps, ${warns.length} things worth cleaning up, and ${passes.length} things you already have working. There's real foundational work to do before any growth channel will compound.`,
+    );
+  } else if (fails.length > 0) {
+    lines.push(
+      `Your site has a decent foundation. ${passes.length} of ${result.checks.length} checks passed. There are ${fails.length} blockers and ${warns.length} smaller gaps keeping you from compounding growth.`,
+    );
+  } else {
+    lines.push(
+      `Your site is in solid shape. ${passes.length} of ${result.checks.length} checks passed, with ${warns.length} smaller things to clean up. The opportunity now is leveraging what you have, not fixing what's broken.`,
+    );
+  }
+  lines.push("");
+  lines.push("## The biggest gaps I see");
+  if (fails.length > 0) {
+    fails.slice(0, 3).forEach((c, i) => {
+      lines.push(`${i + 1}. **${c.label}**. ${c.detail}`);
+    });
+  } else if (warns.length > 0) {
+    warns.slice(0, 3).forEach((c, i) => {
+      lines.push(`${i + 1}. **${c.label}**. ${c.detail}`);
+    });
+  } else {
+    lines.push("1. No critical gaps flagged. The next move is optimization, not repair.");
+  }
+  lines.push("");
+  lines.push("## What I'd do first");
+  lines.push(
+    "The quickest wins are usually the measurement stack, email capture, and a steady content cadence. Those three together unlock paid ads, owned reach, and organic discovery all at once.",
+  );
+  lines.push("");
+  lines.push("## The one thing I'd fix this week");
+  if (fails.length > 0 && fails[0].fix) {
+    lines.push(fails[0].fix);
+  } else {
+    lines.push(
+      "Install a Meta Pixel and GA4 if you haven't already. Without measurement you can't optimize anything, and it's a one-hour job.",
+    );
+  }
+  return lines.join("\n");
+}
+
+function groupEvidence(checks: AuditCheck[]): {
+  growth: AuditCheck[];
+  content: AuditCheck[];
+  basics: AuditCheck[];
+} {
+  const growthIds = new Set(["pixels", "email_capture", "conversion"]);
+  const contentIds = new Set(["content_hub", "content_fresh", "social"]);
+  const growth: AuditCheck[] = [];
+  const content: AuditCheck[] = [];
+  const basics: AuditCheck[] = [];
+  for (const c of checks) {
+    if (growthIds.has(c.id)) growth.push(c);
+    else if (contentIds.has(c.id)) content.push(c);
+    else basics.push(c);
+  }
+  return { growth, content, basics };
 }
 
 export function renderAuditEmail(
@@ -524,38 +1040,42 @@ export function renderAuditEmail(
 ): { subject: string; html: string; text: string } {
   const displayUrl = result.finalUrl.replace(/^https?:\/\//, "").replace(/\/$/, "");
   const subject = result.reachable
-    ? `Your Venti Scale audit for ${displayUrl} — ${result.grade} (${result.score}/100)`
-    : `We couldn't reach ${displayUrl} — here's what that means`;
+    ? `Your Venti Scale marketing plan for ${displayUrl}`
+    : `We couldn't reach ${displayUrl}. Here's what that means.`;
+
+  const fontImport = `<link href="https://fonts.googleapis.com/css2?family=Fraunces:wght@400;500;600&display=swap" rel="stylesheet">`;
+  const bodyBase = `margin:0;padding:0;background:${EMAIL_COLORS.bg};font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif;color:${EMAIL_COLORS.text};`;
 
   if (!result.reachable) {
-    const html = `
-<!doctype html>
+    const html = `<!doctype html>
 <html>
-<body style="margin:0;padding:0;background:#F6F1EA;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif;color:#1B1B1B;">
-  <div style="max-width:600px;margin:0 auto;padding:48px 32px;">
-    <div style="font-size:11px;font-weight:600;letter-spacing:0.14em;color:#1F3D2B;text-transform:uppercase;">Venti Scale · Audit</div>
-    <h1 style="font-family:Georgia,'Times New Roman',serif;font-size:32px;font-weight:400;letter-spacing:-0.02em;margin:14px 0 8px;line-height:1.1;">We couldn't reach your site.</h1>
-    <p style="font-size:16px;line-height:1.55;color:#1B1B1B;opacity:0.75;">
-      We tried to audit <strong style="color:#1B1B1B;opacity:1;">${escapeHtml(displayUrl)}</strong> but got this error:
+<head>
+<meta charset="utf-8">
+${fontImport}
+</head>
+<body style="${bodyBase}">
+  <div style="max-width:600px;margin:0 auto;padding:48px 28px;">
+    <div style="font-size:11px;font-weight:600;letter-spacing:0.14em;color:${EMAIL_COLORS.textDim};text-transform:uppercase;">Venti Scale</div>
+    <h1 style="font-family:Fraunces,Georgia,'Times New Roman',serif;font-size:32px;font-weight:500;letter-spacing:-0.02em;margin:14px 0 10px;line-height:1.15;color:${EMAIL_COLORS.text};">We couldn't reach your site.</h1>
+    <p style="font-size:16px;line-height:1.6;color:${EMAIL_COLORS.textMid};">
+      I tried to audit <strong style="color:${EMAIL_COLORS.text};">${escapeHtml(displayUrl)}</strong> but got this error:
     </p>
-    <div style="background:#FAF6EF;border:1px solid rgba(27,27,27,0.10);border-radius:8px;padding:16px;font-family:'SF Mono',Consolas,monospace;font-size:13px;color:#1B1B1B;margin:16px 0 24px;">
+    <div style="background:${EMAIL_COLORS.card};border:1px solid ${EMAIL_COLORS.border};border-radius:8px;padding:16px;font-family:'SF Mono',Consolas,monospace;font-size:13px;color:${EMAIL_COLORS.textMid};margin:16px 0 24px;">
       ${escapeHtml(result.error || "Network error")}
     </div>
-    <p style="font-size:15px;line-height:1.55;color:#1B1B1B;opacity:0.75;">
-      Possible causes:
-    </p>
-    <ul style="font-size:15px;line-height:1.7;color:#1B1B1B;opacity:0.75;padding-left:20px;">
+    <p style="font-size:15px;line-height:1.6;color:${EMAIL_COLORS.textMid};">Possible causes:</p>
+    <ul style="font-size:15px;line-height:1.7;color:${EMAIL_COLORS.textMid};padding-left:20px;">
       <li>The URL is wrong or the site is temporarily down.</li>
       <li>Your host blocks automated requests (some CDNs do this).</li>
       <li>DNS isn't resolving from our server.</li>
     </ul>
-    <p style="font-size:15px;line-height:1.55;color:#1B1B1B;opacity:0.75;margin-top:24px;">
+    <p style="font-size:15px;line-height:1.6;color:${EMAIL_COLORS.textMid};margin-top:24px;">
       Reply to this email with the correct URL and I'll run it manually.
     </p>
-    <div style="margin-top:32px;padding-top:24px;border-top:1px solid rgba(27,27,27,0.10);">
-      <p style="font-size:13px;color:#1B1B1B;opacity:0.55;margin:0;">
-        Dustin<br/>
-        <a href="https://www.ventiscale.com" style="color:#1F3D2B;text-decoration:none;">ventiscale.com</a>
+    <div style="margin-top:32px;padding-top:24px;border-top:1px solid ${EMAIL_COLORS.border};">
+      <p style="font-size:13px;color:${EMAIL_COLORS.textDim};margin:0;">
+        Dustin Gilmour<br/>
+        <a href="https://www.ventiscale.com" style="color:${EMAIL_COLORS.blue};text-decoration:none;">ventiscale.com</a>
       </p>
     </div>
   </div>
@@ -564,32 +1084,28 @@ export function renderAuditEmail(
     return {
       subject,
       html,
-      text: `We couldn't reach ${displayUrl}: ${result.error}\n\nReply with the correct URL and I'll run it manually.\n— Dustin`,
+      text: `I couldn't reach ${displayUrl}: ${result.error}\n\nReply with the correct URL and I'll run it manually.\n\nDustin Gilmour, Venti Scale`,
     };
   }
 
-  // Group checks by status
   const fails = result.checks.filter((c) => c.status === "fail");
   const warns = result.checks.filter((c) => c.status === "warn");
   const passes = result.checks.filter((c) => c.status === "pass");
-  const infos = result.checks.filter((c) => c.status === "info");
 
-  const renderCheck = (c: AuditCheck): string => `
+  const planMarkdown = result.plan && result.plan.trim().length > 0 ? result.plan : renderPlanFallback(result);
+  const planHtml = renderPlanMarkdown(planMarkdown);
+
+  const evidence = groupEvidence(result.checks);
+
+  const renderEvidenceCheck = (c: AuditCheck): string => `
     <tr>
-      <td style="padding:16px 0;border-top:1px solid rgba(27,27,27,0.08);vertical-align:top;">
+      <td style="padding:10px 0;border-top:1px solid ${EMAIL_COLORS.border};vertical-align:top;">
         <table cellpadding="0" cellspacing="0" border="0" width="100%">
           <tr>
-            <td style="vertical-align:top;width:60px;padding-right:12px;">
-              ${statusBadge(c.status)}
-            </td>
+            <td style="vertical-align:top;width:56px;padding-right:10px;">${darkStatusBadge(c.status)}</td>
             <td style="vertical-align:top;">
-              <div style="font-size:15px;font-weight:600;color:#1B1B1B;">${escapeHtml(c.label)}</div>
-              <div style="font-size:14px;color:#1B1B1B;opacity:0.70;line-height:1.5;margin-top:4px;">${escapeHtml(c.detail)}</div>
-              ${
-                c.fix
-                  ? `<div style="font-size:13px;color:#1F3D2B;line-height:1.5;margin-top:8px;padding:10px 12px;background:#F1EBDF;border-left:2px solid #1F3D2B;border-radius:2px;"><strong>Fix:</strong> ${escapeHtml(c.fix)}</div>`
-                  : ""
-              }
+              <div style="font-size:13px;font-weight:600;color:${EMAIL_COLORS.text};">${escapeHtml(c.label)}</div>
+              <div style="font-size:12px;color:${EMAIL_COLORS.textDim};line-height:1.5;margin-top:3px;">${escapeHtml(c.detail)}</div>
             </td>
           </tr>
         </table>
@@ -597,76 +1113,94 @@ export function renderAuditEmail(
     </tr>
   `;
 
-  const section = (title: string, items: AuditCheck[]): string => {
+  const evidenceSection = (title: string, items: AuditCheck[]): string => {
     if (items.length === 0) return "";
     return `
-      <div style="margin-top:32px;">
-        <div style="font-size:11px;font-weight:600;letter-spacing:0.14em;color:#1B1B1B;opacity:0.55;text-transform:uppercase;margin-bottom:4px;">${title}</div>
+      <div style="margin-top:22px;">
+        <div style="font-size:10px;font-weight:600;letter-spacing:0.14em;color:${EMAIL_COLORS.textDim};text-transform:uppercase;margin-bottom:4px;">${title}</div>
         <table cellpadding="0" cellspacing="0" border="0" width="100%">
-          ${items.map(renderCheck).join("")}
+          ${items.map(renderEvidenceCheck).join("")}
         </table>
       </div>
     `;
   };
 
-  const html = `
-<!doctype html>
+  const fetchedDate = new Date(result.fetchedAt);
+  const timeString = fetchedDate.toUTCString().replace("GMT", "UTC");
+
+  const html = `<!doctype html>
 <html>
-<body style="margin:0;padding:0;background:#F6F1EA;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif;color:#1B1B1B;">
-  <div style="max-width:640px;margin:0 auto;padding:48px 32px 64px;">
+<head>
+<meta charset="utf-8">
+${fontImport}
+</head>
+<body style="${bodyBase}">
+  <div style="max-width:640px;margin:0 auto;padding:48px 28px 64px;">
 
     <!-- Header -->
-    <div style="font-size:11px;font-weight:600;letter-spacing:0.14em;color:#1F3D2B;text-transform:uppercase;">Venti Scale · Audit report</div>
-    <h1 style="font-family:Georgia,'Times New Roman',serif;font-size:34px;font-weight:400;letter-spacing:-0.02em;margin:14px 0 8px;line-height:1.1;">
-      Your audit for <br/>
-      <span style="color:#1F3D2B;">${escapeHtml(displayUrl)}</span>
+    <div style="font-size:11px;font-weight:600;letter-spacing:0.16em;color:${EMAIL_COLORS.textDim};text-transform:uppercase;">Venti Scale · Your marketing plan</div>
+    <h1 style="font-family:Fraunces,Georgia,'Times New Roman',serif;font-size:34px;font-weight:500;letter-spacing:-0.02em;margin:14px 0 10px;line-height:1.12;color:${EMAIL_COLORS.text};">
+      Your marketing plan for<br/>
+      <span style="color:${EMAIL_COLORS.blue};">${escapeHtml(displayUrl)}</span>
     </h1>
-    <p style="font-size:15px;line-height:1.55;color:#1B1B1B;opacity:0.65;margin:0 0 8px;">
-      ${result.checks.length} surface checks run in ${(result.durationMs / 1000).toFixed(1)}s. Here's what I found.
+    <p style="font-size:14px;line-height:1.55;color:${EMAIL_COLORS.textDim};margin:0 0 8px;">
+      Generated ${escapeHtml(timeString)} from ${result.checks.length} signals on your homepage.
     </p>
 
-    ${gradeBlock(result.grade, result.score)}
-
-    <!-- Summary counts -->
-    <table cellpadding="0" cellspacing="0" border="0" width="100%" style="margin:8px 0 16px;">
+    <!-- Snapshot strip -->
+    <table cellpadding="0" cellspacing="0" border="0" width="100%" style="margin:24px 0 8px;">
       <tr>
-        <td style="text-align:center;padding:12px;background:#F7E2DD;border-radius:6px 0 0 6px;">
-          <div style="font-size:22px;font-weight:700;color:#8A1F0F;font-family:Georgia,serif;">${fails.length}</div>
-          <div style="font-size:10px;font-weight:600;letter-spacing:0.08em;color:#8A1F0F;text-transform:uppercase;margin-top:2px;">Failed</div>
+        <td style="width:33.33%;padding:4px;">
+          <div style="background:${EMAIL_COLORS.card};border:1px solid ${EMAIL_COLORS.border};border-radius:10px;padding:18px 14px;text-align:center;">
+            <div style="font-family:Fraunces,Georgia,serif;font-size:28px;font-weight:500;color:${EMAIL_COLORS.green};line-height:1;">${passes.length}</div>
+            <div style="font-size:10px;font-weight:600;letter-spacing:0.12em;color:${EMAIL_COLORS.textDim};text-transform:uppercase;margin-top:6px;">Wins</div>
+          </div>
         </td>
-        <td style="text-align:center;padding:12px;background:#FBF2DD;border-left:1px solid rgba(255,255,255,0.6);border-right:1px solid rgba(255,255,255,0.6);">
-          <div style="font-size:22px;font-weight:700;color:#8A5A00;font-family:Georgia,serif;">${warns.length}</div>
-          <div style="font-size:10px;font-weight:600;letter-spacing:0.08em;color:#8A5A00;text-transform:uppercase;margin-top:2px;">Warnings</div>
+        <td style="width:33.33%;padding:4px;">
+          <div style="background:${EMAIL_COLORS.card};border:1px solid ${EMAIL_COLORS.border};border-radius:10px;padding:18px 14px;text-align:center;">
+            <div style="font-family:Fraunces,Georgia,serif;font-size:28px;font-weight:500;color:#FFC850;line-height:1;">${warns.length}</div>
+            <div style="font-size:10px;font-weight:600;letter-spacing:0.12em;color:${EMAIL_COLORS.textDim};text-transform:uppercase;margin-top:6px;">Gaps</div>
+          </div>
         </td>
-        <td style="text-align:center;padding:12px;background:#E8F0EA;border-radius:0 6px 6px 0;">
-          <div style="font-size:22px;font-weight:700;color:#1F3D2B;font-family:Georgia,serif;">${passes.length}</div>
-          <div style="font-size:10px;font-weight:600;letter-spacing:0.08em;color:#1F3D2B;text-transform:uppercase;margin-top:2px;">Passed</div>
+        <td style="width:33.33%;padding:4px;">
+          <div style="background:${EMAIL_COLORS.card};border:1px solid ${EMAIL_COLORS.border};border-radius:10px;padding:18px 14px;text-align:center;">
+            <div style="font-family:Fraunces,Georgia,serif;font-size:28px;font-weight:500;color:${EMAIL_COLORS.red};line-height:1;">${fails.length}</div>
+            <div style="font-size:10px;font-weight:600;letter-spacing:0.12em;color:${EMAIL_COLORS.textDim};text-transform:uppercase;margin-top:6px;">Blockers</div>
+          </div>
         </td>
       </tr>
     </table>
 
-    ${section("What to fix first", fails)}
-    ${section("Worth cleaning up", warns)}
-    ${section("Already solid", passes)}
-    ${section("Notes", infos)}
+    <!-- Plan body -->
+    <div style="background:${EMAIL_COLORS.card};border:1px solid ${EMAIL_COLORS.border};border-radius:12px;padding:28px 26px;margin-top:20px;">
+      ${planHtml}
+    </div>
 
     <!-- CTA -->
-    <div style="margin-top:48px;padding:32px 28px;background:#1B1B1B;border-radius:12px;text-align:center;">
-      <div style="font-family:Georgia,'Times New Roman',serif;font-size:22px;font-weight:400;line-height:1.25;color:#F6F1EA;">
-        Want me to fix these <span style="font-style:italic;">for you?</span>
+    <div style="margin-top:36px;padding:32px 28px;background:${EMAIL_COLORS.cardAlt};border:1px solid ${EMAIL_COLORS.borderStrong};border-radius:12px;text-align:center;">
+      <div style="font-family:Fraunces,Georgia,'Times New Roman',serif;font-size:22px;font-weight:500;line-height:1.3;color:${EMAIL_COLORS.text};">
+        Want me to execute this plan for you?
       </div>
-      <p style="font-size:14px;line-height:1.55;color:#F6F1EA;opacity:0.65;margin:12px 0 20px;">
-        This audit scratches the surface. The full Venti Scale system covers email, content, ads, SEO
-        and reports, built around your business. One quick call, no contract, no hard sell.
+      <p style="font-size:14px;line-height:1.6;color:${EMAIL_COLORS.textMid};margin:12px 0 22px;">
+        Venti Scale runs your content, email, ads, SEO, and reporting as your full marketing team, built around your brand voice. One quick call, no contract.
       </p>
-      <a href="https://www.ventiscale.com" style="display:inline-block;background:#F6F1EA;color:#1B1B1B;text-decoration:none;font-size:13px;font-weight:600;padding:12px 22px;border-radius:6px;">
-        See how it works
+      <a href="https://www.ventiscale.com" style="display:inline-block;background:${EMAIL_COLORS.red};color:#FFFFFF;text-decoration:none;font-size:14px;font-weight:600;padding:14px 26px;border-radius:8px;letter-spacing:0.01em;">
+        Start a quick call
       </a>
     </div>
 
+    <!-- Supporting evidence -->
+    <div style="margin-top:48px;padding-top:24px;border-top:1px solid ${EMAIL_COLORS.border};">
+      <div style="font-size:11px;font-weight:600;letter-spacing:0.14em;color:${EMAIL_COLORS.textDim};text-transform:uppercase;margin-bottom:4px;">Supporting evidence</div>
+      <p style="font-size:12px;line-height:1.55;color:${EMAIL_COLORS.textDim};margin:6px 0 0;">The raw signals the plan is built on. Skim if you want the receipts.</p>
+      ${evidenceSection("Growth foundation", evidence.growth)}
+      ${evidenceSection("Content engine", evidence.content)}
+      ${evidenceSection("Website basics", evidence.basics)}
+    </div>
+
     <!-- Footer -->
-    <div style="margin-top:40px;padding-top:24px;border-top:1px solid rgba(27,27,27,0.10);font-size:12px;color:#1B1B1B;opacity:0.50;line-height:1.6;">
-      Sent to ${escapeHtml(recipientEmail)} because you ran an audit at <a href="https://www.ventiscale.com" style="color:#1F3D2B;text-decoration:none;">ventiscale.com</a>. No follow-up sequence, no spam. If you want to chat, just reply.<br/><br/>
+    <div style="margin-top:40px;padding-top:20px;border-top:1px solid ${EMAIL_COLORS.border};font-size:12px;color:${EMAIL_COLORS.textDim};line-height:1.65;">
+      Sent to ${escapeHtml(recipientEmail)} because you ran a free audit at <a href="https://www.ventiscale.com" style="color:${EMAIL_COLORS.blue};text-decoration:none;">ventiscale.com</a>. Reply any time.<br/><br/>
       Dustin Gilmour, Venti Scale
     </div>
 
@@ -674,31 +1208,19 @@ export function renderAuditEmail(
 </body>
 </html>`;
 
-  // Plain-text fallback
+  // Plain-text fallback. Claude markdown renders cleanly as-is.
   const textLines = [
-    `Your Venti Scale audit for ${displayUrl}`,
-    `Grade: ${result.grade} (${result.score}/100)`,
+    `Your Venti Scale marketing plan for ${displayUrl}`,
+    `Generated ${timeString}`,
     ``,
-    `${fails.length} failed · ${warns.length} warnings · ${passes.length} passed`,
+    `${passes.length} wins · ${warns.length} gaps · ${fails.length} blockers`,
     ``,
+    planMarkdown,
+    ``,
+    `Want me to execute this plan for you? Start a quick call: https://www.ventiscale.com`,
+    ``,
+    `Dustin Gilmour, Venti Scale`,
   ];
-  const appendSection = (title: string, items: AuditCheck[]) => {
-    if (items.length === 0) return;
-    textLines.push(`— ${title.toUpperCase()} —`);
-    for (const c of items) {
-      textLines.push(`[${c.status.toUpperCase()}] ${c.label}: ${c.detail}`);
-      if (c.fix) textLines.push(`  Fix: ${c.fix}`);
-    }
-    textLines.push("");
-  };
-  appendSection("What to fix first", fails);
-  appendSection("Worth cleaning up", warns);
-  appendSection("Already solid", passes);
-  textLines.push(
-    "Want me to fix these for you? One quick call, no contract, no hard sell. https://www.ventiscale.com",
-    "",
-    "Dustin Gilmour, Venti Scale",
-  );
 
   return { subject, html, text: textLines.join("\n") };
 }
