@@ -1,4 +1,4 @@
-import { NextResponse } from "next/server";
+import { NextResponse, after } from "next/server";
 import {
   runAudit,
   renderAuditEmail,
@@ -109,16 +109,22 @@ async function sendLeadNotification(entry: AuditRequest, result: AuditResult) {
   const warned = result.checks.filter((c) => c.status === "warn").length;
   const passed = result.checks.filter((c) => c.status === "pass").length;
   const gradeColor =
-    result.grade === "A" ? "#1F3D2B" :
-    result.grade === "B" ? "#2E5B3E" :
-    result.grade === "C" ? "#A06A00" :
-    "#A12A1A";
+    result.grade === "A" ? "#10E39A" :
+    result.grade === "B" ? "#10E39A" :
+    result.grade === "C" ? "#F5B841" :
+    "#C8362B";
+
+  const subtle = "rgba(255,255,255,0.55)";
+  const muted = "rgba(255,255,255,0.72)";
+  const rowStyle = `padding:8px 14px 8px 0;color:${subtle};font-family:'SF Mono',Menlo,Consolas,monospace;font-size:11px;letter-spacing:0.08em;text-transform:uppercase;vertical-align:top;`;
+  const valStyle = `padding:8px 0;color:#F5F6FA;font-size:14px;vertical-align:top;`;
 
   const reachableRow = result.reachable
-    ? `<tr><td style="padding:6px 12px 6px 0;color:#1B1B1B;opacity:0.6;">Grade</td><td style="padding:6px 0;"><strong style="color:${gradeColor};font-size:18px;">${result.grade}</strong> <span style="color:#1B1B1B;opacity:0.5;">(${result.score}/100)</span></td></tr>
-       <tr><td style="padding:6px 12px 6px 0;color:#1B1B1B;opacity:0.6;">Checks</td><td style="padding:6px 0;">${failed} failed · ${warned} warnings · ${passed} passed</td></tr>
-       <tr><td style="padding:6px 12px 6px 0;color:#1B1B1B;opacity:0.6;">Final URL</td><td style="padding:6px 0;"><a href="${result.finalUrl}">${result.finalUrl}</a></td></tr>`
-    : `<tr><td style="padding:6px 12px 6px 0;color:#1B1B1B;opacity:0.6;">Status</td><td style="padding:6px 0;color:#A12A1A;"><strong>UNREACHABLE</strong>. ${result.error || "site did not respond"}</td></tr>`;
+    ? `<tr><td style="${rowStyle}">Grade</td><td style="${valStyle}"><strong style="color:${gradeColor};font-size:22px;font-family:Georgia,serif;">${result.grade}</strong> <span style="color:${subtle};font-size:13px;">· ${result.score}/100</span></td></tr>
+       <tr><td style="${rowStyle}">Checks</td><td style="${valStyle}"><span style="color:#C8362B;">${failed} failed</span> · <span style="color:#F5B841;">${warned} warnings</span> · <span style="color:#10E39A;">${passed} passed</span></td></tr>
+       <tr><td style="${rowStyle}">Plan</td><td style="${valStyle}">${result.plan ? `<span style="color:#10E39A;">AI generated</span> <span style="color:${subtle};">(${result.plan.length} chars)</span>` : `<span style="color:${subtle};">fallback template</span>`}</td></tr>
+       <tr><td style="${rowStyle}">Final URL</td><td style="${valStyle}"><a href="${result.finalUrl}" style="color:#5280FF;text-decoration:none;">${result.finalUrl}</a></td></tr>`
+    : `<tr><td style="${rowStyle}">Status</td><td style="${valStyle};color:#C8362B;"><strong>UNREACHABLE</strong>. ${result.error || "site did not respond"}</td></tr>`;
 
   const subject = result.reachable
     ? `New audit lead: ${entry.url} · Grade ${result.grade} (${result.score})`
@@ -134,23 +140,34 @@ async function sendLeadNotification(entry: AuditRequest, result: AuditResult) {
 
   const notesHtml = entry.notes
     ? escapeHtml(entry.notes).replace(/\n/g, "<br>")
-    : "(none)";
+    : `<span style="color:${subtle};">(none)</span>`;
 
   const htmlContent = `
-    <div style="font-family:-apple-system,BlinkMacSystemFont,sans-serif;color:#1B1B1B;">
-      <h2 style="margin:0 0 16px;font-weight:500;">New audit lead</h2>
-      <table style="border-collapse:collapse;font-size:14px;">
-        <tr><td style="padding:6px 12px 6px 0;color:#1B1B1B;opacity:0.6;">Name</td><td style="padding:6px 0;">${escapeHtml(entry.name)}</td></tr>
-        <tr><td style="padding:6px 12px 6px 0;color:#1B1B1B;opacity:0.6;">Type of business</td><td style="padding:6px 0;">${escapeHtml(entry.business)}</td></tr>
-        <tr><td style="padding:6px 12px 6px 0;color:#1B1B1B;opacity:0.6;">Website</td><td style="padding:6px 0;"><a href="${result.finalUrl || entry.url}">${entry.url}</a></td></tr>
-        <tr><td style="padding:6px 12px 6px 0;color:#1B1B1B;opacity:0.6;">Email</td><td style="padding:6px 0;"><a href="mailto:${entry.email}">${entry.email}</a></td></tr>
-        ${reachableRow}
-        <tr><td style="padding:6px 12px 6px 0;color:#1B1B1B;opacity:0.6;vertical-align:top;">Notes from them</td><td style="padding:6px 0;">${notesHtml}</td></tr>
-        <tr><td style="padding:6px 12px 6px 0;color:#1B1B1B;opacity:0.6;">Received</td><td style="padding:6px 0;">${entry.receivedAt}</td></tr>
-        <tr><td style="padding:6px 12px 6px 0;color:#1B1B1B;opacity:0.6;">ID</td><td style="padding:6px 0;font-family:monospace;font-size:12px;">${entry.id}</td></tr>
-        <tr><td style="padding:6px 12px 6px 0;color:#1B1B1B;opacity:0.6;">IP</td><td style="padding:6px 0;font-family:monospace;font-size:12px;">${entry.ip || "(none)"}</td></tr>
-      </table>
-      <p style="margin:20px 0 0;font-size:13px;color:#1B1B1B;opacity:0.6;">Audit email was sent to the visitor. Reply directly to follow up.</p>
+    <div style="background:#07080C;padding:40px 20px;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif;">
+      <div style="max-width:560px;margin:0 auto;background:#11131B;border:1px solid rgba(255,255,255,0.08);border-radius:16px;padding:36px 32px;">
+        <div style="font-family:'SF Mono',Menlo,Consolas,monospace;font-size:10px;letter-spacing:0.22em;text-transform:uppercase;color:${subtle};margin-bottom:10px;">
+          Venti Scale · New lead
+        </div>
+        <h1 style="margin:0 0 22px;font-family:Georgia,serif;font-size:26px;font-weight:400;letter-spacing:-0.01em;color:#F5F6FA;">
+          New audit lead
+        </h1>
+        <table style="border-collapse:collapse;width:100%;">
+          <tr><td style="${rowStyle}">Name</td><td style="${valStyle}">${escapeHtml(entry.name)}</td></tr>
+          <tr><td style="${rowStyle}">Business</td><td style="${valStyle}">${escapeHtml(entry.business)}</td></tr>
+          <tr><td style="${rowStyle}">Website</td><td style="${valStyle}"><a href="${result.finalUrl || entry.url}" style="color:#5280FF;text-decoration:none;">${escapeHtml(entry.url)}</a></td></tr>
+          <tr><td style="${rowStyle}">Email</td><td style="${valStyle}"><a href="mailto:${entry.email}" style="color:#5280FF;text-decoration:none;">${escapeHtml(entry.email)}</a></td></tr>
+          ${reachableRow}
+          <tr><td style="${rowStyle}">Notes</td><td style="${valStyle}color:${muted};">${notesHtml}</td></tr>
+          <tr><td style="${rowStyle}">Received</td><td style="${valStyle}color:${muted};font-size:12px;">${entry.receivedAt}</td></tr>
+          <tr><td style="${rowStyle}">ID</td><td style="${valStyle}font-family:'SF Mono',Menlo,monospace;font-size:11px;color:${subtle};">${entry.id}</td></tr>
+          <tr><td style="${rowStyle}">IP</td><td style="${valStyle}font-family:'SF Mono',Menlo,monospace;font-size:11px;color:${subtle};">${entry.ip || "unknown"}</td></tr>
+        </table>
+        <div style="margin-top:28px;padding-top:24px;border-top:1px solid rgba(255,255,255,0.08);">
+          <p style="margin:0;font-size:13px;color:${muted};line-height:1.55;">
+            Their plan email is on the way. Reply directly to this notification to follow up with them today.
+          </p>
+        </div>
+      </div>
     </div>
   `.trim();
 
@@ -284,52 +301,56 @@ export async function POST(req: Request) {
 
   console.log("[audit] new request", JSON.stringify(entry));
 
-  // Run the audit. Failures here should never fail the response, the lead
-  // is still captured and Dusty can follow up manually.
-  let result: AuditResult | null = null;
-  try {
-    result = await runAudit(url);
-    console.log("[audit] result", entry.id, result.reachable ? `${result.grade} ${result.score}/100` : `UNREACHABLE: ${result.error}`);
-  } catch (err) {
-    console.error("[audit] runAudit threw", err);
-  }
-
-  // Generate the Claude-powered marketing plan. Never blocks or throws, a
-  // null return falls back to a simpler email inside renderAuditEmail.
-  if (result && result.reachable) {
+  // All heavy lifting runs after the response is sent so the visitor sees
+  // instant success. Claude can take its time thinking, freshness probes can
+  // hit slow sitemaps, Brevo can retry, none of it blocks the user. after()
+  // still counts against maxDuration (60s) but doesn't make the user wait.
+  after(async () => {
+    let result: AuditResult | null = null;
     try {
-      result.businessType = business;
-      const plan = await generateMarketingPlan(result, url, business);
-      result.plan = plan;
+      result = await runAudit(url);
       console.log(
-        "[audit] plan",
+        "[audit] result",
         entry.id,
-        plan ? `generated (${plan.length} chars)` : "fallback",
+        result.reachable ? `${result.grade} ${result.score}/100` : `UNREACHABLE: ${result.error}`,
       );
     } catch (err) {
-      console.error("[audit] generateMarketingPlan threw", err);
-      result.plan = null;
+      console.error("[audit] runAudit threw", err);
     }
-  }
 
-  // Fire both emails in parallel. Failures are logged, never thrown.
-  if (result) {
-    await Promise.allSettled([
-      sendAuditToVisitor(entry, result),
-      sendLeadNotification(entry, result),
-    ]);
-  }
+    if (result && result.reachable) {
+      try {
+        result.businessType = business;
+        const plan = await generateMarketingPlan(result, url, business);
+        result.plan = plan;
+        console.log(
+          "[audit] plan",
+          entry.id,
+          plan ? `generated (${plan.length} chars)` : "fallback",
+        );
+      } catch (err) {
+        console.error("[audit] generateMarketingPlan threw", err);
+        result.plan = null;
+      }
+    }
 
-  // Fire-and-forget Telegram ping. Never blocks or fails the response.
-  void sendTelegramPing(entry);
+    if (result) {
+      await Promise.allSettled([
+        sendAuditToVisitor(entry, result),
+        sendLeadNotification(entry, result),
+      ]);
+    }
 
-  return NextResponse.json({
-    ok: true,
-    id: entry.id,
-    ...(result && result.reachable
-      ? { score: result.score, grade: result.grade }
-      : {}),
+    try {
+      await sendTelegramPing(entry);
+    } catch (err) {
+      console.error("[audit] telegram ping threw", err);
+    }
   });
+
+  // Respond immediately. The UI shows "Audit queued" and tells the visitor
+  // their plan is being written and will land in their inbox shortly.
+  return NextResponse.json({ ok: true, id: entry.id });
 }
 
 export async function GET() {
