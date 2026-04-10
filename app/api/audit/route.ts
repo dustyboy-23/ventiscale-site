@@ -14,8 +14,11 @@ import { runAudit, renderAuditEmail, type AuditResult } from "@/lib/audit";
 
 interface AuditRequest {
   id: string;
+  name: string;
+  business: string;
   email: string;
   url: string;
+  notes: string;
   receivedAt: string;
   userAgent?: string;
   ip?: string;
@@ -88,13 +91,28 @@ async function sendLeadNotification(entry: AuditRequest, result: AuditResult) {
     ? `New audit lead: ${entry.url} — Grade ${result.grade} (${result.score})`
     : `New audit lead: ${entry.url} — UNREACHABLE`;
 
+  const escapeHtml = (s: string) =>
+    s
+      .replace(/&/g, "&amp;")
+      .replace(/</g, "&lt;")
+      .replace(/>/g, "&gt;")
+      .replace(/"/g, "&quot;")
+      .replace(/'/g, "&#39;");
+
+  const notesHtml = entry.notes
+    ? escapeHtml(entry.notes).replace(/\n/g, "<br>")
+    : "(none)";
+
   const htmlContent = `
     <div style="font-family:-apple-system,BlinkMacSystemFont,sans-serif;color:#1B1B1B;">
       <h2 style="margin:0 0 16px;font-weight:500;">New audit lead</h2>
       <table style="border-collapse:collapse;font-size:14px;">
-        <tr><td style="padding:6px 12px 6px 0;color:#1B1B1B;opacity:0.6;">URL</td><td style="padding:6px 0;"><a href="${result.finalUrl || entry.url}">${entry.url}</a></td></tr>
+        <tr><td style="padding:6px 12px 6px 0;color:#1B1B1B;opacity:0.6;">Name</td><td style="padding:6px 0;">${escapeHtml(entry.name)}</td></tr>
+        <tr><td style="padding:6px 12px 6px 0;color:#1B1B1B;opacity:0.6;">Type of business</td><td style="padding:6px 0;">${escapeHtml(entry.business)}</td></tr>
+        <tr><td style="padding:6px 12px 6px 0;color:#1B1B1B;opacity:0.6;">Website</td><td style="padding:6px 0;"><a href="${result.finalUrl || entry.url}">${entry.url}</a></td></tr>
         <tr><td style="padding:6px 12px 6px 0;color:#1B1B1B;opacity:0.6;">Email</td><td style="padding:6px 0;"><a href="mailto:${entry.email}">${entry.email}</a></td></tr>
         ${reachableRow}
+        <tr><td style="padding:6px 12px 6px 0;color:#1B1B1B;opacity:0.6;vertical-align:top;">Notes from them</td><td style="padding:6px 0;">${notesHtml}</td></tr>
         <tr><td style="padding:6px 12px 6px 0;color:#1B1B1B;opacity:0.6;">Received</td><td style="padding:6px 0;">${entry.receivedAt}</td></tr>
         <tr><td style="padding:6px 12px 6px 0;color:#1B1B1B;opacity:0.6;">ID</td><td style="padding:6px 0;font-family:monospace;font-size:12px;">${entry.id}</td></tr>
         <tr><td style="padding:6px 12px 6px 0;color:#1B1B1B;opacity:0.6;">IP</td><td style="padding:6px 0;font-family:monospace;font-size:12px;">${entry.ip || "—"}</td></tr>
@@ -112,6 +130,46 @@ async function sendLeadNotification(entry: AuditRequest, result: AuditResult) {
   });
 }
 
+function escapeMarkdown(s: string) {
+  // Telegram Markdown (legacy) parse_mode — escape the reserved chars that
+  // commonly trip it up. Good enough for our plain-text user inputs.
+  return s.replace(/([_*`\[])/g, "\\$1");
+}
+
+async function sendTelegramPing(entry: AuditRequest) {
+  const token = process.env.TELEGRAM_BOT_TOKEN;
+  const chatId = process.env.TELEGRAM_CHAT_ID;
+  if (!token || !chatId) {
+    return;
+  }
+  try {
+    const notesBlock = entry.notes
+      ? `\n\n*Notes from them:*\n${escapeMarkdown(entry.notes)}`
+      : "";
+    const text =
+      `🔥 *New AI audit request*\n\n` +
+      `*Name:* ${escapeMarkdown(entry.name)}\n` +
+      `*Business:* ${escapeMarkdown(entry.business)}\n` +
+      `*Website:* ${escapeMarkdown(entry.url)}\n` +
+      `*Email:* ${escapeMarkdown(entry.email)}` +
+      notesBlock +
+      `\n\n_Pull the pitch template at pitch-templates/audit-delivery.md, customize it, and send from hello@ventiscale.com today._`;
+
+    await fetch(`https://api.telegram.org/bot${token}/sendMessage`, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        chat_id: chatId,
+        text,
+        parse_mode: "Markdown",
+        disable_web_page_preview: true,
+      }),
+    });
+  } catch (err) {
+    console.error("[audit] telegram ping threw", err);
+  }
+}
+
 function isValidEmail(s: string) {
   return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(s);
 }
@@ -123,16 +181,31 @@ function isValidUrl(s: string) {
 }
 
 export async function POST(req: Request) {
-  let body: { email?: string; url?: string };
+  let body: {
+    name?: string;
+    business?: string;
+    email?: string;
+    url?: string;
+    notes?: string;
+  };
   try {
     body = await req.json();
   } catch {
     return NextResponse.json({ ok: false, error: "Invalid JSON" }, { status: 400 });
   }
 
+  const name = (body.name || "").trim();
+  const business = (body.business || "").trim();
   const email = (body.email || "").trim();
   const url = (body.url || "").trim();
+  const notes = (body.notes || "").trim().slice(0, 2000);
 
+  if (!name || name.length > 120) {
+    return NextResponse.json({ ok: false, error: "Invalid name" }, { status: 400 });
+  }
+  if (!business || business.length > 160) {
+    return NextResponse.json({ ok: false, error: "Invalid business" }, { status: 400 });
+  }
   if (!isValidEmail(email)) {
     return NextResponse.json({ ok: false, error: "Invalid email" }, { status: 400 });
   }
@@ -142,8 +215,11 @@ export async function POST(req: Request) {
 
   const entry: AuditRequest = {
     id: `aud_${Date.now().toString(36)}_${Math.random().toString(36).slice(2, 8)}`,
+    name,
+    business,
     email,
     url,
+    notes,
     receivedAt: new Date().toISOString(),
     userAgent: req.headers.get("user-agent") || undefined,
     ip:
@@ -171,6 +247,9 @@ export async function POST(req: Request) {
       sendLeadNotification(entry, result),
     ]);
   }
+
+  // Fire-and-forget Telegram ping. Never blocks or fails the response.
+  void sendTelegramPing(entry);
 
   return NextResponse.json({
     ok: true,

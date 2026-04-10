@@ -1,101 +1,170 @@
 import Link from "next/link";
-import Image from "next/image";
 import {
   ArrowRight,
-  Mail,
-  Calendar,
+  ArrowUpRight,
+  PenLine,
   Megaphone,
   Search,
   BarChart3,
-  Compass,
-  Check,
+  Share2,
+  Mail,
+  Sparkles,
+  Shield,
+  Eye,
+  UserCheck,
+  Clock,
+  Fingerprint,
+  Cpu,
+  Zap,
+  HelpCircle,
+  Plus,
 } from "lucide-react";
-import { BrowserFrame } from "@/components/marketing/browser-frame";
-import { DashboardMock } from "@/components/marketing/dashboard-mock";
+import { AiWorkers } from "@/components/marketing/ai-workers";
 import { AuditForm } from "@/components/marketing/audit-form";
-import { ScrollReveal } from "@/components/marketing/scroll-reveal";
+import { Eyebrow } from "@/components/marketing/eyebrow";
 
-const SERVICES = [
-  {
-    icon: Mail,
-    title: "Email",
-    outcome: "Welcome flows, abandoned-cart, monthly broadcasts.",
-    metric: "30–45% of revenue, on average.",
-  },
-  {
-    icon: Calendar,
-    title: "Content",
-    outcome: "On-brand posts going out daily across the channels that matter.",
-    metric: "Written, designed, scheduled, monitored.",
-  },
-  {
-    icon: Megaphone,
-    title: "Ads",
-    outcome: "Meta, Google, TikTok. Creative made in-house.",
-    metric: "Tested weekly. Optimized until every dollar pulls.",
-  },
-  {
-    icon: Search,
-    title: "SEO",
-    outcome: "Keyword strategy, technical fixes, optimized articles.",
-    metric: "Free traffic that compounds.",
-  },
-  {
-    icon: BarChart3,
-    title: "Reports",
-    outcome: "Plain-English monthly recap. Real numbers, no slide deck theater.",
-    metric: "Always one click away in the portal.",
-  },
-  {
-    icon: Compass,
-    title: "Strategy",
-    outcome: "Direct line to me. The brain behind the system.",
-    metric: "I run a few brands. Yours could be next.",
-  },
-];
-
-const STEPS = [
+const PROCESS = [
   {
     n: "01",
-    title: "Run your free audit.",
-    body: "Drop your URL, get a real audit in your inbox in under a minute. If I can help your brand, I'll reach out. If I can't, I'll tell you and point you somewhere better.",
+    icon: Fingerprint,
+    title: "You send your brand DNA",
+    body: "Your voice, your tone, your audience, your goals. One onboarding form. Takes 15 minutes.",
   },
   {
     n: "02",
-    title: "I onboard your brand into the portal.",
-    body: "One week. Brand voice, audience, goals, channels, history. The system learns your shop.",
+    icon: Cpu,
+    title: "We train your Custom AI",
+    body: "We build you a custom AI trained on your brand, your products, and your competitors. One week to go live.",
   },
   {
     n: "03",
-    title: "You watch the work happen.",
-    body: "Every email, every post, every report appears in your portal the moment it's done. Cancel any time.",
+    icon: Zap,
+    title: "It runs on autopilot",
+    body: "Every day, your AI writes, posts, optimizes, reports. I personally review everything before it ships. You watch it happen in your portal.",
+  },
+];
+
+const SERVICES = [
+  {
+    icon: PenLine,
+    title: "Creative Writing",
+    cadence: "1 / day",
+    body: "One SEO-tuned blog post every day, written in your brand voice and auto-published to your website.",
+  },
+  {
+    icon: Share2,
+    title: "Social Media",
+    cadence: "3 / day",
+    body: "Three fresh posts across Instagram, Facebook, TikTok, and LinkedIn. Captions, hashtags, scheduled, replied-to.",
+  },
+  {
+    icon: Mail,
+    title: "Email Marketing",
+    cadence: "2 / week",
+    body: "Welcome flows, weekly broadcasts, cart abandonment. All written, designed, and sent to your list automatically.",
+  },
+  {
+    icon: Megaphone,
+    title: "Advertising",
+    cadence: "Weekly refresh",
+    body: "New ad creative and copy every week. A/B tested and optimized across Meta, Google, and TikTok.",
+  },
+  {
+    icon: Search,
+    title: "Research",
+    cadence: "Daily scan",
+    body: "Your competitors, keywords, and local rivals scanned every morning. Fresh insights posted to your portal.",
+  },
+  {
+    icon: BarChart3,
+    title: "Analyst",
+    cadence: "Weekly report",
+    body: "Every Monday you get a plain-English report of what shipped, what worked, and what is next. No PDF theater.",
+  },
+];
+
+const TIMELINE = [
+  {
+    when: "Today",
+    tag: "00:00",
+    title: "Free audit + custom growth plan",
+    body: "Drop your details in the form above. Our AI pulls your site, socials, ads, SEO, and competitors. I read the results personally and we send you a real growth plan built for your business. In your inbox the same day.",
+  },
+  {
+    when: "Day 1-2",
+    tag: "+24H",
+    title: "You review. We talk only if you want.",
+    body: "Read it, sit with it, reply with questions. If you want a quick call, we are around. If you want to just say yes and go, that works too. No sales calls forced on you.",
+  },
+  {
+    when: "Day 5",
+    tag: "GO LIVE",
+    title: "Your portal goes live",
+    body: "Your Custom AI is trained, your portal is built, and work starts shipping the same week. You log in and see every asset, every report, every dollar tracked in real time.",
+  },
+  {
+    when: "Week 1+",
+    tag: "ONGOING",
+    title: "Daily work. Weekly reports. Direct Slack.",
+    body: "Your AI writes, posts, optimizes, and monitors every day. I personally review and approve everything before it ships. You get a Slack channel with me directly. Same-day replies. Always me, never a junior. Month-to-month. Cancel any time.",
   },
 ];
 
 const FAQ = [
   {
-    q: "Is this AI slop?",
-    a: "No. The system writes drafts, I edit and approve everything. The AI is the lever; the taste is mine. If the work isn't on-brand, it doesn't ship.",
+    q: "How is this different from a marketing agency?",
+    a: "Agencies charge you retainer money to pay junior employees to run templates. We charge less, ship more, and everything is driven by a Custom AI trained specifically on your brand. You get a direct Slack channel with the founder, not an account manager. No meetings, no PDFs, no project managers, no upsells.",
   },
   {
-    q: "What if I don't like the work?",
-    a: "Tell me. I rebuild it, re-train the system on the feedback, or refund the month. There's no contract holding you. Cancel any time.",
+    q: "Is this just ChatGPT with a logo on it?",
+    a: "No. We train a Custom AI on your brand DNA, your products, your audience, your competitors, and your voice. It runs inside a full pipeline we have built that researches, writes, designs, schedules, posts, and reports. ChatGPT is a chat box. This is a running marketing team.",
   },
   {
-    q: "How is this only $1,500?",
-    a: "Because the AI is doing the labor a junior team used to do. I'm not paying six salaries, so I'm not charging you for six salaries. The price reflects the math, not the legacy markup.",
+    q: "What if the AI writes something off-brand or wrong?",
+    a: "Nothing hits your channels until I personally review and approve it. Every blog post, every ad, every email, every caption. The AI does the volume, I do the taste and quality control. If something is off, it never ships.",
   },
   {
-    q: "Who actually runs my account — you or a model?",
-    a: "Both. I architect it, set the strategy, approve the work. The model executes inside the system I built. You get my judgment with a junior team's throughput.",
+    q: "Why is there no pricing on the site?",
+    a: "Because every business is different. A local plumber does not need what a SaaS startup needs. We audit your business first, then send you a plan built for exactly what you need and exactly what it costs. No tiers, no packages, no upsells.",
   },
   {
-    q: "What if I want to bring marketing back in-house?",
-    a: "Easy. Export every asset, every email, every post, every brief. No lock-in. Your data is yours.",
+    q: "How fast will I see results?",
+    a: "Your portal is live in 5 business days. Content, posts, and ads start shipping the same week. Real numbers (traffic, leads, revenue) usually show up in the first 30 to 60 days depending on your starting point. We tell you up front in the audit what to expect for your business.",
   },
   {
-    q: "How is this different from Designjoy or Penji-style services?",
-    a: "Those are unlimited-design subscriptions. This is unlimited-marketing-execution. They make graphics; I run the channel. Different category, similar honesty about pricing.",
+    q: "Can I cancel? Do I own my content?",
+    a: "Month to month. Cancel any time, no contract, no termination fee. Everything produced for your business is yours. You keep every asset, every post, every piece of copy, forever.",
+  },
+  {
+    q: "Do I need to learn any new tools?",
+    a: "No. You already know how to check email and log into a website. That is the whole workflow. Your portal shows you everything in one place. If you want a Slack channel with the founder, we will set it up.",
+  },
+  {
+    q: "Will I actually talk to a real person, or get handed off?",
+    a: "You talk directly to the founder. One Slack channel, same-day replies during business hours. Never outsourced to juniors, never handed off to an account manager. Every message goes straight to me.",
+  },
+];
+
+const ASSURANCES = [
+  {
+    icon: UserCheck,
+    title: "Every piece, human-approved",
+    body: "The AI writes drafts. I personally read them, edit them, and approve them. Nothing hits your channels until I sign off.",
+  },
+  {
+    icon: Eye,
+    title: "You see everything, live",
+    body: "No monthly PDFs. No quarterly reviews. Your portal shows every asset, every report, every dollar, the second it ships.",
+  },
+  {
+    icon: Shield,
+    title: "Custom per business, not templated",
+    body: "We do not run the same playbook on every client. Your plan, your voice, your strategy, built for your business.",
+  },
+  {
+    icon: Clock,
+    title: "Same-day response, direct from the founder",
+    body: "One Slack channel. One human. I answer every message myself, same day, during business hours.",
   },
 ];
 
@@ -105,512 +174,481 @@ export default function MarketingHome() {
       {/* ─────────────────────────────────────────────
           1. HERO
          ───────────────────────────────────────────── */}
-      <section className="relative">
-        <div className="max-w-[1180px] mx-auto px-6 lg:px-10 pt-24 sm:pt-32 lg:pt-40 pb-16 sm:pb-24">
-          <div className="hero-fade">
-            <div className="eyebrow mb-7">Done-for-you marketing · for ecommerce brands</div>
-
-            <h1 className="h-display text-[#1B1B1B] text-[44px] sm:text-[68px] lg:text-[88px] max-w-[14ch]">
-              Fire your marketing agency.
-              <br />
-              <span className="italic">Keep the growth.</span>
-            </h1>
-
-            <p className="body-lede mt-8 max-w-[640px]">
-              I run done-for-you marketing for ecommerce brands using AI. Content, email, ads,
-              SEO, reports — handled. <span className="text-[#1B1B1B]">$1,500 a month, flat.</span>{" "}
-              Watch it work in your portal.
-            </p>
-
-            <div className="mt-10 flex flex-col sm:flex-row items-start sm:items-center gap-3.5">
-              <a href="#audit" className="btn-arterial">
-                Run my audit
-                <ArrowRight className="w-4 h-4" strokeWidth={2.25} />
-              </a>
-              <a href="#work" className="btn-ghost">
-                See the portal
-              </a>
-            </div>
-
-            <p className="mt-6 text-[13px] text-[#1B1B1B]/55 font-medium">
-              Currently running marketing for a small portfolio of DTC brands. Cancel any time. No
-              contracts.
-            </p>
-          </div>
-
-          {/* Hero product image */}
-          <div id="work" className="mt-20 sm:mt-28">
-            <ScrollReveal>
-              <BrowserFrame url="ventiscale.com/portal/stoneline" shadow="xl" variant="cream">
-                <DashboardMock />
-              </BrowserFrame>
-            </ScrollReveal>
-            <p className="mt-5 text-center text-[11px] font-mono uppercase tracking-[0.16em] text-[#1B1B1B]/45">
-              The actual portal. Real data. Yours after week one.
-            </p>
-          </div>
+      <section className="relative overflow-hidden">
+        {/* Aurora glow */}
+        <div className="absolute inset-0 pointer-events-none">
+          <div className="aurora aurora-1" style={{ top: "-10%", left: "10%" }} />
+          <div className="aurora aurora-2" style={{ top: "20%", right: "-5%" }} />
+          <div className="aurora aurora-3" style={{ top: "40%", left: "30%" }} />
         </div>
-      </section>
+        {/* Grid overlay */}
+        <div className="absolute inset-0 grid-overlay pointer-events-none" />
 
-      {/* ─────────────────────────────────────────────
-          2. THE AGENCY MATH (problem)
-         ───────────────────────────────────────────── */}
-      <section className="relative border-t border-[rgba(27,27,27,0.08)] bg-[#EFE8DC]">
-        <div className="max-w-[1180px] mx-auto px-6 lg:px-10 py-24 sm:py-32">
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-16 items-center">
-            <div className="lg:col-span-7">
-              <ScrollReveal>
-                <div className="eyebrow mb-6">The agency math</div>
-              </ScrollReveal>
-              <ScrollReveal delay={100}>
-                <h2 className="h-section text-[#1B1B1B] text-[40px] sm:text-[56px] lg:text-[68px]">
-                  $5,000 a month <span className="italic">×</span> twelve months
-                  <br />
-                  <span className="italic">= sixty thousand dollars</span>
-                  <br />
-                  for what?
-                </h2>
-              </ScrollReveal>
+        <div className="relative max-w-[1240px] mx-auto px-6 lg:px-10 pt-16 sm:pt-20 lg:pt-24 pb-20 sm:pb-28">
+          <div className="grid grid-cols-1 lg:grid-cols-[1.05fr_0.95fr] gap-12 lg:gap-16 items-start">
+            <div>
+              <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full border border-white/10 bg-white/[0.03] mb-8">
+                <span className="relative flex h-2 w-2">
+                  <span className="absolute inline-flex h-full w-full rounded-full bg-[#10E39A] opacity-60 dot-pulse" />
+                  <span className="relative inline-flex rounded-full h-2 w-2 bg-[#10E39A]" />
+                </span>
+                <span className="font-mono text-[10px] uppercase tracking-[0.18em] text-white/70">
+                  Jarvis (AI) · Online
+                </span>
+              </div>
+
+              <h1 className="font-display text-[46px] sm:text-[64px] lg:text-[82px] leading-[0.98] tracking-[-0.035em] text-white max-w-[14ch]">
+                The AI marketing team that{" "}
+                <span className="italic bg-gradient-to-r from-[#10E39A] via-[#5280FF] to-[#C8362B] bg-clip-text text-transparent">
+                  never sleeps.
+                </span>
+              </h1>
+
+              <p className="mt-8 text-[17px] lg:text-[19px] leading-[1.55] text-white/65 max-w-[560px]">
+                Content, social, SEO, ads, and reports. Shipped daily by AI,
+                reviewed by a human, visible in your live portal. Every business
+                gets a custom plan.{" "}
+                <span className="text-white">
+                  Start with a free AI audit of your business.
+                </span>
+              </p>
+
+              <div className="mt-10 flex flex-col sm:flex-row items-start sm:items-center gap-3.5">
+                <a href="#audit" className="btn-red">
+                  <Sparkles className="w-[17px] h-[17px]" strokeWidth={2.25} />
+                  Get my free AI audit
+                  <ArrowRight className="w-[17px] h-[17px]" strokeWidth={2.25} />
+                </a>
+                <Link href="/login" className="btn-outline-dark">
+                  Client login
+                  <ArrowUpRight className="w-[17px] h-[17px]" strokeWidth={2.25} />
+                </Link>
+              </div>
+
+              <p className="mt-6 text-[12px] font-mono uppercase tracking-[0.14em] text-white/40">
+                Takes 60 seconds to submit · Plan in your inbox today · No sales call
+              </p>
             </div>
-            <div className="lg:col-span-5">
-              <ScrollReveal delay={200}>
-                <ul className="space-y-5 text-[16px] text-[#1B1B1B]/75 leading-relaxed">
-                  <li className="flex gap-3">
-                    <span className="text-[#1F3D2B] font-mono text-[12px] mt-1.5 shrink-0">×</span>
-                    A junior strategist who learned your brand from a Notion doc.
-                  </li>
-                  <li className="flex gap-3">
-                    <span className="text-[#1F3D2B] font-mono text-[12px] mt-1.5 shrink-0">×</span>
-                    Three Slack channels, two stand-ups, one slow inbox.
-                  </li>
-                  <li className="flex gap-3">
-                    <span className="text-[#1F3D2B] font-mono text-[12px] mt-1.5 shrink-0">×</span>
-                    A monthly PDF that nobody on your team actually reads.
-                  </li>
-                  <li className="flex gap-3">
-                    <span className="text-[#1F3D2B] font-mono text-[12px] mt-1.5 shrink-0">×</span>
-                    Quarterly &ldquo;strategy reviews&rdquo; that produce a new slide deck.
-                  </li>
-                  <li className="flex gap-3">
-                    <span className="text-[#1F3D2B] font-mono text-[12px] mt-1.5 shrink-0">×</span>
-                    Three deliverables, late, every month, like clockwork.
-                  </li>
-                </ul>
-              </ScrollReveal>
+
+            {/* Live AI workers grid */}
+            <div className="relative">
+              <AiWorkers />
             </div>
           </div>
         </div>
       </section>
 
       {/* ─────────────────────────────────────────────
-          3. THE SHIFT
+          2. YOUR CUSTOM AI (teach the value prop)
          ───────────────────────────────────────────── */}
-      <section className="relative">
-        <div className="max-w-[980px] mx-auto px-6 lg:px-10 py-32 sm:py-44 text-center">
-          <ScrollReveal>
-            <p className="h-section text-[#1B1B1B] text-[34px] sm:text-[48px] lg:text-[60px]">
-              AI did to marketing
-              <br />
-              what calculators did to <span className="italic">bookkeeping.</span>
+      <section
+        id="services"
+        className="relative border-t border-white/[0.06] bg-[#0A0B11]"
+      >
+        <div className="max-w-[1240px] mx-auto px-6 lg:px-10 py-24 sm:py-32">
+          <div className="max-w-[780px] mb-16">
+            <Eyebrow variant="accent">YOUR CUSTOM AI</Eyebrow>
+            <h2 className="font-display text-[38px] sm:text-[56px] leading-[1.02] tracking-[-0.03em] text-white mt-5">
+              One Custom AI.{" "}
+              <span className="italic text-white/60">
+                Trained on your brand. Running every day.
+              </span>
+            </h2>
+            <p className="mt-6 text-[16px] lg:text-[18px] leading-[1.65] text-white/65 max-w-[680px]">
+              This is not a template and it is not a tool you have to learn.
+              You send us your brand DNA. Your voice, your audience, your
+              goals. Then we build you a Custom AI trained specifically for
+              your business. Then it runs on autopilot.{" "}
+              <span className="text-white">
+                Writing, posting, optimizing, reporting. Every single day.
+              </span>
             </p>
-          </ScrollReveal>
-          <ScrollReveal delay={200}>
-            <p className="mt-10 text-[16px] text-[#1B1B1B]/55 max-w-[520px] mx-auto leading-relaxed">
-              The work that used to take a six-person team can now be run by one operator with the
-              right system. I built the system. I&apos;d like to run it for your brand.
-            </p>
-          </ScrollReveal>
-        </div>
-      </section>
-
-      {/* ─────────────────────────────────────────────
-          4. WHAT YOU GET (services)
-         ───────────────────────────────────────────── */}
-      <section id="services" className="relative border-t border-[rgba(27,27,27,0.08)]">
-        <div className="max-w-[1180px] mx-auto px-6 lg:px-10 py-24 sm:py-32">
-          <div className="max-w-[680px] mb-16">
-            <ScrollReveal>
-              <div className="eyebrow mb-5">What you get</div>
-            </ScrollReveal>
-            <ScrollReveal delay={100}>
-              <h2 className="h-section text-[#1B1B1B] text-[36px] sm:text-[52px]">
-                Every channel <span className="italic">that moves the number,</span> handled.
-              </h2>
-            </ScrollReveal>
           </div>
 
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-px bg-[rgba(27,27,27,0.08)] border border-[rgba(27,27,27,0.08)] rounded-lg overflow-hidden">
-            {SERVICES.map((s, i) => {
-              const Icon = s.icon;
+          {/* 3-step process strip */}
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-5 mb-20">
+            {PROCESS.map((step) => {
+              const Icon = step.icon;
               return (
-                <ScrollReveal key={s.title} delay={i * 60}>
-                  <div className="bg-[#F6F1EA] p-8 h-full">
-                    <Icon className="w-5 h-5 text-[#1B1B1B]" strokeWidth={1.75} />
-                    <h3
-                      className="text-[24px] text-[#1B1B1B] mt-5 tracking-tight"
-                      style={{ fontFamily: "Fraunces, serif", fontWeight: 400 }}
-                    >
-                      {s.title}
-                    </h3>
-                    <p className="text-[14px] text-[#1B1B1B]/70 mt-2 leading-relaxed">
-                      {s.outcome}
-                    </p>
-                    <p className="text-[12px] text-[#1B1B1B]/45 mt-3 font-mono">{s.metric}</p>
+                <div
+                  key={step.n}
+                  className="relative rounded-2xl border border-white/[0.08] bg-gradient-to-b from-white/[0.035] to-transparent p-7"
+                >
+                  <div className="flex items-center justify-between mb-5">
+                    <div className="w-11 h-11 rounded-xl bg-[#10E39A]/[0.08] border border-[#10E39A]/25 flex items-center justify-center">
+                      <Icon
+                        className="w-5 h-5 text-[#10E39A]"
+                        strokeWidth={2}
+                      />
+                    </div>
+                    <div className="font-display text-[34px] leading-none text-white/12 tabular">
+                      {step.n}
+                    </div>
                   </div>
-                </ScrollReveal>
+                  <h3 className="font-display text-[20px] text-white tracking-tight mb-2 leading-[1.25]">
+                    {step.title}
+                  </h3>
+                  <p className="text-[13.5px] text-white/60 leading-[1.6]">
+                    {step.body}
+                  </p>
+                </div>
               );
             })}
           </div>
 
-          <div className="mt-12 text-center">
-            <a href="#audit" className="btn-arterial">
-              Run my audit
-              <ArrowRight className="w-4 h-4" strokeWidth={2.25} />
-            </a>
-          </div>
-        </div>
-      </section>
-
-      {/* ─────────────────────────────────────────────
-          5. THE PORTAL (proof of work)
-         ───────────────────────────────────────────── */}
-      <section className="relative bg-[#1B1B1B] text-[#F6F1EA]">
-        <div className="max-w-[1180px] mx-auto px-6 lg:px-10 py-24 sm:py-32">
-          <div className="max-w-[680px] mb-14">
-            <ScrollReveal>
-              <div className="text-[11px] font-mono uppercase tracking-[0.16em] text-[#F6F1EA]/55 mb-5">
-                The portal
-              </div>
-            </ScrollReveal>
-            <ScrollReveal delay={100}>
-              <h2
-                className="text-[36px] sm:text-[52px] tracking-[-0.025em] leading-[1.05]"
-                style={{ fontFamily: "Fraunces, serif", fontWeight: 360 }}
-              >
-                Everything I do for your brand{" "}
-                <span className="italic">lives here.</span>
-              </h2>
-            </ScrollReveal>
-            <ScrollReveal delay={200}>
-              <p className="mt-6 text-[17px] text-[#F6F1EA]/65 leading-relaxed max-w-[580px]">
-                You see the work the moment it&apos;s done. No status meeting. No screenshot
-                roundup. No PDF. The portal is the deliverable.
-              </p>
-            </ScrollReveal>
+          {/* Sub-header for what the AI actually does */}
+          <div className="max-w-[720px] mb-10">
+            <div className="font-mono text-[11px] tracking-[0.18em] uppercase text-white/45 mb-3">
+              WHAT YOUR AI SHIPS, EVERY DAY
+            </div>
+            <h3 className="font-display text-[28px] sm:text-[36px] leading-[1.1] tracking-[-0.02em] text-white">
+              Six channels.{" "}
+              <span className="italic text-white/60">Always-on.</span>
+            </h3>
           </div>
 
-          <ScrollReveal delay={120}>
-            <BrowserFrame url="ventiscale.com/portal/stoneline" shadow="xl" variant="cream">
-              <DashboardMock />
-            </BrowserFrame>
-          </ScrollReveal>
-
-          <div className="mt-12 grid grid-cols-1 sm:grid-cols-3 gap-8 sm:gap-12 max-w-[920px]">
-            {[
-              {
-                k: "Live work, not weekly digests.",
-                v: "Every email, post, ad, and report appears in your portal the second it ships.",
-              },
-              {
-                k: "Real numbers, plain English.",
-                v: "Revenue, orders, conversion. No vanity charts. No agency theater.",
-              },
-              {
-                k: "Direct line to me.",
-                v: "Comment on anything in the portal. I respond same day, every day.",
-              },
-            ].map((it) => (
-              <div key={it.k}>
-                <p
-                  className="text-[18px] tracking-tight"
-                  style={{ fontFamily: "Fraunces, serif", fontWeight: 400 }}
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-px bg-white/[0.06] border border-white/[0.06] rounded-2xl overflow-hidden">
+            {SERVICES.map((s) => {
+              const Icon = s.icon;
+              return (
+                <div
+                  key={s.title}
+                  className="group relative bg-[#0A0B11] p-8 hover:bg-[#11131B] transition-colors"
                 >
-                  {it.k}
-                </p>
-                <p className="text-[14px] text-[#F6F1EA]/60 mt-2 leading-relaxed">{it.v}</p>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* ─────────────────────────────────────────────
-          6. HOW IT WORKS
-         ───────────────────────────────────────────── */}
-      <section className="relative border-t border-[rgba(27,27,27,0.08)]">
-        <div className="max-w-[1180px] mx-auto px-6 lg:px-10 py-24 sm:py-32">
-          <div className="max-w-[680px] mb-16">
-            <ScrollReveal>
-              <div className="eyebrow mb-5">How it works</div>
-            </ScrollReveal>
-            <ScrollReveal delay={100}>
-              <h2 className="h-section text-[#1B1B1B] text-[36px] sm:text-[52px]">
-                Three steps. <span className="italic">No discovery phase,</span> no statement of work.
-              </h2>
-            </ScrollReveal>
-          </div>
-
-          <div className="space-y-px bg-[rgba(27,27,27,0.08)] border border-[rgba(27,27,27,0.08)] rounded-lg overflow-hidden">
-            {STEPS.map((s) => (
-              <ScrollReveal key={s.n}>
-                <div className="bg-[#F6F1EA] p-8 sm:p-10 grid grid-cols-12 gap-6 items-baseline">
-                  <div className="col-span-12 sm:col-span-2">
-                    <div
-                      className="text-[36px] text-[#1B1B1B]/30 tabular"
-                      style={{ fontFamily: "Fraunces, serif", fontWeight: 300 }}
-                    >
-                      {s.n}
+                  <div className="flex items-start justify-between mb-6">
+                    <div className="w-11 h-11 rounded-xl bg-white/[0.04] border border-white/[0.08] flex items-center justify-center group-hover:border-[#10E39A]/40 group-hover:bg-[#10E39A]/[0.05] transition-colors">
+                      <Icon
+                        className="w-5 h-5 text-white group-hover:text-[#10E39A] transition-colors"
+                        strokeWidth={1.75}
+                      />
+                    </div>
+                    <div className="text-right">
+                      <div className="font-display text-[22px] text-[#10E39A] leading-none tabular">
+                        {s.cadence}
+                      </div>
+                      <div className="mt-1.5 flex items-center justify-end gap-1">
+                        <Zap
+                          className="w-[10px] h-[10px] text-white/40"
+                          strokeWidth={2.5}
+                        />
+                        <span className="font-mono text-[9px] tracking-[0.14em] uppercase text-white/40">
+                          on autopilot
+                        </span>
+                      </div>
                     </div>
                   </div>
-                  <div className="col-span-12 sm:col-span-10">
-                    <h3
-                      className="text-[24px] sm:text-[28px] text-[#1B1B1B] tracking-tight"
-                      style={{ fontFamily: "Fraunces, serif", fontWeight: 400 }}
-                    >
-                      {s.title}
-                    </h3>
-                    <p className="text-[15px] text-[#1B1B1B]/65 mt-2 leading-relaxed max-w-[640px]">
-                      {s.body}
-                    </p>
-                  </div>
+                  <h3 className="font-display text-[24px] text-white tracking-tight mb-2">
+                    {s.title}
+                  </h3>
+                  <p className="text-[14px] text-white/60 leading-[1.65]">
+                    {s.body}
+                  </p>
                 </div>
-              </ScrollReveal>
+              );
+            })}
+          </div>
+        </div>
+      </section>
+
+      {/* ─────────────────────────────────────────────
+          3. FREE AUDIT (primary capture)
+         ───────────────────────────────────────────── */}
+      <section
+        id="audit"
+        className="relative border-t border-white/[0.06] overflow-hidden"
+      >
+        <div className="absolute inset-0 pointer-events-none">
+          <div className="aurora aurora-1" style={{ top: "10%", left: "-5%" }} />
+          <div className="aurora aurora-2" style={{ top: "30%", right: "10%" }} />
+        </div>
+        <div className="relative max-w-[860px] mx-auto px-6 lg:px-10 py-28 sm:py-36">
+          <div className="text-center mb-12">
+            <Eyebrow variant="accent">FREE AI AUDIT</Eyebrow>
+            <h2 className="font-display text-[40px] sm:text-[56px] lg:text-[68px] leading-[1.02] tracking-[-0.03em] text-white mt-5 mb-6">
+              Tell us about your business.
+              <br />
+              <span className="italic">Get a custom plan today.</span>
+            </h2>
+            <p className="text-[16px] lg:text-[18px] text-white/65 leading-[1.6] max-w-[580px] mx-auto">
+              Drop your details below. We run your business through the AI
+              audit, write you a real growth plan, and send it to your inbox
+              today. What we would do, how we would do it, and what it could
+              look like for your business.
+            </p>
+          </div>
+
+          <AuditForm variant="block" />
+
+          <div className="mt-14 grid grid-cols-1 sm:grid-cols-3 gap-6 max-w-[720px] mx-auto">
+            {[
+              { label: "60 seconds", body: "to submit" },
+              { label: "Same day", body: "growth plan in your inbox" },
+              { label: "Zero pressure", body: "no call, no contract, no hard sell" },
+            ].map((item) => (
+              <div
+                key={item.label}
+                className="rounded-xl border border-white/[0.08] bg-white/[0.02] p-5 text-center"
+              >
+                <div className="font-display text-[22px] text-white tracking-tight">
+                  {item.label}
+                </div>
+                <div className="text-[12px] text-white/55 mt-1.5">
+                  {item.body}
+                </div>
+              </div>
             ))}
           </div>
         </div>
       </section>
 
       {/* ─────────────────────────────────────────────
-          7. FOUNDER
+          4. HOW IT WORKS (timeline)
          ───────────────────────────────────────────── */}
-      <section className="relative border-t border-[rgba(27,27,27,0.08)] bg-[#EFE8DC]">
-        <div className="max-w-[1180px] mx-auto px-6 lg:px-10 py-24 sm:py-32">
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-center">
-            <div className="lg:col-span-5">
-              <ScrollReveal>
-                <div className="aspect-[4/5] bg-[#1B1B1B] rounded-lg overflow-hidden relative">
-                  <Image
-                    src="/founder/dustin.png"
-                    alt="Dustin Gilmour, founder of Venti Scale"
-                    fill
-                    sizes="(min-width: 1024px) 480px, 100vw"
-                    className="object-cover"
-                    priority
-                  />
-                </div>
-              </ScrollReveal>
-            </div>
-            <div className="lg:col-span-7">
-              <ScrollReveal delay={100}>
-                <div className="eyebrow mb-5">Who runs your account</div>
-              </ScrollReveal>
-              <ScrollReveal delay={200}>
-                <h2 className="h-section text-[#1B1B1B] text-[34px] sm:text-[44px]">
-                  Hi. I&apos;m Dustin. <span className="italic">I run the system.</span>
-                </h2>
-              </ScrollReveal>
-              <ScrollReveal delay={300}>
-                <div className="mt-7 space-y-5 text-[16px] text-[#1B1B1B]/75 leading-relaxed max-w-[580px]">
-                  <p>
-                    I built Venti Scale because I was tired of watching ecommerce founders pay
-                    agency rates for junior work, then get a slide deck instead of growth.
-                  </p>
-                  <p>
-                    I run marketing for a small portfolio of brands using a system I tuned over the
-                    last eighteen months. I&apos;d like to run yours too.
-                  </p>
-                  <p>
-                    Here&apos;s how I think about it: marketing should be a flywheel that turns
-                    on, then turns by itself. Your job is to build a brand worth marketing.
-                    That&apos;s the work nobody can do for you. The rest, I can.
-                  </p>
-                </div>
-              </ScrollReveal>
-              <ScrollReveal delay={400}>
-                <div className="mt-9">
-                  <a href="#audit" className="btn-arterial">
-                    Run my audit
-                    <ArrowRight className="w-4 h-4" strokeWidth={2.25} />
-                  </a>
-                </div>
-              </ScrollReveal>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* ─────────────────────────────────────────────
-          8. PRICING
-         ───────────────────────────────────────────── */}
-      <section id="pricing" className="relative border-t border-[rgba(27,27,27,0.08)]">
-        <div className="max-w-[820px] mx-auto px-6 lg:px-10 py-24 sm:py-32">
-          <div className="text-center mb-14">
-            <ScrollReveal>
-              <div className="eyebrow mb-5">Pricing</div>
-            </ScrollReveal>
-            <ScrollReveal delay={100}>
-              <h2 className="h-section text-[#1B1B1B] text-[36px] sm:text-[52px]">
-                One price. <span className="italic">No surprises.</span>
-              </h2>
-            </ScrollReveal>
+      <section
+        id="how"
+        className="relative border-t border-white/[0.06] bg-[#0A0B11]"
+      >
+        <div className="max-w-[1240px] mx-auto px-6 lg:px-10 py-24 sm:py-32">
+          <div className="max-w-[780px] mb-16">
+            <Eyebrow variant="accent">FROM TODAY TO LIVE</Eyebrow>
+            <h2 className="font-display text-[38px] sm:text-[56px] leading-[1.02] tracking-[-0.03em] text-white mt-5">
+              Your portal is live in five days.{" "}
+              <span className="italic text-white/60">
+                No discovery phase. No sales deck.
+              </span>
+            </h2>
+            <p className="mt-6 text-[16px] lg:text-[18px] leading-[1.65] text-white/65 max-w-[680px]">
+              Most agencies take three weeks just to onboard you. We have the
+              whole pipeline automated, which means we go from cold audit to
+              your portal running live in under a week.
+            </p>
           </div>
 
-          <ScrollReveal delay={200}>
-            <div className="bg-[#FAF6EF] border border-[rgba(27,27,27,0.10)] rounded-lg p-10 sm:p-14">
-              <div className="text-center">
-                <div className="text-[14px] text-[#1B1B1B]/45 line-through">
-                  Typical agency: $4,500–$8,000/mo + $5,000 setup
-                </div>
-                <div className="mt-5 flex items-baseline justify-center gap-2">
-                  <span
-                    className="text-[72px] sm:text-[96px] text-[#1B1B1B] leading-none tabular"
-                    style={{ fontFamily: "Fraunces, serif", fontWeight: 360, letterSpacing: "-0.03em" }}
-                  >
-                    $1,500
-                  </span>
-                  <span className="text-[20px] text-[#1B1B1B]/55 font-medium">/month</span>
-                </div>
-                <div className="mt-3 text-[14px] text-[#1B1B1B]/65">
-                  Flat. No setup. No retainer escalation.
-                </div>
-              </div>
+          {/* Timeline */}
+          <div className="relative max-w-[980px]">
+            {/* Vertical line */}
+            <div className="absolute left-[18px] sm:left-[140px] top-2 bottom-2 w-px bg-gradient-to-b from-[#10E39A]/50 via-white/[0.08] to-white/[0.04]" />
 
-              <div className="mt-10 pt-10 border-t border-[rgba(27,27,27,0.08)] grid grid-cols-1 sm:grid-cols-2 gap-x-10 gap-y-3.5">
-                {[
-                  "Email marketing (flows + broadcasts)",
-                  "Daily content across all channels",
-                  "Paid ads (Meta, Google, TikTok)",
-                  "SEO strategy + on-page + content",
-                  "Monthly reports in plain English",
-                  "Direct strategy line to me",
-                  "Live portal access for your team",
-                  "Cancel any time, export everything",
-                ].map((item) => (
-                  <div key={item} className="flex items-start gap-2.5">
-                    <Check
-                      className="w-4 h-4 text-[#1F3D2B] mt-1 shrink-0"
-                      strokeWidth={2.5}
-                    />
-                    <span className="text-[14px] text-[#1B1B1B]/80">{item}</span>
+            <div className="space-y-8 sm:space-y-10">
+              {TIMELINE.map((item, i) => (
+                <div
+                  key={item.when}
+                  className="relative grid grid-cols-[48px_1fr] sm:grid-cols-[170px_1fr] gap-4 sm:gap-8 items-start"
+                >
+                  {/* Left: day label */}
+                  <div className="pt-1">
+                    <div className="hidden sm:block font-display text-[22px] text-white tracking-tight leading-none">
+                      {item.when}
+                    </div>
+                    <div className="hidden sm:block font-mono text-[10px] tracking-[0.18em] uppercase text-[#10E39A] mt-2">
+                      {item.tag}
+                    </div>
                   </div>
-                ))}
-              </div>
 
-              <div className="mt-10 text-center">
-                <a href="#audit" className="btn-arterial">
-                  Run my audit
-                  <ArrowRight className="w-4 h-4" strokeWidth={2.25} />
-                </a>
-                <p className="mt-5 text-[12px] font-mono uppercase tracking-[0.14em] text-[#1B1B1B]/45">
-                  Cancel any time · Your data is yours · No contracts
-                </p>
-              </div>
+                  {/* Node + card */}
+                  <div className="relative">
+                    {/* Node dot */}
+                    <div className="absolute -left-[30px] sm:-left-[38px] top-6 w-4 h-4 rounded-full bg-[#0A0B11] border-2 border-[#10E39A] flex items-center justify-center">
+                      <div className="w-1.5 h-1.5 rounded-full bg-[#10E39A] dot-pulse" />
+                    </div>
+
+                    <div className="rounded-2xl border border-white/[0.08] bg-gradient-to-b from-white/[0.035] to-transparent p-6 sm:p-8 hover:border-white/[0.14] transition-colors">
+                      {/* Mobile day label (hidden on sm+) */}
+                      <div className="sm:hidden mb-3 flex items-baseline gap-3">
+                        <div className="font-display text-[18px] text-white tracking-tight leading-none">
+                          {item.when}
+                        </div>
+                        <div className="font-mono text-[9px] tracking-[0.16em] uppercase text-[#10E39A]">
+                          {item.tag}
+                        </div>
+                      </div>
+                      <div className="flex items-start justify-between gap-4 mb-3">
+                        <h3 className="font-display text-[22px] sm:text-[26px] text-white tracking-tight leading-[1.2]">
+                          {item.title}
+                        </h3>
+                        <div className="font-mono text-[11px] text-white/30 tabular shrink-0 pt-2">
+                          0{i + 1}
+                        </div>
+                      </div>
+                      <p className="text-[14.5px] text-white/65 leading-[1.65]">
+                        {item.body}
+                      </p>
+                    </div>
+                  </div>
+                </div>
+              ))}
             </div>
-          </ScrollReveal>
+          </div>
         </div>
       </section>
 
       {/* ─────────────────────────────────────────────
-          9. FAQ
+          5. PORTAL PREVIEW (dark CTA card)
          ───────────────────────────────────────────── */}
-      <section className="relative border-t border-[rgba(27,27,27,0.08)] bg-[#EFE8DC]">
-        <div className="max-w-[860px] mx-auto px-6 lg:px-10 py-24 sm:py-32">
-          <div className="text-center mb-14">
-            <ScrollReveal>
-              <div className="eyebrow mb-5">Common questions</div>
-            </ScrollReveal>
-            <ScrollReveal delay={100}>
-              <h2 className="h-section text-[#1B1B1B] text-[36px] sm:text-[52px]">
-                The questions <span className="italic">every founder asks me.</span>
-              </h2>
-            </ScrollReveal>
+      <section className="relative border-t border-white/[0.06]">
+        <div className="max-w-[1240px] mx-auto px-6 lg:px-10 py-24 sm:py-32">
+          <div className="rounded-3xl overflow-hidden border border-white/[0.08] bg-gradient-to-br from-[#11131B] via-[#0D0F16] to-[#07080C] relative">
+            <div className="absolute inset-0 pointer-events-none">
+              <div className="aurora aurora-1" style={{ top: "-20%", right: "-5%" }} />
+            </div>
+            <div className="relative p-10 lg:p-16">
+              <div className="max-w-[620px]">
+                <Eyebrow variant="accent">THE PORTAL</Eyebrow>
+                <h2 className="font-display text-[36px] sm:text-[48px] leading-[1.05] tracking-[-0.025em] text-white mt-5 mb-5">
+                  Every client gets a live portal.
+                  <br />
+                  <span className="italic text-white/60">
+                    This is not a mockup.
+                  </span>
+                </h2>
+                <p className="text-[16px] text-white/65 leading-[1.65] mb-10">
+                  Log in as a demo client right now and click around. See what
+                  the weekly reports look like, how the file library feels, how
+                  the dashboard numbers show up. No signup, no form. Takes 90
+                  seconds.
+                </p>
+                <Link href="/login" className="btn-red">
+                  Open the client portal
+                  <ArrowUpRight className="w-4 h-4" strokeWidth={2.25} />
+                </Link>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* ─────────────────────────────────────────────
+          6. QUALITY / ASSURANCE STRIP
+         ───────────────────────────────────────────── */}
+      <section className="relative border-t border-white/[0.06] bg-[#0A0B11]">
+        <div className="max-w-[1240px] mx-auto px-6 lg:px-10 py-24 sm:py-32">
+          <div className="max-w-[720px] mb-16">
+            <Eyebrow variant="accent">THE PROMISE</Eyebrow>
+            <h2 className="font-display text-[38px] sm:text-[56px] leading-[1.02] tracking-[-0.03em] text-white mt-5">
+              AI handles the volume.{" "}
+              <span className="italic text-white/60">
+                A human handles the taste.
+              </span>
+            </h2>
           </div>
 
-          <div className="space-y-3">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-5">
+            {ASSURANCES.map((item) => {
+              const Icon = item.icon;
+              return (
+                <div
+                  key={item.title}
+                  className="rounded-2xl border border-white/[0.08] bg-white/[0.015] p-7 hover:bg-white/[0.03] transition-colors"
+                >
+                  <div className="w-10 h-10 rounded-lg bg-[#C8362B]/10 border border-[#C8362B]/25 flex items-center justify-center mb-5">
+                    <Icon
+                      className="w-4.5 h-4.5 text-[#E04A3E]"
+                      strokeWidth={2}
+                    />
+                  </div>
+                  <h3 className="font-display text-[18px] text-white tracking-tight mb-2 leading-[1.3]">
+                    {item.title}
+                  </h3>
+                  <p className="text-[13px] text-white/60 leading-[1.6]">
+                    {item.body}
+                  </p>
+                </div>
+              );
+            })}
+          </div>
+        </div>
+      </section>
+
+      {/* ─────────────────────────────────────────────
+          7. FAQ
+         ───────────────────────────────────────────── */}
+      <section
+        id="faq"
+        className="relative border-t border-white/[0.06]"
+      >
+        <div className="max-w-[920px] mx-auto px-6 lg:px-10 py-24 sm:py-32">
+          <div className="max-w-[720px] mb-14">
+            <Eyebrow variant="accent">QUESTIONS</Eyebrow>
+            <h2 className="font-display text-[38px] sm:text-[56px] leading-[1.02] tracking-[-0.03em] text-white mt-5">
+              The things{" "}
+              <span className="italic text-white/60">
+                everyone asks before signing up.
+              </span>
+            </h2>
+          </div>
+
+          <div className="rounded-2xl border border-white/[0.08] bg-gradient-to-b from-white/[0.02] to-transparent divide-y divide-white/[0.06] overflow-hidden">
             {FAQ.map((item, i) => (
-              <ScrollReveal key={item.q} delay={i * 50}>
-                <details className="group bg-[#FAF6EF] border border-[rgba(27,27,27,0.10)] rounded-lg overflow-hidden">
-                  <summary className="cursor-pointer list-none px-7 py-6 flex items-center justify-between gap-4">
-                    <h3
-                      className="text-[17px] text-[#1B1B1B] tracking-tight"
-                      style={{ fontFamily: "Fraunces, serif", fontWeight: 400 }}
-                    >
+              <details
+                key={item.q}
+                className="group"
+                {...(i === 0 ? { open: true } : {})}
+              >
+                <summary className="list-none cursor-pointer px-6 sm:px-8 py-6 flex items-start justify-between gap-6 hover:bg-white/[0.02] transition-colors">
+                  <div className="flex items-start gap-4 flex-1">
+                    <HelpCircle
+                      className="w-[18px] h-[18px] text-[#10E39A] mt-[3px] shrink-0"
+                      strokeWidth={2}
+                    />
+                    <h3 className="font-display text-[18px] sm:text-[20px] text-white tracking-tight leading-[1.35]">
                       {item.q}
                     </h3>
-                    <div className="shrink-0 w-7 h-7 rounded-full border border-[rgba(27,27,27,0.20)] flex items-center justify-center transition-transform group-open:rotate-45">
-                      <span className="text-[18px] text-[#1B1B1B] leading-none font-medium">
-                        +
-                      </span>
-                    </div>
-                  </summary>
-                  <div className="px-7 pb-7 -mt-1">
-                    <p className="text-[15px] text-[#1B1B1B]/70 leading-relaxed max-w-[640px]">
-                      {item.a}
-                    </p>
                   </div>
-                </details>
-              </ScrollReveal>
+                  <div className="w-8 h-8 rounded-full border border-white/[0.12] flex items-center justify-center shrink-0 mt-[2px] group-open:bg-[#10E39A]/10 group-open:border-[#10E39A]/40 transition-colors">
+                    <Plus
+                      className="w-4 h-4 text-white/60 group-open:text-[#10E39A] transition-all group-open:rotate-45"
+                      strokeWidth={2.25}
+                    />
+                  </div>
+                </summary>
+                <div className="px-6 sm:px-8 pb-7 pl-[58px] sm:pl-[66px] -mt-1">
+                  <p className="text-[14.5px] text-white/65 leading-[1.7]">
+                    {item.a}
+                  </p>
+                </div>
+              </details>
             ))}
+          </div>
+
+          <div className="mt-10 text-center">
+            <p className="text-[13.5px] text-white/50">
+              Still have a question?{" "}
+              <a
+                href="#audit"
+                className="text-white underline decoration-white/25 underline-offset-4 hover:decoration-[#10E39A] hover:text-[#10E39A] transition-colors"
+              >
+                Drop it in the audit form above
+              </a>{" "}
+              and we&apos;ll answer it personally when we send your plan.
+            </p>
           </div>
         </div>
       </section>
 
       {/* ─────────────────────────────────────────────
-          10. SELF-SERVE AUDIT
+          8. FINAL CTA
          ───────────────────────────────────────────── */}
-      <section id="audit" className="relative border-t border-[rgba(27,27,27,0.08)]">
-        <div className="max-w-[820px] mx-auto px-6 lg:px-10 py-24 sm:py-32 text-center">
-          <ScrollReveal>
-            <div className="eyebrow mb-5">Or, see for yourself</div>
-          </ScrollReveal>
-          <ScrollReveal delay={100}>
-            <h2 className="h-section text-[#1B1B1B] text-[34px] sm:text-[44px]">
-              Drop your URL. Get a real audit{" "}
-              <span className="italic">in under a minute.</span>
-            </h2>
-          </ScrollReveal>
-          <ScrollReveal delay={200}>
-            <p className="body-lede mt-7 max-w-[560px] mx-auto">
-              Real data from your store. Run by the same system that runs my clients&apos; brands.
-              No call, no follow-up, no spam.
-            </p>
-          </ScrollReveal>
-          <ScrollReveal delay={300}>
-            <div className="mt-10 max-w-[600px] mx-auto">
-              <AuditForm />
-            </div>
-          </ScrollReveal>
+      <section className="relative border-t border-white/[0.06] overflow-hidden">
+        <div className="absolute inset-0 pointer-events-none">
+          <div className="aurora aurora-1" style={{ top: "0%", left: "20%" }} />
+          <div className="aurora aurora-2" style={{ top: "30%", right: "20%" }} />
         </div>
-      </section>
-
-      {/* ─────────────────────────────────────────────
-          11. FINAL CTA
-         ───────────────────────────────────────────── */}
-      <section className="relative border-t border-[rgba(27,27,27,0.08)] bg-[#1B1B1B] text-[#F6F1EA]">
-        <div className="max-w-[980px] mx-auto px-6 lg:px-10 py-32 sm:py-44 text-center">
-          <ScrollReveal>
-            <h2
-              className="text-[44px] sm:text-[68px] lg:text-[88px] tracking-[-0.03em] leading-[1.0]"
-              style={{ fontFamily: "Fraunces, serif", fontWeight: 360 }}
-            >
-              Stop paying for slide decks.
-              <br />
-              <span className="italic">Start paying for marketing that runs.</span>
-            </h2>
-          </ScrollReveal>
-          <ScrollReveal delay={200}>
-            <div className="mt-12">
-              <a href="#audit" className="btn-arterial">
-                Run my audit
-                <ArrowRight className="w-4 h-4" strokeWidth={2.25} />
-              </a>
-            </div>
-          </ScrollReveal>
-          <ScrollReveal delay={300}>
-            <p className="mt-7 text-[12px] font-mono uppercase tracking-[0.14em] text-[#F6F1EA]/45">
-              $1,500/mo · Cancel any time · No contracts
-            </p>
-          </ScrollReveal>
+        <div className="relative max-w-[820px] mx-auto px-6 lg:px-10 py-32 sm:py-40 text-center">
+          <Eyebrow variant="accent">READY?</Eyebrow>
+          <h2 className="font-display text-[46px] sm:text-[72px] lg:text-[88px] leading-[0.98] tracking-[-0.035em] text-white mt-5 mb-6">
+            See what AI can do{" "}
+            <span className="italic bg-gradient-to-r from-[#10E39A] via-[#5280FF] to-[#C8362B] bg-clip-text text-transparent">
+              for your business.
+            </span>
+          </h2>
+          <p className="text-[16px] lg:text-[18px] text-white/65 leading-[1.65] max-w-[560px] mx-auto mb-12">
+            Free AI audit. Custom growth plan built for your business. All in
+            your inbox today. If it is not a fit, we will tell you, and you
+            still keep the audit.
+          </p>
+          <div className="text-left">
+            <AuditForm variant="block" />
+          </div>
         </div>
       </section>
     </>

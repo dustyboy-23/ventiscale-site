@@ -4,12 +4,12 @@ import Link from "next/link";
 import { useEffect, useState } from "react";
 import { Menu, X } from "lucide-react";
 import { cn } from "@/lib/utils";
-import { Logo } from "./logo";
 
 const LINKS = [
-  { href: "#work", label: "Work" },
-  { href: "#pricing", label: "Pricing" },
-  { href: "/security", label: "Trust" },
+  { href: "/#services", label: "What we do" },
+  { href: "/#how", label: "How it works" },
+  { href: "/#faq", label: "FAQ" },
+  { href: "/login", label: "Client login" },
 ];
 
 export function MarketingNav() {
@@ -26,65 +26,70 @@ export function MarketingNav() {
   return (
     <header
       className={cn(
-        "sticky top-0 z-50 transition-[background,border,backdrop-filter] duration-400",
+        "sticky top-0 z-50 transition-[background,border,backdrop-filter] duration-300",
         scrolled
-          ? "bg-[rgba(246,241,234,0.82)] backdrop-blur-xl border-b border-[rgba(27,27,27,0.08)]"
+          ? "bg-[rgba(7,8,12,0.78)] backdrop-blur-xl border-b border-white/[0.06]"
           : "bg-transparent border-b border-transparent",
       )}
     >
-      <div className="max-w-[1180px] mx-auto px-6 lg:px-10 h-[76px] flex items-center justify-between">
-        <Logo size="sm" variant="ink" />
+      <div className="max-w-[1240px] mx-auto px-6 lg:px-10 h-[64px] flex items-center justify-between">
+        <Link href="/" className="flex items-center gap-2.5 group">
+          <div className="relative w-7 h-7 rounded-md bg-gradient-to-br from-[#10E39A] via-[#5280FF] to-[#C8362B] p-[1px]">
+            <div className="w-full h-full rounded-[5px] bg-[#07080C] flex items-center justify-center">
+              <span className="font-display text-[14px] font-bold text-white leading-none">
+                V
+              </span>
+            </div>
+          </div>
+          <span className="font-display text-[17px] font-semibold tracking-tight text-white">
+            Venti Scale
+          </span>
+        </Link>
 
         {/* Desktop links */}
-        <nav className="hidden md:flex items-center gap-10 absolute left-1/2 -translate-x-1/2">
+        <nav className="hidden md:flex items-center gap-8 absolute left-1/2 -translate-x-1/2">
           {LINKS.map((l) => (
             <Link
               key={l.href}
               href={l.href}
-              className="text-[13px] font-medium text-[#1B1B1B]/65 hover:text-[#1B1B1B] transition-colors"
+              className="text-[13px] font-medium text-white/60 hover:text-white transition-colors"
             >
               {l.label}
             </Link>
           ))}
         </nav>
 
-        {/* CTA */}
         <div className="hidden md:flex items-center gap-3">
           <Link
             href="/login"
-            className="text-[13px] font-medium text-[#1B1B1B]/65 hover:text-[#1B1B1B] transition-colors"
+            className="text-[13px] font-medium text-white/60 hover:text-white transition-colors"
           >
             Client login
           </Link>
-          <a
-            href="#audit"
-            className="text-[13px] font-semibold text-white bg-[#1F3D2B] hover:bg-[#15291D] px-5 h-10 rounded-md inline-flex items-center transition-colors"
-          >
-            Run my audit
+          <a href="/#audit" className="btn-red-sm">
+            Free AI audit
           </a>
         </div>
 
-        {/* Mobile toggle */}
         <button
           type="button"
           onClick={() => setMobileOpen((v) => !v)}
-          className="md:hidden w-10 h-10 -mr-2 flex items-center justify-center text-[#1B1B1B]"
+          className="md:hidden w-10 h-10 -mr-2 flex items-center justify-center text-white"
           aria-label="Toggle menu"
         >
           {mobileOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
         </button>
       </div>
 
-      {/* Mobile drawer */}
       {mobileOpen && (
-        <div className="md:hidden border-t border-[rgba(27,27,27,0.08)] bg-[#F6F1EA]/96 backdrop-blur-xl">
-          <nav className="max-w-[1180px] mx-auto px-6 py-4 flex flex-col gap-1">
+        <div className="md:hidden border-t border-white/[0.06] bg-[rgba(7,8,12,0.95)] backdrop-blur-xl">
+          <nav className="max-w-[1240px] mx-auto px-6 py-4 flex flex-col gap-1">
             {LINKS.map((l) => (
               <Link
                 key={l.href}
                 href={l.href}
                 onClick={() => setMobileOpen(false)}
-                className="text-[16px] font-medium text-[#1B1B1B] py-3.5 border-b border-[rgba(27,27,27,0.08)] last:border-b-0"
+                className="text-[16px] font-medium text-white py-3.5 border-b border-white/[0.06] last:border-b-0"
               >
                 {l.label}
               </Link>
@@ -92,16 +97,16 @@ export function MarketingNav() {
             <Link
               href="/login"
               onClick={() => setMobileOpen(false)}
-              className="text-[15px] font-medium text-[#1B1B1B]/65 py-3"
+              className="text-[15px] font-medium text-white/60 py-3"
             >
               Client login
             </Link>
             <a
-              href="#audit"
+              href="/#audit"
               onClick={() => setMobileOpen(false)}
-              className="mt-3 text-center text-[14px] font-semibold text-white bg-[#1F3D2B] py-3.5 rounded-md"
+              className="mt-3 text-center text-[14px] font-semibold text-white bg-[#C8362B] py-3.5 rounded-md"
             >
-              Run my audit
+              Free AI audit
             </a>
           </nav>
         </div>
