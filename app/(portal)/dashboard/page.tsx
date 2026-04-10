@@ -75,8 +75,8 @@ export default async function DashboardPage({
         title={`${greeting}, ${client.ownerName}`}
         description={
           hasRevenueData
-            ? `Here's how ${client.name} is performing — ${kpis.periodLabel.toLowerCase()}.`
-            : `Welcome to ${client.name}. Your data feeds are connecting — metrics will populate here as soon as they're live.`
+            ? `Here's how ${client.name} is performing over the ${kpis.periodLabel.toLowerCase()}.`
+            : `Welcome to ${client.name}. Your data feeds are connecting. Metrics will populate here as soon as they're live.`
         }
         actions={
           latestClient && (
@@ -135,7 +135,7 @@ export default async function DashboardPage({
                 <p className="text-[14px] text-[var(--color-ink-muted)] leading-relaxed max-w-[540px]">
                   Once your ad accounts, analytics, and storefront are connected, this
                   page will show live revenue, traffic, product performance, and the
-                  insights Jarvis spots for you — updated every morning.
+                  insights Jarvis spots for you, updated every morning.
                 </p>
                 <ul className="mt-5 space-y-2 text-[13px] text-[var(--color-ink-muted)]">
                   <li className="flex items-center gap-2">

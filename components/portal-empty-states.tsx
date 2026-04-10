@@ -30,7 +30,7 @@ export function RealClientEmptyState({ client }: { client: ClientRecord }) {
           Your workspace is live but the live data feeds (Meta Ads, Google Ads,
           Search Console, Shopify) haven&apos;t been connected yet. Once they
           are, KPIs, reports, campaigns and content drafts will populate
-          automatically — no action needed on your end.
+          automatically. No action needed on your end.
         </p>
 
         <div className="mt-6 rounded-xl bg-[var(--color-surface-muted)] border border-[var(--color-border)] px-4 py-3.5 flex items-start gap-3">

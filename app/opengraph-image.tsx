@@ -1,7 +1,7 @@
 import { ImageResponse } from "next/og";
 
 export const runtime = "edge";
-export const alt = "Venti Scale — Fire your marketing agency. Keep the growth.";
+export const alt = "Venti Scale. Fire your marketing agency. Keep the growth.";
 export const size = { width: 1200, height: 630 };
 export const contentType = "image/png";
 
@@ -15,69 +15,62 @@ export default async function Image() {
           display: "flex",
           flexDirection: "column",
           justifyContent: "space-between",
-          padding: "72px 88px",
-          background: "#F6F1EA",
-          fontFamily: "Georgia, serif",
+          padding: "80px 96px",
+          background:
+            "radial-gradient(circle at 20% 0%, rgba(16,227,154,0.14) 0%, rgba(7,8,12,0) 45%), radial-gradient(circle at 95% 100%, rgba(200,54,43,0.22) 0%, rgba(7,8,12,0) 55%), #07080C",
+          fontFamily: "-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif",
           position: "relative",
         }}
       >
-        {/* Subtle texture line */}
-        <div
-          style={{
-            position: "absolute",
-            top: 0,
-            left: 0,
-            right: 0,
-            height: 6,
-            background: "#1F3D2B",
-          }}
-        />
-
-        {/* Top row: monogram + wordmark */}
-        <div style={{ display: "flex", alignItems: "center", gap: 20 }}>
+        {/* Top row: logo + wordmark */}
+        <div style={{ display: "flex", alignItems: "center", gap: 18 }}>
           <div
             style={{
-              width: 72,
-              height: 72,
-              borderRadius: 16,
-              background: "#1F3D2B",
+              width: 64,
+              height: 64,
+              borderRadius: 14,
+              background:
+                "linear-gradient(135deg, #10E39A 0%, #5280FF 50%, #C8362B 100%)",
+              padding: 3,
               display: "flex",
-              alignItems: "center",
-              justifyContent: "center",
-              color: "#F6F1EA",
-              fontSize: 40,
-              fontWeight: 400,
-              fontStyle: "italic",
-              letterSpacing: -1,
-            }}
-          >
-            V
-          </div>
-          <div
-            style={{
-              display: "flex",
-              flexDirection: "column",
-              gap: 2,
             }}
           >
             <div
               style={{
-                fontSize: 28,
-                fontWeight: 500,
-                color: "#1B1B1B",
-                letterSpacing: -0.5,
+                width: "100%",
+                height: "100%",
+                borderRadius: 11,
+                background: "#07080C",
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "center",
+                color: "#FFFFFF",
+                fontSize: 34,
+                fontWeight: 700,
+                letterSpacing: -1.5,
+              }}
+            >
+              V
+            </div>
+          </div>
+          <div style={{ display: "flex", flexDirection: "column", gap: 4 }}>
+            <div
+              style={{
+                fontSize: 26,
+                fontWeight: 600,
+                color: "#FFFFFF",
+                letterSpacing: -0.4,
               }}
             >
               Venti Scale
             </div>
             <div
               style={{
-                fontSize: 16,
-                color: "#1B1B1B",
-                opacity: 0.55,
-                letterSpacing: 2,
+                fontSize: 13,
+                color: "rgba(245,246,250,0.55)",
+                letterSpacing: 2.2,
                 textTransform: "uppercase",
-                fontFamily: "-apple-system, BlinkMacSystemFont, sans-serif",
+                fontWeight: 500,
               }}
             >
               Done-for-you marketing
@@ -86,27 +79,27 @@ export default async function Image() {
         </div>
 
         {/* Headline */}
-        <div
-          style={{
-            display: "flex",
-            flexDirection: "column",
-            gap: 28,
-          }}
-        >
+        <div style={{ display: "flex", flexDirection: "column", gap: 28 }}>
           <div
             style={{
-              fontSize: 82,
-              fontWeight: 400,
-              color: "#1B1B1B",
-              letterSpacing: -2,
-              lineHeight: 1.05,
-              maxWidth: 960,
+              fontSize: 88,
+              fontWeight: 700,
+              color: "#FFFFFF",
+              letterSpacing: -3,
+              lineHeight: 1.02,
+              maxWidth: 1000,
             }}
           >
             Fire your marketing
             <br />
             agency.{" "}
-            <span style={{ fontStyle: "italic", color: "#1F3D2B" }}>
+            <span
+              style={{
+                fontStyle: "italic",
+                fontWeight: 400,
+                color: "rgba(245,246,250,0.55)",
+              }}
+            >
               Keep the growth.
             </span>
           </div>
@@ -114,56 +107,53 @@ export default async function Image() {
           <div
             style={{
               fontSize: 24,
-              color: "#1B1B1B",
-              opacity: 0.65,
-              lineHeight: 1.35,
-              maxWidth: 860,
-              fontFamily: "-apple-system, BlinkMacSystemFont, sans-serif",
+              color: "rgba(245,246,250,0.7)",
+              lineHeight: 1.4,
+              maxWidth: 880,
             }}
           >
-            Content, email, ads, SEO, reports. Run by AI, shipped daily,
+            Content, email, ads, SEO and reports, run by AI, shipped daily,
             watched in your live portal.
           </div>
         </div>
 
-        {/* Footer row: price + domain */}
+        {/* Footer row: pills + domain */}
         <div
           style={{
             display: "flex",
             alignItems: "center",
             justifyContent: "space-between",
-            borderTop: "1px solid rgba(27, 27, 27, 0.12)",
+            borderTop: "1px solid rgba(255,255,255,0.08)",
             paddingTop: 28,
-            fontFamily: "-apple-system, BlinkMacSystemFont, sans-serif",
           }}
         >
-          <div style={{ display: "flex", alignItems: "baseline", gap: 12 }}>
-            <div
-              style={{
-                fontSize: 44,
-                fontWeight: 600,
-                color: "#1B1B1B",
-                letterSpacing: -1.5,
-              }}
-            >
-              $1,500
-            </div>
-            <div
-              style={{
-                fontSize: 20,
-                color: "#1B1B1B",
-                opacity: 0.55,
-              }}
-            >
-              / month · flat · no contracts
-            </div>
+          <div style={{ display: "flex", gap: 14 }}>
+            {["Custom plan", "Live portal", "No contracts"].map((pill) => (
+              <div
+                key={pill}
+                style={{
+                  display: "flex",
+                  alignItems: "center",
+                  fontSize: 18,
+                  fontWeight: 500,
+                  color: "rgba(245,246,250,0.85)",
+                  background: "rgba(255,255,255,0.04)",
+                  border: "1px solid rgba(255,255,255,0.1)",
+                  borderRadius: 999,
+                  padding: "10px 20px",
+                  letterSpacing: -0.2,
+                }}
+              >
+                {pill}
+              </div>
+            ))}
           </div>
           <div
             style={{
               fontSize: 20,
-              color: "#1F3D2B",
-              fontWeight: 500,
-              letterSpacing: 0.5,
+              color: "#10E39A",
+              fontWeight: 600,
+              letterSpacing: 0.3,
             }}
           >
             ventiscale.com

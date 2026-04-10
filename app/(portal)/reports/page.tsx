@@ -59,7 +59,7 @@ export default async function ReportsPage() {
               {r.title}
             </h3>
             <p className="text-[13px] text-[var(--color-ink-muted)]">
-              {r.date ? formatDate(r.date) : "—"}
+              {r.date ? formatDate(r.date) : "No date"}
             </p>
             <div className="mt-5 pt-5 border-t border-[var(--color-border)] flex items-center justify-between">
               <span className="text-[12px] text-[var(--color-ink-subtle)]">Click to open</span>

@@ -12,7 +12,7 @@ export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
   title: {
     default: TITLE,
-    template: "%s — Venti Scale",
+    template: "%s · Venti Scale",
   },
   description: DESCRIPTION,
   applicationName: SITE_NAME,

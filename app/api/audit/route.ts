@@ -85,11 +85,11 @@ async function sendLeadNotification(entry: AuditRequest, result: AuditResult) {
     ? `<tr><td style="padding:6px 12px 6px 0;color:#1B1B1B;opacity:0.6;">Grade</td><td style="padding:6px 0;"><strong style="color:${gradeColor};font-size:18px;">${result.grade}</strong> <span style="color:#1B1B1B;opacity:0.5;">(${result.score}/100)</span></td></tr>
        <tr><td style="padding:6px 12px 6px 0;color:#1B1B1B;opacity:0.6;">Checks</td><td style="padding:6px 0;">${failed} failed · ${warned} warnings · ${passed} passed</td></tr>
        <tr><td style="padding:6px 12px 6px 0;color:#1B1B1B;opacity:0.6;">Final URL</td><td style="padding:6px 0;"><a href="${result.finalUrl}">${result.finalUrl}</a></td></tr>`
-    : `<tr><td style="padding:6px 12px 6px 0;color:#1B1B1B;opacity:0.6;">Status</td><td style="padding:6px 0;color:#A12A1A;"><strong>UNREACHABLE</strong> — ${result.error || "site did not respond"}</td></tr>`;
+    : `<tr><td style="padding:6px 12px 6px 0;color:#1B1B1B;opacity:0.6;">Status</td><td style="padding:6px 0;color:#A12A1A;"><strong>UNREACHABLE</strong>. ${result.error || "site did not respond"}</td></tr>`;
 
   const subject = result.reachable
-    ? `New audit lead: ${entry.url} — Grade ${result.grade} (${result.score})`
-    : `New audit lead: ${entry.url} — UNREACHABLE`;
+    ? `New audit lead: ${entry.url} · Grade ${result.grade} (${result.score})`
+    : `New audit lead: ${entry.url} · UNREACHABLE`;
 
   const escapeHtml = (s: string) =>
     s
@@ -115,7 +115,7 @@ async function sendLeadNotification(entry: AuditRequest, result: AuditResult) {
         <tr><td style="padding:6px 12px 6px 0;color:#1B1B1B;opacity:0.6;vertical-align:top;">Notes from them</td><td style="padding:6px 0;">${notesHtml}</td></tr>
         <tr><td style="padding:6px 12px 6px 0;color:#1B1B1B;opacity:0.6;">Received</td><td style="padding:6px 0;">${entry.receivedAt}</td></tr>
         <tr><td style="padding:6px 12px 6px 0;color:#1B1B1B;opacity:0.6;">ID</td><td style="padding:6px 0;font-family:monospace;font-size:12px;">${entry.id}</td></tr>
-        <tr><td style="padding:6px 12px 6px 0;color:#1B1B1B;opacity:0.6;">IP</td><td style="padding:6px 0;font-family:monospace;font-size:12px;">${entry.ip || "—"}</td></tr>
+        <tr><td style="padding:6px 12px 6px 0;color:#1B1B1B;opacity:0.6;">IP</td><td style="padding:6px 0;font-family:monospace;font-size:12px;">${entry.ip || "(none)"}</td></tr>
       </table>
       <p style="margin:20px 0 0;font-size:13px;color:#1B1B1B;opacity:0.6;">Audit email was sent to the visitor. Reply directly to follow up.</p>
     </div>

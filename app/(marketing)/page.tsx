@@ -1,3 +1,4 @@
+import type { Metadata } from "next";
 import Link from "next/link";
 import {
   ArrowRight,
@@ -23,6 +24,13 @@ import { AiWorkers } from "@/components/marketing/ai-workers";
 import { AuditForm } from "@/components/marketing/audit-form";
 import { Eyebrow } from "@/components/marketing/eyebrow";
 import { enterDemo } from "@/app/actions/demo";
+
+export const metadata: Metadata = {
+  title: "Fire your marketing agency. Keep the growth.",
+  description:
+    "Done-for-you marketing for ecommerce brands, run on AI. Content, email, ads, SEO and reports, built around your business. Watch it work in your live portal.",
+  alternates: { canonical: "https://ventiscale.com" },
+};
 
 const PROCESS = [
   {
@@ -226,8 +234,8 @@ export default function MarketingHome() {
                 </Link>
               </div>
 
-              <p className="mt-6 text-[12px] font-mono uppercase tracking-[0.14em] text-white/40">
-                Takes 60 seconds to submit · Plan in your inbox today · No sales call
+              <p className="mt-6 text-[12px] font-mono uppercase tracking-[0.14em] text-white/55">
+                Takes 60 seconds to submit · Plan in your inbox today · No sales call required
               </p>
             </div>
 
@@ -467,7 +475,10 @@ export default function MarketingHome() {
                         <h3 className="font-display text-[22px] sm:text-[26px] text-white tracking-tight leading-[1.2]">
                           {item.title}
                         </h3>
-                        <div className="font-mono text-[11px] text-white/30 tabular shrink-0 pt-2">
+                        <div
+                          aria-hidden="true"
+                          className="font-mono text-[11px] text-white/30 tabular shrink-0 pt-2"
+                        >
                           0{i + 1}
                         </div>
                       </div>

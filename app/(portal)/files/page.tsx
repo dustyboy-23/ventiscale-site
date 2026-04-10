@@ -4,14 +4,14 @@ import { getClientMeta } from "@/lib/portal-data";
 import { FolderOpen, ImageIcon, FileText, Video, File as FileIcon } from "lucide-react";
 
 const DEMO_FILES = [
-  { name: "Heritage tee — product shots (12 images)", type: "images", icon: ImageIcon, size: "48 MB", updated: "2 days ago" },
+  { name: "Heritage tee, product shots (12 images)", type: "images", icon: ImageIcon, size: "48 MB", updated: "2 days ago" },
   { name: "Spring 2026 lookbook.pdf", type: "pdf", icon: FileText, size: "12 MB", updated: "5 days ago" },
-  { name: "Field jacket — hero video (4K).mp4", type: "video", icon: Video, size: "340 MB", updated: "1 week ago" },
-  { name: "Brand voice guidelines — v3.pdf", type: "pdf", icon: FileText, size: "2.4 MB", updated: "2 weeks ago" },
-  { name: "Selvedge denim — social carousel (6 images)", type: "images", icon: ImageIcon, size: "22 MB", updated: "2 weeks ago" },
-  { name: "Customer photos — Q1 2026 (18 images)", type: "images", icon: ImageIcon, size: "86 MB", updated: "3 weeks ago" },
-  { name: "Logo pack — all formats.zip", type: "other", icon: FileIcon, size: "8 MB", updated: "1 month ago" },
-  { name: "Founder story — Marcus interview.mp4", type: "video", icon: Video, size: "180 MB", updated: "1 month ago" },
+  { name: "Field jacket, hero video (4K).mp4", type: "video", icon: Video, size: "340 MB", updated: "1 week ago" },
+  { name: "Brand voice guidelines v3.pdf", type: "pdf", icon: FileText, size: "2.4 MB", updated: "2 weeks ago" },
+  { name: "Selvedge denim, social carousel (6 images)", type: "images", icon: ImageIcon, size: "22 MB", updated: "2 weeks ago" },
+  { name: "Customer photos, Q1 2026 (18 images)", type: "images", icon: ImageIcon, size: "86 MB", updated: "3 weeks ago" },
+  { name: "Logo pack, all formats.zip", type: "other", icon: FileIcon, size: "8 MB", updated: "1 month ago" },
+  { name: "Founder story, Marcus interview.mp4", type: "video", icon: Video, size: "180 MB", updated: "1 month ago" },
 ];
 
 export default async function FilesPage() {
@@ -23,7 +23,7 @@ export default async function FilesPage() {
         <PageHeader
           eyebrow="Files"
           title="Brand Assets"
-          description="Every creative, image, video, and document for your campaigns — synced live from Google Drive."
+          description="Every creative, image, video, and document for your campaigns, synced live from Google Drive."
         />
 
         <Card padding="none" className="overflow-hidden">
@@ -62,8 +62,8 @@ export default async function FilesPage() {
         </Card>
 
         <p className="text-[12px] text-[var(--color-ink-subtle)] mt-3 text-center">
-          In a live workspace this is a Google Drive mirror — every asset Jarvis ships lands here
-          automatically, synced in real time.
+          In a live workspace this is a Google Drive mirror. Every asset Jarvis
+          ships lands here automatically, synced in real time.
         </p>
       </>
     );
@@ -76,7 +76,7 @@ export default async function FilesPage() {
         <PageHeader
           eyebrow="Files"
           title="Brand Assets"
-          description="Every creative, image, video, and document for your campaigns — synced from Google Drive."
+          description="Every creative, image, video, and document for your campaigns, synced from Google Drive."
         />
 
         <Card padding="none" className="overflow-hidden">
@@ -107,7 +107,7 @@ export default async function FilesPage() {
       <PageHeader
         eyebrow="Files"
         title="Brand Assets"
-        description="Every creative, image, video, and document for your campaigns — synced live from Google Drive."
+        description="Every creative, image, video, and document for your campaigns, synced live from Google Drive."
       />
 
       <Card padding="lg">
@@ -123,8 +123,8 @@ export default async function FilesPage() {
           </h3>
           <p className="text-[14px] text-[var(--color-ink-muted)] mt-2 leading-relaxed">
             Once your Google Drive folder is connected, every creative Jarvis
-            ships — images, videos, PDFs, brand guides — shows up here in
-            real time. Nothing to organize on your end.
+            ships (images, videos, PDFs, brand guides) shows up here in real
+            time. Nothing to organize on your end.
           </p>
         </div>
       </Card>
