@@ -37,7 +37,7 @@ export interface AuditResult {
 const FETCH_TIMEOUT_MS = 10_000;
 const MAX_HTML_BYTES = 2 * 1024 * 1024; // 2 MB cap
 const USER_AGENT =
-  "Mozilla/5.0 (compatible; VentiScaleAuditBot/1.0; +https://ventiscale.com/)";
+  "Mozilla/5.0 (compatible; VentiScaleAuditBot/1.0; +https://www.ventiscale.com/)";
 
 // ──────────────────────────────────────────────────────────
 // URL + fetch
@@ -554,8 +554,8 @@ export function renderAuditEmail(
     </p>
     <div style="margin-top:32px;padding-top:24px;border-top:1px solid rgba(27,27,27,0.10);">
       <p style="font-size:13px;color:#1B1B1B;opacity:0.55;margin:0;">
-        — Dustin<br/>
-        <a href="https://ventiscale.com" style="color:#1F3D2B;text-decoration:none;">ventiscale.com</a>
+        Dustin<br/>
+        <a href="https://www.ventiscale.com" style="color:#1F3D2B;text-decoration:none;">ventiscale.com</a>
       </p>
     </div>
   </div>
@@ -656,18 +656,18 @@ export function renderAuditEmail(
         Want me to fix these <span style="font-style:italic;">for you?</span>
       </div>
       <p style="font-size:14px;line-height:1.55;color:#F6F1EA;opacity:0.65;margin:12px 0 20px;">
-        This audit scratches the surface. The full Venti Scale system covers email, content, ads, SEO,
-        and reports — $1,500/mo flat, cancel any time.
+        This audit scratches the surface. The full Venti Scale system covers email, content, ads, SEO
+        and reports, built around your business. One quick call, no contract, no hard sell.
       </p>
-      <a href="https://ventiscale.com/#pricing" style="display:inline-block;background:#F6F1EA;color:#1B1B1B;text-decoration:none;font-size:13px;font-weight:600;padding:12px 22px;border-radius:6px;">
-        See what you get →
+      <a href="https://www.ventiscale.com" style="display:inline-block;background:#F6F1EA;color:#1B1B1B;text-decoration:none;font-size:13px;font-weight:600;padding:12px 22px;border-radius:6px;">
+        See how it works
       </a>
     </div>
 
     <!-- Footer -->
     <div style="margin-top:40px;padding-top:24px;border-top:1px solid rgba(27,27,27,0.10);font-size:12px;color:#1B1B1B;opacity:0.50;line-height:1.6;">
-      Sent to ${escapeHtml(recipientEmail)} because you ran an audit at <a href="https://ventiscale.com" style="color:#1F3D2B;text-decoration:none;">ventiscale.com</a>. No follow-up sequence, no spam. If you want to chat, just reply.<br/><br/>
-      — Dustin Gilmour, Venti Scale
+      Sent to ${escapeHtml(recipientEmail)} because you ran an audit at <a href="https://www.ventiscale.com" style="color:#1F3D2B;text-decoration:none;">ventiscale.com</a>. No follow-up sequence, no spam. If you want to chat, just reply.<br/><br/>
+      Dustin Gilmour, Venti Scale
     </div>
 
   </div>
@@ -695,9 +695,9 @@ export function renderAuditEmail(
   appendSection("Worth cleaning up", warns);
   appendSection("Already solid", passes);
   textLines.push(
-    "Want me to fix these for you? $1,500/mo flat. https://ventiscale.com/#pricing",
+    "Want me to fix these for you? One quick call, no contract, no hard sell. https://www.ventiscale.com",
     "",
-    "— Dustin Gilmour, Venti Scale",
+    "Dustin Gilmour, Venti Scale",
   );
 
   return { subject, html, text: textLines.join("\n") };

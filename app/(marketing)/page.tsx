@@ -29,7 +29,7 @@ export const metadata: Metadata = {
   title: "Fire your marketing agency. Keep the growth.",
   description:
     "Done-for-you marketing for ecommerce brands, run on AI. Content, email, ads, SEO and reports, built around your business. Watch it work in your live portal.",
-  alternates: { canonical: "https://ventiscale.com" },
+  alternates: { canonical: "https://www.ventiscale.com" },
 };
 
 const PROCESS = [

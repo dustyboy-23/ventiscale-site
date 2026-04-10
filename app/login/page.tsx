@@ -78,7 +78,7 @@ function LoginPageInner() {
           </span>
         </div>
         <a
-          href="https://ventiscale.com"
+          href="https://www.ventiscale.com"
           className="text-[13px] text-[var(--color-ink-muted)] hover:text-[var(--color-ink)] transition-colors"
         >
           Back to ventiscale.com →

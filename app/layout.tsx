@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import { Analytics } from "@vercel/analytics/next";
 import "./globals.css";
 
-const SITE_URL = "https://ventiscale.com";
+const SITE_URL = "https://www.ventiscale.com";
 const SITE_NAME = "Venti Scale";
 const TITLE = "Venti Scale. Fire your marketing agency. Keep the growth.";
 const DESCRIPTION =
