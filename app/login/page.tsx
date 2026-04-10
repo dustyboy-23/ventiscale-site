@@ -37,10 +37,17 @@ function LoginPageInner() {
 
     try {
       const supabase = createClient();
+      // Point at /auth/confirm so the email template (which uses
+      // {{ .TokenHash }}) lands on our click-through page. The page
+      // requires a human click before verifyOtp runs, which means
+      // Gmail's pre-scan of the link doesn't burn the single-use OTP.
+      const siteUrl =
+        process.env.NEXT_PUBLIC_SITE_URL ||
+        (typeof window !== "undefined" ? window.location.origin : "");
       const { error } = await supabase.auth.signInWithOtp({
         email: email.trim().toLowerCase(),
         options: {
-          emailRedirectTo: `${window.location.origin}/auth/callback`,
+          emailRedirectTo: `${siteUrl}/auth/confirm`,
         },
       });
       if (error) {
