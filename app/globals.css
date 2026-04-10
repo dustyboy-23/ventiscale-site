@@ -1,0 +1,227 @@
+@import "tailwindcss";
+
+@theme {
+  --font-sans: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  --font-display: "Fraunces", "Tiempos Headline", "Times New Roman", Georgia, serif;
+  --font-serif: "Fraunces", "Times New Roman", Georgia, serif;
+  --font-mono: "JetBrains Mono", ui-monospace, SFMono-Regular, Menlo, monospace;
+
+  /* ─── Editorial cream canvas (v2) ─── */
+  --color-cream: #F6F1EA;
+  --color-cream-deep: #EFE8DC;
+  --color-cream-soft: #FAF6EF;
+  --color-cream-line: rgba(27, 27, 27, 0.10);
+  --color-cream-line-soft: rgba(27, 27, 27, 0.06);
+  --color-cream-line-strong: rgba(27, 27, 27, 0.18);
+
+  /* Editorial ink */
+  --color-ink-deep: #1B1B1B;
+  --color-ink-body: #2A2A2A;
+  --color-ink-mute: rgba(27, 27, 27, 0.62);
+  --color-ink-faint: rgba(27, 27, 27, 0.42);
+  --color-ink-ghost: rgba(27, 27, 27, 0.22);
+
+  /* The single accent — used once */
+  --color-arterial: #C8362B;
+  --color-arterial-deep: #A82A20;
+  --color-arterial-ink: #7D1B14;
+
+  /* ─── LEGACY light tokens (still used by portal routes) ─── */
+  --color-canvas: #f8f9fb;
+  --color-surface: #ffffff;
+  --color-surface-muted: #f1f3f7;
+  --color-border: #e6e8ef;
+  --color-border-strong: #d4d7e0;
+  --color-ink: #0a0e1f;
+  --color-ink-muted: #5b6479;
+  --color-ink-subtle: #8a92a6;
+  --color-brand: #0a0e1f;
+  --color-brand-soft: #f0f1f6;
+  --color-accent: #1a5e1f;
+  --color-accent-soft: #e9f3ea;
+  --color-accent-strong: #134715;
+  --color-success: #16a34a;
+  --color-warning: #d97706;
+  --color-danger: #dc2626;
+  --color-info: #2563eb;
+}
+
+* {
+  border-color: var(--color-border);
+}
+
+html, body {
+  background: var(--color-canvas);
+  color: var(--color-ink);
+  font-family: var(--font-sans);
+  font-feature-settings: "cv11", "ss01", "ss03";
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+}
+
+/* Marketing surfaces opt-in to the cream canvas */
+body.theme-cream {
+  background: var(--color-cream);
+  color: var(--color-ink-deep);
+}
+
+.tabular {
+  font-variant-numeric: tabular-nums;
+  font-feature-settings: "tnum";
+}
+
+.font-display {
+  font-family: var(--font-display);
+  font-feature-settings: "liga", "kern", "ss01";
+  letter-spacing: -0.025em;
+  font-optical-sizing: auto;
+}
+
+.font-mono {
+  font-family: var(--font-mono);
+}
+
+/* ─── Editorial type scale helpers ─── */
+.h-display {
+  font-family: var(--font-display);
+  font-weight: 360;
+  letter-spacing: -0.03em;
+  line-height: 1.0;
+}
+.h-section {
+  font-family: var(--font-display);
+  font-weight: 360;
+  letter-spacing: -0.025em;
+  line-height: 1.05;
+}
+.body-lede {
+  font-size: 19px;
+  line-height: 1.6;
+  color: var(--color-ink-mute);
+  font-weight: 400;
+}
+.eyebrow {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.16em;
+  color: var(--color-ink-mute);
+}
+
+/* ─── Motion (homeopathic doses only) ─── */
+@keyframes fade-up {
+  0%   { opacity: 0; transform: translateY(14px); }
+  100% { opacity: 1; transform: translateY(0); }
+}
+.reveal {
+  opacity: 0;
+}
+.reveal.is-visible {
+  animation: fade-up 0.85s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+@keyframes hero-fade {
+  0%   { opacity: 0; }
+  100% { opacity: 1; }
+}
+.hero-fade {
+  animation: hero-fade 0.9s ease-out both;
+}
+
+@keyframes dot-tick {
+  0%, 100% { opacity: 1; }
+  50%      { opacity: 0.45; }
+}
+.dot-tick {
+  animation: dot-tick 2.4s ease-in-out infinite;
+}
+
+/* ─── Surfaces (cream) ─── */
+.cream-card {
+  background: var(--color-cream-soft);
+  border: 1px solid var(--color-cream-line);
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.025);
+}
+
+.cream-card-bare {
+  background: transparent;
+  border: 1px solid var(--color-cream-line);
+}
+
+.hairline-t { border-top: 1px solid var(--color-cream-line); }
+.hairline-b { border-bottom: 1px solid var(--color-cream-line); }
+.hairline-l { border-left: 1px solid var(--color-cream-line); }
+.hairline-r { border-right: 1px solid var(--color-cream-line); }
+
+/* Subtle paper grain — barely there */
+.paper-grain {
+  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='240' height='240'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 0.10  0 0 0 0 0.10  0 0 0 0 0.10  0 0 0 0.04 0'/></filter><rect width='100%' height='100%' filter='url(%23n)'/></svg>");
+}
+
+/* Editorial buttons */
+.btn-arterial {
+  background: var(--color-arterial);
+  color: #ffffff;
+  font-weight: 600;
+  font-size: 14px;
+  letter-spacing: 0;
+  height: 52px;
+  padding: 0 24px;
+  border-radius: 6px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  transition: background 160ms ease;
+  white-space: nowrap;
+}
+.btn-arterial:hover {
+  background: var(--color-arterial-deep);
+}
+.btn-ghost {
+  background: transparent;
+  color: var(--color-ink-deep);
+  border: 1px solid var(--color-ink-deep);
+  font-weight: 600;
+  font-size: 14px;
+  height: 52px;
+  padding: 0 24px;
+  border-radius: 6px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  transition: background 160ms ease;
+  white-space: nowrap;
+}
+.btn-ghost:hover {
+  background: rgba(27, 27, 27, 0.05);
+}
+
+/* Scrollbar (cream) */
+::-webkit-scrollbar { width: 10px; height: 10px; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb { background: var(--color-border); border-radius: 8px; }
+::-webkit-scrollbar-thumb:hover { background: var(--color-border-strong); }
+body.theme-cream ::-webkit-scrollbar-thumb { background: rgba(27,27,27,0.14); }
+body.theme-cream ::-webkit-scrollbar-thumb:hover { background: rgba(27,27,27,0.24); }
+
+/* Selection */
+::selection {
+  background: rgba(200, 54, 43, 0.18);
+  color: var(--color-ink-deep);
+}
+
+/* Reduced motion respect */
+@media (prefers-reduced-motion: reduce) {
+  .reveal,
+  .reveal.is-visible,
+  .hero-fade,
+  .dot-tick {
+    animation: none !important;
+    opacity: 1 !important;
+    transform: none !important;
+  }
+}

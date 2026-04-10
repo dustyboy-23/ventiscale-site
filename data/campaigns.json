@@ -1,0 +1,130 @@
+{
+  "_note": "Email campaign data for Sprinkler Guard. Drafts proposed by Jarvis based on real baseline report insights. Production version replaces this file with live Brevo API data.",
+  "proposed": [
+    {
+      "id": "abandoned-cart-recovery",
+      "name": "Abandoned Cart Recovery",
+      "type": "automation",
+      "status": "ready_for_approval",
+      "audience": "Cart abandoners",
+      "audienceSize": 327,
+      "rationale": "80% of customers who add to cart never check out. Recovering even 15% of abandoned carts at the current $143 AOV adds an estimated $1,400/mo.",
+      "projectedImpact": {
+        "revenue": 1400,
+        "label": "added per month"
+      },
+      "sequence": [
+        {
+          "step": 1,
+          "delay": "1 hour after abandon",
+          "subject": "You left your sprinkler protection in the cart",
+          "preview": "We saved your spot. The damage you're trying to prevent isn't waiting."
+        },
+        {
+          "step": 2,
+          "delay": "24 hours later",
+          "subject": "One mower hit costs more than your whole cart",
+          "preview": "Real story from a customer in Texas — and what it cost him."
+        },
+        {
+          "step": 3,
+          "delay": "72 hours later",
+          "subject": "Last chance: 10% off your Sprinkler Guard order",
+          "preview": "We rarely discount. This expires in 24 hours."
+        }
+      ],
+      "createdBy": "Jarvis",
+      "createdAt": "2026-04-09"
+    },
+    {
+      "id": "welcome-series",
+      "name": "New Customer Welcome Series",
+      "type": "automation",
+      "status": "ready_for_approval",
+      "audience": "First-time buyers",
+      "audienceSize": 93,
+      "rationale": "Welcome series for new customers builds trust, drives reviews, and lifts repeat purchase rate. Currently at 8.8% repeat — a welcome series typically lifts that to 14-18%.",
+      "projectedImpact": {
+        "revenue": 850,
+        "label": "added per month from repeat lift"
+      },
+      "sequence": [
+        {
+          "step": 1,
+          "delay": "Immediately after order",
+          "subject": "Your Sprinkler Guard is on the way — here's how to install it",
+          "preview": "30-second installation. No tools required. Quick video inside."
+        },
+        {
+          "step": 2,
+          "delay": "5 days later",
+          "subject": "How's your install going?",
+          "preview": "We'd love to see it. Reply with a photo and we'll send you a free pack."
+        },
+        {
+          "step": 3,
+          "delay": "14 days later",
+          "subject": "Quick favor — 30 seconds for a review?",
+          "preview": "Other homeowners are looking. Your honest review helps them decide."
+        }
+      ],
+      "createdBy": "Jarvis",
+      "createdAt": "2026-04-09"
+    },
+    {
+      "id": "monthly-newsletter",
+      "name": "Sprinkler Care Monthly",
+      "type": "newsletter",
+      "status": "draft",
+      "audience": "Full subscriber list",
+      "audienceSize": 1842,
+      "rationale": "Monthly newsletter on sprinkler care, lawn maintenance, and seasonal tips builds list engagement and drives organic repeat sales without paid ads.",
+      "projectedImpact": {
+        "revenue": 620,
+        "label": "added per send"
+      },
+      "sequence": [
+        {
+          "step": 1,
+          "delay": "First Tuesday of each month",
+          "subject": "5 things to do for your sprinklers this month",
+          "preview": "Spring is when most damage happens. Here's how to get ahead of it."
+        }
+      ],
+      "createdBy": "Jarvis",
+      "createdAt": "2026-04-09"
+    },
+    {
+      "id": "veteran-story",
+      "name": "Veteran-Owned Story",
+      "type": "broadcast",
+      "status": "draft",
+      "audience": "Full subscriber list",
+      "audienceSize": 1842,
+      "rationale": "Lean into the veteran-owned and Made-in-USA story. Brand differentiator that competitors can't copy. Drives loyalty and word-of-mouth.",
+      "projectedImpact": {
+        "revenue": 480,
+        "label": "added per send"
+      },
+      "sequence": [
+        {
+          "step": 1,
+          "delay": "One-time send",
+          "subject": "Why we make Sprinkler Guard in America (and why it costs more)",
+          "preview": "The full story — and what your support actually pays for."
+        }
+      ],
+      "createdBy": "Jarvis",
+      "createdAt": "2026-04-09"
+    }
+  ],
+  "live": [],
+  "history": [],
+  "stats": {
+    "totalSubscribers": 1842,
+    "monthlyGrowth": 4.2,
+    "avgOpenRate": 0,
+    "avgClickRate": 0,
+    "lastSendDate": null
+  }
+}
