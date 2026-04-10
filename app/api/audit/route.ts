@@ -31,6 +31,34 @@ const NOTIFY_TO = "dustin@ventiscale.com";
 const NOTIFY_FROM_EMAIL = "noreply@ventiscale.com";
 const NOTIFY_FROM_NAME = "Venti Scale Audit";
 
+// In-memory rate limit. Resets on cold start, which is fine as a soft gate
+// against casual abuse — anything serious gets stopped by Vercel's DDoS
+// protection upstream. Max 3 submissions per IP per 10 minutes.
+const RATE_LIMIT_MAX = 3;
+const RATE_LIMIT_WINDOW_MS = 10 * 60 * 1000;
+const rateBuckets = new Map<string, number[]>();
+
+function checkRateLimit(ip: string): boolean {
+  const now = Date.now();
+  const cutoff = now - RATE_LIMIT_WINDOW_MS;
+  const existing = (rateBuckets.get(ip) || []).filter((t) => t > cutoff);
+  if (existing.length >= RATE_LIMIT_MAX) {
+    rateBuckets.set(ip, existing);
+    return false;
+  }
+  existing.push(now);
+  rateBuckets.set(ip, existing);
+  // Opportunistic cleanup so the map doesn't grow unbounded across warm invocations.
+  if (rateBuckets.size > 500) {
+    for (const [key, stamps] of rateBuckets) {
+      const fresh = stamps.filter((t) => t > cutoff);
+      if (fresh.length === 0) rateBuckets.delete(key);
+      else rateBuckets.set(key, fresh);
+    }
+  }
+  return true;
+}
+
 async function brevoSend(payload: Record<string, unknown>) {
   const apiKey = process.env.BREVO_API_KEY;
   if (!apiKey) {
@@ -187,11 +215,35 @@ export async function POST(req: Request) {
     email?: string;
     url?: string;
     notes?: string;
+    website?: string;
   };
   try {
     body = await req.json();
   } catch {
     return NextResponse.json({ ok: false, error: "Invalid JSON" }, { status: 400 });
+  }
+
+  // Honeypot: real users never see or fill this field. Bots that autofill every
+  // input get a silent 200 OK so they don't learn anything from the response.
+  if (body.website && body.website.trim().length > 0) {
+    console.warn("[audit] honeypot tripped", {
+      ip: req.headers.get("x-forwarded-for") || req.headers.get("x-real-ip"),
+      website: body.website.slice(0, 80),
+    });
+    return NextResponse.json({ ok: true, id: "hp_blocked" });
+  }
+
+  const ip =
+    req.headers.get("x-forwarded-for")?.split(",")[0]?.trim() ||
+    req.headers.get("x-real-ip") ||
+    "unknown";
+
+  if (!checkRateLimit(ip)) {
+    console.warn("[audit] rate limit hit", { ip });
+    return NextResponse.json(
+      { ok: false, error: "Too many requests. Try again in a few minutes or email hello@ventiscale.com." },
+      { status: 429 },
+    );
   }
 
   const name = (body.name || "").trim();
@@ -222,10 +274,7 @@ export async function POST(req: Request) {
     notes,
     receivedAt: new Date().toISOString(),
     userAgent: req.headers.get("user-agent") || undefined,
-    ip:
-      req.headers.get("x-forwarded-for")?.split(",")[0]?.trim() ||
-      req.headers.get("x-real-ip") ||
-      undefined,
+    ip: ip !== "unknown" ? ip : undefined,
   };
 
   console.log("[audit] new request", JSON.stringify(entry));

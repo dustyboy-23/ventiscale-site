@@ -22,6 +22,7 @@ export function AuditForm({ variant = "hero" }: Props) {
   const [url, setUrl] = useState("");
   const [email, setEmail] = useState("");
   const [notes, setNotes] = useState("");
+  const [website, setWebsite] = useState(""); // honeypot — real humans leave it empty
   const [status, setStatus] = useState<Status>("idle");
   const [error, setError] = useState("");
 
@@ -34,7 +35,7 @@ export function AuditForm({ variant = "hero" }: Props) {
       const res = await fetch("/api/audit", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ name, business, url, email, notes }),
+        body: JSON.stringify({ name, business, url, email, notes, website }),
       });
       if (!res.ok) {
         let message = "Something broke on our end. Email hello@ventiscale.com and we'll fix it.";
@@ -85,6 +86,27 @@ export function AuditForm({ variant = "hero" }: Props) {
 
   return (
     <form onSubmit={onSubmit} className="w-full">
+      <div
+        aria-hidden="true"
+        style={{
+          position: "absolute",
+          left: "-9999px",
+          width: "1px",
+          height: "1px",
+          overflow: "hidden",
+        }}
+      >
+        <label htmlFor={`${baseId}-website`}>Leave this empty</label>
+        <input
+          id={`${baseId}-website`}
+          type="text"
+          name="website"
+          tabIndex={-1}
+          autoComplete="off"
+          value={website}
+          onChange={(e) => setWebsite(e.target.value)}
+        />
+      </div>
       <div className="rounded-2xl p-6 sm:p-7 bg-gradient-to-b from-[#12141C] to-[#0D0F16] border border-white/[0.08] shadow-[0_30px_80px_-30px_rgba(0,0,0,0.6)]">
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-x-5 gap-y-5">
           <div className="group">
