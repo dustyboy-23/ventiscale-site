@@ -2,16 +2,16 @@
 
 import { useState } from "react";
 import Link from "next/link";
-import { Bell, Search, Calendar as CalIcon, ChevronDown, Eye } from "lucide-react";
+import { Search, Calendar as CalIcon, ChevronDown, Eye } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { CLIENT } from "@/lib/sg-data";
+import { MobileNav } from "@/components/mobile-nav";
 
 const PERIODS = ["Last 7 days", "Last 28 days", "This month", "Last 90 days"];
 
 export function TopBar() {
   const [period, setPeriod] = useState("Last 28 days");
   const [periodOpen, setPeriodOpen] = useState(false);
-  const [hasNotifications] = useState(true);
 
   return (
     <header className="sticky top-0 z-30 bg-[var(--color-canvas)]/85 backdrop-blur-md border-b border-[var(--color-border)]">
@@ -27,22 +27,22 @@ export function TopBar() {
         </div>
       )}
       <div className="max-w-[1240px] mx-auto px-6 lg:px-10 h-[60px] flex items-center justify-between gap-4">
-        {/* Search */}
-        <button
-          type="button"
-          className="group flex items-center gap-2.5 max-w-[360px] flex-1 px-3.5 py-2 rounded-lg bg-white border border-[var(--color-border)] hover:border-[var(--color-border-strong)] transition-colors text-left"
-        >
-          <Search
-            className="w-4 h-4 text-[var(--color-ink-subtle)] group-hover:text-[var(--color-ink-muted)] transition-colors shrink-0"
-            strokeWidth={2}
-          />
-          <span className="text-[13px] text-[var(--color-ink-subtle)] flex-1 truncate">
-            Search reports, content, posts...
-          </span>
-          <kbd className="hidden sm:inline-flex items-center gap-0.5 text-[10px] font-medium text-[var(--color-ink-subtle)] bg-[var(--color-surface-muted)] border border-[var(--color-border)] px-1.5 py-0.5 rounded">
-            ⌘K
-          </kbd>
-        </button>
+        {/* Left: mobile nav trigger + search */}
+        <div className="flex items-center gap-3 flex-1 min-w-0">
+          <MobileNav clientName={CLIENT.name} ownerName={CLIENT.ownerName} />
+          <div className="hidden sm:flex items-center gap-2.5 max-w-[360px] flex-1 px-3.5 py-2 rounded-lg bg-white border border-[var(--color-border)] text-left">
+            <Search
+              className="w-4 h-4 text-[var(--color-ink-subtle)] shrink-0"
+              strokeWidth={2}
+            />
+            <span className="text-[13px] text-[var(--color-ink-subtle)] flex-1 truncate">
+              Search reports, content, posts...
+            </span>
+            <kbd className="hidden md:inline-flex items-center gap-0.5 text-[10px] font-medium text-[var(--color-ink-subtle)] bg-[var(--color-surface-muted)] border border-[var(--color-border)] px-1.5 py-0.5 rounded">
+              ⌘K
+            </kbd>
+          </div>
+        </div>
 
         {/* Right side */}
         <div className="flex items-center gap-2">
@@ -87,17 +87,6 @@ export function TopBar() {
             )}
           </div>
 
-          {/* Notifications */}
-          <button
-            type="button"
-            className="relative w-9 h-9 flex items-center justify-center rounded-lg bg-white border border-[var(--color-border)] hover:border-[var(--color-border-strong)] transition-colors"
-            aria-label="Notifications"
-          >
-            <Bell className="w-4 h-4 text-[var(--color-ink-muted)]" strokeWidth={2} />
-            {hasNotifications && (
-              <span className="absolute top-1.5 right-1.5 w-2 h-2 rounded-full bg-[var(--color-accent)] ring-2 ring-white" />
-            )}
-          </button>
         </div>
       </div>
     </header>

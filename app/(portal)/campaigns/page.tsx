@@ -121,10 +121,20 @@ function CampaignCard({ campaign }: { campaign: Campaign }) {
             Drafted by Jarvis · Ready when you are
           </span>
           <div className="flex items-center gap-2">
-            <button className="text-[12px] font-medium text-[var(--color-ink-muted)] hover:text-[var(--color-ink)] transition-colors px-3 py-1.5">
+            <button
+              type="button"
+              disabled
+              title="Disabled in demo mode"
+              className="text-[12px] font-medium text-[var(--color-ink-subtle)] px-3 py-1.5 cursor-not-allowed"
+            >
               Edit
             </button>
-            <button className="text-[12px] font-semibold text-white bg-[var(--color-ink)] hover:bg-black transition-colors px-3.5 py-1.5 rounded-lg inline-flex items-center gap-1.5">
+            <button
+              type="button"
+              disabled
+              title="Disabled in demo mode"
+              className="text-[12px] font-semibold text-white bg-[var(--color-ink)]/50 px-3.5 py-1.5 rounded-lg inline-flex items-center gap-1.5 cursor-not-allowed"
+            >
               Approve & launch
               <ChevronRight className="w-3.5 h-3.5" strokeWidth={2.5} />
             </button>

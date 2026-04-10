@@ -88,7 +88,7 @@ export function Sidebar({ clientName, ownerName }: { clientName: string; ownerNa
 
       {/* User block */}
       <div className="px-3 pb-5 pt-3 border-t border-[var(--color-border)]">
-        <div className="flex items-center gap-3 px-3 py-2.5 rounded-lg hover:bg-[var(--color-surface-muted)] cursor-default">
+        <div className="flex items-center gap-3 px-3 py-2.5 rounded-lg">
           <div className="w-8 h-8 rounded-full bg-[var(--color-accent)] text-white flex items-center justify-center text-[12px] font-semibold">
             {ownerName.slice(0, 1)}
           </div>
@@ -98,12 +98,13 @@ export function Sidebar({ clientName, ownerName }: { clientName: string; ownerNa
             </div>
             <div className="text-[11px] text-[var(--color-ink-subtle)] truncate">Owner</div>
           </div>
-          <button
+          <Link
+            href="/login"
             className="text-[var(--color-ink-subtle)] hover:text-[var(--color-ink)] transition-colors"
             aria-label="Sign out"
           >
             <LogOut className="w-[15px] h-[15px]" />
-          </button>
+          </Link>
         </div>
       </div>
     </aside>

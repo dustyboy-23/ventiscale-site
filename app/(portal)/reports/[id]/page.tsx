@@ -1,8 +1,9 @@
 import Link from "next/link";
-import { ArrowLeft, Download } from "lucide-react";
+import { ArrowLeft } from "lucide-react";
 import { notFound } from "next/navigation";
 import { getReports, getReportHtml } from "@/lib/sg-data";
 import { formatDate } from "@/lib/utils";
+import { PrintButton } from "./print-button";
 
 export default async function ReportViewerPage({
   params,
@@ -32,13 +33,7 @@ export default async function ReportViewerPage({
           <div className="text-[13px] text-[var(--color-ink-muted)]">
             {meta?.date && formatDate(meta.date)}
           </div>
-          <button
-            className="inline-flex items-center gap-1.5 text-[13px] font-medium text-[var(--color-ink)] bg-white border border-[var(--color-border-strong)] hover:border-[var(--color-ink)] px-3 py-1.5 rounded-lg transition-colors"
-            type="button"
-          >
-            <Download className="w-3.5 h-3.5" strokeWidth={2.5} />
-            Download PDF
-          </button>
+          <PrintButton />
         </div>
       </div>
 

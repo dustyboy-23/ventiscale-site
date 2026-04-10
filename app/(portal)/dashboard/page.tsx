@@ -8,7 +8,6 @@ import {
   Sparkles,
   AlertTriangle,
   Target,
-  ExternalLink,
   FileText,
   PenLine,
   Mail,
@@ -189,9 +188,64 @@ export default async function DashboardPage() {
             </div>
           </Card>
 
-          {/* Insights */}
-          {(kpis.insights.working.length > 0 || kpis.insights.actions.length > 0) && (
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+          {/* Devices + Top pages */}
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <Card padding="md">
+              <CardHeader title="Devices" description={kpis.periodLabel} />
+              <div className="space-y-3">
+                {kpis.devices.map((d) => {
+                  const max = Math.max(...kpis.devices.map((x) => x.revenue));
+                  const pct = (d.revenue / max) * 100;
+                  return (
+                    <div key={d.name}>
+                      <div className="flex items-baseline justify-between mb-1">
+                        <span className="text-[13px] font-medium text-[var(--color-ink)]">
+                          {d.name}
+                        </span>
+                        <span className="text-[12px] tabular text-[var(--color-ink-muted)]">
+                          {formatCurrency(d.revenue)}{" "}
+                          <span className="text-[var(--color-ink-subtle)]">
+                            · {d.convRate.toFixed(2)}%
+                          </span>
+                        </span>
+                      </div>
+                      <div className="h-1 bg-[var(--color-surface-muted)] rounded-full overflow-hidden">
+                        <div
+                          className="h-full bg-[var(--color-ink)] rounded-full"
+                          style={{ width: `${pct}%` }}
+                        />
+                      </div>
+                    </div>
+                  );
+                })}
+              </div>
+            </Card>
+
+            <Card padding="md">
+              <CardHeader title="Top pages" description="Highest-traffic URLs" />
+              <ul className="space-y-2.5">
+                {kpis.topPages.map((p) => (
+                  <li key={p.page} className="flex items-baseline justify-between gap-3">
+                    <span className="text-[13px] font-mono text-[var(--color-ink)] truncate min-w-0">
+                      {p.page}
+                    </span>
+                    <span className="text-[12px] tabular text-[var(--color-ink-muted)] shrink-0">
+                      {formatNumber(p.sessions)}{" "}
+                      <span className="text-[var(--color-ink-subtle)]">
+                        · {p.purchases} orders
+                      </span>
+                    </span>
+                  </li>
+                ))}
+              </ul>
+            </Card>
+          </div>
+
+          {/* Insights — 3 columns: working / leaking / actions */}
+          {(kpis.insights.working.length > 0 ||
+            kpis.insights.leaking.length > 0 ||
+            kpis.insights.actions.length > 0) && (
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
               {kpis.insights.working.length > 0 && (
                 <Card padding="md">
                   <div className="flex items-center gap-2 mb-3">
@@ -207,6 +261,29 @@ export default async function DashboardPage() {
                       <li
                         key={i}
                         className="text-[13px] text-[var(--color-ink-muted)] leading-relaxed pl-3 border-l-2 border-emerald-100"
+                      >
+                        {item}
+                      </li>
+                    ))}
+                  </ul>
+                </Card>
+              )}
+
+              {kpis.insights.leaking.length > 0 && (
+                <Card padding="md">
+                  <div className="flex items-center gap-2 mb-3">
+                    <div className="w-7 h-7 rounded-lg bg-red-50 flex items-center justify-center">
+                      <AlertTriangle className="w-4 h-4 text-red-600" strokeWidth={2} />
+                    </div>
+                    <h3 className="text-[14px] font-semibold text-[var(--color-ink)]">
+                      Where you&apos;re leaking
+                    </h3>
+                  </div>
+                  <ul className="space-y-2">
+                    {kpis.insights.leaking.slice(0, 3).map((item, i) => (
+                      <li
+                        key={i}
+                        className="text-[13px] text-[var(--color-ink-muted)] leading-relaxed pl-3 border-l-2 border-red-100"
                       >
                         {item}
                       </li>
@@ -280,9 +357,33 @@ export default async function DashboardPage() {
                 </div>
               </div>
             </div>
+            {kpis.topQueries.length > 0 && (
+              <div className="mt-5 pt-5 border-t border-[var(--color-border)]">
+                <div className="text-[11px] font-medium text-[var(--color-ink-subtle)] uppercase tracking-wider mb-3">
+                  Top search queries
+                </div>
+                <ul className="space-y-2.5">
+                  {kpis.topQueries.slice(0, 4).map((q) => (
+                    <li key={q.query} className="text-[13px]">
+                      <div className="flex items-baseline justify-between gap-2">
+                        <span className="text-[var(--color-ink)] font-medium truncate min-w-0">
+                          {q.query}
+                        </span>
+                        <span className="text-[11px] tabular text-[var(--color-ink-subtle)] shrink-0">
+                          pos {q.position.toFixed(1)}
+                        </span>
+                      </div>
+                      <div className="text-[11px] tabular text-[var(--color-ink-muted)] mt-0.5">
+                        {formatNumber(q.clicks)} clicks · {q.ctr.toFixed(1)}% CTR
+                      </div>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            )}
             <Link
               href="/seo"
-              className="mt-4 inline-flex items-center gap-1 text-[13px] font-medium text-[var(--color-ink)] hover:text-[var(--color-accent)] transition-colors"
+              className="mt-5 inline-flex items-center gap-1 text-[13px] font-medium text-[var(--color-ink)] hover:text-[var(--color-accent)] transition-colors"
             >
               View full SEO plan
               <ArrowUpRight className="w-3.5 h-3.5" strokeWidth={2.5} />
@@ -397,30 +498,6 @@ export default async function DashboardPage() {
             </Card>
           )}
 
-          {/* Quick links */}
-          <Card padding="md">
-            <CardHeader title="Quick links" />
-            <div className="space-y-1">
-              <a
-                href={`https://${CLIENT.primaryDomain}`}
-                target="_blank"
-                rel="noreferrer"
-                className="flex items-center justify-between py-2 px-2 -mx-2 rounded-lg hover:bg-[var(--color-surface-muted)] text-[13px] text-[var(--color-ink)] transition-colors"
-              >
-                <span>{CLIENT.primaryDomain}</span>
-                <ExternalLink className="w-3.5 h-3.5 text-[var(--color-ink-subtle)]" />
-              </a>
-              <a
-                href={`https://${CLIENT.ecomDomain}`}
-                target="_blank"
-                rel="noreferrer"
-                className="flex items-center justify-between py-2 px-2 -mx-2 rounded-lg hover:bg-[var(--color-surface-muted)] text-[13px] text-[var(--color-ink)] transition-colors"
-              >
-                <span>{CLIENT.ecomDomain}</span>
-                <ExternalLink className="w-3.5 h-3.5 text-[var(--color-ink-subtle)]" />
-              </a>
-            </div>
-          </Card>
         </div>
       </div>
     </>
