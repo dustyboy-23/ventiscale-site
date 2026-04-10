@@ -2,7 +2,7 @@ import Link from "next/link";
 import { FileText, ArrowUpRight } from "lucide-react";
 import { PageHeader } from "@/components/page-header";
 import { Card } from "@/components/card";
-import { getReports } from "@/lib/sg-data";
+import { getReports } from "@/lib/portal-data";
 import { formatDate } from "@/lib/utils";
 
 const TYPE_LABEL: Record<string, string> = {

@@ -1,6 +1,6 @@
 import { PageHeader } from "@/components/page-header";
 import { Card } from "@/components/card";
-import { CLIENT } from "@/lib/sg-data";
+import { getClientMeta } from "@/lib/portal-data";
 import { FolderOpen, ImageIcon, FileText, Video, File as FileIcon } from "lucide-react";
 
 const DEMO_FILES = [
@@ -14,10 +14,10 @@ const DEMO_FILES = [
   { name: "Founder story — Marcus interview.mp4", type: "video", icon: Video, size: "180 MB", updated: "1 month ago" },
 ];
 
-export default function FilesPage() {
-  const hasDriveFolder = CLIENT.driveFolderId && CLIENT.driveFolderId.length > 0;
+export default async function FilesPage() {
+  const client = await getClientMeta();
 
-  if (!hasDriveFolder) {
+  if (client.isDemo) {
     return (
       <>
         <PageHeader
@@ -30,7 +30,7 @@ export default function FilesPage() {
           <div className="px-5 py-3 bg-[var(--color-surface-muted)] border-b border-[var(--color-border)] flex items-center gap-2">
             <FolderOpen className="w-4 h-4 text-[var(--color-ink-muted)]" strokeWidth={2} />
             <span className="text-[13px] font-medium text-[var(--color-ink)]">
-              {CLIENT.name} / Brand Assets
+              {client.name} / Brand Assets
             </span>
             <span className="ml-auto text-[11px] font-medium text-[var(--color-ink-subtle)]">
               {DEMO_FILES.length} files
@@ -69,35 +69,65 @@ export default function FilesPage() {
     );
   }
 
-  const driveEmbed = `https://drive.google.com/embeddedfolderview?id=${CLIENT.driveFolderId}#grid`;
+  if (client.driveFolderId) {
+    const driveEmbed = `https://drive.google.com/embeddedfolderview?id=${client.driveFolderId}#grid`;
+    return (
+      <>
+        <PageHeader
+          eyebrow="Files"
+          title="Brand Assets"
+          description="Every creative, image, video, and document for your campaigns — synced from Google Drive."
+        />
+
+        <Card padding="none" className="overflow-hidden">
+          <div className="px-5 py-3 bg-[var(--color-surface-muted)] border-b border-[var(--color-border)] flex items-center gap-2">
+            <FolderOpen className="w-4 h-4 text-[var(--color-ink-muted)]" strokeWidth={2} />
+            <span className="text-[13px] font-medium text-[var(--color-ink)]">
+              {client.name} / Brand Assets
+            </span>
+          </div>
+          <iframe
+            src={driveEmbed}
+            title="Brand assets"
+            className="w-full block border-0 bg-white"
+            style={{ height: "calc(100vh - 240px)", minHeight: "600px" }}
+          />
+        </Card>
+
+        <p className="text-[12px] text-[var(--color-ink-subtle)] mt-3 text-center">
+          Files are synced live from Google Drive. You may need to be signed into your Google account
+          to view private items.
+        </p>
+      </>
+    );
+  }
 
   return (
     <>
       <PageHeader
         eyebrow="Files"
         title="Brand Assets"
-        description="Every creative, image, video, and document for your campaigns — synced from Google Drive."
+        description="Every creative, image, video, and document for your campaigns — synced live from Google Drive."
       />
 
-      <Card padding="none" className="overflow-hidden">
-        <div className="px-5 py-3 bg-[var(--color-surface-muted)] border-b border-[var(--color-border)] flex items-center gap-2">
-          <FolderOpen className="w-4 h-4 text-[var(--color-ink-muted)]" strokeWidth={2} />
-          <span className="text-[13px] font-medium text-[var(--color-ink)]">
-            {CLIENT.name} / Brand Assets
-          </span>
+      <Card padding="lg">
+        <div className="text-center py-10 max-w-[460px] mx-auto">
+          <div className="w-12 h-12 mx-auto mb-4 rounded-full bg-[var(--color-surface-muted)] flex items-center justify-center">
+            <FolderOpen
+              className="w-5 h-5 text-[var(--color-ink-muted)]"
+              strokeWidth={2}
+            />
+          </div>
+          <h3 className="text-[16px] font-semibold text-[var(--color-ink)]">
+            Your brand assets workspace
+          </h3>
+          <p className="text-[14px] text-[var(--color-ink-muted)] mt-2 leading-relaxed">
+            Once your Google Drive folder is connected, every creative Jarvis
+            ships — images, videos, PDFs, brand guides — shows up here in
+            real time. Nothing to organize on your end.
+          </p>
         </div>
-        <iframe
-          src={driveEmbed}
-          title="Brand assets"
-          className="w-full block border-0 bg-white"
-          style={{ height: "calc(100vh - 240px)", minHeight: "600px" }}
-        />
       </Card>
-
-      <p className="text-[12px] text-[var(--color-ink-subtle)] mt-3 text-center">
-        Files are synced live from Google Drive. You may need to be signed into your Google account
-        to view private items.
-      </p>
     </>
   );
 }

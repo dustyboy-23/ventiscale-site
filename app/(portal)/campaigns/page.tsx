@@ -9,7 +9,7 @@ import {
 } from "lucide-react";
 import { PageHeader } from "@/components/page-header";
 import { Card, CardHeader } from "@/components/card";
-import { getCampaigns, type Campaign } from "@/lib/sg-data";
+import { getCampaigns, type Campaign } from "@/lib/portal-data";
 import { formatCurrency, formatNumber, cn } from "@/lib/utils";
 
 const TYPE_LABEL: Record<string, string> = {

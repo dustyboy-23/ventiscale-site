@@ -22,7 +22,15 @@ const NAV = [
   { href: "/files", label: "Files", icon: FolderOpen },
 ];
 
-export function Sidebar({ clientName, ownerName }: { clientName: string; ownerName: string }) {
+export function Sidebar({
+  clientName,
+  ownerName,
+  role = "Owner",
+}: {
+  clientName: string;
+  ownerName: string;
+  role?: string;
+}) {
   const pathname = usePathname();
 
   return (
@@ -96,7 +104,7 @@ export function Sidebar({ clientName, ownerName }: { clientName: string; ownerNa
             <div className="text-[13px] font-medium text-[var(--color-ink)] truncate">
               {ownerName}
             </div>
-            <div className="text-[11px] text-[var(--color-ink-subtle)] truncate">Owner</div>
+            <div className="text-[11px] text-[var(--color-ink-subtle)] truncate">{role}</div>
           </div>
           <Link
             href="/auth/signout"

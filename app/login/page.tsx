@@ -2,9 +2,10 @@
 
 import { useState, useEffect, Suspense } from "react";
 import Link from "next/link";
-import { useRouter, useSearchParams } from "next/navigation";
+import { useSearchParams } from "next/navigation";
 import { ArrowRight, Check, AlertCircle } from "lucide-react";
 import { createClient } from "@/lib/supabase/client";
+import { enterDemo } from "@/app/actions/demo";
 
 const ERROR_MESSAGES: Record<string, string> = {
   missing_code: "Your sign-in link was incomplete. Request a new one below.",
@@ -16,7 +17,6 @@ const ERROR_MESSAGES: Record<string, string> = {
 };
 
 function LoginPageInner() {
-  const router = useRouter();
   const searchParams = useSearchParams();
   const [email, setEmail] = useState("");
   const [submitted, setSubmitted] = useState(false);
@@ -148,12 +148,14 @@ function LoginPageInner() {
                   <div className="text-[11px] font-medium text-[var(--color-ink-subtle)] uppercase tracking-[0.08em] mb-2">
                     Not a client yet?
                   </div>
-                  <button
-                    onClick={() => router.push("/dashboard")}
-                    className="text-[13px] font-medium text-[var(--color-accent)] hover:underline transition-colors"
-                  >
-                    Tour the live demo portal →
-                  </button>
+                  <form action={enterDemo}>
+                    <button
+                      type="submit"
+                      className="text-[13px] font-medium text-[var(--color-accent)] hover:underline transition-colors"
+                    >
+                      Tour the live demo portal →
+                    </button>
+                  </form>
                   <p className="text-[11px] text-[var(--color-ink-subtle)] mt-1.5 leading-relaxed">
                     See exactly what your portal will look like. Fictional brand, real interface.
                   </p>

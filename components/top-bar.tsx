@@ -4,18 +4,25 @@ import { useState } from "react";
 import Link from "next/link";
 import { Search, Calendar as CalIcon, ChevronDown, Eye } from "lucide-react";
 import { cn } from "@/lib/utils";
-import { CLIENT } from "@/lib/sg-data";
 import { MobileNav } from "@/components/mobile-nav";
 
 const PERIODS = ["Last 7 days", "Last 28 days", "This month", "Last 90 days"];
 
-export function TopBar() {
+export function TopBar({
+  isDemo,
+  clientName,
+  ownerName,
+}: {
+  isDemo: boolean;
+  clientName: string;
+  ownerName: string;
+}) {
   const [period, setPeriod] = useState("Last 28 days");
   const [periodOpen, setPeriodOpen] = useState(false);
 
   return (
     <header className="sticky top-0 z-30 bg-[var(--color-canvas)]/85 backdrop-blur-md border-b border-[var(--color-border)]">
-      {CLIENT.isDemo && (
+      {isDemo && (
         <div className="bg-[#1F3D2B] text-white text-[12px] font-medium px-6 py-2 flex items-center justify-center gap-2">
           <Eye className="w-3.5 h-3.5" strokeWidth={2.5} />
           <span>
@@ -29,7 +36,7 @@ export function TopBar() {
       <div className="max-w-[1240px] mx-auto px-6 lg:px-10 h-[60px] flex items-center justify-between gap-4">
         {/* Left: mobile nav trigger + search */}
         <div className="flex items-center gap-3 flex-1 min-w-0">
-          <MobileNav clientName={CLIENT.name} ownerName={CLIENT.ownerName} />
+          <MobileNav clientName={clientName} ownerName={ownerName} />
           <div className="hidden sm:flex items-center gap-2.5 max-w-[360px] flex-1 px-3.5 py-2 rounded-lg bg-white border border-[var(--color-border)] text-left">
             <Search
               className="w-4 h-4 text-[var(--color-ink-subtle)] shrink-0"

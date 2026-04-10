@@ -1,6 +1,6 @@
 import { PageHeader } from "@/components/page-header";
 import { Card } from "@/components/card";
-import { getContentDrafts } from "@/lib/sg-data";
+import { getContentDrafts } from "@/lib/portal-data";
 import { formatDate } from "@/lib/utils";
 import { Sparkles } from "lucide-react";
 

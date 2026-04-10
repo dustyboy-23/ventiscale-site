@@ -1,9 +1,9 @@
 import { NextResponse, type NextRequest } from "next/server";
 import { createClient } from "@/lib/supabase/server";
 
-// Sign-out endpoint. Kills the Supabase session if one exists, then sends
-// the user back to /login. Safe to hit while unauthenticated — signOut() is
-// a no-op without a session, and missing Supabase config just redirects.
+// Sign-out endpoint. Kills the Supabase session if one exists, clears the
+// vs-demo cookie, then sends the user back to /login. Safe to hit while
+// unauthenticated — signOut() is a no-op without a session.
 export async function POST(request: NextRequest) {
   const { origin } = new URL(request.url);
   try {
@@ -12,7 +12,9 @@ export async function POST(request: NextRequest) {
   } catch {
     // No Supabase configured — nothing to sign out of.
   }
-  return NextResponse.redirect(`${origin}/login`, { status: 303 });
+  const response = NextResponse.redirect(`${origin}/login`, { status: 303 });
+  response.cookies.set("vs-demo", "", { path: "/", maxAge: 0 });
+  return response;
 }
 
 // Allow GET too so the sidebar link works without JS.

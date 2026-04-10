@@ -1,6 +1,6 @@
 import { PageHeader } from "@/components/page-header";
 import { Card } from "@/components/card";
-import { getReports, getReportHtml } from "@/lib/sg-data";
+import { getReports, getReportHtml } from "@/lib/portal-data";
 import { TrendingUp, Search } from "lucide-react";
 
 export default async function SeoPage() {

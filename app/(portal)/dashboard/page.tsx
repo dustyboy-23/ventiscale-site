@@ -22,9 +22,9 @@ import {
   getReports,
   getContentDrafts,
   getActivityFeed,
-  CLIENT,
+  getClientMeta,
   type ActivityItem,
-} from "@/lib/sg-data";
+} from "@/lib/portal-data";
 import { formatCurrency, formatNumber, relativeTime, cn } from "@/lib/utils";
 
 const ACTIVITY_META: Record<
@@ -39,15 +39,20 @@ const ACTIVITY_META: Record<
 };
 
 export default async function DashboardPage() {
-  const [kpis, reports, drafts, activity] = await Promise.all([
+  const [kpis, reports, drafts, activity, client] = await Promise.all([
     getClientKpis(),
     getReports(),
     getContentDrafts(),
     getActivityFeed(6),
+    getClientMeta(),
   ]);
 
   const latestClient = reports.find((r) => r.type === "client");
   const upcomingDrafts = drafts.slice(0, 4);
+  const hasRevenueData = kpis.revenue > 0 || kpis.orders > 0;
+  const hasTrafficData = kpis.channels.length > 0 || kpis.devices.length > 0;
+  const hasSeoData =
+    kpis.seo.clicks > 0 || kpis.seo.impressions > 0 || kpis.topQueries.length > 0;
 
   const greeting = (() => {
     const h = new Date().getHours();
@@ -59,9 +64,13 @@ export default async function DashboardPage() {
   return (
     <>
       <PageHeader
-        eyebrow={CLIENT.tagline}
-        title={`${greeting}, ${CLIENT.ownerName}`}
-        description={`Here's how ${CLIENT.name} is performing — ${kpis.periodLabel.toLowerCase()}.`}
+        eyebrow={client.tagline}
+        title={`${greeting}, ${client.ownerName}`}
+        description={
+          hasRevenueData
+            ? `Here's how ${client.name} is performing — ${kpis.periodLabel.toLowerCase()}.`
+            : `Welcome to ${client.name}. Your data feeds are connecting — metrics will populate here as soon as they're live.`
+        }
         actions={
           latestClient && (
             <Link
@@ -105,7 +114,42 @@ export default async function DashboardPage() {
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
         {/* Left column — main content */}
         <div className="lg:col-span-2 space-y-6">
+          {!hasRevenueData && (
+            <Card padding="lg">
+              <div className="py-6">
+                <div className="flex items-center gap-2 mb-3">
+                  <div className="w-8 h-8 rounded-lg bg-[var(--color-accent-soft)] flex items-center justify-center">
+                    <Sparkles className="w-4 h-4 text-[var(--color-accent)]" strokeWidth={2.25} />
+                  </div>
+                  <h3 className="text-[15px] font-semibold text-[var(--color-ink)]">
+                    Your dashboard is ready
+                  </h3>
+                </div>
+                <p className="text-[14px] text-[var(--color-ink-muted)] leading-relaxed max-w-[540px]">
+                  Once your ad accounts, analytics, and storefront are connected, this
+                  page will show live revenue, traffic, product performance, and the
+                  insights Jarvis spots for you — updated every morning.
+                </p>
+                <ul className="mt-5 space-y-2 text-[13px] text-[var(--color-ink-muted)]">
+                  <li className="flex items-center gap-2">
+                    <span className="w-1.5 h-1.5 rounded-full bg-[var(--color-ink-subtle)]" />
+                    Meta Ads · Google Ads · Google Analytics
+                  </li>
+                  <li className="flex items-center gap-2">
+                    <span className="w-1.5 h-1.5 rounded-full bg-[var(--color-ink-subtle)]" />
+                    Search Console · Shopify / WooCommerce
+                  </li>
+                  <li className="flex items-center gap-2">
+                    <span className="w-1.5 h-1.5 rounded-full bg-[var(--color-ink-subtle)]" />
+                    Weekly reports · proactive campaign drafts
+                  </li>
+                </ul>
+              </div>
+            </Card>
+          )}
+
           {/* Product Performance */}
+          {hasRevenueData && kpis.productBreakdown.length > 0 && (
           <Card>
             <CardHeader
               title="Product Performance"
@@ -144,8 +188,10 @@ export default async function DashboardPage() {
               })}
             </div>
           </Card>
+          )}
 
           {/* Traffic Sources */}
+          {hasTrafficData && kpis.channels.length > 0 && (
           <Card>
             <CardHeader
               title="Traffic Sources"
@@ -187,8 +233,10 @@ export default async function DashboardPage() {
               </table>
             </div>
           </Card>
+          )}
 
           {/* Devices + Top pages */}
+          {hasTrafficData && (kpis.devices.length > 0 || kpis.topPages.length > 0) && (
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
             <Card padding="md">
               <CardHeader title="Devices" description={kpis.periodLabel} />
@@ -240,6 +288,7 @@ export default async function DashboardPage() {
               </ul>
             </Card>
           </div>
+          )}
 
           {/* Insights — 3 columns: working / leaking / actions */}
           {(kpis.insights.working.length > 0 ||
@@ -321,6 +370,7 @@ export default async function DashboardPage() {
         {/* Right column — sidebar */}
         <div className="space-y-6">
           {/* SEO Snapshot */}
+          {hasSeoData && (
           <Card padding="md">
             <CardHeader title="SEO Snapshot" description="Last 28 days" />
             <div className="grid grid-cols-2 gap-3">
@@ -389,6 +439,7 @@ export default async function DashboardPage() {
               <ArrowUpRight className="w-3.5 h-3.5" strokeWidth={2.5} />
             </Link>
           </Card>
+          )}
 
           {/* Upcoming content */}
           <Card padding="md">

@@ -1,7 +1,7 @@
 import Link from "next/link";
 import { ArrowLeft } from "lucide-react";
 import { notFound } from "next/navigation";
-import { getReports, getReportHtml } from "@/lib/sg-data";
+import { getReports, getReportHtml } from "@/lib/portal-data";
 import { formatDate } from "@/lib/utils";
 import { PrintButton } from "./print-button";
 
