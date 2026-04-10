@@ -99,7 +99,7 @@ export function Sidebar({ clientName, ownerName }: { clientName: string; ownerNa
             <div className="text-[11px] text-[var(--color-ink-subtle)] truncate">Owner</div>
           </div>
           <Link
-            href="/login"
+            href="/auth/signout"
             className="text-[var(--color-ink-subtle)] hover:text-[var(--color-ink)] transition-colors"
             aria-label="Sign out"
           >

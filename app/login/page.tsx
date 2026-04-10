@@ -1,24 +1,61 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect, Suspense } from "react";
 import Link from "next/link";
-import { useRouter } from "next/navigation";
-import { ArrowRight, Check } from "lucide-react";
+import { useRouter, useSearchParams } from "next/navigation";
+import { ArrowRight, Check, AlertCircle } from "lucide-react";
+import { createClient } from "@/lib/supabase/client";
 
-export default function LoginPage() {
+const ERROR_MESSAGES: Record<string, string> = {
+  missing_code: "Your sign-in link was incomplete. Request a new one below.",
+  exchange_failed: "That sign-in link has expired. Request a new one below.",
+  server_error: "Something went wrong on our end. Try again in a moment.",
+  send_failed: "We couldn't send the sign-in email. Try again in a moment.",
+  supabase_misconfigured:
+    "Sign-in isn't fully configured yet. Email hello@ventiscale.com and we'll get you in.",
+};
+
+function LoginPageInner() {
   const router = useRouter();
+  const searchParams = useSearchParams();
   const [email, setEmail] = useState("");
   const [submitted, setSubmitted] = useState(false);
   const [loading, setLoading] = useState(false);
+  const [errorKey, setErrorKey] = useState<string | null>(null);
+
+  // Surface ?error=... from the callback handler
+  useEffect(() => {
+    const err = searchParams.get("error");
+    if (err) setErrorKey(err);
+  }, [searchParams]);
 
   async function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
     if (!email) return;
     setLoading(true);
-    // Placeholder — Supabase magic link wires here
-    await new Promise((r) => setTimeout(r, 600));
-    setLoading(false);
-    setSubmitted(true);
+    setErrorKey(null);
+
+    try {
+      const supabase = createClient();
+      const { error } = await supabase.auth.signInWithOtp({
+        email: email.trim().toLowerCase(),
+        options: {
+          emailRedirectTo: `${window.location.origin}/auth/callback`,
+        },
+      });
+      if (error) {
+        console.error("[login] signInWithOtp failed", error.message);
+        setErrorKey("send_failed");
+        setLoading(false);
+        return;
+      }
+      setSubmitted(true);
+    } catch (err) {
+      console.error("[login] init/send threw", err);
+      setErrorKey("supabase_misconfigured");
+    } finally {
+      setLoading(false);
+    }
   }
 
   return (
@@ -58,6 +95,18 @@ export default function LoginPage() {
                   Enter your email and we&apos;ll send you a secure sign-in link. No password required.
                 </p>
 
+                {errorKey && (
+                  <div className="mt-5 flex items-start gap-2.5 rounded-xl bg-red-50 border border-red-100 px-3.5 py-3">
+                    <AlertCircle
+                      className="w-4 h-4 text-red-600 shrink-0 mt-0.5"
+                      strokeWidth={2.25}
+                    />
+                    <p className="text-[13px] text-red-700 leading-snug">
+                      {ERROR_MESSAGES[errorKey] || ERROR_MESSAGES.server_error}
+                    </p>
+                  </div>
+                )}
+
                 <form onSubmit={handleSubmit} className="mt-7 space-y-3">
                   <div>
                     <label
@@ -73,7 +122,7 @@ export default function LoginPage() {
                       autoFocus
                       value={email}
                       onChange={(e) => setEmail(e.target.value)}
-                      placeholder="ken@sprinkler-guard.com"
+                      placeholder="you@yourbrand.com"
                       className="w-full px-3.5 py-3 rounded-xl border border-[var(--color-border-strong)] bg-white text-[14px] text-[var(--color-ink)] placeholder:text-[var(--color-ink-subtle)] outline-none focus:border-[var(--color-ink)] focus:ring-4 focus:ring-[var(--color-ink)]/5 transition-all"
                     />
                   </div>
@@ -116,8 +165,18 @@ export default function LoginPage() {
                   <span className="text-[var(--color-ink)] font-medium">{email}</span>
                 </p>
                 <p className="text-[12px] text-[var(--color-ink-subtle)] mt-5">
-                  The link expires in 1 hour.
+                  The link expires in 1 hour. Check spam if it doesn&apos;t arrive.
                 </p>
+                <button
+                  type="button"
+                  onClick={() => {
+                    setSubmitted(false);
+                    setErrorKey(null);
+                  }}
+                  className="mt-4 text-[12px] text-[var(--color-ink-muted)] hover:text-[var(--color-ink)] transition-colors"
+                >
+                  Use a different email
+                </button>
               </div>
             )}
           </div>
@@ -140,5 +199,13 @@ export default function LoginPage() {
         </p>
       </footer>
     </div>
+  );
+}
+
+export default function LoginPage() {
+  return (
+    <Suspense fallback={null}>
+      <LoginPageInner />
+    </Suspense>
   );
 }

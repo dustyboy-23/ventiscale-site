@@ -164,7 +164,7 @@ export function MobileNav({
                   </div>
                 </div>
                 <Link
-                  href="/login"
+                  href="/auth/signout"
                   className="text-[var(--color-ink-subtle)] hover:text-[var(--color-ink)] transition-colors"
                   aria-label="Sign out"
                 >
