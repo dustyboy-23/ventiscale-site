@@ -57,8 +57,8 @@ const SERVICES = [
 const STEPS = [
   {
     n: "01",
-    title: "Book a 15-minute call.",
-    body: "We figure out if I can actually help your brand. If I can't, I'll tell you and point you somewhere better.",
+    title: "Run your free audit.",
+    body: "Drop your URL, get a real audit in your inbox in under a minute. If I can help your brand, I'll reach out. If I can't, I'll tell you and point you somewhere better.",
   },
   {
     n: "02",
