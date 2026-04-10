@@ -1,10 +1,16 @@
 import { NextResponse } from "next/server";
+import { runAudit, renderAuditEmail, type AuditResult } from "@/lib/audit";
 
-// Audit lead capture: validates input, logs to Vercel function logs, and
-// emails dustin@ventiscale.com via Brevo Transactional API. Brevo key lives
-// in BREVO_API_KEY (Vercel env). If the key is missing the route still
-// returns 200 so the form never appears broken to a visitor — the lead is
-// preserved in function logs and can be backfilled.
+// Audit lead capture + real audit generation:
+// 1. Validates input
+// 2. Runs a 15-check surface audit on the submitted URL
+// 3. Emails the visitor their personalized audit report (Brevo)
+// 4. Notifies dustin@ventiscale.com with lead + grade summary (Brevo)
+// 5. Logs to Vercel function logs as a backup record
+//
+// Brevo API key lives in BREVO_API_KEY (Vercel env). If the key is missing
+// the route still returns 200 so the form never appears broken to a visitor
+// — the lead is preserved in function logs and can be backfilled by hand.
 
 interface AuditRequest {
   id: string;
@@ -15,31 +21,19 @@ interface AuditRequest {
   ip?: string;
 }
 
+export const runtime = "nodejs";
+export const maxDuration = 30;
+
 const NOTIFY_TO = "dustin@ventiscale.com";
 const NOTIFY_FROM_EMAIL = "noreply@ventiscale.com";
 const NOTIFY_FROM_NAME = "Venti Scale Audit";
 
-async function sendBrevoNotification(entry: AuditRequest) {
+async function brevoSend(payload: Record<string, unknown>) {
   const apiKey = process.env.BREVO_API_KEY;
   if (!apiKey) {
-    console.warn("[audit] BREVO_API_KEY not set — skipping email notification");
-    return;
+    console.warn("[audit] BREVO_API_KEY not set — skipping email send");
+    return false;
   }
-
-  const subject = `New audit request: ${entry.url}`;
-  const htmlContent = `
-    <div style="font-family:-apple-system,BlinkMacSystemFont,sans-serif;color:#1B1B1B;">
-      <h2 style="margin:0 0 16px;font-weight:500;">New audit request</h2>
-      <table style="border-collapse:collapse;font-size:14px;">
-        <tr><td style="padding:6px 12px 6px 0;color:#1B1B1B;opacity:0.6;">URL</td><td style="padding:6px 0;"><a href="https://${entry.url.replace(/^https?:\/\//, "")}">${entry.url}</a></td></tr>
-        <tr><td style="padding:6px 12px 6px 0;color:#1B1B1B;opacity:0.6;">Email</td><td style="padding:6px 0;"><a href="mailto:${entry.email}">${entry.email}</a></td></tr>
-        <tr><td style="padding:6px 12px 6px 0;color:#1B1B1B;opacity:0.6;">Received</td><td style="padding:6px 0;">${entry.receivedAt}</td></tr>
-        <tr><td style="padding:6px 12px 6px 0;color:#1B1B1B;opacity:0.6;">ID</td><td style="padding:6px 0;font-family:monospace;font-size:12px;">${entry.id}</td></tr>
-        <tr><td style="padding:6px 12px 6px 0;color:#1B1B1B;opacity:0.6;">IP</td><td style="padding:6px 0;font-family:monospace;font-size:12px;">${entry.ip || "—"}</td></tr>
-      </table>
-    </div>
-  `.trim();
-
   try {
     const res = await fetch("https://api.brevo.com/v3/smtp/email", {
       method: "POST",
@@ -48,21 +42,74 @@ async function sendBrevoNotification(entry: AuditRequest) {
         "Content-Type": "application/json",
         accept: "application/json",
       },
-      body: JSON.stringify({
-        sender: { name: NOTIFY_FROM_NAME, email: NOTIFY_FROM_EMAIL },
-        to: [{ email: NOTIFY_TO }],
-        replyTo: { email: entry.email },
-        subject,
-        htmlContent,
-      }),
+      body: JSON.stringify(payload),
     });
     if (!res.ok) {
       const text = await res.text();
       console.error("[audit] Brevo send failed", res.status, text);
+      return false;
     }
+    return true;
   } catch (err) {
     console.error("[audit] Brevo send threw", err);
+    return false;
   }
+}
+
+async function sendAuditToVisitor(entry: AuditRequest, result: AuditResult) {
+  const { subject, html, text } = renderAuditEmail(result, entry.email);
+  return brevoSend({
+    sender: { name: NOTIFY_FROM_NAME, email: NOTIFY_FROM_EMAIL },
+    to: [{ email: entry.email }],
+    replyTo: { email: "dustin@ventiscale.com", name: "Dustin at Venti Scale" },
+    subject,
+    htmlContent: html,
+    textContent: text,
+  });
+}
+
+async function sendLeadNotification(entry: AuditRequest, result: AuditResult) {
+  const failed = result.checks.filter((c) => c.status === "fail").length;
+  const warned = result.checks.filter((c) => c.status === "warn").length;
+  const passed = result.checks.filter((c) => c.status === "pass").length;
+  const gradeColor =
+    result.grade === "A" ? "#1F3D2B" :
+    result.grade === "B" ? "#2E5B3E" :
+    result.grade === "C" ? "#A06A00" :
+    "#A12A1A";
+
+  const reachableRow = result.reachable
+    ? `<tr><td style="padding:6px 12px 6px 0;color:#1B1B1B;opacity:0.6;">Grade</td><td style="padding:6px 0;"><strong style="color:${gradeColor};font-size:18px;">${result.grade}</strong> <span style="color:#1B1B1B;opacity:0.5;">(${result.score}/100)</span></td></tr>
+       <tr><td style="padding:6px 12px 6px 0;color:#1B1B1B;opacity:0.6;">Checks</td><td style="padding:6px 0;">${failed} failed · ${warned} warnings · ${passed} passed</td></tr>
+       <tr><td style="padding:6px 12px 6px 0;color:#1B1B1B;opacity:0.6;">Final URL</td><td style="padding:6px 0;"><a href="${result.finalUrl}">${result.finalUrl}</a></td></tr>`
+    : `<tr><td style="padding:6px 12px 6px 0;color:#1B1B1B;opacity:0.6;">Status</td><td style="padding:6px 0;color:#A12A1A;"><strong>UNREACHABLE</strong> — ${result.error || "site did not respond"}</td></tr>`;
+
+  const subject = result.reachable
+    ? `New audit lead: ${entry.url} — Grade ${result.grade} (${result.score})`
+    : `New audit lead: ${entry.url} — UNREACHABLE`;
+
+  const htmlContent = `
+    <div style="font-family:-apple-system,BlinkMacSystemFont,sans-serif;color:#1B1B1B;">
+      <h2 style="margin:0 0 16px;font-weight:500;">New audit lead</h2>
+      <table style="border-collapse:collapse;font-size:14px;">
+        <tr><td style="padding:6px 12px 6px 0;color:#1B1B1B;opacity:0.6;">URL</td><td style="padding:6px 0;"><a href="${result.finalUrl || entry.url}">${entry.url}</a></td></tr>
+        <tr><td style="padding:6px 12px 6px 0;color:#1B1B1B;opacity:0.6;">Email</td><td style="padding:6px 0;"><a href="mailto:${entry.email}">${entry.email}</a></td></tr>
+        ${reachableRow}
+        <tr><td style="padding:6px 12px 6px 0;color:#1B1B1B;opacity:0.6;">Received</td><td style="padding:6px 0;">${entry.receivedAt}</td></tr>
+        <tr><td style="padding:6px 12px 6px 0;color:#1B1B1B;opacity:0.6;">ID</td><td style="padding:6px 0;font-family:monospace;font-size:12px;">${entry.id}</td></tr>
+        <tr><td style="padding:6px 12px 6px 0;color:#1B1B1B;opacity:0.6;">IP</td><td style="padding:6px 0;font-family:monospace;font-size:12px;">${entry.ip || "—"}</td></tr>
+      </table>
+      <p style="margin:20px 0 0;font-size:13px;color:#1B1B1B;opacity:0.6;">Audit email was sent to the visitor. Reply directly to follow up.</p>
+    </div>
+  `.trim();
+
+  return brevoSend({
+    sender: { name: NOTIFY_FROM_NAME, email: NOTIFY_FROM_EMAIL },
+    to: [{ email: NOTIFY_TO }],
+    replyTo: { email: entry.email },
+    subject,
+    htmlContent,
+  });
 }
 
 function isValidEmail(s: string) {
@@ -105,19 +152,36 @@ export async function POST(req: Request) {
       undefined,
   };
 
-  // Visible in Vercel function logs as a backup record of every lead.
   console.log("[audit] new request", JSON.stringify(entry));
 
-  // Fire-and-await Brevo notification. Failures are logged but never thrown:
-  // a flaky email provider should not fail a working form submission.
-  await sendBrevoNotification(entry);
+  // Run the audit. Failures here should never fail the response — the lead
+  // is still captured and Dusty can follow up manually.
+  let result: AuditResult | null = null;
+  try {
+    result = await runAudit(url);
+    console.log("[audit] result", entry.id, result.reachable ? `${result.grade} ${result.score}/100` : `UNREACHABLE: ${result.error}`);
+  } catch (err) {
+    console.error("[audit] runAudit threw", err);
+  }
 
-  return NextResponse.json({ ok: true, id: entry.id });
+  // Fire both emails in parallel. Failures are logged, never thrown.
+  if (result) {
+    await Promise.allSettled([
+      sendAuditToVisitor(entry, result),
+      sendLeadNotification(entry, result),
+    ]);
+  }
+
+  return NextResponse.json({
+    ok: true,
+    id: entry.id,
+    ...(result && result.reachable
+      ? { score: result.score, grade: result.grade }
+      : {}),
+  });
 }
 
 export async function GET() {
-  // Storage layer is intentionally absent in serverless. Returning empty list
-  // until a real backing store is wired up.
   return NextResponse.json({
     ok: true,
     count: 0,
