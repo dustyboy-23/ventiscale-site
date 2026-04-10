@@ -102,8 +102,12 @@ export function AuditForm({ variant = "hero" }: Props) {
               Website
             </label>
             <input
-              type="url"
+              type="text"
+              inputMode="url"
               required
+              autoCapitalize="none"
+              autoCorrect="off"
+              spellCheck={false}
               placeholder="yourbusiness.com"
               value={url}
               onChange={(e) => setUrl(e.target.value)}

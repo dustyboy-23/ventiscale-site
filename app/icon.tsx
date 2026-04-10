@@ -14,17 +14,30 @@ export default function Icon() {
           display: "flex",
           alignItems: "center",
           justifyContent: "center",
-          background: "#1F3D2B",
-          color: "#F6F1EA",
-          fontSize: 42,
-          fontWeight: 500,
-          fontStyle: "italic",
-          fontFamily: "Georgia, serif",
-          letterSpacing: -1,
-          borderRadius: 12,
+          background:
+            "linear-gradient(135deg, #10E39A 0%, #5280FF 50%, #C8362B 100%)",
+          borderRadius: 14,
+          padding: 3,
         }}
       >
-        V
+        <div
+          style={{
+            width: "100%",
+            height: "100%",
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "center",
+            background: "#07080C",
+            borderRadius: 11,
+            color: "#FFFFFF",
+            fontSize: 40,
+            fontWeight: 700,
+            fontFamily: "Inter, system-ui, sans-serif",
+            letterSpacing: -1.5,
+          }}
+        >
+          V
+        </div>
       </div>
     ),
     { ...size },

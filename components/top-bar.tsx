@@ -1,12 +1,8 @@
 "use client";
 
-import { useState } from "react";
 import Link from "next/link";
-import { Search, Calendar as CalIcon, ChevronDown, Eye } from "lucide-react";
-import { cn } from "@/lib/utils";
+import { Search, Eye } from "lucide-react";
 import { MobileNav } from "@/components/mobile-nav";
-
-const PERIODS = ["Last 7 days", "Last 28 days", "This month", "Last 90 days"];
 
 export function TopBar({
   isDemo,
@@ -17,9 +13,6 @@ export function TopBar({
   clientName: string;
   ownerName: string;
 }) {
-  const [period, setPeriod] = useState("Last 28 days");
-  const [periodOpen, setPeriodOpen] = useState(false);
-
   return (
     <header className="sticky top-0 z-30 bg-[var(--color-canvas)]/85 backdrop-blur-md border-b border-[var(--color-border)]">
       {isDemo && (
@@ -51,50 +44,6 @@ export function TopBar({
           </div>
         </div>
 
-        {/* Right side */}
-        <div className="flex items-center gap-2">
-          {/* Period picker */}
-          <div className="relative">
-            <button
-              type="button"
-              onClick={() => setPeriodOpen((v) => !v)}
-              className="flex items-center gap-1.5 px-3 py-2 rounded-lg bg-white border border-[var(--color-border)] hover:border-[var(--color-border-strong)] text-[13px] font-medium text-[var(--color-ink)] transition-colors"
-            >
-              <CalIcon className="w-3.5 h-3.5 text-[var(--color-ink-muted)]" strokeWidth={2} />
-              <span className="hidden sm:inline">{period}</span>
-              <ChevronDown className="w-3.5 h-3.5 text-[var(--color-ink-muted)]" strokeWidth={2} />
-            </button>
-            {periodOpen && (
-              <>
-                <div
-                  className="fixed inset-0 z-40"
-                  onClick={() => setPeriodOpen(false)}
-                />
-                <div className="absolute right-0 mt-1.5 w-[180px] bg-white rounded-xl border border-[var(--color-border)] shadow-[0_8px_32px_rgba(10,14,31,0.12)] py-1.5 z-50">
-                  {PERIODS.map((p) => (
-                    <button
-                      key={p}
-                      type="button"
-                      onClick={() => {
-                        setPeriod(p);
-                        setPeriodOpen(false);
-                      }}
-                      className={cn(
-                        "w-full text-left px-3 py-1.5 text-[13px] hover:bg-[var(--color-surface-muted)] transition-colors",
-                        period === p
-                          ? "text-[var(--color-ink)] font-medium"
-                          : "text-[var(--color-ink-muted)]",
-                      )}
-                    >
-                      {p}
-                    </button>
-                  ))}
-                </div>
-              </>
-            )}
-          </div>
-
-        </div>
       </div>
     </header>
   );

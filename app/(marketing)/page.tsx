@@ -22,6 +22,7 @@ import {
 import { AiWorkers } from "@/components/marketing/ai-workers";
 import { AuditForm } from "@/components/marketing/audit-form";
 import { Eyebrow } from "@/components/marketing/eyebrow";
+import { enterDemo } from "@/app/actions/demo";
 
 const PROCESS = [
   {
@@ -383,7 +384,7 @@ export default function MarketingHome() {
             {[
               { label: "60 seconds", body: "to submit" },
               { label: "Same day", body: "growth plan in your inbox" },
-              { label: "Zero pressure", body: "no call, no contract, no hard sell" },
+              { label: "Zero pressure", body: "one quick call, no contract, no hard sell" },
             ].map((item) => (
               <div
                 key={item.label}
@@ -498,19 +499,21 @@ export default function MarketingHome() {
                   Every client gets a live portal.
                   <br />
                   <span className="italic text-white/60">
-                    This is not a mockup.
+                    Analytics, reports and plans.
                   </span>
                 </h2>
                 <p className="text-[16px] text-white/65 leading-[1.65] mb-10">
-                  Log in as a demo client right now and click around. See what
-                  the weekly reports look like, how the file library feels, how
-                  the dashboard numbers show up. No signup, no form. Takes 90
-                  seconds.
+                  Log in as a demo client and click around. See what the weekly
+                  reports look like, how the file library feels, how the
+                  dashboard numbers show up. No signup, no form. Go check it
+                  out.
                 </p>
-                <Link href="/login" className="btn-red">
-                  Open the client portal
-                  <ArrowUpRight className="w-4 h-4" strokeWidth={2.25} />
-                </Link>
+                <form action={enterDemo}>
+                  <button type="submit" className="btn-red">
+                    Open the client portal
+                    <ArrowUpRight className="w-4 h-4" strokeWidth={2.25} />
+                  </button>
+                </form>
               </div>
             </div>
           </div>

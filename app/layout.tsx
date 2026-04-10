@@ -4,9 +4,9 @@ import "./globals.css";
 
 const SITE_URL = "https://ventiscale.com";
 const SITE_NAME = "Venti Scale";
-const TITLE = "Venti Scale — Fire your marketing agency. Keep the growth.";
+const TITLE = "Venti Scale. Fire your marketing agency. Keep the growth.";
 const DESCRIPTION =
-  "Done-for-you marketing for ecommerce brands, run on AI. Content, email, ads, SEO, reports — $1,500 a month, flat. Watch it work in your live portal.";
+  "Done-for-you marketing for ecommerce brands, run on AI. Content, email, ads, SEO and reports, built around your business. Watch it work in your live portal.";
 
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
@@ -37,7 +37,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: TITLE,
     description:
-      "Done-for-you marketing for ecommerce brands. $1,500/mo flat. Real portal. No contracts.",
+      "Done-for-you marketing for ecommerce brands. Custom plan built for your business. Real portal, no contracts.",
     url: SITE_URL,
     siteName: SITE_NAME,
     type: "website",
@@ -47,7 +47,7 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: TITLE,
     description:
-      "Done-for-you marketing for ecommerce brands. $1,500/mo flat. Real portal. No contracts.",
+      "Done-for-you marketing for ecommerce brands. Custom plan built for your business. Real portal, no contracts.",
     creator: "@ai_dustingilmour",
   },
   robots: {
@@ -86,22 +86,11 @@ const ORGANIZATION_JSONLD = {
 const SERVICE_JSONLD = {
   "@context": "https://schema.org",
   "@type": "Service",
-  name: "Venti Scale — Done-for-you marketing",
+  name: "Venti Scale: Done-for-you marketing",
   provider: { "@type": "Organization", name: SITE_NAME, url: SITE_URL },
   serviceType: "Ecommerce marketing management",
   areaServed: "Worldwide",
   description: DESCRIPTION,
-  offers: {
-    "@type": "Offer",
-    price: "1500",
-    priceCurrency: "USD",
-    priceSpecification: {
-      "@type": "UnitPriceSpecification",
-      price: "1500",
-      priceCurrency: "USD",
-      unitText: "MONTH",
-    },
-  },
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
