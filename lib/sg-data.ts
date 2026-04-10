@@ -164,66 +164,82 @@ export const CLIENT = {
 // ──────────────────────────────────────────────────────────
 // KPIs
 // ──────────────────────────────────────────────────────────
-export async function getClientKpis(): Promise<ClientKpis> {
+export type PeriodKey = "7d" | "28d" | "month" | "90d";
+
+export const PERIOD_META: Record<PeriodKey, { label: string; scale: number }> = {
+  "7d": { label: "Last 7 days", scale: 0.28 },
+  "28d": { label: "Last 28 days", scale: 1.0 },
+  month: { label: "This month", scale: 0.55 },
+  "90d": { label: "Last 90 days", scale: 3.15 },
+};
+
+export function resolvePeriod(raw: string | undefined): PeriodKey {
+  return raw && raw in PERIOD_META ? (raw as PeriodKey) : "28d";
+}
+
+export async function getClientKpis(period: PeriodKey = "28d"): Promise<ClientKpis> {
+  const { label, scale } = PERIOD_META[period];
+  const i = (n: number) => Math.round(n * scale);
+
   return {
-    revenue: 48290,
-    orders: 312,
+    revenue: i(48290),
+    orders: i(312),
     aov: 154.78,
-    customers: 247,
+    customers: i(247),
     repeatRate: 26.4,
-    periodLabel: "Last 28 days",
+    periodLabel: label,
 
     traffic: {
-      activeUsers: 6840,
-      sessions: 8214,
-      pageViews: 23890,
+      activeUsers: i(6840),
+      sessions: i(8214),
+      pageViews: i(23890),
       conversionRate: 3.8,
     },
 
     productBreakdown: [
-      { name: "Heritage tee bundle", orders: 118, units: 354, revenue: 18420 },
-      { name: "Selvedge denim", orders: 76, units: 76, revenue: 12800 },
-      { name: "Field jacket", orders: 42, units: 42, revenue: 9650 },
-      { name: "Daily oxford shirt", orders: 58, units: 58, revenue: 7420 },
+      { name: "Heritage tee bundle", orders: i(118), units: i(354), revenue: i(18420) },
+      { name: "Selvedge denim", orders: i(76), units: i(76), revenue: i(12800) },
+      { name: "Field jacket", orders: i(42), units: i(42), revenue: i(9650) },
+      { name: "Daily oxford shirt", orders: i(58), units: i(58), revenue: i(7420) },
     ],
 
     topStates: ["CA", "TX", "NY", "FL", "WA", "IL"],
 
     channels: [
-      { name: "Organic search", sessions: 3120, purchases: 118, revenue: 18240, convRate: 3.78 },
-      { name: "Email", sessions: 1840, purchases: 94, revenue: 14560, convRate: 5.11 },
-      { name: "Paid social", sessions: 1680, purchases: 52, revenue: 8120, convRate: 3.10 },
-      { name: "Direct", sessions: 980, purchases: 34, revenue: 5220, convRate: 3.47 },
-      { name: "Referral", sessions: 594, purchases: 14, revenue: 2150, convRate: 2.36 },
+      { name: "Organic search", sessions: i(3120), purchases: i(118), revenue: i(18240), convRate: 3.78 },
+      { name: "Email", sessions: i(1840), purchases: i(94), revenue: i(14560), convRate: 5.11 },
+      { name: "Paid social", sessions: i(1680), purchases: i(52), revenue: i(8120), convRate: 3.10 },
+      { name: "Direct", sessions: i(980), purchases: i(34), revenue: i(5220), convRate: 3.47 },
+      { name: "Referral", sessions: i(594), purchases: i(14), revenue: i(2150), convRate: 2.36 },
     ],
 
     devices: [
-      { name: "Mobile", sessions: 5340, purchases: 186, revenue: 28620, convRate: 3.48 },
-      { name: "Desktop", sessions: 2420, purchases: 108, revenue: 17240, convRate: 4.46 },
-      { name: "Tablet", sessions: 454, purchases: 18, revenue: 2430, convRate: 3.96 },
+      { name: "Mobile", sessions: i(5340), purchases: i(186), revenue: i(28620), convRate: 3.48 },
+      { name: "Desktop", sessions: i(2420), purchases: i(108), revenue: i(17240), convRate: 4.46 },
+      { name: "Tablet", sessions: i(454), purchases: i(18), revenue: i(2430), convRate: 3.96 },
     ],
 
     topPages: [
-      { page: "/", sessions: 3840, purchases: 92 },
-      { page: "/products/heritage-tee-bundle", sessions: 1620, purchases: 118 },
-      { page: "/collections/denim", sessions: 1140, purchases: 48 },
-      { page: "/products/field-jacket", sessions: 820, purchases: 42 },
-      { page: "/pages/the-mill", sessions: 410, purchases: 12 },
+      { page: "/", sessions: i(3840), purchases: i(92) },
+      { page: "/products/heritage-tee-bundle", sessions: i(1620), purchases: i(118) },
+      { page: "/collections/denim", sessions: i(1140), purchases: i(48) },
+      { page: "/products/field-jacket", sessions: i(820), purchases: i(42) },
+      { page: "/pages/the-mill", sessions: i(410), purchases: i(12) },
     ],
 
     seo: {
-      clicks: 1284,
-      impressions: 42180,
+      clicks: i(1284),
+      impressions: i(42180),
       ctr: 3.1,
       position: 14.2,
     },
 
     topQueries: [
-      { query: "selvedge denim brands", clicks: 184, impressions: 4120, ctr: 4.46, position: 8.2 },
-      { query: "heritage mens tee", clicks: 162, impressions: 3880, ctr: 4.18, position: 9.1 },
-      { query: "best field jacket", clicks: 128, impressions: 5210, ctr: 2.46, position: 15.4 },
-      { query: "made in usa menswear", clicks: 94, impressions: 2840, ctr: 3.31, position: 11.8 },
-      { query: "oxford shirt for work", clicks: 72, impressions: 3120, ctr: 2.31, position: 17.2 },
+      { query: "selvedge denim brands", clicks: i(184), impressions: i(4120), ctr: 4.46, position: 8.2 },
+      { query: "heritage mens tee", clicks: i(162), impressions: i(3880), ctr: 4.18, position: 9.1 },
+      { query: "best field jacket", clicks: i(128), impressions: i(5210), ctr: 2.46, position: 15.4 },
+      { query: "made in usa menswear", clicks: i(94), impressions: i(2840), ctr: 3.31, position: 11.8 },
+      { query: "oxford shirt for work", clicks: i(72), impressions: i(3120), ctr: 2.31, position: 17.2 },
     ],
 
     insights: {

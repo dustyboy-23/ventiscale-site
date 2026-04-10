@@ -15,25 +15,22 @@ export default function Icon() {
           alignItems: "center",
           justifyContent: "center",
           background:
-            "linear-gradient(135deg, #10E39A 0%, #5280FF 50%, #C8362B 100%)",
+            "radial-gradient(circle at 50% 55%, rgba(224,74,62,0.55) 0%, rgba(200,54,43,0.2) 45%, #07080C 75%)",
           borderRadius: 14,
-          padding: 3,
         }}
       >
         <div
           style={{
-            width: "100%",
-            height: "100%",
             display: "flex",
             alignItems: "center",
             justifyContent: "center",
-            background: "#07080C",
-            borderRadius: 11,
             color: "#FFFFFF",
-            fontSize: 40,
+            fontSize: 44,
             fontWeight: 700,
             fontFamily: "Inter, system-ui, sans-serif",
-            letterSpacing: -1.5,
+            letterSpacing: -2,
+            textShadow:
+              "0 0 18px rgba(224,74,62,0.95), 0 0 38px rgba(224,74,62,0.55)",
           }}
         >
           V

@@ -5,6 +5,8 @@ import {
   getContentDrafts as demoDrafts,
   getCampaigns as demoCampaigns,
   getActivityFeed as demoActivity,
+  PERIOD_META,
+  type PeriodKey,
   type ClientKpis,
   type ReportSummary,
   type ContentDraft,
@@ -102,10 +104,10 @@ export async function getClientMeta(): Promise<ClientMeta> {
   };
 }
 
-export async function getClientKpis(): Promise<ClientKpis> {
+export async function getClientKpis(period: PeriodKey = "28d"): Promise<ClientKpis> {
   const session = await getPortalSession();
-  if (session?.mode === "demo") return demoKpis();
-  return EMPTY_KPIS;
+  if (session?.mode === "demo") return demoKpis(period);
+  return { ...EMPTY_KPIS, periodLabel: PERIOD_META[period].label };
 }
 
 export async function getReports(): Promise<ReportSummary[]> {
@@ -138,5 +140,5 @@ export async function getActivityFeed(limit = 8): Promise<ActivityItem[]> {
   return [];
 }
 
-export type { ClientKpis, ReportSummary, ContentDraft, CampaignsData, ActivityItem };
+export type { ClientKpis, ReportSummary, ContentDraft, CampaignsData, ActivityItem, PeriodKey };
 export type { Campaign } from "@/lib/sg-data";

@@ -25,6 +25,7 @@ import {
   getClientMeta,
   type ActivityItem,
 } from "@/lib/portal-data";
+import { resolvePeriod } from "@/lib/sg-data";
 import { formatCurrency, formatNumber, relativeTime, cn } from "@/lib/utils";
 
 const ACTIVITY_META: Record<
@@ -38,9 +39,15 @@ const ACTIVITY_META: Record<
   system: { icon: Activity, bg: "bg-slate-100", fg: "text-slate-600" },
 };
 
-export default async function DashboardPage() {
+export default async function DashboardPage({
+  searchParams,
+}: {
+  searchParams?: Promise<{ period?: string }>;
+}) {
+  const params = (await searchParams) || {};
+  const period = resolvePeriod(params.period);
   const [kpis, reports, drafts, activity, client] = await Promise.all([
-    getClientKpis(),
+    getClientKpis(period),
     getReports(),
     getContentDrafts(),
     getActivityFeed(6),
