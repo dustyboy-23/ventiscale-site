@@ -1,8 +1,10 @@
 "use client";
 
 import { useState } from "react";
-import { Bell, Search, Calendar as CalIcon, ChevronDown } from "lucide-react";
+import Link from "next/link";
+import { Bell, Search, Calendar as CalIcon, ChevronDown, Eye } from "lucide-react";
 import { cn } from "@/lib/utils";
+import { CLIENT } from "@/lib/sg-data";
 
 const PERIODS = ["Last 7 days", "Last 28 days", "This month", "Last 90 days"];
 
@@ -13,6 +15,17 @@ export function TopBar() {
 
   return (
     <header className="sticky top-0 z-30 bg-[var(--color-canvas)]/85 backdrop-blur-md border-b border-[var(--color-border)]">
+      {CLIENT.isDemo && (
+        <div className="bg-[#1F3D2B] text-white text-[12px] font-medium px-6 py-2 flex items-center justify-center gap-2">
+          <Eye className="w-3.5 h-3.5" strokeWidth={2.5} />
+          <span>
+            You&apos;re viewing a <strong>live demo</strong> of the Venti Scale client portal. Data is fictional.
+          </span>
+          <Link href="/" className="underline underline-offset-2 hover:opacity-80 ml-2">
+            ← Back to site
+          </Link>
+        </div>
+      )}
       <div className="max-w-[1240px] mx-auto px-6 lg:px-10 h-[60px] flex items-center justify-between gap-4">
         {/* Search */}
         <button

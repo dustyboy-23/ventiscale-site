@@ -89,12 +89,18 @@ export default function LoginPage() {
                 </form>
 
                 <div className="mt-6 pt-6 border-t border-[var(--color-border)]">
+                  <div className="text-[11px] font-medium text-[var(--color-ink-subtle)] uppercase tracking-[0.08em] mb-2">
+                    Not a client yet?
+                  </div>
                   <button
                     onClick={() => router.push("/dashboard")}
-                    className="text-[13px] text-[var(--color-ink-muted)] hover:text-[var(--color-ink)] transition-colors"
+                    className="text-[13px] font-medium text-[var(--color-accent)] hover:underline transition-colors"
                   >
-                    Skip for demo →
+                    Tour the live demo portal →
                   </button>
+                  <p className="text-[11px] text-[var(--color-ink-subtle)] mt-1.5 leading-relaxed">
+                    See exactly what your portal will look like. Fictional brand, real interface.
+                  </p>
                 </div>
               </>
             ) : (

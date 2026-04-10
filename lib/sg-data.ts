@@ -1,10 +1,16 @@
-import fs from "node:fs/promises";
-import path from "node:path";
-import os from "node:os";
-
-const SG_ROOT = path.join(os.homedir(), "sprinkler-guard");
-const REPORTS_DIR = path.join(SG_ROOT, "ops", "reports");
-const DRAFTS_DIR = path.join(SG_ROOT, "content", "drafts", "sg");
+/**
+ * Portal demo data — Stoneline Apparel (fictional).
+ *
+ * Filename is historical ("sg-data" from when this file read from
+ * ~/sprinkler-guard). It now serves a demo brand instead — nothing here
+ * touches the filesystem, so it works identically in local dev and on
+ * Vercel's read-only serverless runtime.
+ *
+ * When a real client portal is wired up, each getter should be swapped
+ * for an authenticated read against the real data source (Supabase,
+ * a client-specific JSON in Drive, a Shopify + GA4 pull, etc.). The
+ * shapes are stable — pages import the types directly.
+ */
 
 // ──────────────────────────────────────────────────────────
 // Types
@@ -98,298 +104,6 @@ export interface ContentDraft {
   isProductPost: boolean;
 }
 
-// ──────────────────────────────────────────────────────────
-// Helpers
-// ──────────────────────────────────────────────────────────
-function parseMoney(s: string): number {
-  return Number(s.replace(/[^0-9.-]/g, "")) || 0;
-}
-
-function parseInt0(s: string): number {
-  return parseInt(s.replace(/[^0-9-]/g, ""), 10) || 0;
-}
-
-function parsePct(s: string): number {
-  return Number(s.replace(/[^0-9.-]/g, "")) || 0;
-}
-
-async function safeRead(p: string): Promise<string | null> {
-  try {
-    return await fs.readFile(p, "utf-8");
-  } catch {
-    return null;
-  }
-}
-
-// ──────────────────────────────────────────────────────────
-// Public — KPIs
-// ──────────────────────────────────────────────────────────
-export async function getClientKpis(): Promise<ClientKpis> {
-  // Find the most recent baseline report
-  let baseline = "";
-  try {
-    const entries = await fs.readdir(REPORTS_DIR);
-    const baselines = entries
-      .filter((f) => f.startsWith("baseline-") && f.endsWith(".md"))
-      .sort()
-      .reverse();
-    if (baselines[0]) {
-      baseline = (await safeRead(path.join(REPORTS_DIR, baselines[0]))) || "";
-    }
-  } catch {
-    // empty
-  }
-
-  // Defaults if no data found
-  const kpis: ClientKpis = {
-    revenue: 0,
-    orders: 0,
-    aov: 0,
-    customers: 0,
-    repeatRate: 0,
-    periodLabel: "Last 28 Days",
-    traffic: { activeUsers: 0, sessions: 0, pageViews: 0, conversionRate: 0 },
-    productBreakdown: [],
-    topStates: [],
-    channels: [],
-    devices: [],
-    topPages: [],
-    seo: { clicks: 0, impressions: 0, ctr: 0, position: 0 },
-    topQueries: [],
-    insights: { working: [], leaking: [], actions: [] },
-  };
-
-  if (!baseline) return kpis;
-
-  // Parse period label
-  const periodMatch = baseline.match(/Last \d+ Days: ([^)]+)\)/);
-  if (periodMatch) kpis.periodLabel = periodMatch[1].trim();
-
-  // Parse top-level metrics
-  const grab = (label: string): string | null => {
-    const re = new RegExp(`\\*\\*${label}\\*\\*\\s*\\|\\s*([^|\\n]+)`);
-    const m = baseline.match(re);
-    return m ? m[1].trim() : null;
-  };
-
-  kpis.revenue = parseMoney(grab("Total Revenue") || "0");
-  kpis.orders = parseInt0(grab("Total Orders") || "0");
-  kpis.aov = parseMoney(grab("Avg Order Value") || "0");
-  kpis.customers = parseInt0(grab("Unique Customers") || "0");
-  const repeat = grab("Repeat Orders");
-  if (repeat) {
-    const m = repeat.match(/\(([0-9.]+)%\)/);
-    if (m) kpis.repeatRate = parseFloat(m[1]);
-  }
-
-  kpis.traffic.activeUsers = parseInt0(grab("Active Users") || "0");
-  kpis.traffic.sessions = parseInt0(grab("Sessions") || "0");
-  kpis.traffic.pageViews = parseInt0(grab("Page Views") || "0");
-  kpis.traffic.conversionRate = parsePct(grab("Conversion Rate") || "0");
-
-  kpis.seo.clicks = parseInt0(grab("Total Clicks") || "0");
-  kpis.seo.impressions = parseInt0(grab("Total Impressions") || "0");
-  kpis.seo.ctr = parsePct(grab("Average CTR") || "0");
-  kpis.seo.position = parseFloat((grab("Average Position") || "0").replace(/[^0-9.]/g, "")) || 0;
-
-  // Parse product breakdown table
-  const productSection = baseline.match(/### Product Breakdown[\s\S]*?(?=\n###|\n---)/);
-  if (productSection) {
-    const rows = productSection[0].matchAll(/^\| ([^|]+) \| (\d+) \| (\d+) \| \$([0-9,.]+) \|/gm);
-    for (const r of rows) {
-      kpis.productBreakdown.push({
-        name: r[1].trim(),
-        orders: parseInt(r[2], 10),
-        units: parseInt(r[3], 10),
-        revenue: parseMoney(r[4]),
-      });
-    }
-  }
-
-  // Top states
-  const statesMatch = baseline.match(/### Top States\s*\n([^\n]+)/);
-  if (statesMatch) {
-    kpis.topStates = statesMatch[1].split(",").map((s) => s.trim()).filter(Boolean);
-  }
-
-  // Channels
-  const channelSection = baseline.match(/### Traffic Sources[\s\S]*?(?=\n###|\n---)/);
-  if (channelSection) {
-    const rows = channelSection[0].matchAll(
-      /^\| ([^|]+) \| ([\d,]+) \| ([\d,]+) \| \$([0-9,.]+) \| ([0-9.]+)% \|/gm,
-    );
-    for (const r of rows) {
-      kpis.channels.push({
-        name: r[1].trim(),
-        sessions: parseInt0(r[2]),
-        purchases: parseInt0(r[3]),
-        revenue: parseMoney(r[4]),
-        convRate: parseFloat(r[5]),
-      });
-    }
-  }
-
-  // Devices
-  const deviceSection = baseline.match(/### Device Breakdown[\s\S]*?(?=\n###|\n---)/);
-  if (deviceSection) {
-    const rows = deviceSection[0].matchAll(
-      /^\| ([^|]+) \| ([\d,]+) \| ([\d,]+) \| \$([0-9,.]+) \| ([0-9.]+)% \|/gm,
-    );
-    for (const r of rows) {
-      kpis.devices.push({
-        name: r[1].trim(),
-        sessions: parseInt0(r[2]),
-        purchases: parseInt0(r[3]),
-        revenue: parseMoney(r[4]),
-        convRate: parseFloat(r[5]),
-      });
-    }
-  }
-
-  // Top landing pages
-  const pagesSection = baseline.match(/### Top Landing Pages[\s\S]*?(?=\n###|\n---)/);
-  if (pagesSection) {
-    const rows = pagesSection[0].matchAll(/^\| ([^|]+) \| ([\d,]+) \| ([\d,]+) \|/gm);
-    for (const r of rows) {
-      kpis.topPages.push({
-        page: r[1].trim(),
-        sessions: parseInt0(r[2]),
-        purchases: parseInt0(r[3]),
-      });
-    }
-  }
-
-  // Top queries
-  const queriesSection = baseline.match(/### Top Search Queries[\s\S]*?(?=\n###|\n---)/);
-  if (queriesSection) {
-    const rows = queriesSection[0].matchAll(
-      /^\| ([^|]+) \| ([\d,]+) \| ([\d,]+) \| ([0-9.]+)% \| ([0-9.]+) \|/gm,
-    );
-    for (const r of rows) {
-      kpis.topQueries.push({
-        query: r[1].trim(),
-        clicks: parseInt0(r[2]),
-        impressions: parseInt0(r[3]),
-        ctr: parseFloat(r[4]),
-        position: parseFloat(r[5]),
-      });
-    }
-  }
-
-  // Insights — pull bullet lists
-  const workingSection = baseline.match(/### What's Working\s*\n([\s\S]*?)(?=\n###|\n---)/);
-  const leakingSection = baseline.match(/### Where Money Is Leaking\s*\n([\s\S]*?)(?=\n###|\n---)/);
-  const actionsSection = baseline.match(/### Priority Actions\s*\n([\s\S]*?)(?=\n###|\n---|$)/);
-
-  const extractBullets = (s: string | null): string[] => {
-    if (!s) return [];
-    return s
-      .split(/\n/)
-      .map((line) => line.replace(/^\d+\.\s*\*?\*?/, "").replace(/\*\*/g, "").trim())
-      .filter((line) => line.length > 0 && !line.startsWith("#"));
-  };
-
-  kpis.insights.working = extractBullets(workingSection ? workingSection[1] : null);
-  kpis.insights.leaking = extractBullets(leakingSection ? leakingSection[1] : null);
-  kpis.insights.actions = extractBullets(actionsSection ? actionsSection[1] : null);
-
-  return kpis;
-}
-
-// ──────────────────────────────────────────────────────────
-// Public — Reports
-// ──────────────────────────────────────────────────────────
-export async function getReports(): Promise<ReportSummary[]> {
-  try {
-    const entries = await fs.readdir(REPORTS_DIR);
-    const reports: ReportSummary[] = [];
-    for (const f of entries) {
-      const full = path.join(REPORTS_DIR, f);
-      const stat = await fs.stat(full);
-      if (!stat.isFile()) continue;
-
-      const dateMatch = f.match(/(\d{4}-\d{2}-\d{2})/);
-      const date = dateMatch ? dateMatch[1] : "";
-      let type: ReportSummary["type"] = "internal";
-      let title = f;
-
-      if (f.includes("client")) {
-        type = "client";
-        title = "Weekly Performance Report";
-      } else if (f.includes("seo")) {
-        type = "seo";
-        title = "SEO Content Plan";
-      } else if (f.includes("baseline")) {
-        type = "baseline";
-        title = "Baseline Report";
-      } else if (f.endsWith(".md")) {
-        title = "Internal Notes";
-      }
-
-      reports.push({
-        id: f.replace(/\.(html|md)$/, ""),
-        title,
-        date,
-        type,
-        path: full,
-      });
-    }
-    return reports.sort((a, b) => b.date.localeCompare(a.date));
-  } catch {
-    return [];
-  }
-}
-
-export async function getReportHtml(id: string): Promise<string | null> {
-  try {
-    const entries = await fs.readdir(REPORTS_DIR);
-    const match = entries.find((f) => f.startsWith(id) && f.endsWith(".html"));
-    if (!match) return null;
-    return await safeRead(path.join(REPORTS_DIR, match));
-  } catch {
-    return null;
-  }
-}
-
-// ──────────────────────────────────────────────────────────
-// Public — Content drafts
-// ──────────────────────────────────────────────────────────
-export async function getContentDrafts(): Promise<ContentDraft[]> {
-  try {
-    const entries = await fs.readdir(DRAFTS_DIR);
-    const drafts: ContentDraft[] = [];
-    for (const f of entries) {
-      if (!f.endsWith(".json")) continue;
-      const raw = await safeRead(path.join(DRAFTS_DIR, f));
-      if (!raw) continue;
-      try {
-        const data = JSON.parse(raw);
-        const platform = f.startsWith("sg-") ? "facebook" : f.startsWith("li-") ? "linkedin" : "other";
-        drafts.push({
-          id: f.replace(/\.json$/, ""),
-          date: data.date || "",
-          slot: data.slot || "",
-          platform,
-          topic: data.topic || "",
-          caption: data.caption || "",
-          imagePrompt: data.image_prompt || "",
-          comments: Array.isArray(data.comments) ? data.comments : [],
-          cta: data.cta || "",
-          isProductPost: !!data.is_product_post,
-        });
-      } catch {
-        // skip malformed
-      }
-    }
-    return drafts.sort((a, b) => b.date.localeCompare(a.date) || a.slot.localeCompare(b.slot));
-  } catch {
-    return [];
-  }
-}
-
-// ──────────────────────────────────────────────────────────
-// Public — Email campaigns
-// ──────────────────────────────────────────────────────────
 export interface CampaignSequenceStep {
   step: number;
   delay: string;
@@ -424,44 +138,6 @@ export interface CampaignsData {
   };
 }
 
-export async function getCampaigns(): Promise<CampaignsData> {
-  try {
-    const raw = await safeRead(
-      path.join(process.cwd(), "data", "campaigns.json"),
-    );
-    if (!raw) throw new Error("no campaigns file");
-    const parsed = JSON.parse(raw);
-    return {
-      proposed: parsed.proposed || [],
-      live: parsed.live || [],
-      history: parsed.history || [],
-      stats: parsed.stats || {
-        totalSubscribers: 0,
-        monthlyGrowth: 0,
-        avgOpenRate: 0,
-        avgClickRate: 0,
-        lastSendDate: null,
-      },
-    };
-  } catch {
-    return {
-      proposed: [],
-      live: [],
-      history: [],
-      stats: {
-        totalSubscribers: 0,
-        monthlyGrowth: 0,
-        avgOpenRate: 0,
-        avgClickRate: 0,
-        lastSendDate: null,
-      },
-    };
-  }
-}
-
-// ──────────────────────────────────────────────────────────
-// Public — Activity feed
-// ──────────────────────────────────────────────────────────
 export interface ActivityItem {
   id: string;
   type: "post" | "report" | "campaign" | "draft" | "system";
@@ -470,57 +146,614 @@ export interface ActivityItem {
   timestamp: string;
 }
 
-export async function getActivityFeed(limit = 8): Promise<ActivityItem[]> {
-  const items: ActivityItem[] = [];
+// ──────────────────────────────────────────────────────────
+// Client meta
+// ──────────────────────────────────────────────────────────
+export const CLIENT = {
+  slug: "stoneline",
+  name: "Stoneline Apparel",
+  tagline: "Premium menswear · Built to last",
+  primaryDomain: "stonelineapparel.com",
+  ecomDomain: "stonelineapparel.com",
+  driveFolderId: "", // demo: no real Drive folder — Files page shows a placeholder
+  ownerName: "Marcus",
+  accent: "#1F3D2B",
+  isDemo: true,
+};
 
-  // Pull recent reports
-  const reports = await getReports();
-  for (const r of reports.slice(0, 3)) {
-    items.push({
-      id: `report-${r.id}`,
-      type: "report",
-      title: `${r.title} generated`,
-      description: r.type === "client" ? "Weekly performance snapshot ready" : undefined,
-      timestamp: r.date ? `${r.date}T08:00:00` : new Date().toISOString(),
-    });
-  }
+// ──────────────────────────────────────────────────────────
+// KPIs
+// ──────────────────────────────────────────────────────────
+export async function getClientKpis(): Promise<ClientKpis> {
+  return {
+    revenue: 48290,
+    orders: 312,
+    aov: 154.78,
+    customers: 247,
+    repeatRate: 26.4,
+    periodLabel: "Last 28 days",
 
-  // Pull recent drafts
-  const drafts = await getContentDrafts();
-  for (const d of drafts.slice(0, 4)) {
-    items.push({
-      id: `draft-${d.id}`,
-      type: "draft",
-      title: `Drafted: ${d.topic}`,
-      description: `${d.platform} · ${d.slot}`,
-      timestamp: d.date ? `${d.date}T07:30:00` : new Date().toISOString(),
-    });
-  }
+    traffic: {
+      activeUsers: 6840,
+      sessions: 8214,
+      pageViews: 23890,
+      conversionRate: 3.8,
+    },
 
-  // System events
-  items.push({
-    id: "system-baseline",
-    type: "system",
-    title: "Baseline performance benchmark captured",
-    description: "Used as the comparison point for future reports",
-    timestamp: "2026-04-09T06:00:00",
-  });
+    productBreakdown: [
+      { name: "Heritage tee bundle", orders: 118, units: 354, revenue: 18420 },
+      { name: "Selvedge denim", orders: 76, units: 76, revenue: 12800 },
+      { name: "Field jacket", orders: 42, units: 42, revenue: 9650 },
+      { name: "Daily oxford shirt", orders: 58, units: 58, revenue: 7420 },
+    ],
 
-  return items
-    .sort((a, b) => b.timestamp.localeCompare(a.timestamp))
-    .slice(0, limit);
+    topStates: ["CA", "TX", "NY", "FL", "WA", "IL"],
+
+    channels: [
+      { name: "Organic search", sessions: 3120, purchases: 118, revenue: 18240, convRate: 3.78 },
+      { name: "Email", sessions: 1840, purchases: 94, revenue: 14560, convRate: 5.11 },
+      { name: "Paid social", sessions: 1680, purchases: 52, revenue: 8120, convRate: 3.10 },
+      { name: "Direct", sessions: 980, purchases: 34, revenue: 5220, convRate: 3.47 },
+      { name: "Referral", sessions: 594, purchases: 14, revenue: 2150, convRate: 2.36 },
+    ],
+
+    devices: [
+      { name: "Mobile", sessions: 5340, purchases: 186, revenue: 28620, convRate: 3.48 },
+      { name: "Desktop", sessions: 2420, purchases: 108, revenue: 17240, convRate: 4.46 },
+      { name: "Tablet", sessions: 454, purchases: 18, revenue: 2430, convRate: 3.96 },
+    ],
+
+    topPages: [
+      { page: "/", sessions: 3840, purchases: 92 },
+      { page: "/products/heritage-tee-bundle", sessions: 1620, purchases: 118 },
+      { page: "/collections/denim", sessions: 1140, purchases: 48 },
+      { page: "/products/field-jacket", sessions: 820, purchases: 42 },
+      { page: "/pages/the-mill", sessions: 410, purchases: 12 },
+    ],
+
+    seo: {
+      clicks: 1284,
+      impressions: 42180,
+      ctr: 3.1,
+      position: 14.2,
+    },
+
+    topQueries: [
+      { query: "selvedge denim brands", clicks: 184, impressions: 4120, ctr: 4.46, position: 8.2 },
+      { query: "heritage mens tee", clicks: 162, impressions: 3880, ctr: 4.18, position: 9.1 },
+      { query: "best field jacket", clicks: 128, impressions: 5210, ctr: 2.46, position: 15.4 },
+      { query: "made in usa menswear", clicks: 94, impressions: 2840, ctr: 3.31, position: 11.8 },
+      { query: "oxford shirt for work", clicks: 72, impressions: 3120, ctr: 2.31, position: 17.2 },
+    ],
+
+    insights: {
+      working: [
+        "Email is punching above its weight at 5.11% conversion — nearly 2x site average. The welcome series is doing the heavy lifting.",
+        "Heritage tee bundle is pulling 38% of total revenue from a single SKU. Bundle economics are working.",
+        "Organic search traffic is up 28% MoM — the SEO plan is starting to compound.",
+      ],
+      leaking: [
+        "Mobile converts at 3.48% vs 4.46% on desktop. A full point gap at this volume is roughly $6k/month on the table.",
+        "Paid social ROAS is 1.9x — under the 2.5x floor we set. Creative refresh needed this week.",
+      ],
+      actions: [
+        "Ship the abandoned-cart flow drafted in Email this week — projected +$4,200/mo recovered revenue.",
+        "Refresh 3 paid social creatives. Test the founder-voice angle against the product-shot control.",
+        "Fix mobile checkout: measure time-to-purchase and identify the drop-off step.",
+      ],
+    },
+  };
 }
 
 // ──────────────────────────────────────────────────────────
-// Public — Client meta
+// Reports
 // ──────────────────────────────────────────────────────────
-export const CLIENT = {
-  slug: "sprinkler-guard",
-  name: "Sprinkler Guard",
-  tagline: "Veteran-owned. Made in USA.",
-  primaryDomain: "sprinkler-guard.com",
-  ecomDomain: "grassholesystem.com",
-  driveFolderId: "1CUiot0p7xmKjeUnRzJ0509-cHrao3jVg",
-  ownerName: "Ken",
-  accent: "#1a5e1f",
+const DEMO_REPORTS: ReportSummary[] = [
+  {
+    id: "client-2026-04-07",
+    title: "Weekly Performance Report",
+    date: "2026-04-07",
+    type: "client",
+    path: "client-2026-04-07.html",
+  },
+  {
+    id: "client-2026-03-31",
+    title: "Weekly Performance Report",
+    date: "2026-03-31",
+    type: "client",
+    path: "client-2026-03-31.html",
+  },
+  {
+    id: "seo-2026-04-01",
+    title: "SEO Content Plan",
+    date: "2026-04-01",
+    type: "seo",
+    path: "seo-2026-04-01.html",
+  },
+  {
+    id: "baseline-2026-03-15",
+    title: "Baseline Report",
+    date: "2026-03-15",
+    type: "baseline",
+    path: "baseline-2026-03-15.html",
+  },
+];
+
+export async function getReports(): Promise<ReportSummary[]> {
+  return DEMO_REPORTS;
+}
+
+function demoReportHtml(title: string, subtitle: string, body: string): string {
+  return `<!doctype html>
+<html>
+<head>
+<meta charset="utf-8" />
+<title>${title}</title>
+<style>
+  :root {
+    --ink: #0F1115;
+    --ink-muted: #4A5160;
+    --ink-subtle: #8A93A4;
+    --accent: #1F3D2B;
+    --border: #E8EAF0;
+    --surface: #FAFAFB;
+  }
+  * { box-sizing: border-box; }
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Inter', sans-serif;
+    color: var(--ink);
+    background: white;
+    margin: 0;
+    padding: 48px 56px;
+    line-height: 1.55;
+    max-width: 820px;
+  }
+  .eyebrow {
+    font-size: 11px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    color: var(--accent);
+    margin-bottom: 12px;
+  }
+  h1 {
+    font-size: 32px;
+    font-weight: 700;
+    letter-spacing: -0.02em;
+    margin: 0 0 8px;
+  }
+  .subtitle {
+    font-size: 15px;
+    color: var(--ink-muted);
+    margin-bottom: 40px;
+  }
+  h2 {
+    font-size: 18px;
+    font-weight: 700;
+    letter-spacing: -0.015em;
+    margin: 36px 0 14px;
+    padding-bottom: 10px;
+    border-bottom: 1px solid var(--border);
+  }
+  p, li { font-size: 14px; color: var(--ink-muted); }
+  strong { color: var(--ink); font-weight: 600; }
+  .kpi-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 12px;
+    margin: 24px 0;
+  }
+  .kpi {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 16px;
+  }
+  .kpi-label {
+    font-size: 11px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--ink-subtle);
+  }
+  .kpi-value {
+    font-size: 24px;
+    font-weight: 700;
+    margin-top: 6px;
+    font-variant-numeric: tabular-nums;
+  }
+  .kpi-hint {
+    font-size: 12px;
+    color: var(--accent);
+    margin-top: 4px;
+    font-weight: 500;
+  }
+  ul { padding-left: 20px; margin: 12px 0; }
+  li { margin-bottom: 8px; }
+  table { width: 100%; border-collapse: collapse; margin: 16px 0; }
+  th, td {
+    text-align: left;
+    font-size: 13px;
+    padding: 10px 12px;
+    border-bottom: 1px solid var(--border);
+  }
+  th {
+    font-weight: 600;
+    color: var(--ink-subtle);
+    text-transform: uppercase;
+    font-size: 11px;
+    letter-spacing: 0.06em;
+  }
+  td { color: var(--ink); font-variant-numeric: tabular-nums; }
+</style>
+</head>
+<body>
+  <div class="eyebrow">Stoneline Apparel · Demo report</div>
+  <h1>${title}</h1>
+  <div class="subtitle">${subtitle}</div>
+  ${body}
+</body>
+</html>`;
+}
+
+const REPORT_HTML: Record<string, string> = {
+  "client-2026-04-07": demoReportHtml(
+    "Weekly Performance Report",
+    "Mar 31 – Apr 7, 2026 · Stoneline Apparel",
+    `
+    <div class="kpi-grid">
+      <div class="kpi"><div class="kpi-label">Revenue</div><div class="kpi-value">$12,480</div><div class="kpi-hint">+18% WoW</div></div>
+      <div class="kpi"><div class="kpi-label">Orders</div><div class="kpi-value">81</div><div class="kpi-hint">$154 AOV</div></div>
+      <div class="kpi"><div class="kpi-label">New customers</div><div class="kpi-value">62</div><div class="kpi-hint">19 repeat</div></div>
+      <div class="kpi"><div class="kpi-label">Conversion</div><div class="kpi-value">3.9%</div><div class="kpi-hint">+0.3pt</div></div>
+    </div>
+
+    <h2>What moved</h2>
+    <ul>
+      <li><strong>Heritage tee bundle</strong> drove 41% of the week's revenue. Bundle economics continue to carry the store.</li>
+      <li><strong>Email welcome series</strong> generated $3,120 from new subscribers — highest weekly email revenue since launch.</li>
+      <li><strong>Organic search</strong> sessions up 9% WoW. Two articles from the SEO plan started ranking on page 1.</li>
+    </ul>
+
+    <h2>Where we're leaking</h2>
+    <ul>
+      <li>Mobile checkout still sits at 3.48% vs 4.46% desktop. Shipping the mobile fix this week.</li>
+      <li>Paid social ROAS came in at 1.8x — below the 2.5x floor. Three new creatives queued for Tuesday.</li>
+    </ul>
+
+    <h2>This week's focus</h2>
+    <ul>
+      <li>Ship abandoned-cart automation (drafted, awaiting approval in Email tab)</li>
+      <li>Refresh paid social creative — founder-voice test vs product-shot control</li>
+      <li>Publish next SEO article: "how to care for selvedge denim"</li>
+    </ul>
+  `,
+  ),
+  "client-2026-03-31": demoReportHtml(
+    "Weekly Performance Report",
+    "Mar 24 – Mar 31, 2026 · Stoneline Apparel",
+    `
+    <div class="kpi-grid">
+      <div class="kpi"><div class="kpi-label">Revenue</div><div class="kpi-value">$10,580</div><div class="kpi-hint">+12% WoW</div></div>
+      <div class="kpi"><div class="kpi-label">Orders</div><div class="kpi-value">69</div><div class="kpi-hint">$153 AOV</div></div>
+      <div class="kpi"><div class="kpi-label">New customers</div><div class="kpi-value">54</div><div class="kpi-hint">15 repeat</div></div>
+      <div class="kpi"><div class="kpi-label">Conversion</div><div class="kpi-value">3.6%</div><div class="kpi-hint">+0.1pt</div></div>
+    </div>
+    <h2>Highlights</h2>
+    <ul>
+      <li>Welcome series launched mid-week — first 5 days pulled $1,840.</li>
+      <li>Field jacket restock sold through in 72 hours.</li>
+    </ul>
+  `,
+  ),
+  "seo-2026-04-01": demoReportHtml(
+    "SEO Content Plan — Q2 2026",
+    "12-week content runway · 18 target keywords",
+    `
+    <h2>Target keywords (priority tier)</h2>
+    <table>
+      <thead><tr><th>Keyword</th><th>Volume</th><th>Difficulty</th><th>Current</th></tr></thead>
+      <tbody>
+        <tr><td>selvedge denim brands</td><td>2,900</td><td>28</td><td>Pos 8</td></tr>
+        <tr><td>heritage mens tee</td><td>1,800</td><td>22</td><td>Pos 9</td></tr>
+        <tr><td>best field jacket men</td><td>3,600</td><td>34</td><td>Pos 15</td></tr>
+        <tr><td>made in usa menswear</td><td>2,100</td><td>31</td><td>Pos 12</td></tr>
+      </tbody>
+    </table>
+
+    <h2>12-week content calendar</h2>
+    <ul>
+      <li><strong>Weeks 1–2:</strong> "How to care for selvedge denim" + "Why raw denim fades the way it does"</li>
+      <li><strong>Weeks 3–4:</strong> "Field jacket vs chore coat — which to wear when" + buyer guide</li>
+      <li><strong>Weeks 5–6:</strong> "Made in USA menswear: the real supply chain" + founder interview</li>
+      <li><strong>Weeks 7–8:</strong> Heritage tee comparison article + care guide</li>
+      <li><strong>Weeks 9–12:</strong> Long-tail product pages + internal linking pass</li>
+    </ul>
+
+    <h2>Technical fixes</h2>
+    <ul>
+      <li>Core Web Vitals: LCP is 3.1s on product pages — target under 2.5s.</li>
+      <li>Missing schema on 18 product pages — ship next week.</li>
+      <li>Internal linking: 6 orphan pages identified.</li>
+    </ul>
+  `,
+  ),
+  "baseline-2026-03-15": demoReportHtml(
+    "Baseline Performance Report",
+    "Dec 15, 2025 – Mar 15, 2026 · 90-day benchmark",
+    `
+    <p>This is the benchmark every future report compares against. Numbers below are the
+    starting state on the day we started running your marketing.</p>
+    <div class="kpi-grid">
+      <div class="kpi"><div class="kpi-label">Revenue (90d)</div><div class="kpi-value">$108,420</div></div>
+      <div class="kpi"><div class="kpi-label">Orders</div><div class="kpi-value">702</div></div>
+      <div class="kpi"><div class="kpi-label">Customers</div><div class="kpi-value">584</div></div>
+      <div class="kpi"><div class="kpi-label">Conversion</div><div class="kpi-value">3.1%</div></div>
+    </div>
+    <h2>Starting state assessment</h2>
+    <ul>
+      <li>Email list: 1,840 subscribers, zero automations running, last broadcast 4 months ago.</li>
+      <li>SEO: 6 articles total, avg position 22, no keyword strategy.</li>
+      <li>Paid: Meta running, ROAS 1.4x, no creative tests in 6 weeks.</li>
+      <li>Organic social: sporadic, no schedule, no plan.</li>
+    </ul>
+    <p><strong>Opportunity:</strong> every channel has clear headroom. 90-day goal is +35% revenue.</p>
+  `,
+  ),
 };
+
+export async function getReportHtml(id: string): Promise<string | null> {
+  return REPORT_HTML[id] || null;
+}
+
+// ──────────────────────────────────────────────────────────
+// Content drafts
+// ──────────────────────────────────────────────────────────
+export async function getContentDrafts(): Promise<ContentDraft[]> {
+  return [
+    {
+      id: "fb-2026-04-10-morning",
+      date: "2026-04-10",
+      slot: "morning",
+      platform: "facebook",
+      topic: "Why we only use selvedge denim (and why it matters)",
+      caption:
+        "The reason your jeans fade like a photograph instead of a phone screen has a name: selvedge.\n\nIt's slow-woven on vintage shuttle looms. One pair takes 3x longer to make. You pay for the time — but you wear them for a decade.\n\nHeritage isn't a marketing word for us. It's the supply chain.",
+      imagePrompt: "",
+      comments: [],
+      cta: "Shop the denim",
+      isProductPost: false,
+    },
+    {
+      id: "li-2026-04-10",
+      date: "2026-04-10",
+      slot: "morning",
+      platform: "linkedin",
+      topic: "How we run a DTC menswear brand with one person + AI",
+      caption:
+        "Running a menswear brand used to mean a team of 8. In 2026 it means one operator and the right system.\n\nHere's the stack we run at Stoneline:\n\n- Marketing: done-for-you, AI-assisted (that's Venti Scale)\n- Fulfillment: 3PL in Indianapolis\n- Customer service: me, two hours a day, Loom for complex issues\n- Manufacturing: one mill, one cut-and-sew, long-term contracts\n\nThe leverage isn't in the tools. It's in saying no to everything else.",
+      imagePrompt: "",
+      comments: [],
+      cta: "",
+      isProductPost: false,
+    },
+    {
+      id: "fb-2026-04-10-midday",
+      date: "2026-04-10",
+      slot: "midday",
+      platform: "facebook",
+      topic: "Field jacket back in stock",
+      caption:
+        "The waxed-cotton field jacket is back. Last run sold out in 72 hours.\n\nBuilt with a single mill in Pennsylvania. Stitched by the same three people who stitched the last batch. Guaranteed for ten years — send it back and we'll rewax it free.\n\n$189. Limited run of 80.",
+      imagePrompt: "",
+      comments: [
+        "Sizes go up to XXL. Fits true — if you're between sizes, go up one.",
+      ],
+      cta: "Shop field jackets",
+      isProductPost: true,
+    },
+    {
+      id: "fb-2026-04-10-evening",
+      date: "2026-04-10",
+      slot: "evening",
+      platform: "facebook",
+      topic: "Customer photo: Jake's selvedge at 18 months",
+      caption:
+        "Jake sent us this photo of his raw denim at 18 months. The fades are earned, not washed in.\n\nThis is the whole point of raw denim. It becomes a map of your life.\n\nThanks for the photo, Jake.",
+      imagePrompt: "",
+      comments: [],
+      cta: "",
+      isProductPost: false,
+    },
+    {
+      id: "fb-2026-04-11-morning",
+      date: "2026-04-11",
+      slot: "morning",
+      platform: "facebook",
+      topic: "Why we don't run sales",
+      caption:
+        "Here's a weird thing about Stoneline: we don't discount. No Black Friday, no spring sale, no \"last chance.\"\n\nReason: if a $189 jacket is worth it, it's worth it in March. And if it's not, a 20% coupon doesn't fix that.\n\nWe price it right the first time. Then we stand behind it for ten years.",
+      imagePrompt: "",
+      comments: [],
+      cta: "",
+      isProductPost: false,
+    },
+    {
+      id: "li-2026-04-11",
+      date: "2026-04-11",
+      slot: "morning",
+      platform: "linkedin",
+      topic: "The one KPI we watch every morning",
+      caption:
+        "Every morning at Stoneline, the first number I check isn't revenue.\n\nIt's the ratio of repeat customers to new ones.\n\nRevenue tells you this month. Repeat rate tells you the next five years. One of those is a leading indicator. The other is a rearview mirror.\n\nCurrent ratio: 26%. Target by end of year: 40%.",
+      imagePrompt: "",
+      comments: [],
+      cta: "",
+      isProductPost: false,
+    },
+  ];
+}
+
+// ──────────────────────────────────────────────────────────
+// Email campaigns
+// ──────────────────────────────────────────────────────────
+export async function getCampaigns(): Promise<CampaignsData> {
+  return {
+    proposed: [
+      {
+        id: "cart-abandon-v1",
+        name: "Abandoned cart recovery (3-email)",
+        type: "automation",
+        status: "ready_for_approval",
+        audience: "Cart abandoners (last 30 days)",
+        audienceSize: 342,
+        rationale:
+          "Stoneline has no cart abandonment flow live. Industry average recovery for a 3-email sequence is 12-18% of abandoned carts. With 342 abandoners/mo and a $154 AOV, that's $6,300-9,500/mo left on the table.",
+        projectedImpact: { revenue: 7800, label: "per month, steady-state" },
+        sequence: [
+          {
+            step: 1,
+            delay: "1 hour after abandonment",
+            subject: "You left something at Stoneline",
+            preview: "Your cart is saved. Finish when you're ready.",
+          },
+          {
+            step: 2,
+            delay: "24 hours later",
+            subject: "The thing about heritage denim",
+            preview: "Why we make one pair slowly instead of a hundred fast.",
+          },
+          {
+            step: 3,
+            delay: "72 hours later",
+            subject: "Last chance — your cart expires tonight",
+            preview: "We're holding your cart until midnight.",
+          },
+        ],
+        createdBy: "Jarvis",
+        createdAt: "2026-04-08T09:14:00Z",
+      },
+      {
+        id: "winback-90d",
+        name: "90-day winback series",
+        type: "automation",
+        status: "ready_for_approval",
+        audience: "Customers who haven't purchased in 90+ days",
+        audienceSize: 186,
+        rationale:
+          "186 customers went quiet after their first purchase. A winback with a genuine re-engagement angle (not a discount) typically recovers 8-12% of lapsed buyers. Target $3k/mo.",
+        projectedImpact: { revenue: 3200, label: "per month, steady-state" },
+        sequence: [
+          {
+            step: 1,
+            delay: "Day 0",
+            subject: "How are your jeans holding up?",
+            preview: "Six months in, the fades start getting interesting.",
+          },
+          {
+            step: 2,
+            delay: "Day 5",
+            subject: "The new field jacket is back",
+            preview: "Small run, 80 pieces, same mill.",
+          },
+          {
+            step: 3,
+            delay: "Day 12",
+            subject: "We miss you, Marcus",
+            preview: "What would bring you back?",
+          },
+        ],
+        createdBy: "Jarvis",
+        createdAt: "2026-04-08T11:02:00Z",
+      },
+    ],
+    live: [
+      {
+        id: "welcome-v2",
+        name: "Welcome series (4-email)",
+        type: "automation",
+        status: "live",
+        audience: "New subscribers",
+        audienceSize: 1840,
+        rationale:
+          "Live since March. Averaging 52% open rate and $18 per subscriber over the 4-email arc.",
+        projectedImpact: { revenue: 4600, label: "per month, current pace" },
+        sequence: [
+          { step: 1, delay: "Immediate", subject: "Welcome to Stoneline", preview: "Here's the short story." },
+          { step: 2, delay: "Day 2", subject: "How we pick our mills", preview: "One mill, one decade." },
+          { step: 3, delay: "Day 5", subject: "Heritage tee bundle — the starter pack", preview: "Three tees, one deal." },
+          { step: 4, delay: "Day 9", subject: "Your first Stoneline order", preview: "Free shipping this week." },
+        ],
+        createdBy: "Jarvis",
+        createdAt: "2026-03-12T14:30:00Z",
+      },
+    ],
+    history: [],
+    stats: {
+      totalSubscribers: 2847,
+      monthlyGrowth: 12,
+      avgOpenRate: 34.2,
+      avgClickRate: 4.2,
+      lastSendDate: "2026-04-09",
+    },
+  };
+}
+
+// ──────────────────────────────────────────────────────────
+// Activity feed
+// ──────────────────────────────────────────────────────────
+export async function getActivityFeed(limit = 8): Promise<ActivityItem[]> {
+  const items: ActivityItem[] = [
+    {
+      id: "act-1",
+      type: "draft",
+      title: "Drafted: Why we only use selvedge denim",
+      description: "facebook · morning · 2026-04-10",
+      timestamp: "2026-04-10T07:30:00",
+    },
+    {
+      id: "act-2",
+      type: "draft",
+      title: "Drafted: How we run a DTC brand with one person + AI",
+      description: "linkedin · morning · 2026-04-10",
+      timestamp: "2026-04-10T07:28:00",
+    },
+    {
+      id: "act-3",
+      type: "campaign",
+      title: "Abandoned cart recovery — ready for approval",
+      description: "3-email sequence · projected +$7,800/mo",
+      timestamp: "2026-04-09T14:12:00",
+    },
+    {
+      id: "act-4",
+      type: "report",
+      title: "Weekly Performance Report generated",
+      description: "Mar 31 – Apr 7, +18% WoW",
+      timestamp: "2026-04-08T08:00:00",
+    },
+    {
+      id: "act-5",
+      type: "post",
+      title: "Published: Customer photo — Jake's selvedge at 18 months",
+      description: "facebook · 142 reactions so far",
+      timestamp: "2026-04-07T18:00:00",
+    },
+    {
+      id: "act-6",
+      type: "campaign",
+      title: "Welcome series sent to 94 new subscribers this week",
+      description: "52% open rate · $1,840 attributed",
+      timestamp: "2026-04-07T09:00:00",
+    },
+    {
+      id: "act-7",
+      type: "system",
+      title: "SEO plan Q2 2026 published",
+      description: "12-week content calendar · 18 target keywords",
+      timestamp: "2026-04-01T10:00:00",
+    },
+  ];
+
+  return items.slice(0, limit);
+}
