@@ -63,7 +63,7 @@ export function DashboardMock() {
               className="text-[10px] font-normal text-[#1B1B1B] leading-none"
               style={{ fontFamily: "Fraunces, serif" }}
             >
-              Venti<span className="text-[#C8362B]">·</span>
+              Venti<span className="text-[#1F3D2B]">·</span>
               <span className="italic">Scale</span>
             </div>
             <div className="text-[7.5px] text-[#1B1B1B]/40 leading-none mt-0.5 font-mono uppercase tracking-wider">
@@ -78,7 +78,7 @@ export function DashboardMock() {
           </div>
           <div className="flex items-center justify-between mt-0.5">
             <div className="text-[10px] font-semibold text-[#1B1B1B]">Stoneline Apparel</div>
-            <div className="w-1.5 h-1.5 rounded-full bg-[#C8362B]" />
+            <div className="w-1.5 h-1.5 rounded-full bg-[#1F3D2B]" />
           </div>
         </div>
 
@@ -105,7 +105,7 @@ export function DashboardMock() {
 
         <div className="mt-auto pt-3 border-t border-[rgba(27,27,27,0.08)]">
           <div className="flex items-center gap-1.5 text-[8px] font-mono uppercase tracking-wider text-[#1B1B1B]/55">
-            <span className="w-1 h-1 rounded-full bg-[#C8362B]" />
+            <span className="w-1 h-1 rounded-full bg-[#1F3D2B]" />
             Jarvis online
           </div>
         </div>
@@ -186,7 +186,7 @@ export function DashboardMock() {
                   <div
                     className={cn(
                       "text-[8px] mt-1 flex items-center gap-0.5",
-                      k.highlight ? "text-[#C8362B]" : "text-[#1B1B1B]/45",
+                      k.highlight ? "text-[#1F3D2B]" : "text-[#1B1B1B]/45",
                     )}
                   >
                     {k.highlight && <ArrowUpRight className="w-2 h-2" strokeWidth={2.5} />}
@@ -264,7 +264,7 @@ export function DashboardMock() {
                   </div>
                 ))}
               </div>
-              <div className="mt-2 flex items-center gap-1 text-[7px] font-mono text-[#C8362B]">
+              <div className="mt-2 flex items-center gap-1 text-[7px] font-mono text-[#1F3D2B]">
                 <Sparkles className="w-2 h-2" strokeWidth={2.5} />
                 Organic +28%
               </div>

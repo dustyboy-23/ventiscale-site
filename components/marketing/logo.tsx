@@ -86,7 +86,7 @@ export function Logo({
       )}
     >
       Venti
-      <span className="inline-block align-middle mx-[0.22em] w-[3px] h-[3px] rounded-full bg-[#C8362B]" />
+      <span className="inline-block align-middle mx-[0.22em] w-[3px] h-[3px] rounded-full bg-[#1F3D2B]" />
       <span className="italic">Scale</span>
     </span>
   );

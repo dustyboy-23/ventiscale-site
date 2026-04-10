@@ -33,7 +33,7 @@ export function BrowserFrame({
           <div className="flex items-center gap-1.5">
             <div className="w-2.5 h-2.5 rounded-full bg-[#1B1B1B]/15" />
             <div className="w-2.5 h-2.5 rounded-full bg-[#1B1B1B]/15" />
-            <div className="w-2.5 h-2.5 rounded-full bg-[#C8362B]/70" />
+            <div className="w-2.5 h-2.5 rounded-full bg-[#1F3D2B]/70" />
           </div>
           <div className="flex-1 flex justify-center">
             <div className="bg-[#FAF6EF] border border-[rgba(27,27,27,0.08)] rounded px-3 py-1 text-[10.5px] text-[#1B1B1B]/55 font-mono tabular max-w-[320px] truncate">
@@ -42,7 +42,7 @@ export function BrowserFrame({
           </div>
           <div className="w-12 flex justify-end">
             <div className="text-[9px] font-mono uppercase tracking-wider text-[#1B1B1B]/55 flex items-center gap-1">
-              <span className="w-1 h-1 rounded-full bg-[#C8362B]" />
+              <span className="w-1 h-1 rounded-full bg-[#1F3D2B]" />
               Live
             </div>
           </div>

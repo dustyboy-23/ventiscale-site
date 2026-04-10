@@ -1,9 +1,10 @@
 import { NextResponse } from "next/server";
 
-// Vercel serverless functions are read-only — filesystem persistence is not
-// available here. This route currently logs incoming audit requests so they
-// show up in Vercel's function logs. Wire to Supabase / Resend / a webhook
-// in a follow-up so requests get captured + emailed automatically.
+// Audit lead capture: validates input, logs to Vercel function logs, and
+// emails dustin@ventiscale.com via Brevo Transactional API. Brevo key lives
+// in BREVO_API_KEY (Vercel env). If the key is missing the route still
+// returns 200 so the form never appears broken to a visitor — the lead is
+// preserved in function logs and can be backfilled.
 
 interface AuditRequest {
   id: string;
@@ -12,6 +13,56 @@ interface AuditRequest {
   receivedAt: string;
   userAgent?: string;
   ip?: string;
+}
+
+const NOTIFY_TO = "dustin@ventiscale.com";
+const NOTIFY_FROM_EMAIL = "noreply@ventiscale.com";
+const NOTIFY_FROM_NAME = "Venti Scale Audit";
+
+async function sendBrevoNotification(entry: AuditRequest) {
+  const apiKey = process.env.BREVO_API_KEY;
+  if (!apiKey) {
+    console.warn("[audit] BREVO_API_KEY not set — skipping email notification");
+    return;
+  }
+
+  const subject = `New audit request: ${entry.url}`;
+  const htmlContent = `
+    <div style="font-family:-apple-system,BlinkMacSystemFont,sans-serif;color:#1B1B1B;">
+      <h2 style="margin:0 0 16px;font-weight:500;">New audit request</h2>
+      <table style="border-collapse:collapse;font-size:14px;">
+        <tr><td style="padding:6px 12px 6px 0;color:#1B1B1B;opacity:0.6;">URL</td><td style="padding:6px 0;"><a href="https://${entry.url.replace(/^https?:\/\//, "")}">${entry.url}</a></td></tr>
+        <tr><td style="padding:6px 12px 6px 0;color:#1B1B1B;opacity:0.6;">Email</td><td style="padding:6px 0;"><a href="mailto:${entry.email}">${entry.email}</a></td></tr>
+        <tr><td style="padding:6px 12px 6px 0;color:#1B1B1B;opacity:0.6;">Received</td><td style="padding:6px 0;">${entry.receivedAt}</td></tr>
+        <tr><td style="padding:6px 12px 6px 0;color:#1B1B1B;opacity:0.6;">ID</td><td style="padding:6px 0;font-family:monospace;font-size:12px;">${entry.id}</td></tr>
+        <tr><td style="padding:6px 12px 6px 0;color:#1B1B1B;opacity:0.6;">IP</td><td style="padding:6px 0;font-family:monospace;font-size:12px;">${entry.ip || "—"}</td></tr>
+      </table>
+    </div>
+  `.trim();
+
+  try {
+    const res = await fetch("https://api.brevo.com/v3/smtp/email", {
+      method: "POST",
+      headers: {
+        "api-key": apiKey,
+        "Content-Type": "application/json",
+        accept: "application/json",
+      },
+      body: JSON.stringify({
+        sender: { name: NOTIFY_FROM_NAME, email: NOTIFY_FROM_EMAIL },
+        to: [{ email: NOTIFY_TO }],
+        replyTo: { email: entry.email },
+        subject,
+        htmlContent,
+      }),
+    });
+    if (!res.ok) {
+      const text = await res.text();
+      console.error("[audit] Brevo send failed", res.status, text);
+    }
+  } catch (err) {
+    console.error("[audit] Brevo send threw", err);
+  }
 }
 
 function isValidEmail(s: string) {
@@ -54,8 +105,12 @@ export async function POST(req: Request) {
       undefined,
   };
 
-  // Visible in Vercel function logs. Replace with Supabase insert + Resend email later.
+  // Visible in Vercel function logs as a backup record of every lead.
   console.log("[audit] new request", JSON.stringify(entry));
+
+  // Fire-and-await Brevo notification. Failures are logged but never thrown:
+  // a flaky email provider should not fail a working form submission.
+  await sendBrevoNotification(entry);
 
   return NextResponse.json({ ok: true, id: entry.id });
 }

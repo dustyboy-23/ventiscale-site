@@ -21,10 +21,10 @@
   --color-ink-faint: rgba(27, 27, 27, 0.42);
   --color-ink-ghost: rgba(27, 27, 27, 0.22);
 
-  /* The single accent — used once */
-  --color-arterial: #C8362B;
-  --color-arterial-deep: #A82A20;
-  --color-arterial-ink: #7D1B14;
+  /* The single accent — used once. Forest green per 2026-04-10 pivot. */
+  --color-arterial: #1F3D2B;
+  --color-arterial-deep: #15291D;
+  --color-arterial-ink: #0F2017;
 
   /* ─── LEGACY light tokens (still used by portal routes) ─── */
   --color-canvas: #f8f9fb;
@@ -210,7 +210,7 @@ body.theme-cream ::-webkit-scrollbar-thumb:hover { background: rgba(27,27,27,0.2
 
 /* Selection */
 ::selection {
-  background: rgba(200, 54, 43, 0.18);
+  background: rgba(31, 61, 43, 0.18);
   color: var(--color-ink-deep);
 }
 

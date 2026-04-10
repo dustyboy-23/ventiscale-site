@@ -1,4 +1,5 @@
 import Link from "next/link";
+import Image from "next/image";
 import {
   ArrowRight,
   Mail,
@@ -122,8 +123,8 @@ export default function MarketingHome() {
             </p>
 
             <div className="mt-10 flex flex-col sm:flex-row items-start sm:items-center gap-3.5">
-              <a href="#book" className="btn-arterial">
-                Book 15-min call
+              <a href="#audit" className="btn-arterial">
+                Run my audit
                 <ArrowRight className="w-4 h-4" strokeWidth={2.25} />
               </a>
               <a href="#work" className="btn-ghost">
@@ -175,23 +176,23 @@ export default function MarketingHome() {
               <ScrollReveal delay={200}>
                 <ul className="space-y-5 text-[16px] text-[#1B1B1B]/75 leading-relaxed">
                   <li className="flex gap-3">
-                    <span className="text-[#C8362B] font-mono text-[12px] mt-1.5 shrink-0">×</span>
+                    <span className="text-[#1F3D2B] font-mono text-[12px] mt-1.5 shrink-0">×</span>
                     A junior strategist who learned your brand from a Notion doc.
                   </li>
                   <li className="flex gap-3">
-                    <span className="text-[#C8362B] font-mono text-[12px] mt-1.5 shrink-0">×</span>
+                    <span className="text-[#1F3D2B] font-mono text-[12px] mt-1.5 shrink-0">×</span>
                     Three Slack channels, two stand-ups, one slow inbox.
                   </li>
                   <li className="flex gap-3">
-                    <span className="text-[#C8362B] font-mono text-[12px] mt-1.5 shrink-0">×</span>
+                    <span className="text-[#1F3D2B] font-mono text-[12px] mt-1.5 shrink-0">×</span>
                     A monthly PDF that nobody on your team actually reads.
                   </li>
                   <li className="flex gap-3">
-                    <span className="text-[#C8362B] font-mono text-[12px] mt-1.5 shrink-0">×</span>
+                    <span className="text-[#1F3D2B] font-mono text-[12px] mt-1.5 shrink-0">×</span>
                     Quarterly &ldquo;strategy reviews&rdquo; that produce a new slide deck.
                   </li>
                   <li className="flex gap-3">
-                    <span className="text-[#C8362B] font-mono text-[12px] mt-1.5 shrink-0">×</span>
+                    <span className="text-[#1F3D2B] font-mono text-[12px] mt-1.5 shrink-0">×</span>
                     Three deliverables, late, every month, like clockwork.
                   </li>
                 </ul>
@@ -262,8 +263,8 @@ export default function MarketingHome() {
           </div>
 
           <div className="mt-12 text-center">
-            <a href="#book" className="btn-arterial">
-              Book 15-min call
+            <a href="#audit" className="btn-arterial">
+              Run my audit
               <ArrowRight className="w-4 h-4" strokeWidth={2.25} />
             </a>
           </div>
@@ -388,20 +389,14 @@ export default function MarketingHome() {
             <div className="lg:col-span-5">
               <ScrollReveal>
                 <div className="aspect-[4/5] bg-[#1B1B1B] rounded-lg overflow-hidden relative">
-                  {/* Founder portrait placeholder — replaced with real photo on shoot */}
-                  <div className="absolute inset-0 flex items-center justify-center text-[#F6F1EA]/30">
-                    <div className="text-center">
-                      <div
-                        className="text-[80px] italic leading-none"
-                        style={{ fontFamily: "Fraunces, serif", fontWeight: 300 }}
-                      >
-                        D
-                      </div>
-                      <div className="text-[10px] font-mono uppercase tracking-[0.16em] mt-4">
-                        Founder portrait
-                      </div>
-                    </div>
-                  </div>
+                  <Image
+                    src="/founder/dustin.png"
+                    alt="Dustin Gilmour, founder of Venti Scale"
+                    fill
+                    sizes="(min-width: 1024px) 480px, 100vw"
+                    className="object-cover"
+                    priority
+                  />
                 </div>
               </ScrollReveal>
             </div>
@@ -433,8 +428,8 @@ export default function MarketingHome() {
               </ScrollReveal>
               <ScrollReveal delay={400}>
                 <div className="mt-9">
-                  <a href="#book" className="btn-arterial">
-                    Book 15-min call
+                  <a href="#audit" className="btn-arterial">
+                    Run my audit
                     <ArrowRight className="w-4 h-4" strokeWidth={2.25} />
                   </a>
                 </div>
@@ -493,7 +488,7 @@ export default function MarketingHome() {
                 ].map((item) => (
                   <div key={item} className="flex items-start gap-2.5">
                     <Check
-                      className="w-4 h-4 text-[#C8362B] mt-1 shrink-0"
+                      className="w-4 h-4 text-[#1F3D2B] mt-1 shrink-0"
                       strokeWidth={2.5}
                     />
                     <span className="text-[14px] text-[#1B1B1B]/80">{item}</span>
@@ -502,8 +497,8 @@ export default function MarketingHome() {
               </div>
 
               <div className="mt-10 text-center">
-                <a href="#book" className="btn-arterial">
-                  Book 15-min call
+                <a href="#audit" className="btn-arterial">
+                  Run my audit
                   <ArrowRight className="w-4 h-4" strokeWidth={2.25} />
                 </a>
                 <p className="mt-5 text-[12px] font-mono uppercase tracking-[0.14em] text-[#1B1B1B]/45">
@@ -563,7 +558,7 @@ export default function MarketingHome() {
       {/* ─────────────────────────────────────────────
           10. SELF-SERVE AUDIT
          ───────────────────────────────────────────── */}
-      <section className="relative border-t border-[rgba(27,27,27,0.08)]">
+      <section id="audit" className="relative border-t border-[rgba(27,27,27,0.08)]">
         <div className="max-w-[820px] mx-auto px-6 lg:px-10 py-24 sm:py-32 text-center">
           <ScrollReveal>
             <div className="eyebrow mb-5">Or, see for yourself</div>
@@ -591,10 +586,7 @@ export default function MarketingHome() {
       {/* ─────────────────────────────────────────────
           11. FINAL CTA
          ───────────────────────────────────────────── */}
-      <section
-        id="book"
-        className="relative border-t border-[rgba(27,27,27,0.08)] bg-[#1B1B1B] text-[#F6F1EA]"
-      >
+      <section className="relative border-t border-[rgba(27,27,27,0.08)] bg-[#1B1B1B] text-[#F6F1EA]">
         <div className="max-w-[980px] mx-auto px-6 lg:px-10 py-32 sm:py-44 text-center">
           <ScrollReveal>
             <h2
@@ -608,13 +600,8 @@ export default function MarketingHome() {
           </ScrollReveal>
           <ScrollReveal delay={200}>
             <div className="mt-12">
-              <a
-                href="https://cal.com/dustingilmour/15min"
-                target="_blank"
-                rel="noopener"
-                className="btn-arterial"
-              >
-                Book 15-min call
+              <a href="#audit" className="btn-arterial">
+                Run my audit
                 <ArrowRight className="w-4 h-4" strokeWidth={2.25} />
               </a>
             </div>

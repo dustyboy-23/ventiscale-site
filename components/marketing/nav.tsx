@@ -57,10 +57,10 @@ export function MarketingNav() {
             Client login
           </Link>
           <a
-            href="#book"
-            className="text-[13px] font-semibold text-white bg-[#C8362B] hover:bg-[#A82A20] px-5 h-10 rounded-md inline-flex items-center transition-colors"
+            href="#audit"
+            className="text-[13px] font-semibold text-white bg-[#1F3D2B] hover:bg-[#15291D] px-5 h-10 rounded-md inline-flex items-center transition-colors"
           >
-            Book 15-min call
+            Run my audit
           </a>
         </div>
 
@@ -97,11 +97,11 @@ export function MarketingNav() {
               Client login
             </Link>
             <a
-              href="#book"
+              href="#audit"
               onClick={() => setMobileOpen(false)}
-              className="mt-3 text-center text-[14px] font-semibold text-white bg-[#C8362B] py-3.5 rounded-md"
+              className="mt-3 text-center text-[14px] font-semibold text-white bg-[#1F3D2B] py-3.5 rounded-md"
             >
-              Book 15-min call
+              Run my audit
             </a>
           </nav>
         </div>

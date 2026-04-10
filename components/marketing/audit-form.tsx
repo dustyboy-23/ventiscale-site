@@ -80,7 +80,7 @@ export function AuditForm() {
         <button
           type="submit"
           disabled={status === "loading"}
-          className="shrink-0 inline-flex items-center justify-center gap-2 px-5 h-12 rounded-md text-[14px] font-semibold text-white bg-[#C8362B] hover:bg-[#A82A20] disabled:opacity-60 transition-colors"
+          className="shrink-0 inline-flex items-center justify-center gap-2 px-5 h-12 rounded-md text-[14px] font-semibold text-white bg-[#1F3D2B] hover:bg-[#15291D] disabled:opacity-60 transition-colors"
         >
           {status === "loading" ? (
             <>
@@ -98,7 +98,7 @@ export function AuditForm() {
       <p className="text-[11px] font-mono uppercase tracking-[0.14em] mt-3.5 text-[#1B1B1B]/45">
         Under a minute · No call · No spam
       </p>
-      {error && <p className="text-[12px] text-[#C8362B] mt-2">{error}</p>}
+      {error && <p className="text-[12px] text-[#1F3D2B] mt-2">{error}</p>}
     </form>
   );
 }
