@@ -174,7 +174,7 @@ export const PERIOD_META: Record<PeriodKey, { label: string; scale: number }> = 
 };
 
 export function resolvePeriod(raw: string | undefined): PeriodKey {
-  return raw && raw in PERIOD_META ? (raw as PeriodKey) : "7d";
+  return raw && raw in PERIOD_META ? (raw as PeriodKey) : "28d";
 }
 
 export async function getClientKpis(period: PeriodKey = "28d"): Promise<ClientKpis> {

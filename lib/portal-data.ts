@@ -41,7 +41,7 @@ const EMPTY_KPIS: ClientKpis = {
   aov: 0,
   customers: 0,
   repeatRate: 0,
-  periodLabel: "Last 7 days",
+  periodLabel: "Last 28 days",
   traffic: { activeUsers: 0, sessions: 0, pageViews: 0, conversionRate: 0 },
   productBreakdown: [],
   topStates: [],
@@ -105,7 +105,7 @@ export async function getClientMeta(): Promise<ClientMeta> {
   };
 }
 
-export async function getClientKpis(period: PeriodKey = "7d"): Promise<ClientKpis> {
+export async function getClientKpis(period: PeriodKey = "28d"): Promise<ClientKpis> {
   const session = await getPortalSession();
   if (session?.mode === "demo") return demoKpis(period);
   if (session?.mode === "real") {

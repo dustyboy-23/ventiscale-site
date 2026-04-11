@@ -13,10 +13,12 @@ import {
 import { cn } from "@/lib/utils";
 import { MobileNav } from "@/components/mobile-nav";
 
+// Keep in sync with PERIOD_META in lib/sg-data.ts and the CHECK constraint
+// on public.client_metrics.period — the puller only writes 7d/28d/90d, so
+// any extra option would render empty.
 const PERIODS: { key: string; label: string }[] = [
   { key: "7d", label: "Last 7 days" },
   { key: "28d", label: "Last 28 days" },
-  { key: "month", label: "This month" },
   { key: "90d", label: "Last 90 days" },
 ];
 
@@ -48,6 +50,10 @@ export function TopBar({
     const href = query ? `${pathname}?${query}` : pathname;
     startTransition(() => {
       router.replace(href, { scroll: false });
+      // Force Server Components to re-fetch with the new period param.
+      // Without this, router.replace can serve a cached RSC payload and
+      // the KPI cards stay on the previous period's numbers.
+      router.refresh();
     });
   }
 
