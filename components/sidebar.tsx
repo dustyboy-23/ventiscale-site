@@ -10,8 +10,11 @@ import {
   Search,
   FolderOpen,
   LogOut,
+  Check,
+  ChevronsUpDown,
 } from "lucide-react";
 import { cn } from "@/lib/utils";
+import { setActiveClient } from "@/app/actions/active-client";
 
 const NAV = [
   { href: "/dashboard", label: "Dashboard", icon: LayoutDashboard },
@@ -22,16 +25,28 @@ const NAV = [
   { href: "/files", label: "Files", icon: FolderOpen },
 ];
 
+export type SidebarMembership = {
+  id: string;
+  name: string;
+  slug: string;
+  isAgency: boolean;
+};
+
 export function Sidebar({
   clientName,
   ownerName,
   role = "Owner",
+  memberships = [],
+  activeClientId,
 }: {
   clientName: string;
   ownerName: string;
   role?: string;
+  memberships?: SidebarMembership[];
+  activeClientId?: string;
 }) {
   const pathname = usePathname();
+  const canSwitch = memberships.length > 1;
 
   return (
     <aside className="hidden lg:flex w-[260px] shrink-0 h-screen sticky top-0 flex-col bg-white border-r border-[var(--color-border)]">
@@ -54,15 +69,72 @@ export function Sidebar({
 
       {/* Client switcher */}
       <div className="px-4 pb-4">
-        <div className="rounded-xl bg-[var(--color-surface-muted)] px-3.5 py-3 border border-transparent hover:border-[var(--color-border)] transition-colors cursor-default">
-          <div className="text-[11px] font-medium text-[var(--color-ink-subtle)] uppercase tracking-wider mb-0.5">
-            Workspace
+        {canSwitch ? (
+          <details className="group relative">
+            <summary className="list-none rounded-xl bg-[var(--color-surface-muted)] px-3.5 py-3 border border-transparent hover:border-[var(--color-border)] transition-colors cursor-pointer">
+              <div className="text-[11px] font-medium text-[var(--color-ink-subtle)] uppercase tracking-wider mb-0.5">
+                Workspace
+              </div>
+              <div className="flex items-center justify-between gap-2">
+                <div className="text-[14px] font-semibold text-[var(--color-ink)] truncate">
+                  {clientName}
+                </div>
+                <ChevronsUpDown className="w-3.5 h-3.5 text-[var(--color-ink-subtle)] shrink-0" />
+              </div>
+            </summary>
+            <div className="absolute left-0 right-0 mt-1.5 z-20 rounded-xl bg-white border border-[var(--color-border)] shadow-lg overflow-hidden">
+              <div className="px-3 pt-2.5 pb-1 text-[10px] font-medium text-[var(--color-ink-subtle)] uppercase tracking-wider">
+                Switch workspace
+              </div>
+              <ul className="py-1">
+                {memberships.map((m) => {
+                  const isActive = m.id === activeClientId;
+                  return (
+                    <li key={m.id}>
+                      <form action={setActiveClient}>
+                        <input type="hidden" name="clientId" value={m.id} />
+                        <button
+                          type="submit"
+                          disabled={isActive}
+                          className={cn(
+                            "w-full text-left flex items-center justify-between gap-3 px-3 py-2 text-[13px] transition-colors",
+                            isActive
+                              ? "bg-[var(--color-surface-muted)] text-[var(--color-ink)] cursor-default"
+                              : "text-[var(--color-ink-muted)] hover:bg-[var(--color-surface-muted)] hover:text-[var(--color-ink)]",
+                          )}
+                        >
+                          <span className="flex items-center gap-2 min-w-0">
+                            <span className="truncate font-medium">{m.name}</span>
+                            {m.isAgency && (
+                              <span className="text-[9px] uppercase tracking-wider text-[var(--color-ink-subtle)] shrink-0">
+                                Agency
+                              </span>
+                            )}
+                          </span>
+                          {isActive && (
+                            <Check className="w-3.5 h-3.5 text-[var(--color-success)] shrink-0" />
+                          )}
+                        </button>
+                      </form>
+                    </li>
+                  );
+                })}
+              </ul>
+            </div>
+          </details>
+        ) : (
+          <div className="rounded-xl bg-[var(--color-surface-muted)] px-3.5 py-3 border border-transparent">
+            <div className="text-[11px] font-medium text-[var(--color-ink-subtle)] uppercase tracking-wider mb-0.5">
+              Workspace
+            </div>
+            <div className="flex items-center justify-between">
+              <div className="text-[14px] font-semibold text-[var(--color-ink)]">
+                {clientName}
+              </div>
+              <div className="w-2 h-2 rounded-full bg-[var(--color-success)]" />
+            </div>
           </div>
-          <div className="flex items-center justify-between">
-            <div className="text-[14px] font-semibold text-[var(--color-ink)]">{clientName}</div>
-            <div className="w-2 h-2 rounded-full bg-[var(--color-success)]" />
-          </div>
-        </div>
+        )}
       </div>
 
       {/* Nav */}

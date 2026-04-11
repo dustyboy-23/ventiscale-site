@@ -1,7 +1,7 @@
 import { redirect } from "next/navigation";
 import { Sidebar } from "@/components/sidebar";
 import { TopBar } from "@/components/top-bar";
-import { getPortalSession } from "@/lib/current-client";
+import { getPortalSession, getMemberships } from "@/lib/current-client";
 import { OrphanEmptyState } from "@/components/portal-empty-states";
 
 export default async function PortalLayout({
@@ -10,6 +10,7 @@ export default async function PortalLayout({
   children: React.ReactNode;
 }) {
   const session = await getPortalSession();
+  const memberships = session?.mode === "real" ? await getMemberships() : [];
 
   if (!session) {
     redirect("/login");
@@ -49,6 +50,13 @@ export default async function PortalLayout({
         clientName={sidebarClient.name}
         ownerName={sidebarOwner}
         role={sidebarRole}
+        memberships={memberships.map((m) => ({
+          id: m.id,
+          name: m.name,
+          slug: m.slug,
+          isAgency: m.isAgency,
+        }))}
+        activeClientId={session.mode === "real" ? session.client.id : undefined}
       />
       <div className="flex-1 min-w-0 flex flex-col">
         <TopBar

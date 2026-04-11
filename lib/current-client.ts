@@ -44,10 +44,34 @@ const DEMO_CLIENT: ClientRecord = {
   isDemo: true,
 };
 
+export interface MembershipSummary {
+  id: string;
+  slug: string;
+  name: string;
+  role: "owner" | "admin" | "viewer";
+  isAgency: boolean;
+}
+
+type MembershipRow = {
+  role: "owner" | "admin" | "viewer";
+  client_id: string;
+  clients: {
+    id: string;
+    slug: string;
+    name: string;
+    tagline: string | null;
+    brand_color: string | null;
+    logo_url: string | null;
+    is_agency: boolean;
+  } | null;
+};
+
 // Single source of truth for "who is viewing the portal right now".
 //
 // Resolution order:
 //   1. Authed user with at least one client_users row → mode: "real"
+//      - If vs-active-client cookie matches one of their memberships, use it
+//      - Otherwise default to oldest membership (created_at asc)
 //   2. Authed user with no memberships → mode: "orphan" (show empty state)
 //   3. No auth but vs-demo cookie set → mode: "demo" (Stoneline fallback)
 //   4. None of the above → null (layout redirects to /login)
@@ -57,6 +81,7 @@ const DEMO_CLIENT: ClientRecord = {
 export const getPortalSession = cache(async (): Promise<PortalSession | null> => {
   const cookieStore = await cookies();
   const isDemo = cookieStore.get("vs-demo")?.value === "1";
+  const activeClientId = cookieStore.get("vs-active-client")?.value;
 
   let supabase;
   try {
@@ -80,23 +105,12 @@ export const getPortalSession = cache(async (): Promise<PortalSession | null> =>
     .from("client_users")
     .select("role, client_id, clients(id, slug, name, tagline, brand_color, logo_url, is_agency)")
     .eq("user_id", user.id)
-    .order("created_at", { ascending: true })
-    .limit(1);
+    .order("created_at", { ascending: true });
 
-  const row = memberships?.[0];
-  const clientRow = row?.clients as unknown as
-    | {
-        id: string;
-        slug: string;
-        name: string;
-        tagline: string | null;
-        brand_color: string | null;
-        logo_url: string | null;
-        is_agency: boolean;
-      }
-    | undefined;
+  const rows = (memberships ?? []) as unknown as MembershipRow[];
+  const valid = rows.filter((r): r is MembershipRow & { clients: NonNullable<MembershipRow["clients"]> } => Boolean(r.clients));
 
-  if (!row || !clientRow) {
+  if (valid.length === 0) {
     return {
       mode: "orphan",
       client: null,
@@ -104,6 +118,9 @@ export const getPortalSession = cache(async (): Promise<PortalSession | null> =>
       role: null,
     };
   }
+
+  const active = (activeClientId && valid.find((r) => r.client_id === activeClientId)) || valid[0];
+  const clientRow = active.clients;
 
   return {
     mode: "real",
@@ -118,6 +135,39 @@ export const getPortalSession = cache(async (): Promise<PortalSession | null> =>
       isDemo: false,
     },
     userEmail: user.email ?? "",
-    role: row.role as "owner" | "admin" | "viewer",
+    role: active.role,
   };
+});
+
+// Returns all client memberships for the current user. Used by the sidebar
+// switcher when the user has 2+ workspaces. Cached per request alongside
+// getPortalSession so it doesn't re-query.
+export const getMemberships = cache(async (): Promise<MembershipSummary[]> => {
+  let supabase;
+  try {
+    supabase = await createClient();
+  } catch {
+    return [];
+  }
+
+  const { data: userData } = await supabase.auth.getUser();
+  const user = userData.user;
+  if (!user) return [];
+
+  const { data: memberships } = await supabase
+    .from("client_users")
+    .select("role, client_id, clients(id, slug, name, tagline, brand_color, logo_url, is_agency)")
+    .eq("user_id", user.id)
+    .order("created_at", { ascending: true });
+
+  const rows = (memberships ?? []) as unknown as MembershipRow[];
+  return rows
+    .filter((r): r is MembershipRow & { clients: NonNullable<MembershipRow["clients"]> } => Boolean(r.clients))
+    .map((r) => ({
+      id: r.clients.id,
+      slug: r.clients.slug,
+      name: r.clients.name,
+      role: r.role,
+      isAgency: r.clients.is_agency,
+    }));
 });
