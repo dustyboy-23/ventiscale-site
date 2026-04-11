@@ -1,5 +1,6 @@
 "use client";
 
+import { useState } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import {
@@ -12,9 +13,9 @@ import {
   LogOut,
   Check,
   ChevronsUpDown,
+  Loader2,
 } from "lucide-react";
 import { cn } from "@/lib/utils";
-import { setActiveClient } from "@/app/actions/active-client";
 
 const NAV = [
   { href: "/dashboard", label: "Dashboard", icon: LayoutDashboard },
@@ -47,6 +48,30 @@ export function Sidebar({
 }) {
   const pathname = usePathname();
   const canSwitch = memberships.length > 1;
+  const [switchingId, setSwitchingId] = useState<string | null>(null);
+
+  async function handleSwitch(clientId: string) {
+    if (switchingId) return;
+    setSwitchingId(clientId);
+    try {
+      const res = await fetch("/api/portal/active-client", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ clientId }),
+      });
+      if (!res.ok) {
+        console.error("[sidebar] switch failed", await res.text());
+        setSwitchingId(null);
+        return;
+      }
+      // Hard nav preserves middleware cookie writes; client-side router
+      // navigation doesn't always pick up the new session state.
+      window.location.href = "/dashboard";
+    } catch (err) {
+      console.error("[sidebar] switch threw", err);
+      setSwitchingId(null);
+    }
+  }
 
   return (
     <aside className="hidden lg:flex w-[260px] shrink-0 h-screen sticky top-0 flex-col bg-white border-r border-[var(--color-border)]">
@@ -89,33 +114,35 @@ export function Sidebar({
               <ul className="py-1">
                 {memberships.map((m) => {
                   const isActive = m.id === activeClientId;
+                  const isSwitching = switchingId === m.id;
                   return (
                     <li key={m.id}>
-                      <form action={setActiveClient}>
-                        <input type="hidden" name="clientId" value={m.id} />
-                        <button
-                          type="submit"
-                          disabled={isActive}
-                          className={cn(
-                            "w-full text-left flex items-center justify-between gap-3 px-3 py-2 text-[13px] transition-colors",
-                            isActive
-                              ? "bg-[var(--color-surface-muted)] text-[var(--color-ink)] cursor-default"
-                              : "text-[var(--color-ink-muted)] hover:bg-[var(--color-surface-muted)] hover:text-[var(--color-ink)]",
+                      <button
+                        type="button"
+                        onClick={() => !isActive && handleSwitch(m.id)}
+                        disabled={isActive || switchingId !== null}
+                        className={cn(
+                          "w-full text-left flex items-center justify-between gap-3 px-3 py-2 text-[13px] transition-colors",
+                          isActive
+                            ? "bg-[var(--color-surface-muted)] text-[var(--color-ink)] cursor-default"
+                            : "text-[var(--color-ink-muted)] hover:bg-[var(--color-surface-muted)] hover:text-[var(--color-ink)]",
+                          switchingId && !isSwitching && "opacity-50",
+                        )}
+                      >
+                        <span className="flex items-center gap-2 min-w-0">
+                          <span className="truncate font-medium">{m.name}</span>
+                          {m.isAgency && (
+                            <span className="text-[9px] uppercase tracking-wider text-[var(--color-ink-subtle)] shrink-0">
+                              Agency
+                            </span>
                           )}
-                        >
-                          <span className="flex items-center gap-2 min-w-0">
-                            <span className="truncate font-medium">{m.name}</span>
-                            {m.isAgency && (
-                              <span className="text-[9px] uppercase tracking-wider text-[var(--color-ink-subtle)] shrink-0">
-                                Agency
-                              </span>
-                            )}
-                          </span>
-                          {isActive && (
-                            <Check className="w-3.5 h-3.5 text-[var(--color-success)] shrink-0" />
-                          )}
-                        </button>
-                      </form>
+                        </span>
+                        {isSwitching ? (
+                          <Loader2 className="w-3.5 h-3.5 text-[var(--color-ink-subtle)] shrink-0 animate-spin" />
+                        ) : isActive ? (
+                          <Check className="w-3.5 h-3.5 text-[var(--color-success)] shrink-0" />
+                        ) : null}
+                      </button>
                     </li>
                   );
                 })}
