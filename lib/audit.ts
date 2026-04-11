@@ -857,11 +857,11 @@ type BusinessKind =
 function classifyBusiness(biz: string): BusinessKind {
   const s = biz.toLowerCase();
   if (/shop|store|ecom|e-com|brand|apparel|clothing|jewel|beauty|skin|supplement|cpg|product|retail|merch/.test(s)) return "ecommerce";
-  if (/saas|software|app|platform|tool|api|dev\b|startup/.test(s)) return "saas";
-  if (/agency|studio|marketing|design|creative|seo\b|ads/.test(s)) return "agency";
+  if (/\bsaas\b|\bsoftware\b|\bapp\b|\bplatform\b|\btool\b|\bapi\b|\bdev\b|\bstartup\b/.test(s)) return "saas";
+  if (/agency|\bstudio\b|marketing|design|creative|\bseo\b|\bads\b/.test(s)) return "agency";
   if (/coach|course|consult|mentor|teacher|info|education|training|academy/.test(s)) return "coach";
   if (/restaurant|cafe|bar\b|diner|bakery|food truck|eatery/.test(s)) return "restaurant";
-  if (/clean|plumb|hvac|electric|roof|landscap|contract|handyman|install|repair|salon|spa|med spa|dentist|chiro|clinic|gym|studio\b|local|service/.test(s)) return s.includes("studio") ? "agency" : /clean|plumb|hvac|electric|roof|landscap|contract|handyman|repair/.test(s) ? "local" : "service";
+  if (/clean|plumb|hvac|electric|roof|landscap|contract|handyman|install|repair|salon|\bspa\b|med spa|dentist|chiro|clinic|\bgym\b|\bstudio\b|\blocal\b|\bservice\b/.test(s)) return s.includes("studio") ? "agency" : /clean|plumb|hvac|electric|roof|landscap|contract|handyman|repair/.test(s) ? "local" : "service";
   if (/creator|youtuber|influencer|podcast|newsletter|writer|artist/.test(s)) return "creator";
   return "generic";
 }
@@ -946,16 +946,16 @@ function painLabelFor(pillarId: string): string {
 function painBodyFor(pillarId: string, kind: BusinessKind, phrase: string): string {
   if (pillarId === "pixels") {
     const map: Partial<Record<BusinessKind, string>> = {
-      ecommerce: `You're running ads, or posting, or maybe both. You've got no clue which of it is actually selling product and which is just burning cash. Every marketing decision you make is a guess.`,
+      ecommerce: `You've got no way to see which visitors turn into buyers. Every post, every email, every campaign idea, you're guessing if it worked. The stuff that's actually selling product is invisible and so is the stuff that isn't.`,
       saas: `You can't see where signups come from, which visitors turn into trials, or which trials turn into paying customers. Every call you make about marketing is a hunch.`,
-      service: `You've got no idea which visitors picked up the phone and which ones bounced. You run an ad and hope it worked. That's not a strategy, that's a prayer.`,
-      local: `You've got no idea which ads or posts are making the phone ring. You spend the money, the phone rings or it doesn't, and you have no way to tell what did it.`,
+      service: `You've got no idea which visitors picked up the phone and which ones bounced. Someone sends you a lead and you can't tell where they came from, so you can't double down on what's working.`,
+      local: `You've got no way to tell what's bringing customers in the door. Could be social, could be word of mouth, could be the website itself. You can't double down on what's working because you can't see it.`,
       coach: `Your whole business is moving strangers from cold to warm to buyer, and you can't see any of it happening. You don't know what's working. You're coaching in the dark.`,
       agency: `You sell marketing and your own site isn't measuring any of it. That's brutal when a prospect pokes around.`,
       creator: `You can't see which posts or videos are actually pulling people to your stuff. You're guessing at the algorithm instead of reading the numbers.`,
-      restaurant: `You can't tell who booked a table and who just looked at the menu and left. You spend on ads and hope seats fill up.`,
+      restaurant: `You can't tell who booked a table and who just looked at the menu and left. You can't see which of your marketing is filling seats and which is flat.`,
     };
-    return map[kind] || `You're making marketing calls without data. Every dollar is a guess. Every month you can't tell what worked. The stuff you're not seeing is usually where the money is.`;
+    return map[kind] || `You're making marketing calls without data. Every decision is a guess. Every month you can't tell what worked. The stuff you're not seeing is usually where the money is.`;
   }
   if (pillarId === "email_capture") {
     return `About 97 out of every 100 people who land on your site leave without doing anything. Right now every one of em is gone forever. You've got nothing to pull em back with. No email, no follow-up, nothing. That's customers you already paid for walking out the door.`;
@@ -985,9 +985,9 @@ function painBodyFor(pillarId: string, kind: BusinessKind, phrase: string): stri
 // Deliberately rough ranges, not fake precision.
 function costBodyFor(pillarId: string, kind: BusinessKind): string {
   if (pillarId === "pixels") {
-    if (kind === "ecommerce") return `Most shops we audit waste 30 to 50% of their ad spend on stuff that isn't converting. If you're spending $2K a month on ads, figure $600 to $1,000 of it is flat burning.`;
-    if (kind === "local" || kind === "service") return `Most local businesses waste 40 to 60% of their marketing budget because they can't tell what's making the phone ring. Small spend or big, a chunk of it is gone every month.`;
-    return `For most businesses we look at, this one hole eats 30 to 50% of the marketing budget. Whatever you're spending, figure a third of it is just lighting money on fire every month.`;
+    if (kind === "ecommerce") return `Without this, you can't tell which traffic sources actually buy. Most shops we look at are doubling down on the wrong channel for months before they figure it out. That's the kind of mistake that costs you a full quarter of growth.`;
+    if (kind === "local" || kind === "service") return `Without this, every marketing decision is a coin flip. The customers you already got could tell you exactly where to go find more of em, but you can't see any of it. That's the growth you leave on the table every single month.`;
+    return `Without this, you're running every marketing play blind. You might be sitting on the exact channel that's pulling your best customers in and not even know it. The cost isn't a dollar number, it's the growth you don't get because you can't see what's working.`;
   }
   if (pillarId === "email_capture") {
     return `Every visitor you don't catch is a customer you paid to get and then threw away. Over a year, for most sites, that adds up to tens of thousands in revenue you never saw.`;
@@ -1009,7 +1009,7 @@ function costBodyFor(pillarId: string, kind: BusinessKind): string {
 
 // Normalizing paragraph. "You're not dumb, here's why this happens to
 // everyone." Universal across pillars because the root cause is the same.
-const WHY_BODY = `Here's why this happens. Most business owners I talk to are in this exact spot. You've been busy running the business, not playing marketer. Nobody told you to hook up tracking before you ran ads. Nobody told you your email list is the only customer list you actually own. The tools to fix all this used to cost a fortune and need a dev team, now they don't, but the playbook hasn't caught up.`;
+const WHY_BODY = `Here's why this happens. Most business owners I talk to are in this exact spot. You've been busy running the business, not playing marketer. Nobody told you to hook up tracking so you could see what's working. Nobody told you your email list is the only customer list you actually own. The tools to fix all this used to cost a fortune and need a dev team, now they don't, but the playbook hasn't caught up.`;
 
 // Outcome-framed "moves" for the Sell the Vacation block. Each move leads
 // with what the reader gets, then how we do it. Kept short on purpose.
@@ -1017,8 +1017,8 @@ function moveFor(pillarId: string, _kind: BusinessKind): { outcome: string; how:
   switch (pillarId) {
     case "pixels":
       return {
-        outcome: "You start knowing exactly which marketing is paying you back.",
-        how: "We hook up the tracking in week 1. From then on, every dollar you spend, you see what it brought in.",
+        outcome: "You start seeing exactly which marketing is bringing customers in.",
+        how: "We hook up the tracking in week 1. From then on, every post, every email, every campaign, you see what it brought in.",
       };
     case "email_capture":
       return {
