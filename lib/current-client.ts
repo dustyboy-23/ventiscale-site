@@ -9,6 +9,7 @@ export interface ClientRecord {
   tagline: string | null;
   brandColor: string | null;
   logoUrl: string | null;
+  driveFolderId: string | null;
   isAgency: boolean;
   isDemo: boolean;
 }
@@ -40,6 +41,7 @@ const DEMO_CLIENT: ClientRecord = {
   tagline: "Premium menswear · Built to last",
   brandColor: "#1F3D2B",
   logoUrl: null,
+  driveFolderId: null,
   isAgency: false,
   isDemo: true,
 };
@@ -62,6 +64,7 @@ type MembershipRow = {
     tagline: string | null;
     brand_color: string | null;
     logo_url: string | null;
+    drive_folder_id: string | null;
     is_agency: boolean;
   } | null;
 };
@@ -104,7 +107,7 @@ export const getPortalSession = cache(async (): Promise<PortalSession | null> =>
 
   const { data: memberships, error: membershipsErr } = await supabase
     .from("client_users")
-    .select("role, client_id, clients(id, slug, name, tagline, brand_color, logo_url, is_agency)")
+    .select("role, client_id, clients(id, slug, name, tagline, brand_color, logo_url, drive_folder_id, is_agency)")
     .eq("user_id", user.id)
     .order("created_at", { ascending: true });
 
@@ -136,6 +139,7 @@ export const getPortalSession = cache(async (): Promise<PortalSession | null> =>
       tagline: clientRow.tagline,
       brandColor: clientRow.brand_color,
       logoUrl: clientRow.logo_url,
+      driveFolderId: clientRow.drive_folder_id,
       isAgency: clientRow.is_agency,
       isDemo: false,
     },
@@ -161,7 +165,7 @@ export const getMemberships = cache(async (): Promise<MembershipSummary[]> => {
 
   const { data: memberships } = await supabase
     .from("client_users")
-    .select("role, client_id, clients(id, slug, name, tagline, brand_color, logo_url, is_agency)")
+    .select("role, client_id, clients(id, slug, name, tagline, brand_color, logo_url, drive_folder_id, is_agency)")
     .eq("user_id", user.id)
     .order("created_at", { ascending: true });
 

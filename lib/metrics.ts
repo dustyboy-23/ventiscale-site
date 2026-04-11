@@ -3,6 +3,11 @@ import { createClient } from "@/lib/supabase/server";
 import type { ClientKpis } from "@/lib/sg-data";
 import type { PeriodKey } from "@/lib/sg-data";
 
+export interface ClientMetricsRow {
+  kpis: ClientKpis;
+  snapshotAt: string;
+}
+
 // Reader for the client_metrics table. The nightly puller
 // (scripts/pull-client-metrics.py) writes one row per (client_id, period)
 // with the full KPI snapshot as JSONB, shaped to match ClientKpis.
@@ -10,7 +15,7 @@ import type { PeriodKey } from "@/lib/sg-data";
 // Cached per request so getClientKpis() for multiple periods on one page
 // doesn't re-query Supabase.
 export const getClientMetrics = cache(
-  async (clientId: string, period: PeriodKey): Promise<ClientKpis | null> => {
+  async (clientId: string, period: PeriodKey): Promise<ClientMetricsRow | null> => {
     let supabase;
     try {
       supabase = await createClient();
@@ -20,7 +25,7 @@ export const getClientMetrics = cache(
 
     const { data, error } = await supabase
       .from("client_metrics")
-      .select("kpis")
+      .select("kpis, snapshot_at")
       .eq("client_id", clientId)
       .eq("period", period)
       .maybeSingle();
@@ -30,6 +35,9 @@ export const getClientMetrics = cache(
       return null;
     }
     if (!data) return null;
-    return data.kpis as ClientKpis;
+    return {
+      kpis: data.kpis as ClientKpis,
+      snapshotAt: data.snapshot_at as string,
+    };
   },
 );

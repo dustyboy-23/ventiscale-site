@@ -26,6 +26,11 @@ const NAV = [
   { href: "/files", label: "Files", icon: FolderOpen },
 ];
 
+// Client portals for real non-agency tenants start with only the tabs
+// that have real wiring behind them. Content/Email/SEO get hidden until
+// those data sources land so the sidebar never advertises a dead tab.
+const REAL_CLIENT_NAV_HREFS = new Set(["/dashboard", "/reports", "/files"]);
+
 export type SidebarMembership = {
   id: string;
   name: string;
@@ -39,15 +44,24 @@ export function Sidebar({
   role = "Owner",
   memberships = [],
   activeClientId,
+  logoUrl,
+  brandColor,
+  realClientMode = false,
 }: {
   clientName: string;
   ownerName: string;
   role?: string;
   memberships?: SidebarMembership[];
   activeClientId?: string;
+  logoUrl?: string | null;
+  brandColor?: string | null;
+  realClientMode?: boolean;
 }) {
   const pathname = usePathname();
   const canSwitch = memberships.length > 1;
+  const visibleNav = realClientMode
+    ? NAV.filter((item) => REAL_CLIENT_NAV_HREFS.has(item.href))
+    : NAV;
   const [switchingId, setSwitchingId] = useState<string | null>(null);
 
   async function handleSwitch(clientId: string) {
@@ -78,15 +92,29 @@ export function Sidebar({
       {/* Brand */}
       <div className="px-6 pt-7 pb-6">
         <div className="flex items-center gap-2.5">
-          <div className="w-8 h-8 rounded-lg bg-[var(--color-ink)] flex items-center justify-center">
-            <span className="text-white font-bold text-sm tracking-tight">VS</span>
-          </div>
+          {logoUrl ? (
+            <div
+              className="w-8 h-8 rounded-lg flex items-center justify-center overflow-hidden shrink-0"
+              style={{ backgroundColor: brandColor || "var(--color-ink)" }}
+            >
+              {/* eslint-disable-next-line @next/next/no-img-element */}
+              <img
+                src={logoUrl}
+                alt={`${clientName} logo`}
+                className="w-full h-full object-contain"
+              />
+            </div>
+          ) : (
+            <div className="w-8 h-8 rounded-lg bg-[var(--color-ink)] flex items-center justify-center">
+              <span className="text-white font-bold text-sm tracking-tight">VS</span>
+            </div>
+          )}
           <div>
             <div className="text-[15px] font-semibold tracking-tight text-[var(--color-ink)] leading-none">
-              Venti Scale
+              {logoUrl ? clientName : "Venti Scale"}
             </div>
             <div className="text-[11px] text-[var(--color-ink-subtle)] leading-none mt-1">
-              Client Portal
+              {logoUrl ? "by Venti Scale" : "Client Portal"}
             </div>
           </div>
         </div>
@@ -170,7 +198,7 @@ export function Sidebar({
           Workspace
         </div>
         <ul className="space-y-0.5">
-          {NAV.map((item) => {
+          {visibleNav.map((item) => {
             const active = pathname === item.href || pathname.startsWith(item.href + "/");
             const Icon = item.icon;
             return (

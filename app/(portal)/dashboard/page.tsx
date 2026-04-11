@@ -23,6 +23,7 @@ import {
   getContentDrafts,
   getActivityFeed,
   getClientMeta,
+  getMetricsSnapshotAt,
   type ActivityItem,
 } from "@/lib/portal-data";
 import { resolvePeriod } from "@/lib/sg-data";
@@ -46,12 +47,13 @@ export default async function DashboardPage({
 }) {
   const params = (await searchParams) || {};
   const period = resolvePeriod(params.period);
-  const [kpis, reports, drafts, activity, client] = await Promise.all([
+  const [kpis, reports, drafts, activity, client, snapshotAt] = await Promise.all([
     getClientKpis(period),
     getReports(),
     getContentDrafts(),
     getActivityFeed(6),
     getClientMeta(),
+    getMetricsSnapshotAt(period),
   ]);
 
   const latestClient = reports.find((r) => r.type === "client");
@@ -68,6 +70,8 @@ export default async function DashboardPage({
     return "Good evening";
   })();
 
+  const freshness = snapshotAt ? `Updated ${relativeTime(snapshotAt)}` : null;
+
   return (
     <>
       <PageHeader
@@ -75,7 +79,7 @@ export default async function DashboardPage({
         title={`${greeting}, ${client.ownerName}`}
         description={
           hasRevenueData
-            ? `Here's how ${client.name} is performing over the ${kpis.periodLabel.toLowerCase()}.`
+            ? `Here's how ${client.name} is performing over the ${kpis.periodLabel.toLowerCase()}.${freshness ? ` ${freshness}.` : ""}`
             : `Welcome to ${client.name}. Your data feeds are connecting. Metrics will populate here as soon as they're live.`
         }
         actions={
@@ -92,7 +96,12 @@ export default async function DashboardPage({
       />
 
       {/* KPI Row */}
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 mb-6 animate-in">
+      <div
+        className={cn(
+          "grid grid-cols-1 sm:grid-cols-2 gap-4 mb-6 animate-in",
+          hasTrafficData ? "lg:grid-cols-4" : "lg:grid-cols-3",
+        )}
+      >
         <KpiCard
           label="Revenue"
           value={kpis.revenue}
@@ -108,13 +117,15 @@ export default async function DashboardPage({
           icon={Users}
           hint={`${kpis.repeatRate.toFixed(1)}% repeat`}
         />
-        <KpiCard
-          label="Conversion"
-          value={kpis.traffic.conversionRate}
-          format="percent"
-          icon={TrendingUp}
-          hint={`${formatNumber(kpis.traffic.sessions)} sessions`}
-        />
+        {hasTrafficData && (
+          <KpiCard
+            label="Conversion"
+            value={kpis.traffic.conversionRate}
+            format="percent"
+            icon={TrendingUp}
+            hint={`${formatNumber(kpis.traffic.sessions)} sessions`}
+          />
+        )}
       </div>
 
       {/* Two-column body */}

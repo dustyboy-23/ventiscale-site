@@ -99,7 +99,7 @@ export async function getClientMeta(): Promise<ClientMeta> {
     tagline: session.client.tagline || "Your Venti Scale workspace",
     ownerName: firstName.charAt(0).toUpperCase() + firstName.slice(1),
     accent: session.client.brandColor || "#0F1115",
-    driveFolderId: "",
+    driveFolderId: session.client.driveFolderId || "",
     isDemo: false,
     logoUrl: session.client.logoUrl,
   };
@@ -110,9 +110,21 @@ export async function getClientKpis(period: PeriodKey = "28d"): Promise<ClientKp
   if (session?.mode === "demo") return demoKpis(period);
   if (session?.mode === "real") {
     const metrics = await getClientMetrics(session.client.id, period);
-    if (metrics) return metrics;
+    if (metrics) return metrics.kpis;
   }
   return { ...EMPTY_KPIS, periodLabel: PERIOD_META[period].label };
+}
+
+// Returns the timestamp of the most recent metrics snapshot for the active
+// client, or null for demo/orphan/no-data. Used to render a "Last updated"
+// stamp on the dashboard so clients know the data is fresh.
+export async function getMetricsSnapshotAt(
+  period: PeriodKey = "28d",
+): Promise<string | null> {
+  const session = await getPortalSession();
+  if (session?.mode !== "real") return null;
+  const metrics = await getClientMetrics(session.client.id, period);
+  return metrics?.snapshotAt ?? null;
 }
 
 export async function getReports(): Promise<ReportSummary[]> {

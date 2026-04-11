@@ -64,6 +64,17 @@ export default async function PortalLayout({
           isAgency: m.isAgency,
         }))}
         activeClientId={session.mode === "real" ? session.client.id : undefined}
+        logoUrl={
+          session.mode === "real" && !session.client.isAgency
+            ? session.client.logoUrl
+            : null
+        }
+        brandColor={
+          session.mode === "real" && !session.client.isAgency
+            ? session.client.brandColor
+            : null
+        }
+        realClientMode={session.mode === "real" && !session.client.isAgency}
       />
       <div className="flex-1 min-w-0 flex flex-col">
         <TopBar
