@@ -2,19 +2,18 @@ import { NextResponse, after } from "next/server";
 import {
   runAudit,
   renderAuditEmail,
+  buildMarketingPlan,
   type AuditResult,
 } from "@/lib/audit";
+import { createAdminClient } from "@/lib/supabase/admin";
 
 // Audit lead capture + real audit generation:
 // 1. Validates input
-// 2. Runs a 15-check surface audit on the submitted URL
-// 3. Emails the visitor their personalized audit report (Brevo)
-// 4. Notifies dustin@ventiscale.com with lead + grade summary (Brevo)
-// 5. Logs to Vercel function logs as a backup record
-//
-// Brevo API key lives in BREVO_API_KEY (Vercel env). If the key is missing
-// the route still returns 200 so the form never appears broken to a visitor
-// the lead is preserved in function logs and can be backfilled by hand.
+// 2. Persists the lead to Supabase (audit_leads) so nothing is lost
+// 3. Runs a 15-check surface audit on the submitted URL
+// 4. Emails the visitor their personalized audit report (Brevo)
+// 5. Notifies dustin@ventiscale.com with lead + grade summary (Brevo)
+// 6. Telegram pings on new lead AND on any Brevo failure
 
 interface AuditRequest {
   id: string;
@@ -184,11 +183,11 @@ function escapeMarkdown(s: string) {
   return s.replace(/([_*`\[])/g, "\\$1");
 }
 
-async function sendTelegramPing(entry: AuditRequest) {
+async function sendTelegramPing(entry: AuditRequest): Promise<boolean> {
   const token = process.env.TELEGRAM_BOT_TOKEN;
   const chatId = process.env.TELEGRAM_CHAT_ID;
   if (!token || !chatId) {
-    return;
+    return false;
   }
   try {
     const notesBlock = entry.notes
@@ -203,6 +202,28 @@ async function sendTelegramPing(entry: AuditRequest) {
       notesBlock +
       `\n\n_Pull the pitch template at pitch-templates/audit-delivery.md, customize it, and send from hello@ventiscale.com today._`;
 
+    const res = await fetch(`https://api.telegram.org/bot${token}/sendMessage`, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        chat_id: chatId,
+        text,
+        parse_mode: "Markdown",
+        disable_web_page_preview: true,
+      }),
+    });
+    return res.ok;
+  } catch (err) {
+    console.error("[audit] telegram ping threw", err);
+    return false;
+  }
+}
+
+async function sendTelegramAlert(text: string) {
+  const token = process.env.TELEGRAM_BOT_TOKEN;
+  const chatId = process.env.TELEGRAM_CHAT_ID;
+  if (!token || !chatId) return;
+  try {
     await fetch(`https://api.telegram.org/bot${token}/sendMessage`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
@@ -214,7 +235,40 @@ async function sendTelegramPing(entry: AuditRequest) {
       }),
     });
   } catch (err) {
-    console.error("[audit] telegram ping threw", err);
+    console.error("[audit] telegram alert threw", err);
+  }
+}
+
+async function insertLead(entry: AuditRequest) {
+  const db = createAdminClient();
+  if (!db) {
+    console.warn("[audit] supabase admin client unavailable, skipping insert");
+    return false;
+  }
+  const { error } = await db.from("audit_leads").insert({
+    id: entry.id,
+    received_at: entry.receivedAt,
+    name: entry.name,
+    business: entry.business,
+    email: entry.email,
+    url: entry.url,
+    notes: entry.notes || null,
+    ip: entry.ip || null,
+    user_agent: entry.userAgent || null,
+  });
+  if (error) {
+    console.error("[audit] insertLead failed", error.message);
+    return false;
+  }
+  return true;
+}
+
+async function updateLead(id: string, patch: Record<string, unknown>) {
+  const db = createAdminClient();
+  if (!db) return;
+  const { error } = await db.from("audit_leads").update(patch).eq("id", id);
+  if (error) {
+    console.error("[audit] updateLead failed", id, error.message);
   }
 }
 
@@ -300,10 +354,12 @@ export async function POST(req: Request) {
   console.log("[audit] new request", JSON.stringify(entry));
 
   // All heavy lifting runs after the response is sent so the visitor sees
-  // instant success. Claude can take its time thinking, freshness probes can
-  // hit slow sitemaps, Brevo can retry, none of it blocks the user. after()
-  // still counts against maxDuration (60s) but doesn't make the user wait.
+  // instant success. The lead is persisted first thing so nothing is lost
+  // even if the audit or email steps fail. after() still counts against
+  // maxDuration (60s) but doesn't make the user wait.
   after(async () => {
+    await insertLead(entry);
+
     let result: AuditResult | null = null;
     try {
       result = await runAudit(url);
@@ -317,17 +373,45 @@ export async function POST(req: Request) {
     }
 
     if (result) {
-      await Promise.allSettled([
+      const planMarkdown = result.reachable ? buildMarketingPlan(result, business) : null;
+      await updateLead(entry.id, {
+        final_url: result.finalUrl || null,
+        reachable: result.reachable,
+        grade: result.grade || null,
+        score: typeof result.score === "number" ? result.score : null,
+        error: result.error || null,
+        checks: result.checks || null,
+        plan_markdown: planMarkdown,
+      });
+
+      const [visitorSent, leadSent] = await Promise.all([
         sendAuditToVisitor(entry, result),
         sendLeadNotification(entry, result),
       ]);
+
+      await updateLead(entry.id, {
+        email_visitor_sent: visitorSent,
+        email_lead_sent: leadSent,
+      });
+
+      if (!visitorSent || !leadSent) {
+        const which = [
+          !visitorSent ? "visitor email" : null,
+          !leadSent ? "lead notification" : null,
+        ].filter(Boolean).join(" + ");
+        await sendTelegramAlert(
+          `⚠️ *Brevo delivery failed*\n\nLead: ${escapeMarkdown(entry.name)} (${escapeMarkdown(entry.email)})\nSite: ${escapeMarkdown(entry.url)}\nFailed: ${which}\nLead ID: \`${entry.id}\`\n\nCheck Vercel function logs and follow up manually.`,
+        );
+      }
+    } else {
+      await updateLead(entry.id, { reachable: false, error: "runAudit threw" });
+      await sendTelegramAlert(
+        `🚨 *Audit crashed*\n\nLead: ${escapeMarkdown(entry.name)} (${escapeMarkdown(entry.email)})\nSite: ${escapeMarkdown(entry.url)}\nLead ID: \`${entry.id}\`\n\nrunAudit threw before completing. Check logs and manually email them.`,
+      );
     }
 
-    try {
-      await sendTelegramPing(entry);
-    } catch (err) {
-      console.error("[audit] telegram ping threw", err);
-    }
+    const telegramSent = await sendTelegramPing(entry);
+    await updateLead(entry.id, { telegram_sent: telegramSent });
   });
 
   // Respond immediately. The UI shows "Audit queued" and tells the visitor
@@ -336,10 +420,23 @@ export async function POST(req: Request) {
 }
 
 export async function GET() {
-  return NextResponse.json({
-    ok: true,
-    count: 0,
-    requests: [],
-    note: "Audit requests are logged to Vercel function logs only. Persistence pending.",
-  });
+  const db = createAdminClient();
+  if (!db) {
+    return NextResponse.json(
+      { ok: false, error: "Supabase admin client unavailable" },
+      { status: 500 },
+    );
+  }
+  const { data, error, count } = await db
+    .from("audit_leads")
+    .select(
+      "id, received_at, name, business, email, url, final_url, reachable, grade, score, email_visitor_sent, email_lead_sent, telegram_sent",
+      { count: "exact" },
+    )
+    .order("created_at", { ascending: false })
+    .limit(50);
+  if (error) {
+    return NextResponse.json({ ok: false, error: error.message }, { status: 500 });
+  }
+  return NextResponse.json({ ok: true, count: count ?? 0, requests: data || [] });
 }

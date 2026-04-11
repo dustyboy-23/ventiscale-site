@@ -1083,7 +1083,7 @@ function oneThingThisWeek(pillars: Record<string, Pillar>): string {
   return `Open Google Search Console and look at the top 10 queries you're ranking 5 to 20 for. Pick the one closest to a buying keyword for your business, and spend an afternoon rewriting whatever page ranks for it so it's the best answer on the internet. One week of work that can move real revenue.`;
 }
 
-function buildMarketingPlan(
+export function buildMarketingPlan(
   result: AuditResult,
   businessType: string,
 ): string {
