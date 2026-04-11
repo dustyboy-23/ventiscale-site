@@ -574,7 +574,7 @@ export async function runAudit(rawUrl: string): Promise<AuditResult> {
       label: "Tracking pixels",
       status: "fail",
       detail: "No tracking pixels detected. You have zero visibility into what your visitors do.",
-      fix: "Install Google Analytics 4 and a Meta Pixel before you run any paid ads. This is table stakes.",
+      fix: "Install Google Analytics 4 and a Meta Pixel before you run any paid ads. This is the baseline.",
     });
   }
 
@@ -791,83 +791,14 @@ function darkStatusBadge(status: CheckStatus): string {
   return `<span style="display:inline-block;background:${p.bg};color:${p.fg};font-size:10px;font-weight:700;letter-spacing:0.08em;padding:3px 7px;border-radius:3px;text-transform:uppercase;">${p.label}</span>`;
 }
 
-function renderPlanMarkdown(markdown: string): string {
-  // Simple, email-safe markdown: ## headings, numbered lists, paragraphs.
-  // No nesting, no inline formatting beyond bold (**x**).
-  const lines = markdown.split(/\r?\n/);
-  const out: string[] = [];
-  let inOl = false;
-  let paraBuf: string[] = [];
-
-  const flushPara = () => {
-    if (paraBuf.length === 0) return;
-    const joined = paraBuf.join(" ").trim();
-    if (joined) {
-      out.push(
-        `<p style="margin:0 0 14px;font-size:15px;line-height:1.65;color:${EMAIL_COLORS.textMid};">${inlineFormat(joined)}</p>`,
-      );
-    }
-    paraBuf = [];
-  };
-  const closeList = () => {
-    if (inOl) {
-      out.push("</ol>");
-      inOl = false;
-    }
-  };
-
-  for (const raw of lines) {
-    const line = raw.trimEnd();
-    if (!line.trim()) {
-      flushPara();
-      closeList();
-      continue;
-    }
-    const h2 = line.match(/^##\s+(.*)$/);
-    if (h2) {
-      flushPara();
-      closeList();
-      out.push(
-        `<h2 style="font-family:Fraunces,Georgia,'Times New Roman',serif;font-size:22px;font-weight:500;letter-spacing:-0.01em;color:${EMAIL_COLORS.text};margin:28px 0 12px;line-height:1.25;">${escapeHtml(h2[1])}</h2>`,
-      );
-      continue;
-    }
-    const ol = line.match(/^(\d+)\.\s+(.*)$/);
-    if (ol) {
-      flushPara();
-      if (!inOl) {
-        out.push(
-          `<ol style="margin:0 0 16px;padding-left:22px;color:${EMAIL_COLORS.textMid};font-size:15px;line-height:1.65;">`,
-        );
-        inOl = true;
-      }
-      out.push(`<li style="margin-bottom:8px;">${inlineFormat(ol[2])}</li>`);
-      continue;
-    }
-    // plain line, accumulate into paragraph
-    if (inOl) closeList();
-    paraBuf.push(line.trim());
-  }
-  flushPara();
-  closeList();
-  return out.join("\n");
-}
-
-function inlineFormat(s: string): string {
-  // Escape first, then restore bold.
-  let out = escapeHtml(s);
-  out = out.replace(/\*\*([^*]+)\*\*/g, `<strong style="color:${EMAIL_COLORS.text};">$1</strong>`);
-  return out;
-}
-
 // ──────────────────────────────────────────────────────────
-// Marketing plan generator
+// Sales email content builder (Hormozi CLOSER framework)
 //
-// Builds a real adaptive marketing plan from the audit findings. Each of
-// the 6 marketing pillars (measurement, capture, content, freshness,
-// distribution, conversion) gets its own narrative + 30-day actions. The
-// opener, gap list, and priority ordering change based on what the site
-// actually has vs what it's missing, so no two plans read the same.
+// The audit findings feed a persuasive sales email, not an audit report.
+// Flow: opener → label the #1 pain → cost of inaction → why it happens →
+// 3 outcome-framed moves → proof → offer → CTA. Underlying signal still
+// comes from assessPillars + rankPriorities, but the copy is tuned to
+// sell a marketing service, not deliver a report card.
 // ──────────────────────────────────────────────────────────
 
 type PillarStrength = "strong" | "weak" | "missing" | "unknown";
@@ -989,290 +920,296 @@ function rankPriorities(
   return scored.slice(0, 3);
 }
 
-// "Why this is #1 for YOU" paragraph — outcome-first, no jargon, no tool
-// names. A pizza shop owner and a SaaS founder should both read this and
-// feel like it's about their business, not a marketing lecture.
-function priorityNarrative(
-  priority: RankedPriority,
-  biz: string,
-  kind: BusinessKind,
-): string {
-  const p = priority.pillar;
-  const isMissing = p.strength === "missing";
-
-  switch (p.id) {
+// The #1 pain, labelled in one plain sentence. This is the centerpiece
+// of the email, what the reader stares at and says "yeah, that's me."
+function painLabelFor(pillarId: string): string {
+  switch (pillarId) {
     case "pixels":
-      if (isMissing) {
-        const why: Record<BusinessKind, string> = {
-          ecommerce: `Right now you can't see which of your ads are actually selling product and which ones are just burning money. We fix that so every dollar you spend goes to the stuff that's actually working. Most shops who do this drop their cost per sale by a third inside the first month. It's the single biggest lever you're not pulling.`,
-          saas: `Right now you can't see where your signups come from, which visitors turn into trials, or which trials turn into paying customers. Every decision about marketing is a guess. We fix that so you know what's working and what isn't, instead of arguing about hunches.`,
-          service: `Right now you have no idea which of your website visitors end up calling you and which ones leave without a trace. That means when you run an ad or post on social, you're guessing at whether it actually made the phone ring. We fix that so you can spend your marketing money on what works.`,
-          agency: `You sell marketing, and your own site isn't set up to measure anything. Not a great look for a prospect who checks. Let's get this in place first so you can practice what you preach and actually prove what's working.`,
-          coach: `Right now you can't see which of your posts, emails, or ads are bringing people to your offers. Your whole business depends on moving cold strangers toward trust and a buy — and right now you can't see any of that happening. We fix it so you know what's working and double down.`,
-          local: `Right now you can't see which of your website visitors actually called you or booked you. That means every dollar of marketing you spend is a coin flip. We fix that so you know exactly which ads and posts are making the phone ring, and you stop paying for the ones that don't.`,
-          creator: `Right now you have no idea which of your posts, videos, or emails are actually bringing people to your site. We fix that so you can see exactly what's working with your audience and do more of it.`,
-          restaurant: `Right now you can't tell which of your visitors actually booked a table and which ones just looked at the menu and left. We fix that so you know which ads, posts, and promotions actually fill seats — and you stop spending on the ones that don't.`,
-          generic: `Every other marketing decision depends on this. Without it, you're guessing at which ads work, which emails get opened, which pages sell. We fix that so every move you make after is backed by real numbers, not hunches.`,
-        };
-        return `Right now, your website isn't telling you anything about who visits or what they do. ${why[kind]}`;
-      }
-      return `Some of your tracking is set up, but not all of it. ${p.detail} That means the parts you can see are making some of your marketing look better than it is, and some worse. We get the full picture in place in week one so you can trust what your dashboard is telling you.`;
-
+      return "You're spending on marketing and you can't tell what's working.";
     case "email_capture":
-      if (isMissing) {
-        const why: Record<BusinessKind, string> = {
-          ecommerce: `About 98 out of every 100 people who visit your site don't buy on the first visit. Right now, every one of them disappears forever. We fix that so you collect their email with a small reward (a discount, a guide, early access to something new), then bring them back with a friendly series of emails. Most shops see this become their best-performing marketing channel within 90 days.`,
-          saas: `Almost nobody signs up for software the first time they visit a website. They come back two or three times first. Right now you have no way to stay in front of them between visits. We fix that so you catch their email, show them what your product does, and stay on their mind until they're ready to try it.`,
-          service: `Most of your future customers research for weeks before they reach out. Right now, during all that research, you're invisible to them. We fix that so they leave their email on the first visit, and you stay in their inbox with helpful stuff until they're ready to hire someone — and that someone is you.`,
-          agency: `The best agencies close deals through helpful newsletters, not cold pitches. Right now you have no way to stay in front of prospects who aren't ready today. We fix that so the next time they need help, you're the first name they think of.`,
-          coach: `Your whole business runs on email. If someone lands on your site and isn't ready to buy yet, you need a way to stay in front of them — otherwise they forget you exist within a week. We fix that so you catch their email, build trust over time, and turn cold strangers into buyers.`,
-          local: `Right now, if someone checks out your site but isn't ready to book, they're gone. We fix that so you can collect their email, send them a friendly follow-up, and pull them back when it's time. A simple monthly email with a seasonal deal is often the difference between a dead Tuesday and a full schedule.`,
-          creator: `Your email list is the only audience you actually own. Every follower on Instagram or TikTok is rented — one algorithm change and it's gone. Right now you have no way to reach your audience directly. We fix that so you build an audience that nobody can take from you.`,
-          restaurant: `Right now, if someone looks at your menu and doesn't book, they're gone. We fix that so you can catch their email with a "first-visit drink on us" offer, then bring them back with news about tonight's special or this weekend's live music. Turns browsers into regulars.`,
-          generic: `Right now, every visitor who doesn't buy or call is gone forever. We fix that so you can bring them back later with news, offers, and updates. This is the single highest-leverage change on your website, and it pays off for years.`,
-        };
-        return `I couldn't find a way to collect email addresses anywhere on your site. ${why[kind]}`;
-      }
-      return `You've got a signup form, but it's not doing much. ${p.detail} The offer isn't strong enough to make someone hand over their email. We rewrite it this week with something your customers actually want, and turn the form into a real asset.`;
-
+      return "Almost every visitor to your site leaves and never comes back.";
     case "content_hub":
-      if (isMissing) {
-        const why: Record<BusinessKind, string> = {
-          ecommerce: `When people search Google for "best [your product]" or "how to choose [your product]" — and they do it thousands of times a month — you're nowhere to be found. We fix that by writing a handful of helpful articles that answer the exact questions your customers ask. Those articles bring in free traffic for years, with zero ad spend.`,
-          saas: `The software businesses that win long-term are the ones that publish helpful stuff their customers search for. Right now you're invisible on Google. We fix that by writing articles that answer real questions your customers have — and over time, Google starts sending you free customers every day.`,
-          service: `Every day, people in your area are typing questions into Google that you could answer — things like "how much does X cost" or "do I need Y." Right now you're not showing up for any of them. We fix that, and those people become your next clients without you paying for ads.`,
-          agency: `Your prospects judge your expertise by what you've published. Right now there's nothing there for them to read, and that makes them hesitant. We fix that by writing helpful articles that show you know your stuff, and those articles become your best sales tool.`,
-          coach: `Most of your future clients find coaches by searching Google for things like "how to start a business" or "how to get more clients." Right now you're invisible to all of them. We fix that by writing the articles they're searching for, so they find you instead of someone else.`,
-          local: `People in your neighborhood are searching for your services on Google every day. Right now you're buried on page 3. We fix that by writing helpful articles and pages that rank for the searches your future customers are actually typing. Get to page 1 and your phone starts ringing without a single dollar of ad spend.`,
-          creator: `The creators who grow long-term are the ones who have a home base on their own website, not just social accounts. Right now you don't have that foundation. We fix that so your best content lives somewhere permanent and keeps working years from now.`,
-          restaurant: `When locals or tourists search "best restaurant near me" or "[your food] in [your city]", you want to be the first name they see. Right now you're not. We fix that so when people in your area are hungry and searching, your name comes up first.`,
-          generic: `Right now your website isn't bringing in any free traffic from Google. We fix that by writing helpful articles your customers are already searching for, and over time those articles become your best marketing channel — no ads, no spending, just visitors who found you because they needed exactly what you offer.`,
-        };
-        return `Your website doesn't have any articles or helpful pages on it. ${why[kind]}`;
-      }
-      return `You've got a blog or resources section, but it's thin. ${p.detail} The fix isn't starting over — it's publishing more regularly and making each new piece answer a specific question your customers ask.`;
-
+      return "You're invisible on Google for the stuff your customers are searching for.";
     case "content_fresh":
-      return isMissing
-        ? `Your blog is there, but it hasn't been updated in a while. ${p.detail} Google notices when a site goes quiet and stops recommending it. Visitors notice too — a stale blog makes people wonder if you're still in business. We restart the cadence (even one short post a week is enough) and Google starts sending you traffic again within about a month.`
-        : `Your posting schedule is inconsistent. ${p.detail} Regular short posts beat occasional brilliant ones, because Google rewards steady activity, not one-off home runs.`;
-
+      return "Your site's gone quiet and Google's pulling the plug.";
     case "social":
-      return isMissing
-        ? `Your website doesn't link out to any social accounts. ${p.detail} When people check you out, they almost always peek at Instagram or TikTok first. If they can't find you there, they assume you're not the real deal and move on. We fix that so you look legitimate and trustworthy at first glance.`
-        : `Your social presence shows up in some places but not others. ${p.detail} We tighten this up so customers can find you wherever they already hang out.`;
-
+      return "You don't look legit at first glance.";
     case "conversion":
-      return isMissing
-        ? `There's no easy way for a visitor to ask you a quick question. ${p.detail} A lot of people won't pick up the phone or send an email — they just move on to the next option. We add a simple chat box so you catch those people in the moment, answer their question, and turn them into customers before they bounce.`
-        : `You've got some way for visitors to reach out, but it's not working as well as it could. ${p.detail} We sharpen it so more visitors actually use it.`;
-
+      return "Visitors with questions are bouncing to the next guy.";
     default:
-      return p.detail;
+      return "There's a gap costing you customers every week.";
   }
 }
 
-function openingRead(
-  pillars: Record<string, Pillar>,
-  biz: string,
-  domain: string,
-  kind: BusinessKind,
-): string {
-  const values = Object.values(pillars);
-  const missing = values.filter((p) => p.strength === "missing").length;
-  const weak = values.filter((p) => p.strength === "weak").length;
+// A paragraph that expands the pain label in Dusty voice. Per business
+// kind where it helps, generic fallback otherwise.
+function painBodyFor(pillarId: string, kind: BusinessKind, phrase: string): string {
+  if (pillarId === "pixels") {
+    const map: Partial<Record<BusinessKind, string>> = {
+      ecommerce: `You're running ads, or posting, or maybe both. You've got no clue which of it is actually selling product and which is just burning cash. Every marketing decision you make is a guess.`,
+      saas: `You can't see where signups come from, which visitors turn into trials, or which trials turn into paying customers. Every call you make about marketing is a hunch.`,
+      service: `You've got no idea which visitors picked up the phone and which ones bounced. You run an ad and hope it worked. That's not a strategy, that's a prayer.`,
+      local: `You've got no idea which ads or posts are making the phone ring. You spend the money, the phone rings or it doesn't, and you have no way to tell what did it.`,
+      coach: `Your whole business is moving strangers from cold to warm to buyer, and you can't see any of it happening. You don't know what's working. You're coaching in the dark.`,
+      agency: `You sell marketing and your own site isn't measuring any of it. That's brutal when a prospect pokes around.`,
+      creator: `You can't see which posts or videos are actually pulling people to your stuff. You're guessing at the algorithm instead of reading the numbers.`,
+      restaurant: `You can't tell who booked a table and who just looked at the menu and left. You spend on ads and hope seats fill up.`,
+    };
+    return map[kind] || `You're making marketing calls without data. Every dollar is a guess. Every month you can't tell what worked. The stuff you're not seeing is usually where the money is.`;
+  }
+  if (pillarId === "email_capture") {
+    return `About 97 out of every 100 people who land on your site leave without doing anything. Right now every one of em is gone forever. You've got nothing to pull em back with. No email, no follow-up, nothing. That's customers you already paid for walking out the door.`;
+  }
+  if (pillarId === "content_hub") {
+    const map: Partial<Record<BusinessKind, string>> = {
+      ecommerce: `People Google "best [your product]" and "how to pick [your product]" thousands of times a month. You're not showing up for any of it. They're finding your competitors instead.`,
+      local: `People in your area are Googling for exactly what you do right now. They're not finding you. They're finding the other guy down the road.`,
+      saas: `The companies that win long-term publish helpful stuff their customers actually search for. Right now you're invisible. Your competitors are eating the free traffic.`,
+      restaurant: `When locals or tourists search "best [your food] near me," you want to be the first name they see. Right now you're not even on the page.`,
+    };
+    return map[kind] || `People are searching for what you do every single day. You're not showing up for any of it. Free traffic that should be yours is going to your competitors instead.`;
+  }
+  if (pillarId === "content_fresh") {
+    return `Your blog's there but it hasn't been touched in months. Google starts pulling the plug on sites that stop publishing. Visitors notice too, a stale blog makes people wonder if you're still in business.`;
+  }
+  if (pillarId === "social") {
+    return `No social links on your site. The first thing a new customer does is peek at Instagram or TikTok to check if you're real. If they can't find you there, they assume you're not. They're gone before you knew they were there.`;
+  }
+  if (pillarId === "conversion") {
+    return `Visitors with a quick question can't get one answered. Most people won't pick up the phone or send an email, they just leave and find someone easier to talk to.`;
+  }
+  return `There's a hole in the way ${phrase} turns visitors into customers, and it's costing you every week.`;
+}
+
+// Loss aversion. Rough numbers that make the pain feel like money on fire.
+// Deliberately rough ranges, not fake precision.
+function costBodyFor(pillarId: string, kind: BusinessKind): string {
+  if (pillarId === "pixels") {
+    if (kind === "ecommerce") return `Most shops we audit waste 30 to 50% of their ad spend on stuff that isn't converting. If you're spending $2K a month on ads, figure $600 to $1,000 of it is flat burning.`;
+    if (kind === "local" || kind === "service") return `Most local businesses waste 40 to 60% of their marketing budget because they can't tell what's making the phone ring. Small spend or big, a chunk of it is gone every month.`;
+    return `For most businesses we look at, this one hole eats 30 to 50% of the marketing budget. Whatever you're spending, figure a third of it is just lighting money on fire every month.`;
+  }
+  if (pillarId === "email_capture") {
+    return `Every visitor you don't catch is a customer you paid to get and then threw away. Over a year, for most sites, that adds up to tens of thousands in revenue you never saw.`;
+  }
+  if (pillarId === "content_hub") {
+    return `Every month you're not on page 1 for the questions your customers type in, that's thousands of clicks going to someone else. Free clicks. The kind that compound for years once you own em.`;
+  }
+  if (pillarId === "content_fresh") {
+    return `Google drops quiet sites fast. You lose about 20% of your search traffic every 90 days of silence. Every week you wait, that's customers finding your competitors instead.`;
+  }
+  if (pillarId === "social") {
+    return `Most buying decisions happen in the first 5 seconds. If a customer can't find you on social in those 5 seconds, they don't trust you. You lose the sale before you know you had a shot.`;
+  }
+  if (pillarId === "conversion") {
+    return `10 to 20% of your visitors would buy if they could ask a quick question first. Right now, all of em leave instead. That's real money walking off your site every day.`;
+  }
+  return `This isn't a nice-to-have. It's real money leaving every week you don't fix it.`;
+}
+
+// Normalizing paragraph. "You're not dumb, here's why this happens to
+// everyone." Universal across pillars because the root cause is the same.
+const WHY_BODY = `Here's why this happens. Most business owners I talk to are in this exact spot. You've been busy running the business, not playing marketer. Nobody told you to hook up tracking before you ran ads. Nobody told you your email list is the only customer list you actually own. The tools to fix all this used to cost a fortune and need a dev team, now they don't, but the playbook hasn't caught up.`;
+
+// Outcome-framed "moves" for the Sell the Vacation block. Each move leads
+// with what the reader gets, then how we do it. Kept short on purpose.
+function moveFor(pillarId: string, _kind: BusinessKind): { outcome: string; how: string } {
+  switch (pillarId) {
+    case "pixels":
+      return {
+        outcome: "You start knowing exactly which marketing is paying you back.",
+        how: "We hook up the tracking in week 1. From then on, every dollar you spend, you see what it brought in.",
+      };
+    case "email_capture":
+      return {
+        outcome: "You stop losing visitors forever.",
+        how: "We put a real offer on your site, something your customers actually want, and hook it to a short email sequence that does the selling while you sleep.",
+      };
+    case "content_hub":
+      return {
+        outcome: "You start showing up on Google for the stuff your customers are searching for.",
+        how: "We write 4 articles a month that answer the exact questions your customers type in. Free traffic that compounds for years.",
+      };
+    case "content_fresh":
+      return {
+        outcome: "You get Google sending you free traffic again.",
+        how: "We restart the posting rhythm with one short piece a week. Google notices inside a month and starts sending people back.",
+      };
+    case "social":
+      return {
+        outcome: "You look legit the second somebody checks you out.",
+        how: "We get your social wired up everywhere customers look and start posting the kind of stuff that builds trust fast.",
+      };
+    case "conversion":
+      return {
+        outcome: "You catch the visitors who were almost ready to buy.",
+        how: "We add a simple chat that handles the quick questions that turn hesitation into a sale.",
+      };
+    default:
+      return {
+        outcome: "You fix a leak that's been costing you customers every week.",
+        how: `We handle it end to end so it actually gets done instead of sitting on a to-do list.`,
+      };
+  }
+}
+
+// Fallback move used when the site only needs 1 or 2 things but we want
+// 3 moves in the email for rhythm.
+function padMove(idx: number): { outcome: string; how: string } {
+  if (idx === 1) {
+    return {
+      outcome: "You double down on what's already working.",
+      how: "We read the numbers every week and pour more fuel on the stuff that's paying for itself. No guessing, no precious attachment to bad ideas.",
+    };
+  }
+  return {
+    outcome: "You stop playing catch-up on marketing and start compounding.",
+    how: "We set up the habits and systems that keep working whether you're paying attention to them or not.",
+  };
+}
+
+// Proof block. No case studies yet, so use Results-in-Advance framing:
+// the audit itself is the proof.
+const PROOF_BODY = `Here's why you should care what I'm saying. This email, the audit you just read, is the same analysis agencies charge $500 to $2,000 for. I give it away because when you see how sharp the read is, working together is the obvious move. If the plan feels right, the work will feel right too.`;
+
+// The offer block. DFY framing. What you get, what it costs you in
+// attention (almost nothing), and the risk reversal.
+const OFFER_BODY = `Here's how it works. You keep running your business. We run your marketing. Tracking, emails, articles, ads, social, all of it. We report back every week with what moved and what didn't. You approve or redirect. No contract, no lock-in, cancel anytime. You get a real marketing team at a fraction of what a real one costs, and you don't have to manage em.`;
+
+interface SalesEmailContent {
+  opener: string;
+  painLabel: string;
+  painBody: string;
+  costBody: string;
+  whyBody: string;
+  moves: Array<{ outcome: string; how: string }>;
+  proofBody: string;
+  offerBody: string;
+  ctaHeadline: string;
+  ctaSub: string;
+  ctaButton: string;
+  softClose: string;
+}
+
+// Happy-path content for sites with no real gaps. We still need to sell,
+// but the frame shifts from "fix" to "scale what's working."
+function buildHappyPathContent(opener: string, phrase: string): SalesEmailContent {
+  return {
+    opener,
+    painLabel: `You're in rare air. Most sites we look at have 3 or 4 big holes.`,
+    painBody: `Almost everything I check for is already working for ${phrase}. The foundation's there. Most businesses we audit are trying to get to where you already are.`,
+    costBody: `The risk now isn't a broken site, it's a plateau. Businesses that stop pushing at this stage get passed by the ones that don't. The work shifts from fixing leaks to pouring fuel on what's already paying.`,
+    whyBody: `Most owners in your spot think "we're good" and coast. That's when competitors catch up. The play now is doubling down on the channels that are working and finding the next one to turn on.`,
+    moves: [
+      {
+        outcome: "You pour fuel on whatever channel is already paying.",
+        how: "We read the numbers, find the channel that's beating everything else, and we double the budget on it. Simple.",
+      },
+      {
+        outcome: "You turn on the next growth channel on your list.",
+        how: "There's always one you've been meaning to try. We pick the right one for your business and launch it with real tracking from day one.",
+      },
+      {
+        outcome: "You stop babysitting the marketing yourself.",
+        how: "We run it week to week so you get your time back and the numbers keep going up.",
+      },
+    ],
+    proofBody: PROOF_BODY,
+    offerBody: OFFER_BODY,
+    ctaHeadline: "Want us to run this for you?",
+    ctaSub: "Book a 15-min call. I'll walk you through the plan for your site and we'll see if we're a fit. No pitch, no contract.",
+    ctaButton: "Book a 15-min call",
+    softClose: "Or just reply to this. I read em all.",
+  };
+}
+
+function buildSalesEmailContent(
+  result: AuditResult,
+  businessType: string,
+  visitorName: string,
+): SalesEmailContent {
+  const pillars = assessPillars(result);
+  const biz = (businessType || "").trim();
+  const kind = classifyBusiness(biz);
   const phrase = bizPhrase(biz, kind);
+  const domain = cleanHostname(result.finalUrl);
+  const priorities = rankPriorities(pillars, kind);
+  const first = firstName(visitorName);
+  const opener = first
+    ? `Hey ${first}, took a look at ${domain}. Here's what's up and what I'd do about it if you were paying me to run it for you.`
+    : `Alright, took a look at ${domain}. Here's what's up and what I'd do about it if you were paying me to run it for you.`;
 
-  if (missing >= 4) {
-    return `I took a real look at ${domain} and here's the honest read. You're running ${phrase}, and most of the stuff that actually brings in new customers from your website isn't set up yet. Don't freak out. Most business owners I talk to are in this exact spot, and honestly it's the best place to start because we get to do it right the first time instead of fixing someone else's half-finished work. Here's what I'd fix, in the order that makes you the most money the fastest.`;
+  if (priorities.length === 0) {
+    return buildHappyPathContent(opener, phrase);
   }
-  if (missing >= 2) {
-    return `I took a real look at ${domain} and here's what I see. You've got a few things going for you with ${phrase}, but there are a couple of big holes that are quietly costing you customers every week. The good news is none of this is hard to fix once you know what order to fix it in, and the order really matters. Here's how I'd rank it for you.`;
-  }
-  if (missing === 1) {
-    return `I took a real look at ${domain}, and honestly, you're in decent shape for ${phrase}. There's one real gap that's holding you back right now. Close it, and everything else you're already doing starts working harder for you. Here's what to focus on.`;
-  }
-  if (weak >= 2) {
-    return `I took a real look at ${domain}. No giant holes. A few things for ${phrase} are present but not pulling their weight. That's a much better conversation than "start over." Here's where you'd get the most bang for your buck.`;
-  }
-  if (weak === 1) {
-    return `Honestly, ${phrase} is in great shape. Almost everything I check for is working, and only one thing needs tightening up. This is what a business ready to step on the gas looks like, not one that needs to rebuild. Here's the one area where I'd push.`;
-  }
-  return `You're in rare air. Almost everything I look for is working for ${phrase}. Most businesses I audit are trying to get to where you already are. The move now is pouring fuel on what's already working, not fixing things that aren't broken.`;
+
+  const top = priorities[0];
+  const moves = priorities.map((pri) => moveFor(pri.pillar.id, kind));
+  while (moves.length < 3) moves.push(padMove(moves.length));
+
+  return {
+    opener,
+    painLabel: painLabelFor(top.pillar.id),
+    painBody: painBodyFor(top.pillar.id, kind, phrase),
+    costBody: costBodyFor(top.pillar.id, kind),
+    whyBody: WHY_BODY,
+    moves,
+    proofBody: PROOF_BODY,
+    offerBody: OFFER_BODY,
+    ctaHeadline: "Want us to run this for you?",
+    ctaSub: "Book a 15-min call. I'll walk you through the plan for your site and we'll see if we're a fit. No pitch, no contract.",
+    ctaButton: "Book a 15-min call",
+    softClose: "Or just reply to this. I read em all.",
+  };
 }
 
-function thirtyDayActions(
-  pillars: Record<string, Pillar>,
-  biz: string,
-): string[] {
-  const actions: string[] = [];
-  const bizLower = biz.toLowerCase();
-  const mNeed = pillars.measurement.strength !== "strong";
-  const cNeed = pillars.capture.strength !== "strong";
-  const contentNeed =
-    pillars.content.strength !== "strong" ||
-    pillars.freshness.strength === "missing";
-  const allStrong = !mNeed && !cNeed && !contentNeed;
-
-  if (allStrong) {
-    actions.push(
-      `**Week 1, we double-check the foundation.** Everything on your site looks good from the outside, but I want to make sure the numbers you're seeing are actually accurate before we start making decisions with them. Nothing's worse than building a strategy on bad data.`,
-    );
-    actions.push(
-      `**Week 2, we find your weak spot.** Every business has one place where visitors drop off. For ${bizLower}, we figure out exactly where that is and we fix it. Could be the homepage, could be the booking flow, could be an email that's not doing its job. We'll know within a week.`,
-    );
-    actions.push(
-      `**Weeks 3 and 4, we turn on a new way to bring people in.** You're probably leaving at least one easy growth channel on the table. We pick the best one for your kind of business and we launch it with a real budget and real tracking from day one.`,
-    );
-    return actions;
-  }
-
-  if (mNeed) {
-    actions.push(
-      `**Week 1, we turn on your visibility.** Right now you're flying blind. We set up the invisible tools that show you who's visiting your site, what they're doing, and which ads or posts are actually sending you real customers. This is usually done in a few hours and changes every decision you make from here on out.`,
-    );
-  }
-  if (cNeed) {
-    actions.push(
-      `**Weeks 1 and 2, we start catching leads.** Right now, people visit your site and leave. We add a simple way to catch their email with something they actually want (not a generic "10% off"). For ${bizLower}, we pick the right offer, write the first few emails that do the selling for you while you sleep, and hook it all up.`,
-    );
-  }
-  if (contentNeed) {
-    actions.push(
-      `**Weeks 2 to 4, we start showing up on Google.** We write 4 real articles that answer the exact questions your customers type in before they buy. Not blog filler. Real stuff that gets found, builds trust, and quietly brings in customers for years without you paying for every click.`,
-    );
-  }
-  if (mNeed || cNeed) {
-    actions.push(
-      `**End of month 1, we turn on paid traffic.** Small budget, carefully watched, feeding everything we just built. We're not trying to hit a home run in month one. We're proving this actually makes you money before we pour fuel on it.`,
-    );
-  }
-  return actions;
-}
-
-function sixtyNinetyActions(
-  pillars: Record<string, Pillar>,
-  biz: string,
-): string[] {
-  const bizLower = biz.toLowerCase();
-  const wasStrong =
-    pillars.measurement.strength === "strong" &&
-    pillars.capture.strength === "strong" &&
-    pillars.content.strength === "strong";
-
-  if (wasStrong) {
-    return [
-      `We pour more fuel on what's making you money and cut what isn't. By day 60 we've got a month of real numbers to look at. Whatever's paying for itself gets double the budget. Whatever isn't, we kill without being precious about it.`,
-      ``,
-      `The articles start stacking. We write more, we link them together, and by day 90 for ${bizLower} you should start seeing your first real wave of free traffic from Google. This is the part that keeps compounding every month after, even if you did nothing else.`,
-    ];
-  }
-
-  return [
-    `Month 1 was about building. The next 60 days are about making it work harder for you.`,
-    ``,
-    `Whatever ad or channel we turned on in month 1 is now producing real numbers. We double down on whatever's paying for itself and cut whatever isn't. No guessing.`,
-    ``,
-    `We also turn on the emails that work while you sleep: the "you forgot something" email, the "thanks, here's what to do next" email, the "come back, we miss you" email, and a monthly newsletter for ${bizLower} that actually gets read because it's worth reading.`,
-    ``,
-    `The articles keep coming, 4 to 6 a month. By day 90 the ones we wrote in month 1 should start showing up on Google, and you should see your first free customers rolling in from search.`,
-  ];
-}
-
-function oneThingThisWeek(pillars: Record<string, Pillar>): string {
-  if (pillars.measurement.strength === "missing") {
-    return `Get the invisible stuff that shows you who's visiting your site turned on. It's free, it takes about an hour, and without it you're just guessing at every single marketing decision. If you do nothing else from this email, do this. If you don't know how, reply to this email and I'll walk you through it in two minutes.`;
-  }
-  if (pillars.capture.strength === "missing") {
-    return `Add one way for a visitor to give you their email in exchange for something they actually want. Not "10% off." A real guide, a sample, a checklist, an early-access offer, something worth it. About two hours of work for something that runs and brings you customers forever.`;
-  }
-  if (pillars.content.strength === "missing") {
-    return `Write one article this week. Pick the single question your last 5 customers asked you before they bought. Answer it in plain English, 800 words or so. Publish it. One real article beats a fancy plan for ten articles you never write.`;
-  }
-  if (pillars.freshness.strength === "missing") {
-    return `Post one new article this week, even a short one. Your site has gone quiet and Google is starting to treat it like it's closed. One 600-word post is enough to flip the signal back on. Don't overthink it, just ship something.`;
-  }
-  if (pillars.distribution.strength === "missing") {
-    return `Put your Instagram, TikTok, and one other relevant social link in your site footer this week. Customers look for it. If it's not there, they assume you're not serious. Two minutes of work, zero downside.`;
-  }
-  if (pillars.measurement.strength === "weak") {
-    return `Take 20 minutes this week and check that the visitor-tracking on your site is actually working. Bad data is worse than no data because it makes you confident in wrong decisions. If you're not sure how, reply to this email and I'll show you how to check in under five minutes.`;
-  }
-  if (pillars.capture.strength === "weak") {
-    return `Look at what you're offering people in exchange for their email right now. If it's generic, rewrite it. If it's "sign up for our newsletter," rewrite it. Make it one specific thing your ideal customer would actually want. One hour of thinking is worth weeks of tweaking everything else.`;
-  }
-  return `Look at your top few Google searches where you're showing up on page 2 but not page 1. Pick the one closest to a customer ready to buy. Spend an afternoon making that page the best answer on the internet for that search. One week of work that can move real money.`;
-}
-
+// Legacy export. Builds a plain-markdown version of the sales email for
+// storage in Supabase (plan_markdown column) and for plantest.ts. The
+// email HTML renders directly from the structured content above, not
+// from this markdown, so the two can diverge in formatting but stay in
+// sync in voice.
 export function buildMarketingPlan(
   result: AuditResult,
   businessType: string,
 ): string {
-  const pillars = assessPillars(result);
-  const biz = (businessType || "").trim();
-  const kind = classifyBusiness(biz);
-  const domain = result.finalUrl
-    .replace(/^https?:\/\//, "")
-    .replace(/\/$/, "");
-
-  const priorities = rankPriorities(pillars, kind);
-
+  const c = buildSalesEmailContent(result, businessType, "");
   const lines: string[] = [];
-
-  if (priorities.length > 0) {
-    lines.push("## The 3 things I'd do first");
-    lines.push("");
-    const rankLabel = ["**#1**", "**#2**", "**#3**"];
-    priorities.forEach((pri, i) => {
-      lines.push(`${rankLabel[i]}: **${pri.pillar.name}.**`);
-      lines.push("");
-      lines.push(priorityNarrative(pri, biz, kind));
-      lines.push("");
-    });
-  } else {
-    lines.push("## You're ahead of most people");
-    lines.push("");
-    lines.push(openingRead(pillars, biz, domain, kind));
-    lines.push("");
-  }
-
-  lines.push("## What month 1 looks like if we work together");
+  lines.push(c.opener);
   lines.push("");
-  for (const a of thirtyDayActions(pillars, biz)) {
-    lines.push(a);
+  lines.push(`## The one thing`);
+  lines.push(`**${c.painLabel}**`);
+  lines.push("");
+  lines.push(c.painBody);
+  lines.push("");
+  lines.push(`## What it's costing you`);
+  lines.push("");
+  lines.push(c.costBody);
+  lines.push("");
+  lines.push(`## Why it's happening`);
+  lines.push("");
+  lines.push(c.whyBody);
+  lines.push("");
+  lines.push(`## The 3 moves`);
+  lines.push("");
+  c.moves.forEach((m, i) => {
+    lines.push(`**${i + 1}. ${m.outcome}**`);
+    lines.push(m.how);
     lines.push("");
-  }
-
-  lines.push("## Month 2 and 3");
+  });
+  lines.push(`## Why listen to me`);
   lines.push("");
-  for (const a of sixtyNinetyActions(pillars, biz)) {
-    lines.push(a);
-  }
+  lines.push(c.proofBody);
   lines.push("");
-
-  lines.push("## One thing to do this week, even if we never talk again");
+  lines.push(`## How we'd work together`);
   lines.push("");
-  lines.push(oneThingThisWeek(pillars));
-
+  lines.push(c.offerBody);
+  lines.push("");
+  lines.push(`## ${c.ctaHeadline}`);
+  lines.push("");
+  lines.push(c.ctaSub);
+  lines.push("");
+  lines.push(c.softClose);
   return lines.join("\n");
-}
-
-function groupEvidence(checks: AuditCheck[]): {
-  growth: AuditCheck[];
-  content: AuditCheck[];
-  basics: AuditCheck[];
-} {
-  const growthIds = new Set(["pixels", "email_capture", "conversion"]);
-  const contentIds = new Set(["content_hub", "content_fresh", "social"]);
-  const growth: AuditCheck[] = [];
-  const content: AuditCheck[] = [];
-  const basics: AuditCheck[] = [];
-  for (const c of checks) {
-    if (growthIds.has(c.id)) growth.push(c);
-    else if (contentIds.has(c.id)) content.push(c);
-    else basics.push(c);
-  }
-  return { growth, content, basics };
 }
 
 // Pull the hostname out of a URL, stripping query strings, fragments, and
@@ -1298,192 +1235,6 @@ function firstName(name: string): string {
   return clean.charAt(0).toUpperCase() + clean.slice(1);
 }
 
-type ReadoutStatus = "good" | "weak" | "broken";
-
-interface ReadoutItem {
-  label: string;
-  status: ReadoutStatus;
-  line: string;
-}
-
-// Roll the 6 marketing checks into 5 business-owner-friendly categories.
-// Each one gets a one-sentence read: what's going on + what we'd do, in
-// the voice of a consultant not an auditor. This is what replaces the
-// "wins / gaps / blockers" strip — the visitor is here for marketing
-// advice, not a website report card.
-function buildMarketingReadout(
-  checks: AuditCheck[],
-  kind: BusinessKind,
-): ReadoutItem[] {
-  const byId = new Map(checks.map((c) => [c.id, c]));
-  const statusOf = (id: string): ReadoutStatus => {
-    const c = byId.get(id);
-    if (!c) return "weak";
-    if (c.status === "fail") return "broken";
-    if (c.status === "warn") return "weak";
-    return "good";
-  };
-
-  // 1. Visibility (tracking pixels / analytics)
-  const visibility: ReadoutItem = (() => {
-    const s = statusOf("pixels");
-    if (s === "good") {
-      return {
-        label: "Knowing what's working",
-        status: s,
-        line: "You can already see which marketing is bringing you customers. That's the foundation most businesses don't have.",
-      };
-    }
-    if (s === "weak") {
-      return {
-        label: "Knowing what's working",
-        status: s,
-        line: "You can see part of the picture, not all of it. That leads to bad calls on where to spend next. We'd get the full view in place in an afternoon.",
-      };
-    }
-    return {
-      label: "Knowing what's working",
-      status: s,
-      line: "You're flying blind on every marketing dollar you spend. We'd turn on the invisible tools that show which ads and posts are actually bringing you customers. It's the single biggest lever you're not pulling.",
-    };
-  })();
-
-  // 2. Catching leads (email capture)
-  const capture: ReadoutItem = (() => {
-    const s = statusOf("email_capture");
-    const capturePhrase: Record<BusinessKind, string> = {
-      ecommerce: "98 out of every 100 visitors leave your site without buying. We'd catch their email on the way out and bring them back with a series of emails that do the selling while you sleep.",
-      saas: "Most people don't sign up the first time they hear about your product. We'd catch their email and stay in their inbox with helpful stuff until they're ready to try it.",
-      service: "Your future customers research for weeks before they reach out. We'd get you in their inbox during that whole window so you're the first name they think of when it's time.",
-      agency: "The best agencies close deals through helpful newsletters, not cold pitches. We'd build you one so the next time a prospect needs help, you're the first name they think of.",
-      coach: "Your business runs on email. We'd get visitors onto your list with a real offer and write the welcome sequence that turns cold strangers into buyers.",
-      local: "We'd catch visitor emails with a simple offer and send them a friendly follow-up so they book with you instead of the next shop down the road.",
-      creator: "Your email list is the only audience nobody can take from you. We'd start building it this week so you're not renting reach from the algorithm forever.",
-      restaurant: "We'd catch their email with a 'first-visit drink on us' offer and keep them coming back with news about tonight's special or this weekend's event.",
-      generic: "Visitors leave your site every day without giving you a way to bring them back. We'd fix that with one smart offer and a short welcome sequence — usually the highest-ROI thing you can add.",
-    };
-    if (s === "good") {
-      return {
-        label: "Catching leads that aren't ready yet",
-        status: s,
-        line: "You're already collecting emails, which puts you ahead of most businesses in your space. Now it's about making what you send them pull harder.",
-      };
-    }
-    if (s === "weak") {
-      return {
-        label: "Catching leads that aren't ready yet",
-        status: s,
-        line: "You've got a signup form, but the offer isn't working. We'd rewrite it this week into something your customers actually want — that alone usually doubles signups.",
-      };
-    }
-    return {
-      label: "Catching leads that aren't ready yet",
-      status: s,
-      line: capturePhrase[kind],
-    };
-  })();
-
-  // 3. Showing up on Google (content_hub + content_fresh merged)
-  const google: ReadoutItem = (() => {
-    const hub = statusOf("content_hub");
-    const fresh = statusOf("content_fresh");
-    const worst: ReadoutStatus =
-      hub === "broken" || fresh === "broken"
-        ? "broken"
-        : hub === "weak" || fresh === "weak"
-        ? "weak"
-        : "good";
-    const googlePhrase: Record<BusinessKind, string> = {
-      ecommerce: "People search for your products every day. We'd write the helpful articles that put you on page 1 — free traffic that compounds for years.",
-      saas: "We'd write the articles your customers are already searching for, and over time Google starts sending you free signups every day.",
-      service: "People in your area are typing questions into Google right now that you could answer. We'd get you showing up for them so your phone starts ringing without ad spend.",
-      agency: "Prospects judge you by what you've published. We'd write the articles that show you know your stuff and turn them into your best sales tool.",
-      coach: "We'd write the articles your future clients are searching for, so they find you instead of someone else.",
-      local: "People in your neighborhood are searching for your services today. We'd get you to page 1 for the searches that actually send you customers.",
-      creator: "Your best content should live somewhere permanent. We'd help you build a home base that keeps bringing in new fans years from now.",
-      restaurant: "When locals search 'best [your food] near me', you want to be the first name they see. We'd make that happen without paying for every click.",
-      generic: "You're invisible on Google for the questions your future customers are typing right now. We'd write the articles that put you on page 1 — free traffic that compounds forever.",
-    };
-    if (worst === "good") {
-      return {
-        label: "Showing up on Google",
-        status: worst,
-        line: "You're publishing content and Google can see you're active. That's the long-term compounding channel already working in your favor.",
-      };
-    }
-    if (worst === "weak") {
-      return {
-        label: "Showing up on Google",
-        status: worst,
-        line: "Your content is there but it's thin or quiet, and Google notices. We'd get you on a simple rhythm of one helpful article a week that answers what customers actually search for.",
-      };
-    }
-    return {
-      label: "Showing up on Google",
-      status: worst,
-      line: googlePhrase[kind],
-    };
-  })();
-
-  // 4. Social presence
-  const social: ReadoutItem = (() => {
-    const s = statusOf("social");
-    if (s === "good") {
-      return {
-        label: "Social proof",
-        status: s,
-        line: "Your social channels are hooked up and customers can find you wherever they already hang out. You look legitimate at first glance, which matters more than most business owners realize.",
-      };
-    }
-    if (s === "weak") {
-      return {
-        label: "Social proof",
-        status: s,
-        line: "You're on some platforms but not all the ones that matter for your business. We'd help you focus on the right 2-3 and post the kind of content that actually gets shared.",
-      };
-    }
-    return {
-      label: "Social proof",
-      status: s,
-      line: "No social links on your site. Customers check Instagram or TikTok before they buy, and if they can't find you there, they assume you're not the real deal. We'd get you posting the content that builds trust fast.",
-    };
-  })();
-
-  // 5. Turning visitors into customers (conversion tools)
-  const convert: ReadoutItem = (() => {
-    const c = byId.get("conversion");
-    const s: ReadoutStatus =
-      c?.status === "pass"
-        ? "good"
-        : c?.status === "warn"
-        ? "weak"
-        : c?.status === "fail"
-        ? "broken"
-        : "weak"; // "info" (no widget) is a soft miss, not a fail
-    if (s === "good") {
-      return {
-        label: "Turning visitors into customers",
-        status: s,
-        line: "You've got a way for visitors to get help on the spot. That's quietly lifting your conversion every day.",
-      };
-    }
-    if (s === "weak") {
-      return {
-        label: "Turning visitors into customers",
-        status: s,
-        line: "No easy way for a curious visitor to ask a quick question. Most people who hesitate just leave for the next option. We'd add a simple chat so you catch them while they're warm.",
-      };
-    }
-    return {
-      label: "Turning visitors into customers",
-      status: s,
-      line: "Your site is missing the tools that turn visitors into buyers. We'd add the small touches (smart chat, clearer next-steps, better CTAs) that lift sales 10-20% without more traffic.",
-    };
-  })();
-
-  return [visibility, capture, google, social, convert];
-}
-
 export function renderAuditEmail(
   result: AuditResult,
   recipientEmail: string,
@@ -1497,9 +1248,6 @@ export function renderAuditEmail(
   const preheader = result.reachable
     ? `This is what you need to be doing.`
     : `Reply with the right URL and I'll run it again.`;
-  const first = firstName(visitorName);
-  const greeting = first ? `Hey ${first},` : "Hey,";
-
   const fontImport = `<link href="https://fonts.googleapis.com/css2?family=Fraunces:wght@400;500;600&display=swap" rel="stylesheet">`;
   const bodyBase = `margin:0;padding:0;background:${EMAIL_COLORS.bg};font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif;color:${EMAIL_COLORS.text};`;
 
@@ -1545,40 +1293,27 @@ ${fontImport}
     };
   }
 
-  const planMarkdown = buildMarketingPlan(result, businessType);
-  const planHtml = renderPlanMarkdown(planMarkdown);
+  const content = buildSalesEmailContent(result, businessType, visitorName);
 
-  const bizKind = classifyBusiness(businessType);
-  const readout = buildMarketingReadout(result.checks, bizKind);
+  // HTML style shorthands for the body sections.
+  const sectionLabel = `font-size:10px;font-weight:700;letter-spacing:0.18em;color:${EMAIL_COLORS.textDim};text-transform:uppercase;`;
+  const sectionHead = `font-family:Fraunces,Georgia,'Times New Roman',serif;font-size:22px;font-weight:500;letter-spacing:-0.015em;color:${EMAIL_COLORS.text};margin:6px 0 14px;line-height:1.25;`;
+  const bodyPara = `font-size:15px;line-height:1.65;color:${EMAIL_COLORS.textMid};margin:0 0 14px;`;
+  const cardWrap = `background:${EMAIL_COLORS.card};border:1px solid ${EMAIL_COLORS.border};border-radius:14px;padding:26px 26px 14px;margin-top:22px;`;
 
-  // Dot colors for the readout rows.
-  const dotColor: Record<ReadoutStatus, string> = {
-    good: EMAIL_COLORS.green,
-    weak: "#F5B841",
-    broken: EMAIL_COLORS.red,
-  };
-
-  const readoutRows = readout
+  const movesHtml = content.moves
     .map(
-      (item) => `
-    <table cellpadding="0" cellspacing="0" border="0" width="100%" style="margin-bottom:18px;">
-      <tr>
-        <td width="22" valign="top" style="padding-top:7px;padding-right:12px;">
-          <div style="width:11px;height:11px;border-radius:50%;background:${dotColor[item.status]};box-shadow:0 0 0 3px ${dotColor[item.status]}22;"></div>
-        </td>
-        <td valign="top">
-          <div style="font-size:14px;font-weight:600;color:${EMAIL_COLORS.text};letter-spacing:-0.005em;">${escapeHtml(item.label)}</div>
-          <div style="font-size:13.5px;color:${EMAIL_COLORS.textMid};line-height:1.6;margin-top:4px;">${escapeHtml(item.line)}</div>
-        </td>
-      </tr>
-    </table>
-  `,
+      (m, i) => `
+      <div style="margin-bottom:18px;">
+        <div style="font-size:14px;font-weight:700;color:${EMAIL_COLORS.text};letter-spacing:-0.005em;line-height:1.4;">
+          ${i + 1}. ${escapeHtml(m.outcome)}
+        </div>
+        <div style="font-size:14px;color:${EMAIL_COLORS.textMid};line-height:1.6;margin-top:4px;">
+          ${escapeHtml(m.how)}
+        </div>
+      </div>`,
     )
     .join("");
-
-  const opener = first
-    ? `${greeting} Alright, I took a real look at your site. Here's what's actually going on with your marketing right now and what I'd do about it if you were paying me to run it for you.`
-    : `Alright, I took a real look at your site. Here's what's actually going on with your marketing right now and what I'd do about it if you were paying me to run it for you.`;
 
   const html = `<!doctype html>
 <html>
@@ -1594,7 +1329,7 @@ ${fontImport}
   <div style="max-width:640px;margin:0 auto;padding:44px 24px 56px;">
 
     <!-- Header -->
-    <div style="font-size:10px;font-weight:700;letter-spacing:0.18em;color:${EMAIL_COLORS.textDim};text-transform:uppercase;">Venti Scale</div>
+    <div style="${sectionLabel}">Venti Scale</div>
     <h1 style="font-family:Fraunces,Georgia,'Times New Roman',serif;font-size:36px;font-weight:500;letter-spacing:-0.025em;margin:12px 0 6px;line-height:1.1;color:${EMAIL_COLORS.text};">
       Your custom growth plan
     </h1>
@@ -1602,38 +1337,66 @@ ${fontImport}
       ${escapeHtml(displayUrl)}
     </div>
 
-    <!-- Personal opener -->
+    <!-- Opener -->
     <p style="font-size:15px;line-height:1.65;color:${EMAIL_COLORS.textMid};margin:26px 0 0;">
-      ${escapeHtml(opener)}
+      ${escapeHtml(content.opener)}
     </p>
 
-    <!-- Marketing readout card -->
-    <div style="background:${EMAIL_COLORS.card};border:1px solid ${EMAIL_COLORS.border};border-radius:14px;padding:28px 26px 14px;margin-top:28px;">
-      <div style="font-size:10px;font-weight:700;letter-spacing:0.16em;color:${EMAIL_COLORS.textDim};text-transform:uppercase;margin-bottom:4px;">Here's the deal</div>
-      <div style="font-family:Fraunces,Georgia,'Times New Roman',serif;font-size:22px;font-weight:500;letter-spacing:-0.015em;color:${EMAIL_COLORS.text};margin:6px 0 22px;line-height:1.25;">
-        What's actually going on with your marketing
+    <!-- The One Thing -->
+    <div style="${cardWrap}">
+      <div style="${sectionLabel}">Here's the deal</div>
+      <div style="${sectionHead}">
+        ${escapeHtml(content.painLabel)}
       </div>
-      ${readoutRows}
+      <p style="${bodyPara}">${escapeHtml(content.painBody)}</p>
     </div>
 
-    <!-- Plan body -->
-    <div style="background:${EMAIL_COLORS.card};border:1px solid ${EMAIL_COLORS.border};border-radius:14px;padding:28px 26px;margin-top:22px;">
-      ${planHtml}
+    <!-- The Cost -->
+    <div style="${cardWrap}">
+      <div style="${sectionLabel}">What it's costing you</div>
+      <p style="${bodyPara}margin-top:12px;">${escapeHtml(content.costBody)}</p>
+    </div>
+
+    <!-- Why It's Happening -->
+    <div style="${cardWrap}">
+      <div style="${sectionLabel}">Why it's happening</div>
+      <p style="${bodyPara}margin-top:12px;">${escapeHtml(content.whyBody)}</p>
+    </div>
+
+    <!-- The 3 Moves -->
+    <div style="${cardWrap}">
+      <div style="${sectionLabel}">The 3 moves</div>
+      <div style="${sectionHead}">
+        Here's what I'd do, in order
+      </div>
+      ${movesHtml}
+    </div>
+
+    <!-- Proof -->
+    <div style="${cardWrap}">
+      <div style="${sectionLabel}">Why listen to me</div>
+      <p style="${bodyPara}margin-top:12px;">${escapeHtml(content.proofBody)}</p>
+    </div>
+
+    <!-- Offer -->
+    <div style="${cardWrap}">
+      <div style="${sectionLabel}">How we'd work together</div>
+      <p style="${bodyPara}margin-top:12px;">${escapeHtml(content.offerBody)}</p>
     </div>
 
     <!-- CTA -->
     <div style="margin-top:32px;padding:34px 28px;background:${EMAIL_COLORS.cardAlt};border:1px solid ${EMAIL_COLORS.borderStrong};border-radius:14px;text-align:center;">
       <div style="font-family:Fraunces,Georgia,'Times New Roman',serif;font-size:24px;font-weight:500;line-height:1.25;color:${EMAIL_COLORS.text};letter-spacing:-0.015em;">
-        Want us to just do all this for you?
+        ${escapeHtml(content.ctaHeadline)}
       </div>
       <p style="font-size:14.5px;line-height:1.65;color:${EMAIL_COLORS.textMid};margin:14px 0 24px;max-width:480px;margin-left:auto;margin-right:auto;">
-        We're basically the marketing team you'd hire if you had the budget for one. You run your business. We bring you customers. Quick call, no contract, no pressure.
+        ${escapeHtml(content.ctaSub)}
       </p>
       <a href="https://www.ventiscale.com" style="display:inline-block;background:${EMAIL_COLORS.red};color:#FFFFFF;text-decoration:none;font-size:14px;font-weight:600;padding:14px 28px;border-radius:10px;letter-spacing:0.01em;">
-        Book a quick call
+        ${escapeHtml(content.ctaButton)}
       </a>
       <div style="margin-top:16px;font-size:12px;color:${EMAIL_COLORS.textDim};">
-        Or just reply to this email. I read em all.
+        ${escapeHtml(content.softClose)}
       </div>
     </div>
 
@@ -1648,24 +1411,46 @@ ${fontImport}
 </html>`;
 
   // Plain-text fallback.
-  const readoutLines = readout.map((item) => {
-    const icon = item.status === "good" ? "✓" : item.status === "weak" ? "~" : "✗";
-    return `${icon} ${item.label}\n  ${item.line}`;
-  });
+  const movesText = content.moves
+    .map((m, i) => `${i + 1}. ${m.outcome}\n   ${m.how}`)
+    .join("\n\n");
 
   const textLines = [
-    `Your custom growth plan — ${displayUrl}`,
-    `${preheader}`,
+    `Your custom growth plan for ${displayUrl}`,
+    preheader,
     ``,
-    opener,
+    content.opener,
     ``,
     `HERE'S THE DEAL`,
+    content.painLabel,
     ``,
-    ...readoutLines.flatMap((l) => [l, ""]),
-    planMarkdown,
+    content.painBody,
     ``,
-    `Want us to just do all this for you? Book a quick call: https://www.ventiscale.com`,
-    `Or just reply to this email. I read em all.`,
+    `WHAT IT'S COSTING YOU`,
+    ``,
+    content.costBody,
+    ``,
+    `WHY IT'S HAPPENING`,
+    ``,
+    content.whyBody,
+    ``,
+    `THE 3 MOVES`,
+    ``,
+    movesText,
+    ``,
+    `WHY LISTEN TO ME`,
+    ``,
+    content.proofBody,
+    ``,
+    `HOW WE'D WORK TOGETHER`,
+    ``,
+    content.offerBody,
+    ``,
+    content.ctaHeadline.toUpperCase(),
+    content.ctaSub,
+    ``,
+    `${content.ctaButton}: https://www.ventiscale.com`,
+    content.softClose,
     ``,
     `Dustin Gilmour, Venti Scale`,
   ];
