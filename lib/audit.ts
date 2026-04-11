@@ -1220,9 +1220,9 @@ export function buildMarketingPlan(
   const lines: string[] = [];
 
   if (priorities.length > 0) {
-    lines.push("## The 3 biggest moves, in order");
+    lines.push("## The 3 things I'd do first");
     lines.push("");
-    const rankLabel = ["**#1 for you**", "**#2 for you**", "**#3 for you**"];
+    const rankLabel = ["**#1**", "**#2**", "**#3**"];
     priorities.forEach((pri, i) => {
       lines.push(`${rankLabel[i]}: **${pri.pillar.name}.**`);
       lines.push("");
@@ -1230,27 +1230,27 @@ export function buildMarketingPlan(
       lines.push("");
     });
   } else {
-    lines.push("## You're ahead of the curve");
+    lines.push("## You're ahead of most people");
     lines.push("");
     lines.push(openingRead(pillars, biz, domain, kind));
     lines.push("");
   }
 
-  lines.push("## What your first month with us looks like");
+  lines.push("## What month 1 looks like if we work together");
   lines.push("");
   for (const a of thirtyDayActions(pillars, biz)) {
     lines.push(a);
     lines.push("");
   }
 
-  lines.push("## Where things go in month 2 and 3");
+  lines.push("## Month 2 and 3");
   lines.push("");
   for (const a of sixtyNinetyActions(pillars, biz)) {
     lines.push(a);
   }
   lines.push("");
 
-  lines.push("## The one thing I'd do this week, even if we never talk again");
+  lines.push("## One thing to do this week, even if we never talk again");
   lines.push("");
   lines.push(oneThingThisWeek(pillars));
 
@@ -1492,8 +1492,11 @@ export function renderAuditEmail(
 ): { subject: string; html: string; text: string } {
   const displayUrl = cleanHostname(result.finalUrl);
   const subject = result.reachable
-    ? `Your growth plan for ${displayUrl}`
-    : `We couldn't reach ${displayUrl}. Here's what that means.`;
+    ? `Your custom growth plan`
+    : `We couldn't reach ${displayUrl}`;
+  const preheader = result.reachable
+    ? `This is what you need to be doing.`
+    : `Reply with the right URL and I'll run it again.`;
   const first = firstName(visitorName);
   const greeting = first ? `Hey ${first},` : "Hey,";
 
@@ -1574,8 +1577,8 @@ ${fontImport}
     .join("");
 
   const opener = first
-    ? `${greeting} I took a real look at your site and pulled together a plain-English read on where you are with marketing right now and what I'd do about it. No jargon. No fluff. Here's the short version.`
-    : `I took a real look at your site and pulled together a plain-English read on where you are with marketing right now and what I'd do about it. No jargon. No fluff. Here's the short version.`;
+    ? `${greeting} Alright, I took a real look at your site. Here's what's actually going on with your marketing right now and what I'd do about it if you were paying me to run it for you.`
+    : `Alright, I took a real look at your site. Here's what's actually going on with your marketing right now and what I'd do about it if you were paying me to run it for you.`;
 
   const html = `<!doctype html>
 <html>
@@ -1584,12 +1587,16 @@ ${fontImport}
 ${fontImport}
 </head>
 <body style="${bodyBase}">
+  <!-- Preheader (hidden, shows in inbox preview next to subject) -->
+  <div style="display:none;max-height:0;overflow:hidden;mso-hide:all;visibility:hidden;opacity:0;color:transparent;height:0;width:0;">
+    ${escapeHtml(preheader)}
+  </div>
   <div style="max-width:640px;margin:0 auto;padding:44px 24px 56px;">
 
     <!-- Header -->
     <div style="font-size:10px;font-weight:700;letter-spacing:0.18em;color:${EMAIL_COLORS.textDim};text-transform:uppercase;">Venti Scale</div>
     <h1 style="font-family:Fraunces,Georgia,'Times New Roman',serif;font-size:36px;font-weight:500;letter-spacing:-0.025em;margin:12px 0 6px;line-height:1.1;color:${EMAIL_COLORS.text};">
-      Your growth plan
+      Your custom growth plan
     </h1>
     <div style="font-size:14px;font-weight:500;color:${EMAIL_COLORS.textMid};letter-spacing:-0.005em;">
       ${escapeHtml(displayUrl)}
@@ -1602,9 +1609,9 @@ ${fontImport}
 
     <!-- Marketing readout card -->
     <div style="background:${EMAIL_COLORS.card};border:1px solid ${EMAIL_COLORS.border};border-radius:14px;padding:28px 26px 14px;margin-top:28px;">
-      <div style="font-size:10px;font-weight:700;letter-spacing:0.16em;color:${EMAIL_COLORS.textDim};text-transform:uppercase;margin-bottom:4px;">The five-minute read</div>
+      <div style="font-size:10px;font-weight:700;letter-spacing:0.16em;color:${EMAIL_COLORS.textDim};text-transform:uppercase;margin-bottom:4px;">Here's the deal</div>
       <div style="font-family:Fraunces,Georgia,'Times New Roman',serif;font-size:22px;font-weight:500;letter-spacing:-0.015em;color:${EMAIL_COLORS.text};margin:6px 0 22px;line-height:1.25;">
-        Where your marketing is right now
+        What's actually going on with your marketing
       </div>
       ${readoutRows}
     </div>
@@ -1617,16 +1624,16 @@ ${fontImport}
     <!-- CTA -->
     <div style="margin-top:32px;padding:34px 28px;background:${EMAIL_COLORS.cardAlt};border:1px solid ${EMAIL_COLORS.borderStrong};border-radius:14px;text-align:center;">
       <div style="font-family:Fraunces,Georgia,'Times New Roman',serif;font-size:24px;font-weight:500;line-height:1.25;color:${EMAIL_COLORS.text};letter-spacing:-0.015em;">
-        Want us to actually do all this for you?
+        Want us to just do all this for you?
       </div>
       <p style="font-size:14.5px;line-height:1.65;color:${EMAIL_COLORS.textMid};margin:14px 0 24px;max-width:480px;margin-left:auto;margin-right:auto;">
-        We become the marketing team you'd hire if you had the budget to hire one. You keep running your business. We bring you more customers. One quick call, no contract, no pressure.
+        We're basically the marketing team you'd hire if you had the budget for one. You run your business. We bring you customers. Quick call, no contract, no pressure.
       </p>
       <a href="https://www.ventiscale.com" style="display:inline-block;background:${EMAIL_COLORS.red};color:#FFFFFF;text-decoration:none;font-size:14px;font-weight:600;padding:14px 28px;border-radius:10px;letter-spacing:0.01em;">
         Book a quick call
       </a>
       <div style="margin-top:16px;font-size:12px;color:${EMAIL_COLORS.textDim};">
-        Or just hit reply to this email. I read every one.
+        Or just reply to this email. I read em all.
       </div>
     </div>
 
@@ -1647,17 +1654,18 @@ ${fontImport}
   });
 
   const textLines = [
-    `Your growth plan — ${displayUrl}`,
+    `Your custom growth plan — ${displayUrl}`,
+    `${preheader}`,
     ``,
     opener,
     ``,
-    `WHERE YOUR MARKETING IS RIGHT NOW`,
+    `HERE'S THE DEAL`,
     ``,
     ...readoutLines.flatMap((l) => [l, ""]),
     planMarkdown,
     ``,
-    `Want us to actually do all this for you? Book a quick call: https://www.ventiscale.com`,
-    `Or just hit reply to this email. I read every one.`,
+    `Want us to just do all this for you? Book a quick call: https://www.ventiscale.com`,
+    `Or just reply to this email. I read em all.`,
     ``,
     `Dustin Gilmour, Venti Scale`,
   ];
