@@ -909,75 +909,197 @@ function assessPillars(result: AuditResult): Record<string, Pillar> {
   };
 }
 
-function pillarNarrative(p: Pillar, biz: string): string {
+// Classify the business from the free-text "business" field so we can tailor
+// the roadmap. This is lossy on purpose — we just need enough signal to pick
+// which pillar matters most for them.
+type BusinessKind =
+  | "ecommerce"
+  | "saas"
+  | "service"
+  | "agency"
+  | "coach"
+  | "local"
+  | "creator"
+  | "restaurant"
+  | "generic";
+
+function classifyBusiness(biz: string): BusinessKind {
+  const s = biz.toLowerCase();
+  if (/shop|store|ecom|e-com|brand|apparel|clothing|jewel|beauty|skin|supplement|cpg|product|retail|merch/.test(s)) return "ecommerce";
+  if (/saas|software|app|platform|tool|api|dev\b|startup/.test(s)) return "saas";
+  if (/agency|studio|marketing|design|creative|seo\b|ads/.test(s)) return "agency";
+  if (/coach|course|consult|mentor|teacher|info|education|training|academy/.test(s)) return "coach";
+  if (/restaurant|cafe|bar\b|diner|bakery|food truck|eatery/.test(s)) return "restaurant";
+  if (/clean|plumb|hvac|electric|roof|landscap|contract|handyman|install|repair|salon|spa|med spa|dentist|chiro|clinic|gym|studio\b|local|service/.test(s)) return s.includes("studio") ? "agency" : /clean|plumb|hvac|electric|roof|landscap|contract|handyman|repair/.test(s) ? "local" : "service";
+  if (/creator|youtuber|influencer|podcast|newsletter|writer|artist/.test(s)) return "creator";
+  return "generic";
+}
+
+// Human-readable phrase for the business so copy reads naturally.
+function bizPhrase(biz: string, kind: BusinessKind): string {
+  const lower = biz.toLowerCase().trim();
+  if (lower) return lower;
+  const fallback: Record<BusinessKind, string> = {
+    ecommerce: "your ecommerce brand",
+    saas: "your software product",
+    service: "your service business",
+    agency: "your agency",
+    coach: "your coaching business",
+    local: "your local service business",
+    creator: "your creator business",
+    restaurant: "your restaurant",
+    generic: "your business",
+  };
+  return fallback[kind];
+}
+
+interface RankedPriority {
+  pillar: Pillar;
+  rank: number;
+  score: number;
+}
+
+// Rank the pillars that need work, weighted by business context. This is the
+// core of the roadmap: the user gets a specific ordered plan with "why this
+// is #1 for you" reasoning tied to their actual business kind.
+function rankPriorities(
+  pillars: Record<string, Pillar>,
+  kind: BusinessKind,
+): RankedPriority[] {
+  // Keyed by check ID, not pillar label, because that's what p.id actually is.
+  const weights: Record<string, Partial<Record<BusinessKind, number>>> = {
+    pixels:        { ecommerce: 25, saas: 20, service: 15, agency: 20, coach: 15, local: 10, creator: 10, restaurant: 10, generic: 18 },
+    email_capture: { ecommerce: 22, saas: 18, service: 18, agency: 15, coach: 25, local: 12, creator: 22, restaurant: 10, generic: 18 },
+    content_hub:   { ecommerce: 10, saas: 18, service: 20, agency: 20, coach: 22, local: 15, creator: 18, restaurant: 8,  generic: 14 },
+    content_fresh: { ecommerce: 4,  saas: 8,  service: 10, agency: 10, coach: 10, local: 6,  creator: 10, restaurant: 4,  generic: 7 },
+    social:        { ecommerce: 12, saas: 6,  service: 8,  agency: 6,  coach: 12, local: 10, creator: 20, restaurant: 15, generic: 10 },
+    conversion:    { ecommerce: 14, saas: 12, service: 12, agency: 8,  coach: 10, local: 18, creator: 6,  restaurant: 12, generic: 10 },
+  };
+
+  const pool = Object.values(pillars).filter(
+    (p) => p.strength === "missing" || p.strength === "weak",
+  );
+  const scored = pool.map((p) => {
+    const base = p.strength === "missing" ? 100 : 45;
+    const bonus = weights[p.id]?.[kind] ?? 10;
+    return { pillar: p, score: base + bonus, rank: 0 };
+  });
+  scored.sort((a, b) => b.score - a.score);
+  scored.forEach((s, i) => (s.rank = i + 1));
+  return scored.slice(0, 3);
+}
+
+// "Why this is #1 for YOU" paragraph. Reasons from the specific business kind
+// so the same gap reads differently for a coach vs an ecom brand.
+function priorityNarrative(
+  priority: RankedPriority,
+  biz: string,
+  kind: BusinessKind,
+): string {
+  const p = priority.pillar;
   const isMissing = p.strength === "missing";
-  const bizLower = biz.toLowerCase();
+  const phrase = bizPhrase(biz, kind);
+
   switch (p.id) {
     case "pixels":
-      return isMissing
-        ? `I didn't find any tracking pixels on your site. No Meta Pixel, no GA4, no Google Tag Manager. Every dollar of ad spend you run right now is a guess, and every visitor who bounces is a lost signal you can't retarget. Measurement is always move one because every downstream decision depends on it.`
-        : `You have partial measurement in place but not the full stack. ${p.detail} The gap matters because any channel you run without full attribution is running blind, and you end up spending money on the channels that look loudest instead of the ones that actually convert.`;
+      if (isMissing) {
+        const why: Record<BusinessKind, string> = {
+          ecommerce: `For ${phrase}, this is costing you real money right now. Meta and Google both reward advertisers who feed them conversion data, and penalize the ones who don't. Without pixels, you're paying CPMs but missing the retargeting pool that makes ecommerce math actually work. Install them and your cost per purchase usually drops 20 to 40 percent inside the first month.`,
+          saas: `For ${phrase}, no tracking means no funnel. You can't tell me which page drives signups, which signups convert to trials, or which trials become paid. Every product decision and every ad dollar is a guess. Fix this and suddenly your whole team argues about evidence instead of opinions.`,
+          service: `For ${phrase}, tracking is what turns your website from a brochure into a lead machine. Right now you have no idea which visitors become enquiries and which bounce. Every ad dollar, every referral, every Google search gets mixed together. Install pixels and you start seeing the real path your best clients take before they book.`,
+          agency: `For ${phrase}, this is the one you should be embarrassed about — you sell marketing and your own site isn't tracking anything. Clients check. Prospects check. Install this today and practice what you preach.`,
+          coach: `For ${phrase}, tracking is the difference between building a cold audience and just hoping organic traffic buys. Pixels let you retarget everyone who lands on a sales page and doesn't convert. That retargeting audience is almost always where the next enrollment comes from.`,
+          local: `For ${phrase}, tracking tells you which service page earns the most calls and which ones are dead weight. Local businesses leak leads to call tracking dead spots all the time. Get the pixel in and the conversion events wired so the next ad you run actually has a target.`,
+          creator: `For ${phrase}, pixels unlock paid amplification of your best organic wins. Tracked visitors become retargeting audiences, and retargeting audiences become paid ad budget that returns. Without tracking, you're leaving the easiest win on the table.`,
+          restaurant: `For ${phrase}, tracking is how you turn website visits into reservations and repeat diners. Right now you can't tell which page drives bookings. Install GA4 and Meta Pixel so you can retarget everyone who looked at your menu and didn't book.`,
+          generic: `Every other decision you make after this depends on it. Ad spend, email strategy, which pages to optimize. Without tracking you're guessing at all of it.`,
+        };
+        return `You have no tracking pixels installed anywhere on your site. No Meta Pixel, no GA4, no Tag Manager. ${why[kind]}`;
+      }
+      return `Your tracking is partial, not complete. ${p.detail} That gap matters because the channels running without full attribution always end up looking better than they really are, and the ones doing the real work look quieter than they are. I'd audit and complete the stack in week one.`;
+
     case "email_capture":
-      return isMissing
-        ? `No email capture anywhere I could find on the site. Every visitor who lands here and isn't ready to buy right this second walks away and you have no way to pull them back. That's the single most expensive leak in DTC, and it's a 30 minute fix the first time we wire it up.`
-        : `There's some form of signup on the page but it's not doing the job. ${p.detail} A capture that doesn't capture is worse than no capture because it takes up attention without earning the return.`;
+      if (isMissing) {
+        const why: Record<BusinessKind, string> = {
+          ecommerce: `For ${phrase}, the math is brutal. About 98 percent of first-time visitors don't buy. If you're not capturing them you're burning the other 98. The welcome sequence you build next will do 20 to 30 percent of your total email revenue for the first year. This is the highest-leverage 2 hours of work on your whole site.`,
+          saas: `For ${phrase}, email is how you convert cold traffic into trials on their second or third visit, not their first. Nobody signs up to a SaaS the first time they land. A simple "get our product updates" popup tied to a trial CTA will lift your signup rate within days.`,
+          service: `For ${phrase}, email capture is what lets you stay in front of prospects who aren't ready to book today. Most service clients research for weeks before they reach out. If you're not capturing them during that research, a competitor with a newsletter is.`,
+          agency: `For ${phrase}, a capture + nurture sequence is how you prove to prospects that you actually know what you're doing before the discovery call. The best agencies close deals through newsletters, not cold outreach.`,
+          coach: `For ${phrase}, this is the entire game. Your business runs on email. If you don't have a list and a nurture sequence, you're building on rented social platforms and watching the roof cave in every algorithm change. A popup, a lead magnet, and a 5-email welcome sequence is your highest priority this month.`,
+          local: `For ${phrase}, an email list is how you stop relying on cold leads and start booking from a warm audience. Even for a local business, a monthly newsletter with a seasonal offer doubles as cheap retention.`,
+          creator: `For ${phrase}, your email list is the only audience asset you actually own. Everything else is rented. This is the most important button on your site.`,
+          restaurant: `For ${phrase}, email means your regulars come back more often and new visitors book their second meal. A simple capture with a "first-visit drink on us" offer funds itself on the first night someone walks in.`,
+          generic: `No capture means every non-buyer is gone forever. Fix this once and it runs forever.`,
+        };
+        return `I couldn't find any email capture on your site. ${why[kind]}`;
+      }
+      return `You have a signup form but it's not pulling its weight. ${p.detail} A capture that exists without a real offer and a sequence behind it is just decoration. I'd rewrite the offer and wire up a 5-email welcome this week.`;
+
     case "content_hub":
-      return isMissing
-        ? `No blog, no content library, no evergreen assets working for you while you sleep. For ${bizLower} that means zero organic traffic compounding over time. Every visitor right now comes from paid or from word of mouth. Content is how you stop renting attention and start owning it.`
-        : `You have a blog or content section but it's underbuilt. ${p.detail} The gap is depth, not existence. A thin content hub is almost worse than none because it sets an expectation and doesn't deliver.`;
+      if (isMissing) {
+        const why: Record<BusinessKind, string> = {
+          ecommerce: `For ${phrase}, content is how you show up in Google when buyers are researching before they purchase. "Best X for Y" searches are where 40 percent of ecom traffic comes from and right now you're invisible to all of it. A handful of buyer-intent blog posts can unlock a channel that runs forever with no ad spend.`,
+          saas: `For ${phrase}, content IS distribution. SaaS founders who skip the blog end up trapped in paid forever. The founders who ship one good article a week for a year usually have organic out-earning paid by month 18. There is no shortcut and no substitute.`,
+          service: `For ${phrase}, content is how you rank for the 50 long-tail "how do I..." questions your prospects are typing into Google right now. Each one you answer becomes a landing page that generates leads in its sleep. No content hub means 100 percent of your leads have to come from referrals or ads.`,
+          agency: `For ${phrase}, your content hub is your sales pitch. Prospects judge your expertise by how you write about it. If there's nothing there, the pitch writes itself: "why should I hire you when you don't even write about your own work?"`,
+          coach: `For ${phrase}, content is how you build the trust that lets a cold stranger pay you thousands of dollars. The coaching business model is content + proof + offer. You're missing the first leg of the tripod.`,
+          local: `For ${phrase}, local SEO rewards businesses that publish regularly. One blog post a month targeting your city + service combinations is usually enough to outrank 80 percent of your competition in the local pack.`,
+          creator: `For ${phrase}, the content IS the business. A thin blog or no blog is a signal to your audience that you're not really committed to the long game.`,
+          restaurant: `For ${phrase}, a content section with seasonal menus, chef stories, and local partnerships is what helps you rank for "restaurants near me" in Google's local results.`,
+          generic: `Content is how you stop renting attention and start owning it. This gap compounds every month you don't close it.`,
+        };
+        return `There's no blog or content library on your site. ${why[kind]}`;
+      }
+      return `Your content section exists but it's thin. ${p.detail} The fix isn't starting from scratch, it's commitment to cadence and topic clustering so each new post builds on the last.`;
+
     case "content_fresh":
       return isMissing
-        ? `Your blog exists but the latest post is stale. Google treats abandoned blogs the same way it treats broken links. Cadence matters more than volume, and right now your cadence reads as "gave up."`
-        : `Your blog is active but the cadence is inconsistent. ${p.detail} Regular publishing beats occasional brilliance every time because Google rewards the signal that you're alive.`;
+        ? `Your blog exists but hasn't been updated in a long time. ${p.detail} Abandoned blogs are worse than no blog because Google notices, readers notice, and it signals "this business stopped caring." Restart the cadence, even at one post a week, and the freshness signal flips back in your favor within a month.`
+        : `Your cadence is inconsistent. ${p.detail} Regular publishing beats sporadic brilliance because Google rewards the drumbeat, not the individual post quality.`;
+
     case "social":
       return isMissing
-        ? `I couldn't find any social links on your site. For ${bizLower} in 2026, that's both a trust signal problem and a distribution problem. Customers check social to see if you're real. Algorithms check social to see if you exist at all.`
-        : `You're on some platforms but not enough of them. ${p.detail} A sparse social footprint is a missed distribution channel, especially if your audience lives on one of the platforms you're not on yet.`;
+        ? `No social links anywhere on your site. ${p.detail} For ${phrase}, that's two problems at once. Customers check social to decide if you're real, and algorithms check social to decide if you exist. Adding the links takes 5 minutes. Not having them costs you trust on every visit.`
+        : `Your social footprint is sparse. ${p.detail} You don't need to be on every platform, but the ones your customers live on need to show up in your footer.`;
+
     case "conversion":
       return isMissing
-        ? `No live chat or conversion widget on the site. High intent visitors with a quick question have no way to ask it, and "I'll come back to this later" almost always means "I never come back."`
-        : `You have some conversion tooling in place but it isn't optimized. ${p.detail}`;
+        ? `No live chat or conversion tool on the site. ${p.detail} For ${phrase} that's a dropped baton every single time a high-intent visitor has a quick question and no way to ask it. "I'll come back later" almost always means never.`
+        : `Your conversion tooling is present but underused. ${p.detail}`;
+
     default:
       return p.detail;
   }
 }
 
-function openingParagraph(
+function openingRead(
   pillars: Record<string, Pillar>,
   biz: string,
   domain: string,
+  kind: BusinessKind,
 ): string {
   const values = Object.values(pillars);
   const missing = values.filter((p) => p.strength === "missing").length;
   const weak = values.filter((p) => p.strength === "weak").length;
   const strong = values.filter((p) => p.strength === "strong").length;
-  const strongNames = values
-    .filter((p) => p.strength === "strong")
-    .map((p) => p.name.toLowerCase());
+  const phrase = bizPhrase(biz, kind);
 
-  const bizLower = biz.toLowerCase();
   if (missing >= 4) {
-    return `You're running ${bizLower} at ${domain} with close to a blank slate on the marketing side. That's not a criticism. Most founders I talk to are exactly here before they hire us, and it's actually the best place to build from because we get to set the system up right instead of untangling someone else's half-working stack. The gaps below are the ones I'd close first, in this order.`;
+    return `I ran a real audit on ${domain} and here's the honest read. You're running ${phrase} with most of the marketing infrastructure still missing. I know how that sounds but stay with me. Most founders I work with look exactly like this when we start, and it's actually the best place to build from because we get to install things right the first time instead of untangling someone else's half-working stack. The roadmap below is ordered specifically for your situation.`;
   }
   if (missing >= 2) {
-    const strongPhrase =
-      strongNames.length === 0
-        ? "the basics on the site"
-        : strongNames.length === 1
-          ? `${strongNames[0]} already working`
-          : `${strongNames.slice(0, -1).join(", ")} and ${strongNames[strongNames.length - 1]} already in place`;
-    return `You've got some of the pieces together but the system isn't wired up yet. I can see ${strongPhrase} for ${bizLower} at ${domain}, which is a real starting point. The ${missing} foundational gaps I found below are each quietly costing you growth every month you don't close them.`;
+    return `I ran a real audit on ${domain} and here's what I see. You've got some of the pieces in place for ${phrase}, and a few foundational ones that aren't wired up yet. Each of those gaps is quietly costing you growth every month. The good news is none of them are hard to fix once you know which order to tackle them in, and that order matters a lot. Here's how I'd rank them for you specifically.`;
   }
   if (missing === 1) {
-    return `You're running a real marketing operation and most of the fundamentals are in place for ${bizLower}. One specific gap is the bottleneck right now. Close it, and everything else you're already doing compounds on top of what you have.`;
+    return `I ran a real audit on ${domain} and honestly, most of the fundamentals are already there for ${phrase}. There's one real gap that's acting as the bottleneck right now. Close it, and everything else you're already doing starts compounding on top of a stronger base. Here's what I'd focus on.`;
   }
   if (weak >= 2) {
-    return `Your foundation is solid. No glaring holes across the ${values.length} pillars I assessed for ${bizLower} at ${domain}. What I see is a few things that are present but not firing at full strength. This is optimization territory, not repair. Different kind of engagement, but a higher ceiling to push against.`;
+    return `I ran a real audit on ${domain}. No glaring holes. ${strong} of 6 foundational pillars are solid for ${phrase}. What I see instead is a few things that are present but not firing at full strength. This is optimization territory, which is a better conversation to have than "we need to rebuild from scratch." Here's where I'd push for more leverage.`;
   }
   if (weak === 1) {
-    return `Honestly, your marketing fundamentals are in great shape. ${strong} of ${values.length} pillars are strong, and only one needs tightening. This is the profile of a brand that's ready to scale, not one that needs to rebuild.`;
+    return `Honestly, ${phrase} is in great shape. ${strong} of 6 pillars are strong and only one needs tightening. This is the profile of a brand that's ready to scale, not one that needs to rebuild. Here's the single area where I'd push for more.`;
   }
-  return `Your marketing system is already the kind of thing most brands are trying to build toward. Measurement, capture, content, distribution — all firing. This audit is giving you a clean grade because you've done the work. The opportunity here is compounding what's working, not fixing what isn't.`;
+  return `Your marketing system is already the kind of thing most brands are trying to build toward. Measurement, capture, content, distribution — all firing for ${phrase}. The audit gave you a clean grade because you've done the work. The opportunity now is compounding what's already working, not fixing what isn't.`;
 }
 
 function thirtyDayActions(
@@ -1088,59 +1210,53 @@ export function buildMarketingPlan(
   businessType: string,
 ): string {
   const pillars = assessPillars(result);
-  const biz = businessType.trim() || "your business";
+  const biz = (businessType || "").trim();
+  const kind = classifyBusiness(biz);
   const domain = result.finalUrl
     .replace(/^https?:\/\//, "")
     .replace(/\/$/, "");
 
-  const gapOrder: Array<keyof typeof pillars> = [
-    "measurement",
-    "capture",
-    "content",
-    "freshness",
-    "distribution",
-    "conversion",
-  ];
-  const gaps = gapOrder
-    .map((k) => pillars[k])
-    .filter((p) => p.strength === "missing" || p.strength === "weak")
-    .slice(0, 3);
+  const priorities = rankPriorities(pillars, kind);
 
   const lines: string[] = [];
 
-  lines.push("## Where you are right now");
+  lines.push("## Here's what I see on your site");
   lines.push("");
-  lines.push(openingParagraph(pillars, biz, domain));
+  lines.push(openingRead(pillars, biz, domain, kind));
   lines.push("");
 
-  lines.push("## The biggest gaps I see");
+  lines.push("## Your roadmap, ranked in order of impact");
   lines.push("");
-  if (gaps.length === 0) {
+  if (priorities.length === 0) {
     lines.push(
-      "Nothing broken. Your system has the right pieces and they're all firing. The next moves are about sharpening what already works, not fixing what doesn't.",
+      "Nothing broken to rank. Every pillar I checked is firing. The next moves are about sharpening what already works, not fixing what doesn't. Skip ahead to the 30 day plan below for what that looks like.",
     );
+    lines.push("");
   } else {
-    gaps.forEach((p, i) => {
-      lines.push(`${i + 1}. **${p.name}.** ${pillarNarrative(p, biz)}`);
+    const rankLabel = ["**#1 priority**", "**#2 priority**", "**#3 priority**"];
+    priorities.forEach((pri, i) => {
+      lines.push(`${rankLabel[i]}: **${pri.pillar.name}.**`);
+      lines.push("");
+      lines.push(priorityNarrative(pri, biz, kind));
+      lines.push("");
     });
   }
-  lines.push("");
 
-  lines.push("## What I'd do in your first 30 days with us");
+  lines.push("## What the first 30 days look like if we work together");
   lines.push("");
   for (const a of thirtyDayActions(pillars, biz)) {
     lines.push(a);
     lines.push("");
   }
 
-  lines.push("## What I'd do in the 60 to 90 day window");
+  lines.push("## What happens in days 60 to 90");
   lines.push("");
   for (const a of sixtyNinetyActions(pillars, biz)) {
     lines.push(a);
   }
   lines.push("");
 
-  lines.push("## The one thing I'd fix this week even without us");
+  lines.push("## The one thing I'd do this week, even without us");
   lines.push("");
   lines.push(oneThingThisWeek(pillars));
 
