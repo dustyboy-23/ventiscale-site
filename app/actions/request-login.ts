@@ -1,36 +1,20 @@
 "use server";
 
 import { createAdminClient } from "@/lib/supabase/admin";
+import { checkRateLimit } from "@/lib/rate-limit";
 
 const FROM_EMAIL = "noreply@ventiscale.com";
 const FROM_NAME = "Venti Scale";
 const REPLY_TO_EMAIL = "dustin@ventiscale.com";
 const REPLY_TO_NAME = "Dusty at Venti Scale";
 
-// Same soft-gate pattern as the audit route. Resets on cold start, fine
-// as a first-line defense against casual abuse. Vercel's upstream DDoS
-// protection catches anything serious.
-const RATE_LIMIT_MAX = 5;
-const RATE_LIMIT_WINDOW_MS = 10 * 60 * 1000;
-const rateBuckets = new Map<string, number[]>();
-
-function checkRateLimit(key: string): boolean {
-  const now = Date.now();
-  const cutoff = now - RATE_LIMIT_WINDOW_MS;
-  const existing = (rateBuckets.get(key) || []).filter((t) => t > cutoff);
-  if (existing.length >= RATE_LIMIT_MAX) {
-    rateBuckets.set(key, existing);
-    return false;
-  }
-  existing.push(now);
-  rateBuckets.set(key, existing);
-  if (rateBuckets.size > 2000) {
-    for (const [k, v] of rateBuckets.entries()) {
-      if (v.every((t) => t <= cutoff)) rateBuckets.delete(k);
-    }
-  }
-  return true;
-}
+// Persistent rate limit via rate_limits table. 5 magic link requests
+// per email per 10 minutes. Keyed by email so an attacker trying to
+// enumerate users can't use a single IP to spray, and a victim who
+// mistypes their address a few times isn't locked out of the whole
+// service.
+const LOGIN_RATE_LIMIT_MAX = 5;
+const LOGIN_RATE_LIMIT_WINDOW_MS = 10 * 60 * 1000;
 
 export type RequestLoginResult =
   | { ok: true }
@@ -42,8 +26,14 @@ export async function requestMagicLink(emailRaw: string): Promise<RequestLoginRe
     return { ok: false, error: "invalid_email" };
   }
 
-  if (!checkRateLimit(email)) {
-    console.warn("[login] rate limit hit", { email });
+  const rateOk = await checkRateLimit(
+    `login:${email}`,
+    LOGIN_RATE_LIMIT_MAX,
+    LOGIN_RATE_LIMIT_WINDOW_MS,
+  );
+  if (!rateOk) {
+    // Don't log the email — PII hygiene.
+    console.warn("[login] rate limit hit");
     return { ok: false, error: "rate_limit" };
   }
 

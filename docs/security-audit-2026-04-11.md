@@ -87,3 +87,62 @@ These are real but small — worth doing soon, not worth pausing client conversa
 | `app/auth/confirm/page.tsx` | `next` validated to same-origin path |
 | `lib/current-client.ts` | PII scrubbed from logs |
 | `supabase/migrations/20260411_03_rls_deny_writes.sql` | explicit RLS write denial, applied |
+
+---
+
+## Round 2 — unbiased self-audit (same day)
+
+Round 1 was scoped by what I told the agent to look at. I went back in to find what I missed by reading the code myself instead of summarizing a report. One real finding, two smaller ones.
+
+### HIGH — SSRF via the public audit endpoint
+- **What:** `lib/audit.ts → fetchHtml()` took any visitor-submitted URL and fetched it from the Vercel serverless function with `redirect: "follow"` and no hostname validation. `isValidUrl` in the audit route only checked that the string *looked* like a domain — it still accepted `169.254.169.254`, `127.0.0.1`, `10.0.0.5`, or any public hostname that 302s to an internal target. `probeFreshness()` did the same thing against `/sitemap.xml` and friends.
+- **Impact:** An attacker could POST an audit for `http://169.254.169.254/latest/meta-data/...` and our function would fetch the cloud metadata service and mail the HTML back to the attacker's email. Same class of bug as the old Capital One breach. On Vercel the metadata endpoint isn't the exact AWS one, but the category (probe internal services, enumerate infra) is exactly what SSRF is.
+- **Fix:**
+  1. New `safeFetch()` walks redirects manually (`redirect: "manual"`, max 5 hops). Every hop is re-validated — a public URL that 302s to an internal IP is caught on the second hop.
+  2. Every hop runs `assertPublicHost()`, which does a real DNS lookup (`dns.lookup`, same resolver fetch uses) and rejects if *any* returned address is in a blocked range: `10/8`, `127/8`, `169.254/16`, `172.16/12`, `192.168/16`, `100.64/10` (CGNAT), `0/8`, multicast, plus IPv6 `::1`, `fe80::/10`, `fc00::/7`, `ff00::/8`, and IPv4-mapped `::ffff:...`.
+  3. Protocol whitelist: only `http:` / `https:`. `file://`, `gopher://`, `ftp://` are rejected before the socket is opened.
+  4. `isValidUrl` in `app/api/audit/route.ts` now rejects bare IP literals and numeric TLDs up-front, so the fast path never even hits DNS.
+  5. `probeFreshness()` now goes through `safeFetch()` too — same guard, same redirect handling.
+
+### LOW — Sign-out left `vs-active-client` cookie behind
+- **What:** `POST /auth/signout` cleared Supabase auth cookies and `vs-demo`, but not `vs-active-client`. The cookie is always re-validated against the new user's memberships on next login, so it's never a leak — but leaving it set meant a user logging into a second account on the same browser would briefly see their old active-client id attempted before the re-check rejected it.
+- **Impact:** Hygiene, not a leak. Noisy from a defense-in-depth standpoint.
+- **Fix:** Sign-out now clears `vs-active-client` alongside `vs-demo`.
+
+### Confirmed safe in round 2
+- **`dangerouslySetInnerHTML`** — used only for hardcoded JSONLD schema (`FAQ_JSONLD`, `ORGANIZATION_JSONLD`, `SERVICE_JSONLD`). Zero user input reaches it. Not an XSS surface.
+- **`client.logo_url`** — stored in `clients`, admin-only writes (explicit RLS deny from phase 3), and currently rendered nowhere in the portal UI. When it does get rendered, add a scheme whitelist (`https:` only) and a CDN allowlist before opening it to client-set input.
+- **Marketing audit form inputs reaching Brevo** — `sendLeadNotification()` HTML-escapes every user field before putting it in the email template. `entry.notes` is escaped and line-breaks are converted with `replace(/\n/g, "<br>")` on the *escaped* string, so raw HTML can't enter the mail body.
+
+### HIGH — Next.js DoS CVE (GHSA-q4gf-8mx6-v5v3)
+- **What:** `npm audit` flagged `next@16.2.0` for a Server Components DoS vulnerability. Affects 16.0.0-beta.0 through 16.2.2. Fix released in 16.2.3.
+- **Impact:** A crafted request could exhaust server resources on a page that uses Server Components — every portal page falls into this category. On Vercel it would burn function time and quota before the edge kills the request.
+- **Fix:** Upgraded to `next@16.2.3`. `npm audit` clean (0 vulnerabilities). Build succeeds.
+
+### MEDIUM — Rate limiters were in-memory (Vercel cold start bypass)
+- **What:** Both `/api/audit` and the `requestMagicLink` server action used per-process `Map`-based rate limiters. On Vercel, serverless functions cold-start frequently — any determined attacker could bypass the limits just by spreading requests across cold starts.
+- **Impact:** Audit endpoint could be used to spam the Brevo send pipeline and the `audit_leads` table. Magic-link endpoint could be used to spray signup emails at arbitrary addresses (Brevo abuse reports + sender reputation damage).
+- **Fix:**
+  1. New `rate_limits` Supabase table (migration `20260411_04_rate_limits.sql`) with explicit RLS deny on all roles — only the service role bypasses. Applied to production.
+  2. New `lib/rate-limit.ts` helper: counts hits in the window, inserts on admit, fails open if Supabase is down, and opportunistically reaps rows older than 24h on ~1% of writes.
+  3. `/api/audit` now calls `checkRateLimit("audit:<ip>", 3, 10min)`.
+  4. `requestMagicLink` now calls `checkRateLimit("login:<email>", 5, 10min)`. The email is no longer logged alongside the rate-limit warning.
+
+### Hardening — baseline security headers
+- **What:** Added `Strict-Transport-Security`, `X-Frame-Options: DENY`, `X-Content-Type-Options: nosniff`, `Referrer-Policy: strict-origin-when-cross-origin`, and a minimal `Permissions-Policy` to every response via `next.config.ts`.
+- **Why:** HSTS forces browsers to remember HTTPS-only for 2 years so a downgrade attack on the next visit can't strip TLS. X-Frame-Options: DENY prevents the portal from being iframed (clickjacking). nosniff forces browsers to honor our Content-Type. Referrer-Policy stops the auth `code` query param from leaking in the Referer when a signed-in user clicks an outbound link. Permissions-Policy disables features we'll never use (camera/mic/geo) so a compromised third-party script can't prompt for them.
+- **Note:** Deliberately skipped CSP — a wrong CSP silently breaks pages, and the marketing site uses inline JSON-LD scripts. Adding CSP belongs in a follow-up where we can dry-run it against a staging env.
+
+### Round 2 changes in production
+
+| File | Change |
+|---|---|
+| `lib/audit.ts` | SSRF-safe `fetchHtml` + `safeFetch` (DNS validation, manual redirect walk, protocol whitelist) |
+| `app/api/audit/route.ts` | `isValidUrl` rejects bare IP literals and numeric TLDs |
+| `app/auth/signout/route.ts` | clears `vs-active-client` cookie on signout |
+| `package.json` + `package-lock.json` | `next` 16.2.0 → 16.2.3 (DoS CVE patch) |
+| `next.config.ts` | HSTS, X-Frame-Options, nosniff, Referrer-Policy, Permissions-Policy |
+| `supabase/migrations/20260411_04_rate_limits.sql` | persistent `rate_limits` table with RLS deny-all, applied |
+| `lib/rate-limit.ts` | shared `checkRateLimit()` helper backed by the table |
+| `app/api/audit/route.ts` | swapped in-memory limiter for persistent one |
+| `app/actions/request-login.ts` | swapped in-memory limiter for persistent one, stopped logging email |

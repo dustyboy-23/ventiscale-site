@@ -16,5 +16,6 @@ export async function POST(request: NextRequest) {
   }
   const response = NextResponse.redirect(`${origin}/login`, { status: 303 });
   response.cookies.set("vs-demo", "", { path: "/", maxAge: 0 });
+  response.cookies.set("vs-active-client", "", { path: "/", maxAge: 0 });
   return response;
 }

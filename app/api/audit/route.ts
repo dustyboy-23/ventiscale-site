@@ -6,6 +6,7 @@ import {
   type AuditResult,
 } from "@/lib/audit";
 import { createAdminClient } from "@/lib/supabase/admin";
+import { checkRateLimit } from "@/lib/rate-limit";
 
 // Audit lead capture + real audit generation:
 // 1. Validates input
@@ -34,33 +35,11 @@ const NOTIFY_TO = "dustin@ventiscale.com";
 const NOTIFY_FROM_EMAIL = "noreply@ventiscale.com";
 const NOTIFY_FROM_NAME = "Venti Scale Audit";
 
-// In-memory rate limit. Resets on cold start, which is fine as a soft gate
-// against casual abuse, anything serious gets stopped by Vercel's DDoS
-// protection upstream. Max 3 submissions per IP per 10 minutes.
-const RATE_LIMIT_MAX = 3;
-const RATE_LIMIT_WINDOW_MS = 10 * 60 * 1000;
-const rateBuckets = new Map<string, number[]>();
-
-function checkRateLimit(ip: string): boolean {
-  const now = Date.now();
-  const cutoff = now - RATE_LIMIT_WINDOW_MS;
-  const existing = (rateBuckets.get(ip) || []).filter((t) => t > cutoff);
-  if (existing.length >= RATE_LIMIT_MAX) {
-    rateBuckets.set(ip, existing);
-    return false;
-  }
-  existing.push(now);
-  rateBuckets.set(ip, existing);
-  // Opportunistic cleanup so the map doesn't grow unbounded across warm invocations.
-  if (rateBuckets.size > 500) {
-    for (const [key, stamps] of rateBuckets) {
-      const fresh = stamps.filter((t) => t > cutoff);
-      if (fresh.length === 0) rateBuckets.delete(key);
-      else rateBuckets.set(key, fresh);
-    }
-  }
-  return true;
-}
+// Persistent rate limit via Supabase rate_limits table. Max 3 audit
+// submissions per IP per 10 minutes. Survives cold starts, which the
+// old in-memory Map did not.
+const AUDIT_RATE_LIMIT_MAX = 3;
+const AUDIT_RATE_LIMIT_WINDOW_MS = 10 * 60 * 1000;
 
 async function brevoSend(payload: Record<string, unknown>) {
   const apiKey = process.env.BREVO_API_KEY;
@@ -279,7 +258,17 @@ function isValidEmail(s: string) {
 function isValidUrl(s: string) {
   if (!s) return false;
   const cleaned = s.trim().toLowerCase().replace(/^https?:\/\//, "").replace(/\/$/, "");
-  return /^[a-z0-9-]+(\.[a-z0-9-]+)+/.test(cleaned);
+  // Must look like a real hostname with a TLD. Reject bare IP literals
+  // (the fetchHtml SSRF guard catches them too, but we'd rather never
+  // touch the network in the first place). At least one alpha char
+  // between dots keeps 169.254.169.254 / 127.0.0.1 / 10.0.0.1 out.
+  const host = cleaned.split("/")[0];
+  if (!/^[a-z0-9-]+(\.[a-z0-9-]+)+$/.test(host)) return false;
+  if (/^\d+(\.\d+)+$/.test(host)) return false;
+  // Require the TLD to contain at least one letter — no numeric TLDs.
+  const tld = host.split(".").pop() || "";
+  if (!/[a-z]/.test(tld)) return false;
+  return true;
 }
 
 // Only allow browser form POSTs from our own marketing site. Server-to-
@@ -326,7 +315,12 @@ export async function POST(req: Request) {
     req.headers.get("x-real-ip") ||
     "unknown";
 
-  if (!checkRateLimit(ip)) {
+  const rateOk = await checkRateLimit(
+    `audit:${ip}`,
+    AUDIT_RATE_LIMIT_MAX,
+    AUDIT_RATE_LIMIT_WINDOW_MS,
+  );
+  if (!rateOk) {
     console.warn("[audit] rate limit hit");
     return NextResponse.json(
       { ok: false, error: "You've run a few audits already. Give it 10 minutes and try again, or just email me at hello@ventiscale.com." },

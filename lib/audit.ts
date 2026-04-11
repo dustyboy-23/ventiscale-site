@@ -35,10 +35,13 @@ export interface AuditResult {
   bodyText?: string;
 }
 
+import { lookup as dnsLookup } from "node:dns/promises";
+
 const FETCH_TIMEOUT_MS = 10_000;
 const MAX_HTML_BYTES = 2 * 1024 * 1024; // 2 MB cap
 const USER_AGENT =
   "Mozilla/5.0 (compatible; VentiScaleAuditBot/1.0; +https://www.ventiscale.com/)";
+const MAX_REDIRECTS = 5;
 
 // ──────────────────────────────────────────────────────────
 // URL + fetch
@@ -48,6 +51,94 @@ export function normalizeUrl(raw: string): string {
   if (!trimmed) return "";
   if (/^https?:\/\//i.test(trimmed)) return trimmed;
   return `https://${trimmed}`;
+}
+
+// SSRF guard: block private, loopback, link-local, cloud-metadata,
+// CGNAT, and multicast ranges for both IPv4 and IPv6. Called against
+// the *resolved* IP of every URL we fetch (not the string), so a
+// public hostname that points at 127.0.0.1 or the AWS metadata IP
+// still gets rejected.
+function isBlockedIp(address: string, family: number): boolean {
+  if (family === 4) {
+    const parts = address.split(".").map((n) => parseInt(n, 10));
+    if (parts.length !== 4 || parts.some((n) => Number.isNaN(n))) return true;
+    const [a, b] = parts;
+    if (a === 10) return true; // 10.0.0.0/8
+    if (a === 127) return true; // loopback
+    if (a === 0) return true; // 0.0.0.0/8
+    if (a === 169 && b === 254) return true; // link-local + AWS/GCP metadata
+    if (a === 172 && b >= 16 && b <= 31) return true; // 172.16.0.0/12
+    if (a === 192 && b === 168) return true; // 192.168.0.0/16
+    if (a === 100 && b >= 64 && b <= 127) return true; // CGNAT 100.64.0.0/10
+    if (a >= 224) return true; // multicast + reserved
+    return false;
+  }
+  // IPv6
+  const lower = address.toLowerCase();
+  if (lower === "::1" || lower === "::") return true; // loopback / unspecified
+  if (lower.startsWith("fe80:") || lower.startsWith("fe80::")) return true; // link-local
+  if (/^f[cd][0-9a-f]{2}:/.test(lower)) return true; // unique local fc00::/7
+  if (lower.startsWith("ff")) return true; // multicast
+  // IPv4-mapped IPv6 (::ffff:10.0.0.1) — extract tail and re-check
+  const mapped = lower.match(/^::ffff:(\d+\.\d+\.\d+\.\d+)$/);
+  if (mapped) return isBlockedIp(mapped[1], 4);
+  return false;
+}
+
+async function assertPublicHost(hostname: string): Promise<void> {
+  // Empty hostname / bare IP literal in URL — resolve via lookup and
+  // validate every returned address. `dns.lookup` honors /etc/hosts
+  // which is the same resolution path fetch() will use.
+  const results = await dnsLookup(hostname, { all: true });
+  if (!results.length) {
+    throw new Error("DNS resolution returned no addresses");
+  }
+  for (const { address, family } of results) {
+    if (isBlockedIp(address, family)) {
+      throw new Error("blocked_host");
+    }
+  }
+}
+
+async function safeFetch(
+  url: string,
+  signal: AbortSignal,
+): Promise<{ res: Response; finalUrl: string }> {
+  // Walk redirects manually so every hop gets re-validated against the
+  // SSRF guard. `redirect: "follow"` would let a public URL 302 to
+  // http://169.254.169.254/ and bypass any up-front check.
+  let current = url;
+  for (let hop = 0; hop <= MAX_REDIRECTS; hop++) {
+    let parsed: URL;
+    try {
+      parsed = new URL(current);
+    } catch {
+      throw new Error("Invalid URL");
+    }
+    if (parsed.protocol !== "http:" && parsed.protocol !== "https:") {
+      throw new Error("Only http/https URLs are allowed");
+    }
+    await assertPublicHost(parsed.hostname);
+
+    const res = await fetch(current, {
+      headers: {
+        "user-agent": USER_AGENT,
+        accept: "text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8",
+        "accept-language": "en-US,en;q=0.9",
+      },
+      signal,
+      redirect: "manual",
+    });
+
+    if (res.status >= 300 && res.status < 400) {
+      const location = res.headers.get("location");
+      if (!location) return { res, finalUrl: current };
+      current = new URL(location, current).toString();
+      continue;
+    }
+    return { res, finalUrl: current };
+  }
+  throw new Error("Too many redirects");
 }
 
 async function fetchHtml(url: string): Promise<{
@@ -60,27 +151,20 @@ async function fetchHtml(url: string): Promise<{
   const controller = new AbortController();
   const timer = setTimeout(() => controller.abort(), FETCH_TIMEOUT_MS);
   try {
-    const res = await fetch(url, {
-      headers: {
-        "user-agent": USER_AGENT,
-        accept: "text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8",
-        "accept-language": "en-US,en;q=0.9",
-      },
-      signal: controller.signal,
-      redirect: "follow",
-    });
+    const { res, finalUrl } = await safeFetch(url, controller.signal);
     const buf = await res.arrayBuffer();
     const size = buf.byteLength;
     const sliced = size > MAX_HTML_BYTES ? buf.slice(0, MAX_HTML_BYTES) : buf;
     const html = new TextDecoder("utf-8", { fatal: false }).decode(sliced);
-    return { status: res.status, html, finalUrl: res.url, size };
+    return { status: res.status, html, finalUrl, size };
   } catch (err) {
+    const msg = (err as Error).message || "Network error";
     return {
       status: 0,
       html: "",
       finalUrl: url,
       size: 0,
-      error: (err as Error).message || "Network error",
+      error: msg === "blocked_host" ? "That URL isn't reachable from our auditor" : msg,
     };
   } finally {
     clearTimeout(timer);
@@ -154,11 +238,7 @@ async function probeFreshness(siteUrl: string): Promise<{ date: Date | null; sou
     const controller = new AbortController();
     const timer = setTimeout(() => controller.abort(), FRESH_TIMEOUT_MS);
     try {
-      const res = await fetch(origin + path, {
-        headers: { "user-agent": USER_AGENT },
-        signal: controller.signal,
-        redirect: "follow",
-      });
+      const { res } = await safeFetch(origin + path, controller.signal);
       if (!res.ok) {
         clearTimeout(timer);
         continue;
