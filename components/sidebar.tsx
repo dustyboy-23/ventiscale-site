@@ -205,13 +205,15 @@ export function Sidebar({
             </div>
             <div className="text-[11px] text-[var(--color-ink-subtle)] truncate">{role}</div>
           </div>
-          <Link
-            href="/auth/signout"
-            className="text-[var(--color-ink-subtle)] hover:text-[var(--color-ink)] transition-colors"
-            aria-label="Sign out"
-          >
-            <LogOut className="w-[15px] h-[15px]" />
-          </Link>
+          <form action="/auth/signout" method="post">
+            <button
+              type="submit"
+              className="text-[var(--color-ink-subtle)] hover:text-[var(--color-ink)] transition-colors"
+              aria-label="Sign out"
+            >
+              <LogOut className="w-[15px] h-[15px]" />
+            </button>
+          </form>
         </div>
       </div>
     </aside>

@@ -1,9 +1,11 @@
 import { NextResponse, type NextRequest } from "next/server";
 import { createClient } from "@/lib/supabase/server";
 
-// Sign-out endpoint. Kills the Supabase session if one exists, clears the
-// vs-demo cookie, then sends the user back to /login. Safe to hit while
-// unauthenticated — signOut() is a no-op without a session.
+// Sign-out endpoint. POST-ONLY — do not add a GET handler. Next.js
+// <Link> prefetches destinations on hover, and a GET-capable signout
+// meant the router was silently signing users out in the background
+// every time the sidebar rendered. The sidebar's sign-out control
+// must be a form POST (or client fetch POST), never a bare <Link>.
 export async function POST(request: NextRequest) {
   const { origin } = new URL(request.url);
   try {
@@ -15,9 +17,4 @@ export async function POST(request: NextRequest) {
   const response = NextResponse.redirect(`${origin}/login`, { status: 303 });
   response.cookies.set("vs-demo", "", { path: "/", maxAge: 0 });
   return response;
-}
-
-// Allow GET too so the sidebar link works without JS.
-export async function GET(request: NextRequest) {
-  return POST(request);
 }
