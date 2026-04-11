@@ -2,7 +2,6 @@ import { NextResponse, after } from "next/server";
 import {
   runAudit,
   renderAuditEmail,
-  generateMarketingPlan,
   type AuditResult,
 } from "@/lib/audit";
 
@@ -93,7 +92,7 @@ async function brevoSend(payload: Record<string, unknown>) {
 }
 
 async function sendAuditToVisitor(entry: AuditRequest, result: AuditResult) {
-  const { subject, html, text } = renderAuditEmail(result, entry.email);
+  const { subject, html, text } = renderAuditEmail(result, entry.email, entry.business);
   return brevoSend({
     sender: { name: NOTIFY_FROM_NAME, email: NOTIFY_FROM_EMAIL },
     to: [{ email: entry.email }],
@@ -122,7 +121,6 @@ async function sendLeadNotification(entry: AuditRequest, result: AuditResult) {
   const reachableRow = result.reachable
     ? `<tr><td style="${rowStyle}">Grade</td><td style="${valStyle}"><strong style="color:${gradeColor};font-size:22px;font-family:Georgia,serif;">${result.grade}</strong> <span style="color:${subtle};font-size:13px;">· ${result.score}/100</span></td></tr>
        <tr><td style="${rowStyle}">Checks</td><td style="${valStyle}"><span style="color:#C8362B;">${failed} failed</span> · <span style="color:#F5B841;">${warned} warnings</span> · <span style="color:#10E39A;">${passed} passed</span></td></tr>
-       <tr><td style="${rowStyle}">Plan</td><td style="${valStyle}">${result.plan ? `<span style="color:#10E39A;">AI generated</span> <span style="color:${subtle};">(${result.plan.length} chars)</span>` : `<span style="color:${subtle};">fallback template</span>`}</td></tr>
        <tr><td style="${rowStyle}">Final URL</td><td style="${valStyle}"><a href="${result.finalUrl}" style="color:#5280FF;text-decoration:none;">${result.finalUrl}</a></td></tr>`
     : `<tr><td style="${rowStyle}">Status</td><td style="${valStyle};color:#C8362B;"><strong>UNREACHABLE</strong>. ${result.error || "site did not respond"}</td></tr>`;
 
@@ -316,22 +314,6 @@ export async function POST(req: Request) {
       );
     } catch (err) {
       console.error("[audit] runAudit threw", err);
-    }
-
-    if (result && result.reachable) {
-      try {
-        result.businessType = business;
-        const plan = await generateMarketingPlan(result, url, business);
-        result.plan = plan;
-        console.log(
-          "[audit] plan",
-          entry.id,
-          plan ? `generated (${plan.length} chars)` : "fallback",
-        );
-      } catch (err) {
-        console.error("[audit] generateMarketingPlan threw", err);
-        result.plan = null;
-      }
     }
 
     if (result) {

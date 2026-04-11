@@ -33,8 +33,6 @@ export interface AuditResult {
   reachable: boolean;
   error?: string;
   bodyText?: string;
-  plan?: string | null;
-  businessType?: string;
 }
 
 const FETCH_TIMEOUT_MS = 10_000;
@@ -756,108 +754,6 @@ export async function runAudit(rawUrl: string): Promise<AuditResult> {
 }
 
 // ──────────────────────────────────────────────────────────
-// Claude-powered marketing plan generator
-// ──────────────────────────────────────────────────────────
-const ANTHROPIC_TIMEOUT_MS = 45_000;
-
-export async function generateMarketingPlan(
-  result: AuditResult,
-  url: string,
-  businessType: string,
-): Promise<string | null> {
-  const apiKey = process.env.ANTHROPIC_API_KEY;
-  if (!apiKey) {
-    console.warn("[audit] ANTHROPIC_API_KEY not set, skipping plan generation");
-    return null;
-  }
-  if (!result.reachable) return null;
-
-  // Structured findings for the prompt
-  const findings = result.checks
-    .filter((c) => c.status !== "info")
-    .map((c) => `${c.status.toUpperCase()}: ${c.label}. ${c.detail}`)
-    .join("\n");
-
-  const bodyText = result.bodyText || "(no body text extracted)";
-  const domain = result.finalUrl.replace(/^https?:\/\//, "").replace(/\/$/, "");
-
-  const prompt = `You are Dustin Gilmour, founder of Venti Scale, a done-for-you marketing agency for ecommerce brands. You're writing a personalized marketing plan for a prospect who just ran our free AI audit on their website. Write in first person, confident but never salesy. No em dashes. No corporate jargon. Direct. Think: how would a senior marketing operator explain what this business needs, in plain English, to the founder?
-
-URL audited: ${url}
-Business type (as entered by the prospect): ${businessType || "(not specified)"}
-Domain: ${domain}
-
-AUDIT FINDINGS:
-${findings}
-
-WHAT THE HOMEPAGE SAYS ABOUT ITSELF (first 3000 chars of visible text, scripts and styles stripped):
-"""
-${bodyText}
-"""
-
-Output in this exact structure, using markdown headings:
-
-## Where you are right now
-[2-3 sentences assessing their current marketing maturity based on the findings]
-
-## The 3 biggest gaps I see
-1. [Gap with specific reference to the findings]
-2. [Gap with specific reference to the findings]
-3. [Gap with specific reference to the findings]
-
-## What I'd do in your first 30 days with us
-[3-5 specific actions that address the gaps, written as if you're already their marketing team. Reference what they DO have as a starting point, not just what's missing.]
-
-## What I'd do in the 60-90 day window
-[2-3 actions that build on the 30-day foundation]
-
-## The one thing I'd fix this week even without us
-[One high-leverage fix they can do themselves. Earn trust by not gating everything behind hiring you.]
-
-Reference their specific business and what you see on their site. Adapt to what they have. If they already have a blog, don't tell them to start one, tell them to improve it. If they have no email capture, that's the first move. If they have pixels but no analytics, the priority is measurement. Be ADAPTIVE. Never generic. No em dashes anywhere. No pricing numbers. No mention of "free". Write like a real operator, not a marketer.`;
-
-  const controller = new AbortController();
-  const timer = setTimeout(() => controller.abort(), ANTHROPIC_TIMEOUT_MS);
-  try {
-    const res = await fetch("https://api.anthropic.com/v1/messages", {
-      method: "POST",
-      headers: {
-        "x-api-key": apiKey,
-        "anthropic-version": "2023-06-01",
-        "content-type": "application/json",
-      },
-      body: JSON.stringify({
-        model: "claude-sonnet-4-5-20250929",
-        max_tokens: 2500,
-        messages: [{ role: "user", content: prompt }],
-      }),
-      signal: controller.signal,
-    });
-    clearTimeout(timer);
-    if (!res.ok) {
-      const txt = await res.text();
-      console.error("[audit] Anthropic API error", res.status, txt.slice(0, 500));
-      return null;
-    }
-    const data = (await res.json()) as {
-      content?: Array<{ type: string; text?: string }>;
-    };
-    const block = (data.content || []).find((b) => b.type === "text");
-    const text = block?.text?.trim();
-    if (!text) {
-      console.error("[audit] Anthropic response had no text block");
-      return null;
-    }
-    // Final safety sweep, just in case
-    return text.replace(/—/g, ",").replace(/–/g, ",");
-  } catch (err) {
-    clearTimeout(timer);
-    console.error("[audit] generateMarketingPlan threw", err);
-    return null;
-  }
-}
-
-// ──────────────────────────────────────────────────────────
 // Email rendering
 // ──────────────────────────────────────────────────────────
 function escapeHtml(s: string): string {
@@ -964,55 +860,290 @@ function inlineFormat(s: string): string {
   return out;
 }
 
-function renderPlanFallback(result: AuditResult): string {
-  // If Claude didn't return anything, build a plan-shaped email from the
-  // findings alone so nothing ever looks broken.
-  const fails = result.checks.filter((c) => c.status === "fail");
-  const warns = result.checks.filter((c) => c.status === "warn");
-  const passes = result.checks.filter((c) => c.status === "pass");
+// ──────────────────────────────────────────────────────────
+// Marketing plan generator
+//
+// Builds a real adaptive marketing plan from the audit findings. Each of
+// the 6 marketing pillars (measurement, capture, content, freshness,
+// distribution, conversion) gets its own narrative + 30-day actions. The
+// opener, gap list, and priority ordering change based on what the site
+// actually has vs what it's missing, so no two plans read the same.
+// ──────────────────────────────────────────────────────────
+
+type PillarStrength = "strong" | "weak" | "missing" | "unknown";
+
+interface Pillar {
+  id: string;
+  name: string;
+  check: AuditCheck | undefined;
+  strength: PillarStrength;
+  detail: string;
+}
+
+function assessPillars(result: AuditResult): Record<string, Pillar> {
+  const get = (id: string) => result.checks.find((c) => c.id === id);
+  const toStrength = (c: AuditCheck | undefined): PillarStrength => {
+    if (!c) return "unknown";
+    if (c.status === "pass") return "strong";
+    if (c.status === "warn") return "weak";
+    if (c.status === "info") return "unknown";
+    return "missing";
+  };
+  const mk = (id: string, name: string): Pillar => {
+    const check = get(id);
+    return {
+      id,
+      name,
+      check,
+      strength: toStrength(check),
+      detail: check?.detail || "",
+    };
+  };
+  return {
+    measurement: mk("pixels", "Measurement"),
+    capture: mk("email_capture", "Email capture"),
+    content: mk("content_hub", "Content engine"),
+    freshness: mk("content_fresh", "Content freshness"),
+    distribution: mk("social", "Social distribution"),
+    conversion: mk("conversion", "Conversion tooling"),
+  };
+}
+
+function pillarNarrative(p: Pillar, biz: string): string {
+  const isMissing = p.strength === "missing";
+  const bizLower = biz.toLowerCase();
+  switch (p.id) {
+    case "pixels":
+      return isMissing
+        ? `I didn't find any tracking pixels on your site. No Meta Pixel, no GA4, no Google Tag Manager. Every dollar of ad spend you run right now is a guess, and every visitor who bounces is a lost signal you can't retarget. Measurement is always move one because every downstream decision depends on it.`
+        : `You have partial measurement in place but not the full stack. ${p.detail} The gap matters because any channel you run without full attribution is running blind, and you end up spending money on the channels that look loudest instead of the ones that actually convert.`;
+    case "email_capture":
+      return isMissing
+        ? `No email capture anywhere I could find on the site. Every visitor who lands here and isn't ready to buy right this second walks away and you have no way to pull them back. That's the single most expensive leak in DTC, and it's a 30 minute fix the first time we wire it up.`
+        : `There's some form of signup on the page but it's not doing the job. ${p.detail} A capture that doesn't capture is worse than no capture because it takes up attention without earning the return.`;
+    case "content_hub":
+      return isMissing
+        ? `No blog, no content library, no evergreen assets working for you while you sleep. For ${bizLower} that means zero organic traffic compounding over time. Every visitor right now comes from paid or from word of mouth. Content is how you stop renting attention and start owning it.`
+        : `You have a blog or content section but it's underbuilt. ${p.detail} The gap is depth, not existence. A thin content hub is almost worse than none because it sets an expectation and doesn't deliver.`;
+    case "content_fresh":
+      return isMissing
+        ? `Your blog exists but the latest post is stale. Google treats abandoned blogs the same way it treats broken links. Cadence matters more than volume, and right now your cadence reads as "gave up."`
+        : `Your blog is active but the cadence is inconsistent. ${p.detail} Regular publishing beats occasional brilliance every time because Google rewards the signal that you're alive.`;
+    case "social":
+      return isMissing
+        ? `I couldn't find any social links on your site. For ${bizLower} in 2026, that's both a trust signal problem and a distribution problem. Customers check social to see if you're real. Algorithms check social to see if you exist at all.`
+        : `You're on some platforms but not enough of them. ${p.detail} A sparse social footprint is a missed distribution channel, especially if your audience lives on one of the platforms you're not on yet.`;
+    case "conversion":
+      return isMissing
+        ? `No live chat or conversion widget on the site. High intent visitors with a quick question have no way to ask it, and "I'll come back to this later" almost always means "I never come back."`
+        : `You have some conversion tooling in place but it isn't optimized. ${p.detail}`;
+    default:
+      return p.detail;
+  }
+}
+
+function openingParagraph(
+  pillars: Record<string, Pillar>,
+  biz: string,
+  domain: string,
+): string {
+  const values = Object.values(pillars);
+  const missing = values.filter((p) => p.strength === "missing").length;
+  const weak = values.filter((p) => p.strength === "weak").length;
+  const strong = values.filter((p) => p.strength === "strong").length;
+  const strongNames = values
+    .filter((p) => p.strength === "strong")
+    .map((p) => p.name.toLowerCase());
+
+  const bizLower = biz.toLowerCase();
+  if (missing >= 4) {
+    return `You're running ${bizLower} at ${domain} with close to a blank slate on the marketing side. That's not a criticism. Most founders I talk to are exactly here before they hire us, and it's actually the best place to build from because we get to set the system up right instead of untangling someone else's half-working stack. The gaps below are the ones I'd close first, in this order.`;
+  }
+  if (missing >= 2) {
+    const strongPhrase =
+      strongNames.length === 0
+        ? "the basics on the site"
+        : strongNames.length === 1
+          ? `${strongNames[0]} already working`
+          : `${strongNames.slice(0, -1).join(", ")} and ${strongNames[strongNames.length - 1]} already in place`;
+    return `You've got some of the pieces together but the system isn't wired up yet. I can see ${strongPhrase} for ${bizLower} at ${domain}, which is a real starting point. The ${missing} foundational gaps I found below are each quietly costing you growth every month you don't close them.`;
+  }
+  if (missing === 1) {
+    return `You're running a real marketing operation and most of the fundamentals are in place for ${bizLower}. One specific gap is the bottleneck right now. Close it, and everything else you're already doing compounds on top of what you have.`;
+  }
+  if (weak >= 2) {
+    return `Your foundation is solid. No glaring holes across the ${values.length} pillars I assessed for ${bizLower} at ${domain}. What I see is a few things that are present but not firing at full strength. This is optimization territory, not repair. Different kind of engagement, but a higher ceiling to push against.`;
+  }
+  if (weak === 1) {
+    return `Honestly, your marketing fundamentals are in great shape. ${strong} of ${values.length} pillars are strong, and only one needs tightening. This is the profile of a brand that's ready to scale, not one that needs to rebuild.`;
+  }
+  return `Your marketing system is already the kind of thing most brands are trying to build toward. Measurement, capture, content, distribution — all firing. This audit is giving you a clean grade because you've done the work. The opportunity here is compounding what's working, not fixing what isn't.`;
+}
+
+function thirtyDayActions(
+  pillars: Record<string, Pillar>,
+  biz: string,
+): string[] {
+  const actions: string[] = [];
+  const bizLower = biz.toLowerCase();
+  const mNeed = pillars.measurement.strength !== "strong";
+  const cNeed = pillars.capture.strength !== "strong";
+  const contentNeed =
+    pillars.content.strength !== "strong" ||
+    pillars.freshness.strength === "missing";
+  const allStrong = !mNeed && !cNeed && !contentNeed;
+
+  if (allStrong) {
+    actions.push(
+      `**Week 1 is a measurement stack audit.** Even strong stacks drift. I want to confirm your Pixel and GA4 are firing clean events for add-to-cart, checkout, and purchase, and that your retargeting audiences are populated and recent. Fix the data before we touch the strategy.`,
+    );
+    actions.push(
+      `**Week 2 is a conversion rate sprint.** One landing page, one email, one ad creative, all tested against your current baseline. We find the weakest link in your funnel for ${bizLower} and we reinforce it.`,
+    );
+    actions.push(
+      `**Week 3 to 4 we open a new channel.** Based on your data, we pick the single highest leverage channel you're not running yet, and we launch with a real budget, a real creative, and real tracking in place from day one.`,
+    );
+    return actions;
+  }
+
+  if (mNeed) {
+    actions.push(
+      `**Week 1 is measurement.** We install Meta Pixel, GA4, and Google Tag Manager on day one. Configure conversion events for add-to-cart, checkout, and purchase so the data actually flows back to us. Build a 180 day retargeting audience in Meta Ads Manager so it's ready when we start spending.`,
+    );
+  }
+  if (cNeed) {
+    actions.push(
+      `**Week 1 to 2 is email capture.** We wire Klaviyo or Mailchimp to your site with a welcome popup that offers something real. Not "10% off." For ${bizLower} the right offer is usually a specific guide, a sizing chart, a style quiz, or early access to a drop. Whatever the ask, the welcome sequence is 5 emails over 7 days doing the job of the salesperson you don't have.`,
+    );
+  }
+  if (contentNeed) {
+    actions.push(
+      `**Week 2 to 4 is content kickoff.** We ship 4 pieces of cornerstone content in the first month. Not blog filler. Real SEO-targeted articles answering the exact questions your customers ask before they buy. We pull the topics from your existing customer emails, your reviews, and the Search Console queries you're already ranking for.`,
+    );
+  }
+  if (mNeed || cNeed) {
+    actions.push(
+      `**End of month 1 we switch on paid traffic.** Small budget, measured carefully, feeding data back into the pixel and the email list we just built. We're not trying to scale in month one. We're proving the unit economics and building the audience pool that powers everything after.`,
+    );
+  }
+  return actions;
+}
+
+function sixtyNinetyActions(
+  pillars: Record<string, Pillar>,
+  biz: string,
+): string[] {
+  const bizLower = biz.toLowerCase();
+  const wasStrong =
+    pillars.measurement.strength === "strong" &&
+    pillars.capture.strength === "strong" &&
+    pillars.content.strength === "strong";
+
+  if (wasStrong) {
+    return [
+      `We scale what's working and cut what isn't. By day 60 we have 30 days of real data across the new channel, the CRO sprint, and the existing stack. Whichever channel is earning its keep gets double the budget. The rest get killed without sentiment.`,
+      ``,
+      `Content goes from optimization to compounding. Monthly volume for ${bizLower} goes up, we add internal linking between posts, and we start chasing specific keyword clusters instead of one-off posts. By day 90 the organic traffic curve should start bending up.`,
+    ];
+  }
+
+  return [
+    `With measurement, capture, and a content foundation live, the next 60 days are about compounding what we built.`,
+    ``,
+    `We scale paid traffic based on the unit economics we proved in month 1. Whichever channel is earning its keep gets more budget. The others get cut.`,
+    ``,
+    `We also add email automation beyond the welcome sequence. Abandoned cart, post-purchase, winback, and a monthly newsletter for ${bizLower} that actually gets read because it says something worth reading.`,
+    ``,
+    `Content continues at a steady 4 to 6 pieces a month, each one targeting a specific search intent. By day 90 the pieces we shipped in month 1 should start ranking, and you should see your first real organic traffic lift.`,
+  ];
+}
+
+function oneThingThisWeek(pillars: Record<string, Pillar>): string {
+  if (pillars.measurement.strength === "missing") {
+    return `Install GA4 and a Meta Pixel on your site today. Both are free. Both take an hour with Shopify, less if you use a tag manager. Both unblock literally every marketing decision you'll make for the next year. If you do nothing else from this email, do this.`;
+  }
+  if (pillars.capture.strength === "missing") {
+    return `Add a welcome popup to your site this week with one specific offer. Not a generic "10% off." A guide, a sample, a style quiz, something your ideal customer would actually want. Wire it to Klaviyo or Mailchimp, set up a 5 email welcome sequence, and ship it. About 2 hours of work for an asset that runs forever.`;
+  }
+  if (pillars.content.strength === "missing") {
+    return `Write one blog post this week. Pick the single most common question your last 5 customers asked before they bought. Answer it in 800 words. Publish it. That's it. One post beats a plan for ten posts that never ship.`;
+  }
+  if (pillars.freshness.strength === "missing") {
+    return `Publish one new post this week, even a short one. Your blog has gone quiet and that's telling Google your site is abandoned. A single 600 word post this week is enough to restart the clock. Don't overthink it.`;
+  }
+  if (pillars.distribution.strength === "missing") {
+    return `Add your Instagram, TikTok, and one other relevant social handle to your footer this week. Customers check. Algorithms check. If the links aren't there, you look invisible to both.`;
+  }
+  if (pillars.measurement.strength === "weak") {
+    return `Audit your existing tracking this week. Open GA4 and your Meta Pixel and confirm your key events (add to cart, checkout, purchase) are firing clean. A tracking stack that runs on broken events is worse than no stack because it makes you confident in bad data.`;
+  }
+  if (pillars.capture.strength === "weak") {
+    return `Rewrite your welcome popup offer. If it's generic, make it specific. If it's specific, make it irresistible. One hour of copy work is worth weeks of capture optimization because the offer does 80% of the work.`;
+  }
+  return `Open Google Search Console and look at the top 10 queries you're ranking 5 to 20 for. Pick the one closest to a buying keyword for your business, and spend an afternoon rewriting whatever page ranks for it so it's the best answer on the internet. One week of work that can move real revenue.`;
+}
+
+function buildMarketingPlan(
+  result: AuditResult,
+  businessType: string,
+): string {
+  const pillars = assessPillars(result);
+  const biz = businessType.trim() || "your business";
+  const domain = result.finalUrl
+    .replace(/^https?:\/\//, "")
+    .replace(/\/$/, "");
+
+  const gapOrder: Array<keyof typeof pillars> = [
+    "measurement",
+    "capture",
+    "content",
+    "freshness",
+    "distribution",
+    "conversion",
+  ];
+  const gaps = gapOrder
+    .map((k) => pillars[k])
+    .filter((p) => p.strength === "missing" || p.strength === "weak")
+    .slice(0, 3);
 
   const lines: string[] = [];
+
   lines.push("## Where you are right now");
-  if (fails.length > 3) {
-    lines.push(
-      `I ran ${result.checks.length} checks across your site and found ${fails.length} critical gaps, ${warns.length} things worth cleaning up, and ${passes.length} things you already have working. There's real foundational work to do before any growth channel will compound.`,
-    );
-  } else if (fails.length > 0) {
-    lines.push(
-      `Your site has a decent foundation. ${passes.length} of ${result.checks.length} checks passed. There are ${fails.length} blockers and ${warns.length} smaller gaps keeping you from compounding growth.`,
-    );
-  } else {
-    lines.push(
-      `Your site is in solid shape. ${passes.length} of ${result.checks.length} checks passed, with ${warns.length} smaller things to clean up. The opportunity now is leveraging what you have, not fixing what's broken.`,
-    );
-  }
   lines.push("");
+  lines.push(openingParagraph(pillars, biz, domain));
+  lines.push("");
+
   lines.push("## The biggest gaps I see");
-  if (fails.length > 0) {
-    fails.slice(0, 3).forEach((c, i) => {
-      lines.push(`${i + 1}. **${c.label}**. ${c.detail}`);
-    });
-  } else if (warns.length > 0) {
-    warns.slice(0, 3).forEach((c, i) => {
-      lines.push(`${i + 1}. **${c.label}**. ${c.detail}`);
-    });
-  } else {
-    lines.push("1. No critical gaps flagged. The next move is optimization, not repair.");
-  }
   lines.push("");
-  lines.push("## What I'd do first");
-  lines.push(
-    "The quickest wins are usually the measurement stack, email capture, and a steady content cadence. Those three together unlock paid ads, owned reach, and organic discovery all at once.",
-  );
-  lines.push("");
-  lines.push("## The one thing I'd fix this week");
-  if (fails.length > 0 && fails[0].fix) {
-    lines.push(fails[0].fix);
-  } else {
+  if (gaps.length === 0) {
     lines.push(
-      "Install a Meta Pixel and GA4 if you haven't already. Without measurement you can't optimize anything, and it's a one-hour job.",
+      "Nothing broken. Your system has the right pieces and they're all firing. The next moves are about sharpening what already works, not fixing what doesn't.",
     );
+  } else {
+    gaps.forEach((p, i) => {
+      lines.push(`${i + 1}. **${p.name}.** ${pillarNarrative(p, biz)}`);
+    });
   }
+  lines.push("");
+
+  lines.push("## What I'd do in your first 30 days with us");
+  lines.push("");
+  for (const a of thirtyDayActions(pillars, biz)) {
+    lines.push(a);
+    lines.push("");
+  }
+
+  lines.push("## What I'd do in the 60 to 90 day window");
+  lines.push("");
+  for (const a of sixtyNinetyActions(pillars, biz)) {
+    lines.push(a);
+  }
+  lines.push("");
+
+  lines.push("## The one thing I'd fix this week even without us");
+  lines.push("");
+  lines.push(oneThingThisWeek(pillars));
+
   return lines.join("\n");
 }
 
@@ -1037,6 +1168,7 @@ function groupEvidence(checks: AuditCheck[]): {
 export function renderAuditEmail(
   result: AuditResult,
   recipientEmail: string,
+  businessType: string = "",
 ): { subject: string; html: string; text: string } {
   const displayUrl = result.finalUrl.replace(/^https?:\/\//, "").replace(/\/$/, "");
   const subject = result.reachable
@@ -1092,7 +1224,7 @@ ${fontImport}
   const warns = result.checks.filter((c) => c.status === "warn");
   const passes = result.checks.filter((c) => c.status === "pass");
 
-  const planMarkdown = result.plan && result.plan.trim().length > 0 ? result.plan : renderPlanFallback(result);
+  const planMarkdown = buildMarketingPlan(result, businessType);
   const planHtml = renderPlanMarkdown(planMarkdown);
 
   const evidence = groupEvidence(result.checks);
