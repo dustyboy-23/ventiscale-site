@@ -2,7 +2,7 @@ import Link from "next/link";
 import {
   DollarSign,
   ShoppingBag,
-  Users,
+  Receipt,
   TrendingUp,
   ArrowUpRight,
   Sparkles,
@@ -96,12 +96,7 @@ export default async function DashboardPage({
       />
 
       {/* KPI Row */}
-      <div
-        className={cn(
-          "grid grid-cols-1 sm:grid-cols-2 gap-4 mb-6 animate-in",
-          hasTrafficData ? "lg:grid-cols-4" : "lg:grid-cols-3",
-        )}
-      >
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 mb-6 animate-in">
         <KpiCard
           label="Revenue"
           value={kpis.revenue}
@@ -110,22 +105,26 @@ export default async function DashboardPage({
           highlight
           hint={kpis.periodLabel}
         />
-        <KpiCard label="Orders" value={kpis.orders} icon={ShoppingBag} hint={`${formatCurrency(kpis.aov)} avg`} />
         <KpiCard
-          label="Customers"
-          value={kpis.customers}
-          icon={Users}
+          label="Orders"
+          value={kpis.orders}
+          icon={ShoppingBag}
+          hint={`${formatNumber(kpis.customers)} customers`}
+        />
+        <KpiCard
+          label="AOV"
+          value={kpis.aov}
+          format="currency"
+          icon={Receipt}
           hint={`${kpis.repeatRate.toFixed(1)}% repeat`}
         />
-        {hasTrafficData && (
-          <KpiCard
-            label="Conversion"
-            value={kpis.traffic.conversionRate}
-            format="percent"
-            icon={TrendingUp}
-            hint={`${formatNumber(kpis.traffic.sessions)} sessions`}
-          />
-        )}
+        <KpiCard
+          label="Conversion"
+          value={kpis.traffic.conversionRate}
+          format="percent"
+          icon={TrendingUp}
+          hint={`${formatNumber(kpis.traffic.sessions)} sessions`}
+        />
       </div>
 
       {/* Two-column body */}

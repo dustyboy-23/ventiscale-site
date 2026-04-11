@@ -44,8 +44,6 @@ export function Sidebar({
   role = "Owner",
   memberships = [],
   activeClientId,
-  logoUrl,
-  brandColor,
   realClientMode = false,
 }: {
   clientName: string;
@@ -53,8 +51,6 @@ export function Sidebar({
   role?: string;
   memberships?: SidebarMembership[];
   activeClientId?: string;
-  logoUrl?: string | null;
-  brandColor?: string | null;
   realClientMode?: boolean;
 }) {
   const pathname = usePathname();
@@ -92,29 +88,15 @@ export function Sidebar({
       {/* Brand */}
       <div className="px-6 pt-7 pb-6">
         <div className="flex items-center gap-2.5">
-          {logoUrl ? (
-            <div
-              className="w-8 h-8 rounded-lg flex items-center justify-center overflow-hidden shrink-0"
-              style={{ backgroundColor: brandColor || "var(--color-ink)" }}
-            >
-              {/* eslint-disable-next-line @next/next/no-img-element */}
-              <img
-                src={logoUrl}
-                alt={`${clientName} logo`}
-                className="w-full h-full object-contain"
-              />
-            </div>
-          ) : (
-            <div className="w-8 h-8 rounded-lg bg-[var(--color-ink)] flex items-center justify-center">
-              <span className="text-white font-bold text-sm tracking-tight">VS</span>
-            </div>
-          )}
+          <div className="w-8 h-8 rounded-lg bg-[var(--color-ink)] flex items-center justify-center">
+            <span className="text-white font-bold text-sm tracking-tight">VS</span>
+          </div>
           <div>
             <div className="text-[15px] font-semibold tracking-tight text-[var(--color-ink)] leading-none">
-              {logoUrl ? clientName : "Venti Scale"}
+              Venti Scale
             </div>
             <div className="text-[11px] text-[var(--color-ink-subtle)] leading-none mt-1">
-              {logoUrl ? "by Venti Scale" : "Client Portal"}
+              Client Portal
             </div>
           </div>
         </div>
