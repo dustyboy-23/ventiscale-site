@@ -925,7 +925,7 @@ function rankPriorities(
 function painLabelFor(pillarId: string): string {
   switch (pillarId) {
     case "pixels":
-      return "You're spending on marketing and you can't tell what's working.";
+      return "You can't see what's actually working in your marketing.";
     case "email_capture":
       return "Almost every visitor to your site leaves and never comes back.";
     case "content_hub":
