@@ -61,25 +61,19 @@ export function AuditForm({ variant = "hero" }: Props) {
   if (status === "success") {
     return (
       <div
-        className={`rounded-xl p-7 bg-[#11131B] border border-white/[0.08] flex items-start gap-4 ${
+        className={`rounded-2xl px-6 py-9 sm:px-8 sm:py-10 bg-[#11131B] border border-white/[0.08] text-center ${
           variant === "hero" ? "" : "max-w-[560px] mx-auto"
         }`}
       >
-        <div className="shrink-0 w-11 h-11 rounded-full bg-[#10E39A]/15 border border-[#10E39A]/30 flex items-center justify-center">
-          <CheckCircle2 className="w-5 h-5 text-[#10E39A]" strokeWidth={2.25} />
+        <div className="mx-auto w-14 h-14 rounded-full bg-[#10E39A]/15 border border-[#10E39A]/30 flex items-center justify-center mb-5">
+          <CheckCircle2 className="w-7 h-7 text-[#10E39A]" strokeWidth={2.25} />
         </div>
-        <div>
-          <div className="font-display text-[22px] text-white leading-[1.2]">
-            Audit queued.
-          </div>
-          <p className="text-[13.5px] text-white/75 mt-2 leading-[1.6]">
-            Your AI audit for{" "}
-            <span className="font-mono text-white">{url}</span> is running.
-            You&apos;ll get a full growth plan at{" "}
-            <span className="font-mono text-white">{email}</span> today. I read
-            every one personally before it goes out.
-          </p>
+        <div className="font-display text-[26px] sm:text-[30px] text-white leading-[1.15] tracking-tight">
+          Go check your email.
         </div>
+        <p className="mt-3 text-[14px] text-white/70 leading-[1.55]">
+          Your plan is being written now and will land in your inbox within a few minutes.
+        </p>
       </div>
     );
   }
