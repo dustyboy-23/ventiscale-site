@@ -10,11 +10,18 @@ export default async function PortalLayout({
   children: React.ReactNode;
 }) {
   const session = await getPortalSession();
-  const memberships = session?.mode === "real" ? await getMemberships() : [];
+  const allMemberships = session?.mode === "real" ? await getMemberships() : [];
 
   if (!session) {
     redirect("/login");
   }
+
+  // Switcher is agency-only: only users who own/admin an agency tenant get
+  // the workspace dropdown. Regular clients (like Ken on Sprinkler Guard)
+  // never see a switcher — their portal is their portal, no menu. Dusty
+  // has a Venti Scale agency row, so he sees all his client workspaces.
+  const isAgencyUser = allMemberships.some((m) => m.isAgency);
+  const memberships = isAgencyUser ? allMemberships : [];
 
   const sidebarClient =
     session.mode === "orphan"

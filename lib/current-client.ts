@@ -86,29 +86,48 @@ export const getPortalSession = cache(async (): Promise<PortalSession | null> =>
   let supabase;
   try {
     supabase = await createClient();
-  } catch {
+  } catch (err) {
+    console.error("[portal-session] createClient threw", err);
     return isDemo
       ? { mode: "demo", client: DEMO_CLIENT, userEmail: null, role: null }
       : null;
   }
 
-  const { data: userData } = await supabase.auth.getUser();
+  const { data: userData, error: userErr } = await supabase.auth.getUser();
   const user = userData.user;
 
   if (!user) {
+    console.warn("[portal-session] no user from getUser", {
+      isDemo,
+      activeClientId,
+      userErr: userErr?.message,
+    });
     return isDemo
       ? { mode: "demo", client: DEMO_CLIENT, userEmail: null, role: null }
       : null;
   }
 
-  const { data: memberships } = await supabase
+  const { data: memberships, error: membershipsErr } = await supabase
     .from("client_users")
     .select("role, client_id, clients(id, slug, name, tagline, brand_color, logo_url, is_agency)")
     .eq("user_id", user.id)
     .order("created_at", { ascending: true });
 
+  if (membershipsErr) {
+    console.error("[portal-session] memberships query failed", membershipsErr.message);
+  }
+
   const rows = (memberships ?? []) as unknown as MembershipRow[];
   const valid = rows.filter((r): r is MembershipRow & { clients: NonNullable<MembershipRow["clients"]> } => Boolean(r.clients));
+
+  console.log("[portal-session] resolved", {
+    userId: user.id,
+    email: user.email,
+    activeClientId,
+    membershipCount: rows.length,
+    validCount: valid.length,
+    validIds: valid.map((v) => v.client_id),
+  });
 
   if (valid.length === 0) {
     return {
