@@ -74,6 +74,9 @@ export function AuditForm({ variant = "hero" }: Props) {
         <p className="mt-3 text-[14px] text-white/70 leading-[1.55]">
           Your plan is being written now and will land in your inbox within a few minutes.
         </p>
+        <p className="mt-3 text-[12px] text-white/50 leading-[1.55]">
+          Don&apos;t see it in 5 min? Check spam. New domain, still earning trust with Gmail.
+        </p>
       </div>
     );
   }

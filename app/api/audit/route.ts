@@ -315,7 +315,7 @@ export async function POST(req: Request) {
   if (!checkRateLimit(ip)) {
     console.warn("[audit] rate limit hit", { ip });
     return NextResponse.json(
-      { ok: false, error: "Too many requests. Try again in a few minutes or email hello@ventiscale.com." },
+      { ok: false, error: "You've run a few audits already. Give it 10 minutes and try again, or just email me at hello@ventiscale.com." },
       { status: 429 },
     );
   }
