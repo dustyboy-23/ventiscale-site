@@ -4,7 +4,6 @@ import { useState, useTransition } from "react";
 import Link from "next/link";
 import { useRouter, useSearchParams, usePathname } from "next/navigation";
 import {
-  Search,
   Calendar as CalIcon,
   ChevronDown,
   Eye,
@@ -71,21 +70,9 @@ export function TopBar({
         </div>
       )}
       <div className="max-w-[1240px] mx-auto px-6 lg:px-10 h-[60px] flex items-center justify-between gap-4">
-        {/* Left: mobile nav trigger + search */}
+        {/* Left: mobile nav trigger */}
         <div className="flex items-center gap-3 flex-1 min-w-0">
           <MobileNav clientName={clientName} ownerName={ownerName} />
-          <div className="hidden sm:flex items-center gap-2.5 max-w-[360px] flex-1 px-3.5 py-2 rounded-lg bg-white border border-[var(--color-border)] text-left">
-            <Search
-              className="w-4 h-4 text-[var(--color-ink-subtle)] shrink-0"
-              strokeWidth={2}
-            />
-            <span className="text-[13px] text-[var(--color-ink-subtle)] flex-1 truncate">
-              Search reports, content, posts...
-            </span>
-            <kbd className="hidden md:inline-flex items-center gap-0.5 text-[10px] font-medium text-[var(--color-ink-subtle)] bg-[var(--color-surface-muted)] border border-[var(--color-border)] px-1.5 py-0.5 rounded">
-              ⌘K
-            </kbd>
-          </div>
         </div>
 
         {/* Right: period picker */}
