@@ -1,0 +1,212 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Sprinkler Guard · Week of April 5</title>
+<style>
+  :root {
+    --ink: #0F1115;
+    --ink-muted: #4A5160;
+    --ink-subtle: #8A93A4;
+    --accent: #2F7D3F;
+    --accent-soft: #EAF5EC;
+    --border: #E8EAF0;
+    --border-soft: #F1F3F7;
+    --surface: #FAFBFC;
+    --danger: #B03A2E;
+    --warn: #B3721D;
+  }
+  * { box-sizing: border-box; }
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Inter', 'Segoe UI', Roboto, sans-serif;
+    color: var(--ink);
+    background: #ffffff;
+    margin: 0;
+    padding: 48px 56px 72px;
+    line-height: 1.6;
+    font-size: 15px;
+    -webkit-font-smoothing: antialiased;
+  }
+  .wrap { max-width: 720px; margin: 0 auto; }
+  .eyebrow {
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    color: var(--accent);
+    font-weight: 600;
+    margin-bottom: 10px;
+  }
+  h1 {
+    font-size: 30px;
+    letter-spacing: -0.015em;
+    font-weight: 700;
+    margin: 0 0 10px;
+    line-height: 1.2;
+  }
+  .sub {
+    color: var(--ink-muted);
+    margin: 0 0 36px;
+    font-size: 15px;
+  }
+  h2 {
+    font-size: 18px;
+    font-weight: 700;
+    letter-spacing: -0.01em;
+    margin: 40px 0 14px;
+    color: var(--ink);
+  }
+  p { margin: 0 0 14px; color: var(--ink); }
+  .lead {
+    font-size: 16px;
+    color: var(--ink);
+    margin-bottom: 18px;
+  }
+  .kpi-row {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 12px;
+    margin: 24px 0 8px;
+  }
+  .kpi {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    padding: 18px 20px;
+  }
+  .kpi .label {
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--ink-subtle);
+    font-weight: 600;
+    margin-bottom: 6px;
+  }
+  .kpi .value {
+    font-size: 24px;
+    font-weight: 700;
+    letter-spacing: -0.02em;
+    color: var(--ink);
+    line-height: 1.1;
+    font-variant-numeric: tabular-nums;
+  }
+  .kpi .hint {
+    font-size: 12px;
+    color: var(--ink-subtle);
+    margin-top: 4px;
+  }
+  .callout {
+    background: var(--accent-soft);
+    border-left: 3px solid var(--accent);
+    border-radius: 0 10px 10px 0;
+    padding: 16px 20px;
+    margin: 16px 0 24px;
+  }
+  .callout strong { color: var(--accent); }
+  .bar {
+    height: 6px;
+    background: var(--border-soft);
+    border-radius: 999px;
+    overflow: hidden;
+    margin-top: 4px;
+  }
+  .bar-fill {
+    height: 100%;
+    background: var(--accent);
+  }
+  .row {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    font-size: 14px;
+    margin-bottom: 6px;
+  }
+  .row .name { color: var(--ink); font-weight: 500; }
+  .row .val { color: var(--ink-muted); font-variant-numeric: tabular-nums; }
+  .divider { height: 1px; background: var(--border); margin: 36px 0 0; }
+  .footer {
+    margin-top: 28px;
+    font-size: 12px;
+    color: var(--ink-subtle);
+  }
+  .signoff {
+    margin-top: 28px;
+    font-size: 15px;
+    color: var(--ink);
+  }
+  .signoff .name {
+    font-weight: 600;
+    color: var(--ink);
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <div class="eyebrow">Weekly Report · Sprinkler Guard</div>
+  <h1>Week of April 5, 2026</h1>
+  <p class="sub">What happened, what's working, what to fix this week.</p>
+
+  <div class="kpi-row">
+    <div class="kpi">
+      <div class="label">Revenue</div>
+      <div class="value">$3,546</div>
+      <div class="hint">30 orders · last 7 days</div>
+    </div>
+    <div class="kpi">
+      <div class="label">Avg Order</div>
+      <div class="value">$118</div>
+      <div class="hint">lifted by the 20 pack</div>
+    </div>
+    <div class="kpi">
+      <div class="label">Conversion</div>
+      <div class="value">2.03%</div>
+      <div class="hint">up from 1.86% (4wk avg)</div>
+    </div>
+  </div>
+
+  <h2>Here's the deal</h2>
+  <p class="lead">Revenue held steady around $3,500/week. Conversion is climbing, 1.63% over 90 days, 1.86% over 4 weeks, 2.03% last week. That's a real trend. The 20 pack is still doing most of the heavy lifting.</p>
+  <p>One problem worth fixing this week. Mobile.</p>
+
+  <h2>What's working</h2>
+  <p><strong>The 20 pack is carrying the store.</strong> It's 33% of revenue over the last 7 days and 30% over the last 4 weeks. Same story for 90 days. When something is that consistent, you lean into it instead of trying to spread attention around.</p>
+  <p><strong>"grasshole" is ranking.</strong> You're sitting at position 3 for that term, pulling 11 clicks last week at an 8.7% click-through. That's a keyword most brands can't own. You already own it.</p>
+  <p><strong>Conversion is trending up.</strong> 1.63 → 1.86 → 2.03% as the window narrows. Whatever you've been doing, keep doing it.</p>
+
+  <h2>What's leaking</h2>
+  <div class="callout">
+    <p style="margin:0;"><strong>Mobile conversion is less than a third of desktop.</strong></p>
+    <p style="margin:8px 0 0; color: var(--ink-muted); font-size: 14px;">Desktop converts at 3.1%. Tablet at 1.3%. Mobile at 0.85%. Mobile is also where most of your sessions are coming from (3,759 vs 1,410 on desktop over the last 28 days).</p>
+  </div>
+  <p>You're getting the most traffic on the worst-converting device. That's the biggest single lever on the store right now. If mobile converted at even 1.5%, you'd be looking at roughly $1,800 more per month without buying a single new visitor.</p>
+
+  <h2>Top products, last 28 days</h2>
+  <div class="row"><span class="name">Sprinkler-Guard (20 Pack)</span><span class="val">$4,388 · 36 units</span></div>
+  <div class="bar"><div class="bar-fill" style="width:100%;"></div></div>
+  <div class="row" style="margin-top:14px;"><span class="name">Sprinkler-Guard (30 Pack)</span><span class="val">$3,906 · 23 units</span></div>
+  <div class="bar"><div class="bar-fill" style="width:89%;"></div></div>
+  <div class="row" style="margin-top:14px;"><span class="name">Sprinkler-Guard (10 Pack)</span><span class="val">$2,782 · 44 units</span></div>
+  <div class="bar"><div class="bar-fill" style="width:63%;"></div></div>
+  <div class="row" style="margin-top:14px;"><span class="name">Sprinkler-Guard (60 Pack)</span><span class="val">$2,695 · 8 units</span></div>
+  <div class="bar"><div class="bar-fill" style="width:61%;"></div></div>
+
+  <h2>One thing to fix this week</h2>
+  <p class="lead"><strong>Pull up the mobile checkout on your own phone and try to buy a 20 pack.</strong> Time every step. Note anything that slows you down, anything that asks for info you wouldn't want to type on your phone, anything that feels like work.</p>
+  <p>I'll do the same on my end and compare notes. 95% of mobile fixes are a small pile of friction, not one big bug. We kill the friction and the conversion climbs.</p>
+
+  <h2>Next week</h2>
+  <p>Nightly metrics are locked in so your Monday dashboard is always fresh by the time you're up. I'll be watching the 30 pack specifically. It's sitting at number two but fewer units mean we've got room to bundle it with the 20 pack and lift average order value without a new ad dollar spent.</p>
+
+  <div class="divider"></div>
+  <div class="signoff">
+    <p style="margin:0;">Talk soon,</p>
+    <p style="margin:4px 0 0;" class="name">Dusty</p>
+    <p style="margin:4px 0 0; color: var(--ink-subtle); font-size:13px;">Venti Scale · dustin@ventiscale.com</p>
+  </div>
+
+  <p class="footer">Data pulled from Google Analytics, Search Console, and your WooCommerce store. Report generated April 11, 2026.</p>
+
+</div>
+</body>
+</html>

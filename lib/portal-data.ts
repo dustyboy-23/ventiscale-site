@@ -15,6 +15,7 @@ import {
 } from "@/lib/sg-data";
 import { getPortalSession } from "@/lib/current-client";
 import { getClientMetrics } from "@/lib/metrics";
+import { getClientReports, getClientReportHtml } from "@/lib/reports";
 
 // Session-aware data layer for the portal. Each getter checks the current
 // portal session:
@@ -130,12 +131,14 @@ export async function getMetricsSnapshotAt(
 export async function getReports(): Promise<ReportSummary[]> {
   const session = await getPortalSession();
   if (session?.mode === "demo") return demoReports();
+  if (session?.mode === "real") return getClientReports(session.client.id);
   return [];
 }
 
 export async function getReportHtml(id: string): Promise<string | null> {
   const session = await getPortalSession();
   if (session?.mode === "demo") return demoReportHtml(id);
+  if (session?.mode === "real") return getClientReportHtml(id, session.client.id);
   return null;
 }
 
