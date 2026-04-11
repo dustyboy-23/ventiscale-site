@@ -418,25 +418,3 @@ export async function POST(req: Request) {
   // their plan is being written and will land in their inbox shortly.
   return NextResponse.json({ ok: true, id: entry.id });
 }
-
-export async function GET() {
-  const db = createAdminClient();
-  if (!db) {
-    return NextResponse.json(
-      { ok: false, error: "Supabase admin client unavailable" },
-      { status: 500 },
-    );
-  }
-  const { data, error, count } = await db
-    .from("audit_leads")
-    .select(
-      "id, received_at, name, business, email, url, final_url, reachable, grade, score, email_visitor_sent, email_lead_sent, telegram_sent",
-      { count: "exact" },
-    )
-    .order("created_at", { ascending: false })
-    .limit(50);
-  if (error) {
-    return NextResponse.json({ ok: false, error: error.message }, { status: 500 });
-  }
-  return NextResponse.json({ ok: true, count: count ?? 0, requests: data || [] });
-}
