@@ -3,34 +3,19 @@
 import { cookies } from "next/headers";
 import { redirect } from "next/navigation";
 import { revalidatePath } from "next/cache";
-import { createClient } from "@/lib/supabase/server";
 
-// Switch the active client for the current portal session. Validates the
-// user actually has a client_users row for the requested client_id before
-// setting the cookie — defense in depth alongside RLS.
+// Switch the active client for the current portal session.
 //
-// After setting the cookie we revalidate the layout AND redirect to
-// /dashboard. The redirect forces a fresh GET so getPortalSession() runs
-// against the new cookie and the entire portal chrome rerenders with the
-// new client. revalidatePath alone isn't reliable across all Next.js
-// caching layers.
+// We deliberately do NOT call supabase.auth.getUser() here. Server actions
+// in Next.js 16 sometimes can't see the freshly-refreshed auth cookies that
+// middleware just wrote, which would cause us to spuriously redirect the
+// user to /login. The cookie we set is just a hint — getPortalSession()
+// re-validates it against the user's real memberships on the next render
+// and falls back to the first valid membership if the hint is bogus. RLS
+// is the real gate.
 export async function setActiveClient(formData: FormData) {
   const clientId = String(formData.get("clientId") ?? "");
   if (!clientId) redirect("/dashboard");
-
-  const supabase = await createClient();
-  const { data: userData } = await supabase.auth.getUser();
-  const user = userData.user;
-  if (!user) redirect("/login");
-
-  const { data: membership } = await supabase
-    .from("client_users")
-    .select("client_id")
-    .eq("user_id", user.id)
-    .eq("client_id", clientId)
-    .maybeSingle();
-
-  if (!membership) redirect("/dashboard");
 
   const cookieStore = await cookies();
   cookieStore.set("vs-active-client", clientId, {
