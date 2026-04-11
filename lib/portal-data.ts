@@ -14,6 +14,7 @@ import {
   type ActivityItem,
 } from "@/lib/sg-data";
 import { getPortalSession } from "@/lib/current-client";
+import { getClientMetrics } from "@/lib/metrics";
 
 // Session-aware data layer for the portal. Each getter checks the current
 // portal session:
@@ -107,6 +108,10 @@ export async function getClientMeta(): Promise<ClientMeta> {
 export async function getClientKpis(period: PeriodKey = "28d"): Promise<ClientKpis> {
   const session = await getPortalSession();
   if (session?.mode === "demo") return demoKpis(period);
+  if (session?.mode === "real") {
+    const metrics = await getClientMetrics(session.client.id, period);
+    if (metrics) return metrics;
+  }
   return { ...EMPTY_KPIS, periodLabel: PERIOD_META[period].label };
 }
 
