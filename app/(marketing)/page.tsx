@@ -154,6 +154,19 @@ const FAQ = [
   },
 ];
 
+const FAQ_JSONLD = {
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  mainEntity: FAQ.map((item) => ({
+    "@type": "Question",
+    name: item.q,
+    acceptedAnswer: {
+      "@type": "Answer",
+      text: item.a,
+    },
+  })),
+};
+
 const ASSURANCES = [
   {
     icon: UserCheck,
@@ -180,6 +193,10 @@ const ASSURANCES = [
 export default function MarketingHome() {
   return (
     <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(FAQ_JSONLD) }}
+      />
       {/* ─────────────────────────────────────────────
           1. HERO
          ───────────────────────────────────────────── */}
@@ -235,7 +252,7 @@ export default function MarketingHome() {
               </div>
 
               <p className="mt-6 text-[12px] font-mono uppercase tracking-[0.14em] text-white/55">
-                Takes 60 seconds to submit · Plan in your inbox today · No sales call required
+                Takes 60 seconds to submit · Plan in your inbox today · One quick call, no hard sell
               </p>
             </div>
 

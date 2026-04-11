@@ -61,6 +61,8 @@ export function AuditForm({ variant = "hero" }: Props) {
   if (status === "success") {
     return (
       <div
+        role="status"
+        aria-live="polite"
         className={`rounded-2xl px-6 py-9 sm:px-8 sm:py-10 bg-[#11131B] border border-white/[0.08] text-center ${
           variant === "hero" ? "" : "max-w-[560px] mx-auto"
         }`}
@@ -237,7 +239,7 @@ export function AuditForm({ variant = "hero" }: Props) {
       </div>
 
       <p className="mt-4 text-[11px] font-mono uppercase tracking-[0.16em] text-white/55 text-center">
-        Takes 60 seconds · Plan in your inbox today · No sales call required
+        Takes 60 seconds · Plan in your inbox today · One quick call, no hard sell
       </p>
       {error && (
         <p
