@@ -282,7 +282,24 @@ function isValidUrl(s: string) {
   return /^[a-z0-9-]+(\.[a-z0-9-]+)+/.test(cleaned);
 }
 
+// Only allow browser form POSTs from our own marketing site. Server-to-
+// server callers (curl, Postman, test runners) have no Origin header and
+// are allowed through — only cross-site browser POSTs get blocked. This
+// is a lightweight CSRF control for an unauthed endpoint; the real spam
+// shield is rate limiting + the honeypot.
+const ALLOWED_ORIGINS = new Set([
+  "https://www.ventiscale.com",
+  "https://ventiscale.com",
+  "http://localhost:3000",
+  "http://localhost:3030",
+]);
+
 export async function POST(req: Request) {
+  const origin = req.headers.get("origin");
+  if (origin && !ALLOWED_ORIGINS.has(origin)) {
+    return NextResponse.json({ ok: false, error: "forbidden" }, { status: 403 });
+  }
+
   let body: {
     name?: string;
     business?: string;
@@ -300,10 +317,7 @@ export async function POST(req: Request) {
   // Honeypot: real users never see or fill this field. Bots that autofill every
   // input get a silent 200 OK so they don't learn anything from the response.
   if (body.website && body.website.trim().length > 0) {
-    console.warn("[audit] honeypot tripped", {
-      ip: req.headers.get("x-forwarded-for") || req.headers.get("x-real-ip"),
-      website: body.website.slice(0, 80),
-    });
+    console.warn("[audit] honeypot tripped");
     return NextResponse.json({ ok: true, id: "hp_blocked" });
   }
 
@@ -313,7 +327,7 @@ export async function POST(req: Request) {
     "unknown";
 
   if (!checkRateLimit(ip)) {
-    console.warn("[audit] rate limit hit", { ip });
+    console.warn("[audit] rate limit hit");
     return NextResponse.json(
       { ok: false, error: "You've run a few audits already. Give it 10 minutes and try again, or just email me at hello@ventiscale.com." },
       { status: 429 },
@@ -351,7 +365,9 @@ export async function POST(req: Request) {
     ip: ip !== "unknown" ? ip : undefined,
   };
 
-  console.log("[audit] new request", JSON.stringify(entry));
+  // Log only the non-PII parts. The full entry (name/email/notes/IP)
+  // lands in the audit_leads table where it belongs, not in Vercel logs.
+  console.log("[audit] new request", { id: entry.id, host: new URL(url).host });
 
   // All heavy lifting runs after the response is sent so the visitor sees
   // instant success. The lead is persisted first thing so nothing is lost

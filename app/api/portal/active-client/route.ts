@@ -1,19 +1,19 @@
 import { NextRequest, NextResponse } from "next/server";
+import { createClient } from "@/lib/supabase/server";
 
 // Sets the vs-active-client cookie. Used by the sidebar workspace
-// switcher. We deliberately do NOT call supabase.auth.getUser() here —
-// see the comment in getPortalSession for the real access gate. This
-// endpoint just records a hint; the next render validates it against
-// the user's actual memberships.
+// switcher.
+//
+// Defense in depth: even though getPortalSession() re-validates the
+// cookie against the user's actual memberships on every render (so a
+// tampered cookie can never expose another client's data), we still
+// require an authed user here AND check that the requested clientId
+// is one they belong to. A bogus clientId returns 403 instead of
+// silently being ignored.
 //
 // Lives as a route handler instead of a server action because server
 // actions + redirect() drop Supabase auth cookie writes that middleware
 // made during the same POST, which caused the switcher to log users out.
-//
-// We set the cookie on the NextResponse object directly (instead of via
-// `cookies()` from next/headers) because that's the canonical route
-// handler pattern and avoids any cookie-store merging weirdness with
-// the middleware-refreshed auth cookies.
 export async function POST(request: NextRequest) {
   let clientId: string | undefined;
   try {
@@ -27,7 +27,30 @@ export async function POST(request: NextRequest) {
     return NextResponse.json({ ok: false, error: "missing_client_id" }, { status: 400 });
   }
 
-  console.log("[active-client] setting cookie", { clientId });
+  // Require auth + confirm the user is actually a member of this client.
+  let supabase;
+  try {
+    supabase = await createClient();
+  } catch {
+    return NextResponse.json({ ok: false, error: "auth_unavailable" }, { status: 503 });
+  }
+
+  const { data: userData } = await supabase.auth.getUser();
+  const user = userData.user;
+  if (!user) {
+    return NextResponse.json({ ok: false, error: "unauthenticated" }, { status: 401 });
+  }
+
+  const { data: membership } = await supabase
+    .from("client_users")
+    .select("client_id")
+    .eq("user_id", user.id)
+    .eq("client_id", clientId)
+    .maybeSingle();
+
+  if (!membership) {
+    return NextResponse.json({ ok: false, error: "forbidden" }, { status: 403 });
+  }
 
   const response = NextResponse.json({ ok: true });
   response.cookies.set("vs-active-client", clientId, {

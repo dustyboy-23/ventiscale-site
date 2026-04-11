@@ -93,15 +93,10 @@ export const getPortalSession = cache(async (): Promise<PortalSession | null> =>
       : null;
   }
 
-  const { data: userData, error: userErr } = await supabase.auth.getUser();
+  const { data: userData } = await supabase.auth.getUser();
   const user = userData.user;
 
   if (!user) {
-    console.warn("[portal-session] no user from getUser", {
-      isDemo,
-      activeClientId,
-      userErr: userErr?.message,
-    });
     return isDemo
       ? { mode: "demo", client: DEMO_CLIENT, userEmail: null, role: null }
       : null;
@@ -114,20 +109,11 @@ export const getPortalSession = cache(async (): Promise<PortalSession | null> =>
     .order("created_at", { ascending: true });
 
   if (membershipsErr) {
-    console.error("[portal-session] memberships query failed", membershipsErr.message);
+    console.error("[portal-session] memberships query failed");
   }
 
   const rows = (memberships ?? []) as unknown as MembershipRow[];
   const valid = rows.filter((r): r is MembershipRow & { clients: NonNullable<MembershipRow["clients"]> } => Boolean(r.clients));
-
-  console.log("[portal-session] resolved", {
-    userId: user.id,
-    email: user.email,
-    activeClientId,
-    membershipCount: rows.length,
-    validCount: valid.length,
-    validIds: valid.map((v) => v.client_id),
-  });
 
   if (valid.length === 0) {
     return {

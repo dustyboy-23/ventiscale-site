@@ -27,7 +27,14 @@ function ConfirmInner() {
     | "recovery"
     | "invite"
     | "signup";
-  const next = searchParams.get("next") ?? "/dashboard";
+  // Same-origin redirect only: rejects `//evil.com`, `/\\evil.com`,
+  // or anything not starting with a single `/`. Prevents the magic
+  // link from being rewritten into an open redirect.
+  const rawNext = searchParams.get("next");
+  const next =
+    rawNext && rawNext.startsWith("/") && !rawNext.startsWith("//") && !rawNext.startsWith("/\\")
+      ? rawNext
+      : "/dashboard";
 
   async function handleConfirm() {
     if (!tokenHash) {
