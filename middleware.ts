@@ -44,8 +44,12 @@ export async function middleware(request: NextRequest) {
 
 export const config = {
   matcher: [
-    // Run on everything except static assets and Next internals. Pulled
-    // straight from the Supabase + Next.js middleware template.
-    "/((?!_next/static|_next/image|favicon.ico|icon|opengraph-image|robots.txt|sitemap.xml|.*\\.(?:svg|png|jpg|jpeg|gif|webp)$).*)",
+    // Run on everything except static assets, Next internals, and the
+    // active-client cookie setter. The cookie setter is deliberately
+    // excluded because the middleware's Supabase refresh creates its own
+    // NextResponse, and the route handler creates a different one for
+    // its JSON reply — the two can clobber each other's cookies, which
+    // was causing the workspace switcher to drop the user's auth.
+    "/((?!_next/static|_next/image|favicon.ico|icon|opengraph-image|robots.txt|sitemap.xml|api/portal/active-client|.*\\.(?:svg|png|jpg|jpeg|gif|webp)$).*)",
   ],
 };
