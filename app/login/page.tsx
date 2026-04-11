@@ -4,8 +4,8 @@ import { useState, useEffect, Suspense } from "react";
 import Link from "next/link";
 import { useSearchParams } from "next/navigation";
 import { ArrowRight, Check, AlertCircle } from "lucide-react";
-import { createClient } from "@/lib/supabase/client";
 import { enterDemo } from "@/app/actions/demo";
+import { requestMagicLink } from "@/app/actions/request-login";
 
 const ERROR_MESSAGES: Record<string, string> = {
   missing_code: "Your sign-in link was incomplete. Request a new one below.",
@@ -14,6 +14,8 @@ const ERROR_MESSAGES: Record<string, string> = {
   send_failed: "We couldn't send the sign-in email. Try again in a moment.",
   supabase_misconfigured:
     "Sign-in isn't fully configured yet. Email hello@ventiscale.com and we'll get you in.",
+  rate_limit: "Too many sign-in attempts. Wait a few minutes, then try again.",
+  invalid_email: "That doesn't look like a valid email. Double-check it and try again.",
 };
 
 function LoginPageInner() {
@@ -36,30 +38,16 @@ function LoginPageInner() {
     setErrorKey(null);
 
     try {
-      const supabase = createClient();
-      // Point at /auth/confirm so the email template (which uses
-      // {{ .TokenHash }}) lands on our click-through page. The page
-      // requires a human click before verifyOtp runs, which means
-      // Gmail's pre-scan of the link doesn't burn the single-use OTP.
-      const siteUrl =
-        process.env.NEXT_PUBLIC_SITE_URL ||
-        (typeof window !== "undefined" ? window.location.origin : "");
-      const { error } = await supabase.auth.signInWithOtp({
-        email: email.trim().toLowerCase(),
-        options: {
-          emailRedirectTo: `${siteUrl}/auth/confirm`,
-        },
-      });
-      if (error) {
-        console.error("[login] signInWithOtp failed", error.message);
-        setErrorKey("send_failed");
+      const result = await requestMagicLink(email);
+      if (!result.ok) {
+        setErrorKey(result.error);
         setLoading(false);
         return;
       }
       setSubmitted(true);
     } catch (err) {
-      console.error("[login] init/send threw", err);
-      setErrorKey("supabase_misconfigured");
+      console.error("[login] requestMagicLink threw", err);
+      setErrorKey("server_error");
     } finally {
       setLoading(false);
     }
