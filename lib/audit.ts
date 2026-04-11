@@ -941,75 +941,56 @@ function painLabelFor(pillarId: string): string {
   }
 }
 
-// A paragraph that expands the pain label in Dusty voice. Per business
-// kind where it helps, generic fallback otherwise.
-function painBodyFor(pillarId: string, kind: BusinessKind, phrase: string): string {
+// One tight paragraph per pillar. Combines the pain, the cost, and the
+// "you're not behind" reassurance into 3-4 sentences. Used to be three
+// separate cards saying the same thing. Now it's one.
+function problemBodyFor(pillarId: string, kind: BusinessKind, phrase: string): string {
   if (pillarId === "pixels") {
     const map: Partial<Record<BusinessKind, string>> = {
-      ecommerce: `You've got no way to see which visitors turn into buyers. Every post, every email, every campaign idea, you're guessing if it worked. The stuff that's actually selling product is invisible and so is the stuff that isn't.`,
-      saas: `You can't see where signups come from, which visitors turn into trials, or which trials turn into paying customers. Every call you make about marketing is a hunch.`,
-      service: `You've got no idea which visitors picked up the phone and which ones bounced. Someone sends you a lead and you can't tell where they came from, so you can't double down on what's working.`,
-      local: `You've got no way to tell what's bringing customers in the door. Could be social, could be word of mouth, could be the website itself. You can't double down on what's working because you can't see it.`,
-      coach: `Your whole business is moving strangers from cold to warm to buyer, and you can't see any of it happening. You don't know what's working. You're coaching in the dark.`,
-      agency: `You sell marketing and your own site isn't measuring any of it. That's brutal when a prospect pokes around.`,
-      creator: `You can't see which posts or videos are actually pulling people to your stuff. You're guessing at the algorithm instead of reading the numbers.`,
-      restaurant: `You can't tell who booked a table and who just looked at the menu and left. You can't see which of your marketing is filling seats and which is flat.`,
+      ecommerce: `Right now you can't see which traffic actually turns into sales. Could be ads, could be social, could be word of mouth, you've got no way to tell which one to pour fuel on. Most shops we look at are right here, the data layer is just the missing piece.`,
+      saas: `You can't see where signups come from, which visitors turn into trials, or which trials turn into paying customers. Every call about marketing is a hunch. Most founders we audit are stuck in the same spot, the playbook for this stuff hasn't caught up yet.`,
+      service: `You've got no idea which traffic actually picks up the phone. Someone calls you, you can't tell where they came from, so you can't double down on what's working. Most service businesses we look at are in this exact spot.`,
+      local: `You've got no way to tell what's bringing customers in. Could be social, could be word of mouth, could be the website, you can't double down on what's working because you can't see it. Most local businesses we audit are right here, the playbook just hasn't caught up.`,
+      coach: `Your whole business is moving strangers from cold to warm to buyer, and you can't see any of it. You're coaching in the dark. Most coaches we look at are in the same spot, the tools to fix this used to cost a fortune and now they don't.`,
+      agency: `You sell marketing and your own site isn't measuring any of it. Brutal when a prospect pokes around. Most agencies we audit are here too, the cobbler-with-no-shoes thing is real.`,
+      creator: `You can't see which posts or videos are actually pulling people to your stuff. You're guessing at the algorithm instead of reading the numbers. Most creators we look at are right here, no excuse to fly blind anymore now that the tools are cheap.`,
+      restaurant: `You can't tell who booked a table and who just looked at the menu and left. You can't see which marketing is filling seats and which is flat. Most restaurants we audit are in the same spot.`,
     };
-    return map[kind] || `You're making marketing calls without data. Every decision is a guess. Every month you can't tell what worked. The stuff you're not seeing is usually where the money is.`;
+    return map[kind] || `Right now you're making marketing decisions blind. Could be working, could be flat, you have no way to tell. Most owners we look at are in this exact spot, you're not behind, the playbook for this stuff just hasn't caught up.`;
   }
   if (pillarId === "email_capture") {
-    return `About 97 out of every 100 people who land on your site leave without doing anything. Right now every one of em is gone forever. You've got nothing to pull em back with. No email, no follow-up, nothing. That's customers you already paid for walking out the door.`;
+    return `About 97 out of every 100 visitors leave your site and never come back. Right now you've got nothing to pull em back with. No email, no follow-up, nothing. That's customers you already paid to get, walking out the door.`;
   }
   if (pillarId === "content_hub") {
     const map: Partial<Record<BusinessKind, string>> = {
-      ecommerce: `People Google "best [your product]" and "how to pick [your product]" thousands of times a month. You're not showing up for any of it. They're finding your competitors instead.`,
-      local: `People in your area are Googling for exactly what you do right now. They're not finding you. They're finding the other guy down the road.`,
-      saas: `The companies that win long-term publish helpful stuff their customers actually search for. Right now you're invisible. Your competitors are eating the free traffic.`,
-      restaurant: `When locals or tourists search "best [your food] near me," you want to be the first name they see. Right now you're not even on the page.`,
+      ecommerce: `People Google "best [your product]" and "how to pick [your product]" thousands of times a month. You're not showing up for any of it. Your competitors are eating that traffic for free.`,
+      local: `People in your area are Googling for exactly what you do right now. They're not finding you, they're finding the other guy down the road. That's free traffic going to whoever bothers to publish for it.`,
+      saas: `The companies that win long-term publish stuff their customers actually search for. Right now you're invisible. Your competitors are eating the free traffic and compounding.`,
+      restaurant: `When locals search "best [your food] near me," you want to be the first name they see. Right now you're not even on the page.`,
     };
-    return map[kind] || `People are searching for what you do every single day. You're not showing up for any of it. Free traffic that should be yours is going to your competitors instead.`;
+    return map[kind] || `People are searching for what ${phrase} does every day. You're not showing up for any of it. Free traffic that should be yours is going to your competitors instead.`;
   }
   if (pillarId === "content_fresh") {
-    return `Your blog's there but it hasn't been touched in months. Google starts pulling the plug on sites that stop publishing. Visitors notice too, a stale blog makes people wonder if you're still in business.`;
+    return `Your blog's there but it's been quiet for months. Google starts pulling the plug on sites that stop publishing, you lose about 20% of your search traffic every 90 days of silence. Visitors notice too, a stale blog makes people wonder if you're still open.`;
   }
   if (pillarId === "social") {
-    return `No social links on your site. The first thing a new customer does is peek at Instagram or TikTok to check if you're real. If they can't find you there, they assume you're not. They're gone before you knew they were there.`;
+    return `No social links on your site. The first thing a new customer does is peek at Instagram or TikTok to check if you're real. If they can't find you there, they assume you're not. They're gone before you even knew they were there.`;
   }
   if (pillarId === "conversion") {
-    return `Visitors with a quick question can't get one answered. Most people won't pick up the phone or send an email, they just leave and find someone easier to talk to.`;
+    return `Visitors with a quick question can't get one answered. Most won't pick up the phone or send an email, they just leave and find someone easier to talk to. That's real money walking off your site every day.`;
   }
   return `There's a hole in the way ${phrase} turns visitors into customers, and it's costing you every week.`;
 }
 
-// Loss aversion. Rough numbers that make the pain feel like money on fire.
-// Deliberately rough ranges, not fake precision.
-function costBodyFor(pillarId: string, kind: BusinessKind): string {
-  if (pillarId === "pixels") {
-    if (kind === "ecommerce") return `Without this, you can't tell which traffic sources actually buy. Most shops we look at are doubling down on the wrong channel for months before they figure it out. That's the kind of mistake that costs you a full quarter of growth.`;
-    if (kind === "local" || kind === "service") return `Without this, every marketing decision is a coin flip. The customers you already got could tell you exactly where to go find more of em, but you can't see any of it. That's the growth you leave on the table every single month.`;
-    return `Without this, you're running every marketing play blind. You might be sitting on the exact channel that's pulling your best customers in and not even know it. The cost isn't a dollar number, it's the growth you don't get because you can't see what's working.`;
-  }
-  if (pillarId === "email_capture") {
-    return `Every visitor you don't catch is a customer you paid to get and then threw away. Over a year, for most sites, that adds up to tens of thousands in revenue you never saw.`;
-  }
-  if (pillarId === "content_hub") {
-    return `Every month you're not on page 1 for the questions your customers type in, that's thousands of clicks going to someone else. Free clicks. The kind that compound for years once you own em.`;
-  }
-  if (pillarId === "content_fresh") {
-    return `Google drops quiet sites fast. You lose about 20% of your search traffic every 90 days of silence. Every week you wait, that's customers finding your competitors instead.`;
-  }
-  if (pillarId === "social") {
-    return `Most buying decisions happen in the first 5 seconds. If a customer can't find you on social in those 5 seconds, they don't trust you. You lose the sale before you know you had a shot.`;
-  }
-  if (pillarId === "conversion") {
-    return `10 to 20% of your visitors would buy if they could ask a quick question first. Right now, all of em leave instead. That's real money walking off your site every day.`;
-  }
-  return `This isn't a nice-to-have. It's real money leaving every week you don't fix it.`;
+// One-line summary that sits next to the score badge. Frames the number
+// for the reader. Tied to how many things are actually broken, not the
+// raw score.
+function scoreLineFor(failingCount: number, phrase: string): string {
+  if (failingCount === 0) return `Foundation's solid. From here it's about scaling what's working.`;
+  if (failingCount === 1) return `Foundation's mostly there, one real gap to plug.`;
+  if (failingCount <= 3) return `Foundation's there, the marketing layer is what's missing.`;
+  return `A few real gaps to plug before ${phrase} can pull for you the way it should.`;
 }
-
-// Normalizing paragraph. "You're not dumb, here's why this happens to
-// everyone." Universal across pillars because the root cause is the same.
-const WHY_BODY = `Here's why this happens. Most business owners I talk to are in this exact spot. You've been busy running the business, not playing marketer. Nobody told you to hook up tracking so you could see what's working. Nobody told you your email list is the only customer list you actually own. The tools to fix all this used to cost a fortune and need a dev team, now they don't, but the playbook hasn't caught up.`;
 
 // Outcome-framed "moves" for the Sell the Vacation block. Each move leads
 // with what the reader gets, then how we do it. Kept short on purpose.
@@ -1068,23 +1049,17 @@ function padMove(idx: number): { outcome: string; how: string } {
   };
 }
 
-// Proof block. No case studies yet, so use Results-in-Advance framing:
-// the audit itself is the proof.
-const PROOF_BODY = `Here's why you should care what I'm saying. This email, the audit you just read, is the same analysis agencies charge $500 to $2,000 for. I give it away because when you see how sharp the read is, working together is the obvious move. If the plan feels right, the work will feel right too.`;
-
-// The offer block. DFY framing. What you get, what it costs you in
-// attention (almost nothing), and the risk reversal.
-const OFFER_BODY = `Here's how it works. You keep running your business. We run your marketing. Tracking, emails, articles, ads, social, all of it. We report back every week with what moved and what didn't. You approve or redirect. No contract, no lock-in, cancel anytime. You get a real marketing team at a fraction of what a real one costs, and you don't have to manage em.`;
+// Combined proof + offer in one block. Results-in-Advance framing (the
+// audit itself is the proof) plus DFY pitch and risk reversal.
+const HELP_BODY = `This audit is the same one agencies charge $500 to $2,000 for. I give it away because once you see how sharp the read is, working together is the obvious move. We'd run your marketing for you, tracking, emails, content, social, ads, all of it, while you keep running the business. Weekly reports on what moved. No contract, cancel anytime.`;
 
 interface SalesEmailContent {
   opener: string;
+  scoreLine: string;
   painLabel: string;
-  painBody: string;
-  costBody: string;
-  whyBody: string;
+  problemBody: string;
   moves: Array<{ outcome: string; how: string }>;
-  proofBody: string;
-  offerBody: string;
+  helpBody: string;
   ctaHeadline: string;
   ctaSub: string;
   ctaButton: string;
@@ -1096,10 +1071,9 @@ interface SalesEmailContent {
 function buildHappyPathContent(opener: string, phrase: string): SalesEmailContent {
   return {
     opener,
+    scoreLine: `Foundation's solid. From here it's about scaling what's working.`,
     painLabel: `You're in rare air. Most sites we look at have 3 or 4 big holes.`,
-    painBody: `Almost everything I check for is already working for ${phrase}. The foundation's there. Most businesses we audit are trying to get to where you already are.`,
-    costBody: `The risk now isn't a broken site, it's a plateau. Businesses that stop pushing at this stage get passed by the ones that don't. The work shifts from fixing leaks to pouring fuel on what's already paying.`,
-    whyBody: `Most owners in your spot think "we're good" and coast. That's when competitors catch up. The play now is doubling down on the channels that are working and finding the next one to turn on.`,
+    problemBody: `Almost everything I check for is already working for ${phrase}. The risk now isn't a broken site, it's a plateau, and the work shifts from fixing leaks to pouring fuel on what's already paying.`,
     moves: [
       {
         outcome: "You pour fuel on whatever channel is already paying.",
@@ -1114,8 +1088,7 @@ function buildHappyPathContent(opener: string, phrase: string): SalesEmailConten
         how: "We run it week to week so you get your time back and the numbers keep going up.",
       },
     ],
-    proofBody: PROOF_BODY,
-    offerBody: OFFER_BODY,
+    helpBody: HELP_BODY,
     ctaHeadline: "Want us to run this for you?",
     ctaSub: "Book a 15-min call. I'll walk you through the plan for your site and we'll see if we're a fit. No pitch, no contract.",
     ctaButton: "Book a 15-min call",
@@ -1136,8 +1109,8 @@ function buildSalesEmailContent(
   const priorities = rankPriorities(pillars, kind);
   const first = firstName(visitorName);
   const opener = first
-    ? `Hey ${first}, took a look at ${domain}. Here's what's up and what I'd do about it if you were paying me to run it for you.`
-    : `Alright, took a look at ${domain}. Here's what's up and what I'd do about it if you were paying me to run it for you.`;
+    ? `Hey ${first}, took a look at ${domain}. Here's the read.`
+    : `Alright, took a look at ${domain}. Here's the read.`;
 
   if (priorities.length === 0) {
     return buildHappyPathContent(opener, phrase);
@@ -1149,13 +1122,11 @@ function buildSalesEmailContent(
 
   return {
     opener,
+    scoreLine: scoreLineFor(priorities.length, phrase),
     painLabel: painLabelFor(top.pillar.id),
-    painBody: painBodyFor(top.pillar.id, kind, phrase),
-    costBody: costBodyFor(top.pillar.id, kind),
-    whyBody: WHY_BODY,
+    problemBody: problemBodyFor(top.pillar.id, kind, phrase),
     moves,
-    proofBody: PROOF_BODY,
-    offerBody: OFFER_BODY,
+    helpBody: HELP_BODY,
     ctaHeadline: "Want us to run this for you?",
     ctaSub: "Book a 15-min call. I'll walk you through the plan for your site and we'll see if we're a fit. No pitch, no contract.",
     ctaButton: "Book a 15-min call",
@@ -1164,10 +1135,7 @@ function buildSalesEmailContent(
 }
 
 // Legacy export. Builds a plain-markdown version of the sales email for
-// storage in Supabase (plan_markdown column) and for plantest.ts. The
-// email HTML renders directly from the structured content above, not
-// from this markdown, so the two can diverge in formatting but stay in
-// sync in voice.
+// storage in Supabase (plan_markdown column) and for plantest.ts.
 export function buildMarketingPlan(
   result: AuditResult,
   businessType: string,
@@ -1176,33 +1144,23 @@ export function buildMarketingPlan(
   const lines: string[] = [];
   lines.push(c.opener);
   lines.push("");
-  lines.push(`## The one thing`);
+  lines.push(`_${c.scoreLine}_`);
+  lines.push("");
+  lines.push(`## The biggest gap`);
   lines.push(`**${c.painLabel}**`);
   lines.push("");
-  lines.push(c.painBody);
+  lines.push(c.problemBody);
   lines.push("");
-  lines.push(`## What it's costing you`);
-  lines.push("");
-  lines.push(c.costBody);
-  lines.push("");
-  lines.push(`## Why it's happening`);
-  lines.push("");
-  lines.push(c.whyBody);
-  lines.push("");
-  lines.push(`## The 3 moves`);
+  lines.push(`## Here's what I'd do`);
   lines.push("");
   c.moves.forEach((m, i) => {
     lines.push(`**${i + 1}. ${m.outcome}**`);
     lines.push(m.how);
     lines.push("");
   });
-  lines.push(`## Why listen to me`);
+  lines.push(`## How I can help`);
   lines.push("");
-  lines.push(c.proofBody);
-  lines.push("");
-  lines.push(`## How we'd work together`);
-  lines.push("");
-  lines.push(c.offerBody);
+  lines.push(c.helpBody);
   lines.push("");
   lines.push(`## ${c.ctaHeadline}`);
   lines.push("");
@@ -1294,22 +1252,75 @@ ${fontImport}
   }
 
   const content = buildSalesEmailContent(result, businessType, visitorName);
+  const pillars = assessPillars(result);
 
   // HTML style shorthands for the body sections.
   const sectionLabel = `font-size:10px;font-weight:700;letter-spacing:0.18em;color:${EMAIL_COLORS.textDim};text-transform:uppercase;`;
   const sectionHead = `font-family:Fraunces,Georgia,'Times New Roman',serif;font-size:22px;font-weight:500;letter-spacing:-0.015em;color:${EMAIL_COLORS.text};margin:6px 0 14px;line-height:1.25;`;
   const bodyPara = `font-size:15px;line-height:1.65;color:${EMAIL_COLORS.textMid};margin:0 0 14px;`;
-  const cardWrap = `background:${EMAIL_COLORS.card};border:1px solid ${EMAIL_COLORS.border};border-radius:14px;padding:26px 26px 14px;margin-top:22px;`;
+  const cardWrap = `background:${EMAIL_COLORS.card};border:1px solid ${EMAIL_COLORS.border};border-radius:14px;padding:26px 26px 22px;margin-top:22px;`;
+
+  // Score → grade letter + accent color.
+  const scoreNum = typeof result.score === "number" ? result.score : 0;
+  const grade = result.grade || (scoreNum >= 90 ? "A" : scoreNum >= 80 ? "B" : scoreNum >= 70 ? "C" : scoreNum >= 60 ? "D" : "F");
+  const scoreColor = scoreNum >= 80 ? EMAIL_COLORS.green : scoreNum >= 60 ? "#FFC850" : "#FF6A5E";
+
+  // Pillar grid: 6 dots in a 2-col layout (table-based for email client compat).
+  const pillarOrder: Array<{ key: keyof typeof pillars; label: string }> = [
+    { key: "measurement", label: "Measurement" },
+    { key: "capture", label: "Email capture" },
+    { key: "content", label: "Content engine" },
+    { key: "freshness", label: "Content freshness" },
+    { key: "distribution", label: "Social presence" },
+    { key: "conversion", label: "Conversion tools" },
+  ];
+  const dotColor = (s: PillarStrength) =>
+    s === "strong" ? EMAIL_COLORS.green : s === "weak" ? "#FFC850" : s === "missing" ? "#FF6A5E" : "rgba(255,255,255,0.35)";
+  const dotLabel = (s: PillarStrength) =>
+    s === "strong" ? "Pass" : s === "weak" ? "Warn" : s === "missing" ? "Fail" : "Skip";
+  const pillarRows: string[] = [];
+  for (let i = 0; i < pillarOrder.length; i += 2) {
+    const left = pillarOrder[i];
+    const right = pillarOrder[i + 1];
+    const cell = (item: typeof pillarOrder[number] | undefined) => {
+      if (!item) return `<td style="width:50%;padding:8px 0;"></td>`;
+      const p = pillars[item.key];
+      const color = dotColor(p.strength);
+      const status = dotLabel(p.strength);
+      return `
+        <td style="width:50%;padding:9px 0;vertical-align:top;">
+          <table cellpadding="0" cellspacing="0" border="0" style="border-collapse:collapse;">
+            <tr>
+              <td style="padding-right:10px;vertical-align:middle;">
+                <div style="width:9px;height:9px;border-radius:50%;background:${color};"></div>
+              </td>
+              <td style="vertical-align:middle;">
+                <div style="font-size:13.5px;color:${EMAIL_COLORS.text};font-weight:500;letter-spacing:-0.005em;">${escapeHtml(item.label)}</div>
+                <div style="font-size:11px;color:${EMAIL_COLORS.textDim};letter-spacing:0.04em;text-transform:uppercase;margin-top:1px;">${status}</div>
+              </td>
+            </tr>
+          </table>
+        </td>`;
+    };
+    pillarRows.push(`<tr>${cell(left)}${cell(right)}</tr>`);
+  }
+  const pillarGridHtml = `
+    <table cellpadding="0" cellspacing="0" border="0" width="100%" style="border-collapse:collapse;margin-top:8px;">
+      ${pillarRows.join("")}
+    </table>`;
 
   const movesHtml = content.moves
     .map(
       (m, i) => `
-      <div style="margin-bottom:18px;">
-        <div style="font-size:14px;font-weight:700;color:${EMAIL_COLORS.text};letter-spacing:-0.005em;line-height:1.4;">
-          ${i + 1}. ${escapeHtml(m.outcome)}
-        </div>
-        <div style="font-size:14px;color:${EMAIL_COLORS.textMid};line-height:1.6;margin-top:4px;">
-          ${escapeHtml(m.how)}
+      <div style="margin-bottom:20px;">
+        <div style="display:inline-block;width:24px;height:24px;background:${EMAIL_COLORS.cardAlt};border:1px solid ${EMAIL_COLORS.borderStrong};border-radius:6px;text-align:center;line-height:24px;font-size:12px;font-weight:700;color:${EMAIL_COLORS.text};margin-right:10px;vertical-align:top;">${i + 1}</div>
+        <div style="display:inline-block;width:calc(100% - 40px);vertical-align:top;">
+          <div style="font-size:14.5px;font-weight:700;color:${EMAIL_COLORS.text};letter-spacing:-0.005em;line-height:1.4;">
+            ${escapeHtml(m.outcome)}
+          </div>
+          <div style="font-size:14px;color:${EMAIL_COLORS.textMid};line-height:1.6;margin-top:4px;">
+            ${escapeHtml(m.how)}
+          </div>
         </div>
       </div>`,
     )
@@ -1338,50 +1349,58 @@ ${fontImport}
     </div>
 
     <!-- Opener -->
-    <p style="font-size:15px;line-height:1.65;color:${EMAIL_COLORS.textMid};margin:26px 0 0;">
+    <p style="font-size:15.5px;line-height:1.65;color:${EMAIL_COLORS.textMid};margin:24px 0 0;">
       ${escapeHtml(content.opener)}
     </p>
 
-    <!-- The One Thing -->
+    <!-- Score Hero + Findings Grid -->
     <div style="${cardWrap}">
-      <div style="${sectionLabel}">Here's the deal</div>
+      <table cellpadding="0" cellspacing="0" border="0" width="100%" style="border-collapse:collapse;">
+        <tr>
+          <td style="vertical-align:middle;width:140px;padding-right:18px;">
+            <div style="font-family:Fraunces,Georgia,'Times New Roman',serif;font-size:64px;font-weight:500;line-height:1;color:${scoreColor};letter-spacing:-0.03em;">
+              ${scoreNum}
+            </div>
+            <div style="font-size:11px;font-weight:700;letter-spacing:0.16em;color:${EMAIL_COLORS.textDim};text-transform:uppercase;margin-top:6px;">
+              out of 100 · grade ${escapeHtml(grade)}
+            </div>
+          </td>
+          <td style="vertical-align:middle;border-left:1px solid ${EMAIL_COLORS.border};padding-left:22px;">
+            <div style="${sectionLabel}">The read</div>
+            <div style="font-size:16px;line-height:1.5;color:${EMAIL_COLORS.text};margin-top:6px;font-weight:500;letter-spacing:-0.005em;">
+              ${escapeHtml(content.scoreLine)}
+            </div>
+          </td>
+        </tr>
+      </table>
+      <div style="border-top:1px solid ${EMAIL_COLORS.border};margin-top:22px;padding-top:18px;">
+        <div style="${sectionLabel}">What we found</div>
+        ${pillarGridHtml}
+      </div>
+    </div>
+
+    <!-- The Biggest Gap -->
+    <div style="${cardWrap}">
+      <div style="${sectionLabel}">The biggest gap</div>
       <div style="${sectionHead}">
         ${escapeHtml(content.painLabel)}
       </div>
-      <p style="${bodyPara}">${escapeHtml(content.painBody)}</p>
-    </div>
-
-    <!-- The Cost -->
-    <div style="${cardWrap}">
-      <div style="${sectionLabel}">What it's costing you</div>
-      <p style="${bodyPara}margin-top:12px;">${escapeHtml(content.costBody)}</p>
-    </div>
-
-    <!-- Why It's Happening -->
-    <div style="${cardWrap}">
-      <div style="${sectionLabel}">Why it's happening</div>
-      <p style="${bodyPara}margin-top:12px;">${escapeHtml(content.whyBody)}</p>
+      <p style="${bodyPara}">${escapeHtml(content.problemBody)}</p>
     </div>
 
     <!-- The 3 Moves -->
     <div style="${cardWrap}">
-      <div style="${sectionLabel}">The 3 moves</div>
+      <div style="${sectionLabel}">Here's what I'd do</div>
       <div style="${sectionHead}">
-        Here's what I'd do, in order
+        3 moves, in order
       </div>
       ${movesHtml}
     </div>
 
-    <!-- Proof -->
+    <!-- How I Can Help -->
     <div style="${cardWrap}">
-      <div style="${sectionLabel}">Why listen to me</div>
-      <p style="${bodyPara}margin-top:12px;">${escapeHtml(content.proofBody)}</p>
-    </div>
-
-    <!-- Offer -->
-    <div style="${cardWrap}">
-      <div style="${sectionLabel}">How we'd work together</div>
-      <p style="${bodyPara}margin-top:12px;">${escapeHtml(content.offerBody)}</p>
+      <div style="${sectionLabel}">How I can help</div>
+      <p style="${bodyPara}margin-top:12px;">${escapeHtml(content.helpBody)}</p>
     </div>
 
     <!-- CTA -->
@@ -1421,30 +1440,21 @@ ${fontImport}
     ``,
     content.opener,
     ``,
-    `HERE'S THE DEAL`,
+    `${scoreNum}/100 · GRADE ${grade}`,
+    content.scoreLine,
+    ``,
+    `THE BIGGEST GAP`,
     content.painLabel,
     ``,
-    content.painBody,
+    content.problemBody,
     ``,
-    `WHAT IT'S COSTING YOU`,
-    ``,
-    content.costBody,
-    ``,
-    `WHY IT'S HAPPENING`,
-    ``,
-    content.whyBody,
-    ``,
-    `THE 3 MOVES`,
+    `HERE'S WHAT I'D DO`,
     ``,
     movesText,
     ``,
-    `WHY LISTEN TO ME`,
+    `HOW I CAN HELP`,
     ``,
-    content.proofBody,
-    ``,
-    `HOW WE'D WORK TOGETHER`,
-    ``,
-    content.offerBody,
+    content.helpBody,
     ``,
     content.ctaHeadline.toUpperCase(),
     content.ctaSub,
