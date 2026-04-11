@@ -1219,19 +1219,9 @@ export function buildMarketingPlan(
 
   const lines: string[] = [];
 
-  lines.push("## Here's what I found on your website");
-  lines.push("");
-  lines.push(openingRead(pillars, biz, domain, kind));
-  lines.push("");
-
-  lines.push("## Your plan, in the order that makes you money fastest");
-  lines.push("");
-  if (priorities.length === 0) {
-    lines.push(
-      "Nothing broken to rank. Everything I check for is working. The next moves are about making the stuff that works, work even harder. Skip ahead to the first-month plan below to see what that looks like.",
-    );
+  if (priorities.length > 0) {
+    lines.push("## The 3 biggest moves, in order");
     lines.push("");
-  } else {
     const rankLabel = ["**#1 for you**", "**#2 for you**", "**#3 for you**"];
     priorities.forEach((pri, i) => {
       lines.push(`${rankLabel[i]}: **${pri.pillar.name}.**`);
@@ -1239,6 +1229,11 @@ export function buildMarketingPlan(
       lines.push(priorityNarrative(pri, biz, kind));
       lines.push("");
     });
+  } else {
+    lines.push("## You're ahead of the curve");
+    lines.push("");
+    lines.push(openingRead(pillars, biz, domain, kind));
+    lines.push("");
   }
 
   lines.push("## What your first month with us looks like");
@@ -1280,15 +1275,227 @@ function groupEvidence(checks: AuditCheck[]): {
   return { growth, content, basics };
 }
 
+// Pull the hostname out of a URL, stripping query strings, fragments, and
+// the leading www. So "https://fastwaterheater.com/?utm_source=google&..."
+// becomes "fastwaterheater.com". Used in the email subject and header so
+// the display URL doesn't explode into a mile-long tracking blob.
+function cleanHostname(url: string): string {
+  try {
+    const u = new URL(url);
+    return u.hostname.replace(/^www\./i, "");
+  } catch {
+    return url
+      .replace(/^https?:\/\//i, "")
+      .replace(/[/?#].*$/, "")
+      .replace(/^www\./i, "");
+  }
+}
+
+// Pull a first name out of "Jane Doe" or "jane". Used for the email opener.
+function firstName(name: string): string {
+  const clean = (name || "").trim().split(/\s+/)[0] || "";
+  if (!clean) return "";
+  return clean.charAt(0).toUpperCase() + clean.slice(1);
+}
+
+type ReadoutStatus = "good" | "weak" | "broken";
+
+interface ReadoutItem {
+  label: string;
+  status: ReadoutStatus;
+  line: string;
+}
+
+// Roll the 6 marketing checks into 5 business-owner-friendly categories.
+// Each one gets a one-sentence read: what's going on + what we'd do, in
+// the voice of a consultant not an auditor. This is what replaces the
+// "wins / gaps / blockers" strip — the visitor is here for marketing
+// advice, not a website report card.
+function buildMarketingReadout(
+  checks: AuditCheck[],
+  kind: BusinessKind,
+): ReadoutItem[] {
+  const byId = new Map(checks.map((c) => [c.id, c]));
+  const statusOf = (id: string): ReadoutStatus => {
+    const c = byId.get(id);
+    if (!c) return "weak";
+    if (c.status === "fail") return "broken";
+    if (c.status === "warn") return "weak";
+    return "good";
+  };
+
+  // 1. Visibility (tracking pixels / analytics)
+  const visibility: ReadoutItem = (() => {
+    const s = statusOf("pixels");
+    if (s === "good") {
+      return {
+        label: "Knowing what's working",
+        status: s,
+        line: "You can already see which marketing is bringing you customers. That's the foundation most businesses don't have.",
+      };
+    }
+    if (s === "weak") {
+      return {
+        label: "Knowing what's working",
+        status: s,
+        line: "You can see part of the picture, not all of it. That leads to bad calls on where to spend next. We'd get the full view in place in an afternoon.",
+      };
+    }
+    return {
+      label: "Knowing what's working",
+      status: s,
+      line: "You're flying blind on every marketing dollar you spend. We'd turn on the invisible tools that show which ads and posts are actually bringing you customers. It's the single biggest lever you're not pulling.",
+    };
+  })();
+
+  // 2. Catching leads (email capture)
+  const capture: ReadoutItem = (() => {
+    const s = statusOf("email_capture");
+    const capturePhrase: Record<BusinessKind, string> = {
+      ecommerce: "98 out of every 100 visitors leave your site without buying. We'd catch their email on the way out and bring them back with a series of emails that do the selling while you sleep.",
+      saas: "Most people don't sign up the first time they hear about your product. We'd catch their email and stay in their inbox with helpful stuff until they're ready to try it.",
+      service: "Your future customers research for weeks before they reach out. We'd get you in their inbox during that whole window so you're the first name they think of when it's time.",
+      agency: "The best agencies close deals through helpful newsletters, not cold pitches. We'd build you one so the next time a prospect needs help, you're the first name they think of.",
+      coach: "Your business runs on email. We'd get visitors onto your list with a real offer and write the welcome sequence that turns cold strangers into buyers.",
+      local: "We'd catch visitor emails with a simple offer and send them a friendly follow-up so they book with you instead of the next shop down the road.",
+      creator: "Your email list is the only audience nobody can take from you. We'd start building it this week so you're not renting reach from the algorithm forever.",
+      restaurant: "We'd catch their email with a 'first-visit drink on us' offer and keep them coming back with news about tonight's special or this weekend's event.",
+      generic: "Visitors leave your site every day without giving you a way to bring them back. We'd fix that with one smart offer and a short welcome sequence — usually the highest-ROI thing you can add.",
+    };
+    if (s === "good") {
+      return {
+        label: "Catching leads that aren't ready yet",
+        status: s,
+        line: "You're already collecting emails, which puts you ahead of most businesses in your space. Now it's about making what you send them pull harder.",
+      };
+    }
+    if (s === "weak") {
+      return {
+        label: "Catching leads that aren't ready yet",
+        status: s,
+        line: "You've got a signup form, but the offer isn't working. We'd rewrite it this week into something your customers actually want — that alone usually doubles signups.",
+      };
+    }
+    return {
+      label: "Catching leads that aren't ready yet",
+      status: s,
+      line: capturePhrase[kind],
+    };
+  })();
+
+  // 3. Showing up on Google (content_hub + content_fresh merged)
+  const google: ReadoutItem = (() => {
+    const hub = statusOf("content_hub");
+    const fresh = statusOf("content_fresh");
+    const worst: ReadoutStatus =
+      hub === "broken" || fresh === "broken"
+        ? "broken"
+        : hub === "weak" || fresh === "weak"
+        ? "weak"
+        : "good";
+    const googlePhrase: Record<BusinessKind, string> = {
+      ecommerce: "People search for your products every day. We'd write the helpful articles that put you on page 1 — free traffic that compounds for years.",
+      saas: "We'd write the articles your customers are already searching for, and over time Google starts sending you free signups every day.",
+      service: "People in your area are typing questions into Google right now that you could answer. We'd get you showing up for them so your phone starts ringing without ad spend.",
+      agency: "Prospects judge you by what you've published. We'd write the articles that show you know your stuff and turn them into your best sales tool.",
+      coach: "We'd write the articles your future clients are searching for, so they find you instead of someone else.",
+      local: "People in your neighborhood are searching for your services today. We'd get you to page 1 for the searches that actually send you customers.",
+      creator: "Your best content should live somewhere permanent. We'd help you build a home base that keeps bringing in new fans years from now.",
+      restaurant: "When locals search 'best [your food] near me', you want to be the first name they see. We'd make that happen without paying for every click.",
+      generic: "You're invisible on Google for the questions your future customers are typing right now. We'd write the articles that put you on page 1 — free traffic that compounds forever.",
+    };
+    if (worst === "good") {
+      return {
+        label: "Showing up on Google",
+        status: worst,
+        line: "You're publishing content and Google can see you're active. That's the long-term compounding channel already working in your favor.",
+      };
+    }
+    if (worst === "weak") {
+      return {
+        label: "Showing up on Google",
+        status: worst,
+        line: "Your content is there but it's thin or quiet, and Google notices. We'd get you on a simple rhythm of one helpful article a week that answers what customers actually search for.",
+      };
+    }
+    return {
+      label: "Showing up on Google",
+      status: worst,
+      line: googlePhrase[kind],
+    };
+  })();
+
+  // 4. Social presence
+  const social: ReadoutItem = (() => {
+    const s = statusOf("social");
+    if (s === "good") {
+      return {
+        label: "Social proof",
+        status: s,
+        line: "Your social channels are hooked up and customers can find you wherever they already hang out. You look legitimate at first glance, which matters more than most business owners realize.",
+      };
+    }
+    if (s === "weak") {
+      return {
+        label: "Social proof",
+        status: s,
+        line: "You're on some platforms but not all the ones that matter for your business. We'd help you focus on the right 2-3 and post the kind of content that actually gets shared.",
+      };
+    }
+    return {
+      label: "Social proof",
+      status: s,
+      line: "No social links on your site. Customers check Instagram or TikTok before they buy, and if they can't find you there, they assume you're not the real deal. We'd get you posting the content that builds trust fast.",
+    };
+  })();
+
+  // 5. Turning visitors into customers (conversion tools)
+  const convert: ReadoutItem = (() => {
+    const c = byId.get("conversion");
+    const s: ReadoutStatus =
+      c?.status === "pass"
+        ? "good"
+        : c?.status === "warn"
+        ? "weak"
+        : c?.status === "fail"
+        ? "broken"
+        : "weak"; // "info" (no widget) is a soft miss, not a fail
+    if (s === "good") {
+      return {
+        label: "Turning visitors into customers",
+        status: s,
+        line: "You've got a way for visitors to get help on the spot. That's quietly lifting your conversion every day.",
+      };
+    }
+    if (s === "weak") {
+      return {
+        label: "Turning visitors into customers",
+        status: s,
+        line: "No easy way for a curious visitor to ask a quick question. Most people who hesitate just leave for the next option. We'd add a simple chat so you catch them while they're warm.",
+      };
+    }
+    return {
+      label: "Turning visitors into customers",
+      status: s,
+      line: "Your site is missing the tools that turn visitors into buyers. We'd add the small touches (smart chat, clearer next-steps, better CTAs) that lift sales 10-20% without more traffic.",
+    };
+  })();
+
+  return [visibility, capture, google, social, convert];
+}
+
 export function renderAuditEmail(
   result: AuditResult,
   recipientEmail: string,
   businessType: string = "",
+  visitorName: string = "",
 ): { subject: string; html: string; text: string } {
-  const displayUrl = result.finalUrl.replace(/^https?:\/\//, "").replace(/\/$/, "");
+  const displayUrl = cleanHostname(result.finalUrl);
   const subject = result.reachable
     ? `Your growth plan for ${displayUrl}`
     : `We couldn't reach ${displayUrl}. Here's what that means.`;
+  const first = firstName(visitorName);
+  const greeting = first ? `Hey ${first},` : "Hey,";
 
   const fontImport = `<link href="https://fonts.googleapis.com/css2?family=Fraunces:wght@400;500;600&display=swap" rel="stylesheet">`;
   const bodyBase = `margin:0;padding:0;background:${EMAIL_COLORS.bg};font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif;color:${EMAIL_COLORS.text};`;
@@ -1335,45 +1542,40 @@ ${fontImport}
     };
   }
 
-  const fails = result.checks.filter((c) => c.status === "fail");
-  const warns = result.checks.filter((c) => c.status === "warn");
-  const passes = result.checks.filter((c) => c.status === "pass");
-
   const planMarkdown = buildMarketingPlan(result, businessType);
   const planHtml = renderPlanMarkdown(planMarkdown);
 
-  const evidence = groupEvidence(result.checks);
+  const bizKind = classifyBusiness(businessType);
+  const readout = buildMarketingReadout(result.checks, bizKind);
 
-  const renderEvidenceCheck = (c: AuditCheck): string => `
-    <tr>
-      <td style="padding:10px 0;border-top:1px solid ${EMAIL_COLORS.border};vertical-align:top;">
-        <table cellpadding="0" cellspacing="0" border="0" width="100%">
-          <tr>
-            <td style="vertical-align:top;width:56px;padding-right:10px;">${darkStatusBadge(c.status)}</td>
-            <td style="vertical-align:top;">
-              <div style="font-size:13px;font-weight:600;color:${EMAIL_COLORS.text};">${escapeHtml(c.label)}</div>
-              <div style="font-size:12px;color:${EMAIL_COLORS.textDim};line-height:1.5;margin-top:3px;">${escapeHtml(c.detail)}</div>
-            </td>
-          </tr>
-        </table>
-      </td>
-    </tr>
-  `;
-
-  const evidenceSection = (title: string, items: AuditCheck[]): string => {
-    if (items.length === 0) return "";
-    return `
-      <div style="margin-top:22px;">
-        <div style="font-size:10px;font-weight:600;letter-spacing:0.14em;color:${EMAIL_COLORS.textDim};text-transform:uppercase;margin-bottom:4px;">${title}</div>
-        <table cellpadding="0" cellspacing="0" border="0" width="100%">
-          ${items.map(renderEvidenceCheck).join("")}
-        </table>
-      </div>
-    `;
+  // Dot colors for the readout rows.
+  const dotColor: Record<ReadoutStatus, string> = {
+    good: EMAIL_COLORS.green,
+    weak: "#F5B841",
+    broken: EMAIL_COLORS.red,
   };
 
-  const fetchedDate = new Date(result.fetchedAt);
-  const timeString = fetchedDate.toUTCString().replace("GMT", "UTC");
+  const readoutRows = readout
+    .map(
+      (item) => `
+    <table cellpadding="0" cellspacing="0" border="0" width="100%" style="margin-bottom:18px;">
+      <tr>
+        <td width="22" valign="top" style="padding-top:7px;padding-right:12px;">
+          <div style="width:11px;height:11px;border-radius:50%;background:${dotColor[item.status]};box-shadow:0 0 0 3px ${dotColor[item.status]}22;"></div>
+        </td>
+        <td valign="top">
+          <div style="font-size:14px;font-weight:600;color:${EMAIL_COLORS.text};letter-spacing:-0.005em;">${escapeHtml(item.label)}</div>
+          <div style="font-size:13.5px;color:${EMAIL_COLORS.textMid};line-height:1.6;margin-top:4px;">${escapeHtml(item.line)}</div>
+        </td>
+      </tr>
+    </table>
+  `,
+    )
+    .join("");
+
+  const opener = first
+    ? `${greeting} I took a real look at your site and pulled together a plain-English read on where you are with marketing right now and what I'd do about it. No jargon. No fluff. Here's the short version.`
+    : `I took a real look at your site and pulled together a plain-English read on where you are with marketing right now and what I'd do about it. No jargon. No fluff. Here's the short version.`;
 
   const html = `<!doctype html>
 <html>
@@ -1382,89 +1584,80 @@ ${fontImport}
 ${fontImport}
 </head>
 <body style="${bodyBase}">
-  <div style="max-width:640px;margin:0 auto;padding:48px 28px 64px;">
+  <div style="max-width:640px;margin:0 auto;padding:44px 24px 56px;">
 
     <!-- Header -->
-    <div style="font-size:11px;font-weight:600;letter-spacing:0.16em;color:${EMAIL_COLORS.textDim};text-transform:uppercase;">Venti Scale · Your growth plan</div>
-    <h1 style="font-family:Fraunces,Georgia,'Times New Roman',serif;font-size:34px;font-weight:500;letter-spacing:-0.02em;margin:14px 0 10px;line-height:1.12;color:${EMAIL_COLORS.text};">
-      Your growth plan for<br/>
-      <span style="color:${EMAIL_COLORS.blue};">${escapeHtml(displayUrl)}</span>
+    <div style="font-size:10px;font-weight:700;letter-spacing:0.18em;color:${EMAIL_COLORS.textDim};text-transform:uppercase;">Venti Scale</div>
+    <h1 style="font-family:Fraunces,Georgia,'Times New Roman',serif;font-size:36px;font-weight:500;letter-spacing:-0.025em;margin:12px 0 6px;line-height:1.1;color:${EMAIL_COLORS.text};">
+      Your growth plan
     </h1>
-    <p style="font-size:14px;line-height:1.55;color:${EMAIL_COLORS.textDim};margin:0 0 8px;">
-      Based on what I found when I looked at your website today. Plain English, no jargon.
+    <div style="font-size:14px;font-weight:500;color:${EMAIL_COLORS.textMid};letter-spacing:-0.005em;">
+      ${escapeHtml(displayUrl)}
+    </div>
+
+    <!-- Personal opener -->
+    <p style="font-size:15px;line-height:1.65;color:${EMAIL_COLORS.textMid};margin:26px 0 0;">
+      ${escapeHtml(opener)}
     </p>
 
-    <!-- Snapshot strip -->
-    <table cellpadding="0" cellspacing="0" border="0" width="100%" style="margin:24px 0 8px;">
-      <tr>
-        <td style="width:33.33%;padding:4px;">
-          <div style="background:${EMAIL_COLORS.card};border:1px solid ${EMAIL_COLORS.border};border-radius:10px;padding:18px 14px;text-align:center;">
-            <div style="font-family:Fraunces,Georgia,serif;font-size:28px;font-weight:500;color:${EMAIL_COLORS.green};line-height:1;">${passes.length}</div>
-            <div style="font-size:10px;font-weight:600;letter-spacing:0.12em;color:${EMAIL_COLORS.textDim};text-transform:uppercase;margin-top:6px;">Working</div>
-          </div>
-        </td>
-        <td style="width:33.33%;padding:4px;">
-          <div style="background:${EMAIL_COLORS.card};border:1px solid ${EMAIL_COLORS.border};border-radius:10px;padding:18px 14px;text-align:center;">
-            <div style="font-family:Fraunces,Georgia,serif;font-size:28px;font-weight:500;color:#FFC850;line-height:1;">${warns.length}</div>
-            <div style="font-size:10px;font-weight:600;letter-spacing:0.12em;color:${EMAIL_COLORS.textDim};text-transform:uppercase;margin-top:6px;">Weak</div>
-          </div>
-        </td>
-        <td style="width:33.33%;padding:4px;">
-          <div style="background:${EMAIL_COLORS.card};border:1px solid ${EMAIL_COLORS.border};border-radius:10px;padding:18px 14px;text-align:center;">
-            <div style="font-family:Fraunces,Georgia,serif;font-size:28px;font-weight:500;color:${EMAIL_COLORS.red};line-height:1;">${fails.length}</div>
-            <div style="font-size:10px;font-weight:600;letter-spacing:0.12em;color:${EMAIL_COLORS.textDim};text-transform:uppercase;margin-top:6px;">Broken</div>
-          </div>
-        </td>
-      </tr>
-    </table>
+    <!-- Marketing readout card -->
+    <div style="background:${EMAIL_COLORS.card};border:1px solid ${EMAIL_COLORS.border};border-radius:14px;padding:28px 26px 14px;margin-top:28px;">
+      <div style="font-size:10px;font-weight:700;letter-spacing:0.16em;color:${EMAIL_COLORS.textDim};text-transform:uppercase;margin-bottom:4px;">The five-minute read</div>
+      <div style="font-family:Fraunces,Georgia,'Times New Roman',serif;font-size:22px;font-weight:500;letter-spacing:-0.015em;color:${EMAIL_COLORS.text};margin:6px 0 22px;line-height:1.25;">
+        Where your marketing is right now
+      </div>
+      ${readoutRows}
+    </div>
 
     <!-- Plan body -->
-    <div style="background:${EMAIL_COLORS.card};border:1px solid ${EMAIL_COLORS.border};border-radius:12px;padding:28px 26px;margin-top:20px;">
+    <div style="background:${EMAIL_COLORS.card};border:1px solid ${EMAIL_COLORS.border};border-radius:14px;padding:28px 26px;margin-top:22px;">
       ${planHtml}
     </div>
 
     <!-- CTA -->
-    <div style="margin-top:36px;padding:32px 28px;background:${EMAIL_COLORS.cardAlt};border:1px solid ${EMAIL_COLORS.borderStrong};border-radius:12px;text-align:center;">
-      <div style="font-family:Fraunces,Georgia,'Times New Roman',serif;font-size:22px;font-weight:500;line-height:1.3;color:${EMAIL_COLORS.text};">
+    <div style="margin-top:32px;padding:34px 28px;background:${EMAIL_COLORS.cardAlt};border:1px solid ${EMAIL_COLORS.borderStrong};border-radius:14px;text-align:center;">
+      <div style="font-family:Fraunces,Georgia,'Times New Roman',serif;font-size:24px;font-weight:500;line-height:1.25;color:${EMAIL_COLORS.text};letter-spacing:-0.015em;">
         Want us to actually do all this for you?
       </div>
-      <p style="font-size:14px;line-height:1.6;color:${EMAIL_COLORS.textMid};margin:12px 0 22px;">
-        We become the marketing team you'd hire if you had the money to hire one. You keep running your business. We bring you more customers. One quick call, no contract, no pressure.
+      <p style="font-size:14.5px;line-height:1.65;color:${EMAIL_COLORS.textMid};margin:14px 0 24px;max-width:480px;margin-left:auto;margin-right:auto;">
+        We become the marketing team you'd hire if you had the budget to hire one. You keep running your business. We bring you more customers. One quick call, no contract, no pressure.
       </p>
-      <a href="https://www.ventiscale.com" style="display:inline-block;background:${EMAIL_COLORS.red};color:#FFFFFF;text-decoration:none;font-size:14px;font-weight:600;padding:14px 26px;border-radius:8px;letter-spacing:0.01em;">
+      <a href="https://www.ventiscale.com" style="display:inline-block;background:${EMAIL_COLORS.red};color:#FFFFFF;text-decoration:none;font-size:14px;font-weight:600;padding:14px 28px;border-radius:10px;letter-spacing:0.01em;">
         Book a quick call
       </a>
-    </div>
-
-    <!-- Supporting evidence -->
-    <div style="margin-top:48px;padding-top:24px;border-top:1px solid ${EMAIL_COLORS.border};">
-      <div style="font-size:11px;font-weight:600;letter-spacing:0.14em;color:${EMAIL_COLORS.textDim};text-transform:uppercase;margin-bottom:4px;">What I actually checked</div>
-      <p style="font-size:12px;line-height:1.55;color:${EMAIL_COLORS.textDim};margin:6px 0 0;">The stuff I looked at on your site. Skim it if you want to see the receipts behind the plan above.</p>
-      ${evidenceSection("Growth foundation", evidence.growth)}
-      ${evidenceSection("Content engine", evidence.content)}
-      ${evidenceSection("Website basics", evidence.basics)}
+      <div style="margin-top:16px;font-size:12px;color:${EMAIL_COLORS.textDim};">
+        Or just hit reply to this email. I read every one.
+      </div>
     </div>
 
     <!-- Footer -->
-    <div style="margin-top:40px;padding-top:20px;border-top:1px solid ${EMAIL_COLORS.border};font-size:12px;color:${EMAIL_COLORS.textDim};line-height:1.65;">
-      Sent to ${escapeHtml(recipientEmail)} because you ran a free audit at <a href="https://www.ventiscale.com" style="color:${EMAIL_COLORS.blue};text-decoration:none;">ventiscale.com</a>. Reply any time.<br/><br/>
-      Dustin Gilmour, Venti Scale
+    <div style="margin-top:40px;padding-top:22px;border-top:1px solid ${EMAIL_COLORS.border};font-size:12px;color:${EMAIL_COLORS.textDim};line-height:1.7;">
+      Dustin Gilmour · Venti Scale<br/>
+      Sent to ${escapeHtml(recipientEmail)} because you asked for a free audit at <a href="https://www.ventiscale.com" style="color:${EMAIL_COLORS.blue};text-decoration:none;">ventiscale.com</a>.
     </div>
 
   </div>
 </body>
 </html>`;
 
-  // Plain-text fallback. Markdown renders cleanly as-is.
+  // Plain-text fallback.
+  const readoutLines = readout.map((item) => {
+    const icon = item.status === "good" ? "✓" : item.status === "weak" ? "~" : "✗";
+    return `${icon} ${item.label}\n  ${item.line}`;
+  });
+
   const textLines = [
-    `Your growth plan for ${displayUrl}`,
-    `Based on what I found when I looked at your website today.`,
+    `Your growth plan — ${displayUrl}`,
     ``,
-    `${passes.length} working · ${warns.length} weak · ${fails.length} broken`,
+    opener,
     ``,
+    `WHERE YOUR MARKETING IS RIGHT NOW`,
+    ``,
+    ...readoutLines.flatMap((l) => [l, ""]),
     planMarkdown,
     ``,
     `Want us to actually do all this for you? Book a quick call: https://www.ventiscale.com`,
+    `Or just hit reply to this email. I read every one.`,
     ``,
     `Dustin Gilmour, Venti Scale`,
   ];

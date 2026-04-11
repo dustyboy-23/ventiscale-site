@@ -91,7 +91,7 @@ async function brevoSend(payload: Record<string, unknown>) {
 }
 
 async function sendAuditToVisitor(entry: AuditRequest, result: AuditResult) {
-  const { subject, html, text } = renderAuditEmail(result, entry.email, entry.business);
+  const { subject, html, text } = renderAuditEmail(result, entry.email, entry.business, entry.name);
   return brevoSend({
     sender: { name: NOTIFY_FROM_NAME, email: NOTIFY_FROM_EMAIL },
     to: [{ email: entry.email }],
