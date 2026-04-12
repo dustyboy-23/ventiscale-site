@@ -87,7 +87,7 @@ export interface ReportSummary {
   id: string;
   title: string;
   date: string;
-  type: "client" | "seo" | "baseline" | "internal";
+  type: "client" | "seo" | "baseline" | "internal" | "ads";
   path: string;
 }
 

@@ -549,6 +549,21 @@ export default async function DashboardPage({
             </ol>
           </Card>
 
+          {/* What's Next */}
+          {(kpis as any).roadmap?.length > 0 && (
+            <Card>
+              <CardHeader title="What's Next" />
+              <ul className="space-y-3 px-1">
+                {((kpis as any).roadmap as string[]).map((item: string, i: number) => (
+                  <li key={i} className="flex items-start gap-3 text-[14px]">
+                    <div className="mt-1.5 w-1.5 h-1.5 rounded-full bg-[var(--color-accent)] shrink-0" />
+                    <span className="text-[var(--color-ink-muted)] leading-snug">{item}</span>
+                  </li>
+                ))}
+              </ul>
+            </Card>
+          )}
+
           {/* Top States */}
           {kpis.topStates.length > 0 && (
             <Card padding="md">

@@ -145,6 +145,36 @@ export async function getReportHtml(id: string): Promise<string | null> {
 export async function getContentDrafts(): Promise<ContentDraft[]> {
   const session = await getPortalSession();
   if (session?.mode === "demo") return demoDrafts();
+  if (session?.mode === "real") {
+    try {
+      const supabase = await (await import("@/lib/supabase/server")).createClient();
+      const { data } = await supabase
+        .from("content_items")
+        .select("id, platform, title, status, scheduled_at, published_at, created_at")
+        .eq("client_id", session.client.id)
+        .order("created_at", { ascending: false })
+        .limit(20);
+
+      if (data && data.length > 0) {
+        return data.map((row: any) => ({
+          id: row.id,
+          date: (row.scheduled_at || row.published_at || row.created_at).slice(0, 10),
+          platform: row.platform as "facebook" | "linkedin" | "other",
+          slot: "",
+          topic: row.title,
+          caption: "",
+          imagePrompt: "",
+          comments: [],
+          cta: "",
+          isProductPost: false,
+          status: row.status === "published" ? "published" : "draft" as any,
+        }));
+      }
+    } catch (e) {
+      console.error("[portal-data] content items query failed", e);
+    }
+    return [];
+  }
   return [];
 }
 
@@ -157,6 +187,32 @@ export async function getCampaigns(): Promise<CampaignsData> {
 export async function getActivityFeed(limit = 8): Promise<ActivityItem[]> {
   const session = await getPortalSession();
   if (session?.mode === "demo") return demoActivity(limit);
+
+  if (session?.mode === "real") {
+    try {
+      const supabase = await (await import("@/lib/supabase/server")).createClient();
+      const { data } = await supabase
+        .from("activity_log")
+        .select("id, type, title, detail, created_at")
+        .eq("client_id", session.client.id)
+        .order("created_at", { ascending: false })
+        .limit(limit);
+
+      if (data && data.length > 0) {
+        return data.map((row: any) => ({
+          id: String(row.id),
+          type: row.type as ActivityItem["type"],
+          title: row.title,
+          description: row.detail || "",
+          timestamp: row.created_at,
+        }));
+      }
+    } catch (e) {
+      console.error("[portal-data] activity feed query failed", e);
+    }
+    return [];
+  }
+
   return [];
 }
 

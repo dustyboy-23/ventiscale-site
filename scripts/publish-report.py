@@ -36,7 +36,7 @@ CLIENT_IDS = {
     "sprinkler-guard": "12baae15-9b58-464e-9b21-a15f375ff979",
 }
 
-VALID_TYPES = {"client", "seo", "baseline", "internal"}
+VALID_TYPES = {"client", "seo", "baseline", "internal", "ads"}
 
 
 def load_env(path: Path) -> dict:
@@ -133,6 +133,32 @@ def main():
     print(f"[publish-report] ✓ published id={report_id}")
     if report_id:
         print(f"  url: https://www.ventiscale.com/reports/{report_id}")
+
+    # Log activity
+    try:
+        url = VENTI_ENV.get("NEXT_PUBLIC_SUPABASE_URL")
+        key = VENTI_ENV.get("SUPABASE_SERVICE_ROLE_KEY")
+        activity_payload = {
+            "client_id": client_id,
+            "type": "report",
+            "title": f"New report: {args.title}",
+            "detail": args.summary or "",
+        }
+        activity_endpoint = f"{url}/rest/v1/activity_log"
+        activity_req = urllib.request.Request(
+            activity_endpoint,
+            data=json.dumps(activity_payload).encode(),
+            headers={
+                "apikey": key,
+                "Authorization": f"Bearer {key}",
+                "Content-Type": "application/json",
+                "Prefer": "return=minimal",
+            },
+            method="POST",
+        )
+        urllib.request.urlopen(activity_req)
+    except Exception as e:
+        print(f"  (activity log failed: {e})", file=sys.stderr)
 
 
 if __name__ == "__main__":

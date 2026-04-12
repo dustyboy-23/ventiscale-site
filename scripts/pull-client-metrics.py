@@ -395,6 +395,22 @@ def derive_insights(kpis: dict) -> dict:
 
 
 # ─────────────────────────────────────────────────────────────
+# Roadmap (static per-client, move to DB when we have more)
+# ─────────────────────────────────────────────────────────────
+def build_roadmap(cfg: dict) -> list:
+    """Simple static roadmap per client. Move to a DB field when we have more clients."""
+    if cfg.get("client_id") == "12baae15-9b58-464e-9b21-a15f375ff979":
+        # Sprinkler Guard
+        return [
+            "9 more SEO blog posts rolling out through April 18",
+            "MailPoet email setup with Ken this week",
+            "Website redesign: product page and homepage ready for review",
+            "Weekly performance reports every Monday",
+        ]
+    return []
+
+
+# ─────────────────────────────────────────────────────────────
 # Build the KPI snapshot for one period
 # ─────────────────────────────────────────────────────────────
 def build_snapshot(cfg: dict, period: str, env: dict) -> dict:
@@ -434,6 +450,7 @@ def build_snapshot(cfg: dict, period: str, env: dict) -> dict:
         "insights": {"working": [], "leaking": [], "actions": []},
     }
     kpis["insights"] = derive_insights(kpis)
+    kpis["roadmap"] = build_roadmap(cfg)
     return kpis
 
 
