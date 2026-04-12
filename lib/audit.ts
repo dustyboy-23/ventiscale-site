@@ -1027,16 +1027,16 @@ function painLabelFor(pillarId: string): string {
 function problemBodyFor(pillarId: string, kind: BusinessKind, phrase: string): string {
   if (pillarId === "pixels") {
     const map: Partial<Record<BusinessKind, string>> = {
-      ecommerce: `Right now you can't see which traffic actually turns into sales. Could be ads, could be social, could be word of mouth, you've got no way to tell which one to pour fuel on. Most shops we look at are right here, the data layer is just the missing piece.`,
-      saas: `You can't see where signups come from, which visitors turn into trials, or which trials turn into paying customers. Every call about marketing is a hunch. Most founders we audit are stuck in the same spot, the playbook for this stuff hasn't caught up yet.`,
+      ecommerce: `Right now you can't see which traffic actually turns into sales. Could be ads, could be social, could be word of mouth, you've got no way to tell which one to pour fuel on. Most shops we look at are right here. The fix is straightforward.`,
+      saas: `You can't see where signups come from, which visitors turn into trials, or which trials turn into paying customers. Every call about marketing is a hunch. Most founders we audit are in the same spot. This is the first thing we'd fix.`,
       service: `You've got no idea which traffic actually picks up the phone. Someone calls you, you can't tell where they came from, so you can't double down on what's working. Most service businesses we look at are in this exact spot.`,
-      local: `You've got no way to tell what's bringing customers in. Could be social, could be word of mouth, could be the website, you can't double down on what's working because you can't see it. Most local businesses we audit are right here, the playbook just hasn't caught up.`,
-      coach: `Your whole business is moving strangers from cold to warm to buyer, and you can't see any of it. You're coaching in the dark. Most coaches we look at are in the same spot, the tools to fix this used to cost a fortune and now they don't.`,
-      agency: `You sell marketing and your own site isn't measuring any of it. Brutal when a prospect pokes around. Most agencies we audit are here too, the cobbler-with-no-shoes thing is real.`,
-      creator: `You can't see which posts or videos are actually pulling people to your stuff. You're guessing at the algorithm instead of reading the numbers. Most creators we look at are right here, no excuse to fly blind anymore now that the tools are cheap.`,
+      local: `You've got no way to tell what's bringing customers in. Could be social, could be word of mouth, could be the website, you can't double down on what's working because you can't see it. Most local businesses we audit are right here. Easy fix once you know what to set up.`,
+      coach: `Your whole business is moving strangers from cold to warm to buyer, and you can't see any of it. You're coaching in the dark. Most coaches we look at are in the same spot. The tools to fix it used to cost a fortune, now they don't.`,
+      agency: `You sell marketing and your own site isn't measuring any of it. Not a great look when a prospect pokes around. Most agencies we audit are in the same boat.`,
+      creator: `You can't see which posts or videos are actually pulling people to your stuff. You're guessing at the algorithm instead of reading the numbers. Most creators we look at are right here. No reason to fly blind when the tools are free.`,
       restaurant: `You can't tell who booked a table and who just looked at the menu and left. You can't see which marketing is filling seats and which is flat. Most restaurants we audit are in the same spot.`,
     };
-    return map[kind] || `Right now you're making marketing decisions blind. Could be working, could be flat, you have no way to tell. Most owners we look at are in this exact spot, you're not behind, the playbook for this stuff just hasn't caught up.`;
+    return map[kind] || `Right now you're making marketing decisions blind. Could be working, could be flat, you have no way to tell. Most businesses we look at are in this exact spot. You're not behind, this is just the piece that's missing.`;
   }
   if (pillarId === "email_capture") {
     return `About 97 out of every 100 visitors leave your site and never come back. Right now you've got nothing to pull em back with. No email, no follow-up, nothing. That's customers you already paid to get, walking out the door.`;
@@ -1120,18 +1120,18 @@ function padMove(idx: number): { outcome: string; how: string } {
   if (idx === 1) {
     return {
       outcome: "You double down on what's already working.",
-      how: "We read the numbers every week and pour more fuel on the stuff that's paying for itself. No guessing, no precious attachment to bad ideas.",
+      how: "We check the numbers every week and put more money behind whatever's paying for itself. No guessing.",
     };
   }
   return {
-    outcome: "You stop playing catch-up on marketing and start compounding.",
-    how: "We set up the habits and systems that keep working whether you're paying attention to them or not.",
+    outcome: "You stop thinking about marketing and it still gets done.",
+    how: "We handle the week-to-week so it keeps running whether you're looking at it or not.",
   };
 }
 
 // Combined proof + offer in one block. Results-in-Advance framing (the
 // audit itself is the proof) plus DFY pitch and risk reversal.
-const HELP_BODY = `This audit is the same one agencies charge $500 to $2,000 for. I give it away because once you see how sharp the read is, working together is the obvious move. We'd run your marketing for you, tracking, emails, content, social, ads, all of it, while you keep running the business. Weekly reports on what moved. No contract, cancel anytime.`;
+const HELP_BODY = `This is the same audit agencies charge $500 to $2,000 for. I give it away because once you see how good the read is, you'll want us to do the rest. We take over your marketing. Tracking, emails, content, social, ads. You run the business, we bring in the customers. Weekly updates on what's working. No contract, cancel whenever.`;
 
 interface SalesEmailContent {
   opener: string;
@@ -1153,15 +1153,15 @@ function buildHappyPathContent(opener: string, phrase: string): SalesEmailConten
     opener,
     scoreLine: `Foundation's solid. From here it's about scaling what's working.`,
     painLabel: `You're in rare air. Most sites we look at have 3 or 4 big holes.`,
-    problemBody: `Almost everything I check for is already working for ${phrase}. The risk now isn't a broken site, it's a plateau, and the work shifts from fixing leaks to pouring fuel on what's already paying.`,
+    problemBody: `Almost everything I check for is already working for ${phrase}. You're not fixing stuff, you're scaling what's already paying. That's a good spot to be in.`,
     moves: [
       {
         outcome: "You pour fuel on whatever channel is already paying.",
         how: "We read the numbers, find the channel that's beating everything else, and we double the budget on it. Simple.",
       },
       {
-        outcome: "You turn on the next growth channel on your list.",
-        how: "There's always one you've been meaning to try. We pick the right one for your business and launch it with real tracking from day one.",
+        outcome: "You turn on the next channel you've been meaning to try.",
+        how: "We pick the right one for your business and launch it with real tracking so you know if it's working from week one.",
       },
       {
         outcome: "You stop babysitting the marketing yourself.",
@@ -1170,7 +1170,7 @@ function buildHappyPathContent(opener: string, phrase: string): SalesEmailConten
     ],
     helpBody: HELP_BODY,
     ctaHeadline: "Want us to run this for you?",
-    ctaSub: "Book a 15-min call. I'll walk you through the plan for your site and we'll see if we're a fit. No pitch, no contract.",
+    ctaSub: "Book a 15-min call. I'll show you the plan for your site and we'll figure out if it's a fit. No contract.",
     ctaButton: "Book a 15-min call",
     softClose: "Or just reply to this. I read em all.",
   };
@@ -1208,7 +1208,7 @@ function buildSalesEmailContent(
     moves,
     helpBody: HELP_BODY,
     ctaHeadline: "Want us to run this for you?",
-    ctaSub: "Book a 15-min call. I'll walk you through the plan for your site and we'll see if we're a fit. No pitch, no contract.",
+    ctaSub: "Book a 15-min call. I'll show you the plan for your site and we'll figure out if it's a fit. No contract.",
     ctaButton: "Book a 15-min call",
     softClose: "Or just reply to this. I read em all.",
   };
