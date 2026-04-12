@@ -150,7 +150,7 @@ export async function getContentDrafts(): Promise<ContentDraft[]> {
       const supabase = await (await import("@/lib/supabase/server")).createClient();
       const { data } = await supabase
         .from("content_items")
-        .select("id, platform, title, status, scheduled_at, published_at, created_at")
+        .select("id, platform, title, body, status, scheduled_at, published_at, created_at")
         .eq("client_id", session.client.id)
         .order("created_at", { ascending: false })
         .limit(20);
@@ -162,7 +162,7 @@ export async function getContentDrafts(): Promise<ContentDraft[]> {
           platform: row.platform as "facebook" | "linkedin" | "other",
           slot: "",
           topic: row.title,
-          caption: "",
+          caption: row.body || "",
           imagePrompt: "",
           comments: [],
           cta: "",
