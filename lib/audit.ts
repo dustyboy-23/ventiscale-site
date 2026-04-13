@@ -1045,7 +1045,7 @@ function problemBodyFor(pillarId: string, kind: BusinessKind, phrase: string): s
     const map: Partial<Record<BusinessKind, string>> = {
       ecommerce: `People Google "best [your product]" and "how to pick [your product]" thousands of times a month. You're not showing up for any of it. Your competitors are eating that traffic for free.`,
       local: `People in your area are Googling for exactly what you do right now. They're not finding you, they're finding the other guy down the road. That's free traffic going to whoever bothers to publish for it.`,
-      saas: `The companies that win long-term publish stuff their customers actually search for. Right now you're invisible. Your competitors are eating the free traffic and compounding.`,
+      saas: `The companies that win long-term publish stuff their customers actually search for. Right now you're invisible. Your competitors are eating that free traffic and pulling further ahead.`,
       restaurant: `When locals search "best [your food] near me," you want to be the first name they see. Right now you're not even on the page.`,
     };
     return map[kind] || `People are searching for what ${phrase} does every day. You're not showing up for any of it. Free traffic that should be yours is going to your competitors instead.`;
@@ -1066,7 +1066,7 @@ function problemBodyFor(pillarId: string, kind: BusinessKind, phrase: string): s
 // for the reader. Tied to how many things are actually broken, not the
 // raw score.
 function scoreLineFor(failingCount: number, phrase: string): string {
-  if (failingCount === 0) return `Foundation's solid. From here it's about scaling what's working.`;
+  if (failingCount === 0) return `Foundation's solid. Now it's about doing more of what's already working.`;
   if (failingCount === 1) return `Foundation's mostly there, one real gap to plug.`;
   if (failingCount <= 3) return `Foundation's there, the marketing layer is what's missing.`;
   return `A few real gaps to plug before ${phrase} can pull for you the way it should.`;
@@ -1079,32 +1079,32 @@ function moveFor(pillarId: string, _kind: BusinessKind): { outcome: string; how:
     case "pixels":
       return {
         outcome: "You start seeing exactly which marketing is bringing customers in.",
-        how: "We hook up the tracking in week 1. From then on, every post, every email, every campaign, you see what it brought in.",
+        how: "We set up the tracking so every post, every email, every ad, you see what it brought in. No more guessing which channel to put money into.",
       };
     case "email_capture":
       return {
-        outcome: "You stop losing visitors forever.",
-        how: "We put a real offer on your site, something your customers actually want, and hook it to a short email sequence that does the selling while you sleep.",
+        outcome: "You stop losing customers who were almost ready to buy.",
+        how: "We build a real offer and hook it to an automated email sequence that follows up for you. Runs on its own, does the selling while you sleep.",
       };
     case "content_hub":
       return {
         outcome: "You start showing up on Google for the stuff your customers are searching for.",
-        how: "We write 4 articles a month that answer the exact questions your customers type in. Free traffic that compounds for years.",
+        how: "We publish content that answers the exact questions your customers type in. Free traffic that keeps growing while you focus on running the business.",
       };
     case "content_fresh":
       return {
         outcome: "You get Google sending you free traffic again.",
-        how: "We restart the posting rhythm with one short piece a week. Google notices inside a month and starts sending people back.",
+        how: "We get content going on a consistent schedule. Google notices inside a month and starts sending people back. We keep it running so it doesn't go quiet again.",
       };
     case "social":
       return {
-        outcome: "You look legit the second somebody checks you out.",
-        how: "We get your social wired up everywhere customers look and start posting the kind of stuff that builds trust fast.",
+        outcome: "You show up everywhere your customers are looking.",
+        how: "We run your social media for you. Real content, consistent posting, on the platforms that matter for your business. You don't touch it.",
       };
     case "conversion":
       return {
-        outcome: "You catch the visitors who were almost ready to buy.",
-        how: "We add a simple chat that handles the quick questions that turn hesitation into a sale.",
+        outcome: "You catch the people who are on the fence.",
+        how: "We set up the right tools so visitors with questions get answers fast instead of bouncing to your competitor.",
       };
     default:
       return {
@@ -1120,18 +1120,20 @@ function padMove(idx: number): { outcome: string; how: string } {
   if (idx === 1) {
     return {
       outcome: "You double down on what's already working.",
-      how: "We check the numbers every week and put more money behind whatever's paying for itself. No guessing.",
+      how: "We read the numbers every week and put more fuel behind whatever's paying for itself. Social, email, content, ads. Whatever's working gets more.",
     };
   }
   return {
-    outcome: "You stop thinking about marketing and it still gets done.",
-    how: "We handle the week-to-week so it keeps running whether you're looking at it or not.",
+    outcome: "Your marketing runs without you babysitting it.",
+    how: "We automate the whole thing. Posts go out, emails go out, numbers get tracked. You check in when you want, otherwise it just runs.",
   };
 }
 
-// Combined proof + offer in one block. Results-in-Advance framing (the
-// audit itself is the proof) plus DFY pitch and risk reversal.
-const HELP_BODY = `This is the same audit agencies charge $500 to $2,000 for. I give it away because once you see how good the read is, you'll want us to do the rest. We take over your marketing. Tracking, emails, content, social, ads. You run the business, we bring in the customers. Weekly updates on what's working. No contract, cancel whenever.`;
+// Proof + offer + risk reversal, broken into scannable lines.
+const HELP_PROOF = `Agencies charge $500 to $2,000 for this exact audit. You got it free because I want you to see what we actually do before we ever talk.`;
+const HELP_OFFER = `We run your marketing on autopilot. Social media, content, emails, ads, tracking. All of it. You see the numbers every week so you always know what's working. You run the business, we bring in the customers.`;
+const HELP_RISK = `No contract. No minimum. If it's not working you'll know because the numbers won't lie. Cancel whenever.`;
+const HELP_URGENCY = `I only take on a few clients at a time so I can actually do the work right. If this sits in your inbox for a month, the gaps on your site are still there costing you customers.`;
 
 interface SalesEmailContent {
   opener: string;
@@ -1139,11 +1141,14 @@ interface SalesEmailContent {
   painLabel: string;
   problemBody: string;
   moves: Array<{ outcome: string; how: string }>;
-  helpBody: string;
+  helpProof: string;
+  helpOffer: string;
+  helpRisk: string;
+  helpUrgency: string;
   ctaHeadline: string;
   ctaSub: string;
-  ctaButton: string;
   softClose: string;
+  ps: string;
 }
 
 // Happy-path content for sites with no real gaps. We still need to sell,
@@ -1151,28 +1156,31 @@ interface SalesEmailContent {
 function buildHappyPathContent(opener: string, phrase: string): SalesEmailContent {
   return {
     opener,
-    scoreLine: `Foundation's solid. From here it's about scaling what's working.`,
-    painLabel: `You're in rare air. Most sites we look at have 3 or 4 big holes.`,
-    problemBody: `Almost everything I check for is already working for ${phrase}. You're not fixing stuff, you're scaling what's already paying. That's a good spot to be in.`,
+    scoreLine: `Foundation's solid. Now it's about doing more of what's already working.`,
+    painLabel: `This is rare. Most sites we look at have 3 or 4 big holes.`,
+    problemBody: `Almost everything I check for is already working for ${phrase}. You're not fixing stuff, you're scaling what's already paying. That's a way better position than most businesses I audit.`,
     moves: [
       {
-        outcome: "You pour fuel on whatever channel is already paying.",
-        how: "We read the numbers, find the channel that's beating everything else, and we double the budget on it. Simple.",
+        outcome: "You find out which channel is actually making you money and go harder on it.",
+        how: "We dig into the numbers, find what's outperforming everything else, and pour fuel on it. Social, email, content, ads. Whatever's winning gets more.",
       },
       {
-        outcome: "You turn on the next channel you've been meaning to try.",
-        how: "We pick the right one for your business and launch it with real tracking so you know if it's working from week one.",
+        outcome: "You launch the next channel without guessing.",
+        how: "We pick the right one based on where your customers actually hang out, set it up with real tracking, and run it for you from day one.",
       },
       {
-        outcome: "You stop babysitting the marketing yourself.",
-        how: "We run it week to week so you get your time back and the numbers keep going up.",
+        outcome: "Your marketing runs on autopilot and you get your time back.",
+        how: "We automate the posting, the emails, the content, the tracking. You check the numbers when you want, otherwise it just runs.",
       },
     ],
-    helpBody: HELP_BODY,
-    ctaHeadline: "Want us to run this for you?",
-    ctaSub: "Book a 15-min call. I'll show you the plan for your site and we'll figure out if it's a fit. No contract.",
-    ctaButton: "Book a 15-min call",
-    softClose: "Or just reply to this. I read em all.",
+    helpProof: HELP_PROOF,
+    helpOffer: HELP_OFFER,
+    helpRisk: HELP_RISK,
+    helpUrgency: HELP_URGENCY,
+    ctaHeadline: "Want us to just do this for you?",
+    ctaSub: "Just reply to this email. Tell me a bit about what you're working on and I'll send over a real plan for ${phrase}.",
+    softClose: "I read every reply.",
+    ps: `Most businesses I audit have 3 or 4 things broken. Yours doesn't. That means you're closer to real growth than you think.`,
   };
 }
 
@@ -1206,11 +1214,14 @@ function buildSalesEmailContent(
     painLabel: painLabelFor(top.pillar.id),
     problemBody: problemBodyFor(top.pillar.id, kind, phrase),
     moves,
-    helpBody: HELP_BODY,
-    ctaHeadline: "Want us to run this for you?",
-    ctaSub: "Book a 15-min call. I'll show you the plan for your site and we'll figure out if it's a fit. No contract.",
-    ctaButton: "Book a 15-min call",
-    softClose: "Or just reply to this. I read em all.",
+    helpProof: HELP_PROOF,
+    helpOffer: HELP_OFFER,
+    helpRisk: HELP_RISK,
+    helpUrgency: HELP_URGENCY,
+    ctaHeadline: "Want us to just do this for you?",
+    ctaSub: `Just reply to this email. Tell me a bit about what you're working on and I'll send over a real plan for ${phrase}.`,
+    softClose: "I read every reply.",
+    ps: `That ${painLabelFor(top.pillar.id).toLowerCase().replace(/\.$/, "")}? It's costing you customers right now. Not next month. Right now.`,
   };
 }
 
@@ -1238,15 +1249,25 @@ export function buildMarketingPlan(
     lines.push(m.how);
     lines.push("");
   });
-  lines.push(`## How I can help`);
+  lines.push(`## What we do`);
   lines.push("");
-  lines.push(c.helpBody);
+  lines.push(c.helpProof);
+  lines.push("");
+  lines.push(c.helpOffer);
+  lines.push("");
+  lines.push(c.helpRisk);
+  lines.push("");
+  lines.push(c.helpUrgency);
   lines.push("");
   lines.push(`## ${c.ctaHeadline}`);
   lines.push("");
   lines.push(c.ctaSub);
   lines.push("");
   lines.push(c.softClose);
+  if (c.ps) {
+    lines.push("");
+    lines.push(`P.S. ${c.ps}`);
+  }
   return lines.join("\n");
 }
 
@@ -1280,16 +1301,12 @@ export function renderAuditEmail(
   visitorName: string = "",
 ): { subject: string; html: string; text: string } {
   const displayUrl = cleanHostname(result.finalUrl);
-  const subject = result.reachable
-    ? `Your custom growth plan`
-    : `We couldn't reach ${displayUrl}`;
-  const preheader = result.reachable
-    ? `This is what you need to be doing.`
-    : `Reply with the right URL and I'll run it again.`;
+  const first = firstName(visitorName);
   const fontImport = `<link href="https://fonts.googleapis.com/css2?family=Fraunces:wght@400;500;600&display=swap" rel="stylesheet">`;
   const bodyBase = `margin:0;padding:0;background:${EMAIL_COLORS.bg};font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif;color:${EMAIL_COLORS.text};`;
 
   if (!result.reachable) {
+    const subject = `We couldn't reach ${displayUrl}`;
     const html = `<!doctype html>
 <html>
 <head>
@@ -1333,6 +1350,15 @@ ${fontImport}
 
   const content = buildSalesEmailContent(result, businessType, visitorName);
   const pillars = assessPillars(result);
+
+  // Subject: they submitted for an audit, they're expecting this. Keep it short.
+  const subject = first
+    ? `${first}, your audit's ready`
+    : `Your site audit's ready`;
+  // Preheader: pull from their actual #1 pain so it's specific in the inbox.
+  const preheader = content.painLabel.endsWith(".")
+    ? content.painLabel.slice(0, -1) + ` and ${content.moves.length} things I'd fix.`
+    : `${content.painLabel} Plus ${content.moves.length} things I'd fix.`;
 
   // HTML style shorthands for the body sections.
   const sectionLabel = `font-size:10px;font-weight:700;letter-spacing:0.18em;color:${EMAIL_COLORS.textDim};text-transform:uppercase;`;
@@ -1422,7 +1448,7 @@ ${fontImport}
     <!-- Header -->
     <div style="${sectionLabel}">Venti Scale</div>
     <h1 style="font-family:Fraunces,Georgia,'Times New Roman',serif;font-size:36px;font-weight:500;letter-spacing:-0.025em;margin:12px 0 6px;line-height:1.1;color:${EMAIL_COLORS.text};">
-      Your custom growth plan
+      Here's the read
     </h1>
     <div style="font-size:14px;font-weight:500;color:${EMAIL_COLORS.textMid};letter-spacing:-0.005em;">
       ${escapeHtml(displayUrl)}
@@ -1479,8 +1505,11 @@ ${fontImport}
 
     <!-- How I Can Help -->
     <div style="${cardWrap}">
-      <div style="${sectionLabel}">How I can help</div>
-      <p style="${bodyPara}margin-top:12px;">${escapeHtml(content.helpBody)}</p>
+      <div style="${sectionLabel}">What we do</div>
+      <p style="${bodyPara}margin-top:12px;">${escapeHtml(content.helpProof)}</p>
+      <p style="${bodyPara}">${escapeHtml(content.helpOffer)}</p>
+      <p style="${bodyPara}">${escapeHtml(content.helpRisk)}</p>
+      <p style="font-size:15px;line-height:1.65;color:${EMAIL_COLORS.text};margin:0;font-weight:500;">${escapeHtml(content.helpUrgency)}</p>
     </div>
 
     <!-- CTA -->
@@ -1488,21 +1517,24 @@ ${fontImport}
       <div style="font-family:Fraunces,Georgia,'Times New Roman',serif;font-size:24px;font-weight:500;line-height:1.25;color:${EMAIL_COLORS.text};letter-spacing:-0.015em;">
         ${escapeHtml(content.ctaHeadline)}
       </div>
-      <p style="font-size:14.5px;line-height:1.65;color:${EMAIL_COLORS.textMid};margin:14px 0 24px;max-width:480px;margin-left:auto;margin-right:auto;">
+      <p style="font-size:14.5px;line-height:1.65;color:${EMAIL_COLORS.textMid};margin:14px 0 0;max-width:480px;margin-left:auto;margin-right:auto;">
         ${escapeHtml(content.ctaSub)}
       </p>
-      <a href="https://www.ventiscale.com" style="display:inline-block;background:${EMAIL_COLORS.red};color:#FFFFFF;text-decoration:none;font-size:14px;font-weight:600;padding:14px 28px;border-radius:10px;letter-spacing:0.01em;">
-        ${escapeHtml(content.ctaButton)}
-      </a>
-      <div style="margin-top:16px;font-size:12px;color:${EMAIL_COLORS.textDim};">
+      <div style="margin-top:14px;font-size:13px;color:${EMAIL_COLORS.textDim};">
         ${escapeHtml(content.softClose)}
       </div>
     </div>
 
+    <!-- P.S. -->
+    ${content.ps ? `
+    <p style="font-size:14px;line-height:1.65;color:${EMAIL_COLORS.textMid};margin:28px 0 0;">
+      <strong style="color:${EMAIL_COLORS.text};">P.S.</strong> ${escapeHtml(content.ps)}
+    </p>` : ""}
+
     <!-- Footer -->
     <div style="margin-top:40px;padding-top:22px;border-top:1px solid ${EMAIL_COLORS.border};font-size:12px;color:${EMAIL_COLORS.textDim};line-height:1.7;">
       Dustin Gilmour · Venti Scale<br/>
-      Sent to ${escapeHtml(recipientEmail)} because you asked for a free audit at <a href="https://www.ventiscale.com" style="color:${EMAIL_COLORS.blue};text-decoration:none;">ventiscale.com</a>.
+      You got this because you asked for a free audit at <a href="https://www.ventiscale.com" style="color:${EMAIL_COLORS.blue};text-decoration:none;">ventiscale.com</a>.
     </div>
 
   </div>
@@ -1515,8 +1547,7 @@ ${fontImport}
     .join("\n\n");
 
   const textLines = [
-    `Your custom growth plan for ${displayUrl}`,
-    preheader,
+    subject,
     ``,
     content.opener,
     ``,
@@ -1532,15 +1563,21 @@ ${fontImport}
     ``,
     movesText,
     ``,
-    `HOW I CAN HELP`,
+    `WHAT WE DO`,
     ``,
-    content.helpBody,
+    content.helpProof,
+    ``,
+    content.helpOffer,
+    ``,
+    content.helpRisk,
+    ``,
+    content.helpUrgency,
     ``,
     content.ctaHeadline.toUpperCase(),
     content.ctaSub,
     ``,
-    `${content.ctaButton}: https://www.ventiscale.com`,
     content.softClose,
+    ...(content.ps ? [``, `P.S. ${content.ps}`] : []),
     ``,
     `Dustin Gilmour, Venti Scale`,
   ];
