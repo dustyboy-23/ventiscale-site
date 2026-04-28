@@ -26,6 +26,9 @@ const NAV = [
   { href: "/campaigns", label: "Email", icon: Mail },
   { href: "/reports", label: "Reports", icon: FileText },
   { href: "/files", label: "Files", icon: FolderOpen },
+];
+
+const FOOTER_NAV = [
   { href: "/settings/data-handling", label: "Privacy", icon: Shield },
 ];
 
@@ -71,6 +74,9 @@ export function Sidebar({
   const visibleNav = realClientMode
     ? NAV.filter((item) => REAL_CLIENT_NAV_HREFS.has(item.href))
     : NAV;
+  const visibleFooterNav = realClientMode
+    ? FOOTER_NAV.filter((item) => REAL_CLIENT_NAV_HREFS.has(item.href))
+    : FOOTER_NAV;
   const [switchingId, setSwitchingId] = useState<string | null>(null);
 
   async function handleSwitch(clientId: string) {
@@ -272,6 +278,34 @@ export function Sidebar({
           })}
         </ul>
       </nav>
+
+      {/* Footer nav (Privacy etc.) — visually separated from main nav */}
+      {visibleFooterNav.length > 0 && (
+        <nav className="px-3 pt-2 pb-2 border-t border-[var(--color-border)]">
+          <ul className="space-y-0.5">
+            {visibleFooterNav.map((item) => {
+              const active = pathname === item.href || pathname.startsWith(item.href + "/");
+              const Icon = item.icon;
+              return (
+                <li key={item.href}>
+                  <Link
+                    href={item.href}
+                    className={cn(
+                      "flex items-center gap-3 px-3 py-2 rounded-lg text-[13px] transition-colors",
+                      active
+                        ? "bg-[var(--color-ink)] text-white font-medium"
+                        : "text-[var(--color-ink-subtle)] hover:bg-[var(--color-surface-muted)] hover:text-[var(--color-ink)]",
+                    )}
+                  >
+                    <Icon className="w-[15px] h-[15px]" strokeWidth={active ? 2.25 : 2} />
+                    <span>{item.label}</span>
+                  </Link>
+                </li>
+              );
+            })}
+          </ul>
+        </nav>
+      )}
 
       {/* User block */}
       <div className="px-3 pb-5 pt-3 border-t border-[var(--color-border)]">
