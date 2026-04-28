@@ -146,7 +146,14 @@ export interface CampaignsData {
 
 export interface ActivityItem {
   id: string;
-  type: "post" | "report" | "campaign" | "draft" | "system";
+  type:
+    | "post"
+    | "report"
+    | "campaign"
+    | "draft"
+    | "system"
+    | "content_approved"
+    | "content_rejected";
   title: string;
   description?: string;
   timestamp: string;

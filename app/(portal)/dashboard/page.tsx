@@ -29,15 +29,24 @@ import {
 import { resolvePeriod } from "@/lib/sg-data";
 import { formatCurrency, formatNumber, relativeTime, cn } from "@/lib/utils";
 
-const ACTIVITY_META: Record<
-  ActivityItem["type"],
-  { icon: typeof FileText; bg: string; fg: string }
-> = {
+type ActivityMeta = { icon: typeof FileText; bg: string; fg: string };
+
+const ACTIVITY_META: Record<ActivityItem["type"], ActivityMeta> = {
   report: { icon: FileText, bg: "bg-blue-50", fg: "text-blue-600" },
   draft: { icon: PenLine, bg: "bg-violet-50", fg: "text-violet-600" },
   campaign: { icon: Mail, bg: "bg-amber-50", fg: "text-amber-600" },
   post: { icon: Zap, bg: "bg-emerald-50", fg: "text-emerald-600" },
   system: { icon: Activity, bg: "bg-slate-100", fg: "text-slate-600" },
+  content_approved: { icon: Sparkles, bg: "bg-emerald-50", fg: "text-emerald-600" },
+  content_rejected: { icon: AlertTriangle, bg: "bg-red-50", fg: "text-red-600" },
+};
+
+// Fallback for any activity type the dashboard hasn't been taught about yet —
+// prevents a new server-side type from crashing the page render.
+const ACTIVITY_FALLBACK: ActivityMeta = {
+  icon: Activity,
+  bg: "bg-slate-100",
+  fg: "text-slate-600",
 };
 
 export default async function DashboardPage({
@@ -437,7 +446,7 @@ export default async function DashboardPage({
                 </p>
               )}
               {activity.map((item, i) => {
-                const meta = ACTIVITY_META[item.type];
+                const meta = ACTIVITY_META[item.type] ?? ACTIVITY_FALLBACK;
                 const Icon = meta.icon;
                 const isLast = i === activity.length - 1;
                 return (
