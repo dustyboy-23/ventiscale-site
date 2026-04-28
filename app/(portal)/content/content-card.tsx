@@ -173,7 +173,7 @@ export function ContentCard({
           {draft.mediaType === "video" ? (
             <iframe
               src={`https://drive.google.com/file/d/${draft.driveFileId}/preview`}
-              className="w-full h-[380px] rounded-lg border border-[var(--color-border)] bg-black block"
+              className="w-full h-[520px] rounded-lg border border-[var(--color-border)] bg-black block"
               title="Video preview"
               loading="lazy"
               allow="autoplay"
