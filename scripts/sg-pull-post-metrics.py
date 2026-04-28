@@ -134,15 +134,19 @@ def fb_post_metrics(post_id: str, token: str) -> dict:
     # still available via /insights at the PAGE level instead (followers,
     # daily follow gains, page views) — see fetch_and_save_page_metrics.
 
-    # If this looks like a bare video id (no underscore), pull views
-    if "_" not in post_id:
-        v_insights = graph_get(post_id, {"metric": "total_video_views"}, token)
-        if v_insights and isinstance(v_insights.get("data"), list):
-            for m in v_insights["data"]:
-                if m.get("name") == "total_video_views":
-                    values = m.get("values", [])
-                    if values:
-                        out["video_views"] = values[0].get("value", 0)
+    # Video views: post_video_views works on /insights for any video post,
+    # whether the FB id is bare (from /videos endpoint) or formatted as
+    # <page>_<post> (from /posts). Returns 0 for photos so it's safe to
+    # query unconditionally and the consumer can decide whether to show.
+    v_insights = graph_get(f"{post_id}/insights", {"metric": "post_video_views"}, token)
+    if v_insights and isinstance(v_insights.get("data"), list):
+        for m in v_insights["data"]:
+            if m.get("name") == "post_video_views":
+                values = m.get("values", [])
+                if values:
+                    val = values[0].get("value", 0)
+                    if val > 0:
+                        out["video_views"] = val
     return out
 
 

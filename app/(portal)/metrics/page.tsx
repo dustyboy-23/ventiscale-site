@@ -6,7 +6,6 @@ import { formatNumber } from "@/lib/utils";
 import {
   BarChart3,
   ThumbsUp,
-  MessageSquare,
   Share2,
   TrendingUp,
   TrendingDown,
@@ -16,6 +15,7 @@ import {
   Calendar,
   Users,
   Eye,
+  Play,
 } from "lucide-react";
 import Link from "next/link";
 
@@ -100,15 +100,15 @@ export default async function MetricsPage({
     posts: posts.length,
     eng: sumEng(posts),
     reactions: sumK(posts, "reactions"),
-    comments: sumK(posts, "comments"),
     shares: sumK(posts, "shares"),
+    videoViews: sumK(posts, "video_views"),
   };
   const prev = {
     posts: prevPosts.length,
     eng: sumEng(prevPosts),
     reactions: sumK(prevPosts, "reactions"),
-    comments: sumK(prevPosts, "comments"),
     shares: sumK(prevPosts, "shares"),
+    videoViews: sumK(prevPosts, "video_views"),
   };
 
   // Daily trend bars (across the current window only)
@@ -134,8 +134,8 @@ export default async function MetricsPage({
   const peakDay = days.reduce((m, d) => (d.engagement > m ? d.engagement : m), 0) || 1;
 
   // Content type breakdown — AVG per post (not total) per the analytics convention.
-  type TypeAgg = { posts: number; engagement: number; reactions: number; comments: number; shares: number };
-  const blank = (): TypeAgg => ({ posts: 0, engagement: 0, reactions: 0, comments: 0, shares: 0 });
+  type TypeAgg = { posts: number; engagement: number; reactions: number; shares: number; videoViews: number };
+  const blank = (): TypeAgg => ({ posts: 0, engagement: 0, reactions: 0, shares: 0, videoViews: 0 });
   const byType: Record<string, TypeAgg> = { image: blank(), video: blank(), text: blank() };
   for (const p of posts) {
     const t = p.mediaType || "text";
@@ -143,8 +143,8 @@ export default async function MetricsPage({
     bucket.posts++;
     bucket.engagement += engagementOf(p.metrics || {});
     bucket.reactions += Number(p.metrics?.reactions) || 0;
-    bucket.comments += Number(p.metrics?.comments) || 0;
     bucket.shares += Number(p.metrics?.shares) || 0;
+    bucket.videoViews += Number(p.metrics?.video_views) || 0;
   }
 
   if (fbAll.length === 0) {
@@ -183,8 +183,8 @@ export default async function MetricsPage({
         )}
         <KpiTile label="Posts" icon={Calendar} value={cur.posts} prev={prev.posts} />
         <KpiTile label="Engagement" icon={TrendingUp} value={cur.eng} prev={prev.eng} accent />
+        <KpiTile label="Video views" icon={Play} value={cur.videoViews} prev={prev.videoViews} />
         <KpiTile label="Reactions" icon={ThumbsUp} value={cur.reactions} prev={prev.reactions} />
-        <KpiTile label="Comments" icon={MessageSquare} value={cur.comments} prev={prev.comments} />
         <KpiTile label="Shares" icon={Share2} value={cur.shares} prev={prev.shares} />
       </div>
 
@@ -269,6 +269,7 @@ export default async function MetricsPage({
             icon={Film}
             agg={byType.video}
             barColor="bg-violet-500"
+            showVideoViews
           />
         </div>
       </section>
@@ -419,11 +420,13 @@ function ContentTypeCard({
   icon: Icon,
   agg,
   barColor,
+  showVideoViews,
 }: {
   label: string;
   icon: typeof BarChart3;
-  agg: { posts: number; engagement: number; reactions: number; comments: number; shares: number };
+  agg: { posts: number; engagement: number; reactions: number; shares: number; videoViews: number };
   barColor: string;
+  showVideoViews?: boolean;
 }) {
   const avgPerPost = agg.posts ? Math.round(agg.engagement / agg.posts) : 0;
   return (
@@ -446,8 +449,12 @@ function ContentTypeCard({
       <div className={`mt-3 h-1 rounded-full ${barColor}`} />
       <div className="grid grid-cols-3 gap-2 mt-4 pt-4 border-t border-[var(--color-border)]">
         <Stat label="Reactions" value={formatNumber(agg.reactions)} />
-        <Stat label="Comments" value={formatNumber(agg.comments)} />
         <Stat label="Shares" value={formatNumber(agg.shares)} />
+        {showVideoViews ? (
+          <Stat label="Video views" value={formatNumber(agg.videoViews)} />
+        ) : (
+          <Stat label="Posts" value={formatNumber(agg.posts)} />
+        )}
       </div>
     </Card>
   );
