@@ -123,18 +123,21 @@ def auto_approve_imminent(
     service_key: str,
     window_hours: int = AUTO_APPROVE_WINDOW_HOURS,
 ) -> int:
-    """Flip status from draft -> approved for any rows whose scheduled_at
-    is within `window_hours`. The 'no objection' rule: if Ken hasn't
-    rejected by now, the post goes out. Audit trail lives in
-    reviewer_notes + activity_log.
+    """Flip status from draft -> approved for any PHOTO rows whose
+    scheduled_at is within `window_hours`. The 'no objection' rule: if
+    Ken hasn't rejected a photo by now, the post goes out.
 
-    Posts can still be stopped after auto-approval by editing in portal
-    (status -> rejected) up until the poster cron actually fires."""
+    Videos are explicitly EXCLUDED from auto-approve — they need Ken's
+    eyes (review the actual video content) before going out. Videos
+    stay in draft forever unless Ken approves them manually in the
+    Videos tab.
+
+    Audit trail lives in reviewer_notes + activity_log."""
     now = datetime.now(timezone.utc)
     cutoff = (now + timedelta(hours=window_hours)).isoformat()
     path = (
         f"/rest/v1/content_items?client_id=eq.{client_id}"
-        f"&platform=eq.{platform}&status=eq.draft"
+        f"&platform=eq.{platform}&media_type=eq.image&status=eq.draft"
         f"&scheduled_at=lte.{urllib.parse.quote(cutoff)}"
         "&select=id,title,scheduled_at"
     )
