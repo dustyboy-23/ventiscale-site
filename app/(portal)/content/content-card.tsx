@@ -2,7 +2,7 @@
 
 import { useMemo, useState, useTransition } from "react";
 import { Card } from "@/components/card";
-import { Check, X, MessageSquare, Loader2, Calendar } from "lucide-react";
+import { Check, X, MessageSquare, Loader2, Calendar, CornerDownRight } from "lucide-react";
 import { reviewContent } from "./actions";
 import type { ContentDraft } from "@/lib/sg-data";
 
@@ -148,18 +148,25 @@ export function ContentCard({
         )}
       </div>
 
-      {/* Drive asset preview. Two-stage strategy:
-            1. Try the direct image via Google's CDN
-               (lh3.googleusercontent.com). No Drive UI chrome, no zoom
-               buttons, just the image at natural width.
-            2. If that fails (file not shared with the viewer's Google
-               session, no thumbnail generated yet, etc.), fall back to
-               the Drive /preview iframe which always works for users
-               with file access via their cookies.
-          The fallback is one-way per session: once the iframe loads,
-          we don't retry the img path. */}
+      {/* Title at the top of the card so it leads even when caption is long. */}
+      <h3 className="text-[14px] font-semibold text-[var(--color-ink)] tracking-tight mb-2 leading-snug">
+        {draft.topic}
+      </h3>
+
+      {/* Caption / description above the image so the writing leads
+          and the visual supports it (matches how the post will read in
+          a feed). */}
+      {draft.caption && (
+        <p className="text-[12.5px] text-[var(--color-ink-muted)] leading-relaxed whitespace-pre-line mb-3">
+          {draft.caption}
+        </p>
+      )}
+
+      {/* Drive asset preview. Two-stage strategy: try the direct image
+          via Google's CDN; on error fall back to the /preview iframe
+          which always works for users with file access. */}
       {draft.driveFileId && (
-        <div className="mb-4 -mx-1">
+        <div className="mb-3 -mx-1">
           {previewMode === "img" ? (
             <a
               href={`https://drive.google.com/file/d/${draft.driveFileId}/view`}
@@ -168,9 +175,9 @@ export function ContentCard({
               className="block overflow-hidden rounded-lg border border-[var(--color-border)] bg-[var(--color-surface-muted)]"
             >
               <img
-                src={`https://lh3.googleusercontent.com/d/${draft.driveFileId}=w1600`}
+                src={`https://lh3.googleusercontent.com/d/${draft.driveFileId}=w1200`}
                 alt="Draft asset preview"
-                className="w-full max-h-[600px] object-contain block bg-white"
+                className="w-full max-h-[380px] object-contain block bg-white"
                 loading="lazy"
                 onError={() => setPreviewMode("iframe")}
               />
@@ -178,31 +185,38 @@ export function ContentCard({
           ) : (
             <iframe
               src={`https://drive.google.com/file/d/${draft.driveFileId}/preview`}
-              className="w-full h-[520px] rounded-lg border border-[var(--color-border)] bg-[var(--color-surface-muted)] block"
+              className="w-full h-[380px] rounded-lg border border-[var(--color-border)] bg-[var(--color-surface-muted)] block"
               title="Asset preview"
               loading="lazy"
               allow="autoplay"
             />
           )}
-          <p className="text-[11px] text-[var(--color-ink-subtle)] mt-1.5 text-center">
-            {previewMode === "img"
-              ? "Click to open in Drive."
-              : "Hosted on Google Drive. Sign in to your Google account if you see \u201Crequest access.\u201D"}
-          </p>
         </div>
       )}
 
-      {/* Title + caption */}
-      <h3 className="text-[15px] font-semibold text-[var(--color-ink)] tracking-tight mb-2 leading-snug">
-        {draft.topic}
-      </h3>
-      <p className="text-[13px] text-[var(--color-ink-muted)] leading-relaxed whitespace-pre-line">
-        {draft.caption}
-      </p>
+      {/* First-comment / story-comment prompts. Shown below the image,
+          stacked, indented with a corner-arrow so they read as
+          replies-to-the-post. Hidden when there are none. */}
+      {draft.comments && draft.comments.length > 0 && (
+        <div className="mb-3 space-y-1.5">
+          {draft.comments.map((c, i) => (
+            <div
+              key={i}
+              className="flex items-start gap-2 text-[12px] text-[var(--color-ink-muted)] leading-relaxed pl-1"
+            >
+              <CornerDownRight
+                className="w-3 h-3 mt-1 text-[var(--color-ink-subtle)] shrink-0"
+                strokeWidth={2.25}
+              />
+              <span className="whitespace-pre-line">{c}</span>
+            </div>
+          ))}
+        </div>
+      )}
 
       {/* Reviewer notes (if rejected) */}
       {status === "rejected" && draft.reviewerNotes && !showNotes && (
-        <div className="mt-3 p-3 bg-red-50 rounded-lg">
+        <div className="mt-2 p-2.5 bg-red-50 rounded-lg">
           <p className="text-[12px] text-red-600 leading-relaxed">
             <span className="font-semibold">Note:</span> {draft.reviewerNotes}
           </p>
