@@ -125,7 +125,7 @@ export function ContentCard({
   }
 
   return (
-    <Card padding="md">
+    <Card padding="md" className="h-full flex flex-col">
       {/* Header: platform + status */}
       <div className="flex items-center gap-2 mb-4">
         <span
@@ -283,8 +283,10 @@ export function ContentCard({
         </div>
       )}
 
-      {/* Review actions */}
-      <div className="mt-4 pt-4 border-t border-[var(--color-border)]">
+      {/* Review actions — mt-auto pins to the bottom of each card so
+          Approve / Needs changes / Add note line up across the row.
+          Card is flex-col + h-full so this works with grid stretch. */}
+      <div className="mt-auto pt-4 border-t border-[var(--color-border)]">
         {canReview ? (
           <div className="space-y-3">
             {/* Schedule picker. Appears on first Approve click. */}
