@@ -79,7 +79,7 @@ export default async function ContentPage() {
               </span>
             </div>
 
-            <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-3.5">
+            <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-3.5 items-start">
               {grouped[date].map((d) => (
                 <ContentCard key={d.id} draft={d} role={role} />
               ))}
