@@ -81,6 +81,31 @@ export interface ClientKpis {
     leaking: string[];
     actions: string[];
   };
+
+  // Ad performance (Meta + Google direct from the ad platforms, NOT GA4).
+  // GA4 under-attributes paid traffic because of iOS 14+ ATT and link-shimming;
+  // these numbers come from the platforms themselves and reflect actual ROAS.
+  // Optional because not every period is guaranteed to have ad data.
+  ads?: {
+    meta: {
+      spend: number;
+      revenue: number;
+      purchases: number;
+      roas: number;
+      costPerPurchase: number;
+    };
+    google: {
+      spend: number;
+      revenue: number;
+      purchases: number;
+      roas: number;
+    };
+    total: {
+      spend: number;
+      revenue: number;
+      roas: number;
+    };
+  };
 }
 
 export interface ReportSummary {

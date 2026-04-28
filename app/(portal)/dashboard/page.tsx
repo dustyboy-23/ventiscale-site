@@ -214,12 +214,89 @@ export default async function DashboardPage({
           </Card>
           )}
 
-          {/* Traffic Sources */}
+          {/* Ad Performance — pulled directly from Meta + Google, NOT GA4. */}
+          {kpis.ads && kpis.ads.total.spend > 0 && (
+          <Card>
+            <CardHeader
+              title="Ad Performance"
+              description="Real numbers from Meta + Google Ads (not GA4)"
+            />
+            <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 mb-4">
+              <div className="rounded-xl bg-[var(--color-surface-muted)] p-4">
+                <div className="text-[11px] text-[var(--color-ink-subtle)] uppercase tracking-wider font-medium">
+                  Total Spend
+                </div>
+                <div className="text-[22px] font-bold tabular text-[var(--color-ink)] mt-1">
+                  {formatCurrency(kpis.ads.total.spend)}
+                </div>
+                <div className="text-[11px] text-[var(--color-ink-subtle)] mt-1">
+                  {kpis.periodLabel}
+                </div>
+              </div>
+              <div className="rounded-xl bg-[var(--color-surface-muted)] p-4">
+                <div className="text-[11px] text-[var(--color-ink-subtle)] uppercase tracking-wider font-medium">
+                  Revenue Generated
+                </div>
+                <div className="text-[22px] font-bold tabular text-[var(--color-ink)] mt-1">
+                  {formatCurrency(kpis.ads.total.revenue)}
+                </div>
+                <div className="text-[11px] text-[var(--color-ink-subtle)] mt-1">
+                  Tracked by ad platforms
+                </div>
+              </div>
+              <div className="rounded-xl bg-emerald-50 p-4">
+                <div className="text-[11px] text-emerald-700 uppercase tracking-wider font-medium">
+                  Blended ROAS
+                </div>
+                <div className="text-[22px] font-bold tabular text-emerald-700 mt-1">
+                  {kpis.ads.total.roas.toFixed(2)}x
+                </div>
+                <div className="text-[11px] text-emerald-700/70 mt-1">
+                  ${kpis.ads.total.roas.toFixed(2)} back per $1 spent
+                </div>
+              </div>
+            </div>
+            <div className="overflow-x-auto -mx-2">
+              <table className="w-full text-[14px]">
+                <thead>
+                  <tr className="text-[11px] font-medium text-[var(--color-ink-subtle)] uppercase tracking-wider">
+                    <th className="text-left px-2 pb-3">Platform</th>
+                    <th className="text-right px-2 pb-3">Spend</th>
+                    <th className="text-right px-2 pb-3">Revenue</th>
+                    <th className="text-right px-2 pb-3">Purchases</th>
+                    <th className="text-right px-2 pb-3">ROAS</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr className="border-t border-[var(--color-border)]">
+                    <td className="px-2 py-3 font-medium text-[var(--color-ink)]">Meta (Facebook + Instagram)</td>
+                    <td className="px-2 py-3 text-right tabular text-[var(--color-ink-muted)]">{formatCurrency(kpis.ads.meta.spend)}</td>
+                    <td className="px-2 py-3 text-right tabular text-[var(--color-ink)] font-semibold">{formatCurrency(kpis.ads.meta.revenue)}</td>
+                    <td className="px-2 py-3 text-right tabular text-[var(--color-ink-muted)]">{kpis.ads.meta.purchases}</td>
+                    <td className="px-2 py-3 text-right tabular text-emerald-700 font-semibold">{kpis.ads.meta.roas.toFixed(2)}x</td>
+                  </tr>
+                  <tr className="border-t border-[var(--color-border)]">
+                    <td className="px-2 py-3 font-medium text-[var(--color-ink)]">Google Ads (PMax)</td>
+                    <td className="px-2 py-3 text-right tabular text-[var(--color-ink-muted)]">{formatCurrency(kpis.ads.google.spend)}</td>
+                    <td className="px-2 py-3 text-right tabular text-[var(--color-ink)] font-semibold">{formatCurrency(kpis.ads.google.revenue)}</td>
+                    <td className="px-2 py-3 text-right tabular text-[var(--color-ink-muted)]">{kpis.ads.google.purchases}</td>
+                    <td className="px-2 py-3 text-right tabular text-emerald-700 font-semibold">{kpis.ads.google.roas.toFixed(2)}x</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </Card>
+          )}
+
+          {/* Traffic Sources — GA4 view of where sessions come from.
+              Paid Social / Paid Search / Paid Other are filtered because GA4
+              under-attributes ad-driven purchases (iOS 14+ ATT, link-shimming).
+              The Ad Performance card above shows the real ad numbers. */}
           {hasTrafficData && kpis.channels.length > 0 && (
           <Card>
             <CardHeader
               title="Traffic Sources"
-              description="Where your customers are coming from"
+              description="Where your customers are coming from (organic + direct)"
             />
             <div className="overflow-x-auto -mx-2">
               <table className="w-full">
@@ -233,7 +310,9 @@ export default async function DashboardPage({
                   </tr>
                 </thead>
                 <tbody>
-                  {kpis.channels.map((c) => (
+                  {kpis.channels
+                    .filter((c) => !/^Paid /i.test(c.name) && c.name !== "Cross-network")
+                    .map((c) => (
                     <tr
                       key={c.name}
                       className="border-t border-[var(--color-border)] text-[14px]"
@@ -256,6 +335,9 @@ export default async function DashboardPage({
                 </tbody>
               </table>
             </div>
+            <p className="text-[11px] text-[var(--color-ink-subtle)] mt-3 leading-relaxed">
+              Paid Social, Paid Search, and Cross-network are excluded here; GA4 under-attributes them due to iOS privacy rules. Real ad performance is in the card above.
+            </p>
           </Card>
           )}
 
