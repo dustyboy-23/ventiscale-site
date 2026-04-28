@@ -154,9 +154,10 @@ export function ContentCard({
       </h3>
 
       {/* Caption / description above the image so the writing leads
-          and the visual supports it (matches how the post will read in
-          a feed). */}
-      {draft.caption && (
+          and the visual supports it. Hidden for LinkedIn text posts
+          since their preview block already shows the caption inline
+          (avoid duplicating the same text twice on the card). */}
+      {draft.caption && !(draft.platform === "linkedin" && !draft.driveFileId) && (
         <p className="text-[12.5px] text-[var(--color-ink-muted)] leading-relaxed whitespace-pre-line mb-3">
           {draft.caption}
         </p>
@@ -191,6 +192,55 @@ export function ContentCard({
               allow="autoplay"
             />
           )}
+        </div>
+      )}
+
+      {/* LinkedIn-styled preview for text-only posts (no Drive image
+          attached). Same height as the photo preview area so the cards
+          line up on /content. Renders the post in a LinkedIn-feed-style
+          mockup so Ken sees what it'll look like on his profile. */}
+      {!draft.driveFileId && draft.platform === "linkedin" && (
+        <div className="mb-3 -mx-1">
+          <div className="rounded-lg border border-[#0A66C2]/20 bg-gradient-to-br from-[#EFF4F9] to-white h-[380px] flex flex-col overflow-hidden">
+            {/* Faux LinkedIn post header */}
+            <div className="flex items-center gap-2.5 px-4 pt-3.5 pb-3 border-b border-[#0A66C2]/10">
+              <div className="w-9 h-9 rounded-full bg-[#0A66C2] flex items-center justify-center shrink-0">
+                <svg
+                  viewBox="0 0 24 24"
+                  className="w-4 h-4 text-white"
+                  fill="currentColor"
+                  aria-hidden="true"
+                >
+                  <path d="M20.5 2h-17A1.5 1.5 0 002 3.5v17A1.5 1.5 0 003.5 22h17a1.5 1.5 0 001.5-1.5v-17A1.5 1.5 0 0020.5 2zM8 19H5v-9h3zM6.5 8.25A1.75 1.75 0 118.3 6.5a1.78 1.78 0 01-1.8 1.75zM19 19h-3v-4.74c0-1.42-.6-1.93-1.38-1.93A1.74 1.74 0 0013 14.19a.66.66 0 000 .14V19h-3v-9h2.9v1.3a3.11 3.11 0 012.7-1.4c1.55 0 3.36.86 3.36 3.66z" />
+                </svg>
+              </div>
+              <div className="min-w-0">
+                <div className="text-[13px] font-semibold text-[#000000DE] truncate">
+                  Ken Kwiatkowski
+                </div>
+                <div className="text-[11px] text-[#00000099]">
+                  Founder, Sprinkler-Guard · LinkedIn post
+                </div>
+              </div>
+            </div>
+
+            {/* Post body excerpt (first ~6 lines) */}
+            <div className="flex-1 px-4 py-3.5 overflow-hidden">
+              <p className="text-[13px] text-[#000000DE] leading-relaxed whitespace-pre-line line-clamp-[14]">
+                {draft.caption || "(no body)"}
+              </p>
+            </div>
+
+            {/* Footer: faux engagement bar */}
+            <div className="px-4 py-2.5 border-t border-[#0A66C2]/10 bg-white/40 flex items-center gap-4 text-[11px] text-[#00000099]">
+              <span>👍 Like</span>
+              <span>💬 Comment</span>
+              <span>↗️ Share</span>
+              <span className="ml-auto text-[10px] uppercase tracking-wider font-medium text-[#0A66C2]">
+                Preview
+              </span>
+            </div>
+          </div>
         </div>
       )}
 
