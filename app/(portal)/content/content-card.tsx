@@ -210,7 +210,7 @@ export function ContentCard({
           line up on /content. Renders the post in a LinkedIn-feed-style
           mockup so Ken sees what it'll look like on his profile. */}
       {!draft.driveFileId && draft.platform === "linkedin" && (
-        <div className="mb-3 -mx-1 flex-1 min-h-[520px] flex">
+        <div className="mb-3 -mx-1 flex-1 flex">
           <div className="w-full rounded-lg border border-[#0A66C2]/20 bg-gradient-to-br from-[#EFF4F9] to-white flex flex-col overflow-hidden">
             {/* Faux LinkedIn post header */}
             <div className="flex items-center gap-2.5 px-4 pt-3.5 pb-3 border-b border-[#0A66C2]/10">
