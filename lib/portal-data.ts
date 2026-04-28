@@ -196,6 +196,82 @@ export async function getContentDrafts(): Promise<ContentDraft[]> {
   return [];
 }
 
+// Asset library for the /files tab. Reads the cached snapshot written by
+// scripts/pull-client-assets.py (cron'd every 6h). Single Supabase row read.
+export interface AssetItem {
+  source: string;
+  id: string | number;
+  name: string;
+  kind: "image" | "video" | "file" | "linkedin_post" | "blog_post";
+  size: number | null;
+  updated_at: string | null;
+  url: string | null;
+  thumbnail_url?: string | null;
+  snippet?: string | null;
+  mime?: string | null;
+  slug?: string | null;
+}
+
+export interface AssetLibrary {
+  generatedAt: string | null;
+  refreshedAt: string | null;
+  totals: { videos: number; photos: number; linkedin: number; blog: number };
+  videos: AssetItem[];
+  photos: AssetItem[];
+  linkedin: AssetItem[];
+  blog: AssetItem[];
+}
+
+const EMPTY_LIBRARY: AssetLibrary = {
+  generatedAt: null,
+  refreshedAt: null,
+  totals: { videos: 0, photos: 0, linkedin: 0, blog: 0 },
+  videos: [],
+  photos: [],
+  linkedin: [],
+  blog: [],
+};
+
+export async function getAssetLibrary(): Promise<AssetLibrary> {
+  const session = await getPortalSession();
+  if (session?.mode !== "real") return EMPTY_LIBRARY;
+  try {
+    const supabase = await (await import("@/lib/supabase/server")).createClient();
+    const { data: blob, error } = await supabase.storage
+      .from("client-assets")
+      .download(`${session.client.id}.json`);
+    if (error || !blob) return EMPTY_LIBRARY;
+    const text = await blob.text();
+    const cache = JSON.parse(text);
+    const sources = cache.sources || {};
+    // Merge approved + posted videos; photos as one bucket
+    const videos = [
+      ...(sources.videos_approved || []),
+      ...(sources.videos_posted || []),
+    ];
+    const photos = sources.photos || [];
+    const linkedin = sources.linkedin || [];
+    const blog = sources.blog || [];
+    return {
+      generatedAt: cache.generated_at || null,
+      refreshedAt: cache.generated_at || null,
+      totals: {
+        videos: videos.length,
+        photos: photos.length,
+        linkedin: linkedin.length,
+        blog: blog.length,
+      },
+      videos,
+      photos,
+      linkedin,
+      blog,
+    };
+  } catch (e) {
+    console.error("[portal-data] asset library query failed", e);
+    return EMPTY_LIBRARY;
+  }
+}
+
 export async function getCampaigns(): Promise<CampaignsData> {
   const session = await getPortalSession();
   if (session?.mode === "demo") return demoCampaigns();
