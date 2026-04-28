@@ -46,6 +46,7 @@ PHOTO_REJECTED_FOLDER = "1IhmGHU90LH_i6xuXFPfivpHWaK9XJa_n"
 PHOTO_POSTED_FOLDER = "1Uiu8pGjzfTEnELi-k81xHHaS0qh04_qf"
 PHOTO_REVISIONS_DOC = "1Y-URu9aQLPfbX4T7ap6yqR1qBPXLHMaFvH0zno2ZvRQ"
 PORTAL_ENV_PATH = Path(__file__).resolve().parent.parent / ".env.local"
+NOTES_WATERMARK_PATH = Path(__file__).resolve().parent.parent / "ops" / "state" / "sg-drive-state-sweep-notes.watermark"
 
 TARGET_PARENT_BY_STATUS = {
     "approved": PHOTO_APPROVED_FOLDER,
@@ -157,11 +158,29 @@ def revisions_section(row: dict) -> str:
     when = row.get("reviewed_at") or datetime.now(timezone.utc).isoformat()
     title = row.get("title") or "(untitled)"
     notes = (row.get("reviewer_notes") or "").strip() or "(no note provided)"
+    status_label = (row.get("status") or "noted").capitalize()
     return (
-        f"\n## {title} (Rejected {when[:10]})\n"
+        f"\n## {title} ({status_label} {when[:10]})\n"
         f"{notes}\n\n"
         "----------------------------------------\n"
     )
+
+
+def read_notes_watermark() -> str:
+    """Return the ISO timestamp watermark, or epoch if no marker yet."""
+    if NOTES_WATERMARK_PATH.exists():
+        try:
+            text = NOTES_WATERMARK_PATH.read_text().strip()
+            if text:
+                return text
+        except OSError:
+            pass
+    return "1970-01-01T00:00:00+00:00"
+
+
+def write_notes_watermark(iso: str) -> None:
+    NOTES_WATERMARK_PATH.parent.mkdir(parents=True, exist_ok=True)
+    NOTES_WATERMARK_PATH.write_text(iso + "\n")
 
 
 def append_to_revisions_doc(text: str, gog_path: str) -> bool:
@@ -212,6 +231,7 @@ def main() -> int:
     failed = 0
     revisions = 0
     legacy_renames = 0
+    photo_row_ids: set[str] = set()
 
     for row in rows:
         meta = gog_get_file(row["drive_file_id"], gog_path)
@@ -222,6 +242,7 @@ def main() -> int:
         if not in_photo_tree(parents):
             skipped_not_photo += 1
             continue
+        photo_row_ids.add(row["id"])
 
         title = (row.get("title") or "")[:60]
         status = row["status"]
@@ -259,9 +280,40 @@ def main() -> int:
             continue
         moved += 1
 
-        if status == "rejected":
+    # Notes pass: append to the photo Revisions doc any reviewer_notes
+    # that landed since the last watermark. Covers approve+note,
+    # reject+note, and any future standalone-note flow. Mirrors the
+    # video sweep behavior.
+    watermark = read_notes_watermark()
+    new_max = watermark
+    pending_notes = []
+    for row in rows:
+        if row["id"] not in photo_row_ids:
+            continue
+        notes = (row.get("reviewer_notes") or "").strip()
+        if not notes:
+            continue
+        reviewed_at = row.get("reviewed_at") or ""
+        if not reviewed_at or reviewed_at <= watermark:
+            continue
+        pending_notes.append(row)
+        if reviewed_at > new_max:
+            new_max = reviewed_at
+
+    if pending_notes:
+        pending_notes.sort(key=lambda r: r.get("reviewed_at") or "")
+        for row in pending_notes:
+            t = (row.get("title") or "")[:60]
+            print(f"  {'WOULD APPEND' if args.dry_run else 'appending'} note for {t} ({row['status']})")
+            if args.dry_run:
+                revisions += 1
+                continue
             if append_to_revisions_doc(revisions_section(row), gog_path):
                 revisions += 1
+            else:
+                failed += 1
+        if not args.dry_run and new_max != watermark:
+            write_notes_watermark(new_max)
 
     print()
     print(
