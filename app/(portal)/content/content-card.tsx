@@ -125,7 +125,7 @@ export function ContentCard({
   }
 
   return (
-    <Card padding="md">
+    <Card padding="md" className="h-full flex flex-col">
       {/* Header: platform + status */}
       <div className="flex items-center gap-2 mb-4">
         <span
@@ -206,12 +206,14 @@ export function ContentCard({
       )}
 
       {/* LinkedIn-styled preview for text-only posts (no Drive image
-          attached). Same height as the photo preview area so the cards
-          line up on /content. Renders the post in a LinkedIn-feed-style
-          mockup so Ken sees what it'll look like on his profile. */}
+          attached). flex-1 so the mockup grows to fill whatever vertical
+          space the row gives this card; min-h-[380px] keeps the original
+          size when the row is short. Renders the post in a
+          LinkedIn-feed-style mockup so Ken sees what it'll look like on
+          his profile. */}
       {!draft.driveFileId && draft.platform === "linkedin" && (
-        <div className="mb-3 -mx-1">
-          <div className="rounded-lg border border-[#0A66C2]/20 bg-gradient-to-br from-[#EFF4F9] to-white h-[380px] flex flex-col overflow-hidden">
+        <div className="mb-3 -mx-1 flex-1 min-h-[380px] flex">
+          <div className="w-full rounded-lg border border-[#0A66C2]/20 bg-gradient-to-br from-[#EFF4F9] to-white flex flex-col overflow-hidden">
             {/* Faux LinkedIn post header */}
             <div className="flex items-center gap-2.5 px-4 pt-3.5 pb-3 border-b border-[#0A66C2]/10">
               <div className="w-9 h-9 rounded-full bg-[#0A66C2] flex items-center justify-center shrink-0">
@@ -236,7 +238,7 @@ export function ContentCard({
 
             {/* Post body excerpt (first ~6 lines) */}
             <div className="flex-1 px-4 py-3.5 overflow-hidden">
-              <p className="text-[13px] text-[#000000DE] leading-relaxed whitespace-pre-line line-clamp-[14]">
+              <p className="text-[13px] text-[#000000DE] leading-relaxed whitespace-pre-line">
                 {draft.caption || "(no body)"}
               </p>
             </div>
@@ -283,8 +285,12 @@ export function ContentCard({
         </div>
       )}
 
-      {/* Review actions */}
-      <div className="mt-4 pt-4 border-t border-[var(--color-border)]">
+      {/* Review actions — mt-auto pins to the bottom of the card so
+          Approve / Needs changes / Add note line up across the row.
+          When the row stretches, photo cards get a small gap below
+          their content; LI cards have no gap because the mockup
+          grows to fill (flex-1 above). */}
+      <div className="mt-auto pt-4 border-t border-[var(--color-border)]">
         {canReview ? (
           <div className="space-y-3">
             {/* Schedule picker. Appears on first Approve click. */}
