@@ -46,12 +46,27 @@ from typing import Optional
 GOG_DEFAULT = "/home/dustin/.local/bin/gog"
 PLATFORMS = ("facebook", "linkedin", "blog", "instagram", "other")
 
-# Parse Dusty's filename convention. Examples:
+# Parse Dusty's filename convention. The date prefix is the CAMPAIGN
+# START DATE (Day 1), not the post date. "Day N AM/PM" means N days
+# into the campaign in the morning or afternoon slot.
+#
+# Examples:
 #   "2026-04-28 - Day 5 PM - hose-attachment.png"
+#       campaign starts 2026-04-28, Day 5 = start + 4 days = 2026-05-02
+#       PM = 15:00 PT
+#       -> scheduled_at = 2026-05-02T15:00:00-07:00
+#
 #   "2026-04-27 - V3 Post 10-Yard-vs-Truck.png"
-# Captures the YYYY-MM-DD prefix and (optionally) AM/PM if present.
+#       no Day N, just date prefix. Even-numbered V3 Posts go AM,
+#       odd go PM, so two posts on the same date split across slots.
+DAY_N_PATTERN = re.compile(
+    r"^(\d{4}-\d{2}-\d{2})\s+-\s+Day\s+(\d+)\s+(AM|PM)\b", re.IGNORECASE
+)
+V3_POST_PATTERN = re.compile(
+    r"^(\d{4}-\d{2}-\d{2})\s+-\s+V\d+\s+Post\s+(\d+)", re.IGNORECASE
+)
 DATE_PREFIX = re.compile(r"^(\d{4}-\d{2}-\d{2})\b")
-AM_PM_TAG = re.compile(r"\b(AM|PM)\b")
+AM_PM_TAG = re.compile(r"\b(AM|PM)\b", re.IGNORECASE)
 
 
 def load_env_local() -> None:
@@ -168,25 +183,59 @@ def filename_to_scheduled_at(name: str) -> Optional[str]:
     """
     Pull a default scheduled_at out of Dusty's filename convention.
     Returns an ISO-8601 timestamptz string in PT (America/Los_Angeles) or
-    None if the filename doesn't start with a date prefix.
+    None if the filename doesn't fit any known pattern.
 
-    Time of day:
-      "AM" in the name -> 09:00 PT
-      "PM" in the name -> 15:00 PT
-      neither           -> 11:00 PT (midday)
+    Naming conventions handled:
 
-    Postgres parses the explicit -07:00 / -08:00 offset cleanly; we use
-    -07:00 here because America/Los_Angeles is on PDT through early
-    November. The reviewer can adjust the exact time during approval.
+      "<startDate> - Day <N> <AM|PM> - <topic>.<ext>"
+        Day 1 == startDate. Day N == startDate + (N-1) days. AM=09:00 PT,
+        PM=15:00 PT. So a 14-day campaign starting 2026-04-28 spreads
+        across 2026-04-28 through 2026-05-11, two posts per day.
+
+      "<date> - V<v> Post <NN> - <topic>.<ext>"
+        One-off batch posts on a single date. Even NN go to AM (09:00 PT),
+        odd NN go to PM (15:00 PT) so two posts on the same date split
+        cleanly across slots.
+
+      "<date> ... AM|PM ..." (catch-all with AM/PM tag)
+        Posted on <date> at the matching slot.
+
+      "<date> ..." (catch-all date prefix only)
+        Posted on <date> at 11:00 PT.
+
+    Postgres parses the explicit -07:00 offset cleanly. PDT runs through
+    early November so this is correct for now. The reviewer can adjust
+    the exact time during approval if needed.
     """
+    from datetime import date, timedelta
+
+    m = DAY_N_PATTERN.match(name)
+    if m:
+        start = date.fromisoformat(m.group(1))
+        day_n = int(m.group(2))
+        ampm = m.group(3).upper()
+        target = start + timedelta(days=day_n - 1)
+        time_str = "09:00:00" if ampm == "AM" else "15:00:00"
+        return f"{target.isoformat()}T{time_str}-07:00"
+
+    m = V3_POST_PATTERN.match(name)
+    if m:
+        d = m.group(1)
+        post_n = int(m.group(2))
+        # Alternate every 2 posts: 04 AM, 06 PM, 08 AM, 10 PM, 12 AM, 14 PM.
+        # Spreads sequential post numbers across slots even when they're
+        # all even (Dusty's V3 Posts step by 2: 08, 10, 12, ...).
+        time_str = "09:00:00" if (post_n // 2) % 2 == 0 else "15:00:00"
+        return f"{d}T{time_str}-07:00"
+
     m = DATE_PREFIX.match(name)
     if not m:
         return None
     date_str = m.group(1)
     period = AM_PM_TAG.search(name)
-    if period and period.group(1) == "AM":
+    if period and period.group(1).upper() == "AM":
         time_str = "09:00:00"
-    elif period and period.group(1) == "PM":
+    elif period and period.group(1).upper() == "PM":
         time_str = "15:00:00"
     else:
         time_str = "11:00:00"
