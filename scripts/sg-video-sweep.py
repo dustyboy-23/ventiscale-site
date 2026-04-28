@@ -1,17 +1,21 @@
 #!/usr/bin/env python3
 """
 Drive state sweep for Sprinkler Guard VIDEOS. Aligns Drive parent
-folder to portal status. Uses the existing real subfolders since
-editor-uploaded videos already live in a folder structure that has
-Approved / Rejected / Already posted siblings.
+folder to portal status, AND appends any new reviewer notes (from
+either approve+note or reject+note flows) to the Revisions Google Doc.
 
   approved   -> move file to Approved subfolder
-  rejected   -> move file to Rejected subfolder + append note to Revisions doc
+  rejected   -> move file to Rejected subfolder
   published  -> move file to Already posted subfolder
   draft      -> stays in parent (top-level pending bucket)
 
-Idempotent: skips files already in the correct subfolder. Safe to
-re-run on cron.
+  any status with reviewer_notes set -> append section to Revisions doc
+  with the note + status + date. Idempotent via a watermark file:
+  /home/dustin/.openclaw/workspace/ventiscale/ops/state/sg-video-sweep-notes.watermark
+
+Idempotent on moves: skips files already in the correct subfolder.
+Idempotent on notes: only appends rows with reviewed_at > watermark,
+then advances the watermark. Safe to re-run on cron.
 
 Usage:
     python scripts/sg-video-sweep.py
@@ -44,6 +48,7 @@ VIDEO_REJECTED_FOLDER = "1Niu67a2yBFlkwUl04aM6STqo6ifIW3sf"
 VIDEO_POSTED_FOLDER = "11BpV3GhVp2T12vVYlj9yZp9fOnjV7LQQ"
 VIDEO_REVISIONS_DOC = "1mM7sUaKWWBxFkrckwwRZ0f8w4QPSQ9gzQkHu27_XnEs"
 PORTAL_ENV_PATH = Path(__file__).resolve().parent.parent / ".env.local"
+NOTES_WATERMARK_PATH = Path(__file__).resolve().parent.parent / "ops" / "state" / "sg-video-sweep-notes.watermark"
 
 TARGET_PARENT_BY_STATUS = {
     "approved": VIDEO_APPROVED_FOLDER,
@@ -115,6 +120,23 @@ def list_video_rows(client_id: str, *, base_url: str, service_key: str) -> list:
     return data if isinstance(data, list) else []
 
 
+def read_notes_watermark() -> str:
+    """Return the ISO timestamp watermark, or epoch if no marker yet."""
+    if NOTES_WATERMARK_PATH.exists():
+        try:
+            text = NOTES_WATERMARK_PATH.read_text().strip()
+            if text:
+                return text
+        except OSError:
+            pass
+    return "1970-01-01T00:00:00+00:00"
+
+
+def write_notes_watermark(iso: str) -> None:
+    NOTES_WATERMARK_PATH.parent.mkdir(parents=True, exist_ok=True)
+    NOTES_WATERMARK_PATH.write_text(iso + "\n")
+
+
 def gog_get_file(file_id: str, gog_path: str) -> Optional[dict]:
     cmd = [gog_path, "drive", "get", file_id, "--json"]
     result = subprocess.run(cmd, capture_output=True, text=True)
@@ -153,8 +175,9 @@ def revisions_section(row: dict) -> str:
     when_short = when[:10]
     title = row.get("title") or "(untitled)"
     notes = (row.get("reviewer_notes") or "").strip() or "(no note provided)"
+    status_label = (row.get("status") or "noted").capitalize()
     return (
-        f"\n## {title} (Rejected {when_short})\n"
+        f"\n## {title} ({status_label} {when_short})\n"
         f"{notes}\n\n"
         "----------------------------------------\n"
     )
@@ -209,16 +232,23 @@ def main() -> int:
     failed = 0
     revision_appends = 0
 
+    # Cache per-file metadata so we don't double-fetch when both the
+    # move pass and the notes pass need parents/MIME.
+    meta_cache: dict[str, dict] = {}
+    video_row_ids: set[str] = set()
+
     for row in rows:
         meta = gog_get_file(row["drive_file_id"], gog_path)
         if not meta:
             failed += 1
             continue
+        meta_cache[row["id"]] = meta
         parents = meta.get("parents", [])
         if not is_in_video_tree(parents):
             # Not a video file (probably a photo). Skip silently.
             skipped_not_video += 1
             continue
+        video_row_ids.add(row["id"])
 
         title = (row.get("title") or "")[:60]
         status = row["status"]
@@ -241,9 +271,40 @@ def main() -> int:
             continue
         moved += 1
 
-        if status == "rejected":
+    # Notes pass: append to the Revisions Google Doc any reviewer_notes
+    # that landed since the last watermark. Covers approve+note,
+    # reject+note, and any future standalone-note flow.
+    watermark = read_notes_watermark()
+    new_max = watermark
+    pending_notes = []
+    for row in rows:
+        if row["id"] not in video_row_ids:
+            continue
+        notes = (row.get("reviewer_notes") or "").strip()
+        if not notes:
+            continue
+        reviewed_at = row.get("reviewed_at") or ""
+        if not reviewed_at or reviewed_at <= watermark:
+            continue
+        pending_notes.append(row)
+        if reviewed_at > new_max:
+            new_max = reviewed_at
+
+    if pending_notes:
+        # Append oldest first so the doc reads chronologically.
+        pending_notes.sort(key=lambda r: r.get("reviewed_at") or "")
+        for row in pending_notes:
+            title = (row.get("title") or "")[:60]
+            print(f"  {'WOULD APPEND' if args.dry_run else 'appending'} note for {title} ({row['status']})")
+            if args.dry_run:
+                revision_appends += 1
+                continue
             if append_to_revisions_doc(revisions_section(row), gog_path):
                 revision_appends += 1
+            else:
+                failed += 1
+        if not args.dry_run and new_max != watermark:
+            write_notes_watermark(new_max)
 
     print()
     print(
