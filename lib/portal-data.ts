@@ -148,10 +148,19 @@ export async function getContentDrafts(): Promise<ContentDraft[]> {
   if (session?.mode === "real") {
     try {
       const supabase = await (await import("@/lib/supabase/server")).createClient();
+      // Calendar is forward-looking: hide drafts scheduled before
+      // today's date in PT. Unscheduled drafts (null scheduled_at)
+      // always show so they don't get lost.
+      const ptOffsetMs = 7 * 60 * 60 * 1000; // PDT, close enough for date math
+      const ptNow = new Date(Date.now() - ptOffsetMs);
+      const ptDateStr = ptNow.toISOString().slice(0, 10);
+      const todayStartUtc = `${ptDateStr}T00:00:00-07:00`;
+
       const { data } = await supabase
         .from("content_items")
         .select("id, platform, title, body, status, scheduled_at, published_at, created_at, reviewed_at, reviewer_notes, drive_file_id, comments, media_type")
         .eq("client_id", session.client.id)
+        .or(`scheduled_at.gte.${todayStartUtc},scheduled_at.is.null`)
         // Order by scheduled_at ascending so within a date the morning
         // (AM, 09:00 PT) slot lands before the afternoon (PM, 15:00 PT)
         // slot. nullsFirst:false keeps unscheduled drafts at the end.
