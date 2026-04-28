@@ -150,7 +150,7 @@ export async function getContentDrafts(): Promise<ContentDraft[]> {
       const supabase = await (await import("@/lib/supabase/server")).createClient();
       const { data } = await supabase
         .from("content_items")
-        .select("id, platform, title, body, status, scheduled_at, published_at, created_at, reviewed_at, reviewer_notes, drive_file_id")
+        .select("id, platform, title, body, status, scheduled_at, published_at, created_at, reviewed_at, reviewer_notes, drive_file_id, comments")
         .eq("client_id", session.client.id)
         // Order by scheduled_at ascending so within a date the morning
         // (AM, 09:00 PT) slot lands before the afternoon (PM, 15:00 PT)
@@ -168,7 +168,7 @@ export async function getContentDrafts(): Promise<ContentDraft[]> {
           topic: row.title,
           caption: row.body || "",
           imagePrompt: "",
-          comments: [],
+          comments: Array.isArray(row.comments) ? row.comments : [],
           cta: "",
           isProductPost: false,
           status: row.status as ContentDraft["status"],
