@@ -34,6 +34,7 @@ Requires:
 import argparse
 import json
 import os
+import re
 import shutil
 import subprocess
 import urllib.error
@@ -44,6 +45,13 @@ from typing import Optional
 
 GOG_DEFAULT = "/home/dustin/.local/bin/gog"
 PLATFORMS = ("facebook", "linkedin", "blog", "instagram", "other")
+
+# Parse Dusty's filename convention. Examples:
+#   "2026-04-28 - Day 5 PM - hose-attachment.png"
+#   "2026-04-27 - V3 Post 10-Yard-vs-Truck.png"
+# Captures the YYYY-MM-DD prefix and (optionally) AM/PM if present.
+DATE_PREFIX = re.compile(r"^(\d{4}-\d{2}-\d{2})\b")
+AM_PM_TAG = re.compile(r"\b(AM|PM)\b")
 
 
 def load_env_local() -> None:
@@ -125,16 +133,19 @@ def insert_content_item(
     drive_file_id: str,
     title: str,
     platform: str,
+    scheduled_at: Optional[str],
     base_url: str,
     service_key: str,
 ) -> dict:
-    body = {
+    body: dict = {
         "client_id": client_id,
         "drive_file_id": drive_file_id,
         "title": title[:200],
         "platform": platform,
         "status": "draft",
     }
+    if scheduled_at:
+        body["scheduled_at"] = scheduled_at
     return supabase_request(
         "POST",
         "/rest/v1/content_items",
@@ -151,6 +162,35 @@ def filename_to_title(name: str) -> str:
     # readable in the portal.
     base = name.rsplit(".", 1)[0] if "." in name else name
     return base.strip()
+
+
+def filename_to_scheduled_at(name: str) -> Optional[str]:
+    """
+    Pull a default scheduled_at out of Dusty's filename convention.
+    Returns an ISO-8601 timestamptz string in PT (America/Los_Angeles) or
+    None if the filename doesn't start with a date prefix.
+
+    Time of day:
+      "AM" in the name -> 09:00 PT
+      "PM" in the name -> 15:00 PT
+      neither           -> 11:00 PT (midday)
+
+    Postgres parses the explicit -07:00 / -08:00 offset cleanly; we use
+    -07:00 here because America/Los_Angeles is on PDT through early
+    November. The reviewer can adjust the exact time during approval.
+    """
+    m = DATE_PREFIX.match(name)
+    if not m:
+        return None
+    date_str = m.group(1)
+    period = AM_PM_TAG.search(name)
+    if period and period.group(1) == "AM":
+        time_str = "09:00:00"
+    elif period and period.group(1) == "PM":
+        time_str = "15:00:00"
+    else:
+        time_str = "11:00:00"
+    return f"{date_str}T{time_str}-07:00"
 
 
 def main() -> int:
@@ -219,7 +259,8 @@ def main() -> int:
 
     print(f"\nWill insert {len(new_files)} new draft row(s):")
     for f in new_files:
-        print(f"  · {filename_to_title(f['name']):60s}  {f['id']}")
+        sched = filename_to_scheduled_at(f["name"]) or "(no date in name)"
+        print(f"  · {filename_to_title(f['name']):60s}  scheduled={sched}")
 
     if args.dry_run:
         print("\nDry run. Re-run without --dry-run to write.")
@@ -234,6 +275,7 @@ def main() -> int:
                 drive_file_id=f["id"],
                 title=filename_to_title(f["name"]),
                 platform=args.platform,
+                scheduled_at=filename_to_scheduled_at(f["name"]),
                 base_url=base_url,
                 service_key=service_key,
             )

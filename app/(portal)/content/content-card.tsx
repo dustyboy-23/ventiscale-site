@@ -147,19 +147,28 @@ export function ContentCard({
         )}
       </div>
 
-      {/* Drive asset preview */}
+      {/* Drive asset preview. Uses Drive's thumbnail URL (no Drive UI
+          chrome, no zoom controls) wrapped in a click-through to the
+          full file in Drive. Renders the image at natural width up to
+          a 600px cap so vertical creatives stay reasonable. */}
       {draft.driveFileId && (
         <div className="mb-4 -mx-1">
-          <iframe
-            src={`https://drive.google.com/file/d/${draft.driveFileId}/preview`}
-            className="w-full h-[300px] rounded-lg border border-[var(--color-border)] bg-[var(--color-surface-muted)]"
-            title="Asset preview"
-            loading="lazy"
-            referrerPolicy="no-referrer"
-            allow="autoplay"
-          />
+          <a
+            href={`https://drive.google.com/file/d/${draft.driveFileId}/view`}
+            target="_blank"
+            rel="noreferrer"
+            className="block overflow-hidden rounded-lg border border-[var(--color-border)] bg-[var(--color-surface-muted)]"
+          >
+            <img
+              src={`https://drive.google.com/thumbnail?id=${draft.driveFileId}&sz=w1600`}
+              alt="Draft asset preview"
+              className="w-full max-h-[600px] object-contain block bg-white"
+              loading="lazy"
+              referrerPolicy="no-referrer"
+            />
+          </a>
           <p className="text-[11px] text-[var(--color-ink-subtle)] mt-1.5 text-center">
-            Asset hosted on Google Drive. Sign in to your Google account to view.
+            Click to open in Drive. Sign in to your Google account if it doesn&apos;t load.
           </p>
         </div>
       )}
