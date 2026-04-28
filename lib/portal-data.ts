@@ -224,5 +224,52 @@ export async function getActivityFeed(limit = 8): Promise<ActivityItem[]> {
   return [];
 }
 
+export interface PublishedPostMetrics {
+  id: string;
+  title: string;
+  platform: string;
+  publishedAt: string | null;
+  externalId: string | null;
+  driveFileId: string | null;
+  metrics: Record<string, number>;
+  metricsSyncedAt: string | null;
+  body: string;
+}
+
+export async function getPublishedPosts(limit = 50): Promise<PublishedPostMetrics[]> {
+  const session = await getPortalSession();
+  if (!session || session.mode !== "real") return [];
+
+  try {
+    const supabase = await (await import("@/lib/supabase/server")).createClient();
+    const { data } = await supabase
+      .from("content_items")
+      .select(
+        "id, title, platform, body, published_at, external_id, drive_file_id, metrics, metrics_synced_at",
+      )
+      .eq("client_id", session.client.id)
+      .eq("status", "published")
+      .order("published_at", { ascending: false, nullsFirst: false })
+      .limit(limit);
+
+    if (!data) return [];
+    return data.map((row: any) => ({
+      id: row.id,
+      title: row.title,
+      platform: row.platform,
+      publishedAt: row.published_at || null,
+      externalId: row.external_id || null,
+      driveFileId: row.drive_file_id || null,
+      metrics:
+        typeof row.metrics === "object" && row.metrics !== null ? row.metrics : {},
+      metricsSyncedAt: row.metrics_synced_at || null,
+      body: row.body || "",
+    }));
+  } catch (e) {
+    console.error("[portal-data] published posts query failed", e);
+    return [];
+  }
+}
+
 export type { ClientKpis, ReportSummary, ContentDraft, CampaignsData, ActivityItem, PeriodKey };
 export type { Campaign } from "@/lib/sg-data";

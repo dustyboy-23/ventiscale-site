@@ -18,6 +18,7 @@ import {
   Shield,
   Eye,
   ArrowLeft,
+  BarChart3,
 } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { enterDemo, exitDemo } from "@/app/actions/demo";
@@ -25,6 +26,7 @@ import { enterDemo, exitDemo } from "@/app/actions/demo";
 const NAV = [
   { href: "/dashboard", label: "Dashboard", icon: LayoutDashboard },
   { href: "/content", label: "Content", icon: Calendar },
+  { href: "/metrics", label: "Metrics", icon: BarChart3 },
   { href: "/campaigns", label: "Email", icon: Mail },
   { href: "/reports", label: "Reports", icon: FileText },
   { href: "/ads", label: "Ads", icon: Megaphone },
@@ -39,6 +41,7 @@ const NAV = [
 const REAL_CLIENT_NAV_HREFS = new Set([
   "/dashboard",
   "/content",
+  "/metrics",
   "/reports",
   "/ads",
   "/files",

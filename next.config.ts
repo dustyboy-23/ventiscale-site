@@ -2,11 +2,12 @@ import type { NextConfig } from "next";
 
 // Baseline security headers applied to every response.
 //
-// CSP ships in REPORT-ONLY mode for this round. Wrong CSP silently
-// breaks pages, so we observe violations in production logs first, then
-// flip to enforce in a follow-up commit once 2-3 days of clean traffic
-// confirms nothing legit is being blocked. The report-only header still
-// shows a B+ on securityheaders.com.
+// CSP is now in ENFORCE mode (was report-only through Round 3 audit).
+// The same policy ran as report-only without violations on legit
+// traffic, so flipping to enforce closes the loop without breakage
+// risk. If a future change adds a third-party script/host that needs
+// to load, update the policy below before shipping that change so
+// enforce mode doesn't block it.
 //
 // What the policy allows:
 //   - inline scripts/styles: required by JSON-LD blocks (FAQ, Org, Service)
@@ -52,7 +53,7 @@ const securityHeaders = [
     value: "camera=(), microphone=(), geolocation=(), interest-cohort=()",
   },
   {
-    key: "Content-Security-Policy-Report-Only",
+    key: "Content-Security-Policy",
     value: csp,
   },
 ];
