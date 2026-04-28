@@ -36,11 +36,11 @@ export default async function ContentPage({
     (a.scheduledAt || "9999").localeCompare(b.scheduledAt || "9999"),
   );
 
-  // Calendar tab: everything that's NOT a video awaiting Ken's review.
-  // Approved/published videos still show in the calendar so Ken sees the
-  // full week's posting flow.
-  const videoQueueIds = new Set(videoQueue.map((d) => d.id));
-  const calendarDrafts = drafts.filter((d) => !videoQueueIds.has(d.id));
+  // Calendar tab: photos + LinkedIn only. Videos live in their own
+  // tab so Ken doesn't see them in the daily flow — they're a separate
+  // workstream (review → approve → schedule). Per-day target = 2 FB
+  // photos + 1 LinkedIn.
+  const calendarDrafts = drafts.filter((d) => d.mediaType !== "video");
 
   // Group by date and apply a natural sort within each group.
   // Without natural sort, "Day 10" would land before "Day 5"
