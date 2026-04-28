@@ -163,12 +163,22 @@ export function ContentCard({
         </p>
       )}
 
-      {/* Drive asset preview. Two-stage strategy: try the direct image
-          via Google's CDN; on error fall back to the /preview iframe
-          which always works for users with file access. */}
+      {/* Drive asset preview.
+            For images: try direct CDN <img>; on error fall back to iframe.
+            For videos: skip the img attempt entirely and use the iframe
+              player so Ken can press play on the card. lh3 only returns
+              a still frame for videos which would block playback. */}
       {draft.driveFileId && (
         <div className="mb-3 -mx-1">
-          {previewMode === "img" ? (
+          {draft.mediaType === "video" ? (
+            <iframe
+              src={`https://drive.google.com/file/d/${draft.driveFileId}/preview`}
+              className="w-full h-[380px] rounded-lg border border-[var(--color-border)] bg-black block"
+              title="Video preview"
+              loading="lazy"
+              allow="autoplay"
+            />
+          ) : previewMode === "img" ? (
             <a
               href={`https://drive.google.com/file/d/${draft.driveFileId}/view`}
               target="_blank"

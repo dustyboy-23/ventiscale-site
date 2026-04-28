@@ -167,6 +167,7 @@ def main() -> int:
                     "status": "draft",
                     "external_id": ext_id,
                     "scheduled_at": next_li_slot_at(),
+                    "media_type": "text",
                 },
             )
             inserted += 1

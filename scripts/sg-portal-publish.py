@@ -236,6 +236,7 @@ def insert_content_item(
         "platform": platform,
         "status": "draft",
         "scheduled_at": scheduled_at,
+        "media_type": "image",
     }
     return supabase_request(
         "POST",

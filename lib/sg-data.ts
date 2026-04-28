@@ -107,6 +107,7 @@ export interface ContentDraft {
   reviewerNotes: string | null;
   scheduledAt: string | null;
   driveFileId: string | null;
+  mediaType: "image" | "video" | "text" | null;
 }
 
 export interface CampaignSequenceStep {
@@ -549,6 +550,7 @@ export async function getContentDrafts(): Promise<ContentDraft[]> {
       reviewerNotes: null,
       scheduledAt: null,
       driveFileId: null,
+      mediaType: null,
     },
     {
       id: "li-2026-04-10",
@@ -567,6 +569,7 @@ export async function getContentDrafts(): Promise<ContentDraft[]> {
       reviewerNotes: null,
       scheduledAt: null,
       driveFileId: null,
+      mediaType: null,
     },
     {
       id: "fb-2026-04-10-midday",
@@ -587,6 +590,7 @@ export async function getContentDrafts(): Promise<ContentDraft[]> {
       reviewerNotes: null,
       scheduledAt: null,
       driveFileId: null,
+      mediaType: null,
     },
     {
       id: "fb-2026-04-10-evening",
@@ -605,6 +609,7 @@ export async function getContentDrafts(): Promise<ContentDraft[]> {
       reviewerNotes: null,
       scheduledAt: null,
       driveFileId: null,
+      mediaType: null,
     },
     {
       id: "fb-2026-04-11-morning",
@@ -623,6 +628,7 @@ export async function getContentDrafts(): Promise<ContentDraft[]> {
       reviewerNotes: null,
       scheduledAt: null,
       driveFileId: null,
+      mediaType: null,
     },
     {
       id: "li-2026-04-11",
@@ -641,6 +647,7 @@ export async function getContentDrafts(): Promise<ContentDraft[]> {
       reviewerNotes: null,
       scheduledAt: null,
       driveFileId: null,
+      mediaType: null,
     },
   ];
 }

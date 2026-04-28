@@ -192,6 +192,7 @@ def insert_content_item(
         "platform": platform,
         "status": "draft",
         "scheduled_at": scheduled_at,
+        "media_type": "video",
     }
     return supabase_request(
         "POST",
