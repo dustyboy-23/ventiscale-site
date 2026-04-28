@@ -125,7 +125,7 @@ export function ContentCard({
   }
 
   return (
-    <Card padding="md" className="h-full flex flex-col">
+    <Card padding="md">
       {/* Header: platform + status */}
       <div className="flex items-center gap-2 mb-4">
         <span
@@ -167,16 +167,13 @@ export function ContentCard({
             For images: try direct CDN <img>; on error fall back to iframe.
             For videos: skip the img attempt entirely and use the iframe
               player so Ken can press play on the card. lh3 only returns
-              a still frame for videos which would block playback.
-            Wrapper is flex-1 so the preview grows to fill row height when
-            the card is stretched (grid items align-stretch by default).
-            min-h-[380px] keeps the original size on short rows. */}
+              a still frame for videos which would block playback. */}
       {draft.driveFileId && (
-        <div className="mb-3 -mx-1 flex-1 min-h-[380px] flex">
+        <div className="mb-3 -mx-1">
           {draft.mediaType === "video" ? (
             <iframe
               src={`https://drive.google.com/file/d/${draft.driveFileId}/preview`}
-              className="w-full h-full rounded-lg border border-[var(--color-border)] bg-black block"
+              className="w-full h-[380px] rounded-lg border border-[var(--color-border)] bg-black block"
               title="Video preview"
               loading="lazy"
               allow="autoplay"
@@ -186,12 +183,12 @@ export function ContentCard({
               href={`https://drive.google.com/file/d/${draft.driveFileId}/view`}
               target="_blank"
               rel="noreferrer"
-              className="block w-full h-full overflow-hidden rounded-lg border border-[var(--color-border)] bg-[var(--color-surface-muted)]"
+              className="block overflow-hidden rounded-lg border border-[var(--color-border)] bg-[var(--color-surface-muted)]"
             >
               <img
                 src={`https://lh3.googleusercontent.com/d/${draft.driveFileId}=w1200`}
                 alt="Draft asset preview"
-                className="w-full h-full object-contain block bg-white"
+                className="w-full max-h-[380px] object-contain block bg-white"
                 loading="lazy"
                 onError={() => setPreviewMode("iframe")}
               />
@@ -199,7 +196,7 @@ export function ContentCard({
           ) : (
             <iframe
               src={`https://drive.google.com/file/d/${draft.driveFileId}/preview`}
-              className="w-full h-full rounded-lg border border-[var(--color-border)] bg-[var(--color-surface-muted)] block"
+              className="w-full h-[380px] rounded-lg border border-[var(--color-border)] bg-[var(--color-surface-muted)] block"
               title="Asset preview"
               loading="lazy"
               allow="autoplay"
@@ -209,12 +206,12 @@ export function ContentCard({
       )}
 
       {/* LinkedIn-styled preview for text-only posts (no Drive image
-          attached). Same flex-1 + min-h-[380px] pattern as the photo
-          preview so cards line up on /content with action buttons
-          glued to the bottom of every card. */}
+          attached). Same height as the photo preview area so the cards
+          line up on /content. Renders the post in a LinkedIn-feed-style
+          mockup so Ken sees what it'll look like on his profile. */}
       {!draft.driveFileId && draft.platform === "linkedin" && (
-        <div className="mb-3 -mx-1 flex-1 min-h-[380px] flex">
-          <div className="w-full rounded-lg border border-[#0A66C2]/20 bg-gradient-to-br from-[#EFF4F9] to-white flex flex-col overflow-hidden">
+        <div className="mb-3 -mx-1">
+          <div className="rounded-lg border border-[#0A66C2]/20 bg-gradient-to-br from-[#EFF4F9] to-white h-[380px] flex flex-col overflow-hidden">
             {/* Faux LinkedIn post header */}
             <div className="flex items-center gap-2.5 px-4 pt-3.5 pb-3 border-b border-[#0A66C2]/10">
               <div className="w-9 h-9 rounded-full bg-[#0A66C2] flex items-center justify-center shrink-0">
@@ -237,10 +234,9 @@ export function ContentCard({
               </div>
             </div>
 
-            {/* Post body excerpt — flex-1 inside the mockup so the
-                body grows to fill whatever height the row gives us. */}
+            {/* Post body excerpt (first ~6 lines) */}
             <div className="flex-1 px-4 py-3.5 overflow-hidden">
-              <p className="text-[13px] text-[#000000DE] leading-relaxed whitespace-pre-line">
+              <p className="text-[13px] text-[#000000DE] leading-relaxed whitespace-pre-line line-clamp-[14]">
                 {draft.caption || "(no body)"}
               </p>
             </div>
@@ -287,10 +283,8 @@ export function ContentCard({
         </div>
       )}
 
-      {/* Review actions — mt-auto pins this to the bottom of the card
-          so Approve / Needs changes / Add note line up across all 4
-          cards in a row regardless of how tall the preview area got. */}
-      <div className="mt-auto pt-4 border-t border-[var(--color-border)]">
+      {/* Review actions */}
+      <div className="mt-4 pt-4 border-t border-[var(--color-border)]">
         {canReview ? (
           <div className="space-y-3">
             {/* Schedule picker. Appears on first Approve click. */}
