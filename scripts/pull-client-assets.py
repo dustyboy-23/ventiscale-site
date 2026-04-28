@@ -84,6 +84,12 @@ def normalize_drive_file(f: dict, source: str) -> dict:
     mime = f.get("mimeType", "")
     is_video = "video" in mime
     is_image = "image" in mime
+    # Drive's CDN thumbnail endpoint. Loads if the viewer's Google session has
+    # access to the file; works for both shared-with-user and anyone-with-link.
+    thumb = (
+        f"https://drive.google.com/thumbnail?id={fid}&sz=w800"
+        if fid and (is_image or is_video) else None
+    )
     return {
         "source": source,
         "id": fid,
@@ -93,7 +99,7 @@ def normalize_drive_file(f: dict, source: str) -> dict:
         "size": int(f["size"]) if f.get("size") else None,
         "updated_at": f.get("modifiedTime"),
         "url": f.get("webViewLink") or (f"https://drive.google.com/file/d/{fid}/view" if fid else None),
-        "thumbnail_url": f.get("thumbnailLink"),
+        "thumbnail_url": thumb,
     }
 
 

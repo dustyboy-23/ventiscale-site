@@ -7,6 +7,7 @@ import {
   FileText,
   Video,
   Linkedin,
+  Play,
   ExternalLink,
 } from "lucide-react";
 
@@ -49,39 +50,137 @@ function relativeTime(iso: string | null): string {
 }
 
 
-function AssetRow({ item, icon: Icon, badge }: { item: AssetItem; icon: any; badge?: string }) {
+function MediaTile({ item }: { item: AssetItem }) {
+  const isVideo = item.kind === "video";
+  const thumb = item.thumbnail_url;
+  const updatedRel = relativeTime(item.updated_at);
   const sizeStr = formatBytes(item.size);
-  const updatedStr = relativeTime(item.updated_at);
-  const meta = [sizeStr, updatedStr ? `updated ${updatedStr}` : ""].filter(Boolean).join(" · ");
+  const meta = [sizeStr, updatedRel].filter(Boolean).join(" · ");
 
-  const inner = (
-    <div className="px-5 py-3.5 flex items-center gap-3 hover:bg-[var(--color-surface-muted)] transition-colors group">
-      <div className="w-9 h-9 rounded-lg bg-[var(--color-surface-muted)] flex items-center justify-center shrink-0">
-        <Icon className="w-4 h-4 text-[var(--color-ink-muted)]" strokeWidth={2} />
-      </div>
-      <div className="flex-1 min-w-0">
-        <div className="text-[14px] font-medium text-[var(--color-ink)] truncate">
-          {item.name}
-        </div>
-        {item.snippet && (
-          <div className="text-[12.5px] text-[var(--color-ink-muted)] line-clamp-1 mt-0.5">
-            {item.snippet}
+  return (
+    <a
+      href={item.url || "#"}
+      target="_blank"
+      rel="noopener noreferrer"
+      className="group block rounded-xl overflow-hidden bg-white border border-[var(--color-border)] hover:border-[var(--color-border-strong)] hover:shadow-md transition-all"
+    >
+      <div className="relative aspect-[4/3] bg-[var(--color-surface-muted)] overflow-hidden">
+        {thumb ? (
+          // eslint-disable-next-line @next/next/no-img-element
+          <img
+            src={thumb}
+            alt={item.name}
+            referrerPolicy="no-referrer"
+            className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
+          />
+        ) : (
+          <div className="w-full h-full flex items-center justify-center">
+            {isVideo ? (
+              <Video className="w-8 h-8 text-[var(--color-ink-subtle)]" strokeWidth={1.5} />
+            ) : (
+              <ImageIcon className="w-8 h-8 text-[var(--color-ink-subtle)]" strokeWidth={1.5} />
+            )}
           </div>
         )}
+        {isVideo && (
+          <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
+            <div className="w-12 h-12 rounded-full bg-black/55 backdrop-blur-sm flex items-center justify-center group-hover:bg-black/70 transition-colors">
+              <Play className="w-5 h-5 text-white fill-white ml-0.5" />
+            </div>
+          </div>
+        )}
+        <div className="absolute top-2 right-2 opacity-0 group-hover:opacity-100 transition-opacity">
+          <div className="w-7 h-7 rounded-full bg-white/90 backdrop-blur-sm flex items-center justify-center">
+            <ExternalLink className="w-3.5 h-3.5 text-[var(--color-ink)]" strokeWidth={2} />
+          </div>
+        </div>
+        {item.source === "videos_posted" && (
+          <div className="absolute bottom-2 left-2">
+            <span className="text-[10px] font-semibold uppercase tracking-wider bg-[var(--color-accent)] text-white px-2 py-1 rounded">
+              Posted
+            </span>
+          </div>
+        )}
+      </div>
+      <div className="px-3 py-2.5">
+        <div className="text-[12.5px] font-medium text-[var(--color-ink)] truncate">
+          {item.name.replace(/\.[a-z0-9]+$/i, "")}
+        </div>
         {meta && (
-          <div className="text-[11px] text-[var(--color-ink-subtle)] mt-0.5">
+          <div className="text-[11px] text-[var(--color-ink-subtle)] mt-0.5 truncate">
             {meta}
           </div>
         )}
       </div>
-      {badge && (
-        <span className="text-[10px] font-medium uppercase tracking-wider text-[var(--color-ink-subtle)] shrink-0 mr-2">
-          {badge}
+    </a>
+  );
+}
+
+
+function MediaGrid({
+  title,
+  count,
+  items,
+  icon: Icon,
+  emptyMessage,
+}: {
+  title: string;
+  count: number;
+  items: AssetItem[];
+  icon: any;
+  emptyMessage: string;
+}) {
+  return (
+    <Card padding="none" className="overflow-hidden">
+      <div className="px-5 py-3 bg-[var(--color-surface-muted)] border-b border-[var(--color-border)] flex items-center gap-2">
+        <Icon className="w-4 h-4 text-[var(--color-ink-muted)]" strokeWidth={2} />
+        <span className="text-[13px] font-medium text-[var(--color-ink)]">{title}</span>
+        <span className="ml-auto text-[11px] font-medium text-[var(--color-ink-subtle)]">
+          {count} {count === 1 ? "item" : "items"}
         </span>
+      </div>
+      {items.length === 0 ? (
+        <div className="px-5 py-10 text-center">
+          <p className="text-[13px] text-[var(--color-ink-subtle)]">{emptyMessage}</p>
+        </div>
+      ) : (
+        <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-3 p-4">
+          {items.map((item) => (
+            <MediaTile key={`${item.source}-${item.id}`} item={item} />
+          ))}
+        </div>
       )}
+    </Card>
+  );
+}
+
+
+function PostRow({ item, icon: Icon }: { item: AssetItem; icon: any }) {
+  const updatedStr = relativeTime(item.updated_at);
+
+  const inner = (
+    <div className="px-5 py-3.5 flex items-start gap-3 hover:bg-[var(--color-surface-muted)] transition-colors group">
+      <div className="w-9 h-9 rounded-lg bg-[var(--color-surface-muted)] flex items-center justify-center shrink-0 mt-0.5">
+        <Icon className="w-4 h-4 text-[var(--color-ink-muted)]" strokeWidth={2} />
+      </div>
+      <div className="flex-1 min-w-0">
+        <div className="text-[14px] font-medium text-[var(--color-ink)] line-clamp-1">
+          {item.name}
+        </div>
+        {item.snippet && (
+          <div className="text-[12.5px] text-[var(--color-ink-muted)] line-clamp-2 mt-0.5 leading-relaxed">
+            {item.snippet}
+          </div>
+        )}
+        {updatedStr && (
+          <div className="text-[11px] text-[var(--color-ink-subtle)] mt-1">
+            {updatedStr}
+          </div>
+        )}
+      </div>
       {item.url && (
         <ExternalLink
-          className="w-3.5 h-3.5 text-[var(--color-ink-subtle)] shrink-0 opacity-0 group-hover:opacity-100 transition-opacity"
+          className="w-3.5 h-3.5 text-[var(--color-ink-subtle)] shrink-0 opacity-0 group-hover:opacity-100 transition-opacity mt-1"
           strokeWidth={2}
         />
       )}
@@ -99,20 +198,18 @@ function AssetRow({ item, icon: Icon, badge }: { item: AssetItem; icon: any; bad
 }
 
 
-function Section({
+function PostList({
   title,
   count,
   items,
   icon: Icon,
   emptyMessage,
-  badgeFor,
 }: {
   title: string;
   count: number;
   items: AssetItem[];
   icon: any;
   emptyMessage: string;
-  badgeFor?: (item: AssetItem) => string | undefined;
 }) {
   return (
     <Card padding="none" className="overflow-hidden">
@@ -130,12 +227,7 @@ function Section({
       ) : (
         <div className="divide-y divide-[var(--color-border)]">
           {items.map((item) => (
-            <AssetRow
-              key={`${item.source}-${item.id}`}
-              item={item}
-              icon={Icon}
-              badge={badgeFor ? badgeFor(item) : undefined}
-            />
+            <PostRow key={`${item.source}-${item.id}`} item={item} icon={Icon} />
           ))}
         </div>
       )}
@@ -147,7 +239,6 @@ function Section({
 export default async function FilesPage() {
   const client = await getClientMeta();
 
-  // Demo client keeps the prior fixture
   if (client.isDemo) {
     return (
       <>
@@ -156,7 +247,6 @@ export default async function FilesPage() {
           title="Brand Assets"
           description="Every creative, image, video, and document for your campaigns, synced live from Google Drive."
         />
-
         <Card padding="none" className="overflow-hidden">
           <div className="px-5 py-3 bg-[var(--color-surface-muted)] border-b border-[var(--color-border)] flex items-center gap-2">
             <FolderOpen className="w-4 h-4 text-[var(--color-ink-muted)]" strokeWidth={2} />
@@ -191,20 +281,14 @@ export default async function FilesPage() {
             })}
           </div>
         </Card>
-
-        <p className="text-[12px] text-[var(--color-ink-subtle)] mt-3 text-center">
-          In a live workspace this is a Google Drive mirror. Every asset Jarvis
-          ships lands here automatically, synced in real time.
-        </p>
       </>
     );
   }
 
   const lib = await getAssetLibrary();
   const refreshedRel = relativeTime(lib.refreshedAt);
-
-  // Empty state when nothing has been pulled yet (cache not seeded)
   const totalAll = lib.totals.videos + lib.totals.photos + lib.totals.linkedin + lib.totals.blog;
+
   if (totalAll === 0) {
     return (
       <>
@@ -231,10 +315,6 @@ export default async function FilesPage() {
     );
   }
 
-  // Approved/posted badge on videos, source folder hint
-  const videoBadge = (item: AssetItem) =>
-    item.source === "videos_posted" ? "Posted" : "Approved";
-
   return (
     <>
       <PageHeader
@@ -244,16 +324,15 @@ export default async function FilesPage() {
       />
 
       <div className="space-y-5">
-        <Section
+        <MediaGrid
           title="Videos"
           count={lib.totals.videos}
           items={lib.videos}
           icon={Video}
           emptyMessage="No approved videos yet."
-          badgeFor={videoBadge}
         />
 
-        <Section
+        <MediaGrid
           title="Photos"
           count={lib.totals.photos}
           items={lib.photos}
@@ -261,7 +340,7 @@ export default async function FilesPage() {
           emptyMessage="No photo assets yet."
         />
 
-        <Section
+        <PostList
           title="LinkedIn posts"
           count={lib.totals.linkedin}
           items={lib.linkedin}
@@ -269,7 +348,7 @@ export default async function FilesPage() {
           emptyMessage="No LinkedIn posts published yet. They appear here after they go live."
         />
 
-        <Section
+        <PostList
           title="Blog posts"
           count={lib.totals.blog}
           items={lib.blog}
