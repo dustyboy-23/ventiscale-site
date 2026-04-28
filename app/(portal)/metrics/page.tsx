@@ -1,14 +1,9 @@
 import { PageHeader } from "@/components/page-header";
 import { Card } from "@/components/card";
 import { getPublishedPosts } from "@/lib/portal-data";
-import { formatDate, formatNumber, relativeTime } from "@/lib/utils";
+import { formatNumber, relativeTime } from "@/lib/utils";
 import {
   BarChart3,
-  ThumbsUp,
-  MessageSquare,
-  Share2,
-  Eye,
-  Play,
   ExternalLink,
   TrendingUp,
   Trophy,
@@ -22,15 +17,6 @@ const PLATFORM_STYLES: Record<string, { label: string; bg: string; text: string;
   instagram: { label: "Instagram", bg: "bg-pink-50", text: "text-pink-700", bar: "bg-pink-500" },
   other: { label: "Social", bg: "bg-slate-100", text: "text-slate-700", bar: "bg-slate-500" },
 };
-
-const METRIC_META: Array<{ key: string; label: string; icon: typeof ThumbsUp }> = [
-  { key: "reactions", label: "Reactions", icon: ThumbsUp },
-  { key: "likes", label: "Likes", icon: ThumbsUp },
-  { key: "comments", label: "Comments", icon: MessageSquare },
-  { key: "shares", label: "Shares", icon: Share2 },
-  { key: "video_views", label: "Views", icon: Play },
-  { key: "impressions", label: "Impressions", icon: Eye },
-];
 
 const ENGAGEMENT_KEYS = ["reactions", "likes", "comments", "shares"] as const;
 
@@ -305,92 +291,7 @@ export default async function MetricsPage() {
         </section>
       )}
 
-      {/* All posts */}
-      <section>
-        <SectionHead title="All posts" subtitle="Every post that's gone live, newest first" />
-        <div className="space-y-3">
-          {posts.map((p) => {
-            const meta = PLATFORM_STYLES[p.platform] || PLATFORM_STYLES.other;
-            const link = postLink(p.platform, p.externalId);
-            const visibleMetrics = METRIC_META.filter(
-              (m) => p.metrics && p.metrics[m.key] !== undefined,
-            );
-            return (
-              <Card key={p.id} padding="md">
-                <div className="flex items-start gap-4">
-                  {p.driveFileId && (
-                    <a
-                      href={`https://drive.google.com/file/d/${p.driveFileId}/view`}
-                      target="_blank"
-                      rel="noreferrer"
-                      className="shrink-0"
-                    >
-                      <img
-                        src={`https://lh3.googleusercontent.com/d/${p.driveFileId}=w160`}
-                        alt=""
-                        className="w-20 h-20 rounded-lg object-cover bg-[var(--color-surface-muted)]"
-                        loading="lazy"
-                      />
-                    </a>
-                  )}
-                  <div className="flex-1 min-w-0">
-                    <div className="flex items-center gap-2 mb-1.5">
-                      <span
-                        className={`text-[10px] font-semibold uppercase tracking-wider ${meta.bg} ${meta.text} px-2 py-0.5 rounded`}
-                      >
-                        {meta.label}
-                      </span>
-                      {p.publishedAt && (
-                        <span className="text-[11px] text-[var(--color-ink-subtle)]">
-                          {formatDate(p.publishedAt, { month: "short", day: "numeric", year: "numeric" })} · {relativeTime(p.publishedAt)}
-                        </span>
-                      )}
-                      {link && (
-                        <a
-                          href={link}
-                          target="_blank"
-                          rel="noreferrer"
-                          className="ml-auto text-[var(--color-ink-subtle)] hover:text-[var(--color-ink)] transition-colors"
-                          aria-label="Open post"
-                        >
-                          <ExternalLink className="w-3.5 h-3.5" />
-                        </a>
-                      )}
-                    </div>
-                    <h3 className="text-[14px] font-semibold text-[var(--color-ink)] tracking-tight leading-snug mb-2">
-                      {p.title}
-                    </h3>
-
-                    {visibleMetrics.length > 0 ? (
-                      <div className="flex flex-wrap items-center gap-x-4 gap-y-1.5">
-                        {visibleMetrics.map((m) => {
-                          const Icon = m.icon;
-                          const val = Number(p.metrics[m.key]) || 0;
-                          return (
-                            <div key={m.key} className="inline-flex items-center gap-1.5 text-[12px] text-[var(--color-ink-muted)]">
-                              <Icon className="w-3.5 h-3.5 text-[var(--color-ink-subtle)]" />
-                              <span className="font-medium text-[var(--color-ink)] tabular-nums">{formatNumber(val)}</span>
-                              <span className="text-[11px]">{m.label.toLowerCase()}</span>
-                            </div>
-                          );
-                        })}
-                      </div>
-                    ) : (
-                      <p className="text-[12px] text-[var(--color-ink-subtle)]">
-                        {p.metricsSyncedAt
-                          ? "No engagement yet."
-                          : "Metrics pending. Check back after the next 6h refresh."}
-                      </p>
-                    )}
-                  </div>
-                </div>
-              </Card>
-            );
-          })}
-        </div>
-      </section>
-
-      <p className="text-[11px] text-[var(--color-ink-subtle)] mt-6 text-center">
+      <p className="text-[11px] text-[var(--color-ink-subtle)] mt-2 text-center">
         Engagement refreshes every 6 hours from FB and LinkedIn directly.
       </p>
     </>
