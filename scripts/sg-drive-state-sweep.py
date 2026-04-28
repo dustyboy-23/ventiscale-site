@@ -1,29 +1,25 @@
 #!/usr/bin/env python3
 """
-Drive state sweep for Sprinkler Guard photos. Aligns Drive filenames
-to portal status by prefixing the filename with the current state:
+Drive state sweep for Sprinkler Guard PHOTOS. Aligns Drive parent
+folder to portal status using real subfolder moves now that the
+parent folder has Approved / Rejected / Posted siblings.
 
-  approved    -> "[APPROVED] <name>"
-  rejected    -> "[REJECTED] <name>"  + revision note appended to SG Revisions doc
-  published   -> "[POSTED] <name>"
-  draft       -> no prefix (original filename)
+  approved   -> move file to Approved subfolder
+  rejected   -> move file to Rejected subfolder + append note to Revisions doc
+  published  -> move file to Posted subfolder
+  draft      -> stays in parent (top-level pending bucket)
 
-Idempotent: skips files whose name already matches the desired state.
-On reject, also appends a section to the SG Revisions doc with the
-reviewer's note so editors have one place to read all pending fixes.
+Idempotent. Skips files already in the correct subfolder.
 
-Why filenames instead of subfolders:
-  Drive folder creation requires OAuth bearer auth that gog doesn't
-  expose and we can't extract per hard-rule #7. Filename prefixes get
-  the same visual organization (sorted by name in Drive UI groups all
-  [APPROVED] / [REJECTED] / [POSTED] together) without needing folder
-  creation rights we don't have.
+Also strips legacy [APPROVED]/[REJECTED]/[POSTED] filename prefixes
+that the previous filename-based sweep may have applied, so the
+visible filename ends up clean once Drive moves take over.
 
 Usage:
     python scripts/sg-drive-state-sweep.py
     python scripts/sg-drive-state-sweep.py --dry-run
 
-Cron suggestion (PT, twice daily):
+Cron suggestion (PT, twice daily before posting slots):
     30 8 * * * /usr/bin/python3 scripts/sg-drive-state-sweep.py
     30 14 * * * /usr/bin/python3 scripts/sg-drive-state-sweep.py
 """
@@ -44,17 +40,27 @@ from typing import Optional
 
 GOG_DEFAULT = "/home/dustin/.local/bin/gog"
 SG_CLIENT_SLUG = "sprinkler-guard"
-SG_REVISIONS_DOC_ID = "1Y-URu9aQLPfbX4T7ap6yqR1qBPXLHMaFvH0zno2ZvRQ"
+PHOTO_PARENT_FOLDER = "1L5tD47hvCy20UIXAY4gml4D3aMOun7Vc"
+PHOTO_APPROVED_FOLDER = "1pqfAT4G96T1PkKygVZnWgzkojjdQIBfY"
+PHOTO_REJECTED_FOLDER = "1IhmGHU90LH_i6xuXFPfivpHWaK9XJa_n"
+PHOTO_POSTED_FOLDER = "1Uiu8pGjzfTEnELi-k81xHHaS0qh04_qf"
+PHOTO_REVISIONS_DOC = "1Y-URu9aQLPfbX4T7ap6yqR1qBPXLHMaFvH0zno2ZvRQ"
 PORTAL_ENV_PATH = Path(__file__).resolve().parent.parent / ".env.local"
 
-PREFIX_BY_STATUS = {
-    "approved": "[APPROVED] ",
-    "rejected": "[REJECTED] ",
-    "published": "[POSTED] ",
+TARGET_PARENT_BY_STATUS = {
+    "approved": PHOTO_APPROVED_FOLDER,
+    "rejected": PHOTO_REJECTED_FOLDER,
+    "published": PHOTO_POSTED_FOLDER,
 }
-ALL_PREFIXES = list(PREFIX_BY_STATUS.values())
 
-PREFIX_RE = re.compile(r"^\[(APPROVED|REJECTED|POSTED)\]\s+")
+PHOTO_TREE = {
+    PHOTO_PARENT_FOLDER,
+    PHOTO_APPROVED_FOLDER,
+    PHOTO_REJECTED_FOLDER,
+    PHOTO_POSTED_FOLDER,
+}
+
+LEGACY_PREFIX_RE = re.compile(r"^\[(APPROVED|REJECTED|POSTED)\]\s+")
 
 
 def load_env_file(path: Path) -> None:
@@ -104,8 +110,7 @@ def find_client_by_slug(slug: str, *, base_url: str, service_key: str) -> Option
     return data[0] if isinstance(data, list) and data else None
 
 
-def list_state_relevant_rows(client_id: str, *, base_url: str, service_key: str) -> list:
-    """Pull all rows that could need renaming."""
+def list_photo_rows(client_id: str, *, base_url: str, service_key: str) -> list:
     path = (
         f"/rest/v1/content_items?client_id=eq.{client_id}"
         f"&drive_file_id=not.is.null"
@@ -121,61 +126,54 @@ def gog_get_file(file_id: str, gog_path: str) -> Optional[dict]:
     cmd = [gog_path, "drive", "get", file_id, "--json"]
     result = subprocess.run(cmd, capture_output=True, text=True)
     if result.returncode != 0:
-        print(f"  ! gog drive get {file_id} failed: {result.stderr.strip()[:200]}", file=sys.stderr)
         return None
-    payload = json.loads(result.stdout) if result.stdout.strip() else {}
+    try:
+        payload = json.loads(result.stdout) if result.stdout.strip() else {}
+    except json.JSONDecodeError:
+        return None
     return payload.get("file") if isinstance(payload, dict) else None
+
+
+def gog_move(file_id: str, new_parent: str, gog_path: str) -> bool:
+    cmd = [gog_path, "drive", "move", file_id, "--parent", new_parent, "--force"]
+    result = subprocess.run(cmd, capture_output=True, text=True)
+    if result.returncode != 0:
+        print(f"  ! gog drive move failed: {result.stderr.strip()[:200]}", file=sys.stderr)
+        return False
+    return True
 
 
 def gog_rename(file_id: str, new_name: str, gog_path: str) -> bool:
     cmd = [gog_path, "drive", "rename", file_id, new_name]
     result = subprocess.run(cmd, capture_output=True, text=True)
-    if result.returncode != 0:
-        print(f"  ! gog drive rename failed: {result.stderr.strip()[:200]}", file=sys.stderr)
-        return False
-    return True
+    return result.returncode == 0
 
 
-def strip_state_prefix(name: str) -> str:
-    return PREFIX_RE.sub("", name)
+def in_photo_tree(parents: list) -> bool:
+    return bool(parents) and parents[0] in PHOTO_TREE
 
 
-def desired_name_for_state(current_name: str, status: str) -> Optional[str]:
-    base = strip_state_prefix(current_name)
-    prefix = PREFIX_BY_STATUS.get(status, "")
-    target = f"{prefix}{base}"
-    return target if target != current_name else None
-
-
-def revisions_section_for_row(row: dict, base_name: str) -> str:
-    when = row.get("reviewed_at", "") or datetime.now(timezone.utc).isoformat()
-    when_short = when[:10]
+def revisions_section(row: dict) -> str:
+    when = row.get("reviewed_at") or datetime.now(timezone.utc).isoformat()
+    title = row.get("title") or "(untitled)"
     notes = (row.get("reviewer_notes") or "").strip() or "(no note provided)"
     return (
-        f"\n## {base_name} (Rejected {when_short})\n"
+        f"\n## {title} (Rejected {when[:10]})\n"
         f"{notes}\n\n"
         "----------------------------------------\n"
     )
 
 
 def append_to_revisions_doc(text: str, gog_path: str) -> bool:
-    """Append text to the end of the SG Revisions Google Doc.
-    Uses gog docs sed to find the end-marker (we maintain a stable end
-    marker so appends are idempotent against re-runs)."""
-    # Strategy: insert before the trailing end-marker. If the doc has
-    # no end-marker yet, drop one in first via clear+insert.
-    end_marker = "<!-- SG_REVISIONS_END -->"
-    # Append by rewriting the end-marker line: delete the marker, append
-    # text + new marker. gog docs sed s/<marker>/<text-then-marker>/g.
+    end_marker = "<!-- PHOTO_REVISIONS_END -->"
     needle = re.escape(end_marker)
     repl = (text + end_marker).replace("/", r"\/")
     expr = f"s/{needle}/{repl}/"
-    cmd = [gog_path, "docs", "sed", SG_REVISIONS_DOC_ID, expr]
+    cmd = [gog_path, "docs", "sed", PHOTO_REVISIONS_DOC, expr]
     result = subprocess.run(cmd, capture_output=True, text=True)
     if result.returncode != 0:
-        # If end-marker missing, try seeding the doc first.
-        seed_cmd = [gog_path, "docs", "insert", SG_REVISIONS_DOC_ID, end_marker]
-        subprocess.run(seed_cmd, capture_output=True, text=True)
+        seed = [gog_path, "docs", "insert", PHOTO_REVISIONS_DOC, end_marker]
+        subprocess.run(seed, capture_output=True, text=True)
         result = subprocess.run(cmd, capture_output=True, text=True)
     if result.returncode != 0:
         print(f"  ! revisions doc append failed: {result.stderr.strip()[:200]}", file=sys.stderr)
@@ -184,9 +182,7 @@ def append_to_revisions_doc(text: str, gog_path: str) -> bool:
 
 
 def main() -> int:
-    parser = argparse.ArgumentParser(
-        description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter
-    )
+    parser = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
     parser.add_argument("--dry-run", action="store_true")
     parser.add_argument("--gog", default=GOG_DEFAULT)
     args = parser.parse_args()
@@ -205,52 +201,73 @@ def main() -> int:
         print(f"ERROR: no clients row with slug='{SG_CLIENT_SLUG}'")
         return 1
 
-    rows = list_state_relevant_rows(client["id"], base_url=base_url, service_key=service_key)
+    rows = list_photo_rows(client["id"], base_url=base_url, service_key=service_key)
     if not rows:
-        print("No SG drafts with drive files. Nothing to sweep.")
+        print("No SG drafts to sweep.")
         return 0
 
-    print(f"Sweeping {len(rows)} row(s)...")
-
-    renamed = 0
+    moved = 0
     skipped_aligned = 0
+    skipped_not_photo = 0
     failed = 0
-    revision_appends = 0
+    revisions = 0
+    legacy_renames = 0
 
     for row in rows:
-        status = row["status"]
         meta = gog_get_file(row["drive_file_id"], gog_path)
         if not meta:
             failed += 1
             continue
+        parents = meta.get("parents", [])
+        if not in_photo_tree(parents):
+            skipped_not_photo += 1
+            continue
+
+        title = (row.get("title") or "")[:60]
+        status = row["status"]
+        target_parent = TARGET_PARENT_BY_STATUS.get(status, PHOTO_PARENT_FOLDER)
+        current_parent = parents[0]
         current_name = meta.get("name", "")
-        target = desired_name_for_state(current_name, status)
-        if target is None:
+
+        # Strip legacy filename prefix if present (one-time cleanup)
+        clean_name = LEGACY_PREFIX_RE.sub("", current_name)
+        if clean_name != current_name:
+            print(f"  cleanup  {current_name[:60]}  ->  {clean_name[:60]}")
+            if not args.dry_run:
+                if gog_rename(row["drive_file_id"], clean_name, gog_path):
+                    legacy_renames += 1
+
+        if current_parent == target_parent:
             skipped_aligned += 1
             continue
 
-        action = "WOULD RENAME" if args.dry_run else "renaming"
-        print(f"  {action}  {current_name[:60]}  ->  {target[:60]}")
+        action = "WOULD MOVE" if args.dry_run else "moving"
+        target_label = {
+            PHOTO_APPROVED_FOLDER: "Approved",
+            PHOTO_REJECTED_FOLDER: "Rejected",
+            PHOTO_POSTED_FOLDER: "Posted",
+            PHOTO_PARENT_FOLDER: "(pending)",
+        }.get(target_parent, target_parent[:8] + "...")
+        print(f"  {action}  {clean_name[:60]:60s}  ->  {target_label} ({status})")
+
         if args.dry_run:
-            renamed += 1
+            moved += 1
             continue
 
-        if not gog_rename(row["drive_file_id"], target, gog_path):
+        if not gog_move(row["drive_file_id"], target_parent, gog_path):
             failed += 1
             continue
-        renamed += 1
+        moved += 1
 
-        # On reject, also append revision note to the SG Revisions doc
         if status == "rejected":
-            base_name = strip_state_prefix(current_name)
-            section = revisions_section_for_row(row, base_name)
-            if append_to_revisions_doc(section, gog_path):
-                revision_appends += 1
+            if append_to_revisions_doc(revisions_section(row), gog_path):
+                revisions += 1
 
     print()
     print(
-        f"Summary: renamed={renamed}  aligned={skipped_aligned}  "
-        f"failed={failed}  revision-appends={revision_appends}"
+        f"Summary: moved={moved}  aligned={skipped_aligned}  "
+        f"not-photo={skipped_not_photo}  failed={failed}  "
+        f"revisions={revisions}  legacy-cleaned={legacy_renames}"
     )
     if args.dry_run:
         print("Dry run. Re-run without --dry-run to apply.")

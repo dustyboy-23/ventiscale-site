@@ -133,6 +133,68 @@ def download_drive_file(drive_file_id: str, dest: Path, gog_path: str) -> bool:
     return dest.exists() and dest.stat().st_size > 0
 
 
+def get_drive_mime(drive_file_id: str, gog_path: str) -> str:
+    cmd = [gog_path, "drive", "get", drive_file_id, "--json"]
+    result = subprocess.run(cmd, capture_output=True, text=True)
+    if result.returncode != 0:
+        return ""
+    try:
+        payload = json.loads(result.stdout) if result.stdout.strip() else {}
+    except json.JSONDecodeError:
+        return ""
+    f = payload.get("file") if isinstance(payload, dict) else None
+    return (f or {}).get("mimeType", "") if isinstance(f, dict) else ""
+
+
+def fb_upload_video(
+    vid_path: Path, caption: str, *, page_id: str, page_token: str
+) -> Optional[str]:
+    """Posts a video + caption to the FB page via the /videos endpoint.
+    For files under 100MB this single-request multipart works; larger
+    videos need the resumable upload flow which we'll add when needed."""
+    vid_data = vid_path.read_bytes()
+    boundary = uuid.uuid4().hex
+    body = b""
+    body += f"--{boundary}\r\n".encode()
+    body += b'Content-Disposition: form-data; name="description"\r\n\r\n'
+    body += caption.encode() + b"\r\n"
+    body += f"--{boundary}\r\n".encode()
+    body += b'Content-Disposition: form-data; name="access_token"\r\n\r\n'
+    body += page_token.encode() + b"\r\n"
+    body += f"--{boundary}\r\n".encode()
+    body += b'Content-Disposition: form-data; name="source"; filename="post.mp4"\r\n'
+    body += b"Content-Type: application/octet-stream\r\n\r\n"
+    body += vid_data + b"\r\n"
+    body += f"--{boundary}--\r\n".encode()
+
+    url = f"https://graph.facebook.com/{GRAPH_VERSION}/{page_id}/videos"
+    req = urllib.request.Request(
+        url,
+        data=body,
+        headers={
+            "Content-Type": f"multipart/form-data; boundary={boundary}",
+            "Content-Length": str(len(body)),
+        },
+        method="POST",
+    )
+
+    for attempt in range(MAX_RETRIES):
+        try:
+            with urllib.request.urlopen(req, timeout=300) as resp:
+                payload = json.loads(resp.read())
+                vid_id = payload.get("id") or payload.get("post_id")
+                if vid_id:
+                    return vid_id
+                print(f"  [attempt {attempt + 1}] no id in video response: {payload}", file=sys.stderr)
+        except urllib.error.HTTPError as exc:
+            print(f"  [attempt {attempt + 1}] FB video upload {exc.code}: {exc.read().decode()[:300]}", file=sys.stderr)
+        except Exception as exc:
+            print(f"  [attempt {attempt + 1}] FB video upload error: {exc}", file=sys.stderr)
+        if attempt < MAX_RETRIES - 1:
+            time.sleep(10)
+    return None
+
+
 def fb_upload_photo(
     img_path: Path, caption: str, *, page_id: str, page_token: str
 ) -> Optional[str]:
@@ -300,24 +362,35 @@ def main() -> int:
             posted += 1
             continue
 
+        # Detect MIME so we route image -> /photos and video -> /videos
+        mime = get_drive_mime(row["drive_file_id"], gog_path)
+        is_video = mime.startswith("video/")
+
         with tempfile.TemporaryDirectory() as td:
-            img_path = Path(td) / "post.png"
-            ok = download_drive_file(row["drive_file_id"], img_path, gog_path)
+            ext = "mp4" if is_video else "png"
+            local_path = Path(td) / f"post.{ext}"
+            ok = download_drive_file(row["drive_file_id"], local_path, gog_path)
             if not ok:
                 print(f"     download failed.")
                 failed += 1
                 continue
 
             caption = row.get("body") or ""
-            fb_post_id = fb_upload_photo(
-                img_path, caption, page_id=page_id, page_token=page_token
-            )
+            if is_video:
+                fb_post_id = fb_upload_video(
+                    local_path, caption, page_id=page_id, page_token=page_token
+                )
+            else:
+                fb_post_id = fb_upload_photo(
+                    local_path, caption, page_id=page_id, page_token=page_token
+                )
             if not fb_post_id:
                 print(f"     FB upload failed.")
                 failed += 1
                 continue
 
-            print(f"     posted: {fb_post_id}")
+            kind = "video" if is_video else "photo"
+            print(f"     posted ({kind}): {fb_post_id}")
 
             # Best-effort comments
             comments = row.get("comments") or []

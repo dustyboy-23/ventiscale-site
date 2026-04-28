@@ -252,7 +252,7 @@ def main() -> int:
                 drive_file_id=f["id"],
                 title=title,
                 body=description,
-                platform="other",
+                platform="facebook",
                 scheduled_at=scheduled,
                 base_url=base_url,
                 service_key=service_key,
@@ -264,7 +264,8 @@ def main() -> int:
     if args.dry_run:
         print("\nDry run. Re-run without --dry-run to insert.")
         return 0
-    print(f"\nInserted {inserted}/{len(new_files)} video drafts. Status='draft', platform='other'.")
+    print(f"\nInserted {inserted}/{len(new_files)} video drafts. Status='draft', platform='facebook'.")
+    print("(Poster auto-detects video vs image via Drive MIME and uses the right Graph endpoint.)")
     return 0
 
 

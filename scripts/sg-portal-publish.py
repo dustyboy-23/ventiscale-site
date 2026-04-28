@@ -47,7 +47,11 @@ GOG_DEFAULT = "/home/dustin/.local/bin/gog"
 SG_CLIENT_SLUG = "sprinkler-guard"
 SG_DRIVE_FOLDER_ID = "1L5tD47hvCy20UIXAY4gml4D3aMOun7Vc"
 BUFFER_TARGET_DAYS = 7
-BUFFER_TARGET_POSTS = BUFFER_TARGET_DAYS * 2  # 2 per day = 14
+BUFFER_TARGET_POSTS = BUFFER_TARGET_DAYS * 4  # 4 per day target = 28
+# Per-day mix Dusty wants: 2 FB photos + 1 video + 1 LinkedIn.
+# This script generates FB photos only, but the buffer counts ALL
+# pending content for the next 7 days so we don't overgenerate when
+# videos/LI also have drafts in the queue.
 SG_ENV_PATH = Path("/home/dustin/sprinkler-guard/.env")
 PORTAL_ENV_PATH = (
     Path(__file__).resolve().parent.parent / ".env.local"
