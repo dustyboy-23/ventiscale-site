@@ -29,6 +29,7 @@ CLIENT_CONFIG = {
     "sprinkler-guard": {
         "client_id": "12baae15-9b58-464e-9b21-a15f375ff979",
         "workspace_root": Path("/home/dustin/sprinkler-guard"),
+        "service_account": Path("/home/dustin/.openclaw/.secure/sprinkler-guard-ga.json"),
         "ga4_property_id": "395712117",
         "gsc_site": "sc-domain:grassholesystem.com",
         "meta_ad_account": "act_3047045345618996",
@@ -64,9 +65,7 @@ VENTI_ENV = load_env(VENTI_ROOT / ".env.local")
 # GA4
 # ─────────────────────────────────────────────────────────────
 def pull_ga4(cfg: dict, days: int) -> dict:
-    os.environ["GOOGLE_APPLICATION_CREDENTIALS"] = str(
-        cfg["workspace_root"] / "ga-service-account.json"
-    )
+    os.environ["GOOGLE_APPLICATION_CREDENTIALS"] = str(cfg["service_account"])
     from google.analytics.data_v1beta import BetaAnalyticsDataClient
     from google.analytics.data_v1beta.types import (
         RunReportRequest,
@@ -214,7 +213,7 @@ def pull_gsc(cfg: dict, days: int) -> dict:
     from googleapiclient.discovery import build
 
     creds = service_account.Credentials.from_service_account_file(
-        str(cfg["workspace_root"] / "ga-service-account.json"),
+        str(cfg["service_account"]),
         scopes=["https://www.googleapis.com/auth/webmasters.readonly"],
     )
     service = build("searchconsole", "v1", credentials=creds)
