@@ -241,6 +241,7 @@ export interface PublishedPostMetrics {
   publishedAt: string | null;
   externalId: string | null;
   driveFileId: string | null;
+  mediaType: string | null;
   metrics: Record<string, number>;
   metricsSyncedAt: string | null;
   body: string;
@@ -255,7 +256,7 @@ export async function getPublishedPosts(limit = 50): Promise<PublishedPostMetric
     const { data } = await supabase
       .from("content_items")
       .select(
-        "id, title, platform, body, published_at, external_id, drive_file_id, metrics, metrics_synced_at",
+        "id, title, platform, body, published_at, external_id, drive_file_id, media_type, metrics, metrics_synced_at",
       )
       .eq("client_id", session.client.id)
       .eq("status", "published")
@@ -270,6 +271,7 @@ export async function getPublishedPosts(limit = 50): Promise<PublishedPostMetric
       publishedAt: row.published_at || null,
       externalId: row.external_id || null,
       driveFileId: row.drive_file_id || null,
+      mediaType: row.media_type || null,
       metrics:
         typeof row.metrics === "object" && row.metrics !== null ? row.metrics : {},
       metricsSyncedAt: row.metrics_synced_at || null,

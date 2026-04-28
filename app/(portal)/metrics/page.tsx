@@ -5,34 +5,24 @@ import { formatNumber, relativeTime } from "@/lib/utils";
 import {
   BarChart3,
   ExternalLink,
+  ThumbsUp,
+  MessageSquare,
+  Share2,
   TrendingUp,
   Trophy,
+  FileImage,
+  Film,
   Calendar,
 } from "lucide-react";
 
-const PLATFORM_STYLES: Record<string, { label: string; bg: string; text: string; bar: string }> = {
-  facebook: { label: "Facebook", bg: "bg-blue-50", text: "text-blue-700", bar: "bg-blue-500" },
-  linkedin: { label: "LinkedIn", bg: "bg-sky-50", text: "text-sky-700", bar: "bg-sky-500" },
-  blog: { label: "Blog", bg: "bg-amber-50", text: "text-amber-700", bar: "bg-amber-500" },
-  instagram: { label: "Instagram", bg: "bg-pink-50", text: "text-pink-700", bar: "bg-pink-500" },
-  other: { label: "Social", bg: "bg-slate-100", text: "text-slate-700", bar: "bg-slate-500" },
-};
-
 const ENGAGEMENT_KEYS = ["reactions", "likes", "comments", "shares"] as const;
 
-function postLink(platform: string, externalId: string | null): string | null {
+function postLink(externalId: string | null): string | null {
   if (!externalId) return null;
-  if (platform === "facebook") {
-    if (externalId.includes("_")) {
-      return `https://www.facebook.com/${externalId.replace("_", "/posts/")}`;
-    }
-    return `https://www.facebook.com/${externalId}`;
+  if (externalId.includes("_")) {
+    return `https://www.facebook.com/${externalId.replace("_", "/posts/")}`;
   }
-  if (platform === "linkedin" && externalId.startsWith("urn:li:share:")) {
-    const id = externalId.split(":").pop();
-    return `https://www.linkedin.com/feed/update/urn:li:activity:${id}/`;
-  }
-  return null;
+  return `https://www.facebook.com/${externalId}`;
 }
 
 function engagementOf(metrics: Record<string, unknown>): number {
@@ -44,7 +34,6 @@ function engagementOf(metrics: Record<string, unknown>): number {
 }
 
 function ymdPT(iso: string): string {
-  // Render the calendar day in PT for the trend chart bucketing.
   const d = new Date(iso);
   return new Intl.DateTimeFormat("en-CA", {
     timeZone: "America/Los_Angeles",
@@ -55,11 +44,14 @@ function ymdPT(iso: string): string {
 }
 
 export default async function MetricsPage() {
-  const posts = await getPublishedPosts(120);
+  // FB-only: filter to facebook posts here so the page is purely the
+  // Sprinkler-Guard FB Page performance, mirroring FB Professional
+  // Dashboard. LinkedIn (when it lands) will get its own page.
+  const all = await getPublishedPosts(200);
+  const posts = all.filter((p) => p.platform === "facebook");
 
   // ---- Aggregations ----------------------------------------------------
 
-  // Totals across all metrics keys we know about
   const totals = posts.reduce<Record<string, number>>((acc, p) => {
     for (const k of Object.keys(p.metrics || {})) {
       acc[k] = (acc[k] || 0) + (Number(p.metrics[k]) || 0);
@@ -68,7 +60,9 @@ export default async function MetricsPage() {
   }, {});
 
   const totalEngagement = posts.reduce((s, p) => s + engagementOf(p.metrics || {}), 0);
-  const avgEngagement = posts.length ? Math.round(totalEngagement / posts.length) : 0;
+  const totalReactions = totals.reactions || 0;
+  const totalComments = totals.comments || 0;
+  const totalShares = totals.shares || 0;
   const bestPost = posts.length
     ? posts.reduce((best, p) => {
         const e = engagementOf(p.metrics || {});
@@ -77,10 +71,10 @@ export default async function MetricsPage() {
     : null;
   const bestEngagement = bestPost ? engagementOf(bestPost.metrics || {}) : 0;
 
-  // Trend: last 30 days, daily totals
+  // 28-day daily trend
   const today = new Date();
   const days: { date: string; label: string; engagement: number }[] = [];
-  for (let i = 29; i >= 0; i--) {
+  for (let i = 27; i >= 0; i--) {
     const d = new Date(today);
     d.setDate(d.getDate() - i);
     const ymd = ymdPT(d.toISOString());
@@ -101,18 +95,21 @@ export default async function MetricsPage() {
   }
   const peakDay = days.reduce((m, d) => (d.engagement > m ? d.engagement : m), 0) || 1;
 
-  // Platform split
-  const platformAgg: Record<string, { posts: number; engagement: number }> = {};
+  // Content type breakdown (FB Pro Dashboard pattern: Photo vs Video)
+  type TypeAgg = { posts: number; engagement: number; reactions: number; comments: number; shares: number };
+  const blank = (): TypeAgg => ({ posts: 0, engagement: 0, reactions: 0, comments: 0, shares: 0 });
+  const byType: Record<string, TypeAgg> = { image: blank(), video: blank(), text: blank() };
   for (const p of posts) {
-    const k = p.platform || "other";
-    if (!platformAgg[k]) platformAgg[k] = { posts: 0, engagement: 0 };
-    platformAgg[k].posts++;
-    platformAgg[k].engagement += engagementOf(p.metrics || {});
+    const t = p.mediaType || "text";
+    const bucket = byType[t] || byType.text;
+    bucket.posts++;
+    bucket.engagement += engagementOf(p.metrics || {});
+    bucket.reactions += Number(p.metrics?.reactions) || 0;
+    bucket.comments += Number(p.metrics?.comments) || 0;
+    bucket.shares += Number(p.metrics?.shares) || 0;
   }
-  const platformList = Object.entries(platformAgg)
-    .sort((a, b) => b[1].engagement - a[1].engagement);
 
-  // Top performers
+  // Top 5
   const top5 = [...posts]
     .map((p) => ({ ...p, _eng: engagementOf(p.metrics || {}) }))
     .filter((p) => p._eng > 0)
@@ -126,8 +123,8 @@ export default async function MetricsPage() {
       <>
         <PageHeader
           eyebrow="Metrics"
-          title="Social Performance"
-          description="Engagement on every post across Facebook + LinkedIn. Refreshes every 6 hours."
+          title="Facebook Performance"
+          description="Engagement on every post going out to your page. Updates every Monday."
         />
         <EmptyMetrics />
       </>
@@ -138,23 +135,25 @@ export default async function MetricsPage() {
     <>
       <PageHeader
         eyebrow="Metrics"
-        title="Social Performance"
-        description="Engagement on every post across Facebook + LinkedIn. Refreshes every 6 hours."
+        title="Facebook Performance"
+        description="Engagement on every post going out to your page. Updates every Monday."
       />
 
-      {/* Stat strip */}
-      <div className="grid grid-cols-2 md:grid-cols-4 gap-3 mb-8">
-        <StatCard label="Posts published" value={formatNumber(posts.length)} icon={Calendar} />
-        <StatCard label="Total engagement" value={formatNumber(totalEngagement)} icon={TrendingUp} />
-        <StatCard label="Avg per post" value={formatNumber(avgEngagement)} icon={BarChart3} />
+      {/* Hero stat tiles — Facebook Pro Dashboard style */}
+      <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-3 mb-8">
+        <StatCard label="Posts" value={formatNumber(posts.length)} icon={Calendar} />
+        <StatCard label="Engagement" value={formatNumber(totalEngagement)} icon={TrendingUp} accent />
+        <StatCard label="Reactions" value={formatNumber(totalReactions)} icon={ThumbsUp} />
+        <StatCard label="Comments" value={formatNumber(totalComments)} icon={MessageSquare} />
+        <StatCard label="Shares" value={formatNumber(totalShares)} icon={Share2} />
         <StatCard label="Best post" value={formatNumber(bestEngagement)} icon={Trophy} />
       </div>
 
-      {/* Trend */}
+      {/* 28-day trend */}
       <section className="mb-8">
-        <SectionHead title="Last 30 days" subtitle="Daily engagement total across all platforms" />
+        <SectionHead title="Last 28 days" subtitle="Daily post engagement" />
         <Card padding="md">
-          <div className="flex items-end gap-1 h-[140px]">
+          <div className="flex items-end gap-1 h-[160px]">
             {days.map((d) => {
               const pct = (d.engagement / peakDay) * 100;
               return (
@@ -184,37 +183,26 @@ export default async function MetricsPage() {
         </Card>
       </section>
 
-      {/* Platform split */}
+      {/* Content type — Photo vs Video performance */}
       <section className="mb-8">
-        <SectionHead title="By platform" subtitle="Engagement and post volume per channel" />
+        <SectionHead title="By content type" subtitle="What's working — photos vs videos" />
         <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
-          {platformList.map(([key, agg]) => {
-            const meta = PLATFORM_STYLES[key] || PLATFORM_STYLES.other;
-            const pct = totalEngagement > 0 ? (agg.engagement / totalEngagement) * 100 : 0;
-            return (
-              <Card key={key} padding="md">
-                <div className="flex items-center justify-between mb-3">
-                  <span
-                    className={`text-[11px] font-semibold uppercase tracking-wider ${meta.bg} ${meta.text} px-2 py-1 rounded`}
-                  >
-                    {meta.label}
-                  </span>
-                  <span className="text-[12px] text-[var(--color-ink-muted)]">
-                    {agg.posts} {agg.posts === 1 ? "post" : "posts"}
-                  </span>
-                </div>
-                <div className="text-[28px] font-bold text-[var(--color-ink)] tracking-tight tabular-nums">
-                  {formatNumber(agg.engagement)}
-                </div>
-                <div className="text-[11px] text-[var(--color-ink-subtle)] mt-1">
-                  total engagement · {pct.toFixed(0)}% of all
-                </div>
-                <div className="mt-3 h-1.5 rounded-full bg-[var(--color-border)]/40 overflow-hidden">
-                  <div className={`h-full ${meta.bar}`} style={{ width: `${pct}%` }} />
-                </div>
-              </Card>
-            );
-          })}
+          <ContentTypeCard
+            label="Photos"
+            icon={FileImage}
+            agg={byType.image}
+            totalPosts={posts.length}
+            totalEngagement={totalEngagement}
+            barColor="bg-emerald-500"
+          />
+          <ContentTypeCard
+            label="Videos"
+            icon={Film}
+            agg={byType.video}
+            totalPosts={posts.length}
+            totalEngagement={totalEngagement}
+            barColor="bg-violet-500"
+          />
         </div>
       </section>
 
@@ -224,8 +212,7 @@ export default async function MetricsPage() {
           <SectionHead title="Top performers" subtitle="Your 5 highest-engagement posts" />
           <div className="space-y-2">
             {top5.map((p, i) => {
-              const meta = PLATFORM_STYLES[p.platform] || PLATFORM_STYLES.other;
-              const link = postLink(p.platform, p.externalId);
+              const link = postLink(p.externalId);
               return (
                 <Card key={p.id} padding="md">
                   <div className="flex items-center gap-4">
@@ -249,10 +236,8 @@ export default async function MetricsPage() {
                     )}
                     <div className="flex-1 min-w-0">
                       <div className="flex items-center gap-2 mb-1">
-                        <span
-                          className={`text-[10px] font-semibold uppercase tracking-wider ${meta.bg} ${meta.text} px-1.5 py-0.5 rounded`}
-                        >
-                          {meta.label}
+                        <span className="text-[10px] font-semibold uppercase tracking-wider bg-blue-50 text-blue-700 px-1.5 py-0.5 rounded">
+                          Facebook
                         </span>
                         {p.publishedAt && (
                           <span className="text-[11px] text-[var(--color-ink-subtle)]">
@@ -292,7 +277,7 @@ export default async function MetricsPage() {
       )}
 
       <p className="text-[11px] text-[var(--color-ink-subtle)] mt-2 text-center">
-        Engagement refreshes every 6 hours from FB and LinkedIn directly.
+        Updates every Monday — pulled directly from Facebook.
       </p>
     </>
   );
@@ -304,18 +289,25 @@ function StatCard({
   label,
   value,
   icon: Icon,
+  accent,
 }: {
   label: string;
   value: string;
   icon: typeof BarChart3;
+  accent?: boolean;
 }) {
   return (
-    <Card padding="md">
+    <Card padding="md" className={accent ? "ring-1 ring-[var(--color-accent)]/30" : undefined}>
       <div className="flex items-center gap-1.5 text-[11px] font-medium text-[var(--color-ink-subtle)] uppercase tracking-wider">
         <Icon className="w-3 h-3" />
         {label}
       </div>
-      <div className="text-[24px] font-bold text-[var(--color-ink)] mt-1 tracking-tight tabular-nums">
+      <div
+        className={
+          "text-[24px] font-bold mt-1 tracking-tight tabular-nums " +
+          (accent ? "text-[var(--color-accent)]" : "text-[var(--color-ink)]")
+        }
+      >
         {value}
       </div>
     </Card>
@@ -326,9 +318,7 @@ function SectionHead({ title, subtitle }: { title: string; subtitle: string }) {
   return (
     <div className="flex items-center gap-3 mb-4">
       <div>
-        <h2 className="text-[15px] font-bold text-[var(--color-ink)] tracking-tight">
-          {title}
-        </h2>
+        <h2 className="text-[15px] font-bold text-[var(--color-ink)] tracking-tight">{title}</h2>
         <p className="text-[12px] text-[var(--color-ink-muted)]">{subtitle}</p>
       </div>
       <div className="flex-1 h-px bg-[var(--color-border)] ml-3" />
@@ -336,74 +326,81 @@ function SectionHead({ title, subtitle }: { title: string; subtitle: string }) {
   );
 }
 
+function ContentTypeCard({
+  label,
+  icon: Icon,
+  agg,
+  totalPosts,
+  totalEngagement,
+  barColor,
+}: {
+  label: string;
+  icon: typeof BarChart3;
+  agg: { posts: number; engagement: number; reactions: number; comments: number; shares: number };
+  totalPosts: number;
+  totalEngagement: number;
+  barColor: string;
+}) {
+  const sharePct = totalEngagement > 0 ? (agg.engagement / totalEngagement) * 100 : 0;
+  const avgPerPost = agg.posts ? Math.round(agg.engagement / agg.posts) : 0;
+  return (
+    <Card padding="md">
+      <div className="flex items-center justify-between mb-3">
+        <div className="inline-flex items-center gap-2">
+          <Icon className="w-4 h-4 text-[var(--color-ink-muted)]" />
+          <span className="text-[13px] font-semibold text-[var(--color-ink)]">{label}</span>
+        </div>
+        <span className="text-[12px] text-[var(--color-ink-muted)] tabular-nums">
+          {agg.posts} of {totalPosts}
+        </span>
+      </div>
+      <div className="text-[28px] font-bold text-[var(--color-ink)] tracking-tight tabular-nums">
+        {formatNumber(agg.engagement)}
+      </div>
+      <div className="text-[11px] text-[var(--color-ink-subtle)] mt-1">
+        total engagement · {sharePct.toFixed(0)}% of all
+      </div>
+      <div className="mt-3 h-1.5 rounded-full bg-[var(--color-border)]/40 overflow-hidden">
+        <div className={`h-full ${barColor}`} style={{ width: `${sharePct}%` }} />
+      </div>
+      <div className="grid grid-cols-4 gap-2 mt-4 pt-4 border-t border-[var(--color-border)]">
+        <Stat label="Avg/post" value={formatNumber(avgPerPost)} />
+        <Stat label="Reactions" value={formatNumber(agg.reactions)} />
+        <Stat label="Comments" value={formatNumber(agg.comments)} />
+        <Stat label="Shares" value={formatNumber(agg.shares)} />
+      </div>
+    </Card>
+  );
+}
+
+function Stat({ label, value }: { label: string; value: string }) {
+  return (
+    <div>
+      <div className="text-[10px] font-medium text-[var(--color-ink-subtle)] uppercase tracking-wider">
+        {label}
+      </div>
+      <div className="text-[14px] font-semibold text-[var(--color-ink)] mt-0.5 tabular-nums">
+        {value}
+      </div>
+    </div>
+  );
+}
+
 function EmptyMetrics() {
-  // Helpful empty state showing the user what's coming once posts go out.
   return (
     <>
       <Card padding="lg">
         <div className="text-center py-8">
           <BarChart3 className="w-10 h-10 text-[var(--color-ink-subtle)] mx-auto mb-4" strokeWidth={1.5} />
           <h3 className="text-[16px] font-semibold text-[var(--color-ink)]">
-            Metrics start landing here once your first post goes out
+            No Facebook posts yet
           </h3>
           <p className="text-[13.5px] text-[var(--color-ink-muted)] mt-1.5 max-w-md mx-auto leading-relaxed">
-            We pull engagement directly from Facebook and LinkedIn every 6 hours.
-            You'll see daily totals, platform splits, top performers, and per-post
-            breakdowns — all updated automatically.
+            Once your first post goes out, engagement numbers populate here.
+            Updates every Monday — pulled directly from your Facebook page.
           </p>
         </div>
       </Card>
-
-      <div className="grid grid-cols-2 md:grid-cols-4 gap-3 mt-6">
-        {["Posts published", "Total engagement", "Avg per post", "Best post"].map((label) => (
-          <Card key={label} padding="md">
-            <div className="text-[11px] font-medium text-[var(--color-ink-subtle)] uppercase tracking-wider">
-              {label}
-            </div>
-            <div className="text-[24px] font-bold text-[var(--color-ink-subtle)]/40 mt-1 tracking-tight">
-              —
-            </div>
-          </Card>
-        ))}
-      </div>
-
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-3 mt-6">
-        <Card padding="md">
-          <div className="text-[12px] font-semibold text-[var(--color-ink-muted)] mb-3">
-            Last 30 days · daily engagement
-          </div>
-          <div className="flex items-end gap-1 h-[100px] opacity-30">
-            {Array.from({ length: 30 }).map((_, i) => (
-              <div
-                key={i}
-                className="flex-1 bg-[var(--color-border)] rounded-t"
-                style={{ height: `${15 + Math.sin(i / 3) * 25 + Math.random() * 20}%` }}
-              />
-            ))}
-          </div>
-        </Card>
-        <Card padding="md">
-          <div className="text-[12px] font-semibold text-[var(--color-ink-muted)] mb-3">
-            By platform
-          </div>
-          <div className="space-y-3 opacity-30">
-            <div>
-              <div className="flex justify-between text-[11px] mb-1">
-                <span>Facebook</span>
-                <span className="tabular-nums">—</span>
-              </div>
-              <div className="h-1.5 rounded-full bg-blue-500/30" />
-            </div>
-            <div>
-              <div className="flex justify-between text-[11px] mb-1">
-                <span>LinkedIn</span>
-                <span className="tabular-nums">—</span>
-              </div>
-              <div className="h-1.5 rounded-full bg-sky-500/30" />
-            </div>
-          </div>
-        </Card>
-      </div>
     </>
   );
 }
