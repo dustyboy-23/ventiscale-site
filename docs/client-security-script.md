@@ -32,7 +32,7 @@ That's usually enough. Most people just want to know you thought about it.
 Clients ask the same five things. Memorize these.
 
 ### "What if someone hacks into my account?"
-> You'd get a magic link email every time somebody tries to log in. If you didn't request it, don't click it. That's it. There's no password to steal because there's no password to begin with. Attacker needs access to your actual inbox, and at that point you've got bigger problems than your marketing dashboard.
+> You'd see a sign-in attempt land in your inbox. If you didn't ask for it, don't act on it. There's no password to steal because there's no password to begin with. The attacker would need your actual inbox, and at that point you've got bigger problems than your marketing dashboard. While we're in early-cohort mode I'm sending sign-in links by direct message instead of email, so a stranger trying to break in can't even trigger one.
 
 ### "What if you get hacked?"
 > If somebody got into my side of things, the database would still block them from reading your rows because the rule's set at the database level. They'd need my admin keys AND they'd need to figure out how to use em. And I keep those keys in one spot, rotated when anything weird happens. I've tested it. The hack-from-the-top path is closed.
@@ -56,6 +56,12 @@ Some clients have a tech person in their ear. If the question gets specific, you
 - **"Magic link auth via Supabase."** Same auth that plenty of YC-backed SaaS companies use. Not something I wrote from scratch.
 - **"Hosted on Vercel, database on Supabase."** Both are SOC 2 compliant. I'm not running a server in my garage.
 - **"No passwords stored, no sessions in localStorage."** Session lives in an httpOnly cookie that JavaScript can't touch. Standard XSS defense.
+- **"Role-based access control on every write."** Owner/admin/viewer roles are enforced server-side. A read-only teammate can see drafts but cannot approve them.
+- **"Audit log on every review action."** Every approve or reject writes a row to the activity log: who, when, what scheduled time, any notes. If you ever ask "did you really approve this?" I can show you the exact row.
+- **"SSRF guards on the public audit endpoint."** Visitor-submitted URLs are validated, redirects are walked manually, internal IP ranges are blocked. Standard SSRF defense, well-tested.
+- **"Persistent rate limits."** Login attempts and audit submissions are throttled at the database level so cold starts don't reset the limiter.
+- **"Content Security Policy in report-only mode."** Defense-in-depth XSS containment. Logging violations now, flipping to enforce after the policy proves correct against real traffic.
+- **"HTTPS-only at the database layer."** Things like brand logo URLs are constrained to `https://` by a CHECK constraint. The DB rejects http:// even if application code lets it through.
 
 Don't volunteer any of this. Only use it if they ask a technical question directly. Leading with it makes you sound defensive.
 
