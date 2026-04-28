@@ -34,7 +34,8 @@ export default async function ContentPage() {
     grouped[date].sort((a, b) => naturalSort.compare(sortKey(a), sortKey(b)));
   }
 
-  const dates = Object.keys(grouped).sort((a, b) => b.localeCompare(a));
+  // Ascending: nearest day first, future days below.
+  const dates = Object.keys(grouped).sort((a, b) => a.localeCompare(b));
 
   // Count pending reviews
   const pendingCount = drafts.filter(
