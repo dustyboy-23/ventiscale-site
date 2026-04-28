@@ -10,16 +10,25 @@ export default async function PortalLayout({
   children: React.ReactNode;
 }) {
   const session = await getPortalSession();
-  const allMemberships = session?.mode === "real" ? await getMemberships() : [];
 
   if (!session) {
     redirect("/login");
   }
 
+  // Memberships are fetched for any authed session (real OR demo overlay).
+  // The demo overlay path is reachable only by agency users (see
+  // getPortalSession), so when mode=='demo' and userEmail is non-null we
+  // know there's a real auth underneath and the switcher should still
+  // show their real workspaces alongside the demo preview.
+  const isAuthedDemoOverlay =
+    session.mode === "demo" && session.userEmail !== null;
+  const allMemberships =
+    session.mode === "real" || isAuthedDemoOverlay ? await getMemberships() : [];
+
   // Switcher is agency-only: only users who own/admin an agency tenant get
   // the workspace dropdown. Regular clients (like Ken on Sprinkler Guard)
-  // never see a switcher — their portal is their portal, no menu. Dusty
-  // has a Venti Scale agency row, so he sees all his client workspaces.
+  // never see a switcher. Dusty has a Venti Scale agency row, so he sees
+  // all his client workspaces (and the demo preview entry).
   const isAgencyUser = allMemberships.some((m) => m.isAgency);
   const memberships = isAgencyUser ? allMemberships : [];
 
@@ -65,6 +74,8 @@ export default async function PortalLayout({
         }))}
         activeClientId={session.mode === "real" ? session.client.id : undefined}
         realClientMode={session.mode === "real" && !session.client.isAgency}
+        canPreviewDemo={isAgencyUser}
+        inDemoMode={session.mode === "demo"}
       />
       <div className="flex-1 min-w-0 flex flex-col">
         <TopBar

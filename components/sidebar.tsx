@@ -16,8 +16,11 @@ import {
   ChevronsUpDown,
   Loader2,
   Shield,
+  Eye,
+  ArrowLeft,
 } from "lucide-react";
 import { cn } from "@/lib/utils";
+import { enterDemo, exitDemo } from "@/app/actions/demo";
 
 const NAV = [
   { href: "/dashboard", label: "Dashboard", icon: LayoutDashboard },
@@ -57,6 +60,8 @@ export function Sidebar({
   memberships = [],
   activeClientId,
   realClientMode = false,
+  canPreviewDemo = false,
+  inDemoMode = false,
 }: {
   clientName: string;
   ownerName: string;
@@ -64,9 +69,14 @@ export function Sidebar({
   memberships?: SidebarMembership[];
   activeClientId?: string;
   realClientMode?: boolean;
+  canPreviewDemo?: boolean;
+  inDemoMode?: boolean;
 }) {
   const pathname = usePathname();
-  const canSwitch = memberships.length > 1;
+  // Switcher opens whenever there are multiple memberships OR the user
+  // has a demo preview option (so even a solo agency owner gets the
+  // dropdown to flip into demo).
+  const canSwitch = memberships.length > 1 || canPreviewDemo;
   const visibleNav = realClientMode
     ? NAV.filter((item) => REAL_CLIENT_NAV_HREFS.has(item.href))
     : NAV;
@@ -118,9 +128,27 @@ export function Sidebar({
       <div className="px-4 pb-4">
         {canSwitch ? (
           <details className="group relative">
-            <summary className="list-none rounded-xl bg-[var(--color-surface-muted)] px-3.5 py-3 border border-transparent hover:border-[var(--color-border)] transition-colors cursor-pointer">
-              <div className="text-[11px] font-medium text-[var(--color-ink-subtle)] uppercase tracking-wider mb-0.5">
-                Workspace
+            <summary
+              className={cn(
+                "list-none rounded-xl px-3.5 py-3 border transition-colors cursor-pointer",
+                inDemoMode
+                  ? "bg-amber-50 border-amber-200 hover:border-amber-300"
+                  : "bg-[var(--color-surface-muted)] border-transparent hover:border-[var(--color-border)]",
+              )}
+            >
+              <div
+                className={cn(
+                  "text-[11px] font-medium uppercase tracking-wider mb-0.5 flex items-center gap-1.5",
+                  inDemoMode ? "text-amber-700" : "text-[var(--color-ink-subtle)]",
+                )}
+              >
+                {inDemoMode ? (
+                  <>
+                    <Eye className="w-3 h-3" /> Demo preview
+                  </>
+                ) : (
+                  "Workspace"
+                )}
               </div>
               <div className="flex items-center justify-between gap-2">
                 <div className="text-[14px] font-semibold text-[var(--color-ink)] truncate">
@@ -135,7 +163,7 @@ export function Sidebar({
               </div>
               <ul className="py-1">
                 {memberships.map((m) => {
-                  const isActive = m.id === activeClientId;
+                  const isActive = !inDemoMode && m.id === activeClientId;
                   const isSwitching = switchingId === m.id;
                   return (
                     <li key={m.id}>
@@ -169,6 +197,45 @@ export function Sidebar({
                   );
                 })}
               </ul>
+
+              {/* Demo preview entry. Only shown to agency users; lets you
+                  see the portal as a prospect would, without losing your
+                  real session underneath. Form-based so the cookie set
+                  happens server-side (httpOnly) before the redirect. */}
+              {canPreviewDemo && !inDemoMode && (
+                <>
+                  <div className="border-t border-[var(--color-border)] mt-1" />
+                  <form action={enterDemo} className="py-1">
+                    <button
+                      type="submit"
+                      className="w-full text-left flex items-center justify-between gap-3 px-3 py-2 text-[13px] text-[var(--color-ink-muted)] hover:bg-[var(--color-surface-muted)] hover:text-[var(--color-ink)] transition-colors"
+                    >
+                      <span className="flex items-center gap-2 min-w-0">
+                        <Eye className="w-3.5 h-3.5 shrink-0" />
+                        <span className="truncate font-medium">Preview demo workspace</span>
+                      </span>
+                      <span className="text-[9px] uppercase tracking-wider text-[var(--color-ink-subtle)] shrink-0">
+                        Stoneline
+                      </span>
+                    </button>
+                  </form>
+                </>
+              )}
+
+              {inDemoMode && (
+                <>
+                  <div className="border-t border-amber-200 mt-1" />
+                  <form action={exitDemo} className="py-1">
+                    <button
+                      type="submit"
+                      className="w-full text-left flex items-center gap-2 px-3 py-2 text-[13px] font-medium text-amber-700 hover:bg-amber-50 transition-colors"
+                    >
+                      <ArrowLeft className="w-3.5 h-3.5 shrink-0" />
+                      Exit demo, back to my workspace
+                    </button>
+                  </form>
+                </>
+              )}
             </div>
           </details>
         ) : (

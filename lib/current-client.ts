@@ -18,7 +18,10 @@ export type PortalSession =
   | {
       mode: "demo";
       client: ClientRecord;
-      userEmail: null;
+      // Populated when an authed agency user is previewing demo on top of
+      // their real session. null for the marketing-tour case where there
+      // is no auth behind the demo.
+      userEmail: string | null;
       role: null;
     }
   | {
@@ -123,6 +126,21 @@ export const getPortalSession = cache(async (): Promise<PortalSession | null> =>
       mode: "orphan",
       client: null,
       userEmail: user.email ?? "",
+      role: null,
+    };
+  }
+
+  // Agency users (any tenant where is_agency=true) can layer the demo
+  // on top of their real session via the vs-demo cookie. This is the
+  // "preview as a prospect would see it" path from the workspace
+  // switcher. Non-agency authed users have the cookie ignored, so a
+  // regular client can't accidentally land in demo mode.
+  const hasAgencyMembership = valid.some((r) => r.clients.is_agency);
+  if (isDemo && hasAgencyMembership) {
+    return {
+      mode: "demo",
+      client: DEMO_CLIENT,
+      userEmail: user.email ?? null,
       role: null,
     };
   }
