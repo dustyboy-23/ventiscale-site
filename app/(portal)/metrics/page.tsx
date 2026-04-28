@@ -1,6 +1,7 @@
 import { PageHeader } from "@/components/page-header";
 import { Card } from "@/components/card";
 import { getPublishedPosts } from "@/lib/portal-data";
+import { getPageMetrics } from "@/lib/page-metrics";
 import { formatNumber } from "@/lib/utils";
 import {
   BarChart3,
@@ -13,6 +14,8 @@ import {
   FileImage,
   Film,
   Calendar,
+  Users,
+  Eye,
 } from "lucide-react";
 import Link from "next/link";
 
@@ -58,8 +61,20 @@ export default async function MetricsPage({
     PERIODS.find((p) => p.key === params.period)?.key || "28d";
   const periodDays = PERIODS.find((p) => p.key === periodKey)!.days;
 
-  const all = await getPublishedPosts(500);
+  const [all, pageMetrics] = await Promise.all([
+    getPublishedPosts(500),
+    getPageMetrics(),
+  ]);
   const fbAll = all.filter((p) => p.platform === "facebook");
+
+  // Follower deltas computed from daily_follows[] (net new per day).
+  // Sum the days that fall in current vs previous window for WoW math.
+  const followsInWindow = (from: number, to: number) => {
+    return pageMetrics.dailyFollows.reduce((s, d) => {
+      const t = new Date(d.date).getTime();
+      return t >= from && t < to ? s + d.value : s;
+    }, 0);
+  };
 
   // Bucket into current window vs previous window for WoW deltas.
   const now = Date.now();
@@ -155,7 +170,17 @@ export default async function MetricsPage({
       />
 
       {/* KPI tiles with WoW deltas */}
-      <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-3 mb-8">
+      <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-3 mb-8">
+        {pageMetrics.followers !== null && (
+          <KpiTile
+            label="Followers"
+            icon={Users}
+            value={pageMetrics.followers}
+            prev={pageMetrics.followers - followsInWindow(cutCurrent, now)}
+            displayDelta={followsInWindow(cutCurrent, now) - followsInWindow(cutPrev, cutCurrent)}
+            absoluteMode
+          />
+        )}
         <KpiTile label="Posts" icon={Calendar} value={cur.posts} prev={prev.posts} />
         <KpiTile label="Engagement" icon={TrendingUp} value={cur.eng} prev={prev.eng} accent />
         <KpiTile label="Reactions" icon={ThumbsUp} value={cur.reactions} prev={prev.reactions} />
@@ -197,6 +222,32 @@ export default async function MetricsPage({
             <span>{days[Math.floor(days.length / 2)].label}</span>
             <span>{days[days.length - 1].label}</span>
           </div>
+          {(pageMetrics.pageViews28d !== null || pageMetrics.postEngagements28d !== null) && (
+            <div className="grid grid-cols-2 gap-4 mt-4 pt-4 border-t border-[var(--color-border)]">
+              {pageMetrics.pageViews28d !== null && (
+                <div className="flex items-center gap-2">
+                  <Eye className="w-3.5 h-3.5 text-[var(--color-ink-subtle)]" />
+                  <span className="text-[12px] text-[var(--color-ink-muted)]">
+                    <span className="font-semibold text-[var(--color-ink)] tabular-nums">
+                      {formatNumber(pageMetrics.pageViews28d)}
+                    </span>{" "}
+                    page views (28d)
+                  </span>
+                </div>
+              )}
+              {pageMetrics.postEngagements28d !== null && (
+                <div className="flex items-center gap-2">
+                  <TrendingUp className="w-3.5 h-3.5 text-[var(--color-ink-subtle)]" />
+                  <span className="text-[12px] text-[var(--color-ink-muted)]">
+                    <span className="font-semibold text-[var(--color-ink)] tabular-nums">
+                      {formatNumber(pageMetrics.postEngagements28d)}
+                    </span>{" "}
+                    total post engagements (28d)
+                  </span>
+                </div>
+              )}
+            </div>
+          )}
         </Card>
       </section>
 
@@ -261,14 +312,17 @@ function KpiTile({
   value,
   prev,
   accent,
+  displayDelta,
+  absoluteMode,
 }: {
   label: string;
   icon: typeof BarChart3;
   value: number;
   prev: number;
   accent?: boolean;
+  displayDelta?: number; // for absoluteMode: net change to display
+  absoluteMode?: boolean; // show "+12" instead of "+12%"
 }) {
-  const delta = pctDelta(value, prev);
   return (
     <Card padding="md" className={accent ? "ring-1 ring-[var(--color-accent)]/30" : undefined}>
       <div className="flex items-center gap-1.5 text-[11px] font-medium text-[var(--color-ink-subtle)] uppercase tracking-wider">
@@ -283,7 +337,11 @@ function KpiTile({
       >
         {formatNumber(value)}
       </div>
-      <DeltaBadge delta={delta} />
+      {absoluteMode ? (
+        <AbsoluteDeltaBadge delta={displayDelta ?? 0} />
+      ) : (
+        <DeltaBadge delta={pctDelta(value, prev)} />
+      )}
     </Card>
   );
 }
@@ -314,6 +372,30 @@ function DeltaBadge({ delta }: { delta: number | null }) {
       <span className="font-medium tabular-nums">
         {up ? "+" : ""}
         {delta.toFixed(0)}%
+      </span>
+      <span className="text-[var(--color-ink-subtle)]">vs prev</span>
+    </div>
+  );
+}
+
+function AbsoluteDeltaBadge({ delta }: { delta: number }) {
+  if (delta === 0) {
+    return (
+      <div className="text-[11px] text-[var(--color-ink-subtle)] mt-1 inline-flex items-center gap-1">
+        <Minus className="w-3 h-3" />
+        <span>No change</span>
+      </div>
+    );
+  }
+  const up = delta > 0;
+  const Icon = up ? TrendingUp : TrendingDown;
+  const color = up ? "text-emerald-600" : "text-red-600";
+  return (
+    <div className={`text-[11px] mt-1 inline-flex items-center gap-1 ${color}`}>
+      <Icon className="w-3 h-3" strokeWidth={2.5} />
+      <span className="font-medium tabular-nums">
+        {up ? "+" : ""}
+        {delta}
       </span>
       <span className="text-[var(--color-ink-subtle)]">vs prev</span>
     </div>

@@ -38,6 +38,7 @@ from typing import Optional
 SG_CLIENT_SLUG = "sprinkler-guard"
 SG_ENV_PATH = Path("/home/dustin/sprinkler-guard/.env")
 PORTAL_ENV_PATH = Path(__file__).resolve().parent.parent / ".env.local"
+PAGE_METRICS_PATH = Path(__file__).resolve().parent.parent / "ops" / "state" / "sg-page-metrics.json"
 GRAPH_VERSION = "v21.0"
 
 
@@ -110,11 +111,9 @@ def graph_get(path: str, params: dict, token: str) -> Optional[dict]:
 
 
 def fb_post_metrics(post_id: str, token: str) -> dict:
-    """Fetch likes/comments/shares/reactions for a FB post or video.
+    """Fetch engagement + insights for a FB post or video.
     Post IDs from /photos look like '<page>_<post>'; from /videos
-    they're just the video id. We try the post fields first; if the
-    fb_post_id looks like a video (no underscore), we also pull
-    video_insights for views."""
+    they're just the video id."""
     out: dict = {}
     fields = "reactions.summary(true),comments.summary(true),shares"
     data = graph_get(post_id, {"fields": fields}, token)
@@ -129,11 +128,17 @@ def fb_post_metrics(post_id: str, token: str) -> dict:
         if shares:
             out["shares"] = shares.get("count", 0)
 
+    # NOTE on per-post reach/impressions/clicks: FB deprecated
+    # post_impressions, post_impressions_unique, and post_clicks per their
+    # Aug 2025 update. The API rejects them with error 100. We pull what's
+    # still available via /insights at the PAGE level instead (followers,
+    # daily follow gains, page views) — see fetch_and_save_page_metrics.
+
     # If this looks like a bare video id (no underscore), pull views
     if "_" not in post_id:
-        insights = graph_get(post_id, {"metric": "total_video_views"}, token)
-        if insights and isinstance(insights.get("data"), list):
-            for m in insights["data"]:
+        v_insights = graph_get(post_id, {"metric": "total_video_views"}, token)
+        if v_insights and isinstance(v_insights.get("data"), list):
+            for m in v_insights["data"]:
                 if m.get("name") == "total_video_views":
                     values = m.get("values", [])
                     if values:
@@ -174,6 +179,55 @@ def li_post_metrics(urn: str, li_token: str) -> dict:
         return {}
 
 
+def fetch_page_snapshot(page_id: str, token: str) -> dict:
+    """Page-level snapshot for the metrics page. Pulled weekly.
+    All metrics here are still alive on the Graph API as of 2026-04
+    (per-post reach/impressions are deprecated; page-level is fine)."""
+    snap: dict = {
+        "captured_at": datetime.now(timezone.utc).isoformat(),
+    }
+    # Followers (simple GET on the page object)
+    page = graph_get(page_id, {"fields": "followers_count,fan_count,name"}, token)
+    if page:
+        snap["followers"] = page.get("followers_count") or page.get("fan_count") or 0
+        snap["page_name"] = page.get("name", "")
+
+    # Daily follower gains for the last 30 days
+    daily = graph_get(
+        f"{page_id}/insights",
+        {"metric": "page_daily_follows_unique", "period": "day", "since": int((datetime.now(timezone.utc) - timedelta(days=30)).timestamp())},
+        token,
+    )
+    if daily and isinstance(daily.get("data"), list):
+        for m in daily["data"]:
+            if m.get("name") == "page_daily_follows_unique":
+                snap["daily_follows"] = [
+                    {"date": v.get("end_time", "")[:10], "value": v.get("value", 0)}
+                    for v in m.get("values", [])
+                ]
+
+    # Page views total + post engagements (last 28 days)
+    for metric in ("page_views_total", "page_post_engagements"):
+        d = graph_get(
+            f"{page_id}/insights",
+            {"metric": metric, "period": "days_28"},
+            token,
+        )
+        if d and isinstance(d.get("data"), list):
+            for m in d["data"]:
+                if m.get("name") == metric:
+                    values = m.get("values") or []
+                    if values:
+                        snap[metric] = values[-1].get("value", 0)
+
+    return snap
+
+
+def save_page_snapshot(snap: dict) -> None:
+    PAGE_METRICS_PATH.parent.mkdir(parents=True, exist_ok=True)
+    PAGE_METRICS_PATH.write_text(json.dumps(snap, indent=2))
+
+
 def update_metrics(row_id, metrics, *, base_url, service_key) -> None:
     supabase_request(
         "PATCH",
@@ -209,6 +263,17 @@ def main() -> int:
     if not client:
         print(f"ERROR: no clients row with slug='{SG_CLIENT_SLUG}'")
         return 1
+
+    # Page-level snapshot (followers, daily follow gains, page views).
+    # Cheap, runs every time. Powers the 'Followers' tile + growth chart
+    # on the metrics page since per-post reach/impressions are deprecated.
+    sg_page_id = os.environ.get("SG_PAGE_ID", "")
+    if fb_token and sg_page_id:
+        snap = fetch_page_snapshot(sg_page_id, fb_token)
+        if not args.dry_run:
+            save_page_snapshot(snap)
+        followers = snap.get("followers", "?")
+        print(f"Page snapshot: {followers} followers · saved to {PAGE_METRICS_PATH.name}")
 
     rows = list_published_due(
         client["id"], args.min_stale_minutes, base_url=base_url, service_key=service_key
