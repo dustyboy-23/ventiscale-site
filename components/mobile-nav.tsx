@@ -8,7 +8,6 @@ import {
   Calendar,
   Mail,
   FileText,
-  Search,
   FolderOpen,
   LogOut,
   Menu,
@@ -21,7 +20,6 @@ const NAV = [
   { href: "/content", label: "Content", icon: Calendar },
   { href: "/campaigns", label: "Email", icon: Mail },
   { href: "/reports", label: "Reports", icon: FileText },
-  { href: "/seo", label: "SEO Plan", icon: Search },
   { href: "/files", label: "Files", icon: FolderOpen },
 ];
 

@@ -60,8 +60,6 @@ export default async function DashboardPage({
   const upcomingDrafts = drafts.slice(0, 4);
   const hasRevenueData = kpis.revenue > 0 || kpis.orders > 0;
   const hasTrafficData = kpis.channels.length > 0 || kpis.devices.length > 0;
-  const hasSeoData =
-    kpis.seo.clicks > 0 || kpis.seo.impressions > 0 || kpis.topQueries.length > 0;
 
   const greeting = (() => {
     const h = new Date().getHours();
@@ -386,78 +384,6 @@ export default async function DashboardPage({
 
         {/* Right column — sidebar */}
         <div className="space-y-6">
-          {/* SEO Snapshot */}
-          {hasSeoData && (
-          <Card padding="md">
-            <CardHeader title="SEO Snapshot" description="Last 28 days" />
-            <div className="grid grid-cols-2 gap-3">
-              <div className="rounded-xl bg-[var(--color-surface-muted)] p-3.5">
-                <div className="text-[11px] text-[var(--color-ink-subtle)] uppercase tracking-wider font-medium">
-                  Clicks
-                </div>
-                <div className="text-[22px] font-bold tabular text-[var(--color-ink)] mt-1">
-                  {formatNumber(kpis.seo.clicks)}
-                </div>
-              </div>
-              <div className="rounded-xl bg-[var(--color-surface-muted)] p-3.5">
-                <div className="text-[11px] text-[var(--color-ink-subtle)] uppercase tracking-wider font-medium">
-                  Impressions
-                </div>
-                <div className="text-[22px] font-bold tabular text-[var(--color-ink)] mt-1">
-                  {formatNumber(kpis.seo.impressions)}
-                </div>
-              </div>
-              <div className="rounded-xl bg-[var(--color-surface-muted)] p-3.5">
-                <div className="text-[11px] text-[var(--color-ink-subtle)] uppercase tracking-wider font-medium">
-                  Avg CTR
-                </div>
-                <div className="text-[22px] font-bold tabular text-[var(--color-ink)] mt-1">
-                  {kpis.seo.ctr.toFixed(1)}%
-                </div>
-              </div>
-              <div className="rounded-xl bg-[var(--color-surface-muted)] p-3.5">
-                <div className="text-[11px] text-[var(--color-ink-subtle)] uppercase tracking-wider font-medium">
-                  Avg Position
-                </div>
-                <div className="text-[22px] font-bold tabular text-[var(--color-ink)] mt-1">
-                  {kpis.seo.position.toFixed(1)}
-                </div>
-              </div>
-            </div>
-            {kpis.topQueries.length > 0 && (
-              <div className="mt-5 pt-5 border-t border-[var(--color-border)]">
-                <div className="text-[11px] font-medium text-[var(--color-ink-subtle)] uppercase tracking-wider mb-3">
-                  Top search queries
-                </div>
-                <ul className="space-y-2.5">
-                  {kpis.topQueries.slice(0, 4).map((q) => (
-                    <li key={q.query} className="text-[13px]">
-                      <div className="flex items-baseline justify-between gap-2">
-                        <span className="text-[var(--color-ink)] font-medium truncate min-w-0">
-                          {q.query}
-                        </span>
-                        <span className="text-[11px] tabular text-[var(--color-ink-subtle)] shrink-0">
-                          pos {q.position.toFixed(1)}
-                        </span>
-                      </div>
-                      <div className="text-[11px] tabular text-[var(--color-ink-muted)] mt-0.5">
-                        {formatNumber(q.clicks)} clicks · {q.ctr.toFixed(1)}% CTR
-                      </div>
-                    </li>
-                  ))}
-                </ul>
-              </div>
-            )}
-            <Link
-              href="/seo"
-              className="mt-5 inline-flex items-center gap-1 text-[13px] font-medium text-[var(--color-ink)] hover:text-[var(--color-accent)] transition-colors"
-            >
-              View full SEO plan
-              <ArrowUpRight className="w-3.5 h-3.5" strokeWidth={2.5} />
-            </Link>
-          </Card>
-          )}
-
           {/* Upcoming content */}
           <Card padding="md">
             <CardHeader

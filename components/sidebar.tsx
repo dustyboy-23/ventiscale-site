@@ -8,8 +8,6 @@ import {
   Calendar,
   Mail,
   FileText,
-  Search,
-  Megaphone,
   FolderOpen,
   LogOut,
   Check,
@@ -27,22 +25,15 @@ const NAV = [
   { href: "/content", label: "Content", icon: Calendar },
   { href: "/campaigns", label: "Email", icon: Mail },
   { href: "/reports", label: "Reports", icon: FileText },
-  { href: "/ads", label: "Ads", icon: Megaphone },
-  { href: "/seo", label: "SEO Plan", icon: Search },
   { href: "/files", label: "Files", icon: FolderOpen },
   { href: "/settings/data-handling", label: "Privacy", icon: Shield },
 ];
 
-// Client portals for real non-agency tenants start with only the tabs
-// that have real wiring behind them. Content/Email/SEO get hidden until
-// those data sources land so the sidebar never advertises a dead tab.
 const REAL_CLIENT_NAV_HREFS = new Set([
   "/dashboard",
   "/content",
   "/reports",
-  "/ads",
   "/files",
-  "/seo",
   "/settings/data-handling",
 ]);
 
