@@ -14,11 +14,25 @@ export default async function ContentPage() {
   const role: "owner" | "admin" | "viewer" =
     session?.mode === "real" ? session.role : "owner";
 
-  // Group by date
+  // Group by date and apply a natural sort within each group.
+  // Without natural sort, "Day 10" would land before "Day 5"
+  // alphabetically. Intl.Collator with numeric:true gets that right
+  // and also keeps "AM" before "PM" since A precedes P.
+  const naturalSort = new Intl.Collator("en", {
+    numeric: true,
+    sensitivity: "base",
+  });
+  const sortKey = (d: (typeof drafts)[number]) =>
+    `${d.scheduledAt || "9999"}|${d.topic}`;
+
   const grouped = drafts.reduce<Record<string, typeof drafts>>((acc, d) => {
     (acc[d.date] = acc[d.date] || []).push(d);
     return acc;
   }, {});
+
+  for (const date of Object.keys(grouped)) {
+    grouped[date].sort((a, b) => naturalSort.compare(sortKey(a), sortKey(b)));
+  }
 
   const dates = Object.keys(grouped).sort((a, b) => b.localeCompare(a));
 

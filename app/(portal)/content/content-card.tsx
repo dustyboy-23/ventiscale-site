@@ -147,28 +147,25 @@ export function ContentCard({
         )}
       </div>
 
-      {/* Drive asset preview. Uses Drive's thumbnail URL (no Drive UI
-          chrome, no zoom controls) wrapped in a click-through to the
-          full file in Drive. Renders the image at natural width up to
-          a 600px cap so vertical creatives stay reasonable. */}
+      {/* Drive asset preview via Drive's own /preview iframe. The
+          thumbnail URL pattern is unreliable for fresh uploads and
+          requires referrer-cookie alignment that the static <img>
+          tag fights. Iframe always works for any user with file
+          access through their Google session. Sized big enough that
+          square or vertical creatives don't need zooming. */}
       {draft.driveFileId && (
         <div className="mb-4 -mx-1">
-          <a
-            href={`https://drive.google.com/file/d/${draft.driveFileId}/view`}
-            target="_blank"
-            rel="noreferrer"
-            className="block overflow-hidden rounded-lg border border-[var(--color-border)] bg-[var(--color-surface-muted)]"
-          >
-            <img
-              src={`https://drive.google.com/thumbnail?id=${draft.driveFileId}&sz=w1600`}
-              alt="Draft asset preview"
-              className="w-full max-h-[600px] object-contain block bg-white"
-              loading="lazy"
-              referrerPolicy="no-referrer"
-            />
-          </a>
+          <iframe
+            src={`https://drive.google.com/file/d/${draft.driveFileId}/preview`}
+            className="w-full h-[520px] rounded-lg border border-[var(--color-border)] bg-[var(--color-surface-muted)] block"
+            title="Asset preview"
+            loading="lazy"
+            referrerPolicy="no-referrer"
+            allow="autoplay"
+          />
           <p className="text-[11px] text-[var(--color-ink-subtle)] mt-1.5 text-center">
-            Click to open in Drive. Sign in to your Google account if it doesn&apos;t load.
+            Hosted on Google Drive. Sign in to your Google account if you see
+            &ldquo;request access.&rdquo;
           </p>
         </div>
       )}

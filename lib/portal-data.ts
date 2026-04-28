@@ -152,8 +152,12 @@ export async function getContentDrafts(): Promise<ContentDraft[]> {
         .from("content_items")
         .select("id, platform, title, body, status, scheduled_at, published_at, created_at, reviewed_at, reviewer_notes, drive_file_id")
         .eq("client_id", session.client.id)
+        // Order by scheduled_at ascending so within a date the morning
+        // (AM, 09:00 PT) slot lands before the afternoon (PM, 15:00 PT)
+        // slot. nullsFirst:false keeps unscheduled drafts at the end.
+        .order("scheduled_at", { ascending: true, nullsFirst: false })
         .order("created_at", { ascending: false })
-        .limit(20);
+        .limit(50);
 
       if (data && data.length > 0) {
         return data.map((row: any) => ({
