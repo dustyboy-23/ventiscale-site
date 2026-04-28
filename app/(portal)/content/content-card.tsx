@@ -69,6 +69,7 @@ export function ContentCard({
   const [notes, setNotes] = useState(draft.reviewerNotes || "");
   const [showNotes, setShowNotes] = useState(false);
   const [showSchedule, setShowSchedule] = useState(false);
+  const [previewMode, setPreviewMode] = useState<"img" | "iframe">("img");
   const [scheduleValue, setScheduleValue] = useState<string>(() =>
     draft.scheduledAt ? isoToLocalInput(draft.scheduledAt) : defaultScheduleValue(),
   );
@@ -147,25 +148,46 @@ export function ContentCard({
         )}
       </div>
 
-      {/* Drive asset preview via Drive's own /preview iframe. The
-          thumbnail URL pattern is unreliable for fresh uploads and
-          requires referrer-cookie alignment that the static <img>
-          tag fights. Iframe always works for any user with file
-          access through their Google session. Sized big enough that
-          square or vertical creatives don't need zooming. */}
+      {/* Drive asset preview. Two-stage strategy:
+            1. Try the direct image via Google's CDN
+               (lh3.googleusercontent.com). No Drive UI chrome, no zoom
+               buttons, just the image at natural width.
+            2. If that fails (file not shared with the viewer's Google
+               session, no thumbnail generated yet, etc.), fall back to
+               the Drive /preview iframe which always works for users
+               with file access via their cookies.
+          The fallback is one-way per session: once the iframe loads,
+          we don't retry the img path. */}
       {draft.driveFileId && (
         <div className="mb-4 -mx-1">
-          <iframe
-            src={`https://drive.google.com/file/d/${draft.driveFileId}/preview`}
-            className="w-full h-[520px] rounded-lg border border-[var(--color-border)] bg-[var(--color-surface-muted)] block"
-            title="Asset preview"
-            loading="lazy"
-            referrerPolicy="no-referrer"
-            allow="autoplay"
-          />
+          {previewMode === "img" ? (
+            <a
+              href={`https://drive.google.com/file/d/${draft.driveFileId}/view`}
+              target="_blank"
+              rel="noreferrer"
+              className="block overflow-hidden rounded-lg border border-[var(--color-border)] bg-[var(--color-surface-muted)]"
+            >
+              <img
+                src={`https://lh3.googleusercontent.com/d/${draft.driveFileId}=w1600`}
+                alt="Draft asset preview"
+                className="w-full max-h-[600px] object-contain block bg-white"
+                loading="lazy"
+                onError={() => setPreviewMode("iframe")}
+              />
+            </a>
+          ) : (
+            <iframe
+              src={`https://drive.google.com/file/d/${draft.driveFileId}/preview`}
+              className="w-full h-[520px] rounded-lg border border-[var(--color-border)] bg-[var(--color-surface-muted)] block"
+              title="Asset preview"
+              loading="lazy"
+              allow="autoplay"
+            />
+          )}
           <p className="text-[11px] text-[var(--color-ink-subtle)] mt-1.5 text-center">
-            Hosted on Google Drive. Sign in to your Google account if you see
-            &ldquo;request access.&rdquo;
+            {previewMode === "img"
+              ? "Click to open in Drive."
+              : "Hosted on Google Drive. Sign in to your Google account if you see \u201Crequest access.\u201D"}
           </p>
         </div>
       )}
