@@ -112,6 +112,79 @@ def list_due_approved(client_id: str, *, base_url: str, service_key: str) -> lis
     return data if isinstance(data, list) else []
 
 
+AUTO_APPROVE_WINDOW_HOURS = 2
+
+
+def auto_approve_imminent(
+    client_id: str,
+    *,
+    platform: str,
+    base_url: str,
+    service_key: str,
+    window_hours: int = AUTO_APPROVE_WINDOW_HOURS,
+) -> int:
+    """Flip status from draft -> approved for any rows whose scheduled_at
+    is within `window_hours`. The 'no objection' rule: if Ken hasn't
+    rejected by now, the post goes out. Audit trail lives in
+    reviewer_notes + activity_log.
+
+    Posts can still be stopped after auto-approval by editing in portal
+    (status -> rejected) up until the poster cron actually fires."""
+    now = datetime.now(timezone.utc)
+    cutoff = (now + timedelta(hours=window_hours)).isoformat()
+    path = (
+        f"/rest/v1/content_items?client_id=eq.{client_id}"
+        f"&platform=eq.{platform}&status=eq.draft"
+        f"&scheduled_at=lte.{urllib.parse.quote(cutoff)}"
+        "&select=id,title,scheduled_at"
+    )
+    rows = supabase_request("GET", path, base_url=base_url, service_key=service_key)
+    if not isinstance(rows, list) or not rows:
+        return 0
+    note = f"auto-approved · no objection within {window_hours}h review window"
+    flipped = 0
+    for r in rows:
+        try:
+            supabase_request(
+                "PATCH",
+                f"/rest/v1/content_items?id=eq.{r['id']}",
+                base_url=base_url,
+                service_key=service_key,
+                headers={"Prefer": "return=minimal"},
+                body={
+                    "status": "approved",
+                    "reviewed_at": now.isoformat(),
+                    "reviewer_notes": note,
+                },
+            )
+            flipped += 1
+        except SystemExit as exc:
+            print(f"  auto-approve PATCH failed for {r.get('id')}: {exc}", file=sys.stderr)
+            continue
+        try:
+            supabase_request(
+                "POST",
+                "/rest/v1/activity_log",
+                base_url=base_url,
+                service_key=service_key,
+                headers={"Prefer": "return=minimal"},
+                body={
+                    "client_id": client_id,
+                    "type": "content_approved",
+                    "title": f"Auto-approved {platform}: {(r.get('title') or '')[:140]}",
+                    "detail": json.dumps({
+                        "content_id": r["id"],
+                        "auto": True,
+                        "scheduled_at": r.get("scheduled_at"),
+                        "window_hours": window_hours,
+                    }),
+                },
+            )
+        except SystemExit:
+            pass
+    return flipped
+
+
 def is_stale(scheduled_at_iso: str) -> bool:
     try:
         sched = datetime.fromisoformat(scheduled_at_iso.replace("Z", "+00:00"))
@@ -330,6 +403,14 @@ def main() -> int:
     if not client:
         print(f"ERROR: no clients row with slug='{SG_CLIENT_SLUG}'")
         return 1
+
+    if not args.dry_run:
+        flipped = auto_approve_imminent(
+            client["id"], platform="facebook",
+            base_url=base_url, service_key=service_key,
+        )
+        if flipped:
+            print(f"Auto-approved {flipped} imminent FB draft(s) (no objection within {AUTO_APPROVE_WINDOW_HOURS}h).")
 
     due = list_due_approved(client["id"], base_url=base_url, service_key=service_key)
     if not due:

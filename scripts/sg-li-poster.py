@@ -30,7 +30,7 @@ import tempfile
 import urllib.error
 import urllib.parse
 import urllib.request
-from datetime import datetime, timezone
+from datetime import datetime, timedelta, timezone
 from pathlib import Path
 from typing import Optional
 
@@ -90,6 +90,74 @@ def list_due_approved(client_id, *, base_url, service_key):
     )
     data = supabase_request("GET", path, base_url=base_url, service_key=service_key)
     return data if isinstance(data, list) else []
+
+
+AUTO_APPROVE_WINDOW_HOURS = 2
+
+
+def auto_approve_imminent(
+    client_id,
+    *,
+    base_url,
+    service_key,
+    window_hours: int = AUTO_APPROVE_WINDOW_HOURS,
+) -> int:
+    """No-objection rule for LinkedIn drafts: flip draft -> approved for
+    rows scheduled within `window_hours`. Audit trail in reviewer_notes
+    + activity_log."""
+    now = datetime.now(timezone.utc)
+    cutoff = (now + timedelta(hours=window_hours)).isoformat()
+    path = (
+        f"/rest/v1/content_items?client_id=eq.{client_id}"
+        f"&platform=eq.linkedin&status=eq.draft"
+        f"&scheduled_at=lte.{urllib.parse.quote(cutoff)}"
+        "&select=id,title,scheduled_at"
+    )
+    rows = supabase_request("GET", path, base_url=base_url, service_key=service_key)
+    if not isinstance(rows, list) or not rows:
+        return 0
+    note = f"auto-approved · no objection within {window_hours}h review window"
+    flipped = 0
+    for r in rows:
+        try:
+            supabase_request(
+                "PATCH",
+                f"/rest/v1/content_items?id=eq.{r['id']}",
+                base_url=base_url,
+                service_key=service_key,
+                headers={"Prefer": "return=minimal"},
+                body={
+                    "status": "approved",
+                    "reviewed_at": now.isoformat(),
+                    "reviewer_notes": note,
+                },
+            )
+            flipped += 1
+        except SystemExit as exc:
+            print(f"  auto-approve PATCH failed for {r.get('id')}: {exc}", file=sys.stderr)
+            continue
+        try:
+            supabase_request(
+                "POST",
+                "/rest/v1/activity_log",
+                base_url=base_url,
+                service_key=service_key,
+                headers={"Prefer": "return=minimal"},
+                body={
+                    "client_id": client_id,
+                    "type": "content_approved",
+                    "title": f"Auto-approved linkedin: {(r.get('title') or '')[:140]}",
+                    "detail": json.dumps({
+                        "content_id": r["id"],
+                        "auto": True,
+                        "scheduled_at": r.get("scheduled_at"),
+                        "window_hours": window_hours,
+                    }),
+                },
+            )
+        except SystemExit:
+            pass
+    return flipped
 
 
 def post_via_existing_script(body_text: str, title: str) -> Optional[str]:
@@ -187,6 +255,13 @@ def main() -> int:
     if not client:
         print(f"ERROR: no clients row with slug='{SG_CLIENT_SLUG}'")
         return 1
+
+    if not args.dry_run:
+        flipped = auto_approve_imminent(
+            client["id"], base_url=base_url, service_key=service_key,
+        )
+        if flipped:
+            print(f"Auto-approved {flipped} imminent LI draft(s) (no objection within {AUTO_APPROVE_WINDOW_HOURS}h).")
 
     due = list_due_approved(client["id"], base_url=base_url, service_key=service_key)
     if not due:

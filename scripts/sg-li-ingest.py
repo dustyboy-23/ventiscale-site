@@ -86,14 +86,27 @@ def list_existing_li_external_ids(client_id, *, base_url, service_key):
     return {r["external_id"] for r in data if r.get("external_id")}
 
 
-def next_li_slot_at() -> str:
-    """LinkedIn slot defaults: 8 AM PT, on the next business day."""
-    now = datetime.now(timezone.utc)
-    target = now + timedelta(days=1)
-    # Snap to next Mon/Wed/Fri to match existing LI cadence
-    while target.weekday() not in (0, 2, 4):
-        target += timedelta(days=1)
-    return f"{target.date().isoformat()}T08:00:00-07:00"
+def latest_unposted_li_slot(client_id, *, base_url, service_key) -> Optional[datetime]:
+    """Return max scheduled_at among LI drafts/scheduled rows so we can stagger after it."""
+    path = (
+        f"/rest/v1/content_items?client_id=eq.{client_id}"
+        "&platform=eq.linkedin&status=in.(draft,scheduled)"
+        "&select=scheduled_at&order=scheduled_at.desc&limit=1"
+    )
+    data = supabase_request("GET", path, base_url=base_url, service_key=service_key)
+    if not isinstance(data, list) or not data or not data[0].get("scheduled_at"):
+        return None
+    raw = data[0]["scheduled_at"].replace("Z", "+00:00")
+    try:
+        return datetime.fromisoformat(raw)
+    except ValueError:
+        return None
+
+
+def slot_for_offset(base_slot: datetime, offset: int) -> str:
+    """One LI post per day at 08:00 PT. base_slot+offset days, formatted in PT."""
+    d = (base_slot + timedelta(days=offset)).astimezone(timezone(timedelta(hours=-7)))
+    return f"{d.date().isoformat()}T08:00:00-07:00"
 
 
 def main() -> int:
@@ -139,17 +152,25 @@ def main() -> int:
         print("No new LinkedIn entries to ingest.")
         return 0
 
-    print(f"Will ingest {len(new_entries)} LinkedIn draft(s):")
-    for entry, ext_id in new_entries:
+    # Stagger one per day starting the day after the latest existing
+    # unposted LI slot, or tomorrow if none exists.
+    latest = latest_unposted_li_slot(client["id"], base_url=base_url, service_key=service_key)
+    if latest is None:
+        base_slot = datetime.now(timezone.utc) + timedelta(days=1)
+    else:
+        base_slot = latest + timedelta(days=1)
+
+    print(f"Will ingest {len(new_entries)} LinkedIn draft(s) starting {slot_for_offset(base_slot, 0)}:")
+    for i, (entry, ext_id) in enumerate(new_entries):
         title = entry.get("title", "")[:60]
-        print(f"  · {title:60s}  external_id={ext_id}")
+        print(f"  · {slot_for_offset(base_slot, i)}  {title:60s}  external_id={ext_id}")
 
     if args.dry_run:
         print("\nDry run.")
         return 0
 
     inserted = 0
-    for entry, ext_id in new_entries:
+    for i, (entry, ext_id) in enumerate(new_entries):
         title = entry.get("title", f"LinkedIn post #{entry.get('id')}")
         body = entry.get("body", "")
         try:
@@ -166,7 +187,7 @@ def main() -> int:
                     "platform": "linkedin",
                     "status": "draft",
                     "external_id": ext_id,
-                    "scheduled_at": next_li_slot_at(),
+                    "scheduled_at": slot_for_offset(base_slot, i),
                     "media_type": "text",
                 },
             )
