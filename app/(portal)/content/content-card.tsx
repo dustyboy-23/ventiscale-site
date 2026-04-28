@@ -2,7 +2,7 @@
 
 import { useMemo, useState, useTransition } from "react";
 import { Card } from "@/components/card";
-import { Check, X, MessageSquare, Loader2, Calendar, CornerDownRight } from "lucide-react";
+import { Check, X, MessageSquare, Loader2, CornerDownRight } from "lucide-react";
 import { reviewContent } from "./actions";
 import type { ContentDraft } from "@/lib/sg-data";
 
@@ -22,29 +22,14 @@ const STATUS_BADGE: Record<string, { label: string; bg: string; text: string }> 
 
 type Role = "owner" | "admin" | "viewer";
 
-// Returns "YYYY-MM-DDTHH:mm" (no timezone) for use as a datetime-local value.
-// Default: now + 1 hour, rounded up to the nearest 15 minutes.
-function defaultScheduleValue(): string {
-  const d = new Date(Date.now() + 60 * 60 * 1000);
-  d.setSeconds(0, 0);
-  const minutes = d.getMinutes();
-  const rounded = Math.ceil(minutes / 15) * 15;
-  if (rounded === 60) {
-    d.setHours(d.getHours() + 1);
-    d.setMinutes(0);
-  } else {
-    d.setMinutes(rounded);
-  }
-  const pad = (n: number) => String(n).padStart(2, "0");
-  return `${d.getFullYear()}-${pad(d.getMonth() + 1)}-${pad(d.getDate())}T${pad(d.getHours())}:${pad(d.getMinutes())}`;
-}
-
-// Convert an ISO timestamptz string from the server into a datetime-local
-// value bound to the user's local timezone.
-function isoToLocalInput(iso: string): string {
-  const d = new Date(iso);
-  const pad = (n: number) => String(n).padStart(2, "0");
-  return `${d.getFullYear()}-${pad(d.getMonth() + 1)}-${pad(d.getDate())}T${pad(d.getHours())}:${pad(d.getMinutes())}`;
+// Fallback: tomorrow at 09:00 PT (the natural AM photo / approximate slot).
+// Only used if a draft somehow comes in without a scheduled_at set —
+// shouldn't happen since publish/ingest scripts always set it.
+function defaultNextDayValue(): string {
+  const d = new Date();
+  d.setDate(d.getDate() + 1);
+  d.setHours(9, 0, 0, 0);
+  return d.toISOString();
 }
 
 function formatScheduledFor(iso: string): string {
@@ -68,11 +53,7 @@ export function ContentCard({
   const [scheduledAt, setScheduledAt] = useState<string | null>(draft.scheduledAt);
   const [notes, setNotes] = useState(draft.reviewerNotes || "");
   const [showNotes, setShowNotes] = useState(false);
-  const [showSchedule, setShowSchedule] = useState(false);
   const [previewMode, setPreviewMode] = useState<"img" | "iframe">("img");
-  const [scheduleValue, setScheduleValue] = useState<string>(() =>
-    draft.scheduledAt ? isoToLocalInput(draft.scheduledAt) : defaultScheduleValue(),
-  );
   const [error, setError] = useState<string | null>(null);
   const [isPending, startTransition] = useTransition();
 
@@ -87,21 +68,15 @@ export function ContentCard({
 
   function handleApprove() {
     setError(null);
-    if (!showSchedule) {
-      setShowSchedule(true);
-      return;
-    }
-    if (!scheduleValue) {
-      setError("Pick a date and time first.");
-      return;
-    }
-    const iso = new Date(scheduleValue).toISOString();
+    // Use the schedule already on the draft. The publish/ingest scripts
+    // set scheduled_at when the row is created, so one click = approve.
+    // Fallback to tomorrow at 09:00 PT if somehow null (shouldn't happen).
+    const targetIso = scheduledAt || defaultNextDayValue();
     startTransition(async () => {
-      const res = await reviewContent(draft.id, "approved", notes || undefined, iso);
+      const res = await reviewContent(draft.id, "approved", notes || undefined, targetIso);
       if (res.ok) {
         setStatus("approved");
-        setScheduledAt(iso);
-        setShowSchedule(false);
+        setScheduledAt(targetIso);
       } else {
         setError(res.error);
       }
@@ -289,25 +264,6 @@ export function ContentCard({
       <div className="mt-auto pt-4 border-t border-[var(--color-border)]">
         {canReview ? (
           <div className="space-y-3">
-            {/* Schedule picker. Appears on first Approve click. */}
-            {showSchedule && (
-              <div className="p-3 bg-[var(--color-surface-muted)] rounded-lg space-y-2">
-                <label className="flex items-center gap-2 text-[12px] font-medium text-[var(--color-ink-muted)]">
-                  <Calendar className="w-3.5 h-3.5" />
-                  When should this go out?
-                </label>
-                <input
-                  type="datetime-local"
-                  value={scheduleValue}
-                  onChange={(e) => setScheduleValue(e.target.value)}
-                  className="w-full text-[13px] p-2 rounded border border-[var(--color-border)] bg-white text-[var(--color-ink)] focus:outline-none focus:ring-2 focus:ring-[var(--color-accent)]/20 focus:border-[var(--color-accent)]"
-                />
-                <p className="text-[11px] text-[var(--color-ink-subtle)]">
-                  Local time. Click Approve again to confirm.
-                </p>
-              </div>
-            )}
-
             {/* Notes input */}
             {showNotes && (
               <textarea
@@ -330,7 +286,7 @@ export function ContentCard({
                 ) : (
                   <Check className="w-3.5 h-3.5" strokeWidth={2.5} />
                 )}
-                {showSchedule ? "Confirm approval" : "Approve"}
+                Approve
               </button>
 
               <button
