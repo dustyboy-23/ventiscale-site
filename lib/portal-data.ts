@@ -150,7 +150,7 @@ export async function getContentDrafts(): Promise<ContentDraft[]> {
       const supabase = await (await import("@/lib/supabase/server")).createClient();
       const { data } = await supabase
         .from("content_items")
-        .select("id, platform, title, body, status, scheduled_at, published_at, created_at")
+        .select("id, platform, title, body, status, scheduled_at, published_at, created_at, reviewed_at, reviewer_notes, drive_file_id")
         .eq("client_id", session.client.id)
         .order("created_at", { ascending: false })
         .limit(20);
@@ -167,7 +167,11 @@ export async function getContentDrafts(): Promise<ContentDraft[]> {
           comments: [],
           cta: "",
           isProductPost: false,
-          status: row.status === "published" ? "published" : "draft" as any,
+          status: row.status as ContentDraft["status"],
+          reviewedAt: row.reviewed_at || null,
+          reviewerNotes: row.reviewer_notes || null,
+          scheduledAt: row.scheduled_at || null,
+          driveFileId: row.drive_file_id || null,
         }));
       }
     } catch (e) {

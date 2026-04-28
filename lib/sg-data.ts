@@ -102,6 +102,11 @@ export interface ContentDraft {
   comments: string[];
   cta: string;
   isProductPost: boolean;
+  status: "draft" | "scheduled" | "approved" | "rejected" | "published";
+  reviewedAt: string | null;
+  reviewerNotes: string | null;
+  scheduledAt: string | null;
+  driveFileId: string | null;
 }
 
 export interface CampaignSequenceStep {
@@ -539,6 +544,11 @@ export async function getContentDrafts(): Promise<ContentDraft[]> {
       comments: [],
       cta: "Shop the denim",
       isProductPost: false,
+      status: "scheduled",
+      reviewedAt: null,
+      reviewerNotes: null,
+      scheduledAt: null,
+      driveFileId: null,
     },
     {
       id: "li-2026-04-10",
@@ -552,6 +562,11 @@ export async function getContentDrafts(): Promise<ContentDraft[]> {
       comments: [],
       cta: "",
       isProductPost: false,
+      status: "scheduled",
+      reviewedAt: null,
+      reviewerNotes: null,
+      scheduledAt: null,
+      driveFileId: null,
     },
     {
       id: "fb-2026-04-10-midday",
@@ -567,6 +582,11 @@ export async function getContentDrafts(): Promise<ContentDraft[]> {
       ],
       cta: "Shop field jackets",
       isProductPost: true,
+      status: "scheduled",
+      reviewedAt: null,
+      reviewerNotes: null,
+      scheduledAt: null,
+      driveFileId: null,
     },
     {
       id: "fb-2026-04-10-evening",
@@ -580,6 +600,11 @@ export async function getContentDrafts(): Promise<ContentDraft[]> {
       comments: [],
       cta: "",
       isProductPost: false,
+      status: "scheduled",
+      reviewedAt: null,
+      reviewerNotes: null,
+      scheduledAt: null,
+      driveFileId: null,
     },
     {
       id: "fb-2026-04-11-morning",
@@ -593,6 +618,11 @@ export async function getContentDrafts(): Promise<ContentDraft[]> {
       comments: [],
       cta: "",
       isProductPost: false,
+      status: "scheduled",
+      reviewedAt: null,
+      reviewerNotes: null,
+      scheduledAt: null,
+      driveFileId: null,
     },
     {
       id: "li-2026-04-11",
@@ -606,6 +636,11 @@ export async function getContentDrafts(): Promise<ContentDraft[]> {
       comments: [],
       cta: "",
       isProductPost: false,
+      status: "scheduled",
+      reviewedAt: null,
+      reviewerNotes: null,
+      scheduledAt: null,
+      driveFileId: null,
     },
   ];
 }
