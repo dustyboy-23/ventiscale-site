@@ -18,8 +18,9 @@ Usage:
 
 Buffer guard:
     --skip-if-buffer-full    Exits 0 without doing anything if the portal
-                             already has 14+ pending drafts in the next
-                             7 days (the "always 7 days ahead" rule).
+                             already has 14+ FB photo drafts (2/day target)
+                             in the next 7 days. The "always 7 days ahead"
+                             rule for the calendar.
 
 Requires:
     GEMINI_API_KEY (in /home/dustin/sprinkler-guard/.env)
@@ -47,11 +48,11 @@ GOG_DEFAULT = "/home/dustin/.local/bin/gog"
 SG_CLIENT_SLUG = "sprinkler-guard"
 SG_DRIVE_FOLDER_ID = "1L5tD47hvCy20UIXAY4gml4D3aMOun7Vc"
 BUFFER_TARGET_DAYS = 7
-BUFFER_TARGET_POSTS = BUFFER_TARGET_DAYS * 4  # 4 per day target = 28
-# Per-day mix Dusty wants: 2 FB photos + 1 video + 1 LinkedIn.
-# This script generates FB photos only, but the buffer counts ALL
-# pending content for the next 7 days so we don't overgenerate when
-# videos/LI also have drafts in the queue.
+# Calendar mix: 2 FB photos + 1 LinkedIn per day. Videos live in
+# their own tab and are NOT counted toward the calendar buffer.
+# This script only generates FB photos; the LI side is fed by the
+# li-queue ingest pipeline. Target FB photo count for 7-day buffer:
+BUFFER_TARGET_POSTS = BUFFER_TARGET_DAYS * 2  # 2 FB photos/day = 14
 SG_ENV_PATH = Path("/home/dustin/sprinkler-guard/.env")
 PORTAL_ENV_PATH = (
     Path(__file__).resolve().parent.parent / ".env.local"
@@ -109,12 +110,16 @@ def find_client_by_slug(slug: str, *, base_url: str, service_key: str) -> Option
 
 
 def count_buffer(client_id: str, *, base_url: str, service_key: str) -> int:
-    """Count draft+approved posts scheduled in the next 7 days."""
+    """Count FB photo drafts/approved scheduled in the next 7 days.
+    Videos and LinkedIn are tracked separately and don't affect the
+    photo generation buffer."""
     now_iso = datetime.now(timezone.utc).isoformat()
     later_iso = (datetime.now(timezone.utc) + timedelta(days=BUFFER_TARGET_DAYS)).isoformat()
     path = (
         f"/rest/v1/content_items?client_id=eq.{client_id}"
         f"&status=in.(draft,approved)"
+        f"&platform=eq.facebook"
+        f"&media_type=eq.image"
         f"&scheduled_at=gte.{urllib.parse.quote(now_iso)}"
         f"&scheduled_at=lt.{urllib.parse.quote(later_iso)}"
         "&select=id"
@@ -267,7 +272,7 @@ def main() -> int:
     parser.add_argument(
         "--skip-if-buffer-full",
         action="store_true",
-        help="Exit 0 silently if buffer already has 14+ pending in next 7 days",
+        help="Exit 0 silently if buffer already has 14+ FB photos in next 7 days",
     )
     parser.add_argument("--gog", default=GOG_DEFAULT)
     args = parser.parse_args()
