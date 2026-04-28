@@ -183,12 +183,12 @@ export function ContentCard({
               href={`https://drive.google.com/file/d/${draft.driveFileId}/view`}
               target="_blank"
               rel="noreferrer"
-              className="block overflow-hidden rounded-lg border border-[var(--color-border)] bg-[var(--color-surface-muted)]"
+              className="block overflow-hidden rounded-lg border border-[var(--color-border)] bg-[var(--color-surface-muted)] h-[380px]"
             >
               <img
                 src={`https://lh3.googleusercontent.com/d/${draft.driveFileId}=w1200`}
                 alt="Draft asset preview"
-                className="w-full max-h-[380px] object-contain block bg-white"
+                className="w-full h-full object-contain block bg-white"
                 loading="lazy"
                 onError={() => setPreviewMode("iframe")}
               />
