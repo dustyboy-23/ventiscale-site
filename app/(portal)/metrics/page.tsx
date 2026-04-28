@@ -1,29 +1,29 @@
 import { PageHeader } from "@/components/page-header";
 import { Card } from "@/components/card";
 import { getPublishedPosts } from "@/lib/portal-data";
-import { formatNumber, relativeTime } from "@/lib/utils";
+import { formatNumber } from "@/lib/utils";
 import {
   BarChart3,
-  ExternalLink,
   ThumbsUp,
   MessageSquare,
   Share2,
   TrendingUp,
-  Trophy,
+  TrendingDown,
+  Minus,
   FileImage,
   Film,
   Calendar,
 } from "lucide-react";
+import Link from "next/link";
 
 const ENGAGEMENT_KEYS = ["reactions", "likes", "comments", "shares"] as const;
 
-function postLink(externalId: string | null): string | null {
-  if (!externalId) return null;
-  if (externalId.includes("_")) {
-    return `https://www.facebook.com/${externalId.replace("_", "/posts/")}`;
-  }
-  return `https://www.facebook.com/${externalId}`;
-}
+const PERIODS = [
+  { key: "7d", label: "7 days", days: 7 },
+  { key: "28d", label: "28 days", days: 28 },
+  { key: "90d", label: "90 days", days: 90 },
+] as const;
+type PeriodKey = (typeof PERIODS)[number]["key"];
 
 function engagementOf(metrics: Record<string, unknown>): number {
   let total = 0;
@@ -43,40 +43,63 @@ function ymdPT(iso: string): string {
   }).format(d);
 }
 
-export default async function MetricsPage() {
-  // FB-only: filter to facebook posts here so the page is purely the
-  // Sprinkler-Guard FB Page performance, mirroring FB Professional
-  // Dashboard. LinkedIn (when it lands) will get its own page.
-  const all = await getPublishedPosts(200);
-  const posts = all.filter((p) => p.platform === "facebook");
+function pctDelta(curr: number, prev: number): number | null {
+  if (prev === 0) return curr > 0 ? null : 0; // can't divide by zero, show as new
+  return ((curr - prev) / prev) * 100;
+}
 
-  // ---- Aggregations ----------------------------------------------------
+export default async function MetricsPage({
+  searchParams,
+}: {
+  searchParams?: Promise<{ period?: string }>;
+}) {
+  const params = (await searchParams) || {};
+  const periodKey: PeriodKey =
+    PERIODS.find((p) => p.key === params.period)?.key || "28d";
+  const periodDays = PERIODS.find((p) => p.key === periodKey)!.days;
 
-  const totals = posts.reduce<Record<string, number>>((acc, p) => {
-    for (const k of Object.keys(p.metrics || {})) {
-      acc[k] = (acc[k] || 0) + (Number(p.metrics[k]) || 0);
-    }
-    return acc;
-  }, {});
+  const all = await getPublishedPosts(500);
+  const fbAll = all.filter((p) => p.platform === "facebook");
 
-  const totalEngagement = posts.reduce((s, p) => s + engagementOf(p.metrics || {}), 0);
-  const totalReactions = totals.reactions || 0;
-  const totalComments = totals.comments || 0;
-  const totalShares = totals.shares || 0;
-  const bestPost = posts.length
-    ? posts.reduce((best, p) => {
-        const e = engagementOf(p.metrics || {});
-        return e > engagementOf(best.metrics || {}) ? p : best;
-      })
-    : null;
-  const bestEngagement = bestPost ? engagementOf(bestPost.metrics || {}) : 0;
+  // Bucket into current window vs previous window for WoW deltas.
+  const now = Date.now();
+  const winMs = periodDays * 24 * 60 * 60 * 1000;
+  const cutCurrent = now - winMs;
+  const cutPrev = now - 2 * winMs;
 
-  // 28-day daily trend
-  const today = new Date();
+  const inWindow = (p: (typeof fbAll)[number], from: number, to: number) => {
+    if (!p.publishedAt) return false;
+    const t = new Date(p.publishedAt).getTime();
+    return t >= from && t < to;
+  };
+
+  const posts = fbAll.filter((p) => inWindow(p, cutCurrent, now));
+  const prevPosts = fbAll.filter((p) => inWindow(p, cutPrev, cutCurrent));
+
+  const sumK = (xs: typeof posts, k: string) =>
+    xs.reduce((s, p) => s + (Number(p.metrics?.[k]) || 0), 0);
+  const sumEng = (xs: typeof posts) =>
+    xs.reduce((s, p) => s + engagementOf(p.metrics || {}), 0);
+
+  const cur = {
+    posts: posts.length,
+    eng: sumEng(posts),
+    reactions: sumK(posts, "reactions"),
+    comments: sumK(posts, "comments"),
+    shares: sumK(posts, "shares"),
+  };
+  const prev = {
+    posts: prevPosts.length,
+    eng: sumEng(prevPosts),
+    reactions: sumK(prevPosts, "reactions"),
+    comments: sumK(prevPosts, "comments"),
+    shares: sumK(prevPosts, "shares"),
+  };
+
+  // Daily trend bars (across the current window only)
   const days: { date: string; label: string; engagement: number }[] = [];
-  for (let i = 27; i >= 0; i--) {
-    const d = new Date(today);
-    d.setDate(d.getDate() - i);
+  for (let i = periodDays - 1; i >= 0; i--) {
+    const d = new Date(now - i * 86400000);
     const ymd = ymdPT(d.toISOString());
     const label = new Intl.DateTimeFormat("en-US", {
       month: "numeric",
@@ -95,7 +118,7 @@ export default async function MetricsPage() {
   }
   const peakDay = days.reduce((m, d) => (d.engagement > m ? d.engagement : m), 0) || 1;
 
-  // Content type breakdown (FB Pro Dashboard pattern: Photo vs Video)
+  // Content type breakdown — AVG per post (not total) per the analytics convention.
   type TypeAgg = { posts: number; engagement: number; reactions: number; comments: number; shares: number };
   const blank = (): TypeAgg => ({ posts: 0, engagement: 0, reactions: 0, comments: 0, shares: 0 });
   const byType: Record<string, TypeAgg> = { image: blank(), video: blank(), text: blank() };
@@ -109,16 +132,7 @@ export default async function MetricsPage() {
     bucket.shares += Number(p.metrics?.shares) || 0;
   }
 
-  // Top 5
-  const top5 = [...posts]
-    .map((p) => ({ ...p, _eng: engagementOf(p.metrics || {}) }))
-    .filter((p) => p._eng > 0)
-    .sort((a, b) => b._eng - a._eng)
-    .slice(0, 5);
-
-  // ---- Render ----------------------------------------------------------
-
-  if (posts.length === 0) {
+  if (fbAll.length === 0) {
     return (
       <>
         <PageHeader
@@ -137,21 +151,24 @@ export default async function MetricsPage() {
         eyebrow="Metrics"
         title="Facebook Performance"
         description="Engagement on every post going out to your page. Updates every Monday."
+        actions={<PeriodSelector active={periodKey} />}
       />
 
-      {/* Hero stat tiles — Facebook Pro Dashboard style */}
-      <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-3 mb-8">
-        <StatCard label="Posts" value={formatNumber(posts.length)} icon={Calendar} />
-        <StatCard label="Engagement" value={formatNumber(totalEngagement)} icon={TrendingUp} accent />
-        <StatCard label="Reactions" value={formatNumber(totalReactions)} icon={ThumbsUp} />
-        <StatCard label="Comments" value={formatNumber(totalComments)} icon={MessageSquare} />
-        <StatCard label="Shares" value={formatNumber(totalShares)} icon={Share2} />
-        <StatCard label="Best post" value={formatNumber(bestEngagement)} icon={Trophy} />
+      {/* KPI tiles with WoW deltas */}
+      <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-3 mb-8">
+        <KpiTile label="Posts" icon={Calendar} value={cur.posts} prev={prev.posts} />
+        <KpiTile label="Engagement" icon={TrendingUp} value={cur.eng} prev={prev.eng} accent />
+        <KpiTile label="Reactions" icon={ThumbsUp} value={cur.reactions} prev={prev.reactions} />
+        <KpiTile label="Comments" icon={MessageSquare} value={cur.comments} prev={prev.comments} />
+        <KpiTile label="Shares" icon={Share2} value={cur.shares} prev={prev.shares} />
       </div>
 
-      {/* 28-day trend */}
+      {/* Daily engagement trend */}
       <section className="mb-8">
-        <SectionHead title="Last 28 days" subtitle="Daily post engagement" />
+        <SectionHead
+          title={`Last ${periodDays} days`}
+          subtitle="Daily post engagement (reactions + comments + shares)"
+        />
         <Card padding="md">
           <div className="flex items-end gap-1 h-[160px]">
             {days.map((d) => {
@@ -183,100 +200,29 @@ export default async function MetricsPage() {
         </Card>
       </section>
 
-      {/* Content type — Photo vs Video performance */}
-      <section className="mb-8">
-        <SectionHead title="By content type" subtitle="What's working — photos vs videos" />
+      {/* Content type — Photos vs Videos AVG per post */}
+      <section>
+        <SectionHead
+          title="By content type"
+          subtitle="Avg engagement per post — what's pulling its weight"
+        />
         <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
           <ContentTypeCard
             label="Photos"
             icon={FileImage}
             agg={byType.image}
-            totalPosts={posts.length}
-            totalEngagement={totalEngagement}
             barColor="bg-emerald-500"
           />
           <ContentTypeCard
             label="Videos"
             icon={Film}
             agg={byType.video}
-            totalPosts={posts.length}
-            totalEngagement={totalEngagement}
             barColor="bg-violet-500"
           />
         </div>
       </section>
 
-      {/* Top 5 */}
-      {top5.length > 0 && (
-        <section className="mb-8">
-          <SectionHead title="Top performers" subtitle="Your 5 highest-engagement posts" />
-          <div className="space-y-2">
-            {top5.map((p, i) => {
-              const link = postLink(p.externalId);
-              return (
-                <Card key={p.id} padding="md">
-                  <div className="flex items-center gap-4">
-                    <div className="flex items-center justify-center w-7 h-7 rounded-full bg-[var(--color-surface-muted)] text-[12px] font-bold text-[var(--color-ink-muted)] shrink-0 tabular-nums">
-                      {i + 1}
-                    </div>
-                    {p.driveFileId && (
-                      <a
-                        href={`https://drive.google.com/file/d/${p.driveFileId}/view`}
-                        target="_blank"
-                        rel="noreferrer"
-                        className="shrink-0"
-                      >
-                        <img
-                          src={`https://lh3.googleusercontent.com/d/${p.driveFileId}=w120`}
-                          alt=""
-                          className="w-14 h-14 rounded-lg object-cover bg-[var(--color-surface-muted)]"
-                          loading="lazy"
-                        />
-                      </a>
-                    )}
-                    <div className="flex-1 min-w-0">
-                      <div className="flex items-center gap-2 mb-1">
-                        <span className="text-[10px] font-semibold uppercase tracking-wider bg-blue-50 text-blue-700 px-1.5 py-0.5 rounded">
-                          Facebook
-                        </span>
-                        {p.publishedAt && (
-                          <span className="text-[11px] text-[var(--color-ink-subtle)]">
-                            {relativeTime(p.publishedAt)}
-                          </span>
-                        )}
-                      </div>
-                      <h3 className="text-[13.5px] font-semibold text-[var(--color-ink)] truncate">
-                        {p.title}
-                      </h3>
-                    </div>
-                    <div className="text-right shrink-0">
-                      <div className="text-[20px] font-bold text-[var(--color-ink)] tabular-nums leading-none">
-                        {formatNumber(p._eng)}
-                      </div>
-                      <div className="text-[10px] text-[var(--color-ink-subtle)] uppercase tracking-wider mt-1">
-                        engagement
-                      </div>
-                    </div>
-                    {link && (
-                      <a
-                        href={link}
-                        target="_blank"
-                        rel="noreferrer"
-                        className="text-[var(--color-ink-subtle)] hover:text-[var(--color-ink)] transition-colors shrink-0"
-                        aria-label="Open post"
-                      >
-                        <ExternalLink className="w-4 h-4" />
-                      </a>
-                    )}
-                  </div>
-                </Card>
-              );
-            })}
-          </div>
-        </section>
-      )}
-
-      <p className="text-[11px] text-[var(--color-ink-subtle)] mt-2 text-center">
+      <p className="text-[11px] text-[var(--color-ink-subtle)] mt-6 text-center">
         Updates every Monday — pulled directly from Facebook.
       </p>
     </>
@@ -285,17 +231,44 @@ export default async function MetricsPage() {
 
 // ---- Subcomponents -----------------------------------------------------
 
-function StatCard({
+function PeriodSelector({ active }: { active: PeriodKey }) {
+  return (
+    <div className="inline-flex items-center gap-1 bg-[var(--color-surface-muted)] rounded-lg p-0.5">
+      {PERIODS.map((p) => {
+        const isActive = active === p.key;
+        return (
+          <Link
+            key={p.key}
+            href={p.key === "28d" ? "/metrics" : `/metrics?period=${p.key}`}
+            className={
+              "text-[12px] font-medium px-3 py-1 rounded-md transition-colors " +
+              (isActive
+                ? "bg-white text-[var(--color-ink)] shadow-sm"
+                : "text-[var(--color-ink-muted)] hover:text-[var(--color-ink)]")
+            }
+          >
+            {p.label}
+          </Link>
+        );
+      })}
+    </div>
+  );
+}
+
+function KpiTile({
   label,
-  value,
   icon: Icon,
+  value,
+  prev,
   accent,
 }: {
   label: string;
-  value: string;
   icon: typeof BarChart3;
+  value: number;
+  prev: number;
   accent?: boolean;
 }) {
+  const delta = pctDelta(value, prev);
   return (
     <Card padding="md" className={accent ? "ring-1 ring-[var(--color-accent)]/30" : undefined}>
       <div className="flex items-center gap-1.5 text-[11px] font-medium text-[var(--color-ink-subtle)] uppercase tracking-wider">
@@ -308,9 +281,42 @@ function StatCard({
           (accent ? "text-[var(--color-accent)]" : "text-[var(--color-ink)]")
         }
       >
-        {value}
+        {formatNumber(value)}
       </div>
+      <DeltaBadge delta={delta} />
     </Card>
+  );
+}
+
+function DeltaBadge({ delta }: { delta: number | null }) {
+  if (delta === null) {
+    return (
+      <div className="text-[11px] text-[var(--color-ink-subtle)] mt-1 inline-flex items-center gap-1">
+        <span className="text-emerald-600 font-medium">New</span>
+        <span>vs previous period</span>
+      </div>
+    );
+  }
+  if (delta === 0) {
+    return (
+      <div className="text-[11px] text-[var(--color-ink-subtle)] mt-1 inline-flex items-center gap-1">
+        <Minus className="w-3 h-3" />
+        <span>No change</span>
+      </div>
+    );
+  }
+  const up = delta > 0;
+  const Icon = up ? TrendingUp : TrendingDown;
+  const color = up ? "text-emerald-600" : "text-red-600";
+  return (
+    <div className={`text-[11px] mt-1 inline-flex items-center gap-1 ${color}`}>
+      <Icon className="w-3 h-3" strokeWidth={2.5} />
+      <span className="font-medium tabular-nums">
+        {up ? "+" : ""}
+        {delta.toFixed(0)}%
+      </span>
+      <span className="text-[var(--color-ink-subtle)]">vs prev</span>
+    </div>
   );
 }
 
@@ -330,18 +336,13 @@ function ContentTypeCard({
   label,
   icon: Icon,
   agg,
-  totalPosts,
-  totalEngagement,
   barColor,
 }: {
   label: string;
   icon: typeof BarChart3;
   agg: { posts: number; engagement: number; reactions: number; comments: number; shares: number };
-  totalPosts: number;
-  totalEngagement: number;
   barColor: string;
 }) {
-  const sharePct = totalEngagement > 0 ? (agg.engagement / totalEngagement) * 100 : 0;
   const avgPerPost = agg.posts ? Math.round(agg.engagement / agg.posts) : 0;
   return (
     <Card padding="md">
@@ -351,20 +352,17 @@ function ContentTypeCard({
           <span className="text-[13px] font-semibold text-[var(--color-ink)]">{label}</span>
         </div>
         <span className="text-[12px] text-[var(--color-ink-muted)] tabular-nums">
-          {agg.posts} of {totalPosts}
+          {agg.posts} {agg.posts === 1 ? "post" : "posts"}
         </span>
       </div>
       <div className="text-[28px] font-bold text-[var(--color-ink)] tracking-tight tabular-nums">
-        {formatNumber(agg.engagement)}
+        {formatNumber(avgPerPost)}
       </div>
       <div className="text-[11px] text-[var(--color-ink-subtle)] mt-1">
-        total engagement · {sharePct.toFixed(0)}% of all
+        avg engagement per post
       </div>
-      <div className="mt-3 h-1.5 rounded-full bg-[var(--color-border)]/40 overflow-hidden">
-        <div className={`h-full ${barColor}`} style={{ width: `${sharePct}%` }} />
-      </div>
-      <div className="grid grid-cols-4 gap-2 mt-4 pt-4 border-t border-[var(--color-border)]">
-        <Stat label="Avg/post" value={formatNumber(avgPerPost)} />
+      <div className={`mt-3 h-1 rounded-full ${barColor}`} />
+      <div className="grid grid-cols-3 gap-2 mt-4 pt-4 border-t border-[var(--color-border)]">
         <Stat label="Reactions" value={formatNumber(agg.reactions)} />
         <Stat label="Comments" value={formatNumber(agg.comments)} />
         <Stat label="Shares" value={formatNumber(agg.shares)} />
@@ -388,19 +386,17 @@ function Stat({ label, value }: { label: string; value: string }) {
 
 function EmptyMetrics() {
   return (
-    <>
-      <Card padding="lg">
-        <div className="text-center py-8">
-          <BarChart3 className="w-10 h-10 text-[var(--color-ink-subtle)] mx-auto mb-4" strokeWidth={1.5} />
-          <h3 className="text-[16px] font-semibold text-[var(--color-ink)]">
-            No Facebook posts yet
-          </h3>
-          <p className="text-[13.5px] text-[var(--color-ink-muted)] mt-1.5 max-w-md mx-auto leading-relaxed">
-            Once your first post goes out, engagement numbers populate here.
-            Updates every Monday — pulled directly from your Facebook page.
-          </p>
-        </div>
-      </Card>
-    </>
+    <Card padding="lg">
+      <div className="text-center py-8">
+        <BarChart3 className="w-10 h-10 text-[var(--color-ink-subtle)] mx-auto mb-4" strokeWidth={1.5} />
+        <h3 className="text-[16px] font-semibold text-[var(--color-ink)]">
+          No Facebook posts yet
+        </h3>
+        <p className="text-[13.5px] text-[var(--color-ink-muted)] mt-1.5 max-w-md mx-auto leading-relaxed">
+          Once your first post goes out, engagement numbers populate here.
+          Updates every Monday — pulled directly from your Facebook page.
+        </p>
+      </div>
+    </Card>
   );
 }
