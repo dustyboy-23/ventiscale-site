@@ -184,17 +184,11 @@ def revisions_section(row: dict) -> str:
 
 
 def append_to_revisions_doc(text: str, gog_path: str) -> bool:
-    end_marker = "<!-- VIDEO_REVISIONS_END -->"
-    needle = re.escape(end_marker)
-    repl = (text + end_marker).replace("/", r"\/")
-    expr = f"s/{needle}/{repl}/"
-    cmd = [gog_path, "docs", "sed", VIDEO_REVISIONS_DOC, expr]
-    result = subprocess.run(cmd, capture_output=True, text=True)
-    if result.returncode != 0:
-        # Seed end marker if missing
-        seed = [gog_path, "docs", "insert", VIDEO_REVISIONS_DOC, end_marker]
-        subprocess.run(seed, capture_output=True, text=True)
-        result = subprocess.run(cmd, capture_output=True, text=True)
+    """Append a section to the video Revisions doc via stdin.
+    Was using sed-style replacement; that silently no-ops when the
+    marker is absent. --append writes at the end of the doc body."""
+    cmd = [gog_path, "docs", "write", "--append", "--file=-", VIDEO_REVISIONS_DOC]
+    result = subprocess.run(cmd, input=text, capture_output=True, text=True)
     if result.returncode != 0:
         print(f"  ! revisions doc append failed: {result.stderr.strip()[:200]}", file=sys.stderr)
         return False
