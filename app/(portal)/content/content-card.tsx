@@ -211,7 +211,7 @@ export function ContentCard({
           mockup so Ken sees what it'll look like on his profile. */}
       {!draft.driveFileId && draft.platform === "linkedin" && (
         <div className="mb-3 -mx-1">
-          <div className="rounded-lg border border-[#0A66C2]/20 bg-gradient-to-br from-[#EFF4F9] to-white h-[380px] flex flex-col overflow-hidden">
+          <div className="rounded-lg border border-[#0A66C2]/20 bg-gradient-to-br from-[#EFF4F9] to-white h-[520px] flex flex-col overflow-hidden">
             {/* Faux LinkedIn post header */}
             <div className="flex items-center gap-2.5 px-4 pt-3.5 pb-3 border-b border-[#0A66C2]/10">
               <div className="w-9 h-9 rounded-full bg-[#0A66C2] flex items-center justify-center shrink-0">
@@ -236,7 +236,7 @@ export function ContentCard({
 
             {/* Post body excerpt (first ~6 lines) */}
             <div className="flex-1 px-4 py-3.5 overflow-hidden">
-              <p className="text-[13px] text-[#000000DE] leading-relaxed whitespace-pre-line line-clamp-[14]">
+              <p className="text-[13px] text-[#000000DE] leading-relaxed whitespace-pre-line line-clamp-[20]">
                 {draft.caption || "(no body)"}
               </p>
             </div>
