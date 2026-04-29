@@ -1,6 +1,6 @@
 import { PageHeader } from "@/components/page-header";
 import { Card } from "@/components/card";
-import { getContentDrafts } from "@/lib/portal-data";
+import { getContentDrafts, getClientMeta } from "@/lib/portal-data";
 import { getPortalSession } from "@/lib/current-client";
 import { formatDate } from "@/lib/utils";
 import { Sparkles, Calendar as CalendarIcon, Film } from "lucide-react";
@@ -18,12 +18,19 @@ export default async function ContentPage({
   const requestedTab = params.tab === "videos" ? "videos" : "calendar";
   const activeTab: Tab = requestedTab;
 
-  const [drafts, session] = await Promise.all([
+  const [drafts, session, client] = await Promise.all([
     getContentDrafts(),
     getPortalSession(),
+    getClientMeta(),
   ]);
   const role: "owner" | "admin" | "viewer" =
     session?.mode === "real" ? session.role : "owner";
+
+  // LinkedIn-mockup author identity. Demo (Stoneline) used to fall back to
+  // hardcoded "Ken Kwiatkowski / Founder, Sprinkler-Guard" — fixed here so
+  // every client's posts render under their own owner + brand.
+  const authorName = client.ownerName || "Founder";
+  const authorTitle = `Founder, ${client.name}`;
 
   // Videos tab: only the videos Ken still needs to review (draft or
   // sent-back). Approved videos live in the calendar at their scheduled
@@ -144,7 +151,7 @@ export default async function ContentPage({
               </p>
               <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-3.5">
                 {videoQueue.map((d) => (
-                  <ContentCard key={d.id} draft={d} role={role} />
+                  <ContentCard key={d.id} draft={d} role={role} authorName={authorName} authorTitle={authorTitle} />
                 ))}
               </div>
             </>
@@ -178,7 +185,7 @@ export default async function ContentPage({
 
                   <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-3.5">
                     {grouped[date].map((d) => (
-                      <ContentCard key={d.id} draft={d} role={role} />
+                      <ContentCard key={d.id} draft={d} role={role} authorName={authorName} authorTitle={authorTitle} />
                     ))}
                   </div>
                 </section>

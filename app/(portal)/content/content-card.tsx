@@ -45,9 +45,16 @@ function formatScheduledFor(iso: string): string {
 export function ContentCard({
   draft,
   role = "owner",
+  authorName = "Founder",
+  authorTitle = "Owner",
 }: {
   draft: ContentDraft;
   role?: Role;
+  /** Display name for LinkedIn-mockup post author. Falls back to a generic
+   *  founder label so the mockup never leaks one client's owner into another's
+   *  view (demo mode used to show Ken's name on Stoneline drafts). */
+  authorName?: string;
+  authorTitle?: string;
 }) {
   const [status, setStatus] = useState(draft.status);
   const [scheduledAt, setScheduledAt] = useState<string | null>(draft.scheduledAt);
@@ -201,10 +208,10 @@ export function ContentCard({
               </div>
               <div className="min-w-0">
                 <div className="text-[13px] font-semibold text-[#000000DE] truncate">
-                  Ken Kwiatkowski
+                  {authorName}
                 </div>
                 <div className="text-[11px] text-[#00000099]">
-                  Founder, Sprinkler-Guard · LinkedIn post
+                  {authorTitle} · LinkedIn post
                 </div>
               </div>
             </div>
