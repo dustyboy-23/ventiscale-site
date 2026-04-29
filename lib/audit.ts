@@ -3,7 +3,8 @@
  *
  * Fetches a URL, runs a set of surface checks (SEO, performance hints,
  * meta, structured data, accessibility), and returns a scored report
- * plus an HTML email body ready to send via Brevo.
+ * plus an HTML email body ready to send via the configured transactional
+ * email provider.
  *
  * Zero external deps, regex parsing on the raw HTML. Good enough for a
  * surface audit; a deeper audit (Lighthouse, real performance metrics,
@@ -600,18 +601,18 @@ export async function runAudit(rawUrl: string): Promise<AuditResult> {
   if (wordCount < 100) {
     checks.push({
       id: "content",
-      label: "Content depth",
+      label: "Homepage's nearly empty",
       status: "fail",
-      detail: `Only ~${wordCount} words on the page.`,
-      fix: "Thin content doesn't rank and doesn't sell. Target 300+ words on landing pages.",
+      detail: `Only ~${wordCount} words on the homepage. Not enough for visitors to figure out what you do, and not enough for Google to rank you for anything specific.`,
+      fix: "We'd rebuild the page with the right copy and proof.",
     });
   } else if (wordCount < 300) {
     checks.push({
       id: "content",
-      label: "Content depth",
+      label: "Homepage's thin",
       status: "warn",
-      detail: `~${wordCount} words. A little light.`,
-      fix: "Target 300-500 words with context, benefits, and social proof.",
+      detail: `Only ~${wordCount} words on the homepage. Visitors land, can't tell in 10 seconds what makes you different from the next guy, and bounce. Google can't rank you specifically either.`,
+      fix: "We'd flesh out the page with the context, benefits, and proof customers need to convert.",
     });
   } else {
     checks.push({
@@ -645,16 +646,16 @@ export async function runAudit(rawUrl: string): Promise<AuditResult> {
       id: "pixels",
       label: "Tracking pixels",
       status: "warn",
-      detail: `Only one pixel detected: ${pixels[0]}. You're flying half-blind.`,
-      fix: "Add GA4 and Meta Pixel at minimum. Without measurement, you can't optimize anything.",
+      detail: `One tracker on the site (${pixels[0]}). Fine for traffic counts, not enough to attribute paid traffic or social posts to actual customers.`,
+      fix: "We'd round out the tracking so any paid traffic gets attributed properly.",
     });
   } else {
     checks.push({
       id: "pixels",
-      label: "Tracking pixels",
+      label: "Can't tell what marketing's working",
       status: "fail",
-      detail: "No tracking pixels detected. You have zero visibility into what your visitors do.",
-      fix: "Install Google Analytics 4 and a Meta Pixel before you run any paid ads. This is the baseline.",
+      detail: "Didn't see Google Analytics, a Meta Pixel, or any other tracker on your site. If you're running ads or paying for traffic anywhere, there's no way to tell what's actually paying for itself.",
+      fix: "We'd add the basics so any traffic you're paying for is measurable, and any future ad spend has a number behind it.",
     });
   }
 
@@ -682,10 +683,10 @@ export async function runAudit(rawUrl: string): Promise<AuditResult> {
   } else {
     checks.push({
       id: "email_capture",
-      label: "Email capture",
+      label: "Visitors leave with no way to follow up",
       status: "fail",
-      detail: "No email capture anywhere on the homepage.",
-      fix: "Add a newsletter signup or a lead magnet opt-in. Email is the highest ROI channel you have, and you're leaving it on the table.",
+      detail: "Didn't see a newsletter signup, popup, or lead-magnet opt-in on the homepage. New visitors who aren't ready to buy on the first visit have no way to come back.",
+      fix: "We'd build an offer plus a short follow-up email sequence so visitors who aren't ready today don't disappear forever.",
     });
   }
 
@@ -712,10 +713,10 @@ export async function runAudit(rawUrl: string): Promise<AuditResult> {
   } else {
     checks.push({
       id: "content_hub",
-      label: "Content engine",
+      label: "Nothing for Google to send searchers to",
       status: "warn",
-      detail: "No blog, articles, or resources section found on the homepage.",
-      fix: "Content is how you get free traffic and build authority. Even one article a week compounds.",
+      detail: "No blog, articles, or resources section linked from the homepage. When customers Google what you sell, there's nothing on your site for Google to rank for those searches.",
+      fix: "We'd publish content that answers the questions your customers are already typing into Google.",
     });
   }
 
@@ -735,16 +736,16 @@ export async function runAudit(rawUrl: string): Promise<AuditResult> {
         id: "content_fresh",
         label: "Content freshness",
         status: "warn",
-        detail: `Last update: ~${Math.round(daysOld)} days ago (from ${freshCheck.source}).`,
-        fix: "Publish something fresh this month. Search engines reward recency and so do humans.",
+        detail: `Last update was ~${Math.round(daysOld)} days ago (${freshCheck.source}). Past the window where Google and visitors register the site as actively maintained.`,
+        fix: "We'd put it on a monthly cadence at minimum.",
       });
     } else {
       checks.push({
         id: "content_fresh",
-        label: "Content freshness",
+        label: "Site reads as dormant",
         status: "fail",
-        detail: `Last update: ${Math.round(daysOld)} days ago (from ${freshCheck.source}). The site looks abandoned.`,
-        fix: "Fresh content signals a living brand. Get on a weekly or biweekly cadence.",
+        detail: `Last fresh content was ${Math.round(daysOld)} days ago (${freshCheck.source}). Both visitors and Google read silence as 'this place might be closed.' Sites that go quiet typically lose ~20% of search traffic every 90 days idle.`,
+        fix: "We'd get content publishing on a steady cadence so the site reads as alive.",
       });
     }
   } else {
@@ -782,16 +783,16 @@ export async function runAudit(rawUrl: string): Promise<AuditResult> {
       id: "social",
       label: "Social presence",
       status: "warn",
-      detail: `Only ${socialPlatforms.size} platform(s) linked: ${Array.from(socialPlatforms).join(", ")}.`,
-      fix: "Pick 2 more channels where your customers actually spend time and show up there consistently.",
+      detail: `Only ${socialPlatforms.size} platform linked (${Array.from(socialPlatforms).join(", ")}). Most new customers check 2-3 before they trust a business. Right now they only find you on the one.`,
+      fix: "We'd add presence on the right additional platforms for your kind of business.",
     });
   } else {
     checks.push({
       id: "social",
-      label: "Social presence",
+      label: "Hard for new customers to verify you're real",
       status: "fail",
-      detail: "No social platforms linked from the homepage.",
-      fix: "Link your social channels in the footer at minimum. Customers want to see you're real.",
+      detail: "No links to Instagram, Facebook, or any other platform from the homepage. Most new customers peek at one or two before buying. If they can't find you there, they assume you're not active.",
+      fix: "We'd run social on the platforms that actually fit your business and link em from the site.",
     });
   }
 
@@ -1005,19 +1006,19 @@ function rankPriorities(
 function painLabelFor(pillarId: string): string {
   switch (pillarId) {
     case "pixels":
-      return "You can't see what's actually working in your marketing.";
+      return "There's no way to tell what's bringing customers in.";
     case "email_capture":
-      return "Almost every visitor to your site leaves and never comes back.";
+      return "Visitors who aren't ready to buy yet have no way to come back.";
     case "content_hub":
-      return "You're invisible on Google for the stuff your customers are searching for.";
+      return "There's nothing on the site for Google to send searchers to.";
     case "content_fresh":
-      return "Your site's gone quiet and Google's pulling the plug.";
+      return "Your site's gone quiet, and Google notices.";
     case "social":
-      return "You don't look legit at first glance.";
+      return "New customers can't verify you're active anywhere off the site.";
     case "conversion":
-      return "Visitors with questions are bouncing to the next guy.";
+      return "Visitors with a quick question can't get one answered before they leave.";
     default:
-      return "There's a gap costing you customers every week.";
+      return "There's a gap in how the site turns visitors into customers.";
   }
 }
 
@@ -1027,19 +1028,19 @@ function painLabelFor(pillarId: string): string {
 function problemBodyFor(pillarId: string, kind: BusinessKind, phrase: string): string {
   if (pillarId === "pixels") {
     const map: Partial<Record<BusinessKind, string>> = {
-      ecommerce: `Right now you can't see which traffic actually turns into sales. Could be ads, could be social, could be word of mouth, you've got no way to tell which one to pour fuel on. Most shops we look at are right here. The fix is straightforward.`,
-      saas: `You can't see where signups come from, which visitors turn into trials, or which trials turn into paying customers. Every call about marketing is a hunch. Most founders we audit are in the same spot. This is the first thing we'd fix.`,
+      ecommerce: `Right now there's no way to tell which traffic actually turns into sales. If you're running anything (ads, social, email), you can't tell which one's pulling the weight. Most shops we look at are right here. The fix is straightforward.`,
+      saas: `You can't see where signups come from, which visitors turn into trials, or which trials turn into paying customers. Any call about marketing becomes a hunch instead of a number. Most founders we audit are in the same spot. This is the first thing we'd fix.`,
       service: `You've got no idea which traffic actually picks up the phone. Someone calls you, you can't tell where they came from, so you can't double down on what's working. Most service businesses we look at are in this exact spot.`,
       local: `You've got no way to tell what's bringing customers in. Could be social, could be word of mouth, could be the website, you can't double down on what's working because you can't see it. Most local businesses we audit are right here. Easy fix once you know what to set up.`,
-      coach: `Your whole business is moving strangers from cold to warm to buyer, and you can't see any of it. You're coaching in the dark. Most coaches we look at are in the same spot. The tools to fix it used to cost a fortune, now they don't.`,
+      coach: `If your business runs on moving cold strangers to warm leads to buyers, you can't see any of that journey right now. Most coaches we audit are flying blind on the same thing. The tools to fix it used to cost a fortune, now they don't.`,
       agency: `You sell marketing and your own site isn't measuring any of it. Not a great look when a prospect pokes around. Most agencies we audit are in the same boat.`,
       creator: `You can't see which posts or videos are actually pulling people to your stuff. You're guessing at the algorithm instead of reading the numbers. Most creators we look at are right here. No reason to fly blind when the tools are free.`,
       restaurant: `You can't tell who booked a table and who just looked at the menu and left. You can't see which marketing is filling seats and which is flat. Most restaurants we audit are in the same spot.`,
     };
-    return map[kind] || `Right now you're making marketing decisions blind. Could be working, could be flat, you have no way to tell. Most businesses we look at are in this exact spot. You're not behind, this is just the piece that's missing.`;
+    return map[kind] || `Any marketing you're running right now is producing zero numbers you can read. Could be working, could be flat, no way to tell. Most businesses we look at are in this exact spot. You're not behind, this is just the piece that's missing.`;
   }
   if (pillarId === "email_capture") {
-    return `About 97 out of every 100 visitors leave your site and never come back. Right now you've got nothing to pull em back with. No email, no follow-up, nothing. That's customers you already paid to get, walking out the door.`;
+    return `Most sites we look at see ~97 of every 100 visitors leave and never return. Yours has nothing on it to pull em back. No email signup, no follow-up. Anyone who isn't ready to buy on the first visit just disappears.`;
   }
   if (pillarId === "content_hub") {
     const map: Partial<Record<BusinessKind, string>> = {
@@ -1051,15 +1052,15 @@ function problemBodyFor(pillarId: string, kind: BusinessKind, phrase: string): s
     return map[kind] || `People are searching for what ${phrase} does every day. You're not showing up for any of it. Free traffic that should be yours is going to your competitors instead.`;
   }
   if (pillarId === "content_fresh") {
-    return `Your blog's there but it's been quiet for months. Google starts pulling the plug on sites that stop publishing, you lose about 20% of your search traffic every 90 days of silence. Visitors notice too, a stale blog makes people wonder if you're still open.`;
+    return `Your blog's there but it's been quiet for months. Sites that go silent typically lose ~20% of search traffic every 90 days idle, Google reads it as a signal that you've stopped. Visitors notice too, a stale blog makes people wonder if you're still open.`;
   }
   if (pillarId === "social") {
-    return `No social links on your site. The first thing a new customer does is peek at Instagram or TikTok to check if you're real. If they can't find you there, they assume you're not. They're gone before you even knew they were there.`;
+    return `No social links on your site. Most new customers peek at Instagram or TikTok before they buy, to check if you're real. If they can't find you, they assume you're not. They're gone before you knew they were there.`;
   }
   if (pillarId === "conversion") {
-    return `Visitors with a quick question can't get one answered. Most won't pick up the phone or send an email, they just leave and find someone easier to talk to. That's real money walking off your site every day.`;
+    return `Visitors with a quick question can't get one answered. Most won't pick up the phone or send an email, they just leave and find someone easier to talk to.`;
   }
-  return `There's a hole in the way ${phrase} turns visitors into customers, and it's costing you every week.`;
+  return `There's a hole in the way ${phrase} turns visitors into customers.`;
 }
 
 // One-line summary that sits next to the score badge. Frames the number
@@ -1078,12 +1079,12 @@ function moveFor(pillarId: string, _kind: BusinessKind): { outcome: string; how:
   switch (pillarId) {
     case "pixels":
       return {
-        outcome: "You start seeing exactly which marketing is bringing customers in.",
-        how: "We set up the tracking so every post, every email, every ad, you see what it brought in. No more guessing which channel to put money into.",
+        outcome: "Any marketing you're running starts producing real numbers you can read.",
+        how: "We set up the tracking so every post, every email, every ad has a number behind it. No more guessing which channel to put money into.",
       };
     case "email_capture":
       return {
-        outcome: "You stop losing customers who were almost ready to buy.",
+        outcome: "Visitors who aren't ready to buy yet stop disappearing on you.",
         how: "We build a real offer and hook it to an automated email sequence that follows up for you. Runs on its own, does the selling while you sleep.",
       };
     case "content_hub":
@@ -1093,7 +1094,7 @@ function moveFor(pillarId: string, _kind: BusinessKind): { outcome: string; how:
       };
     case "content_fresh":
       return {
-        outcome: "You get Google sending you free traffic again.",
+        outcome: "Google starts sending traffic to a site it can tell is alive.",
         how: "We get content going on a consistent schedule. Google notices inside a month and starts sending people back. We keep it running so it doesn't go quiet again.",
       };
     case "social":
@@ -1108,7 +1109,7 @@ function moveFor(pillarId: string, _kind: BusinessKind): { outcome: string; how:
       };
     default:
       return {
-        outcome: "You fix a leak that's been costing you customers every week.",
+        outcome: "You close one of the gaps that costs sites like yours business.",
         how: `We handle it end to end so it actually gets done instead of sitting on a to-do list.`,
       };
   }
@@ -1119,12 +1120,12 @@ function moveFor(pillarId: string, _kind: BusinessKind): { outcome: string; how:
 function padMove(idx: number): { outcome: string; how: string } {
   if (idx === 1) {
     return {
-      outcome: "You double down on what's already working.",
+      outcome: "We find what's paying its way and pour fuel on it.",
       how: "We read the numbers every week and put more fuel behind whatever's paying for itself. Social, email, content, ads. Whatever's working gets more.",
     };
   }
   return {
-    outcome: "Your marketing runs without you babysitting it.",
+    outcome: "Your marketing runs on its own. You check in when you want, otherwise it's running.",
     how: "We automate the whole thing. Posts go out, emails go out, numbers get tracked. You check in when you want, otherwise it just runs.",
   };
 }
@@ -1133,7 +1134,7 @@ function padMove(idx: number): { outcome: string; how: string } {
 const HELP_PROOF = `Agencies charge $500 to $2,000 for this exact audit. You got it free because I want you to see what we actually do before we ever talk.`;
 const HELP_OFFER = `We run your marketing on autopilot. Social media, content, emails, ads, tracking. All of it. You see the numbers every week so you always know what's working. You run the business, we bring in the customers.`;
 const HELP_RISK = `No contract. No minimum. If it's not working you'll know because the numbers won't lie. Cancel whenever.`;
-const HELP_URGENCY = `I only take on a few clients at a time so I can actually do the work right. If this sits in your inbox for a month, the gaps on your site are still there costing you customers.`;
+const HELP_URGENCY = `I only take on a few clients at a time so I can actually do the work right. If this sits in your inbox for a month, those gaps are still there.`;
 
 interface SalesEmailContent {
   opener: string;
@@ -1161,7 +1162,7 @@ function buildHappyPathContent(opener: string, phrase: string): SalesEmailConten
     problemBody: `Almost everything I check for is already working for ${phrase}. You're not fixing stuff, you're scaling what's already paying. That's a way better position than most businesses I audit.`,
     moves: [
       {
-        outcome: "You find out which channel is actually making you money and go harder on it.",
+        outcome: "We find which channel's paying its way and pour fuel on it.",
         how: "We dig into the numbers, find what's outperforming everything else, and pour fuel on it. Social, email, content, ads. Whatever's winning gets more.",
       },
       {
@@ -1178,7 +1179,7 @@ function buildHappyPathContent(opener: string, phrase: string): SalesEmailConten
     helpRisk: HELP_RISK,
     helpUrgency: HELP_URGENCY,
     ctaHeadline: "Want us to just do this for you?",
-    ctaSub: "Just reply to this email. Tell me a bit about what you're working on and I'll send over a real plan for ${phrase}.",
+    ctaSub: "Just reply to this email. Tell me a bit about what you're working on and I'll send over a real plan for you.",
     softClose: "I read every reply.",
     ps: `Most businesses I audit have 3 or 4 things broken. Yours doesn't. That means you're closer to real growth than you think.`,
   };
@@ -1219,9 +1220,9 @@ function buildSalesEmailContent(
     helpRisk: HELP_RISK,
     helpUrgency: HELP_URGENCY,
     ctaHeadline: "Want us to just do this for you?",
-    ctaSub: `Just reply to this email. Tell me a bit about what you're working on and I'll send over a real plan for ${phrase}.`,
+    ctaSub: `Just reply to this email. Tell me a bit about what you're working on and I'll send over a real plan for you.`,
     softClose: "I read every reply.",
-    ps: `That ${painLabelFor(top.pillar.id).toLowerCase().replace(/\.$/, "")}? It's costing you customers right now. Not next month. Right now.`,
+    ps: `That ${painLabelFor(top.pillar.id).toLowerCase().replace(/\.$/, "")}? Worth fixing this month, not next.`,
   };
 }
 
