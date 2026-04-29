@@ -82,40 +82,39 @@ export async function requestMagicLink(emailRaw: string): Promise<RequestLoginRe
 }
 
 async function sendLoginEmail(email: string, link: string): Promise<boolean> {
-  const apiKey = process.env.BREVO_API_KEY;
+  const apiKey = process.env.RESEND_API_KEY;
   if (!apiKey) {
-    console.error("[login] BREVO_API_KEY not set, cannot send");
+    console.error("[login] RESEND_API_KEY not set, cannot send");
     return false;
   }
 
   const { html, text, subject } = renderLoginEmail(link);
 
   try {
-    const res = await fetch("https://api.brevo.com/v3/smtp/email", {
+    const res = await fetch("https://api.resend.com/emails", {
       method: "POST",
       headers: {
-        "api-key": apiKey,
+        Authorization: `Bearer ${apiKey}`,
         "Content-Type": "application/json",
-        accept: "application/json",
       },
       body: JSON.stringify({
-        sender: { name: FROM_NAME, email: FROM_EMAIL },
-        to: [{ email }],
-        replyTo: { email: REPLY_TO_EMAIL, name: REPLY_TO_NAME },
+        from: `${FROM_NAME} <${FROM_EMAIL}>`,
+        to: [email],
+        reply_to: REPLY_TO_EMAIL,
         subject,
-        htmlContent: html,
-        textContent: text,
-        tags: ["portal-login"],
+        html,
+        text,
+        tags: [{ name: "source", value: "portal-login" }],
       }),
     });
     if (!res.ok) {
       const body = await res.text();
-      console.error("[login] Brevo send failed", res.status, body);
+      console.error("[login] Resend send failed", res.status, body);
       return false;
     }
     return true;
   } catch (err) {
-    console.error("[login] Brevo send threw", err);
+    console.error("[login] Resend send threw", err);
     return false;
   }
 }

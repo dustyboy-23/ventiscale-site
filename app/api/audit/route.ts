@@ -1,7 +1,6 @@
 import { NextResponse, after } from "next/server";
 import {
   runAudit,
-  renderAuditEmail,
   buildMarketingPlan,
   type AuditResult,
 } from "@/lib/audit";
@@ -12,9 +11,14 @@ import { checkRateLimit } from "@/lib/rate-limit";
 // 1. Validates input
 // 2. Persists the lead to Supabase (audit_leads) so nothing is lost
 // 3. Runs a 15-check surface audit on the submitted URL
-// 4. Emails the visitor their personalized audit report (Brevo)
-// 5. Notifies dustin@ventiscale.com with lead + grade summary (Brevo)
-// 6. Telegram pings on new lead AND on any Brevo failure
+// 4. Stores the audit results + marketing plan on the row
+// 5. Telegram pings on new lead
+//
+// Email delivery (visitor audit report + lead notification) is handled
+// asynchronously by the local cron worker at
+//   ~/venti-scale/portal/scripts/send-pending-audit-emails.py
+// which sends from dustin@ventiscale.com via the already-authed gog Gmail
+// OAuth setup. This route never touches a transactional email API.
 
 interface AuditRequest {
   id: string;
@@ -31,130 +35,11 @@ interface AuditRequest {
 export const runtime = "nodejs";
 export const maxDuration = 60;
 
-const NOTIFY_TO = "dustin@ventiscale.com";
-const NOTIFY_FROM_EMAIL = "noreply@ventiscale.com";
-const NOTIFY_FROM_NAME = "Venti Scale Audit";
-
 // Persistent rate limit via Supabase rate_limits table. Max 3 audit
 // submissions per IP per 10 minutes. Survives cold starts, which the
 // old in-memory Map did not.
 const AUDIT_RATE_LIMIT_MAX = 3;
 const AUDIT_RATE_LIMIT_WINDOW_MS = 10 * 60 * 1000;
-
-async function brevoSend(payload: Record<string, unknown>) {
-  const apiKey = process.env.BREVO_API_KEY;
-  if (!apiKey) {
-    console.warn("[audit] BREVO_API_KEY not set, skipping email send");
-    return false;
-  }
-  try {
-    const res = await fetch("https://api.brevo.com/v3/smtp/email", {
-      method: "POST",
-      headers: {
-        "api-key": apiKey,
-        "Content-Type": "application/json",
-        accept: "application/json",
-      },
-      body: JSON.stringify(payload),
-    });
-    if (!res.ok) {
-      const text = await res.text();
-      console.error("[audit] Brevo send failed", res.status, text);
-      return false;
-    }
-    return true;
-  } catch (err) {
-    console.error("[audit] Brevo send threw", err);
-    return false;
-  }
-}
-
-async function sendAuditToVisitor(entry: AuditRequest, result: AuditResult) {
-  const { subject, html, text } = renderAuditEmail(result, entry.email, entry.business, entry.name);
-  return brevoSend({
-    sender: { name: NOTIFY_FROM_NAME, email: NOTIFY_FROM_EMAIL },
-    to: [{ email: entry.email }],
-    replyTo: { email: "dustin@ventiscale.com", name: "Dustin at Venti Scale" },
-    subject,
-    htmlContent: html,
-    textContent: text,
-  });
-}
-
-async function sendLeadNotification(entry: AuditRequest, result: AuditResult) {
-  const failed = result.checks.filter((c) => c.status === "fail").length;
-  const warned = result.checks.filter((c) => c.status === "warn").length;
-  const passed = result.checks.filter((c) => c.status === "pass").length;
-  const gradeColor =
-    result.grade === "A" ? "#10E39A" :
-    result.grade === "B" ? "#10E39A" :
-    result.grade === "C" ? "#F5B841" :
-    "#C8362B";
-
-  const subtle = "rgba(255,255,255,0.55)";
-  const muted = "rgba(255,255,255,0.72)";
-  const rowStyle = `padding:8px 14px 8px 0;color:${subtle};font-family:'SF Mono',Menlo,Consolas,monospace;font-size:11px;letter-spacing:0.08em;text-transform:uppercase;vertical-align:top;`;
-  const valStyle = `padding:8px 0;color:#F5F6FA;font-size:14px;vertical-align:top;`;
-
-  const reachableRow = result.reachable
-    ? `<tr><td style="${rowStyle}">Grade</td><td style="${valStyle}"><strong style="color:${gradeColor};font-size:22px;font-family:Georgia,serif;">${result.grade}</strong> <span style="color:${subtle};font-size:13px;">· ${result.score}/100</span></td></tr>
-       <tr><td style="${rowStyle}">Checks</td><td style="${valStyle}"><span style="color:#C8362B;">${failed} failed</span> · <span style="color:#F5B841;">${warned} warnings</span> · <span style="color:#10E39A;">${passed} passed</span></td></tr>
-       <tr><td style="${rowStyle}">Final URL</td><td style="${valStyle}"><a href="${result.finalUrl}" style="color:#5280FF;text-decoration:none;">${result.finalUrl}</a></td></tr>`
-    : `<tr><td style="${rowStyle}">Status</td><td style="${valStyle};color:#C8362B;"><strong>UNREACHABLE</strong>. ${result.error || "site did not respond"}</td></tr>`;
-
-  const subject = result.reachable
-    ? `New audit lead: ${entry.url} · Grade ${result.grade} (${result.score})`
-    : `New audit lead: ${entry.url} · UNREACHABLE`;
-
-  const escapeHtml = (s: string) =>
-    s
-      .replace(/&/g, "&amp;")
-      .replace(/</g, "&lt;")
-      .replace(/>/g, "&gt;")
-      .replace(/"/g, "&quot;")
-      .replace(/'/g, "&#39;");
-
-  const notesHtml = entry.notes
-    ? escapeHtml(entry.notes).replace(/\n/g, "<br>")
-    : `<span style="color:${subtle};">(none)</span>`;
-
-  const htmlContent = `
-    <div style="background:#07080C;padding:40px 20px;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif;">
-      <div style="max-width:560px;margin:0 auto;background:#11131B;border:1px solid rgba(255,255,255,0.08);border-radius:16px;padding:36px 32px;">
-        <div style="font-family:'SF Mono',Menlo,Consolas,monospace;font-size:10px;letter-spacing:0.22em;text-transform:uppercase;color:${subtle};margin-bottom:10px;">
-          Venti Scale · New lead
-        </div>
-        <h1 style="margin:0 0 22px;font-family:Georgia,serif;font-size:26px;font-weight:400;letter-spacing:-0.01em;color:#F5F6FA;">
-          New audit lead
-        </h1>
-        <table style="border-collapse:collapse;width:100%;">
-          <tr><td style="${rowStyle}">Name</td><td style="${valStyle}">${escapeHtml(entry.name)}</td></tr>
-          <tr><td style="${rowStyle}">Business</td><td style="${valStyle}">${escapeHtml(entry.business)}</td></tr>
-          <tr><td style="${rowStyle}">Website</td><td style="${valStyle}"><a href="${result.finalUrl || entry.url}" style="color:#5280FF;text-decoration:none;">${escapeHtml(entry.url)}</a></td></tr>
-          <tr><td style="${rowStyle}">Email</td><td style="${valStyle}"><a href="mailto:${entry.email}" style="color:#5280FF;text-decoration:none;">${escapeHtml(entry.email)}</a></td></tr>
-          ${reachableRow}
-          <tr><td style="${rowStyle}">Notes</td><td style="${valStyle}color:${muted};">${notesHtml}</td></tr>
-          <tr><td style="${rowStyle}">Received</td><td style="${valStyle}color:${muted};font-size:12px;">${entry.receivedAt}</td></tr>
-          <tr><td style="${rowStyle}">ID</td><td style="${valStyle}font-family:'SF Mono',Menlo,monospace;font-size:11px;color:${subtle};">${entry.id}</td></tr>
-          <tr><td style="${rowStyle}">IP</td><td style="${valStyle}font-family:'SF Mono',Menlo,monospace;font-size:11px;color:${subtle};">${entry.ip || "unknown"}</td></tr>
-        </table>
-        <div style="margin-top:28px;padding-top:24px;border-top:1px solid rgba(255,255,255,0.08);">
-          <p style="margin:0;font-size:13px;color:${muted};line-height:1.55;">
-            Their plan email is on the way. Reply directly to this notification to follow up with them today.
-          </p>
-        </div>
-      </div>
-    </div>
-  `.trim();
-
-  return brevoSend({
-    sender: { name: NOTIFY_FROM_NAME, email: NOTIFY_FROM_EMAIL },
-    to: [{ email: NOTIFY_TO }],
-    replyTo: { email: entry.email },
-    subject,
-    htmlContent,
-  });
-}
 
 function escapeMarkdown(s: string) {
   // Telegram Markdown (legacy) parse_mode, escape the reserved chars that
@@ -179,7 +64,7 @@ async function sendTelegramPing(entry: AuditRequest): Promise<boolean> {
       `*Website:* ${escapeMarkdown(entry.url)}\n` +
       `*Email:* ${escapeMarkdown(entry.email)}` +
       notesBlock +
-      `\n\n_Pull the pitch template at pitch-templates/audit-delivery.md, customize it, and send from hello@ventiscale.com today._`;
+      `\n\n_The audit email queue worker will deliver their plan within 5 minutes._`;
 
     const res = await fetch(`https://api.telegram.org/bot${token}/sendMessage`, {
       method: "POST",
@@ -201,9 +86,9 @@ async function sendTelegramPing(entry: AuditRequest): Promise<boolean> {
 async function sendTelegramAlert(text: string) {
   const token = process.env.TELEGRAM_BOT_TOKEN;
   const chatId = process.env.TELEGRAM_CHAT_ID;
-  if (!token || !chatId) return;
+  if (!token || !chatId) return false;
   try {
-    await fetch(`https://api.telegram.org/bot${token}/sendMessage`, {
+    const res = await fetch(`https://api.telegram.org/bot${token}/sendMessage`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
@@ -213,8 +98,10 @@ async function sendTelegramAlert(text: string) {
         disable_web_page_preview: true,
       }),
     });
+    return res.ok;
   } catch (err) {
     console.error("[audit] telegram alert threw", err);
+    return false;
   }
 }
 
@@ -365,8 +252,8 @@ export async function POST(req: Request) {
 
   // All heavy lifting runs after the response is sent so the visitor sees
   // instant success. The lead is persisted first thing so nothing is lost
-  // even if the audit or email steps fail. after() still counts against
-  // maxDuration (60s) but doesn't make the user wait.
+  // even if the audit step fails. Email delivery happens out-of-band via
+  // the local cron worker; this route never sends mail itself.
   after(async () => {
     await insertLead(entry);
 
@@ -393,26 +280,6 @@ export async function POST(req: Request) {
         checks: result.checks || null,
         plan_markdown: planMarkdown,
       });
-
-      const [visitorSent, leadSent] = await Promise.all([
-        sendAuditToVisitor(entry, result),
-        sendLeadNotification(entry, result),
-      ]);
-
-      await updateLead(entry.id, {
-        email_visitor_sent: visitorSent,
-        email_lead_sent: leadSent,
-      });
-
-      if (!visitorSent || !leadSent) {
-        const which = [
-          !visitorSent ? "visitor email" : null,
-          !leadSent ? "lead notification" : null,
-        ].filter(Boolean).join(" + ");
-        await sendTelegramAlert(
-          `⚠️ *Brevo delivery failed*\n\nLead: ${escapeMarkdown(entry.name)} (${escapeMarkdown(entry.email)})\nSite: ${escapeMarkdown(entry.url)}\nFailed: ${which}\nLead ID: \`${entry.id}\`\n\nCheck Vercel function logs and follow up manually.`,
-        );
-      }
     } else {
       await updateLead(entry.id, { reachable: false, error: "runAudit threw" });
       await sendTelegramAlert(
