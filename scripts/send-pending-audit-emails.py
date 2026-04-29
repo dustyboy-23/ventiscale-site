@@ -53,6 +53,15 @@ SEND_FROM_ACCOUNT = "dustin@ventiscale.com"
 LEAD_NOTIFY_TO = "dustin@ventiscale.com"
 DEFAULT_LIMIT = 25
 
+# CASL (Canada) + CAN-SPAM (US) require every commercial email to include the
+# sender's physical mailing address and a working unsubscribe mechanism.
+# Both env vars come from .env.local (loaded via load_env). If
+# VS_BUSINESS_ADDRESS is unset, the footer falls back to a clearly-marked
+# placeholder so non-compliant sends are visible immediately rather than
+# silent.
+BUSINESS_NAME_FALLBACK = "Venti Scale LLC"
+BUSINESS_ADDRESS_FALLBACK = "[mailing address pending — set VS_BUSINESS_ADDRESS in .env.local]"
+
 
 def load_env(path: Path) -> dict:
     env = {}
@@ -96,7 +105,40 @@ def clean_hostname(url: str) -> str:
     return cleaned
 
 
-def render_visitor_email(row: dict) -> dict:
+def build_compliance_footer(env: dict) -> tuple[str, str]:
+    """Returns (text_footer, html_footer) for CASL + CAN-SPAM compliance.
+
+    Required elements:
+      - identification of the sender (business name)
+      - physical mailing address
+      - reason recipient is being contacted (consent reminder)
+      - working opt-out mechanism (Reply STOP, manual processing within 10 bd)
+      - link to privacy policy
+    """
+    business = env.get("VS_BUSINESS_NAME") or BUSINESS_NAME_FALLBACK
+    address = env.get("VS_BUSINESS_ADDRESS") or BUSINESS_ADDRESS_FALLBACK
+    text = (
+        "\n\n--\n"
+        "Why you got this email: you requested an audit at ventiscale.com. The audit and the growth plan above were prepared in response to that request.\n\n"
+        "Don't want any further emails from me? Reply with the word STOP and I'll never email you again. (Allow up to 10 business days to process.)\n\n"
+        f"{business} · {address}\n"
+        "Privacy: https://www.ventiscale.com/privacy\n"
+        "Contact: hello@ventiscale.com\n"
+    )
+    html = (
+        "<div style=\"margin-top:48px;padding-top:24px;border-top:1px solid #eee;color:#888;font-size:12px;line-height:1.6;\">"
+        "<p style=\"margin:0 0 8px;\"><strong style=\"color:#666;\">Why you got this email:</strong> you requested an audit at "
+        "<a href=\"https://www.ventiscale.com\" style=\"color:#888;\">ventiscale.com</a>. The audit and the growth plan above were prepared in response to that request.</p>"
+        "<p style=\"margin:0 0 8px;\">Don't want any further emails from me? Reply with the word <strong style=\"color:#666;\">STOP</strong> and I'll never email you again. (Allow up to 10 business days to process.)</p>"
+        f"<p style=\"margin:0 0 4px;\">{html_escape(business)} &middot; {html_escape(address)}</p>"
+        "<p style=\"margin:0;\"><a href=\"https://www.ventiscale.com/privacy\" style=\"color:#888;\">Privacy Policy</a> &middot; "
+        "<a href=\"mailto:hello@ventiscale.com\" style=\"color:#888;\">hello@ventiscale.com</a></p>"
+        "</div>"
+    )
+    return text, html
+
+
+def render_visitor_email(row: dict, env: dict) -> dict:
     """Returns {subject, html, text} for the visitor's audit report email."""
     name = row.get("name") or ""
     email = row.get("email") or ""
@@ -109,6 +151,7 @@ def render_visitor_email(row: dict) -> dict:
     error = row.get("error") or ""
     checks = row.get("checks") or []
     plan_markdown = row.get("plan_markdown") or ""
+    footer_text, footer_html = build_compliance_footer(env)
 
     display_url = clean_hostname(final_url or url)
     first = first_name(name)
@@ -125,6 +168,7 @@ def render_visitor_email(row: dict) -> dict:
             "  - DNS isn't resolving from our server.\n\n"
             "Reply to this email with the correct URL and I'll run it manually.\n\n"
             "Dustin Gilmour\nVenti Scale\nhttps://www.ventiscale.com"
+            f"{footer_text}"
         )
         html = (
             "<div style=\"font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif;"
@@ -139,6 +183,7 @@ def render_visitor_email(row: dict) -> dict:
             "<p>Reply to this email with the correct URL and I'll run it manually.</p>"
             "<p style=\"margin-top:32px;color:#555;\">Dustin Gilmour<br>"
             "<a href=\"https://www.ventiscale.com\" style=\"color:#5280FF;text-decoration:none;\">ventiscale.com</a></p>"
+            f"{footer_html}"
             "</div>"
         )
         return {"subject": subject, "html": html, "text": text}
@@ -224,6 +269,7 @@ def render_visitor_email(row: dict) -> dict:
         "<a href=\"https://www.ventiscale.com#audit\" style=\"color:#5280FF;text-decoration:none;\">check out what running on Venti Scale looks like</a>.</p>"
         "<p style=\"margin-top:28px;color:#555;\">Dustin Gilmour<br>"
         "<a href=\"https://www.ventiscale.com\" style=\"color:#5280FF;text-decoration:none;\">ventiscale.com</a></p>"
+        f"{footer_html}"
         "</div>"
     )
 
@@ -255,7 +301,7 @@ def render_visitor_email(row: dict) -> dict:
     text_lines.append("Venti Scale")
     text_lines.append("https://www.ventiscale.com")
 
-    return {"subject": subject, "html": html, "text": "\n".join(text_lines)}
+    return {"subject": subject, "html": html, "text": "\n".join(text_lines) + footer_text}
 
 
 def render_lead_notification(row: dict) -> dict:
@@ -463,7 +509,7 @@ def main():
 
         # Build emails
         try:
-            visitor = render_visitor_email(row)
+            visitor = render_visitor_email(row, env)
             lead_notif = render_lead_notification(row)
         except Exception as e:
             print(f"  ! render failed for {lead_id}: {e}", file=sys.stderr)

@@ -241,6 +241,10 @@ export function AuditForm({ variant = "hero" }: Props) {
       <p className="mt-4 text-[11px] font-mono uppercase tracking-[0.16em] text-white/55 text-center">
         Takes 60 seconds · Plan in your inbox today · One quick call, no hard sell
       </p>
+      <p className="mt-3 text-[11px] leading-[1.55] text-white/40 text-center max-w-[480px] mx-auto">
+        By submitting, you&apos;re asking me to run the audit and email you the plan. I&apos;ll also follow up about how Venti Scale could help. You can reply <strong className="text-white/60">STOP</strong> any time and I&apos;ll never email you again. See the{" "}
+        <a href="/privacy" className="underline hover:text-white/70 transition-colors">privacy policy</a>.
+      </p>
       {error && (
         <p
           role="alert"
