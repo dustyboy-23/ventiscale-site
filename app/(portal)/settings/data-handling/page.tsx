@@ -84,19 +84,20 @@ export default async function DataHandlingPage() {
             </div>
             <div className="flex-1">
               <h3 className="text-[15px] font-semibold text-[var(--color-ink)] tracking-tight">
-                Passwordless authentication
+                Sign in with Google (OAuth 2.0)
               </h3>
               <p className="text-[13px] text-[var(--color-ink-muted)] mt-2 leading-relaxed">
-                Sign-in is performed via a one-time link sent to the user&apos;s registered
-                email address. No passwords are stored, transmitted, or recoverable, because
-                no password exists. This is the same authentication pattern used by Slack,
-                Notion, and Substack. An unauthorized sign-in attempt would generate a
-                sign-in email the user did not request; that email should be ignored and
-                reported.
+                Authentication is handled by <strong>Google OAuth 2.0</strong>. The portal
+                never sees the user&apos;s Google password; Google verifies the identity and
+                returns a signed token, which the portal exchanges for a session. This is
+                the same authentication standard used by Slack, Notion, Figma, GitHub, and
+                most enterprise SaaS. No password exists on Venti Scale&apos;s side, so there
+                is no password database to breach.
               </p>
               <p className="text-[12px] text-[var(--color-ink-subtle)] mt-3 leading-relaxed">
-                If a session expires and access is locked out, contact Venti Scale support
-                and a new sign-in link will be issued promptly.
+                If Google sign-in is unavailable for any reason, a one-time email link can
+                be issued as a fallback. If a session expires and access is locked out,
+                contact Venti Scale support and a new session will be set up promptly.
               </p>
             </div>
           </div>

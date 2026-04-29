@@ -11,7 +11,13 @@ function safeNext(raw: string | null): string {
   // not start with `//` (protocol-relative) or `/\\` (backslash trick).
   if (!raw.startsWith("/")) return "/dashboard";
   if (raw.startsWith("//") || raw.startsWith("/\\")) return "/dashboard";
-  return raw;
+  // Strip CR/LF (header-injection paranoia) and cap length. A legitimate
+  // post-login destination is always a portal route — short, ASCII path
+  // characters only. Anything weirder gets the safe default.
+  const cleaned = raw.replace(/[\r\n]/g, "");
+  if (cleaned.length > 200) return "/dashboard";
+  if (!/^\/[A-Za-z0-9_\-./?=&%]*$/.test(cleaned)) return "/dashboard";
+  return cleaned;
 }
 
 // Magic-link landing URL. Supabase sends the user here with a one-time

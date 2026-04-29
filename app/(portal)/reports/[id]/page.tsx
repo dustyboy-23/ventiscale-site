@@ -43,6 +43,11 @@ export default async function ReportViewerPage({
           title={meta?.title || "Report"}
           className="w-full block border-0"
           style={{ height: "calc(100vh - 180px)", minHeight: "800px" }}
+          // Reports are static HTML+CSS only — no scripts needed. allow-same-origin
+          // lets internal links and forms resolve relative to the parent; we omit
+          // allow-scripts so any future malicious HTML can't run JS.
+          sandbox="allow-same-origin allow-popups allow-popups-to-escape-sandbox"
+          referrerPolicy="no-referrer"
         />
       </div>
     </>
