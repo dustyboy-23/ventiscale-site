@@ -304,32 +304,25 @@ export async function getClientKpis(period: PeriodKey = "28d"): Promise<ClientKp
 // ──────────────────────────────────────────────────────────
 const DEMO_REPORTS: ReportSummary[] = [
   {
-    id: "client-2026-04-07",
-    title: "Weekly Performance Report",
-    date: "2026-04-07",
+    id: "client-monthly-2026-04",
+    title: "Monthly Performance Report · Apr 1-28, 2026",
+    date: "2026-04-28",
     type: "client",
-    path: "client-2026-04-07.html",
+    path: "client-monthly-2026-04.html",
   },
   {
-    id: "client-2026-03-31",
-    title: "Weekly Performance Report",
-    date: "2026-03-31",
-    type: "client",
-    path: "client-2026-03-31.html",
-  },
-  {
-    id: "seo-2026-04-01",
-    title: "SEO Content Plan",
-    date: "2026-04-01",
+    id: "seo-monthly-2026-04",
+    title: "Monthly SEO Report · Apr 1-28, 2026",
+    date: "2026-04-28",
     type: "seo",
-    path: "seo-2026-04-01.html",
+    path: "seo-monthly-2026-04.html",
   },
   {
-    id: "baseline-2026-03-15",
-    title: "Baseline Report",
-    date: "2026-03-15",
-    type: "baseline",
-    path: "baseline-2026-03-15.html",
+    id: "strategy-q2-2026",
+    title: "Q2 Strategy Brief — 90-day plan",
+    date: "2026-04-15",
+    type: "internal",
+    path: "strategy-q2-2026.html",
   },
 ];
 
@@ -337,223 +330,445 @@ export async function getReports(): Promise<ReportSummary[]> {
   return DEMO_REPORTS;
 }
 
-function demoReportHtml(title: string, subtitle: string, body: string): string {
-  return `<!doctype html>
-<html>
-<head>
-<meta charset="utf-8" />
-<title>${title}</title>
-<style>
+// Shared style block for all demo reports — mirrors the SG production
+// report aesthetic so prospects see the same standard of work.
+const DEMO_REPORT_STYLES = `
   :root {
     --ink: #0F1115;
     --ink-muted: #4A5160;
     --ink-subtle: #8A93A4;
     --accent: #1F3D2B;
+    --accent-soft: #E6EFE8;
+    --gold: #C9A654;
+    --warn: #B3721D;
+    --warn-soft: #FBF3E1;
+    --danger: #B03A2E;
+    --danger-soft: #FBE9E5;
     --border: #E8EAF0;
-    --surface: #FAFAFB;
+    --border-soft: #F1F3F7;
+    --surface: #FAFBFC;
   }
   * { box-sizing: border-box; }
   body {
     font-family: -apple-system, BlinkMacSystemFont, 'Inter', sans-serif;
-    color: var(--ink);
-    background: white;
-    margin: 0;
-    padding: 48px 56px;
-    line-height: 1.55;
-    max-width: 820px;
+    color: var(--ink); background: #ffffff;
+    margin: 0; padding: 48px 56px 72px;
+    line-height: 1.6; font-size: 15px;
+    -webkit-font-smoothing: antialiased;
   }
+  .wrap { max-width: 860px; margin: 0 auto; }
+  .hero {
+    background: linear-gradient(135deg, #0F1115 0%, #1F3D2B 100%);
+    color: #fff; border-radius: 16px;
+    padding: 32px 36px; margin-bottom: 28px;
+  }
+  .hero .brand-mark {
+    font-size: 11px; text-transform: uppercase; letter-spacing: 0.18em;
+    opacity: 0.85; margin-bottom: 10px;
+  }
+  .hero h1 { margin: 0 0 6px; font-size: 30px; letter-spacing: -0.018em; font-weight: 700; line-height: 1.15; }
+  .hero .sub { margin: 0; opacity: 0.85; font-size: 15px; }
+  .hero .period { margin-top: 16px; font-size: 11.5px; opacity: 0.85; text-transform: uppercase; letter-spacing: 0.08em; }
   .eyebrow {
-    font-size: 11px;
-    font-weight: 600;
-    text-transform: uppercase;
-    letter-spacing: 0.12em;
-    color: var(--accent);
-    margin-bottom: 12px;
+    font-size: 11px; text-transform: uppercase; letter-spacing: 0.12em;
+    color: var(--accent); font-weight: 700; margin: 36px 0 8px;
   }
-  h1 {
-    font-size: 32px;
-    font-weight: 700;
-    letter-spacing: -0.02em;
-    margin: 0 0 8px;
-  }
-  .subtitle {
-    font-size: 15px;
-    color: var(--ink-muted);
-    margin-bottom: 40px;
-  }
-  h2 {
-    font-size: 18px;
-    font-weight: 700;
-    letter-spacing: -0.015em;
-    margin: 36px 0 14px;
-    padding-bottom: 10px;
-    border-bottom: 1px solid var(--border);
-  }
-  p, li { font-size: 14px; color: var(--ink-muted); }
+  h2 { font-size: 19px; font-weight: 700; letter-spacing: -0.012em; margin: 0 0 14px; color: var(--ink); }
+  h3 { font-size: 15px; font-weight: 700; margin: 20px 0 8px; }
+  p { margin: 0 0 14px; color: var(--ink-muted); }
+  .lead { font-size: 16px; color: var(--ink); margin-bottom: 20px; }
+  em, .italic { font-style: italic; color: var(--ink-muted); }
   strong { color: var(--ink); font-weight: 600; }
-  .kpi-grid {
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    gap: 12px;
-    margin: 24px 0;
+  .summary-box {
+    background: var(--surface); border: 1px solid var(--border);
+    border-left: 4px solid var(--accent);
+    padding: 18px 24px; border-radius: 12px; margin: 4px 0 24px;
   }
-  .kpi {
-    background: var(--surface);
-    border: 1px solid var(--border);
-    border-radius: 10px;
-    padding: 16px;
+  .summary-box p { margin: 0 0 10px; font-size: 15px; color: var(--ink); }
+  .summary-box p:last-child { margin: 0; }
+  .kpi-row { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; margin: 8px 0 24px; }
+  .kpi { background: var(--surface); border: 1px solid var(--border); border-radius: 14px; padding: 16px 18px; }
+  .kpi .label { font-size: 10.5px; text-transform: uppercase; letter-spacing: 0.08em; color: var(--ink-subtle); font-weight: 600; margin-bottom: 6px; }
+  .kpi .value { font-size: 22px; font-weight: 700; letter-spacing: -0.02em; color: var(--ink); line-height: 1.1; font-variant-numeric: tabular-nums; }
+  .kpi .delta { display: inline-block; font-size: 11px; font-weight: 600; padding: 1px 6px; border-radius: 4px; margin-top: 6px; }
+  .delta-good { color: var(--accent); background: var(--accent-soft); }
+  .delta-bad  { color: var(--danger); background: var(--danger-soft); }
+  .delta-neutral { color: var(--ink-subtle); background: var(--border-soft); }
+  table { width: 100%; border-collapse: collapse; font-size: 13.5px; margin-bottom: 8px; }
+  thead th { text-align: left; font-size: 10.5px; text-transform: uppercase; letter-spacing: 0.08em; color: var(--ink-subtle); font-weight: 600; padding: 8px 10px; border-bottom: 1px solid var(--border); }
+  tbody td { padding: 10px; border-bottom: 1px solid var(--border); font-variant-numeric: tabular-nums; }
+  tbody tr:last-child td { border-bottom: none; }
+  td.right, th.right { text-align: right; }
+  td.bold, .bold { font-weight: 600; }
+  .badge { display: inline-block; padding: 2px 8px; border-radius: 999px; font-size: 11.5px; font-weight: 600; }
+  .badge-green { background: var(--accent-soft); color: var(--accent); }
+  .badge-gold { background: #FBF3E1; color: var(--warn); }
+  .badge-red { background: var(--danger-soft); color: var(--danger); }
+  .callout { border-left: 3px solid var(--accent); background: var(--accent-soft); border-radius: 0 10px 10px 0; padding: 16px 20px; margin: 14px 0 22px; }
+  .callout-warn { border-left-color: var(--warn); background: var(--warn-soft); }
+  .callout-warn .callout-title { color: var(--warn); }
+  .callout-bad { border-left-color: var(--danger); background: var(--danger-soft); }
+  .callout-bad .callout-title { color: var(--danger); }
+  .callout-title { font-weight: 700; margin-bottom: 6px; font-size: 13px; text-transform: uppercase; letter-spacing: 0.06em; color: var(--accent); }
+  .callout-body { font-size: 14px; color: var(--ink-muted); }
+  .row { display: flex; justify-content: space-between; align-items: baseline; font-size: 14px; margin-bottom: 6px; }
+  .row .name { color: var(--ink); font-weight: 500; }
+  .row .val { color: var(--ink-muted); font-variant-numeric: tabular-nums; }
+  .bar { height: 6px; background: var(--border-soft); border-radius: 999px; overflow: hidden; margin-top: 4px; }
+  .bar-fill { height: 100%; background: var(--accent); }
+  ul { padding-left: 20px; margin: 12px 0; color: var(--ink-muted); }
+  ul li { margin-bottom: 6px; font-size: 14px; }
+  .signoff { margin-top: 36px; padding-top: 18px; border-top: 1px solid var(--border); font-size: 14px; color: var(--ink-muted); }
+  .signoff .name { font-weight: 600; color: var(--ink); }
+  .footer-meta { margin-top: 24px; font-size: 11.5px; color: var(--ink-subtle); }
+  @media (max-width: 720px) {
+    body { padding: 24px 20px 60px; }
+    .kpi-row { grid-template-columns: repeat(2, 1fr); }
   }
-  .kpi-label {
-    font-size: 11px;
-    font-weight: 600;
-    text-transform: uppercase;
-    letter-spacing: 0.08em;
-    color: var(--ink-subtle);
-  }
-  .kpi-value {
-    font-size: 24px;
-    font-weight: 700;
-    margin-top: 6px;
-    font-variant-numeric: tabular-nums;
-  }
-  .kpi-hint {
-    font-size: 12px;
-    color: var(--accent);
-    margin-top: 4px;
-    font-weight: 500;
-  }
-  ul { padding-left: 20px; margin: 12px 0; }
-  li { margin-bottom: 8px; }
-  table { width: 100%; border-collapse: collapse; margin: 16px 0; }
-  th, td {
-    text-align: left;
-    font-size: 13px;
-    padding: 10px 12px;
-    border-bottom: 1px solid var(--border);
-  }
-  th {
-    font-weight: 600;
-    color: var(--ink-subtle);
-    text-transform: uppercase;
-    font-size: 11px;
-    letter-spacing: 0.06em;
-  }
-  td { color: var(--ink); font-variant-numeric: tabular-nums; }
-</style>
+`;
+
+function demoReportShell(title: string, body: string): string {
+  return `<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>${title} · Stoneline Apparel</title>
+<style>${DEMO_REPORT_STYLES}</style>
 </head>
 <body>
-  <div class="eyebrow">Stoneline Apparel · Demo report</div>
-  <h1>${title}</h1>
-  <div class="subtitle">${subtitle}</div>
-  ${body}
+<div class="wrap">
+${body}
+</div>
 </body>
 </html>`;
 }
 
 const REPORT_HTML: Record<string, string> = {
-  "client-2026-04-07": demoReportHtml(
-    "Weekly Performance Report",
-    "Mar 31 – Apr 7, 2026 · Stoneline Apparel",
+  // ───────────────────────────────────────────────────────────
+  // Monthly Performance Report — Stoneline Apparel
+  // Mirrors the SG production weekly-report-refresh template.
+  // ───────────────────────────────────────────────────────────
+  "client-monthly-2026-04": demoReportShell(
+    "Monthly Performance Report",
     `
-    <div class="kpi-grid">
-      <div class="kpi"><div class="kpi-label">Revenue</div><div class="kpi-value">$12,480</div><div class="kpi-hint">+18% WoW</div></div>
-      <div class="kpi"><div class="kpi-label">Orders</div><div class="kpi-value">81</div><div class="kpi-hint">$154 AOV</div></div>
-      <div class="kpi"><div class="kpi-label">New customers</div><div class="kpi-value">62</div><div class="kpi-hint">19 repeat</div></div>
-      <div class="kpi"><div class="kpi-label">Conversion</div><div class="kpi-value">3.9%</div><div class="kpi-hint">+0.3pt</div></div>
+    <div class="hero">
+      <div class="brand-mark">Stoneline Apparel · Heritage Menswear</div>
+      <h1>Monthly Performance Report</h1>
+      <p class="sub">Where the business stands, what changed, what to lean into next.</p>
+      <div class="period">Period · April 1-28, 2026 · 28 days &nbsp;·&nbsp; Compared to · March 4-31, 2026</div>
     </div>
 
-    <h2>What moved</h2>
-    <ul>
-      <li><strong>Heritage tee bundle</strong> drove 41% of the week's revenue. Bundle economics continue to carry the store.</li>
-      <li><strong>Email welcome series</strong> generated $3,120 from new subscribers — highest weekly email revenue since launch.</li>
-      <li><strong>Organic search</strong> sessions up 9% WoW. Two articles from the SEO plan started ranking on page 1.</li>
-    </ul>
-
-    <h2>Where we're leaking</h2>
-    <ul>
-      <li>Mobile checkout still sits at 3.48% vs 4.46% desktop. Shipping the mobile fix this week.</li>
-      <li>Paid social ROAS came in at 1.8x — below the 2.5x floor. Three new creatives queued for Tuesday.</li>
-    </ul>
-
-    <h2>This week's focus</h2>
-    <ul>
-      <li>Ship abandoned-cart automation (drafted, awaiting approval in Email tab)</li>
-      <li>Refresh paid social creative — founder-voice test vs product-shot control</li>
-      <li>Publish next SEO article: "how to care for selvedge denim"</li>
-    </ul>
-  `,
-  ),
-  "client-2026-03-31": demoReportHtml(
-    "Weekly Performance Report",
-    "Mar 24 – Mar 31, 2026 · Stoneline Apparel",
-    `
-    <div class="kpi-grid">
-      <div class="kpi"><div class="kpi-label">Revenue</div><div class="kpi-value">$10,580</div><div class="kpi-hint">+12% WoW</div></div>
-      <div class="kpi"><div class="kpi-label">Orders</div><div class="kpi-value">69</div><div class="kpi-hint">$153 AOV</div></div>
-      <div class="kpi"><div class="kpi-label">New customers</div><div class="kpi-value">54</div><div class="kpi-hint">15 repeat</div></div>
-      <div class="kpi"><div class="kpi-label">Conversion</div><div class="kpi-value">3.6%</div><div class="kpi-hint">+0.1pt</div></div>
+    <div class="eyebrow">Executive Summary</div>
+    <h2>The 30-second read</h2>
+    <div class="summary-box">
+      <p>Best month on record. Net revenue hit <strong>$48,920</strong> on 318 orders, up <strong>+24%</strong> versus the prior 28-day window. Average order value climbed from $144 to $154 as the Heritage Field Jacket launch shifted the mix toward higher-ticket pieces.</p>
+      <p>Paid spend stayed disciplined: <strong>$8,640 in / $19,290 out</strong> across Meta and Google, blended <strong>2.23x ROAS</strong>. Email did the quiet work — the welcome series alone returned <strong>$5,140</strong> from 142 new subscribers. Mobile conversion is still the gap to close (1.8% mobile vs 4.4% desktop).</p>
     </div>
-    <h2>Highlights</h2>
-    <ul>
-      <li>Welcome series launched mid-week — first 5 days pulled $1,840.</li>
-      <li>Field jacket restock sold through in 72 hours.</li>
-    </ul>
-  `,
-  ),
-  "seo-2026-04-01": demoReportHtml(
-    "SEO Content Plan — Q2 2026",
-    "12-week content runway · 18 target keywords",
-    `
-    <h2>Target keywords (priority tier)</h2>
+
+    <div class="eyebrow">Section 1 · Profit &amp; Loss</div>
+    <h2>Where every dollar landed</h2>
     <table>
-      <thead><tr><th>Keyword</th><th>Volume</th><th>Difficulty</th><th>Current</th></tr></thead>
+      <thead><tr><th>Line</th><th class="right">Amount</th></tr></thead>
       <tbody>
-        <tr><td>selvedge denim brands</td><td>2,900</td><td>28</td><td>Pos 8</td></tr>
-        <tr><td>heritage mens tee</td><td>1,800</td><td>22</td><td>Pos 9</td></tr>
-        <tr><td>best field jacket men</td><td>3,600</td><td>34</td><td>Pos 15</td></tr>
-        <tr><td>made in usa menswear</td><td>2,100</td><td>31</td><td>Pos 12</td></tr>
+        <tr><td>Gross sales (318 orders)</td><td class="right bold">$48,920</td></tr>
+        <tr><td>Shipping collected</td><td class="right">$1,860</td></tr>
+        <tr><td>Discounts applied</td><td class="right">-$2,140</td></tr>
+        <tr><td>Refunds (8 orders)</td><td class="right">-$1,260</td></tr>
+        <tr><td class="bold">Net revenue</td><td class="right bold">$47,380</td></tr>
+        <tr><td>Cost of goods sold</td><td class="right">-$15,560</td></tr>
+        <tr><td>Total ad spend</td><td class="right">-$8,640</td></tr>
+        <tr><td>Tools &amp; fulfillment</td><td class="right">-$2,890</td></tr>
+        <tr><td class="bold">Net profit</td><td class="right bold" style="color:var(--accent);">$20,290</td></tr>
+      </tbody>
+    </table>
+    <div class="callout">
+      <div class="callout-title">Margin holding strong</div>
+      <div class="callout-body">Gross margin <strong>67.2%</strong>. Net margin <strong>42.8%</strong>. For every dollar Stoneline puts into product + ads, it's getting <strong>$1.83 back</strong>. Industry benchmark for menswear DTC sits at $1.25–$1.45.</div>
+    </div>
+
+    <div class="eyebrow">Section 2 · Ad Performance</div>
+    <h2>What ads are actually returning (real platform data)</h2>
+    <div class="kpi-row">
+      <div class="kpi"><div class="label">Total Ad Spend</div><div class="value">$8,640</div></div>
+      <div class="kpi"><div class="label">Revenue Generated</div><div class="value">$19,290</div></div>
+      <div class="kpi"><div class="label">Blended ROAS</div><div class="value">2.23x</div><div class="delta delta-good">↑ 0.31x</div></div>
+      <div class="kpi"><div class="label">Cost Per Purchase</div><div class="value">$48</div></div>
+    </div>
+    <table>
+      <thead><tr><th>Platform</th><th class="right">Spend</th><th class="right">Revenue</th><th class="right">Purchases</th><th class="right">ROAS</th><th></th></tr></thead>
+      <tbody>
+        <tr><td class="bold">Meta · Heritage Field Jacket launch</td><td class="right">$3,420</td><td class="right">$9,180</td><td class="right">42</td><td class="right bold" style="color:var(--accent);">2.68x</td><td><span class="badge badge-green">Winner</span></td></tr>
+        <tr><td class="bold">Meta · Selvedge Denim retargeting</td><td class="right">$1,810</td><td class="right">$4,580</td><td class="right">28</td><td class="right bold" style="color:var(--accent);">2.53x</td><td><span class="badge badge-green">Strong</span></td></tr>
+        <tr><td class="bold">Meta · Brand prospecting (broad)</td><td class="right">$1,290</td><td class="right">$2,140</td><td class="right">14</td><td class="right" style="color:var(--accent);">1.66x</td><td><span class="badge badge-gold">Watch</span></td></tr>
+        <tr><td class="bold">Google · PMax shopping</td><td class="right">$2,120</td><td class="right">$3,390</td><td class="right">22</td><td class="right" style="color:var(--accent);">1.60x</td><td><span class="badge badge-gold">Watch</span></td></tr>
       </tbody>
     </table>
 
-    <h2>12-week content calendar</h2>
+    <div class="eyebrow">Section 3 · Conversion Funnel</div>
+    <h2>Sessions to purchase, step by step</h2>
+    <table>
+      <thead><tr><th>Stage</th><th class="right">Count</th><th class="right">Drop-off</th></tr></thead>
+      <tbody>
+        <tr><td>Total sessions</td><td class="right bold">22,140</td><td class="right">—</td></tr>
+        <tr><td>Product page views</td><td class="right">14,580</td><td class="right">34%</td></tr>
+        <tr><td>Add-to-cart</td><td class="right">1,920</td><td class="right">87%</td></tr>
+        <tr><td>Checkout initiated</td><td class="right">812</td><td class="right">58%</td></tr>
+        <tr><td class="bold">Completed purchase</td><td class="right bold">318</td><td class="right">61%</td></tr>
+      </tbody>
+    </table>
+    <div class="callout callout-warn">
+      <div class="callout-title">Where it's leaking — Mobile checkout</div>
+      <div class="callout-body">Mobile is <strong>72%</strong> of sessions but only <strong>48%</strong> of revenue. If mobile converted at the desktop rate, that's roughly <strong>$11,400 more</strong> per month. Mobile checkout redesign ships in week 2 of next month.</div>
+    </div>
+
+    <div class="eyebrow">Section 4 · Top Products</div>
+    <h2>What's carrying the store</h2>
+    <div class="row"><span class="name">Heritage Field Jacket</span><span class="val">$14,140 · 49 units</span></div>
+    <div class="bar"><div class="bar-fill" style="width:100%;"></div></div>
+    <div class="row" style="margin-top:14px;"><span class="name">Selvedge 5-pocket Denim</span><span class="val">$11,820 · 78 units</span></div>
+    <div class="bar"><div class="bar-fill" style="width:84%;"></div></div>
+    <div class="row" style="margin-top:14px;"><span class="name">Heritage Tee · 3-pack</span><span class="val">$7,910 · 102 units</span></div>
+    <div class="bar"><div class="bar-fill" style="width:56%;"></div></div>
+    <div class="row" style="margin-top:14px;"><span class="name">Waxed Canvas Trucker</span><span class="val">$6,680 · 31 units</span></div>
+    <div class="bar"><div class="bar-fill" style="width:47%;"></div></div>
+    <div class="row" style="margin-top:14px;"><span class="name">Wool Crewneck Sweater</span><span class="val">$4,250 · 26 units</span></div>
+    <div class="bar"><div class="bar-fill" style="width:30%;"></div></div>
+
+    <div class="eyebrow">Section 5 · Channel Mix</div>
+    <h2>Where buyers came from</h2>
+    <table>
+      <thead><tr><th>Channel</th><th class="right">Sessions</th><th class="right">Orders</th><th class="right">Revenue</th><th class="right">Conv</th></tr></thead>
+      <tbody>
+        <tr><td class="bold">Email (welcome + broadcasts)</td><td class="right">3,840</td><td class="right">98</td><td class="right">$15,920</td><td class="right"><span class="badge badge-green">2.55%</span></td></tr>
+        <tr><td class="bold">Organic Search</td><td class="right">5,210</td><td class="right">71</td><td class="right">$10,470</td><td class="right">1.36%</td></tr>
+        <tr><td class="bold">Direct</td><td class="right">3,480</td><td class="right">62</td><td class="right">$9,180</td><td class="right">1.78%</td></tr>
+        <tr><td class="bold">Organic Social</td><td class="right">4,920</td><td class="right">48</td><td class="right">$5,840</td><td class="right">0.98%</td></tr>
+        <tr><td class="bold">Referral</td><td class="right">1,620</td><td class="right">21</td><td class="right">$3,210</td><td class="right">1.30%</td></tr>
+      </tbody>
+    </table>
+    <p style="font-size:11.5px;color:var(--ink-subtle);margin-top:8px;">Paid channels excluded — those are reported in Section 2 directly from the ad platforms (GA4 under-attributes paid traffic).</p>
+
+    <div class="eyebrow">Section 6 · Recommendations</div>
+    <h2>Where to lean next month</h2>
     <ul>
-      <li><strong>Weeks 1–2:</strong> "How to care for selvedge denim" + "Why raw denim fades the way it does"</li>
-      <li><strong>Weeks 3–4:</strong> "Field jacket vs chore coat — which to wear when" + buyer guide</li>
-      <li><strong>Weeks 5–6:</strong> "Made in USA menswear: the real supply chain" + founder interview</li>
-      <li><strong>Weeks 7–8:</strong> Heritage tee comparison article + care guide</li>
-      <li><strong>Weeks 9–12:</strong> Long-tail product pages + internal linking pass</li>
+      <li><strong>Scale the winner.</strong> Heritage Field Jacket campaign is doing 2.68x at $3,420 spend. Take it to $5,000 in 20% increments.</li>
+      <li><strong>Ship the mobile checkout fix.</strong> Single largest revenue lever in the funnel right now (~$11k/mo upside).</li>
+      <li><strong>Email cadence to 2x/week.</strong> Welcome series is doing 2.55% conversion. Add a Tuesday product drop email + Friday founder note.</li>
+      <li><strong>Pause the broad prospecting set.</strong> 1.66x ROAS for 30 days; reallocate budget to retargeting + lookalikes from purchasers.</li>
+      <li><strong>Q2 lookbook drops May 6.</strong> Coordinate with the Spring Sale email to avoid creative collision.</li>
     </ul>
 
-    <h2>Technical fixes</h2>
-    <ul>
-      <li>Core Web Vitals: LCP is 3.1s on product pages — target under 2.5s.</li>
-      <li>Missing schema on 18 product pages — ship next week.</li>
-      <li>Internal linking: 6 orphan pages identified.</li>
-    </ul>
-  `,
-  ),
-  "baseline-2026-03-15": demoReportHtml(
-    "Baseline Performance Report",
-    "Dec 15, 2025 – Mar 15, 2026 · 90-day benchmark",
-    `
-    <p>This is the benchmark every future report compares against. Numbers below are the
-    starting state on the day we started running your marketing.</p>
-    <div class="kpi-grid">
-      <div class="kpi"><div class="kpi-label">Revenue (90d)</div><div class="kpi-value">$108,420</div></div>
-      <div class="kpi"><div class="kpi-label">Orders</div><div class="kpi-value">702</div></div>
-      <div class="kpi"><div class="kpi-label">Customers</div><div class="kpi-value">584</div></div>
-      <div class="kpi"><div class="kpi-label">Conversion</div><div class="kpi-value">3.1%</div></div>
+    <div class="signoff">
+      <p style="margin:0;">Reviewed and signed off by</p>
+      <p style="margin:4px 0 0;" class="name">Dusty · Venti Scale</p>
+      <p class="footer-meta">Data: Shopify · Meta Ads · Google Ads · GA4 · Klaviyo. Generated April 28, 2026. Next monthly: May 28, 2026.</p>
     </div>
-    <h2>Starting state assessment</h2>
-    <ul>
-      <li>Email list: 1,840 subscribers, zero automations running, last broadcast 4 months ago.</li>
-      <li>SEO: 6 articles total, avg position 22, no keyword strategy.</li>
-      <li>Paid: Meta running, ROAS 1.4x, no creative tests in 6 weeks.</li>
-      <li>Organic social: sporadic, no schedule, no plan.</li>
-    </ul>
-    <p><strong>Opportunity:</strong> every channel has clear headroom. 90-day goal is +35% revenue.</p>
-  `,
+    `,
   ),
+
+  // ───────────────────────────────────────────────────────────
+  // Monthly SEO Report — Stoneline Apparel
+  // ───────────────────────────────────────────────────────────
+  "seo-monthly-2026-04": demoReportShell(
+    "Monthly SEO Report",
+    `
+    <div class="hero">
+      <div class="brand-mark">Stoneline Apparel · Heritage Menswear</div>
+      <h1>Monthly SEO Report</h1>
+      <p class="sub">Search performance, the revenue it drove, and the work behind it.</p>
+      <div class="period">Period · April 1-28, 2026 · 28-day window &nbsp;·&nbsp; Compared to · March 4-31, 2026</div>
+    </div>
+
+    <div class="eyebrow">Executive Summary</div>
+    <h2>The 30-second read</h2>
+    <div class="summary-box">
+      <p>Clicks are up: <strong>1,840</strong> this period vs 1,420 last period (<strong>+30%</strong>). Average position improved from 14.2 to 11.8.</p>
+      <p>Organic search drove <strong>$10,470</strong> in revenue from 5,210 sessions. That's <strong>+38%</strong> vs prior period and now the second-largest non-paid channel after email. <strong>"selvedge denim brands"</strong> is the top driver: 218 clicks at position 4.2.</p>
+    </div>
+
+    <div class="eyebrow">Search Performance</div>
+    <h2>Top-line metrics (vs prior 28 days)</h2>
+    <div class="kpi-row">
+      <div class="kpi"><div class="label">Clicks</div><div class="value">1,840</div><div class="delta delta-good">↑ 30%</div></div>
+      <div class="kpi"><div class="label">Impressions</div><div class="value">82,400</div><div class="delta delta-good">↑ 24%</div></div>
+      <div class="kpi"><div class="label">Avg CTR</div><div class="value">2.2%</div><div class="delta delta-good">↑ 0.3pp</div></div>
+      <div class="kpi"><div class="label">Avg Position</div><div class="value">11.8</div><div class="delta delta-good">↑ 2.4</div></div>
+    </div>
+
+    <div class="eyebrow">Revenue Impact</div>
+    <h2>What organic search earned</h2>
+    <div class="kpi-row">
+      <div class="kpi"><div class="label">Organic Sessions</div><div class="value">5,210</div></div>
+      <div class="kpi"><div class="label">Organic Orders</div><div class="value">71</div></div>
+      <div class="kpi"><div class="label">Organic Revenue</div><div class="value">$10,470</div></div>
+      <div class="kpi"><div class="label">$/Search Click</div><div class="value">$5.69</div></div>
+    </div>
+    <p class="lead">Every organic search click is currently worth <strong>$5.69</strong> in revenue. That puts a real dollar number on every position we win or lose.</p>
+
+    <div class="callout">
+      <div class="callout-title">↑ Climbing this period</div>
+      <div class="callout-body">
+        <ul style="margin:0;">
+          <li><strong>"selvedge denim brands"</strong> — 218 clicks (Δ +89), position 4.2 (Δ +3.1)</li>
+          <li><strong>"heritage menswear"</strong> — 142 clicks (Δ +54), position 5.8 (Δ +2.2)</li>
+          <li><strong>"made in usa menswear"</strong> — 96 clicks (Δ +38), position 7.4 (Δ +1.6)</li>
+          <li><strong>"waxed canvas jacket"</strong> — 71 clicks (Δ +44), position 8.1 (Δ +2.3)</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="eyebrow">Section · Queries</div>
+    <h2>Top search queries (with movement)</h2>
+    <table>
+      <thead><tr><th>Query</th><th class="right">Clicks (Δ)</th><th class="right">Impressions</th><th class="right">CTR</th><th class="right">Position (Δ)</th></tr></thead>
+      <tbody>
+        <tr><td class="bold">selvedge denim brands</td><td class="right">218 <span class="delta delta-good">↑ 69%</span></td><td class="right">4,820</td><td class="right"><span class="badge badge-green">4.5%</span></td><td class="right">4.2 <span class="delta delta-good">↑ 3.1</span></td></tr>
+        <tr><td class="bold">heritage menswear</td><td class="right">142 <span class="delta delta-good">↑ 61%</span></td><td class="right">3,210</td><td class="right">4.4%</td><td class="right">5.8 <span class="delta delta-good">↑ 2.2</span></td></tr>
+        <tr><td class="bold">best field jacket men</td><td class="right">128 <span class="delta delta-good">↑ 32%</span></td><td class="right">5,940</td><td class="right">2.2%</td><td class="right">9.4 <span class="delta delta-good">↑ 1.8</span></td></tr>
+        <tr><td class="bold">made in usa menswear</td><td class="right">96 <span class="delta delta-good">↑ 65%</span></td><td class="right">2,810</td><td class="right">3.4%</td><td class="right">7.4 <span class="delta delta-good">↑ 1.6</span></td></tr>
+        <tr><td class="bold">waxed canvas jacket</td><td class="right">71 <span class="delta delta-good">↑ 163%</span></td><td class="right">1,920</td><td class="right">3.7%</td><td class="right">8.1 <span class="delta delta-good">↑ 2.3</span></td></tr>
+        <tr><td class="bold">how to break in selvedge denim</td><td class="right">58 <span class="delta delta-good">↑ 45%</span></td><td class="right">1,420</td><td class="right">4.1%</td><td class="right">3.1 <span class="delta delta-neutral">flat</span></td></tr>
+        <tr><td>raw denim care</td><td class="right">42 <span class="delta delta-good">↑ 24%</span></td><td class="right">1,180</td><td class="right">3.6%</td><td class="right">6.2 <span class="delta delta-good">↑ 0.8</span></td></tr>
+        <tr><td>heritage chinos</td><td class="right">38 <span class="delta delta-good">↑ 41%</span></td><td class="right">980</td><td class="right">3.9%</td><td class="right">7.5 <span class="delta delta-good">↑ 1.4</span></td></tr>
+      </tbody>
+    </table>
+
+    <div class="eyebrow">Section · Pages</div>
+    <h2>Top pages (with movement)</h2>
+    <table>
+      <thead><tr><th>Page</th><th class="right">Clicks (Δ)</th><th class="right">Impressions</th><th class="right">CTR</th></tr></thead>
+      <tbody>
+        <tr><td class="bold">/products/selvedge-denim</td><td class="right">312 <span class="delta delta-good">↑ 58%</span></td><td class="right">7,420</td><td class="right">4.2%</td></tr>
+        <tr><td class="bold">/the-stoneline-story</td><td class="right">178 <span class="delta delta-good">↑ 32%</span></td><td class="right">4,810</td><td class="right">3.7%</td></tr>
+        <tr><td class="bold">/products/heritage-field-jacket</td><td class="right">164 <span class="delta delta-good">↑ 124%</span></td><td class="right">3,920</td><td class="right">4.2%</td></tr>
+        <tr><td class="bold">/journal/break-in-selvedge</td><td class="right">142 <span class="delta delta-good">↑ 41%</span></td><td class="right">3,180</td><td class="right">4.5%</td></tr>
+        <tr><td class="bold">/journal/made-in-usa-supply-chain</td><td class="right">98 <span class="delta delta-good">↑ 22%</span></td><td class="right">2,840</td><td class="right">3.5%</td></tr>
+        <tr><td class="bold">/collection/heritage</td><td class="right">86 <span class="delta delta-good">↑ 19%</span></td><td class="right">5,610</td><td class="right"><span class="badge badge-red">1.5%</span></td></tr>
+      </tbody>
+    </table>
+
+    <div class="callout callout-warn">
+      <div class="callout-title">Quick Win This Period</div>
+      <div class="callout-body">
+        <strong>/collection/heritage</strong> pulled <strong>5,610 impressions</strong> at only <strong>1.5% CTR</strong>. People are seeing it but not clicking. Rewriting the meta title and description could lift this to roughly <strong>140-220 additional clicks</strong> per month for free. Owner of fix: SEO. Ship by May 8.
+      </div>
+    </div>
+
+    <div class="eyebrow">The Work Behind the Numbers</div>
+    <h2>What we shipped + what's next</h2>
+    <div class="callout">
+      <div class="callout-title">Content shipped this period (6 articles)</div>
+      <div class="callout-body">
+        <ul style="margin:0;">
+          <li><strong>Apr 4</strong> — How to break in selvedge denim (the proper way) <span style="color:var(--ink-subtle);font-family:monospace;font-size:11.5px;">[break in selvedge denim]</span></li>
+          <li><strong>Apr 9</strong> — Made in USA menswear: what the label actually means <span style="color:var(--ink-subtle);font-family:monospace;font-size:11.5px;">[made in usa menswear]</span></li>
+          <li><strong>Apr 13</strong> — Field jacket vs chore coat: which one earns its place <span style="color:var(--ink-subtle);font-family:monospace;font-size:11.5px;">[best field jacket men]</span></li>
+          <li><strong>Apr 17</strong> — Why we run waxed canvas (and how to care for it) <span style="color:var(--ink-subtle);font-family:monospace;font-size:11.5px;">[waxed canvas jacket]</span></li>
+          <li><strong>Apr 22</strong> — Heritage chinos: the cut, the cloth, the case for them <span style="color:var(--ink-subtle);font-family:monospace;font-size:11.5px;">[heritage chinos]</span></li>
+          <li><strong>Apr 26</strong> — A 12-piece spring capsule, fully styled <span style="color:var(--ink-subtle);font-family:monospace;font-size:11.5px;">[spring capsule menswear]</span></li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="callout">
+      <div class="callout-title">Coming next (4 scheduled)</div>
+      <div class="callout-body">
+        <ul style="margin:0;">
+          <li><strong>May 1</strong> — Best heritage menswear brands of 2026 (head-to-head) <span style="color:var(--ink-subtle);font-family:monospace;font-size:11.5px;">[heritage menswear brands]</span></li>
+          <li><strong>May 6</strong> — How to wear a field jacket year-round <span style="color:var(--ink-subtle);font-family:monospace;font-size:11.5px;">[how to wear field jacket]</span></li>
+          <li><strong>May 11</strong> — Wool vs cotton crewneck: when to wear which <span style="color:var(--ink-subtle);font-family:monospace;font-size:11.5px;">[wool crewneck men]</span></li>
+          <li><strong>May 15</strong> — The case for buying fewer, better menswear pieces <span style="color:var(--ink-subtle);font-family:monospace;font-size:11.5px;">[buy less better menswear]</span></li>
+        </ul>
+      </div>
+    </div>
+
+    <p class="footer-meta">Data: Google Search Console · Google Analytics 4 · Stoneline content calendar. Generated April 28, 2026. Next monthly: May 28, 2026.</p>
+    `,
+  ),
+
+  // ───────────────────────────────────────────────────────────
+  // Q2 Strategy Brief — long-form narrative
+  // ───────────────────────────────────────────────────────────
+  "strategy-q2-2026": demoReportShell(
+    "Q2 Strategy Brief",
+    `
+    <div class="hero">
+      <div class="brand-mark">Stoneline Apparel · Strategy Brief</div>
+      <h1>Q2 2026 Strategy Brief</h1>
+      <p class="sub">A 90-day plan to grow net revenue 35% without buying more traffic.</p>
+      <div class="period">Drafted · April 15, 2026 &nbsp;·&nbsp; Quarter window · Apr 1 – Jun 30, 2026</div>
+    </div>
+
+    <div class="eyebrow">Where the business stands</div>
+    <h2>The starting line for Q2</h2>
+    <p class="lead">Q1 closed at <strong>$132,400</strong> in revenue, <strong>+22%</strong> vs Q4 2025. Two channels carried the quarter: email (28% of revenue) and direct (24%). Paid social held a 2.1x blended ROAS, healthy for a heritage menswear brand at this scale. Mobile conversion is the single largest leak in the funnel — 1.8% mobile vs 4.4% desktop, on a traffic mix that's 72% mobile.</p>
+    <p>The Heritage Field Jacket launch in late March validated the higher-ticket capsule strategy. AOV moved from $138 (Q1 average) to $154 in April. The product mix is shifting toward fewer, better pieces — exactly the story the brand has been telling.</p>
+
+    <div class="eyebrow">The quarter goal</div>
+    <h2>Three numbers to hit by June 30</h2>
+    <div class="kpi-row">
+      <div class="kpi"><div class="label">Quarter revenue</div><div class="value">$179,000</div></div>
+      <div class="kpi"><div class="label">Net margin</div><div class="value">≥ 40%</div></div>
+      <div class="kpi"><div class="label">Email list</div><div class="value">14,000 active</div></div>
+      <div class="kpi"><div class="label">Mobile conv</div><div class="value">3.0%+</div></div>
+    </div>
+    <p>Hitting $179k at 40% net margin requires zero new ad budget — every dollar is in the existing channels and creative. The bet is on conversion improvement and email cadence, not paid scaling.</p>
+
+    <div class="eyebrow">The 90-day plan</div>
+    <h2>Three workstreams, owned end-to-end by Venti Scale</h2>
+
+    <h3>1. Mobile checkout rebuild (weeks 1-3)</h3>
+    <p>The biggest revenue lever in the business. Mobile sessions outnumber desktop 3:1, but mobile conversion is 41% of desktop. If we close half the gap, that's <strong>roughly $14,000/month</strong> in incremental revenue — with the same traffic, same ad spend.</p>
+    <ul>
+      <li><strong>Week 1:</strong> session recordings + heatmaps. Identify the top 3 friction points.</li>
+      <li><strong>Week 2:</strong> redesign + ship the mobile cart drawer + Apple Pay / Shop Pay above the fold.</li>
+      <li><strong>Week 3:</strong> A/B test new mobile PDP layout vs control. Cut at 95% confidence.</li>
+    </ul>
+
+    <h3>2. Email cadence + automation (weeks 2-8)</h3>
+    <p>Welcome series is doing 2.55% conversion — strong. List size is the cap. Two moves to grow it: (a) a smarter exit-intent on mobile, (b) a content-led lead magnet (the "Heritage Care Guide" PDF). Cadence moves from 1 broadcast/week to 2: a Tuesday product story and a Friday founder note. Both run on autopilot from the editorial calendar.</p>
+    <ul>
+      <li><strong>Week 2:</strong> ship the Heritage Care Guide opt-in. Target: +800 subscribers in 30 days.</li>
+      <li><strong>Week 4:</strong> launch abandoned cart sequence (5 emails over 9 days).</li>
+      <li><strong>Week 6:</strong> add a post-purchase replenishment flow at day 60.</li>
+      <li><strong>Week 8:</strong> review WoW open + click rates; tune subject lines from the bottom of the funnel up.</li>
+    </ul>
+
+    <h3>3. SEO content engine + product pages (weeks 1-12)</h3>
+    <p>Organic search is now $5.69 per click. Every position we earn compounds. The plan: 2 articles per week (24 over the quarter) targeting commercial-intent and long-tail menswear queries. In parallel, rewrite meta titles + descriptions on the 18 product pages with high impressions / low CTR.</p>
+    <ul>
+      <li><strong>Weeks 1-4:</strong> ship 8 articles around "selvedge denim", "heritage menswear", "made in USA" cluster.</li>
+      <li><strong>Weeks 5-8:</strong> 8 articles on field jackets, chore coats, waxed canvas (top buyer-intent terms).</li>
+      <li><strong>Weeks 9-12:</strong> 8 articles around the spring/summer capsule + internal linking pass.</li>
+      <li><strong>Continuous:</strong> meta title/description rewrites on the 18 quick-win pages identified in the SEO report.</li>
+    </ul>
+
+    <div class="eyebrow">What we're not doing</div>
+    <h2>The anti-list</h2>
+    <ul>
+      <li><strong>No new ad platforms.</strong> Meta + Google PMax are working. Adding TikTok or Pinterest spreads the budget without proving anything new this quarter.</li>
+      <li><strong>No new product launches.</strong> The Heritage Field Jacket, Selvedge Denim, and Heritage Tee are already carrying the store. Doubling down beats adding.</li>
+      <li><strong>No influencer campaigns.</strong> Cost-per-acquisition through influencers in Q1 was $94 vs $48 on email — not worth chasing again until conversion gaps are closed.</li>
+      <li><strong>No retargeting list expansion past 90 days.</strong> Sub-90 retargeting is doing 2.53x ROAS; longer windows dilute the signal.</li>
+    </ul>
+
+    <div class="eyebrow">Risks + watchpoints</div>
+    <h2>What could break the plan</h2>
+    <ul>
+      <li><strong>Meta CPM inflation.</strong> Q2 typically runs 10-15% higher CPMs than Q1. We've baked +12% into the ROAS targets. If CPM spikes &gt;20%, we throttle prospecting and lean harder into retargeting.</li>
+      <li><strong>iOS 18 attribution further degrading.</strong> Already a known gap. We trust Meta's ROAS reporting + Shopify GMV math, not GA4 paid attribution.</li>
+      <li><strong>Mobile rebuild slipping past week 3.</strong> If it slips, we ship a smaller version (cart drawer only) and follow up with the PDP redesign in Q3.</li>
+    </ul>
+
+    <div class="signoff">
+      <p style="margin:0;">Drafted by</p>
+      <p style="margin:4px 0 0;" class="name">Dusty · Venti Scale</p>
+      <p class="footer-meta">For: Stoneline Apparel · Marcus, Founder. Strategic review monthly. End-of-quarter retrospective: July 5, 2026.</p>
+    </div>
+    `,
+  ),
+
 };
 
 export async function getReportHtml(id: string): Promise<string | null> {
