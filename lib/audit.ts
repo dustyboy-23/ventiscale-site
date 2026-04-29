@@ -1131,10 +1131,10 @@ function padMove(idx: number): { outcome: string; how: string } {
 }
 
 // Proof + offer + risk reversal, broken into scannable lines.
-const HELP_PROOF = `Agencies usually charge real money for this kind of audit. You got it free because I'm confident enough in what we actually do to put it in front of you before we ever talk.`;
-const HELP_OFFER = `We run your marketing on autopilot. Social media, content, emails, ads, tracking. All of it. You see the numbers every week so you always know what's working. You run the business, we bring in the customers.`;
-const HELP_RISK = `No contract. No minimum. If it's not working you'll know because the numbers won't lie. Cancel whenever.`;
-const HELP_URGENCY = `I only take on a few clients at a time so I can actually do the work right. If this sits in your inbox for a month, those gaps are still there.`;
+const HELP_PROOF = `Agencies charge for this kind of audit. You got the roadmap and the plan free, before we even talk, because I'm that confident in what we actually do.`;
+const HELP_OFFER = `We run the full marketing engine for you. SEO that ranks you above your competition on Google so customers find you first. Social media so they see you everywhere. Content, email, ads, tracking. All of it. You run the business, we bring you the customers.`;
+const HELP_RISK = `We don't get paid to send you reports or run discovery workshops. We get paid to bring you customers.`;
+const HELP_URGENCY = `I only take on a few clients at a time so I can actually do the work right. Spots fill up. If you want one, reply this week.`;
 
 interface SalesEmailContent {
   opener: string;
@@ -1179,9 +1179,9 @@ function buildHappyPathContent(opener: string, phrase: string): SalesEmailConten
     helpRisk: HELP_RISK,
     helpUrgency: HELP_URGENCY,
     ctaHeadline: "Want us to just do this for you?",
-    ctaSub: "Just reply to this email. Tell me a bit about what you're working on and I'll send over a real plan for you.",
+    ctaSub: "Reply to this email with what you're working on. I'll send back a real plan and what it costs. No discovery call.",
     softClose: "I read every reply.",
-    ps: `Most businesses I audit have 3 or 4 things broken. Yours doesn't. That means you're closer to real growth than you think.`,
+    ps: `Most businesses I audit have 3 or 4 things broken. Yours doesn't. That means you're closer to real growth than you think. Reply if you want me to point you at the next move.`,
   };
 }
 
@@ -1220,9 +1220,9 @@ function buildSalesEmailContent(
     helpRisk: HELP_RISK,
     helpUrgency: HELP_URGENCY,
     ctaHeadline: "Want us to just do this for you?",
-    ctaSub: `Just reply to this email. Tell me a bit about what you're working on and I'll send over a real plan for you.`,
+    ctaSub: `Reply to this email with what you're working on. I'll send back a real plan and what it costs. No discovery call.`,
     softClose: "I read every reply.",
-    ps: `That ${painLabelFor(top.pillar.id).toLowerCase().replace(/\.$/, "")}? Worth fixing this month, not next.`,
+    ps: `That ${painLabelFor(top.pillar.id).toLowerCase().replace(/\.$/, "")}? Don't sit on it. Reply and I'll have a plan back to you within a day.`,
   };
 }
 
