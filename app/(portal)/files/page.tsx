@@ -31,51 +31,51 @@ type DemoAsset = {
 };
 
 const DEMO_ASSETS: DemoAsset[] = [
-  // Product Shots — hero campaign-ready
-  { name: "Heritage Field Jacket — Hero shot",     category: "Product Shots", driveFileId: "11hhCdsaAhC_Z6Tbd0OTBTqDMDAjN6AeJ", size: "8.4 MB", updated: "2 hours ago", badge: "New" },
-  { name: "Leather jacket — hero",                  category: "Product Shots", driveFileId: "143TwLhvtptq-qFk_wTSghItXlg0DYthL", size: "7.2 MB", updated: "yesterday" },
-  { name: "Selvedge denim — detail close-up",       category: "Product Shots", driveFileId: "1Sk1aAa3KZhhJilgSkN7RIO5MpjrAby8r", size: "6.1 MB", updated: "yesterday" },
-  { name: "Selvedge jeans — pocket detail",         category: "Product Shots", driveFileId: "1NDfrWWsFHPBYlhGc2spSzvJiL9mgsAyp", size: "4.7 MB", updated: "1 week ago" },
-  { name: "Studio garment — hanging",               category: "Product Shots", driveFileId: "1p-vRiK2BpfMSGFNIs4ysWyPWZX_tyGUU", size: "4.9 MB", updated: "3 days ago" },
-  { name: "Clothing rack — product shoot",          category: "Product Shots", driveFileId: "1tP4Q9AwDE9GkBetMZyYTisgZ_aT8SV-G", size: "5.8 MB", updated: "3 days ago" },
-  { name: "Outerwear capsule — outdoor shot",       category: "Product Shots", driveFileId: "1uhF80HFcUmfo0EHybb1ASp5fVARq_Mt4", size: "9.3 MB", updated: "5 days ago" },
-  { name: "Boot leather — macro",                   category: "Product Shots", driveFileId: "1jCwAOdnLD9i25XPM5EMQ-6wt3VfHh4N-", size: "5.4 MB", updated: "5 days ago" },
-  { name: "Tee mockup — flat-lay",                  category: "Product Shots", driveFileId: "1OtRipFlS4kgnKwteTGpG87dy60rcQZpE", size: "4.1 MB", updated: "1 week ago" },
-  { name: "Black tee rack — product shoot",         category: "Product Shots", driveFileId: "1M_Vv_OnLUAPm0B-TOLPTHBGQ_a20RIys", size: "5.0 MB", updated: "1 week ago" },
+  // Product Shots — campaign-ready editorial
+  { name: "Spring '26 — Hero 01",       category: "Product Shots", driveFileId: "11hhCdsaAhC_Z6Tbd0OTBTqDMDAjN6AeJ", size: "8.4 MB", updated: "2 hours ago", badge: "New" },
+  { name: "Spring '26 — Hero 02",       category: "Product Shots", driveFileId: "143TwLhvtptq-qFk_wTSghItXlg0DYthL", size: "7.2 MB", updated: "yesterday" },
+  { name: "Spring '26 — Detail 03",     category: "Product Shots", driveFileId: "1Sk1aAa3KZhhJilgSkN7RIO5MpjrAby8r", size: "6.1 MB", updated: "yesterday" },
+  { name: "Spring '26 — Detail 04",     category: "Product Shots", driveFileId: "1NDfrWWsFHPBYlhGc2spSzvJiL9mgsAyp", size: "4.7 MB", updated: "1 week ago" },
+  { name: "Studio shoot — Frame 05",    category: "Product Shots", driveFileId: "1p-vRiK2BpfMSGFNIs4ysWyPWZX_tyGUU", size: "4.9 MB", updated: "3 days ago" },
+  { name: "Studio shoot — Frame 06",    category: "Product Shots", driveFileId: "1tP4Q9AwDE9GkBetMZyYTisgZ_aT8SV-G", size: "5.8 MB", updated: "3 days ago" },
+  { name: "Studio shoot — Frame 07",    category: "Product Shots", driveFileId: "1uhF80HFcUmfo0EHybb1ASp5fVARq_Mt4", size: "9.3 MB", updated: "5 days ago" },
+  { name: "Studio shoot — Frame 08",    category: "Product Shots", driveFileId: "1jCwAOdnLD9i25XPM5EMQ-6wt3VfHh4N-", size: "5.4 MB", updated: "5 days ago" },
+  { name: "Studio shoot — Frame 09",    category: "Product Shots", driveFileId: "1OtRipFlS4kgnKwteTGpG87dy60rcQZpE", size: "4.1 MB", updated: "1 week ago" },
+  { name: "Studio shoot — Frame 10",    category: "Product Shots", driveFileId: "1M_Vv_OnLUAPm0B-TOLPTHBGQ_a20RIys", size: "5.0 MB", updated: "1 week ago" },
 
-  // Lookbook — editorial
-  { name: "Spring '26 Lookbook — storefront cover", category: "Lookbook", driveFileId: "1kqeggByr7xpLKxZBqFXdr0_v9pozBMCi", size: "6.6 MB", updated: "yesterday", badge: "Featured" },
-  { name: "Spring '26 Lookbook — model portrait",   category: "Lookbook", driveFileId: "1SeF8xYcXZIHiod1a438j6c1rp2Cm0Dch", size: "5.9 MB", updated: "yesterday" },
-  { name: "Editorial — studio model",               category: "Lookbook", driveFileId: "17VQrrZpsX0nNMGJpmuE1PSSXO-sGi13n", size: "7.0 MB", updated: "2 days ago" },
-  { name: "Editorial — cafe portrait",              category: "Lookbook", driveFileId: "1DV-g-6KXflipVKjTkWXPXw6zAbCVOQ4t", size: "6.4 MB", updated: "4 days ago" },
-  { name: "Editorial — walking the city",           category: "Lookbook", driveFileId: "18cR1TiLgMi1OcAtLyKjHuUdog6zJn3Jx", size: "8.2 MB", updated: "4 days ago" },
-  { name: "Tweed capsule — heritage spread",        category: "Lookbook", driveFileId: "14R75fBe_Z9OyRoeLs8bsrKN49cYQX3Vy", size: "7.7 MB", updated: "1 week ago" },
-  { name: "Retail window — campaign reveal",        category: "Lookbook", driveFileId: "1-Bv9uoPVa4t4k8lEOoKcOfkgNwj2TOFO", size: "4.8 MB", updated: "2 weeks ago" },
-  { name: "Editorial — model lookbook frame",       category: "Lookbook", driveFileId: "1KS-SdzTsMGauza3mHyx3HVCpHJPyCZ59", size: "5.3 MB", updated: "1 week ago" },
+  // Lookbook — editorial frames
+  { name: "Spring '26 Lookbook — Cover",        category: "Lookbook", driveFileId: "1kqeggByr7xpLKxZBqFXdr0_v9pozBMCi", size: "6.6 MB", updated: "yesterday", badge: "Featured" },
+  { name: "Spring '26 Lookbook — Frame 12",     category: "Lookbook", driveFileId: "1SeF8xYcXZIHiod1a438j6c1rp2Cm0Dch", size: "5.9 MB", updated: "yesterday" },
+  { name: "Spring '26 Lookbook — Frame 13",     category: "Lookbook", driveFileId: "17VQrrZpsX0nNMGJpmuE1PSSXO-sGi13n", size: "7.0 MB", updated: "2 days ago" },
+  { name: "Spring '26 Lookbook — Frame 14",     category: "Lookbook", driveFileId: "1DV-g-6KXflipVKjTkWXPXw6zAbCVOQ4t", size: "6.4 MB", updated: "4 days ago" },
+  { name: "Spring '26 Lookbook — Frame 15",     category: "Lookbook", driveFileId: "18cR1TiLgMi1OcAtLyKjHuUdog6zJn3Jx", size: "8.2 MB", updated: "4 days ago" },
+  { name: "Spring '26 Lookbook — Frame 16",     category: "Lookbook", driveFileId: "14R75fBe_Z9OyRoeLs8bsrKN49cYQX3Vy", size: "7.7 MB", updated: "1 week ago" },
+  { name: "Spring '26 Lookbook — Frame 17",     category: "Lookbook", driveFileId: "1-Bv9uoPVa4t4k8lEOoKcOfkgNwj2TOFO", size: "4.8 MB", updated: "2 weeks ago" },
+  { name: "Spring '26 Lookbook — Frame 18",     category: "Lookbook", driveFileId: "1KS-SdzTsMGauza3mHyx3HVCpHJPyCZ59", size: "5.3 MB", updated: "1 week ago" },
 
-  // Sale Graphics + social
-  { name: "Spring Sale 30% OFF — social tile",      category: "Sale Graphics", driveFileId: "1JmO6dPn91cDPKnhVQ7yY_1zkV7qMic4l", size: "2.1 MB", updated: "today", badge: "Live" },
-  { name: "Heritage Field Jacket — launch flyer",   category: "Sale Graphics", driveFileId: "1I1pszQB0OFjwMtI1_C-z3DoWb6St3Jfr", size: "1.8 MB", updated: "yesterday" },
-  { name: "Free shipping weekend — promo banner",   category: "Sale Graphics", driveFileId: "16p9bNjem3lFPriNWeQNS0akryTqD9_qJ", size: "2.6 MB", updated: "2 days ago" },
-  { name: "Bestseller of the week — IG callout",    category: "Sale Graphics", driveFileId: "1-jbFJimt4yhkWuqnQnucci8hcUVjvucp", size: "1.4 MB", updated: "3 days ago" },
-  { name: "Flash Sale TODAY ONLY — story graphic",  category: "Sale Graphics", driveFileId: "13ErmzT5YqpxedyLOl-lhasaoUjTjvkjN", size: "1.6 MB", updated: "today",  badge: "Live" },
-  { name: "Email header — Dispatch No. 12",         category: "Sale Graphics", driveFileId: "1udPKcdZHqB2IdutmkBIwAZUrY4oY39T3", size: "1.2 MB", updated: "yesterday" },
-  { name: "Member Exclusive — early access tile",   category: "Sale Graphics", driveFileId: "1_F0qzKKmtQ7k8TyNgEnbhhG0xXMPBR9t", size: "1.5 MB", updated: "2 days ago" },
+  // Sale Graphics — designed by Venti Scale, accurate names
+  { name: "Spring Sale 30% OFF — social tile",   category: "Sale Graphics", driveFileId: "1JmO6dPn91cDPKnhVQ7yY_1zkV7qMic4l", size: "2.1 MB", updated: "today", badge: "Live" },
+  { name: "Heritage Drop — launch flyer",        category: "Sale Graphics", driveFileId: "1I1pszQB0OFjwMtI1_C-z3DoWb6St3Jfr", size: "1.8 MB", updated: "yesterday" },
+  { name: "Free Shipping Weekend — promo banner", category: "Sale Graphics", driveFileId: "16p9bNjem3lFPriNWeQNS0akryTqD9_qJ", size: "2.6 MB", updated: "2 days ago" },
+  { name: "Bestseller of the Week — IG callout", category: "Sale Graphics", driveFileId: "1-jbFJimt4yhkWuqnQnucci8hcUVjvucp", size: "1.4 MB", updated: "3 days ago" },
+  { name: "Flash Sale Today Only — story graphic", category: "Sale Graphics", driveFileId: "13ErmzT5YqpxedyLOl-lhasaoUjTjvkjN", size: "1.6 MB", updated: "today",  badge: "Live" },
+  { name: "Email Header — Dispatch No. 12",      category: "Sale Graphics", driveFileId: "1udPKcdZHqB2IdutmkBIwAZUrY4oY39T3", size: "1.2 MB", updated: "yesterday" },
+  { name: "Member Exclusive — early access tile", category: "Sale Graphics", driveFileId: "1_F0qzKKmtQ7k8TyNgEnbhhG0xXMPBR9t", size: "1.5 MB", updated: "2 days ago" },
 
-  // Lifestyle / accessories / styling content
-  { name: "Daily-carry flat-lay — wallet + watch",  category: "Lifestyle", driveFileId: "1-HQ7yGH9-o66ttivyVkL3Drr25cu5JGl", size: "3.2 MB", updated: "yesterday" },
-  { name: "Boot styling — leather flatlay",         category: "Lifestyle", driveFileId: "1YYjOGg-P3rhyr3P-UDF8h6-s3ShbZ-Lh", size: "3.7 MB", updated: "2 days ago" },
-  { name: "Sneaker drop — on-figure walking shot",  category: "Lifestyle", driveFileId: "1VtN74apimp45zcWn5YAlV0KjVLe7jX51", size: "4.5 MB", updated: "5 days ago" },
-  { name: "Travel essentials — backpack styling",   category: "Lifestyle", driveFileId: "1ypgkRdgFKd6XpPAbq9oGY3ib6gxqnJlE", size: "3.9 MB", updated: "1 week ago" },
-  { name: "Hat portrait — heritage capsule",        category: "Lifestyle", driveFileId: "1JhQady-YP0LlVsOjABRT67YMtTby2DEF", size: "3.6 MB", updated: "1 week ago" },
-  { name: "Watch detail — accessory close-up",      category: "Lifestyle", driveFileId: "13YaV4Q6cV10IrCtMjQs1ct3zHSSFANMm", size: "3.1 MB", updated: "2 weeks ago" },
-  { name: "Coffee shop vibes — brand mood",         category: "Lifestyle", driveFileId: "1zvyv9sOZNnaDbyEXhY64vdpt0rm8zQJL", size: "2.9 MB", updated: "2 weeks ago" },
+  // Lifestyle frames
+  { name: "Lifestyle — Frame 19", category: "Lifestyle", driveFileId: "1-HQ7yGH9-o66ttivyVkL3Drr25cu5JGl", size: "3.2 MB", updated: "yesterday" },
+  { name: "Lifestyle — Frame 20", category: "Lifestyle", driveFileId: "1YYjOGg-P3rhyr3P-UDF8h6-s3ShbZ-Lh", size: "3.7 MB", updated: "2 days ago" },
+  { name: "Lifestyle — Frame 21", category: "Lifestyle", driveFileId: "1VtN74apimp45zcWn5YAlV0KjVLe7jX51", size: "4.5 MB", updated: "5 days ago" },
+  { name: "Lifestyle — Frame 22", category: "Lifestyle", driveFileId: "1ypgkRdgFKd6XpPAbq9oGY3ib6gxqnJlE", size: "3.9 MB", updated: "1 week ago" },
+  { name: "Lifestyle — Frame 23", category: "Lifestyle", driveFileId: "1JhQady-YP0LlVsOjABRT67YMtTby2DEF", size: "3.6 MB", updated: "1 week ago" },
+  { name: "Lifestyle — Frame 24", category: "Lifestyle", driveFileId: "13YaV4Q6cV10IrCtMjQs1ct3zHSSFANMm", size: "3.1 MB", updated: "2 weeks ago" },
+  { name: "Lifestyle — Frame 25", category: "Lifestyle", driveFileId: "1zvyv9sOZNnaDbyEXhY64vdpt0rm8zQJL", size: "2.9 MB", updated: "2 weeks ago" },
 
   // Video covers
-  { name: "Heritage Field Jacket — hero film (4K)", category: "Video", driveFileId: "11hhCdsaAhC_Z6Tbd0OTBTqDMDAjN6AeJ", size: "340 MB", updated: "yesterday",   isVideo: true, badge: "Featured" },
-  { name: "Founder story — Marcus interview",       category: "Video", driveFileId: "17VQrrZpsX0nNMGJpmuE1PSSXO-sGi13n", size: "180 MB", updated: "1 week ago",  isVideo: true },
-  { name: "Spring '26 lookbook reveal — 30s cut",   category: "Video", driveFileId: "1kqeggByr7xpLKxZBqFXdr0_v9pozBMCi", size: "92 MB",  updated: "3 days ago",  isVideo: true },
-  { name: "Behind-the-scenes — denim shoot",        category: "Video", driveFileId: "1Sk1aAa3KZhhJilgSkN7RIO5MpjrAby8r", size: "210 MB", updated: "1 week ago",  isVideo: true },
+  { name: "Spring '26 — Hero film (4K)",      category: "Video", driveFileId: "11hhCdsaAhC_Z6Tbd0OTBTqDMDAjN6AeJ", size: "340 MB", updated: "yesterday",   isVideo: true, badge: "Featured" },
+  { name: "Founder story — interview cut",    category: "Video", driveFileId: "17VQrrZpsX0nNMGJpmuE1PSSXO-sGi13n", size: "180 MB", updated: "1 week ago",  isVideo: true },
+  { name: "Spring '26 lookbook reveal — 30s", category: "Video", driveFileId: "1kqeggByr7xpLKxZBqFXdr0_v9pozBMCi", size: "92 MB",  updated: "3 days ago",  isVideo: true },
+  { name: "Behind-the-scenes — production",   category: "Video", driveFileId: "1Sk1aAa3KZhhJilgSkN7RIO5MpjrAby8r", size: "210 MB", updated: "1 week ago",  isVideo: true },
 ];
 
 const CATEGORY_ORDER: DemoAsset["category"][] = [
