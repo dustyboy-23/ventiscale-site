@@ -452,6 +452,15 @@ def main():
             print(f"  ! skipping {lead_id}: no email")
             continue
 
+        # Guard: don't render until the audit has actually completed. The
+        # main cron query already filters reachable=not.is.null, but the
+        # --id path bypasses that filter, so a row whose audit hasn't
+        # finished can still get pulled in. Without this check we'd
+        # render the unreachable branch on a row that's just slow.
+        if row.get("reachable") is None:
+            print(f"  ⏳ skipping {lead_id}: audit not yet complete (reachable=None)")
+            continue
+
         # Build emails
         try:
             visitor = render_visitor_email(row)
