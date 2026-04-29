@@ -133,6 +133,9 @@ export interface ContentDraft {
   scheduledAt: string | null;
   driveFileId: string | null;
   mediaType: "image" | "video" | "text" | null;
+  /** Demo-only: direct thumbnail URL the content card renders when there's
+   *  no Drive file ID. Real clients always have a driveFileId. */
+  mockThumbnailUrl?: string;
 }
 
 export interface CampaignSequenceStep {
@@ -305,24 +308,17 @@ export async function getClientKpis(period: PeriodKey = "28d"): Promise<ClientKp
 const DEMO_REPORTS: ReportSummary[] = [
   {
     id: "client-monthly-2026-04",
-    title: "Monthly Performance Report · Apr 1-28, 2026",
+    title: "Monthly Performance Report \u00b7 Apr 1-28, 2026",
     date: "2026-04-28",
     type: "client",
     path: "client-monthly-2026-04.html",
   },
   {
     id: "seo-monthly-2026-04",
-    title: "Monthly SEO Report · Apr 1-28, 2026",
+    title: "Monthly SEO Report \u00b7 Apr 1-28, 2026",
     date: "2026-04-28",
     type: "seo",
     path: "seo-monthly-2026-04.html",
-  },
-  {
-    id: "strategy-q2-2026",
-    title: "Q2 Strategy Brief — 90-day plan",
-    date: "2026-04-15",
-    type: "internal",
-    path: "strategy-q2-2026.html",
   },
 ];
 
@@ -330,445 +326,12 @@ export async function getReports(): Promise<ReportSummary[]> {
   return DEMO_REPORTS;
 }
 
-// Shared style block for all demo reports — mirrors the SG production
-// report aesthetic so prospects see the same standard of work.
-const DEMO_REPORT_STYLES = `
-  :root {
-    --ink: #0F1115;
-    --ink-muted: #4A5160;
-    --ink-subtle: #8A93A4;
-    --accent: #1F3D2B;
-    --accent-soft: #E6EFE8;
-    --gold: #C9A654;
-    --warn: #B3721D;
-    --warn-soft: #FBF3E1;
-    --danger: #B03A2E;
-    --danger-soft: #FBE9E5;
-    --border: #E8EAF0;
-    --border-soft: #F1F3F7;
-    --surface: #FAFBFC;
-  }
-  * { box-sizing: border-box; }
-  body {
-    font-family: -apple-system, BlinkMacSystemFont, 'Inter', sans-serif;
-    color: var(--ink); background: #ffffff;
-    margin: 0; padding: 48px 56px 72px;
-    line-height: 1.6; font-size: 15px;
-    -webkit-font-smoothing: antialiased;
-  }
-  .wrap { max-width: 860px; margin: 0 auto; }
-  .hero {
-    background: linear-gradient(135deg, #0F1115 0%, #1F3D2B 100%);
-    color: #fff; border-radius: 16px;
-    padding: 32px 36px; margin-bottom: 28px;
-  }
-  .hero .brand-mark {
-    font-size: 11px; text-transform: uppercase; letter-spacing: 0.18em;
-    opacity: 0.85; margin-bottom: 10px;
-  }
-  .hero h1 { margin: 0 0 6px; font-size: 30px; letter-spacing: -0.018em; font-weight: 700; line-height: 1.15; }
-  .hero .sub { margin: 0; opacity: 0.85; font-size: 15px; }
-  .hero .period { margin-top: 16px; font-size: 11.5px; opacity: 0.85; text-transform: uppercase; letter-spacing: 0.08em; }
-  .eyebrow {
-    font-size: 11px; text-transform: uppercase; letter-spacing: 0.12em;
-    color: var(--accent); font-weight: 700; margin: 36px 0 8px;
-  }
-  h2 { font-size: 19px; font-weight: 700; letter-spacing: -0.012em; margin: 0 0 14px; color: var(--ink); }
-  h3 { font-size: 15px; font-weight: 700; margin: 20px 0 8px; }
-  p { margin: 0 0 14px; color: var(--ink-muted); }
-  .lead { font-size: 16px; color: var(--ink); margin-bottom: 20px; }
-  em, .italic { font-style: italic; color: var(--ink-muted); }
-  strong { color: var(--ink); font-weight: 600; }
-  .summary-box {
-    background: var(--surface); border: 1px solid var(--border);
-    border-left: 4px solid var(--accent);
-    padding: 18px 24px; border-radius: 12px; margin: 4px 0 24px;
-  }
-  .summary-box p { margin: 0 0 10px; font-size: 15px; color: var(--ink); }
-  .summary-box p:last-child { margin: 0; }
-  .kpi-row { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; margin: 8px 0 24px; }
-  .kpi { background: var(--surface); border: 1px solid var(--border); border-radius: 14px; padding: 16px 18px; }
-  .kpi .label { font-size: 10.5px; text-transform: uppercase; letter-spacing: 0.08em; color: var(--ink-subtle); font-weight: 600; margin-bottom: 6px; }
-  .kpi .value { font-size: 22px; font-weight: 700; letter-spacing: -0.02em; color: var(--ink); line-height: 1.1; font-variant-numeric: tabular-nums; }
-  .kpi .delta { display: inline-block; font-size: 11px; font-weight: 600; padding: 1px 6px; border-radius: 4px; margin-top: 6px; }
-  .delta-good { color: var(--accent); background: var(--accent-soft); }
-  .delta-bad  { color: var(--danger); background: var(--danger-soft); }
-  .delta-neutral { color: var(--ink-subtle); background: var(--border-soft); }
-  table { width: 100%; border-collapse: collapse; font-size: 13.5px; margin-bottom: 8px; }
-  thead th { text-align: left; font-size: 10.5px; text-transform: uppercase; letter-spacing: 0.08em; color: var(--ink-subtle); font-weight: 600; padding: 8px 10px; border-bottom: 1px solid var(--border); }
-  tbody td { padding: 10px; border-bottom: 1px solid var(--border); font-variant-numeric: tabular-nums; }
-  tbody tr:last-child td { border-bottom: none; }
-  td.right, th.right { text-align: right; }
-  td.bold, .bold { font-weight: 600; }
-  .badge { display: inline-block; padding: 2px 8px; border-radius: 999px; font-size: 11.5px; font-weight: 600; }
-  .badge-green { background: var(--accent-soft); color: var(--accent); }
-  .badge-gold { background: #FBF3E1; color: var(--warn); }
-  .badge-red { background: var(--danger-soft); color: var(--danger); }
-  .callout { border-left: 3px solid var(--accent); background: var(--accent-soft); border-radius: 0 10px 10px 0; padding: 16px 20px; margin: 14px 0 22px; }
-  .callout-warn { border-left-color: var(--warn); background: var(--warn-soft); }
-  .callout-warn .callout-title { color: var(--warn); }
-  .callout-bad { border-left-color: var(--danger); background: var(--danger-soft); }
-  .callout-bad .callout-title { color: var(--danger); }
-  .callout-title { font-weight: 700; margin-bottom: 6px; font-size: 13px; text-transform: uppercase; letter-spacing: 0.06em; color: var(--accent); }
-  .callout-body { font-size: 14px; color: var(--ink-muted); }
-  .row { display: flex; justify-content: space-between; align-items: baseline; font-size: 14px; margin-bottom: 6px; }
-  .row .name { color: var(--ink); font-weight: 500; }
-  .row .val { color: var(--ink-muted); font-variant-numeric: tabular-nums; }
-  .bar { height: 6px; background: var(--border-soft); border-radius: 999px; overflow: hidden; margin-top: 4px; }
-  .bar-fill { height: 100%; background: var(--accent); }
-  ul { padding-left: 20px; margin: 12px 0; color: var(--ink-muted); }
-  ul li { margin-bottom: 6px; font-size: 14px; }
-  .signoff { margin-top: 36px; padding-top: 18px; border-top: 1px solid var(--border); font-size: 14px; color: var(--ink-muted); }
-  .signoff .name { font-weight: 600; color: var(--ink); }
-  .footer-meta { margin-top: 24px; font-size: 11.5px; color: var(--ink-subtle); }
-  @media (max-width: 720px) {
-    body { padding: 24px 20px 60px; }
-    .kpi-row { grid-template-columns: repeat(2, 1fr); }
-  }
-`;
-
-function demoReportShell(title: string, body: string): string {
-  return `<!doctype html>
-<html lang="en">
-<head>
-<meta charset="utf-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>${title} · Stoneline Apparel</title>
-<style>${DEMO_REPORT_STYLES}</style>
-</head>
-<body>
-<div class="wrap">
-${body}
-</div>
-</body>
-</html>`;
-}
-
+// Demo report HTML — rendered from the SG production templates with mocked
+// Stoneline Apparel data. Same structure, same look, same standard prospects
+// will see when they become real clients.
 const REPORT_HTML: Record<string, string> = {
-  // ───────────────────────────────────────────────────────────
-  // Monthly Performance Report — Stoneline Apparel
-  // Mirrors the SG production weekly-report-refresh template.
-  // ───────────────────────────────────────────────────────────
-  "client-monthly-2026-04": demoReportShell(
-    "Monthly Performance Report",
-    `
-    <div class="hero">
-      <div class="brand-mark">Stoneline Apparel · Heritage Menswear</div>
-      <h1>Monthly Performance Report</h1>
-      <p class="sub">Where the business stands, what changed, what to lean into next.</p>
-      <div class="period">Period · April 1-28, 2026 · 28 days &nbsp;·&nbsp; Compared to · March 4-31, 2026</div>
-    </div>
-
-    <div class="eyebrow">Executive Summary</div>
-    <h2>The 30-second read</h2>
-    <div class="summary-box">
-      <p>Best month on record. Net revenue hit <strong>$48,920</strong> on 318 orders, up <strong>+24%</strong> versus the prior 28-day window. Average order value climbed from $144 to $154 as the Heritage Field Jacket launch shifted the mix toward higher-ticket pieces.</p>
-      <p>Paid spend stayed disciplined: <strong>$8,640 in / $19,290 out</strong> across Meta and Google, blended <strong>2.23x ROAS</strong>. Email did the quiet work — the welcome series alone returned <strong>$5,140</strong> from 142 new subscribers. Mobile conversion is still the gap to close (1.8% mobile vs 4.4% desktop).</p>
-    </div>
-
-    <div class="eyebrow">Section 1 · Profit &amp; Loss</div>
-    <h2>Where every dollar landed</h2>
-    <table>
-      <thead><tr><th>Line</th><th class="right">Amount</th></tr></thead>
-      <tbody>
-        <tr><td>Gross sales (318 orders)</td><td class="right bold">$48,920</td></tr>
-        <tr><td>Shipping collected</td><td class="right">$1,860</td></tr>
-        <tr><td>Discounts applied</td><td class="right">-$2,140</td></tr>
-        <tr><td>Refunds (8 orders)</td><td class="right">-$1,260</td></tr>
-        <tr><td class="bold">Net revenue</td><td class="right bold">$47,380</td></tr>
-        <tr><td>Cost of goods sold</td><td class="right">-$15,560</td></tr>
-        <tr><td>Total ad spend</td><td class="right">-$8,640</td></tr>
-        <tr><td>Tools &amp; fulfillment</td><td class="right">-$2,890</td></tr>
-        <tr><td class="bold">Net profit</td><td class="right bold" style="color:var(--accent);">$20,290</td></tr>
-      </tbody>
-    </table>
-    <div class="callout">
-      <div class="callout-title">Margin holding strong</div>
-      <div class="callout-body">Gross margin <strong>67.2%</strong>. Net margin <strong>42.8%</strong>. For every dollar Stoneline puts into product + ads, it's getting <strong>$1.83 back</strong>. Industry benchmark for menswear DTC sits at $1.25–$1.45.</div>
-    </div>
-
-    <div class="eyebrow">Section 2 · Ad Performance</div>
-    <h2>What ads are actually returning (real platform data)</h2>
-    <div class="kpi-row">
-      <div class="kpi"><div class="label">Total Ad Spend</div><div class="value">$8,640</div></div>
-      <div class="kpi"><div class="label">Revenue Generated</div><div class="value">$19,290</div></div>
-      <div class="kpi"><div class="label">Blended ROAS</div><div class="value">2.23x</div><div class="delta delta-good">↑ 0.31x</div></div>
-      <div class="kpi"><div class="label">Cost Per Purchase</div><div class="value">$48</div></div>
-    </div>
-    <table>
-      <thead><tr><th>Platform</th><th class="right">Spend</th><th class="right">Revenue</th><th class="right">Purchases</th><th class="right">ROAS</th><th></th></tr></thead>
-      <tbody>
-        <tr><td class="bold">Meta · Heritage Field Jacket launch</td><td class="right">$3,420</td><td class="right">$9,180</td><td class="right">42</td><td class="right bold" style="color:var(--accent);">2.68x</td><td><span class="badge badge-green">Winner</span></td></tr>
-        <tr><td class="bold">Meta · Selvedge Denim retargeting</td><td class="right">$1,810</td><td class="right">$4,580</td><td class="right">28</td><td class="right bold" style="color:var(--accent);">2.53x</td><td><span class="badge badge-green">Strong</span></td></tr>
-        <tr><td class="bold">Meta · Brand prospecting (broad)</td><td class="right">$1,290</td><td class="right">$2,140</td><td class="right">14</td><td class="right" style="color:var(--accent);">1.66x</td><td><span class="badge badge-gold">Watch</span></td></tr>
-        <tr><td class="bold">Google · PMax shopping</td><td class="right">$2,120</td><td class="right">$3,390</td><td class="right">22</td><td class="right" style="color:var(--accent);">1.60x</td><td><span class="badge badge-gold">Watch</span></td></tr>
-      </tbody>
-    </table>
-
-    <div class="eyebrow">Section 3 · Conversion Funnel</div>
-    <h2>Sessions to purchase, step by step</h2>
-    <table>
-      <thead><tr><th>Stage</th><th class="right">Count</th><th class="right">Drop-off</th></tr></thead>
-      <tbody>
-        <tr><td>Total sessions</td><td class="right bold">22,140</td><td class="right">—</td></tr>
-        <tr><td>Product page views</td><td class="right">14,580</td><td class="right">34%</td></tr>
-        <tr><td>Add-to-cart</td><td class="right">1,920</td><td class="right">87%</td></tr>
-        <tr><td>Checkout initiated</td><td class="right">812</td><td class="right">58%</td></tr>
-        <tr><td class="bold">Completed purchase</td><td class="right bold">318</td><td class="right">61%</td></tr>
-      </tbody>
-    </table>
-    <div class="callout callout-warn">
-      <div class="callout-title">Where it's leaking — Mobile checkout</div>
-      <div class="callout-body">Mobile is <strong>72%</strong> of sessions but only <strong>48%</strong> of revenue. If mobile converted at the desktop rate, that's roughly <strong>$11,400 more</strong> per month. Mobile checkout redesign ships in week 2 of next month.</div>
-    </div>
-
-    <div class="eyebrow">Section 4 · Top Products</div>
-    <h2>What's carrying the store</h2>
-    <div class="row"><span class="name">Heritage Field Jacket</span><span class="val">$14,140 · 49 units</span></div>
-    <div class="bar"><div class="bar-fill" style="width:100%;"></div></div>
-    <div class="row" style="margin-top:14px;"><span class="name">Selvedge 5-pocket Denim</span><span class="val">$11,820 · 78 units</span></div>
-    <div class="bar"><div class="bar-fill" style="width:84%;"></div></div>
-    <div class="row" style="margin-top:14px;"><span class="name">Heritage Tee · 3-pack</span><span class="val">$7,910 · 102 units</span></div>
-    <div class="bar"><div class="bar-fill" style="width:56%;"></div></div>
-    <div class="row" style="margin-top:14px;"><span class="name">Waxed Canvas Trucker</span><span class="val">$6,680 · 31 units</span></div>
-    <div class="bar"><div class="bar-fill" style="width:47%;"></div></div>
-    <div class="row" style="margin-top:14px;"><span class="name">Wool Crewneck Sweater</span><span class="val">$4,250 · 26 units</span></div>
-    <div class="bar"><div class="bar-fill" style="width:30%;"></div></div>
-
-    <div class="eyebrow">Section 5 · Channel Mix</div>
-    <h2>Where buyers came from</h2>
-    <table>
-      <thead><tr><th>Channel</th><th class="right">Sessions</th><th class="right">Orders</th><th class="right">Revenue</th><th class="right">Conv</th></tr></thead>
-      <tbody>
-        <tr><td class="bold">Email (welcome + broadcasts)</td><td class="right">3,840</td><td class="right">98</td><td class="right">$15,920</td><td class="right"><span class="badge badge-green">2.55%</span></td></tr>
-        <tr><td class="bold">Organic Search</td><td class="right">5,210</td><td class="right">71</td><td class="right">$10,470</td><td class="right">1.36%</td></tr>
-        <tr><td class="bold">Direct</td><td class="right">3,480</td><td class="right">62</td><td class="right">$9,180</td><td class="right">1.78%</td></tr>
-        <tr><td class="bold">Organic Social</td><td class="right">4,920</td><td class="right">48</td><td class="right">$5,840</td><td class="right">0.98%</td></tr>
-        <tr><td class="bold">Referral</td><td class="right">1,620</td><td class="right">21</td><td class="right">$3,210</td><td class="right">1.30%</td></tr>
-      </tbody>
-    </table>
-    <p style="font-size:11.5px;color:var(--ink-subtle);margin-top:8px;">Paid channels excluded — those are reported in Section 2 directly from the ad platforms (GA4 under-attributes paid traffic).</p>
-
-    <div class="eyebrow">Section 6 · Recommendations</div>
-    <h2>Where to lean next month</h2>
-    <ul>
-      <li><strong>Scale the winner.</strong> Heritage Field Jacket campaign is doing 2.68x at $3,420 spend. Take it to $5,000 in 20% increments.</li>
-      <li><strong>Ship the mobile checkout fix.</strong> Single largest revenue lever in the funnel right now (~$11k/mo upside).</li>
-      <li><strong>Email cadence to 2x/week.</strong> Welcome series is doing 2.55% conversion. Add a Tuesday product drop email + Friday founder note.</li>
-      <li><strong>Pause the broad prospecting set.</strong> 1.66x ROAS for 30 days; reallocate budget to retargeting + lookalikes from purchasers.</li>
-      <li><strong>Q2 lookbook drops May 6.</strong> Coordinate with the Spring Sale email to avoid creative collision.</li>
-    </ul>
-
-    <div class="signoff">
-      <p style="margin:0;">Reviewed and signed off by</p>
-      <p style="margin:4px 0 0;" class="name">Dusty · Venti Scale</p>
-      <p class="footer-meta">Data: Shopify · Meta Ads · Google Ads · GA4 · Klaviyo. Generated April 28, 2026. Next monthly: May 28, 2026.</p>
-    </div>
-    `,
-  ),
-
-  // ───────────────────────────────────────────────────────────
-  // Monthly SEO Report — Stoneline Apparel
-  // ───────────────────────────────────────────────────────────
-  "seo-monthly-2026-04": demoReportShell(
-    "Monthly SEO Report",
-    `
-    <div class="hero">
-      <div class="brand-mark">Stoneline Apparel · Heritage Menswear</div>
-      <h1>Monthly SEO Report</h1>
-      <p class="sub">Search performance, the revenue it drove, and the work behind it.</p>
-      <div class="period">Period · April 1-28, 2026 · 28-day window &nbsp;·&nbsp; Compared to · March 4-31, 2026</div>
-    </div>
-
-    <div class="eyebrow">Executive Summary</div>
-    <h2>The 30-second read</h2>
-    <div class="summary-box">
-      <p>Clicks are up: <strong>1,840</strong> this period vs 1,420 last period (<strong>+30%</strong>). Average position improved from 14.2 to 11.8.</p>
-      <p>Organic search drove <strong>$10,470</strong> in revenue from 5,210 sessions. That's <strong>+38%</strong> vs prior period and now the second-largest non-paid channel after email. <strong>"selvedge denim brands"</strong> is the top driver: 218 clicks at position 4.2.</p>
-    </div>
-
-    <div class="eyebrow">Search Performance</div>
-    <h2>Top-line metrics (vs prior 28 days)</h2>
-    <div class="kpi-row">
-      <div class="kpi"><div class="label">Clicks</div><div class="value">1,840</div><div class="delta delta-good">↑ 30%</div></div>
-      <div class="kpi"><div class="label">Impressions</div><div class="value">82,400</div><div class="delta delta-good">↑ 24%</div></div>
-      <div class="kpi"><div class="label">Avg CTR</div><div class="value">2.2%</div><div class="delta delta-good">↑ 0.3pp</div></div>
-      <div class="kpi"><div class="label">Avg Position</div><div class="value">11.8</div><div class="delta delta-good">↑ 2.4</div></div>
-    </div>
-
-    <div class="eyebrow">Revenue Impact</div>
-    <h2>What organic search earned</h2>
-    <div class="kpi-row">
-      <div class="kpi"><div class="label">Organic Sessions</div><div class="value">5,210</div></div>
-      <div class="kpi"><div class="label">Organic Orders</div><div class="value">71</div></div>
-      <div class="kpi"><div class="label">Organic Revenue</div><div class="value">$10,470</div></div>
-      <div class="kpi"><div class="label">$/Search Click</div><div class="value">$5.69</div></div>
-    </div>
-    <p class="lead">Every organic search click is currently worth <strong>$5.69</strong> in revenue. That puts a real dollar number on every position we win or lose.</p>
-
-    <div class="callout">
-      <div class="callout-title">↑ Climbing this period</div>
-      <div class="callout-body">
-        <ul style="margin:0;">
-          <li><strong>"selvedge denim brands"</strong> — 218 clicks (Δ +89), position 4.2 (Δ +3.1)</li>
-          <li><strong>"heritage menswear"</strong> — 142 clicks (Δ +54), position 5.8 (Δ +2.2)</li>
-          <li><strong>"made in usa menswear"</strong> — 96 clicks (Δ +38), position 7.4 (Δ +1.6)</li>
-          <li><strong>"waxed canvas jacket"</strong> — 71 clicks (Δ +44), position 8.1 (Δ +2.3)</li>
-        </ul>
-      </div>
-    </div>
-
-    <div class="eyebrow">Section · Queries</div>
-    <h2>Top search queries (with movement)</h2>
-    <table>
-      <thead><tr><th>Query</th><th class="right">Clicks (Δ)</th><th class="right">Impressions</th><th class="right">CTR</th><th class="right">Position (Δ)</th></tr></thead>
-      <tbody>
-        <tr><td class="bold">selvedge denim brands</td><td class="right">218 <span class="delta delta-good">↑ 69%</span></td><td class="right">4,820</td><td class="right"><span class="badge badge-green">4.5%</span></td><td class="right">4.2 <span class="delta delta-good">↑ 3.1</span></td></tr>
-        <tr><td class="bold">heritage menswear</td><td class="right">142 <span class="delta delta-good">↑ 61%</span></td><td class="right">3,210</td><td class="right">4.4%</td><td class="right">5.8 <span class="delta delta-good">↑ 2.2</span></td></tr>
-        <tr><td class="bold">best field jacket men</td><td class="right">128 <span class="delta delta-good">↑ 32%</span></td><td class="right">5,940</td><td class="right">2.2%</td><td class="right">9.4 <span class="delta delta-good">↑ 1.8</span></td></tr>
-        <tr><td class="bold">made in usa menswear</td><td class="right">96 <span class="delta delta-good">↑ 65%</span></td><td class="right">2,810</td><td class="right">3.4%</td><td class="right">7.4 <span class="delta delta-good">↑ 1.6</span></td></tr>
-        <tr><td class="bold">waxed canvas jacket</td><td class="right">71 <span class="delta delta-good">↑ 163%</span></td><td class="right">1,920</td><td class="right">3.7%</td><td class="right">8.1 <span class="delta delta-good">↑ 2.3</span></td></tr>
-        <tr><td class="bold">how to break in selvedge denim</td><td class="right">58 <span class="delta delta-good">↑ 45%</span></td><td class="right">1,420</td><td class="right">4.1%</td><td class="right">3.1 <span class="delta delta-neutral">flat</span></td></tr>
-        <tr><td>raw denim care</td><td class="right">42 <span class="delta delta-good">↑ 24%</span></td><td class="right">1,180</td><td class="right">3.6%</td><td class="right">6.2 <span class="delta delta-good">↑ 0.8</span></td></tr>
-        <tr><td>heritage chinos</td><td class="right">38 <span class="delta delta-good">↑ 41%</span></td><td class="right">980</td><td class="right">3.9%</td><td class="right">7.5 <span class="delta delta-good">↑ 1.4</span></td></tr>
-      </tbody>
-    </table>
-
-    <div class="eyebrow">Section · Pages</div>
-    <h2>Top pages (with movement)</h2>
-    <table>
-      <thead><tr><th>Page</th><th class="right">Clicks (Δ)</th><th class="right">Impressions</th><th class="right">CTR</th></tr></thead>
-      <tbody>
-        <tr><td class="bold">/products/selvedge-denim</td><td class="right">312 <span class="delta delta-good">↑ 58%</span></td><td class="right">7,420</td><td class="right">4.2%</td></tr>
-        <tr><td class="bold">/the-stoneline-story</td><td class="right">178 <span class="delta delta-good">↑ 32%</span></td><td class="right">4,810</td><td class="right">3.7%</td></tr>
-        <tr><td class="bold">/products/heritage-field-jacket</td><td class="right">164 <span class="delta delta-good">↑ 124%</span></td><td class="right">3,920</td><td class="right">4.2%</td></tr>
-        <tr><td class="bold">/journal/break-in-selvedge</td><td class="right">142 <span class="delta delta-good">↑ 41%</span></td><td class="right">3,180</td><td class="right">4.5%</td></tr>
-        <tr><td class="bold">/journal/made-in-usa-supply-chain</td><td class="right">98 <span class="delta delta-good">↑ 22%</span></td><td class="right">2,840</td><td class="right">3.5%</td></tr>
-        <tr><td class="bold">/collection/heritage</td><td class="right">86 <span class="delta delta-good">↑ 19%</span></td><td class="right">5,610</td><td class="right"><span class="badge badge-red">1.5%</span></td></tr>
-      </tbody>
-    </table>
-
-    <div class="callout callout-warn">
-      <div class="callout-title">Quick Win This Period</div>
-      <div class="callout-body">
-        <strong>/collection/heritage</strong> pulled <strong>5,610 impressions</strong> at only <strong>1.5% CTR</strong>. People are seeing it but not clicking. Rewriting the meta title and description could lift this to roughly <strong>140-220 additional clicks</strong> per month for free. Owner of fix: SEO. Ship by May 8.
-      </div>
-    </div>
-
-    <div class="eyebrow">The Work Behind the Numbers</div>
-    <h2>What we shipped + what's next</h2>
-    <div class="callout">
-      <div class="callout-title">Content shipped this period (6 articles)</div>
-      <div class="callout-body">
-        <ul style="margin:0;">
-          <li><strong>Apr 4</strong> — How to break in selvedge denim (the proper way) <span style="color:var(--ink-subtle);font-family:monospace;font-size:11.5px;">[break in selvedge denim]</span></li>
-          <li><strong>Apr 9</strong> — Made in USA menswear: what the label actually means <span style="color:var(--ink-subtle);font-family:monospace;font-size:11.5px;">[made in usa menswear]</span></li>
-          <li><strong>Apr 13</strong> — Field jacket vs chore coat: which one earns its place <span style="color:var(--ink-subtle);font-family:monospace;font-size:11.5px;">[best field jacket men]</span></li>
-          <li><strong>Apr 17</strong> — Why we run waxed canvas (and how to care for it) <span style="color:var(--ink-subtle);font-family:monospace;font-size:11.5px;">[waxed canvas jacket]</span></li>
-          <li><strong>Apr 22</strong> — Heritage chinos: the cut, the cloth, the case for them <span style="color:var(--ink-subtle);font-family:monospace;font-size:11.5px;">[heritage chinos]</span></li>
-          <li><strong>Apr 26</strong> — A 12-piece spring capsule, fully styled <span style="color:var(--ink-subtle);font-family:monospace;font-size:11.5px;">[spring capsule menswear]</span></li>
-        </ul>
-      </div>
-    </div>
-
-    <div class="callout">
-      <div class="callout-title">Coming next (4 scheduled)</div>
-      <div class="callout-body">
-        <ul style="margin:0;">
-          <li><strong>May 1</strong> — Best heritage menswear brands of 2026 (head-to-head) <span style="color:var(--ink-subtle);font-family:monospace;font-size:11.5px;">[heritage menswear brands]</span></li>
-          <li><strong>May 6</strong> — How to wear a field jacket year-round <span style="color:var(--ink-subtle);font-family:monospace;font-size:11.5px;">[how to wear field jacket]</span></li>
-          <li><strong>May 11</strong> — Wool vs cotton crewneck: when to wear which <span style="color:var(--ink-subtle);font-family:monospace;font-size:11.5px;">[wool crewneck men]</span></li>
-          <li><strong>May 15</strong> — The case for buying fewer, better menswear pieces <span style="color:var(--ink-subtle);font-family:monospace;font-size:11.5px;">[buy less better menswear]</span></li>
-        </ul>
-      </div>
-    </div>
-
-    <p class="footer-meta">Data: Google Search Console · Google Analytics 4 · Stoneline content calendar. Generated April 28, 2026. Next monthly: May 28, 2026.</p>
-    `,
-  ),
-
-  // ───────────────────────────────────────────────────────────
-  // Q2 Strategy Brief — long-form narrative
-  // ───────────────────────────────────────────────────────────
-  "strategy-q2-2026": demoReportShell(
-    "Q2 Strategy Brief",
-    `
-    <div class="hero">
-      <div class="brand-mark">Stoneline Apparel · Strategy Brief</div>
-      <h1>Q2 2026 Strategy Brief</h1>
-      <p class="sub">A 90-day plan to grow net revenue 35% without buying more traffic.</p>
-      <div class="period">Drafted · April 15, 2026 &nbsp;·&nbsp; Quarter window · Apr 1 – Jun 30, 2026</div>
-    </div>
-
-    <div class="eyebrow">Where the business stands</div>
-    <h2>The starting line for Q2</h2>
-    <p class="lead">Q1 closed at <strong>$132,400</strong> in revenue, <strong>+22%</strong> vs Q4 2025. Two channels carried the quarter: email (28% of revenue) and direct (24%). Paid social held a 2.1x blended ROAS, healthy for a heritage menswear brand at this scale. Mobile conversion is the single largest leak in the funnel — 1.8% mobile vs 4.4% desktop, on a traffic mix that's 72% mobile.</p>
-    <p>The Heritage Field Jacket launch in late March validated the higher-ticket capsule strategy. AOV moved from $138 (Q1 average) to $154 in April. The product mix is shifting toward fewer, better pieces — exactly the story the brand has been telling.</p>
-
-    <div class="eyebrow">The quarter goal</div>
-    <h2>Three numbers to hit by June 30</h2>
-    <div class="kpi-row">
-      <div class="kpi"><div class="label">Quarter revenue</div><div class="value">$179,000</div></div>
-      <div class="kpi"><div class="label">Net margin</div><div class="value">≥ 40%</div></div>
-      <div class="kpi"><div class="label">Email list</div><div class="value">14,000 active</div></div>
-      <div class="kpi"><div class="label">Mobile conv</div><div class="value">3.0%+</div></div>
-    </div>
-    <p>Hitting $179k at 40% net margin requires zero new ad budget — every dollar is in the existing channels and creative. The bet is on conversion improvement and email cadence, not paid scaling.</p>
-
-    <div class="eyebrow">The 90-day plan</div>
-    <h2>Three workstreams, owned end-to-end by Venti Scale</h2>
-
-    <h3>1. Mobile checkout rebuild (weeks 1-3)</h3>
-    <p>The biggest revenue lever in the business. Mobile sessions outnumber desktop 3:1, but mobile conversion is 41% of desktop. If we close half the gap, that's <strong>roughly $14,000/month</strong> in incremental revenue — with the same traffic, same ad spend.</p>
-    <ul>
-      <li><strong>Week 1:</strong> session recordings + heatmaps. Identify the top 3 friction points.</li>
-      <li><strong>Week 2:</strong> redesign + ship the mobile cart drawer + Apple Pay / Shop Pay above the fold.</li>
-      <li><strong>Week 3:</strong> A/B test new mobile PDP layout vs control. Cut at 95% confidence.</li>
-    </ul>
-
-    <h3>2. Email cadence + automation (weeks 2-8)</h3>
-    <p>Welcome series is doing 2.55% conversion — strong. List size is the cap. Two moves to grow it: (a) a smarter exit-intent on mobile, (b) a content-led lead magnet (the "Heritage Care Guide" PDF). Cadence moves from 1 broadcast/week to 2: a Tuesday product story and a Friday founder note. Both run on autopilot from the editorial calendar.</p>
-    <ul>
-      <li><strong>Week 2:</strong> ship the Heritage Care Guide opt-in. Target: +800 subscribers in 30 days.</li>
-      <li><strong>Week 4:</strong> launch abandoned cart sequence (5 emails over 9 days).</li>
-      <li><strong>Week 6:</strong> add a post-purchase replenishment flow at day 60.</li>
-      <li><strong>Week 8:</strong> review WoW open + click rates; tune subject lines from the bottom of the funnel up.</li>
-    </ul>
-
-    <h3>3. SEO content engine + product pages (weeks 1-12)</h3>
-    <p>Organic search is now $5.69 per click. Every position we earn compounds. The plan: 2 articles per week (24 over the quarter) targeting commercial-intent and long-tail menswear queries. In parallel, rewrite meta titles + descriptions on the 18 product pages with high impressions / low CTR.</p>
-    <ul>
-      <li><strong>Weeks 1-4:</strong> ship 8 articles around "selvedge denim", "heritage menswear", "made in USA" cluster.</li>
-      <li><strong>Weeks 5-8:</strong> 8 articles on field jackets, chore coats, waxed canvas (top buyer-intent terms).</li>
-      <li><strong>Weeks 9-12:</strong> 8 articles around the spring/summer capsule + internal linking pass.</li>
-      <li><strong>Continuous:</strong> meta title/description rewrites on the 18 quick-win pages identified in the SEO report.</li>
-    </ul>
-
-    <div class="eyebrow">What we're not doing</div>
-    <h2>The anti-list</h2>
-    <ul>
-      <li><strong>No new ad platforms.</strong> Meta + Google PMax are working. Adding TikTok or Pinterest spreads the budget without proving anything new this quarter.</li>
-      <li><strong>No new product launches.</strong> The Heritage Field Jacket, Selvedge Denim, and Heritage Tee are already carrying the store. Doubling down beats adding.</li>
-      <li><strong>No influencer campaigns.</strong> Cost-per-acquisition through influencers in Q1 was $94 vs $48 on email — not worth chasing again until conversion gaps are closed.</li>
-      <li><strong>No retargeting list expansion past 90 days.</strong> Sub-90 retargeting is doing 2.53x ROAS; longer windows dilute the signal.</li>
-    </ul>
-
-    <div class="eyebrow">Risks + watchpoints</div>
-    <h2>What could break the plan</h2>
-    <ul>
-      <li><strong>Meta CPM inflation.</strong> Q2 typically runs 10-15% higher CPMs than Q1. We've baked +12% into the ROAS targets. If CPM spikes &gt;20%, we throttle prospecting and lean harder into retargeting.</li>
-      <li><strong>iOS 18 attribution further degrading.</strong> Already a known gap. We trust Meta's ROAS reporting + Shopify GMV math, not GA4 paid attribution.</li>
-      <li><strong>Mobile rebuild slipping past week 3.</strong> If it slips, we ship a smaller version (cart drawer only) and follow up with the PDP redesign in Q3.</li>
-    </ul>
-
-    <div class="signoff">
-      <p style="margin:0;">Drafted by</p>
-      <p style="margin:4px 0 0;" class="name">Dusty · Venti Scale</p>
-      <p class="footer-meta">For: Stoneline Apparel · Marcus, Founder. Strategic review monthly. End-of-quarter retrospective: July 5, 2026.</p>
-    </div>
-    `,
-  ),
-
+  "client-monthly-2026-04": '<!DOCTYPE html>\n<html lang="en">\n<head>\n<meta charset="UTF-8">\n<meta name="viewport" content="width=device-width, initial-scale=1.0">\n<title>Sprinkler Guard — Weekly Performance Report</title>\n<style>\n  @import url(\'https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&display=swap\');\n\n  * { box-sizing: border-box; margin: 0; padding: 0; }\n  body { font-family: \'DM Sans\', sans-serif; background: #f0f2f5; color: #1a1a2e; line-height: 1.6; }\n\n  .report { max-width: 1000px; margin: 0 auto; padding: 24px; }\n\n  /* Header */\n  .report-header { background: linear-gradient(135deg, #1a5e1f 0%, #0d3b11 100%); border-radius: 16px; padding: 40px; margin-bottom: 24px; color: white; display: flex; justify-content: space-between; align-items: center; }\n  .report-header h1 { font-size: 28px; font-weight: 700; }\n  .report-header .subtitle { opacity: 0.85; font-size: 14px; margin-top: 4px; }\n  .report-header .period { text-align: right; }\n  .report-header .period .dates { font-size: 15px; opacity: 0.9; }\n  .report-header .period .label { font-size: 12px; text-transform: uppercase; letter-spacing: 1px; opacity: 0.6; }\n  .logo-area { display: flex; align-items: center; gap: 16px; }\n  .logo-badge { background: rgba(255,255,255,0.15); padding: 6px 14px; border-radius: 20px; font-size: 12px; letter-spacing: 0.5px; }\n\n  /* Section Headers */\n  .section { margin-bottom: 32px; }\n  .section-title { font-size: 20px; font-weight: 700; color: #1a3c12; margin-bottom: 16px; padding-bottom: 8px; border-bottom: 3px solid #1a5e1f; display: inline-block; }\n  .section-number { color: #1a5e1f; font-size: 13px; text-transform: uppercase; letter-spacing: 2px; font-weight: 600; margin-bottom: 4px; }\n\n  /* KPI Cards */\n  .kpi-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; margin-bottom: 24px; }\n  .kpi-card { background: white; border-radius: 12px; padding: 24px; text-align: center; box-shadow: 0 1px 3px rgba(0,0,0,0.08); }\n  .kpi-card .value { font-size: 32px; font-weight: 700; color: #1a5e1f; }\n  .kpi-card .label { font-size: 13px; color: #666; margin-top: 4px; text-transform: uppercase; letter-spacing: 0.5px; }\n  .kpi-card.highlight { background: linear-gradient(135deg, #1a5e1f, #2d7a32); color: white; }\n  .kpi-card.highlight .value { color: white; }\n  .kpi-card.highlight .label { color: rgba(255,255,255,0.8); }\n  .kpi-card.warning { border-left: 4px solid #e8621a; }\n  .kpi-card .change { font-size: 12px; margin-top: 6px; color: #999; }\n\n  /* Tables */\n  .data-card { background: white; border-radius: 12px; padding: 24px; margin-bottom: 16px; box-shadow: 0 1px 3px rgba(0,0,0,0.08); }\n  .data-card h3 { font-size: 16px; font-weight: 600; margin-bottom: 16px; color: #333; }\n  table { width: 100%; border-collapse: collapse; }\n  th { text-align: left; font-size: 12px; text-transform: uppercase; letter-spacing: 0.5px; color: #888; padding: 8px 12px; border-bottom: 2px solid #f0f0f0; }\n  th.right { text-align: right; }\n  td { padding: 10px 12px; border-bottom: 1px solid #f5f5f5; font-size: 14px; }\n  td.right { text-align: right; font-variant-numeric: tabular-nums; }\n  td.bold { font-weight: 600; }\n  tr:last-child td { border-bottom: none; }\n  .badge { display: inline-block; padding: 2px 8px; border-radius: 10px; font-size: 11px; font-weight: 600; }\n  .badge-green { background: #E8F5E9; color: #2d7a32; }\n  .badge-orange { background: #FFF3E0; color: #e8621a; }\n  .badge-red { background: #FFEBEE; color: #C62828; }\n  .badge-blue { background: #E3F2FD; color: #1565C0; }\n\n  /* Two Column Layout */\n  .two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }\n  .three-col { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 16px; }\n\n  /* Funnel */\n  .funnel { text-align: center; padding: 20px 0; }\n  .funnel-step { display: inline-block; text-align: center; position: relative; }\n  .funnel-bar { height: 60px; border-radius: 8px; display: flex; align-items: center; justify-content: center; color: white; font-weight: 700; font-size: 18px; margin-bottom: 6px; }\n  .funnel-label { font-size: 12px; color: #666; text-transform: uppercase; letter-spacing: 0.5px; }\n  .funnel-arrow { display: inline-block; color: #ccc; font-size: 24px; margin: 0 4px; vertical-align: middle; padding-top: 10px; }\n  .funnel-rate { font-size: 11px; color: #e8621a; font-weight: 600; position: absolute; top: -18px; left: 50%; transform: translateX(-50%); white-space: nowrap; }\n\n  /* Progress bars */\n  .progress-row { margin-bottom: 12px; }\n  .progress-label { display: flex; justify-content: space-between; font-size: 13px; margin-bottom: 4px; }\n  .progress-bar { height: 8px; background: #f0f0f0; border-radius: 4px; overflow: hidden; }\n  .progress-fill { height: 100%; border-radius: 4px; }\n\n  /* P&L Section */\n  .pl-table td { padding: 12px 16px; }\n  .pl-table .total-row { background: #f8f9fa; font-weight: 700; }\n  .pl-table .total-row td { border-top: 2px solid #1a5e1f; }\n  .pl-table .subtotal td { font-weight: 600; border-top: 1px solid #ddd; }\n  .green { color: #2d7a32; }\n  .red { color: #C62828; }\n  .orange { color: #e8621a; }\n\n  /* Callout */\n  .callout { background: #FFF8E1; border-left: 4px solid #e8621a; padding: 16px 20px; border-radius: 0 8px 8px 0; margin: 16px 0; }\n  .callout-green { background: #E8F5E9; border-left-color: #2d7a32; }\n  .callout h4 { font-size: 14px; margin-bottom: 6px; }\n  .callout p { font-size: 13px; color: #555; }\n\n  /* Footer */\n  .report-footer { text-align: center; padding: 32px; color: #999; font-size: 12px; }\n  .report-footer a { color: #1a5e1f; }\n\n  /* Print styles */\n  @media print {\n    body { background: white; }\n    .report { padding: 0; }\n    .section { page-break-inside: avoid; }\n  }\n\n  @media (max-width: 768px) {\n    .kpi-grid { grid-template-columns: repeat(2, 1fr); }\n    .two-col, .three-col { grid-template-columns: 1fr; }\n    .report-header { flex-direction: column; text-align: center; gap: 16px; }\n    .report-header .period { text-align: center; }\n  }\n</style>\n</head>\n<body>\n<div class="report">\n\n  <!-- HEADER -->\n  <div class="report-header">\n    <div>\n      <div class="logo-area">\n        <h1>Stoneline Apparel</h1>\n      </div>\n      <div class="subtitle">Weekly Performance Report</div>\n      <div style="margin-top: 12px;">\n        <span class="logo-badge">Heritage Menswear · Made in USA</span>\n        <span class="logo-badge">Prepared by Venti Scale</span>\n      </div>\n    </div>\n    <div class="period">\n      <div class="label">Reporting Period</div>\n      <div class="dates">Apr 1 - Apr 28, 2026</div>\n      <div class="dates" style="font-size:13px; opacity:0.7;">28 Days</div>\n    </div>\n  </div>\n\n  <!-- EXECUTIVE KPIs -->\n  <div class="section">\n    <div class="section-number">Overview</div>\n    <div class="section-title">Key Performance Indicators</div>\n\n    <div class="kpi-grid">\n      <div class="kpi-card highlight">\n        <div class="value">$48,920</div>\n        <div class="label">Total Revenue</div>\n      </div>\n      <div class="kpi-card">\n        <div class="value">318</div>\n        <div class="label">Orders</div>\n      </div>\n      <div class="kpi-card">\n        <div class="value">$153.84</div>\n        <div class="label">Avg Order Value</div>\n      </div>\n      <div class="kpi-card">\n        <div class="value">1.44%</div>\n        <div class="label">Conversion Rate</div>\n      </div>\n    </div>\n\n    <div class="kpi-grid">\n      <div class="kpi-card">\n        <div class="value">18,360</div>\n        <div class="label">Website Visitors</div>\n      </div>\n      <div class="kpi-card">\n        <div class="value">22,140</div>\n        <div class="label">Sessions</div>\n      </div>\n      <div class="kpi-card">\n        <div class="value">1,840</div>\n        <div class="label">Google Search Clicks</div>\n      </div>\n      <div class="kpi-card">\n        <div class="value">82.4K</div>\n        <div class="label">Search Impressions</div>\n      </div>\n    </div>\n  </div>\n\n  <!-- P&L SNAPSHOT -->\n  <div class="section">\n    <div class="section-number">Section 1</div>\n    <div class="section-title">Profit & Loss Statement</div>\n\n    <div class="data-card">\n      <h3>Full P&L - 28 Day Period</h3>\n      <table class="pl-table">\n        <tr style="background:#f0faf0;"><td colspan="2" class="bold" style="font-size:15px; color:#1a5e1f; padding:14px 16px;">REVENUE</td></tr>\n        <tr><td>Gross Sales (318 orders)</td><td class="right bold">$48,920.00</td></tr>\n        <tr><td>Shipping Collected</td><td class="right">$1,860.00</td></tr>\n        <tr><td>Tax Collected</td><td class="right">$0.00</td></tr>\n        <tr><td>Discounts Given</td><td class="right red">-$2,140.00</td></tr>\n        <tr><td>Refunds (8 orders)</td><td class="right red">-$1,260.00</td></tr>\n        <tr class="subtotal"><td class="bold">Net Revenue</td><td class="right bold green" style="font-size:18px;">$47,380.00</td></tr>\n\n        <tr style="background:#fef9f0;"><td colspan="2" class="bold" style="font-size:15px; color:#e8621a; padding:14px 16px;">COST OF GOODS SOLD</td></tr>\n        <tr><td>Manufacturing (489 units x $1.05)</td><td class="right">$10,260.00</td></tr>\n        <tr><td>Admin/Overhead (489 units x $0.35)</td><td class="right">$3,420.00</td></tr>\n        <tr><td>Shipping Cost (318 orders x $14)</td><td class="right">$1,880.00</td></tr>\n        <tr class="subtotal"><td class="bold">Total COGS</td><td class="right bold red">-$15,560.00</td></tr>\n\n        <tr style="background:#e8f5e9;"><td class="bold" style="font-size:16px;">GROSS PROFIT</td><td class="right bold green" style="font-size:22px;">$31,820.00</td></tr>\n        <tr><td></td><td class="right" style="color:#2d7a32; font-size:13px;">67.2% gross margin</td></tr>\n\n        <tr style="background:#fff3e0;"><td colspan="2" class="bold" style="font-size:15px; color:#e8621a; padding:14px 16px;">ADVERTISING</td></tr>\n        <tr><td>Meta/Facebook Ads</td><td class="right">$6,520.00</td></tr>\n        <tr><td>Google Ads (PMax)</td><td class="right">$2,120.00</td></tr>\n        <tr class="subtotal"><td class="bold">Total Ad Spend</td><td class="right bold red">-$8,640.00</td></tr>\n\n        <tr style="background:#e8f5e9; border-top:3px solid #1a5e1f;"><td class="bold" style="font-size:18px; padding:16px;">NET PROFIT (Before Other Expenses)</td><td class="right bold" style="font-size:28px; padding:16px; color:#1a5e1f;">$20,290.00</td></tr>\n        <tr><td></td><td class="right" style="color:#2d7a32; font-size:13px;">42.8% net margin</td></tr>\n      </table>\n    </div>\n\n    <div class="kpi-grid" style="grid-template-columns: repeat(5, 1fr);">\n      <div class="kpi-card highlight">\n        <div class="value">$47,380</div>\n        <div class="label">Net Revenue</div>\n      </div>\n      <div class="kpi-card">\n        <div class="value" style="color:#C62828;">$15,560</div>\n        <div class="label">COGS</div>\n      </div>\n      <div class="kpi-card">\n        <div class="value">$31,820</div>\n        <div class="label">Gross Profit</div>\n      </div>\n      <div class="kpi-card">\n        <div class="value" style="color:#C62828;">$8,640</div>\n        <div class="label">Ad Spend</div>\n      </div>\n      <div class="kpi-card" style="border: 2px solid #1a5e1f;">\n        <div class="value">$20,290</div>\n        <div class="label">Net Profit</div>\n      </div>\n    </div>\n\n    <div class="callout callout-green">\n      <h4>Bottom Line</h4>\n      <p>For every $1 Ken spends on the business (COGS + ads), he gets <strong>$1.83 back</strong>. The 67.2% gross margin is excellent - the product economics are strong. The key lever is improving conversion rate so existing ad spend generates more revenue.</p>\n    </div>\n  </div>\n\n  <!-- ADVERTISING BREAKDOWN -->\n  <div class="section">\n    <div class="section-number">Section 2</div>\n    <div class="section-title">Advertising Performance</div>\n\n    <div class="two-col">\n      <div class="data-card">\n        <h3>Meta / Facebook Ads</h3>\n        <table class="pl-table">\n          <tr><td>Total Spend</td><td class="right bold">$6,520.00</td></tr>\n          <tr><td>Revenue Generated</td><td class="right bold green">$15,900.00</td></tr>\n          <tr><td>ROAS</td><td class="right bold green">2.44x</td></tr>\n          <tr><td>Purchases</td><td class="right">84</td></tr>\n          <tr><td>Cost per Purchase</td><td class="right">$77.62</td></tr>\n          <tr><td>Link Clicks</td><td class="right">12,840</td></tr>\n          <tr><td>Landing Page Views</td><td class="right">9,180</td></tr>\n          <tr><td>Add to Carts</td><td class="right">612</td></tr>\n          <tr><td>Checkouts Initiated</td><td class="right">381</td></tr>\n          <tr><td>Impressions</td><td class="right">486K</td></tr>\n          <tr><td>CPC</td><td class="right">$0.51</td></tr>\n          <tr><td>CTR</td><td class="right">2.64%</td></tr>\n        </table>\n      </div>\n\n      <div class="data-card">\n        <h3>Google Ads (PMax)</h3>\n        <table class="pl-table">\n          <tr><td>Total Spend</td><td class="right bold">$2,120.00</td></tr>\n          <tr><td>Revenue Generated</td><td class="right bold green">$3,390.00</td></tr>\n          <tr><td>ROAS</td><td class="right bold green">1.60x</td></tr>\n          <tr><td>Purchases</td><td class="right">22</td></tr>\n          <tr><td>Cost per Purchase</td><td class="right">$96.36</td></tr>\n          <tr><td>Clicks</td><td class="right">3,210</td></tr>\n          <tr><td>Impressions</td><td class="right">92K</td></tr>\n        </table>\n        <div style="height:24px;"></div>\n        <div style="background:#f8f9fa; border-radius:8px; padding:16px; text-align:center;">\n          <div style="font-size:13px; color:#666; text-transform:uppercase; letter-spacing:1px;">Combined Totals</div>\n          <div style="display:flex; justify-content:space-around; margin-top:12px;">\n            <div><div style="font-size:24px; font-weight:700; color:#C62828;">$8,640</div><div style="font-size:11px; color:#666;">Total Spend</div></div>\n            <div><div style="font-size:24px; font-weight:700; color:#2d7a32;">$19,290</div><div style="font-size:11px; color:#666;">Total Revenue</div></div>\n            <div><div style="font-size:24px; font-weight:700; color:#1a5e1f;">2.23x</div><div style="font-size:11px; color:#666;">Blended ROAS</div></div>\n          </div>\n        </div>\n      </div>\n    </div>\n\n    <div class="data-card">\n      <h3>Meta Campaign Breakdown</h3>\n      <table>\n        <thead>\n          <tr><th>Campaign</th><th class="right">Spend</th><th class="right">Purchases</th><th class="right">Revenue</th><th class="right">ROAS</th><th class="right">CPA</th><th></th></tr>\n        </thead>\n        <tbody>\n                    <tr>\n            <td class="bold">BOF | Heritage Field Jacket Launch</td>\n            <td class="right">$3,420.00</td>\n            <td class="right">42</td>\n            <td class="right">$9,180.00</td>\n            <td class="right bold green">2.68x</td>\n            <td class="right">$81.43</td>\n            <td><span class="badge badge-green">Strong</span></td>\n          </tr>\n          <tr>\n            <td class="bold">BOF | Selvedge Denim Retargeting</td>\n            <td class="right">$1,810.00</td>\n            <td class="right">28</td>\n            <td class="right">$4,580.00</td>\n            <td class="right bold green">2.53x</td>\n            <td class="right">$64.64</td>\n            <td><span class="badge badge-green">Strong</span></td>\n          </tr>\n          <tr>\n            <td class="bold">TOF | Brand Prospecting Broad</td>\n            <td class="right">$1,290.00</td>\n            <td class="right">14</td>\n            <td class="right">$2,140.00</td>\n            <td class="right bold green">1.66x</td>\n            <td class="right">$92.14</td>\n            <td><span class="badge badge-orange">Watch</span></td>\n          </tr>\n\n        </tbody>\n      </table>\n\n    </div>\n\n    <!-- Revenue Waterfall -->\n    <div class="data-card">\n      <h3>Where Every Dollar Goes</h3>\n      <div style="padding: 16px 0;">\n        <div class="progress-row">\n          <div class="progress-label"><span class="bold">Net Profit (42.8%)</span><span class="green bold">$20,290</span></div>\n          <div class="progress-bar" style="height:32px; border-radius:6px;"><div class="progress-fill" style="width:42.8%; background:linear-gradient(90deg, #1a5e1f, #2d7a32); border-radius:6px;"></div></div>\n        </div>\n        <div class="progress-row">\n          <div class="progress-label"><span class="bold">Ad Spend (18.2%)</span><span class="red bold">$8,640</span></div>\n          <div class="progress-bar" style="height:32px; border-radius:6px;"><div class="progress-fill" style="width:18.2%; background:linear-gradient(90deg, #e8621a, #ff8a50); border-radius:6px;"></div></div>\n        </div>\n        <div class="progress-row">\n          <div class="progress-label"><span class="bold">COGS (32.8%)</span><span style="color:#666;" class="bold">$15,560</span></div>\n          <div class="progress-bar" style="height:32px; border-radius:6px;"><div class="progress-fill" style="width:32.8%; background:linear-gradient(90deg, #999, #bbb); border-radius:6px;"></div></div>\n        </div>\n      </div>\n      <div style="text-align:center; font-size:13px; color:#666; margin-top:8px;">\n        Out of every $1.00 in revenue: <strong style="color:#1a5e1f;">$0.43 profit</strong> · <strong style="color:#e8621a;">$0.18 ads</strong> · <strong style="color:#888;">$0.33 COGS</strong>\n      </div>\n    </div>\n  </div>\n\n  <!-- PRODUCT PERFORMANCE -->\n  <div class="section">\n    <div class="section-number">Section 3</div>\n    <div class="section-title">Product Performance</div>\n\n    <div class="data-card">\n      <table>\n        <thead>\n          <tr>\n            <th>Product</th>\n            <th class="right">Orders</th>\n            <th class="right">Units</th>\n            <th class="right">Revenue</th>\n            <th class="right">% of Sales</th>\n            <th></th>\n          </tr>\n        </thead>\n        <tbody>\n                    <tr>\n            <td class="bold">Heritage Field Jacket</td>\n            <td class="right">49</td>\n            <td class="right">49</td>\n            <td class="right">$14,140.00</td>\n            <td class="right">28.9%</td>\n            <td><span class="badge badge-green">Hero Drop</span></td>\n          </tr>\n          <tr>\n            <td class="bold">Selvedge 5-Pocket Denim</td>\n            <td class="right">76</td>\n            <td class="right">78</td>\n            <td class="right">$11,820.00</td>\n            <td class="right">24.2%</td>\n            <td><span class="badge badge-green">Bestseller</span></td>\n          </tr>\n          <tr>\n            <td class="bold">Heritage Tee · 3-Pack</td>\n            <td class="right">98</td>\n            <td class="right">102</td>\n            <td class="right">$7,910.00</td>\n            <td class="right">16.2%</td>\n            <td><span class="badge badge-blue">Volume</span></td>\n          </tr>\n          <tr>\n            <td class="bold">Waxed Canvas Trucker</td>\n            <td class="right">31</td>\n            <td class="right">31</td>\n            <td class="right">$6,680.00</td>\n            <td class="right">13.7%</td>\n            <td><span class="badge badge-green">High Value</span></td>\n          </tr>\n          <tr>\n            <td class="bold">Wool Crewneck Sweater</td>\n            <td class="right">26</td>\n            <td class="right">26</td>\n            <td class="right">$4,250.00</td>\n            <td class="right">8.7%</td>\n            <td><span class="badge badge-blue">Carryover</span></td>\n          </tr>\n\n        </tbody>\n      </table>\n    </div>\n\n    <div class="callout callout-green">\n      <h4>Insight</h4>\n      <p>The Heritage Field Jacket launch is delivering. Up-mix from $144 to $154 AOV is the entire story — same traffic, higher tickets. Lean into bundle pairings (jacket + tee, jacket + denim) for the next four weeks.</p>\n    </div>\n  </div>\n\n  <!-- TRAFFIC & CHANNELS -->\n  <div class="section">\n    <div class="section-number">Section 4</div>\n    <div class="section-title">Website Traffic & Channels</div>\n\n    <div class="two-col">\n      <div class="data-card">\n        <h3>Device Performance</h3>\n        <table>\n          <thead><tr><th>Device</th><th class="right">Sessions</th><th class="right">Purchases</th><th class="right">Revenue</th><th class="right">Conv Rate</th></tr></thead>\n          <tbody>\n                        <tr>\n              <td class="bold">Mobile</td>\n              <td class="right">15,940 (72%)</td>\n              <td class="right">152</td>\n              <td class="right">$23,470</td>\n              <td class="right"><span class="badge badge-red">0.95%</span></td>\n            </tr>\n            <tr>\n              <td class="bold">Desktop</td>\n              <td class="right">5,180 (23%)</td>\n              <td class="right">142</td>\n              <td class="right">$22,840</td>\n              <td class="right"><span class="badge badge-green">2.74%</span></td>\n            </tr>\n            <tr>\n              <td class="bold">Tablet</td>\n              <td class="right">1,020 (5%)</td>\n              <td class="right">24</td>\n              <td class="right">$2,610</td>\n              <td class="right">2.35%</td>\n            </tr>\n\n          </tbody>\n        </table>\n\n        <div class="callout" style="margin-top:16px;">\n          <h4>Mobile Gap = Lost Revenue</h4>\n          <p>If mobile converted at the desktop rate (2.74%), that\'s <strong>284 additional purchases</strong> and roughly <strong>$43,700 in extra monthly revenue</strong>. Mobile checkout redesign ships in week 2 of next month.</p>\n        </div>\n      </div>\n\n      <div class="data-card">\n        <h3>Top Landing Pages</h3>\n        <table>\n          <thead><tr><th>Page</th><th class="right">Sessions</th><th class="right">Conv</th></tr></thead>\n          <tbody>\n                        <tr><td>/ (homepage)</td><td class="right">8,210</td><td class="right">2.1%</td></tr>\n            <tr><td>/products/heritage-field-jacket</td><td class="right">3,840</td><td class="right"><span class="badge badge-green">3.6%</span></td></tr>\n            <tr><td>/products/selvedge-denim</td><td class="right">2,920</td><td class="right"><span class="badge badge-green">3.1%</span></td></tr>\n            <tr><td>/the-stoneline-story</td><td class="right">1,580</td><td class="right">1.4%</td></tr>\n            <tr><td>/collection/heritage</td><td class="right">1,210</td><td class="right">1.2%</td></tr>\n            <tr><td>/journal/break-in-selvedge</td><td class="right">980</td><td class="right">2.4%</td></tr>\n\n          </tbody>\n        </table>\n\n        <div class="callout" style="margin-top:16px;">\n          <h4>Insight</h4>\n          <p><strong>/products/heritage-field-jacket converts at 3.6%</strong> — best performer among high-traffic pages. Funnel paid traffic here, not the homepage.</p>\n        </div>\n      </div>\n    </div>\n  </div>\n\n  <!-- CONVERSION FUNNEL -->\n  <div class="section">\n    <div class="section-number">Section 5</div>\n    <div class="section-title">Conversion Funnel</div>\n\n    <div class="data-card" style="text-align:center; padding: 32px;">\n      <div style="display: flex; align-items: center; justify-content: center; gap: 8px; flex-wrap: wrap;">\n\n        <div class="funnel-step">\n          <div class="funnel-bar" style="width: 200px; background: #1a5e1f;">22,140</div>\n          <div class="funnel-label">Sessions</div>\n        </div>\n\n        <div class="funnel-arrow">&#8594;</div>\n\n        <div class="funnel-step" style="position:relative;">\n          <div class="funnel-rate">8.7% make it</div>\n          <div class="funnel-bar" style="width: 120px; background: #2d7a32;">1,920</div>\n          <div class="funnel-label">Add to Cart</div>\n        </div>\n\n        <div class="funnel-arrow">&#8594;</div>\n\n        <div class="funnel-step" style="position:relative;">\n          <div class="funnel-rate" style="color:#C62828;">42.3% proceed</div>\n          <div class="funnel-bar" style="width: 80px; background: #e8621a;">812</div>\n          <div class="funnel-label">Checkout</div>\n        </div>\n\n        <div class="funnel-arrow">&#8594;</div>\n\n        <div class="funnel-step" style="position:relative;">\n          <div class="funnel-rate" style="color:#2d7a32;">39.2% complete</div>\n          <div class="funnel-bar" style="width: 70px; background: #C62828;">318</div>\n          <div class="funnel-label">Purchase</div>\n        </div>\n\n      </div>\n\n      <div style="margin-top: 32px; display: flex; gap: 16px; justify-content: center;">\n        <div style="background:#FFEBEE; padding: 16px 24px; border-radius: 10px; text-align: center;">\n          <div style="font-size: 28px; font-weight: 700; color: #C62828;">60.8%</div>\n          <div style="font-size: 12px; color: #666;">Cart &#8594; Checkout<br>DROP-OFF</div>\n        </div>\n        <div style="background:#FFF3E0; padding: 16px 24px; border-radius: 10px; text-align: center;">\n          <div style="font-size: 28px; font-weight: 700; color: #e8621a;">1,602</div>\n          <div style="font-size: 12px; color: #666;">People abandoned<br>after adding to cart</div>\n        </div>\n        <div style="background:#E8F5E9; padding: 16px 24px; border-radius: 10px; text-align: center;">\n          <div style="font-size: 28px; font-weight: 700; color: #2d7a32;">~$246,400</div>\n          <div style="font-size: 12px; color: #666;">Estimated lost<br>revenue (at $153.84 AOV)</div>\n        </div>\n      </div>\n    </div>\n\n    <div class="callout">\n      <h4>Abandoned Cart Recovery: Live</h4>\n      <p>A 5-email recovery sequence is <strong>live in Brevo</strong> and firing every 2 hours via cron. Sequence runs over ~9 days: gentle nudge, math + social proof, founder story, 10% discount, last chance. Based on industry benchmarks (5-10% recovery rate), this is recovering an estimated <strong>$12,320 - $24,640/month</strong> in lost sales that would have walked. We watch the open / click / converted rates weekly and tune copy from the bottom of the sequence first.</p>\n    </div>\n  </div>\n\n  <!-- SEO -->\n  <div class="section">\n    <div class="section-number">Section 6</div>\n    <div class="section-title">SEO & Organic Search</div>\n\n    <div class="kpi-grid" style="grid-template-columns: repeat(4, 1fr);">\n      <div class="kpi-card">\n        <div class="value">1,840</div>\n        <div class="label">Clicks</div>\n      </div>\n      <div class="kpi-card">\n        <div class="value">82.4K</div>\n        <div class="label">Impressions</div>\n      </div>\n      <div class="kpi-card">\n        <div class="value warning">2.2%</div>\n        <div class="label">Avg CTR</div>\n      </div>\n      <div class="kpi-card">\n        <div class="value">11.8</div>\n        <div class="label">Avg Position</div>\n      </div>\n    </div>\n\n    <div class="two-col">\n      <div class="data-card">\n        <h3>Top Search Queries (What People Google)</h3>\n        <table>\n          <thead><tr><th>Query</th><th class="right">Clicks</th><th class="right">Impressions</th><th class="right">CTR</th><th class="right">Position</th></tr></thead>\n          <tbody>\n                        <tr><td class="bold">selvedge denim brands</td><td class="right">218</td><td class="right">4,820</td><td class="right"><span class="badge badge-green">4.5%</span></td><td class="right">4.2</td></tr>\n            <tr><td class="bold">heritage menswear</td><td class="right">142</td><td class="right">3,210</td><td class="right">4.4%</td><td class="right">5.8</td></tr>\n            <tr><td class="bold">best field jacket men</td><td class="right">128</td><td class="right">5,940</td><td class="right">2.2%</td><td class="right">9.4</td></tr>\n            <tr><td class="bold">made in usa menswear</td><td class="right">96</td><td class="right">2,810</td><td class="right">3.4%</td><td class="right">7.4</td></tr>\n            <tr><td class="bold">waxed canvas jacket</td><td class="right">71</td><td class="right">1,920</td><td class="right">3.7%</td><td class="right">8.1</td></tr>\n            <tr><td>how to break in selvedge denim</td><td class="right">58</td><td class="right">1,420</td><td class="right">4.1%</td><td class="right">3.1</td></tr>\n            <tr><td>raw denim care</td><td class="right">42</td><td class="right">1,180</td><td class="right">3.6%</td><td class="right">6.2</td></tr>\n            <tr><td>heritage chinos</td><td class="right">38</td><td class="right">980</td><td class="right">3.9%</td><td class="right">7.5</td></tr>\n\n          </tbody>\n        </table>\n      </div>\n\n      <div class="data-card">\n        <h3>Top Pages in Google Search</h3>\n        <table>\n          <thead><tr><th>Page</th><th class="right">Clicks</th><th class="right">Impressions</th><th class="right">CTR</th></tr></thead>\n          <tbody>\n                        <tr><td class="bold">/products/selvedge-denim</td><td class="right">312</td><td class="right">7,420</td><td class="right">4.2%</td></tr>\n            <tr><td class="bold">/the-stoneline-story</td><td class="right">178</td><td class="right">4,810</td><td class="right">3.7%</td></tr>\n            <tr><td class="bold">/products/heritage-fie...</td><td class="right">164</td><td class="right">3,920</td><td class="right">4.2%</td></tr>\n            <tr><td class="bold">/journal/break-in-selv...</td><td class="right">142</td><td class="right">3,180</td><td class="right">4.5%</td></tr>\n            <tr><td class="bold">/journal/made-in-usa-s...</td><td class="right">98</td><td class="right">2,840</td><td class="right">3.5%</td></tr>\n            <tr><td class="bold">/collection/heritage</td><td class="right">86</td><td class="right">5,610</td><td class="right"><span class="badge badge-red">1.5%</span></td></tr>\n\n          </tbody>\n        </table>\n\n        <div class="callout" style="margin-top:16px;">\n          <h4>Quick Win</h4>\n          <p>"/collection/heritage" has <strong>5,610 impressions but only 1.5% CTR</strong>. Improving the meta title/description for that page could add 140-220 clicks/month for free.</p>\n        </div>\n      </div>\n    </div>\n  </div>\n\n  <!-- CUSTOMER GEOGRAPHY -->\n  <div class="section">\n    <div class="section-number">Section 7</div>\n    <div class="section-title">Customer Geography</div>\n\n    <div class="data-card">\n      <h3>Orders by State</h3>\n      <div style="display: flex; gap: 24px; flex-wrap: wrap; padding: 16px 0;">\n        <div style="flex: 1; min-width: 300px;">\n                    <div class="progress-row">\n            <div class="progress-label"><span class="bold">CA</span><span>72 orders</span></div>\n            <div class="progress-bar"><div class="progress-fill" style="width:100%; background:#1a5e1f;"></div></div>\n          </div>\n          <div class="progress-row">\n            <div class="progress-label"><span class="bold">NY</span><span>54 orders</span></div>\n            <div class="progress-bar"><div class="progress-fill" style="width:75%; background:#2d7a32;"></div></div>\n          </div>\n          <div class="progress-row">\n            <div class="progress-label"><span class="bold">TX</span><span>41 orders</span></div>\n            <div class="progress-bar"><div class="progress-fill" style="width:57%; background:#4CAF50;"></div></div>\n          </div>\n          <div class="progress-row">\n            <div class="progress-label"><span class="bold">WA</span><span>28 orders</span></div>\n            <div class="progress-bar"><div class="progress-fill" style="width:39%; background:#66BB6A;"></div></div>\n          </div>\n          <div class="progress-row">\n            <div class="progress-label"><span class="bold">OR</span><span>22 orders</span></div>\n            <div class="progress-bar"><div class="progress-fill" style="width:31%; background:#66BB6A;"></div></div>\n          </div>\n          <div class="progress-row">\n            <div class="progress-label"><span class="bold">CO</span><span>18 orders</span></div>\n            <div class="progress-bar"><div class="progress-fill" style="width:25%; background:#81C784;"></div></div>\n          </div>\n          <div class="progress-row">\n            <div class="progress-label"><span class="bold">MA</span><span>16 orders</span></div>\n            <div class="progress-bar"><div class="progress-fill" style="width:22%; background:#81C784;"></div></div>\n          </div>\n          <div class="progress-row">\n            <div class="progress-label"><span class="bold">IL</span><span>14 orders</span></div>\n            <div class="progress-bar"><div class="progress-fill" style="width:19%; background:#81C784;"></div></div>\n          </div>\n\n        </div>\n\n        <div style="flex: 0 0 280px; background: #f8f9fa; border-radius: 12px; padding: 20px; text-align: center;">\n          <div style="font-size: 48px; font-weight: 700; color: #1a5e1f;">40%</div>\n          <div style="font-size: 14px; color: #666; margin-bottom: 16px;">of orders from CA + NY</div>\n          <div style="font-size: 13px; color: #555; text-align: left; line-height: 1.8;">\n            Premium menswear sells where premium menswear is worn<br>CA = home base for the brand story<br>NY = highest AOV per customer\n          </div>\n        </div>\n      </div>\n    </div>\n  </div>\n\n  <!-- RECOMMENDATIONS -->\n  <div class="section">\n    <div class="section-number">Section 8</div>\n    <div class="section-title">Recommendations & Action Items</div>\n\n    <div class="three-col">\n      <div class="data-card" style="border-top: 4px solid #C62828;">\n        <h3 style="color:#C62828;">High Priority</h3>\n        <div style="font-size:14px; line-height: 2;">\n                    <div><strong>1.</strong> Scale Heritage Field Jacket campaign +20%</div>\n          <div style="font-size:12px; color:#666; margin-bottom:8px;">→ 2.68x ROAS, room to push</div>\n          <div><strong>2.</strong> Ship mobile checkout redesign</div>\n          <div style="font-size:12px; color:#666; margin-bottom:8px;">→ ~$43,700/mo upside if mobile hits desktop\'s rate</div>\n          <div><strong>3.</strong> Add Tuesday product story email</div>\n          <div style="font-size:12px; color:#666;">→ Welcome series at 2.55%, cadence cap is the bottleneck</div>\n        </div>\n      </div>\n\n      <div class="data-card" style="border-top: 4px solid #e8621a;">\n        <h3 style="color:#e8621a;">Medium Priority</h3>\n        <div style="font-size:14px; line-height: 2;">\n                    <div><strong>4.</strong> Pause Brand Prospecting Broad (1.66x)</div>\n          <div style="font-size:12px; color:#666; margin-bottom:8px;">→ Reallocate to retargeting + lookalikes</div>\n          <div><strong>5.</strong> Rewrite /collection/heritage meta tags</div>\n          <div style="font-size:12px; color:#666; margin-bottom:8px;">→ 5,610 impressions / 1.5% CTR — quick win</div>\n          <div><strong>6.</strong> Bundle Heritage Jacket + Tee 3-pack</div>\n          <div style="font-size:12px; color:#666;">→ AOV play, two top sellers</div>\n        </div>\n      </div>\n\n      <div class="data-card" style="border-top: 4px solid #1a5e1f;">\n        <h3 style="color:#1a5e1f;">Growth Plays</h3>\n        <div style="font-size:14px; line-height: 2;">\n                    <div><strong>7.</strong> SEO content: 2 articles/week through Q2</div>\n          <div style="font-size:12px; color:#666; margin-bottom:8px;">→ Each click is now $5.69 in revenue</div>\n          <div><strong>8.</strong> Launch abandoned cart sequence</div>\n          <div style="font-size:12px; color:#666; margin-bottom:8px;">→ 1,602 abandoned ATCs, ~$12-25k recovery range</div>\n          <div><strong>9.</strong> Test post-purchase replenishment at day 60</div>\n          <div style="font-size:12px; color:#666;">→ Repeat rate is climbing, capture it</div>\n        </div>\n      </div>\n    </div>\n  </div>\n\n  <!-- FOOTER -->\n  <div class="report-footer">\n    <p>\n      <strong>Stoneline Apparel by Stoneline Apparel</strong><br>\n      Report prepared by Venti Scale - April 28, 2026<br>\n      Data sources: Google Analytics 4 &middot; Google Search Console &middot; WooCommerce &middot; Meta Ads<br><br>\n      <em>Next report: May 28, 2026</em>\n    </p>\n  </div>\n\n</div>\n</body>\n</html>\n\n',
+  "seo-monthly-2026-04": '<!doctype html>\n<html lang="en">\n<head>\n<meta charset="utf-8" />\n<meta name="viewport" content="width=device-width, initial-scale=1" />\n<title>Stoneline Apparel · Monthly SEO Report · Apr 1 – Apr 28, 2026</title>\n<style>\n  :root {\n    --ink: #0F1115;\n    --ink-muted: #4A5160;\n    --ink-subtle: #8A93A4;\n    --accent: #2F7D3F;\n    --accent-soft: #EAF5EC;\n    --warn: #B3721D;\n    --warn-soft: #FBF3E1;\n    --danger: #B03A2E;\n    --danger-soft: #FBE9E5;\n    --border: #E8EAF0;\n    --surface: #FAFBFC;\n  }\n  * { box-sizing: border-box; }\n  body {\n    font-family: -apple-system, BlinkMacSystemFont, \'Inter\', \'Segoe UI\', Roboto, sans-serif;\n    color: var(--ink); background: #ffffff;\n    margin: 0; padding: 48px 56px 72px;\n    line-height: 1.6; font-size: 15px;\n    -webkit-font-smoothing: antialiased;\n  }\n  .wrap { max-width: 860px; margin: 0 auto; }\n  .hero {\n    background: linear-gradient(135deg, #1a5e1f 0%, #2F7D3F 100%);\n    color: #fff; border-radius: 16px;\n    padding: 32px 36px; margin-bottom: 28px;\n  }\n  .hero h1 { margin: 0 0 6px; font-size: 28px; letter-spacing: -0.015em; font-weight: 700; }\n  .hero .sub { margin: 0; opacity: 0.85; font-size: 14px; }\n  .hero .period { margin-top: 14px; font-size: 12px; opacity: 0.85; text-transform: uppercase; letter-spacing: 0.08em; }\n  .eyebrow {\n    font-size: 11px; text-transform: uppercase; letter-spacing: 0.12em;\n    color: var(--accent); font-weight: 700; margin: 36px 0 8px;\n  }\n  h2 { font-size: 18px; font-weight: 700; letter-spacing: -0.01em; margin: 0 0 14px; color: var(--ink); }\n  p { margin: 0 0 14px; }\n  .lead { font-size: 16px; color: var(--ink); margin-bottom: 20px; }\n  .summary-box {\n    background: var(--surface); border: 1px solid var(--border);\n    border-left: 4px solid var(--accent);\n    padding: 18px 24px; border-radius: 12px; margin: 4px 0 24px;\n  }\n  .summary-box p { margin: 0 0 8px; font-size: 15px; color: var(--ink); }\n  .summary-box p:last-child { margin-bottom: 0; }\n  .kpi-row { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; margin: 8px 0 20px; }\n  .kpi { background: var(--surface); border: 1px solid var(--border); border-radius: 14px; padding: 16px 18px; }\n  .kpi .label { font-size: 10.5px; text-transform: uppercase; letter-spacing: 0.08em; color: var(--ink-subtle); font-weight: 600; margin-bottom: 6px; }\n  .kpi .value { font-size: 22px; font-weight: 700; letter-spacing: -0.02em; color: var(--ink); line-height: 1.1; font-variant-numeric: tabular-nums; }\n  .kpi .sub { font-size: 11px; margin-top: 6px; }\n  table { width: 100%; border-collapse: collapse; font-size: 13.5px; margin-bottom: 8px; }\n  thead th { text-align: left; font-size: 10.5px; text-transform: uppercase; letter-spacing: 0.08em; color: var(--ink-subtle); font-weight: 600; padding: 8px 10px; border-bottom: 1px solid var(--border); }\n  tbody td { padding: 10px; border-bottom: 1px solid var(--border); font-variant-numeric: tabular-nums; }\n  tbody tr:last-child td { border-bottom: none; }\n  td.right, th.right { text-align: right; }\n  td.bold, .bold { font-weight: 600; }\n  .badge { display: inline-block; padding: 2px 8px; border-radius: 999px; font-size: 11.5px; font-weight: 600; }\n  .badge-green { background: var(--accent-soft); color: var(--accent); }\n  .badge-red   { background: var(--danger-soft); color: var(--danger); }\n  .badge-warn  { background: var(--warn-soft); color: var(--warn); }\n  .delta { display: inline-block; font-size: 11px; font-weight: 600; padding: 1px 6px; border-radius: 4px; margin-left: 4px; }\n  .delta-good { color: var(--accent); background: var(--accent-soft); }\n  .delta-bad  { color: var(--danger); background: var(--danger-soft); }\n  .delta-neutral { color: var(--ink-subtle); background: #F1F3F7; }\n  .callout { border-left: 3px solid var(--accent); background: var(--accent-soft); border-radius: 0 10px 10px 0; padding: 14px 18px; margin: 14px 0 18px; }\n  .callout-warn { border-left-color: var(--warn); background: var(--warn-soft); }\n  .callout-warn .callout-title { color: var(--warn); }\n  .callout-bad { border-left-color: var(--danger); background: var(--danger-soft); }\n  .callout-bad .callout-title { color: var(--danger); }\n  .callout-good { border-left-color: var(--accent); background: var(--accent-soft); }\n  .callout-good .callout-title { color: var(--accent); }\n  .callout-title { font-weight: 700; margin-bottom: 6px; font-size: 13px; text-transform: uppercase; letter-spacing: 0.06em; }\n  .callout-body { font-size: 14px; color: var(--ink-muted); }\n  .callout-body ul { margin: 6px 0 0; padding-left: 18px; }\n  .callout-body li { margin-bottom: 4px; }\n  .two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin: 14px 0 20px; }\n  .two-col .callout { margin: 0; }\n  .content-list { list-style: none; padding: 0; margin: 6px 0 0; }\n  .content-list li { padding: 6px 0; border-bottom: 1px dashed rgba(0,0,0,0.08); font-size: 13.5px; }\n  .content-list li:last-child { border-bottom: none; }\n  .content-list .kw { color: var(--ink-subtle); font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, monospace; font-size: 11.5px; }\n  .footer { margin-top: 36px; font-size: 12px; color: var(--ink-subtle); border-top: 1px solid var(--border); padding-top: 16px; }\n  @media (max-width: 720px) {\n    body { padding: 24px 20px 60px; }\n    .kpi-row { grid-template-columns: repeat(2, 1fr); }\n    .two-col { grid-template-columns: 1fr; }\n  }\n</style>\n</head>\n<body>\n<div class="wrap">\n\n  <div class="hero">\n    <div style="font-size:11px; text-transform:uppercase; letter-spacing:0.12em; opacity:0.85; margin-bottom:8px;">Stoneline Apparel · Heritage Menswear</div>\n    <h1>Monthly SEO Report</h1>\n    <p class="sub">Full monthly view. Search performance, what changed vs last month, the revenue it drove, and the work behind it.</p>\n    <div class="period">Period · Apr 1 – Apr 28, 2026 · 28-day window<br>Compared to · 2026-03-04 to 2026-03-31</div>\n  </div>\n\n  <div class="eyebrow">Executive Summary</div>\n  <h2>The 30-second read</h2>\n  <div class="summary-box">\n    <p>Clicks are up: <strong>1,840</strong> this period vs 1,420 last period (<strong>+30%</strong>). Average position improved from 14.2 to 11.8.</p><p>Organic search drove <strong>$10,470</strong> in revenue from 5,210 sessions. <strong>"selvedge denim brands"</strong> is the top driver: 218 clicks at position 4.2.</p>\n  </div>\n\n  <div class="eyebrow">Search Performance</div>\n  <h2>Top-line metrics (vs prior 28 days)</h2>\n  <div class="kpi-row">\n    <div class="kpi"><div class="label">Clicks</div><div class="value">1,840</div><div class="sub"><span class="delta delta-good">↑ 30%</span></div></div>\n    <div class="kpi"><div class="label">Impressions</div><div class="value">82,400</div><div class="sub"><span class="delta delta-good">↑ 24%</span></div></div>\n    <div class="kpi"><div class="label">Avg CTR</div><div class="value">2.2%</div><div class="sub"><span class="delta delta-good">↑ 4%</span></div></div>\n    <div class="kpi"><div class="label">Avg Position</div><div class="value">11.8</div><div class="sub"><span class="delta delta-good">↑ 2.4</span></div></div>\n  </div>\n\n  <div class="eyebrow">Revenue Impact</div>\n  <h2>What organic search earned</h2>\n  \n        <div class="kpi-row">\n          <div class="kpi"><div class="label">Organic Sessions</div><div class="value">5,210</div></div>\n          <div class="kpi"><div class="label">Organic Orders</div><div class="value">71</div></div>\n          <div class="kpi"><div class="label">Organic Revenue</div><div class="value">$10,470</div></div>\n          <div class="kpi"><div class="label">$/Search Click</div><div class="value">$5.69</div></div>\n        </div>\n        <p class="lead">For every 28-day window, organic search currently turns <strong>1,840 clicks</strong> into <strong>71 orders</strong> at <strong>$147 AOV</strong>. That puts a real dollar number on every position we win or lose.</p>\n\n  <div class="two-col"><div class="callout callout-good"><div class="callout-title">↑ Climbing</div><div class="callout-body"><ul><li><strong>selvedge denim brands</strong> — now 218 clicks (Δ +89), position 4.2 (Δ +3.1)</li><li><strong>waxed canvas jacket</strong> — now 71 clicks (Δ +44), position 8.1 (Δ +2.3)</li><li><strong>heritage menswear</strong> — now 142 clicks (Δ +54), position 5.8 (Δ +2.2)</li><li><strong>best field jacket men</strong> — now 128 clicks (Δ +31), position 9.4 (Δ +1.8)</li></ul></div></div></div>\n\n  <div class="eyebrow">Section · Queries</div>\n  <h2>Top search queries (with movement)</h2>\n  <table>\n    <thead>\n      <tr><th>Query</th><th class="right">Clicks (Δ)</th><th class="right">Impressions</th><th class="right">CTR</th><th class="right">Position (Δ)</th></tr>\n    </thead>\n    <tbody>\n          <tr><td class="bold">selvedge denim brands</td><td class="right">218 <span class="delta delta-good">↑ 69%</span></td><td class="right">4,820</td><td class="right">4.5%</td><td class="right">4.2 <span class="delta delta-good">↑ 3.1</span></td></tr>\n          <tr><td class="bold">heritage menswear</td><td class="right">142 <span class="delta delta-good">↑ 61%</span></td><td class="right">3,210</td><td class="right">4.4%</td><td class="right">5.8 <span class="delta delta-good">↑ 2.2</span></td></tr>\n          <tr><td class="bold">best field jacket men</td><td class="right">128 <span class="delta delta-good">↑ 32%</span></td><td class="right">5,940</td><td class="right">2.2%</td><td class="right">9.4 <span class="delta delta-good">↑ 1.8</span></td></tr>\n          <tr><td class="bold">made in usa menswear</td><td class="right">96 <span class="delta delta-good">↑ 66%</span></td><td class="right">2,810</td><td class="right">3.4%</td><td class="right">7.4 <span class="delta delta-good">↑ 1.6</span></td></tr>\n          <tr><td class="bold">waxed canvas jacket</td><td class="right">71 <span class="delta delta-good">↑ 163%</span></td><td class="right">1,920</td><td class="right">3.7%</td><td class="right">8.1 <span class="delta delta-good">↑ 2.3</span></td></tr>\n          <tr><td class="bold">how to break in selvedge denim</td><td class="right">58 <span class="delta delta-good">↑ 45%</span></td><td class="right">1,420</td><td class="right">4.1%</td><td class="right">3.1 <span class="delta delta-neutral">flat</span></td></tr>\n          <tr><td class="bold">raw denim care</td><td class="right">42 <span class="delta delta-good">↑ 24%</span></td><td class="right">1,180</td><td class="right">3.6%</td><td class="right">6.2 <span class="delta delta-good">↑ 0.8</span></td></tr>\n          <tr><td class="bold">heritage chinos</td><td class="right">38 <span class="delta delta-good">↑ 41%</span></td><td class="right">980</td><td class="right">3.9%</td><td class="right">7.5 <span class="delta delta-good">↑ 1.4</span></td></tr>\n          <tr><td class="bold">wool crewneck men</td><td class="right">32 <span class="delta delta-neutral">new</span></td><td class="right">920</td><td class="right">3.5%</td><td class="right">8.8 </td></tr>\n          <tr><td class="bold">best mens chore coat</td><td class="right">28 <span class="delta delta-neutral">new</span></td><td class="right">1,040</td><td class="right">2.7%</td><td class="right">10.2 </td></tr>\n          <tr><td class="bold">selvedge jeans review</td><td class="right">24 <span class="delta delta-neutral">new</span></td><td class="right">680</td><td class="right">3.5%</td><td class="right">9.1 </td></tr>\n          <tr><td class="bold">heritage mens tee</td><td class="right">21 <span class="delta delta-neutral">new</span></td><td class="right">740</td><td class="right">2.8%</td><td class="right">11.2 </td></tr>\n    </tbody>\n  </table>\n\n  <div class="eyebrow">Section · Pages</div>\n  <h2>Top pages (with movement)</h2>\n  <table>\n    <thead>\n      <tr><th>Page</th><th class="right">Clicks (Δ)</th><th class="right">Impressions</th><th class="right">CTR</th></tr>\n    </thead>\n    <tbody>\n          <tr><td class="bold">https://stonelineapparel.com/produc…</td><td class="right">312 <span class="delta delta-good">↑ 58%</span></td><td class="right">7,420</td><td class="right">4.2%</td></tr>\n          <tr><td class="bold">https://stonelineapparel.com/the-st…</td><td class="right">178 <span class="delta delta-good">↑ 32%</span></td><td class="right">4,810</td><td class="right">3.7%</td></tr>\n          <tr><td class="bold">https://stonelineapparel.com/produc…</td><td class="right">164 <span class="delta delta-good">↑ 125%</span></td><td class="right">3,920</td><td class="right">4.2%</td></tr>\n          <tr><td class="bold">https://stonelineapparel.com/journa…</td><td class="right">142 <span class="delta delta-good">↑ 41%</span></td><td class="right">3,180</td><td class="right">4.5%</td></tr>\n          <tr><td class="bold">https://stonelineapparel.com/journa…</td><td class="right">98 <span class="delta delta-good">↑ 22%</span></td><td class="right">2,840</td><td class="right">3.5%</td></tr>\n          <tr><td class="bold">https://stonelineapparel.com/collec…</td><td class="right">86 <span class="delta delta-good">↑ 19%</span></td><td class="right">5,610</td><td class="right">1.5%</td></tr>\n          <tr><td class="bold">https://stonelineapparel.com/journa…</td><td class="right">64 <span class="delta delta-neutral">new</span></td><td class="right">1,920</td><td class="right">3.3%</td></tr>\n          <tr><td class="bold">https://stonelineapparel.com/produc…</td><td class="right">52 <span class="delta delta-neutral">new</span></td><td class="right">1,540</td><td class="right">3.4%</td></tr>\n          <tr><td class="bold">https://stonelineapparel.com/journa…</td><td class="right">48 <span class="delta delta-neutral">new</span></td><td class="right">1,280</td><td class="right">3.8%</td></tr>\n    </tbody>\n  </table>\n\n  \n\n  <div class="eyebrow">Section · Devices</div>\n  <h2>Search by device</h2>\n  <table>\n    <thead><tr><th>Device</th><th class="right">Clicks</th><th class="right">Impressions</th><th class="right">CTR</th></tr></thead>\n    <tbody>\n          <tr><td class="bold">Mobile</td><td class="right">1,290</td><td class="right">58,200</td><td class="right">2.2%</td></tr>\n          <tr><td class="bold">Desktop</td><td class="right">480</td><td class="right">21,800</td><td class="right">2.2%</td></tr>\n          <tr><td class="bold">Tablet</td><td class="right">70</td><td class="right">2,400</td><td class="right">2.9%</td></tr>\n    </tbody>\n  </table>\n\n  <div class="eyebrow">The Work Behind the Numbers</div>\n  <h2>What we shipped + what\'s next</h2>\n  \n        <div class="callout callout-good">\n          <div class="callout-title">Content shipped this period (6 posts)</div>\n          <div class="callout-body"><ul class="content-list"><li><strong>Apr 04</strong> — How to break in selvedge denim (the proper way) <span class="kw">[break in selvedge denim]</span></li><li><strong>Apr 09</strong> — Made in USA menswear: what the label actually means <span class="kw">[made in usa menswear]</span></li><li><strong>Apr 13</strong> — Field jacket vs chore coat: which one earns its place <span class="kw">[best field jacket men]</span></li><li><strong>Apr 17</strong> — Why we run waxed canvas (and how to care for it) <span class="kw">[waxed canvas jacket]</span></li><li><strong>Apr 22</strong> — Heritage chinos: the cut, the cloth, the case for them <span class="kw">[heritage chinos]</span></li><li><strong>Apr 26</strong> — A 12-piece spring capsule, fully styled <span class="kw">[spring capsule menswear]</span></li></ul></div>\n        </div>\n  \n        <div class="callout">\n          <div class="callout-title">Coming next (4 scheduled)</div>\n          <div class="callout-body"><ul class="content-list"><li><strong>May 01</strong> — Best heritage menswear brands of 2026 (head-to-head) <span class="kw">[heritage menswear brands]</span></li><li><strong>May 06</strong> — How to wear a field jacket year-round <span class="kw">[how to wear field jacket]</span></li><li><strong>May 11</strong> — Wool vs cotton crewneck: when to wear which <span class="kw">[wool crewneck men]</span></li><li><strong>May 15</strong> — The case for buying fewer, better menswear pieces <span class="kw">[buy less better menswear]</span></li></ul></div>\n        </div>\n\n  <p class="footer">\n    Stoneline Apparel by Stoneline Apparel · Report prepared by Venti Scale — April 28, 2026<br>\n    Data sources: Google Search Console (sc-domain:stonelineapparel.com) · Google Analytics 4 · WooCommerce<br>\n    Comparison window: 2026-03-04 to 2026-03-31 · Next report: May 26, 2026\n  </p>\n</div>\n</body>\n</html>\n',
 };
 
 export async function getReportHtml(id: string): Promise<string | null> {
@@ -778,6 +341,11 @@ export async function getReportHtml(id: string): Promise<string | null> {
 // ──────────────────────────────────────────────────────────
 // Content drafts
 // ──────────────────────────────────────────────────────────
+// Demo image source — Unsplash CDN, varied menswear/lifestyle photography
+// matching the Stoneline brand. Kept here so future demo edits stay tight.
+const UNSPLASH = (id: string) =>
+  `https://images.unsplash.com/photo-${id}?w=1200&q=85&auto=format&fit=crop`;
+
 export async function getContentDrafts(): Promise<ContentDraft[]> {
   return [
     {
@@ -797,7 +365,8 @@ export async function getContentDrafts(): Promise<ContentDraft[]> {
       reviewerNotes: null,
       scheduledAt: null,
       driveFileId: null,
-      mediaType: null,
+      mediaType: "image",
+      mockThumbnailUrl: UNSPLASH("1604644401890-0bd678c83788"),
     },
     {
       id: "li-2026-04-10",
@@ -837,7 +406,8 @@ export async function getContentDrafts(): Promise<ContentDraft[]> {
       reviewerNotes: null,
       scheduledAt: null,
       driveFileId: null,
-      mediaType: null,
+      mediaType: "image",
+      mockThumbnailUrl: UNSPLASH("1542272604-787c3835535d"),
     },
     {
       id: "fb-2026-04-10-evening",
@@ -856,7 +426,8 @@ export async function getContentDrafts(): Promise<ContentDraft[]> {
       reviewerNotes: null,
       scheduledAt: null,
       driveFileId: null,
-      mediaType: null,
+      mediaType: "image",
+      mockThumbnailUrl: UNSPLASH("1521577352947-9bb58764b69a"),
     },
     {
       id: "fb-2026-04-11-morning",
@@ -875,7 +446,8 @@ export async function getContentDrafts(): Promise<ContentDraft[]> {
       reviewerNotes: null,
       scheduledAt: null,
       driveFileId: null,
-      mediaType: null,
+      mediaType: "image",
+      mockThumbnailUrl: UNSPLASH("1503342394128-c104d54dba01"),
     },
     {
       id: "li-2026-04-11",

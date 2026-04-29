@@ -145,6 +145,24 @@ export function ContentCard({
         </p>
       )}
 
+      {/* Demo-only direct thumbnail. Real clients always have a driveFileId;
+          demo drafts (Stoneline) ship with a static Unsplash URL so the
+          calendar shows actual photos without requiring a Google sign-in. */}
+      {!draft.driveFileId && draft.mockThumbnailUrl && draft.platform !== "linkedin" && (
+        <div className="mb-3 -mx-1">
+          <div className="block overflow-hidden rounded-lg border border-[var(--color-border)] bg-[var(--color-surface-muted)]">
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img
+              src={draft.mockThumbnailUrl}
+              alt={draft.topic}
+              referrerPolicy="no-referrer"
+              className="w-full max-h-[380px] object-cover block bg-white"
+              loading="lazy"
+            />
+          </div>
+        </div>
+      )}
+
       {/* Drive asset preview.
             For images: try direct CDN <img>; on error fall back to iframe.
             For videos: skip the img attempt entirely and use the iframe
