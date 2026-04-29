@@ -1131,7 +1131,7 @@ function padMove(idx: number): { outcome: string; how: string } {
 }
 
 // Proof + offer + risk reversal, broken into scannable lines.
-const HELP_PROOF = `Agencies charge $500 to $2,000 for this exact audit. You got it free because I want you to see what we actually do before we ever talk.`;
+const HELP_PROOF = `Agencies usually charge real money for this kind of audit. You got it free because I'm confident enough in what we actually do to put it in front of you before we ever talk.`;
 const HELP_OFFER = `We run your marketing on autopilot. Social media, content, emails, ads, tracking. All of it. You see the numbers every week so you always know what's working. You run the business, we bring in the customers.`;
 const HELP_RISK = `No contract. No minimum. If it's not working you'll know because the numbers won't lie. Cancel whenever.`;
 const HELP_URGENCY = `I only take on a few clients at a time so I can actually do the work right. If this sits in your inbox for a month, those gaps are still there.`;
