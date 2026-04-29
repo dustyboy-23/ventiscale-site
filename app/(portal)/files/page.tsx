@@ -10,16 +10,20 @@ import {
   ExternalLink,
 } from "lucide-react";
 
-// Demo asset library for Stoneline (the demo brand prospects see).
-// Mix of product shots, lookbook, lifestyle, sale graphics, video covers —
-// every tile renders an actual photo so prospects can imagine their brand here.
-const UNSPLASH = (id: string, w = 800) =>
-  `https://images.unsplash.com/photo-${id}?w=${w}&q=80&auto=format&fit=crop`;
+// Demo asset library for Stoneline. Pulls from the public Stoneline Drive
+// folder (15l9MjbFo_qw4i-Jga8RNBCEZ-z3boda1) so prospects see real photos
+// served by Drive's CDN — no Google sign-in required because the folder is
+// shared with anyone-with-link.
+const DRIVE_THUMB = (id: string) =>
+  `https://lh3.googleusercontent.com/d/${id}=w1200`;
+const DRIVE_VIEW = (id: string) =>
+  `https://drive.google.com/file/d/${id}/view`;
+const DEMO_DRIVE_FOLDER = "15l9MjbFo_qw4i-Jga8RNBCEZ-z3boda1";
 
 type DemoAsset = {
   name: string;
   category: "Product Shots" | "Lookbook" | "Sale Graphics" | "Lifestyle" | "Video";
-  thumb: string;
+  driveFileId: string;
   size: string;
   updated: string;
   badge?: string;
@@ -28,44 +32,50 @@ type DemoAsset = {
 
 const DEMO_ASSETS: DemoAsset[] = [
   // Product Shots — hero campaign-ready
-  { name: "Heritage Field Jacket — Hero shot",                     category: "Product Shots", thumb: UNSPLASH("1542272604-787c3835535d"), size: "8.4 MB", updated: "2 hours ago",  badge: "New" },
-  { name: "Selvedge denim — detail close-up",                       category: "Product Shots", thumb: UNSPLASH("1604644401890-0bd678c83788"), size: "6.1 MB", updated: "yesterday" },
-  { name: "Leather jacket — hero",                                  category: "Product Shots", thumb: UNSPLASH("1490578474895-699cd4e2cf59"), size: "7.2 MB", updated: "yesterday" },
-  { name: "Black tee rack — product shoot",                         category: "Product Shots", thumb: UNSPLASH("1579338559194-a162d19bf842"), size: "5.8 MB", updated: "3 days ago" },
-  { name: "Studio garment — hanging",                               category: "Product Shots", thumb: UNSPLASH("1503342394128-c104d54dba01"), size: "4.9 MB", updated: "3 days ago" },
-  { name: "Outerwear capsule — outdoor shot",                       category: "Product Shots", thumb: UNSPLASH("1473496169904-658ba7c44d8a"), size: "9.3 MB", updated: "5 days ago" },
-  { name: "Boot leather — macro",                                   category: "Product Shots", thumb: UNSPLASH("1559827260-dc66d52bef19"), size: "5.4 MB", updated: "5 days ago" },
-  { name: "Tee mockup — flat-lay",                                  category: "Product Shots", thumb: UNSPLASH("1611652022419-a9419f74343d"), size: "4.1 MB", updated: "1 week ago" },
-  { name: "Classic crewneck — sleeve detail",                       category: "Product Shots", thumb: UNSPLASH("1544006659-f0b21884ce1d"), size: "5.0 MB", updated: "1 week ago" },
-  { name: "Selvedge jeans — pocket detail",                         category: "Product Shots", thumb: UNSPLASH("1521577352947-9bb58764b69a"), size: "4.7 MB", updated: "1 week ago" },
+  { name: "Heritage Field Jacket — Hero shot",     category: "Product Shots", driveFileId: "11hhCdsaAhC_Z6Tbd0OTBTqDMDAjN6AeJ", size: "8.4 MB", updated: "2 hours ago", badge: "New" },
+  { name: "Leather jacket — hero",                  category: "Product Shots", driveFileId: "143TwLhvtptq-qFk_wTSghItXlg0DYthL", size: "7.2 MB", updated: "yesterday" },
+  { name: "Selvedge denim — detail close-up",       category: "Product Shots", driveFileId: "1Sk1aAa3KZhhJilgSkN7RIO5MpjrAby8r", size: "6.1 MB", updated: "yesterday" },
+  { name: "Selvedge jeans — pocket detail",         category: "Product Shots", driveFileId: "1NDfrWWsFHPBYlhGc2spSzvJiL9mgsAyp", size: "4.7 MB", updated: "1 week ago" },
+  { name: "Studio garment — hanging",               category: "Product Shots", driveFileId: "1p-vRiK2BpfMSGFNIs4ysWyPWZX_tyGUU", size: "4.9 MB", updated: "3 days ago" },
+  { name: "Clothing rack — product shoot",          category: "Product Shots", driveFileId: "1tP4Q9AwDE9GkBetMZyYTisgZ_aT8SV-G", size: "5.8 MB", updated: "3 days ago" },
+  { name: "Outerwear capsule — outdoor shot",       category: "Product Shots", driveFileId: "1uhF80HFcUmfo0EHybb1ASp5fVARq_Mt4", size: "9.3 MB", updated: "5 days ago" },
+  { name: "Boot leather — macro",                   category: "Product Shots", driveFileId: "1jCwAOdnLD9i25XPM5EMQ-6wt3VfHh4N-", size: "5.4 MB", updated: "5 days ago" },
+  { name: "Tee mockup — flat-lay",                  category: "Product Shots", driveFileId: "1OtRipFlS4kgnKwteTGpG87dy60rcQZpE", size: "4.1 MB", updated: "1 week ago" },
+  { name: "Black tee rack — product shoot",         category: "Product Shots", driveFileId: "1M_Vv_OnLUAPm0B-TOLPTHBGQ_a20RIys", size: "5.0 MB", updated: "1 week ago" },
 
   // Lookbook — editorial
-  { name: "Spring '26 Lookbook — page 1 cover",                     category: "Lookbook",      thumb: UNSPLASH("1591047139829-d91aecb6caea"), size: "6.6 MB", updated: "yesterday",   badge: "Featured" },
-  { name: "Spring '26 Lookbook — model portrait",                   category: "Lookbook",      thumb: UNSPLASH("1521572163474-6864f9cf17ab"), size: "5.9 MB", updated: "yesterday" },
-  { name: "Editorial — studio model",                                category: "Lookbook",      thumb: UNSPLASH("1525507119028-ed4c629a60a3"), size: "7.0 MB", updated: "2 days ago" },
-  { name: "Editorial — cafe portrait",                               category: "Lookbook",      thumb: UNSPLASH("1517245386807-bb43f82c33c4"), size: "6.4 MB", updated: "4 days ago" },
-  { name: "Editorial — walking the city",                            category: "Lookbook",      thumb: UNSPLASH("1490481651871-ab68de25d43d"), size: "8.2 MB", updated: "4 days ago" },
-  { name: "Tweed capsule — heritage spread",                         category: "Lookbook",      thumb: UNSPLASH("1463100099107-aa0980c362e6"), size: "7.7 MB", updated: "1 week ago" },
-  { name: "Editorial — model lookbook frame",                        category: "Lookbook",      thumb: UNSPLASH("1483985988355-763728e1935b"), size: "5.3 MB", updated: "1 week ago" },
-  { name: "Retail window — campaign reveal",                         category: "Lookbook",      thumb: UNSPLASH("1620799140408-edc6dcb6d633"), size: "4.8 MB", updated: "2 weeks ago" },
+  { name: "Spring '26 Lookbook — storefront cover", category: "Lookbook", driveFileId: "1kqeggByr7xpLKxZBqFXdr0_v9pozBMCi", size: "6.6 MB", updated: "yesterday", badge: "Featured" },
+  { name: "Spring '26 Lookbook — model portrait",   category: "Lookbook", driveFileId: "1SeF8xYcXZIHiod1a438j6c1rp2Cm0Dch", size: "5.9 MB", updated: "yesterday" },
+  { name: "Editorial — studio model",               category: "Lookbook", driveFileId: "17VQrrZpsX0nNMGJpmuE1PSSXO-sGi13n", size: "7.0 MB", updated: "2 days ago" },
+  { name: "Editorial — cafe portrait",              category: "Lookbook", driveFileId: "1DV-g-6KXflipVKjTkWXPXw6zAbCVOQ4t", size: "6.4 MB", updated: "4 days ago" },
+  { name: "Editorial — walking the city",           category: "Lookbook", driveFileId: "18cR1TiLgMi1OcAtLyKjHuUdog6zJn3Jx", size: "8.2 MB", updated: "4 days ago" },
+  { name: "Tweed capsule — heritage spread",        category: "Lookbook", driveFileId: "14R75fBe_Z9OyRoeLs8bsrKN49cYQX3Vy", size: "7.7 MB", updated: "1 week ago" },
+  { name: "Retail window — campaign reveal",        category: "Lookbook", driveFileId: "1-Bv9uoPVa4t4k8lEOoKcOfkgNwj2TOFO", size: "4.8 MB", updated: "2 weeks ago" },
+  { name: "Editorial — model lookbook frame",       category: "Lookbook", driveFileId: "1KS-SdzTsMGauza3mHyx3HVCpHJPyCZ59", size: "5.3 MB", updated: "1 week ago" },
 
   // Sale Graphics + social
-  { name: "Spring Sale 30% — IG carousel (hero)",                   category: "Sale Graphics", thumb: UNSPLASH("1507003211169-0a1dd7228f2d"), size: "2.1 MB", updated: "today",      badge: "Live" },
-  { name: "Heritage Drop — launch flyer",                            category: "Sale Graphics", thumb: UNSPLASH("1592878904946-b3cd8ae243d0"), size: "1.8 MB", updated: "yesterday" },
-  { name: "Memorial Day weekend — promo banner",                     category: "Sale Graphics", thumb: UNSPLASH("1556905055-8f358a7a47b2"), size: "2.6 MB", updated: "2 days ago" },
-  { name: "Black tee bundle — bundle savings tile",                  category: "Sale Graphics", thumb: UNSPLASH("1593030761757-71fae45fa0e7"), size: "1.4 MB", updated: "3 days ago" },
+  { name: "Spring Sale 30% OFF — social tile",      category: "Sale Graphics", driveFileId: "1JmO6dPn91cDPKnhVQ7yY_1zkV7qMic4l", size: "2.1 MB", updated: "today", badge: "Live" },
+  { name: "Heritage Field Jacket — launch flyer",   category: "Sale Graphics", driveFileId: "1I1pszQB0OFjwMtI1_C-z3DoWb6St3Jfr", size: "1.8 MB", updated: "yesterday" },
+  { name: "Free shipping weekend — promo banner",   category: "Sale Graphics", driveFileId: "16p9bNjem3lFPriNWeQNS0akryTqD9_qJ", size: "2.6 MB", updated: "2 days ago" },
+  { name: "Bestseller of the week — IG callout",    category: "Sale Graphics", driveFileId: "1-jbFJimt4yhkWuqnQnucci8hcUVjvucp", size: "1.4 MB", updated: "3 days ago" },
+  { name: "Flash Sale TODAY ONLY — story graphic",  category: "Sale Graphics", driveFileId: "13ErmzT5YqpxedyLOl-lhasaoUjTjvkjN", size: "1.6 MB", updated: "today",  badge: "Live" },
+  { name: "Email header — Dispatch No. 12",         category: "Sale Graphics", driveFileId: "1udPKcdZHqB2IdutmkBIwAZUrY4oY39T3", size: "1.2 MB", updated: "yesterday" },
+  { name: "Member Exclusive — early access tile",   category: "Sale Graphics", driveFileId: "1_F0qzKKmtQ7k8TyNgEnbhhG0xXMPBR9t", size: "1.5 MB", updated: "2 days ago" },
 
   // Lifestyle / accessories / styling content
-  { name: "Daily-carry flat-lay — wallet + watch",                   category: "Lifestyle",     thumb: UNSPLASH("1578932750355-5eb30ece487a"), size: "3.2 MB", updated: "yesterday" },
-  { name: "Boot styling — leather flatlay",                          category: "Lifestyle",     thumb: UNSPLASH("1617137984095-74e4e5e3613f"), size: "3.7 MB", updated: "2 days ago" },
-  { name: "Sneaker drop — on-figure walking shot",                   category: "Lifestyle",     thumb: UNSPLASH("1566150905458-1bf1fc113f0d"), size: "4.5 MB", updated: "5 days ago" },
-  { name: "Travel essentials — backpack styling",                    category: "Lifestyle",     thumb: UNSPLASH("1580927752452-89d86da3fa0a"), size: "3.9 MB", updated: "1 week ago" },
+  { name: "Daily-carry flat-lay — wallet + watch",  category: "Lifestyle", driveFileId: "1-HQ7yGH9-o66ttivyVkL3Drr25cu5JGl", size: "3.2 MB", updated: "yesterday" },
+  { name: "Boot styling — leather flatlay",         category: "Lifestyle", driveFileId: "1YYjOGg-P3rhyr3P-UDF8h6-s3ShbZ-Lh", size: "3.7 MB", updated: "2 days ago" },
+  { name: "Sneaker drop — on-figure walking shot",  category: "Lifestyle", driveFileId: "1VtN74apimp45zcWn5YAlV0KjVLe7jX51", size: "4.5 MB", updated: "5 days ago" },
+  { name: "Travel essentials — backpack styling",   category: "Lifestyle", driveFileId: "1ypgkRdgFKd6XpPAbq9oGY3ib6gxqnJlE", size: "3.9 MB", updated: "1 week ago" },
+  { name: "Hat portrait — heritage capsule",        category: "Lifestyle", driveFileId: "1JhQady-YP0LlVsOjABRT67YMtTby2DEF", size: "3.6 MB", updated: "1 week ago" },
+  { name: "Watch detail — accessory close-up",      category: "Lifestyle", driveFileId: "13YaV4Q6cV10IrCtMjQs1ct3zHSSFANMm", size: "3.1 MB", updated: "2 weeks ago" },
+  { name: "Coffee shop vibes — brand mood",         category: "Lifestyle", driveFileId: "1zvyv9sOZNnaDbyEXhY64vdpt0rm8zQJL", size: "2.9 MB", updated: "2 weeks ago" },
 
   // Video covers
-  { name: "Heritage Field Jacket — hero film (4K)",                  category: "Video",         thumb: UNSPLASH("1542272604-787c3835535d"), size: "340 MB",  updated: "yesterday",   isVideo: true, badge: "Featured" },
-  { name: "Founder story — Marcus interview",                         category: "Video",         thumb: UNSPLASH("1525507119028-ed4c629a60a3"), size: "180 MB", updated: "1 week ago",  isVideo: true },
-  { name: "Spring '26 lookbook reveal — 30s cut",                    category: "Video",         thumb: UNSPLASH("1591047139829-d91aecb6caea"), size: "92 MB",  updated: "3 days ago",  isVideo: true },
-  { name: "Behind-the-scenes — denim shoot",                          category: "Video",         thumb: UNSPLASH("1604644401890-0bd678c83788"), size: "210 MB", updated: "1 week ago",  isVideo: true },
+  { name: "Heritage Field Jacket — hero film (4K)", category: "Video", driveFileId: "11hhCdsaAhC_Z6Tbd0OTBTqDMDAjN6AeJ", size: "340 MB", updated: "yesterday",   isVideo: true, badge: "Featured" },
+  { name: "Founder story — Marcus interview",       category: "Video", driveFileId: "17VQrrZpsX0nNMGJpmuE1PSSXO-sGi13n", size: "180 MB", updated: "1 week ago",  isVideo: true },
+  { name: "Spring '26 lookbook reveal — 30s cut",   category: "Video", driveFileId: "1kqeggByr7xpLKxZBqFXdr0_v9pozBMCi", size: "92 MB",  updated: "3 days ago",  isVideo: true },
+  { name: "Behind-the-scenes — denim shoot",        category: "Video", driveFileId: "1Sk1aAa3KZhhJilgSkN7RIO5MpjrAby8r", size: "210 MB", updated: "1 week ago",  isVideo: true },
 ];
 
 const CATEGORY_ORDER: DemoAsset["category"][] = [
@@ -112,15 +122,19 @@ export default async function FilesPage() {
                 </div>
                 <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-3 p-4">
                   {items.map((item) => (
-                    <div
+                    <a
                       key={item.name}
-                      className="group block rounded-xl overflow-hidden bg-white border border-[var(--color-border)] hover:border-[var(--color-border-strong)] hover:shadow-md transition-all cursor-pointer"
+                      href={DRIVE_VIEW(item.driveFileId)}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="group block rounded-xl overflow-hidden bg-white border border-[var(--color-border)] hover:border-[var(--color-border-strong)] hover:shadow-md transition-all"
                     >
                       <div className="relative aspect-[4/3] bg-[var(--color-surface-muted)] overflow-hidden">
                         {/* eslint-disable-next-line @next/next/no-img-element */}
                         <img
-                          src={item.thumb}
+                          src={DRIVE_THUMB(item.driveFileId)}
                           alt={item.name}
+                          referrerPolicy="no-referrer"
                           className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
                         />
                         {item.isVideo && (
@@ -151,7 +165,7 @@ export default async function FilesPage() {
                           {item.size} · updated {item.updated}
                         </div>
                       </div>
-                    </div>
+                    </a>
                   ))}
                 </div>
               </Card>

@@ -341,10 +341,10 @@ export async function getReportHtml(id: string): Promise<string | null> {
 // ──────────────────────────────────────────────────────────
 // Content drafts
 // ──────────────────────────────────────────────────────────
-// Demo image source — Unsplash CDN, varied menswear/lifestyle photography
-// matching the Stoneline brand. Kept here so future demo edits stay tight.
-const UNSPLASH = (id: string) =>
-  `https://images.unsplash.com/photo-${id}?w=1200&q=85&auto=format&fit=crop`;
+// Demo image source. The Stoneline demo workspace pulls thumbnails from a
+// public Google Drive folder (15l9MjbFo_qw4i-Jga8RNBCEZ-z3boda1) so the
+// rendered photos route through the same Drive image path that real clients
+// use. driveFileId values below come from `gog drive ls` against that folder.
 
 export async function getContentDrafts(): Promise<ContentDraft[]> {
   return [
@@ -364,9 +364,8 @@ export async function getContentDrafts(): Promise<ContentDraft[]> {
       reviewedAt: null,
       reviewerNotes: null,
       scheduledAt: null,
-      driveFileId: null,
+      driveFileId: "1Sk1aAa3KZhhJilgSkN7RIO5MpjrAby8r",
       mediaType: "image",
-      mockThumbnailUrl: UNSPLASH("1604644401890-0bd678c83788"),
     },
     {
       id: "li-2026-04-10",
@@ -405,9 +404,8 @@ export async function getContentDrafts(): Promise<ContentDraft[]> {
       reviewedAt: null,
       reviewerNotes: null,
       scheduledAt: null,
-      driveFileId: null,
+      driveFileId: "11hhCdsaAhC_Z6Tbd0OTBTqDMDAjN6AeJ",
       mediaType: "image",
-      mockThumbnailUrl: UNSPLASH("1542272604-787c3835535d"),
     },
     {
       id: "fb-2026-04-10-evening",
@@ -425,9 +423,8 @@ export async function getContentDrafts(): Promise<ContentDraft[]> {
       reviewedAt: null,
       reviewerNotes: null,
       scheduledAt: null,
-      driveFileId: null,
+      driveFileId: "1NDfrWWsFHPBYlhGc2spSzvJiL9mgsAyp",
       mediaType: "image",
-      mockThumbnailUrl: UNSPLASH("1521577352947-9bb58764b69a"),
     },
     {
       id: "fb-2026-04-11-morning",
@@ -445,9 +442,8 @@ export async function getContentDrafts(): Promise<ContentDraft[]> {
       reviewedAt: null,
       reviewerNotes: null,
       scheduledAt: null,
-      driveFileId: null,
+      driveFileId: "1p-vRiK2BpfMSGFNIs4ysWyPWZX_tyGUU",
       mediaType: "image",
-      mockThumbnailUrl: UNSPLASH("1503342394128-c104d54dba01"),
     },
     {
       id: "li-2026-04-11",
