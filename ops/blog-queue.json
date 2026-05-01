@@ -1,0 +1,599 @@
+{
+  "meta": {
+    "updated": "2026-05-01",
+    "total": 60,
+    "published": 38,
+    "pending": 22,
+    "strategy": "Batch 2 (ids 31-60). Heavy ICP correction: ecom-first, AI category authority, decision/intent keywords. 3 posts/day, ~10 days of runway. id 34 published manually 4/29 as showcase post for the new SEO standards (BlogAuthorBio, statistic density, title CTR pattern).",
+    "cron": "07:15, 13:15, 18:45 PT daily"
+  },
+  "posts": [
+    {
+      "id": 1,
+      "slug": "social-media-for-ecommerce-brands",
+      "title": "Most ecommerce brands post on social media wrong. Here's what actually works.",
+      "keyword": "ecommerce social media strategy",
+      "tier": 1,
+      "status": "published",
+      "published": "2026-04-12"
+    },
+    {
+      "id": 2,
+      "slug": "why-coaches-need-social-media",
+      "title": "If you're a coach with no social media presence, you're invisible.",
+      "keyword": "marketing for online coaches",
+      "tier": 1,
+      "status": "published",
+      "published": "2026-04-12"
+    },
+    {
+      "id": 3,
+      "slug": "contractors-getting-clients-online",
+      "title": "You're a great contractor. Nobody knows it. Let's fix that.",
+      "keyword": "social media marketing for contractors",
+      "tier": 1,
+      "status": "published",
+      "published": "2026-04-12"
+    },
+    {
+      "id": 4,
+      "slug": "what-done-for-you-marketing-includes",
+      "title": "What does done-for-you marketing actually include? (And what to watch out for)",
+      "keyword": "done for you marketing for small business",
+      "tier": 1,
+      "angle": "Demystify the service, set expectations, position Venti Scale naturally",
+      "status": "published",
+      "published": "2026-04-13"
+    },
+    {
+      "id": 7,
+      "slug": "what-ai-marketing-agency-does",
+      "title": "What an AI marketing agency actually does (it's not what you think)",
+      "keyword": "AI marketing agency",
+      "tier": 1,
+      "angle": "Bust myths, explain AI + human strategy combo, position Venti Scale",
+      "status": "published",
+      "published": "2026-04-13"
+    },
+    {
+      "id": 8,
+      "slug": "ai-cutting-marketing-costs",
+      "title": "How AI is cutting marketing costs by 60% for small businesses in 2026",
+      "keyword": "AI marketing for small business",
+      "tier": 1,
+      "angle": "Data-backed case for AI-powered marketing, real numbers",
+      "status": "published",
+      "published": "2026-04-13"
+    },
+    {
+      "id": 5,
+      "slug": "done-for-you-marketing-vs-diy",
+      "title": "Done-for-you marketing vs. DIY: the real cost comparison for small businesses",
+      "keyword": "done for you marketing vs DIY",
+      "tier": 1,
+      "angle": "Side-by-side cost breakdown showing time + money savings",
+      "status": "published",
+      "published": "2026-04-14"
+    },
+    {
+      "id": 6,
+      "slug": "done-for-you-social-media-management",
+      "title": "Done-for-you social media management: what you get when you stop doing it yourself",
+      "keyword": "done for you social media management",
+      "tier": 1,
+      "angle": "Service explainer walking through what a month actually looks like",
+      "status": "published",
+      "published": "2026-04-14"
+    },
+    {
+      "id": 9,
+      "slug": "best-marketing-strategy-for-coaches",
+      "title": "The best marketing strategy for online coaches in 2026",
+      "keyword": "marketing for online coaches",
+      "tier": 1,
+      "angle": "Walk through the exact playbook, then offer to run it",
+      "status": "published",
+      "published": "2026-04-15"
+    },
+    {
+      "id": 10,
+      "slug": "ecommerce-marketing-compete-with-amazon",
+      "title": "Ecommerce marketing in 2026: what small brands need to compete",
+      "keyword": "ecommerce marketing agency for small brands",
+      "tier": 1,
+      "angle": "Lean AI-powered approach competing with enterprise brands",
+      "status": "published",
+      "published": "2026-04-15"
+    },
+    {
+      "id": 11,
+      "slug": "marketing-agency-vs-in-house",
+      "title": "Marketing agency vs. hiring in-house: the real math for a small business",
+      "keyword": "marketing agency vs in-house cost",
+      "tier": 2,
+      "angle": "Hard numbers, salary + benefits + tools vs. agency retainer",
+      "status": "published",
+      "published": "2026-04-15"
+    },
+    {
+      "id": 15,
+      "slug": "marketing-automation-small-business-guide",
+      "title": "Marketing automation for small business: the 2026 starter guide",
+      "keyword": "marketing automation for small business",
+      "tier": 2,
+      "angle": "Show the tools AND the reality that most people can't set it up, bridge to done-for-you",
+      "status": "published",
+      "published": "2026-04-16"
+    },
+    {
+      "id": 19,
+      "slug": "how-coaches-get-more-clients",
+      "title": "How to get more clients as a coach (without cold DMs or paid ads)",
+      "keyword": "how to get more clients as a coach",
+      "tier": 2,
+      "angle": "Organic strategy guide with agency offer as the accelerator",
+      "status": "published",
+      "published": "2026-04-16"
+    },
+    {
+      "id": 20,
+      "slug": "contractors-getting-more-leads",
+      "title": "5 ways contractors are getting more leads in 2026 (that most miss)",
+      "keyword": "how to get more leads contracting business",
+      "tier": 2,
+      "angle": "Speak their language, Google Business, local SEO, reviews, consistent posting",
+      "status": "published",
+      "published": "2026-04-16"
+    },
+    {
+      "id": 21,
+      "slug": "ecommerce-customers-without-ad-budget",
+      "title": "How small ecommerce brands are getting customers without blowing their ad budget",
+      "keyword": "how to get more customers ecommerce small business",
+      "tier": 2,
+      "angle": "Organic social + email + content strategy playbook",
+      "status": "published",
+      "published": "2026-04-17"
+    },
+    {
+      "id": 12,
+      "slug": "signs-you-should-stop-diy-marketing",
+      "title": "5 signs you should stop DIY-ing your marketing (and what to do instead)",
+      "keyword": "should I outsource my marketing",
+      "tier": 2,
+      "angle": "Pain-point driven, empathetic, leads to let us handle it CTA",
+      "status": "published",
+      "published": "2026-04-17"
+    },
+    {
+      "id": 16,
+      "slug": "automate-social-media-without-losing-voice",
+      "title": "How to automate your social media without losing your brand voice",
+      "keyword": "how to automate social media for small business",
+      "tier": 2,
+      "angle": "Practical guide showing complexity, leading to or just let us handle it",
+      "status": "published",
+      "published": "2026-04-17"
+    },
+    {
+      "id": 13,
+      "slug": "do-i-need-a-social-media-manager",
+      "title": "Do I need a social media manager? 7 questions to ask yourself first",
+      "keyword": "do I need a social media manager",
+      "tier": 2,
+      "angle": "Self-assessment format, each answer nudges toward professional help",
+      "status": "published",
+      "published": "2026-04-18"
+    },
+    {
+      "id": 14,
+      "slug": "when-to-hire-a-marketing-agency",
+      "title": "When is the right time to hire a marketing agency? (A brutally honest guide)",
+      "keyword": "when to hire a marketing agency",
+      "tier": 2,
+      "angle": "Real benchmarks based on revenue and time spent",
+      "status": "published",
+      "published": "2026-04-18"
+    },
+    {
+      "id": 17,
+      "slug": "social-media-marketing-cost",
+      "title": "How much does social media marketing really cost in 2026? (Honest numbers)",
+      "keyword": "social media marketing cost for small business",
+      "tier": 2,
+      "angle": "Transparent pricing breakdown, position Venti Scale as smart middle ground",
+      "status": "published",
+      "published": "2026-04-18",
+      "publish_day": 6
+    },
+    {
+      "id": 18,
+      "slug": "small-business-marketing-budget-template",
+      "title": "What should a small business marketing budget look like?",
+      "keyword": "small business marketing budget",
+      "tier": 2,
+      "angle": "Real budget template showing where money should go",
+      "status": "published",
+      "publish_day": 6,
+      "published": "2026-04-19"
+    },
+    {
+      "id": 22,
+      "slug": "which-social-media-platform-for-business",
+      "title": "Which social media platform should your small business actually focus on?",
+      "keyword": "best social media platform for small business",
+      "tier": 2,
+      "angle": "Decision framework based on business type and audience",
+      "status": "published",
+      "publish_day": 7,
+      "published": "2026-04-19"
+    },
+    {
+      "id": 23,
+      "slug": "facebook-marketing-small-business-2026",
+      "title": "Facebook marketing for small business in 2026: is it still worth it?",
+      "keyword": "Facebook marketing for small business 2026",
+      "tier": 2,
+      "angle": "Data-backed take on current state and what works now",
+      "status": "published",
+      "publish_day": 7,
+      "published": "2026-04-19"
+    },
+    {
+      "id": 24,
+      "slug": "grow-business-instagram-2026",
+      "title": "How to grow your business on Instagram in 2026 (without spending 4 hours a day)",
+      "keyword": "how to grow business on Instagram 2026",
+      "tier": 3,
+      "angle": "Practical tips showing real time investment, seeds the let us do it realization",
+      "status": "published",
+      "published": "2026-04-20",
+      "publish_day": 7
+    },
+    {
+      "id": 25,
+      "slug": "only-social-media-strategy-you-need",
+      "title": "The only social media strategy a small business needs in 2026",
+      "keyword": "social media strategy for small business 2026",
+      "tier": 3,
+      "angle": "Simple opinionated framework cutting through the noise",
+      "status": "published",
+      "publish_day": 8,
+      "published": "2026-04-20"
+    },
+    {
+      "id": 27,
+      "slug": "small-business-marketing-mistakes",
+      "title": "7 marketing mistakes small businesses make (that keep them invisible online)",
+      "keyword": "small business marketing mistakes",
+      "tier": 3,
+      "angle": "Each mistake naturally leads to this is what a good agency fixes",
+      "status": "published",
+      "publish_day": 8,
+      "published": "2026-04-20"
+    },
+    {
+      "id": 28,
+      "slug": "ai-replace-marketing-team",
+      "title": "Can AI replace your marketing team? Here's what actually happens",
+      "keyword": "can AI replace marketing team",
+      "tier": 3,
+      "angle": "Honest take, AI handles execution, humans handle strategy",
+      "status": "published",
+      "published": "2026-04-21",
+      "publish_day": 8
+    },
+    {
+      "id": 26,
+      "slug": "content-calendar-that-drives-sales",
+      "title": "How to create a content calendar that actually drives sales (not just likes)",
+      "keyword": "content calendar for small business",
+      "tier": 3,
+      "angle": "Template-based, actionable, shows complexity that makes people want to outsource",
+      "status": "published",
+      "publish_day": 9,
+      "published": "2026-04-21"
+    },
+    {
+      "id": 29,
+      "slug": "email-marketing-vs-social-media",
+      "title": "Email marketing vs. social media: where should a small business spend its time?",
+      "keyword": "email marketing vs social media small business",
+      "tier": 3,
+      "angle": "Comparison showing both are needed, doing both well requires bandwidth",
+      "status": "published",
+      "published": "2026-04-21",
+      "publish_day": 9
+    },
+    {
+      "id": 30,
+      "slug": "local-seo-for-contractors",
+      "title": "Local SEO for contractors: how to show up when homeowners search",
+      "keyword": "local SEO for contractors",
+      "tier": 3,
+      "angle": "Step-by-step guide to Google Business Profile, citations, reviews",
+      "status": "published",
+      "published": "2026-04-22",
+      "publish_day": 9
+    },
+    {
+      "id": 31,
+      "slug": "shopify-marketing-strategy-2026",
+      "title": "The Shopify marketing strategy that actually works in 2026",
+      "keyword": "Shopify marketing strategy 2026",
+      "tier": 1,
+      "angle": "Hub piece for Shopify cluster. Cover the full stack: organic, paid, email, retention. Frame DIY vs DFY at the end.",
+      "status": "published",
+      "published": "2026-04-29"
+    },
+    {
+      "id": 32,
+      "slug": "ecommerce-email-marketing-flows",
+      "title": "Ecommerce email marketing: the 5 flows that print money on autopilot",
+      "keyword": "ecommerce email marketing",
+      "tier": 1,
+      "angle": "Welcome, abandoned cart, post-purchase, winback, browse abandonment. Specific revenue numbers. Hook into AI training each flow on the brand.",
+      "status": "published",
+      "published": "2026-04-29"
+    },
+    {
+      "id": 33,
+      "slug": "shopify-seo-checklist",
+      "title": "Shopify SEO checklist: 14 things to fix before you spend a dollar on ads",
+      "keyword": "Shopify SEO checklist",
+      "tier": 2,
+      "angle": "Listicle. Each item has a specific fix. Targets readers who are about to spend on ads but should fix free SEO first.",
+      "status": "published",
+      "published": "2026-04-29"
+    },
+    {
+      "id": 34,
+      "slug": "abandoned-cart-email-sequence",
+      "title": "Your abandoned cart emails leave money on the table. Here's the 3-email sequence that recovers 18%.",
+      "keyword": "abandoned cart email sequence",
+      "tier": 2,
+      "angle": "3-email sequence with timing, subject lines, copy frameworks. Real benchmark numbers. Position custom-AI-trained copy as the upgrade.",
+      "status": "published",
+      "published": "2026-04-29",
+      "published_by": "manual-jarvis-c"
+    },
+    {
+      "id": 35,
+      "slug": "get-more-shopify-reviews",
+      "title": "How to get more Shopify reviews without sounding desperate",
+      "keyword": "how to get more Shopify reviews",
+      "tier": 2,
+      "angle": "Timing, subject lines, incentive frameworks. What review platforms beat Shopify defaults. Reviews are conversion fuel.",
+      "status": "published",
+      "published": "2026-04-30"
+    },
+    {
+      "id": 36,
+      "slug": "ecommerce-content-marketing",
+      "title": "Ecommerce content marketing: what to publish when you sell physical products",
+      "keyword": "ecommerce content marketing",
+      "tier": 2,
+      "angle": "Content-first ecom plays. SEO posts, IG carousels, TikTok formats. What to make in-house vs outsource.",
+      "status": "published",
+      "published": "2026-04-30"
+    },
+    {
+      "id": 37,
+      "slug": "retention-vs-acquisition-ecommerce",
+      "title": "Retention vs acquisition: where ecommerce founders waste the most money",
+      "keyword": "retention vs acquisition ecommerce",
+      "tier": 2,
+      "angle": "LTV/CAC math. Why repeat purchase rate beats new-customer cost every time. Where AI marketing actually moves both.",
+      "status": "published",
+      "published": "2026-04-30"
+    },
+    {
+      "id": 38,
+      "slug": "how-much-ecommerce-marketing-budget",
+      "title": "How much should ecommerce brands actually spend on marketing?",
+      "keyword": "how much should ecommerce spend on marketing",
+      "tier": 2,
+      "angle": "Revenue-tier breakdowns. $5k/mo vs $50k/mo vs $200k/mo. Real allocation percentages. Anti-agency-retainer angle.",
+      "status": "published",
+      "published": "2026-05-01"
+    },
+    {
+      "id": 39,
+      "slug": "ecommerce-welcome-email-series",
+      "title": "The ecommerce welcome email series that turns subscribers into buyers",
+      "keyword": "ecommerce welcome email series",
+      "tier": 3,
+      "angle": "5-email arc with subject lines, send timing, conversion benchmarks. Before/after example. AI personalization angle.",
+      "status": "pending"
+    },
+    {
+      "id": 40,
+      "slug": "shopify-analytics-what-to-track",
+      "title": "Shopify analytics: the 7 numbers that actually matter (ignore the rest)",
+      "keyword": "Shopify analytics for small store",
+      "tier": 3,
+      "angle": "Cut through the dashboard noise. Conversion rate by source, repeat rate, AOV, contribution margin. What founder-tier reporting looks like.",
+      "status": "pending"
+    },
+    {
+      "id": 41,
+      "slug": "ecommerce-homepage-conversion",
+      "title": "Why your ecommerce homepage isn't converting (and what to fix first)",
+      "keyword": "ecommerce homepage conversion rate",
+      "tier": 3,
+      "angle": "Above-the-fold rules, value prop clarity, social proof placement, CTA hierarchy. Real ecom homepage examples (anonymized).",
+      "status": "pending"
+    },
+    {
+      "id": 42,
+      "slug": "tiktok-for-ecommerce-brands",
+      "title": "TikTok for ecommerce brands: what works in 2026 (and what's already dead)",
+      "keyword": "TikTok for ecommerce brands",
+      "tier": 3,
+      "angle": "What ecom content formats are still ranking. What's changed since 2024. UGC vs founder-led vs creator-driven. Honest take on attribution.",
+      "status": "pending"
+    },
+    {
+      "id": 43,
+      "slug": "instagram-reels-for-shopify",
+      "title": "Instagram Reels for Shopify: the only 4 formats worth shooting",
+      "keyword": "Instagram Reels for Shopify",
+      "tier": 3,
+      "angle": "Product demo, founder story, customer reaction, before/after. Each with timing, hook patterns, posting cadence.",
+      "status": "pending"
+    },
+    {
+      "id": 44,
+      "slug": "youtube-ecommerce-small-brand",
+      "title": "Should small ecommerce brands be on YouTube? Here's the honest math.",
+      "keyword": "YouTube for ecommerce small brand",
+      "tier": 3,
+      "angle": "Time-cost vs return analysis. When YouTube makes sense (high-AOV, high-consideration). When it doesn't. Shorts vs long-form ROI.",
+      "status": "pending"
+    },
+    {
+      "id": 45,
+      "slug": "first-1000-shopify-customers",
+      "title": "How to get your first 1,000 Shopify customers (without burning $10k on ads)",
+      "keyword": "first 1000 Shopify customers",
+      "tier": 3,
+      "angle": "Channel mix for $0-50k revenue. Founder-led content, micro-influencers, organic SEO, email list build. Real timeframe expectations.",
+      "status": "pending"
+    },
+    {
+      "id": 46,
+      "slug": "ecommerce-product-page-mistakes",
+      "title": "9 product page mistakes killing your ecommerce conversion rate",
+      "keyword": "ecommerce product page mistakes",
+      "tier": 3,
+      "angle": "Listicle. Each mistake with a specific fix. Photos, copy, social proof, urgency, mobile UX, FAQs.",
+      "status": "pending"
+    },
+    {
+      "id": 47,
+      "slug": "how-ai-marketing-actually-works",
+      "title": "How AI marketing actually works (without the hype)",
+      "keyword": "how AI marketing works",
+      "tier": 1,
+      "angle": "Pillar piece for AI cluster. Walk through the actual stack: training data, generation, human review, deployment. Strip the buzzwords. Position custom-AI-per-client as what's missing from generic tools.",
+      "status": "pending"
+    },
+    {
+      "id": 48,
+      "slug": "chatgpt-vs-custom-ai-marketing",
+      "title": "ChatGPT vs a custom AI: which one actually does your marketing?",
+      "keyword": "ChatGPT vs custom AI for marketing",
+      "tier": 2,
+      "angle": "Comparison post. Generic LLM tools vs brand-trained AI. Capabilities, output quality, time-to-launch, cost. The Venti Scale wedge lives here.",
+      "status": "pending"
+    },
+    {
+      "id": 49,
+      "slug": "ai-tools-ecommerce-marketing",
+      "title": "The AI marketing tools ecommerce brands are actually using in 2026",
+      "keyword": "AI tools for ecommerce marketing",
+      "tier": 2,
+      "angle": "Honest tool review. Klaviyo AI, Shopify Magic, Postscript, custom builds. Where each wins, where each fails. What to pick by revenue tier.",
+      "status": "pending"
+    },
+    {
+      "id": 50,
+      "slug": "ai-content-vs-human-written",
+      "title": "AI content vs human-written content: where the line actually is in 2026",
+      "keyword": "AI content vs human written",
+      "tier": 2,
+      "angle": "Honest take. Where AI wins (volume, variations, formats). Where humans still win (taste, judgment, cultural moment). Custom-AI is the both-and.",
+      "status": "pending"
+    },
+    {
+      "id": 51,
+      "slug": "ai-product-descriptions-shopify",
+      "title": "AI product descriptions for Shopify: how to do it without sounding like everyone else",
+      "keyword": "AI product descriptions Shopify",
+      "tier": 3,
+      "angle": "Why generic AI tools produce identical-sounding copy. Brand-voice training as the differentiator. Practical workflow for solo founders.",
+      "status": "pending"
+    },
+    {
+      "id": 52,
+      "slug": "ai-customer-segmentation-small-business",
+      "title": "AI customer segmentation for small ecommerce brands (you don't need 100k customers)",
+      "keyword": "AI customer segmentation small business",
+      "tier": 3,
+      "angle": "Demystify the data myth. What you can segment on at 500-5000 customers. Lifecycle, AOV, product affinity, source. Real flows that move money.",
+      "status": "pending"
+    },
+    {
+      "id": 53,
+      "slug": "ai-seo-2026",
+      "title": "AI and SEO in 2026: what to actually do now that ChatGPT is the new search bar",
+      "keyword": "AI for SEO 2026",
+      "tier": 3,
+      "angle": "GEO basics. How AI engines pick what to cite. Schema, FAQs, entity clarity, brand mentions. Why this is the SEO play of the next 24 months.",
+      "status": "pending"
+    },
+    {
+      "id": 54,
+      "slug": "what-does-ai-marketing-cost",
+      "title": "What does AI marketing actually cost? (And why most pricing is dishonest)",
+      "keyword": "what does AI marketing cost",
+      "tier": 1,
+      "angle": "Pricing transparency post. Tool stacks, agency tiers, custom-AI builds. Real ranges, no fake numbers. Anti-retainer framing throughout.",
+      "status": "pending"
+    },
+    {
+      "id": 55,
+      "slug": "marketing-agency-red-flags",
+      "title": "11 marketing agency red flags every founder should know before signing",
+      "keyword": "marketing agency red flags",
+      "tier": 2,
+      "angle": "Listicle. Forced calls, vague deliverables, junior staff, retainer-only contracts, dashboard theater. Each is a Venti Scale anti-position.",
+      "status": "pending"
+    },
+    {
+      "id": 56,
+      "slug": "how-to-switch-marketing-agencies",
+      "title": "How to switch marketing agencies without breaking your business",
+      "keyword": "how to switch marketing agencies",
+      "tier": 2,
+      "angle": "Tactical playbook. Asset retrieval, contract review, transition timeline, what to communicate to your old team. Reads as a service to readers actively considering us.",
+      "status": "pending"
+    },
+    {
+      "id": 57,
+      "slug": "month-to-month-marketing-services",
+      "title": "Month-to-month marketing services: who actually offers them and why most don't",
+      "keyword": "month to month marketing services",
+      "tier": 2,
+      "angle": "Why agency retainer culture exists. The economic reasons most agencies need lock-in. How AI changes the math. Direct Venti Scale wedge.",
+      "status": "pending"
+    },
+    {
+      "id": 58,
+      "slug": "signs-marketing-agency-gaslighting",
+      "title": "5 signs your marketing agency is gaslighting you (and the metrics that prove it)",
+      "keyword": "marketing agency gaslighting",
+      "tier": 2,
+      "angle": "Confrontational post. Vague reports, blamed algorithms, junior staff churn, attribution dodging. Each with the actual metric to demand.",
+      "status": "pending"
+    },
+    {
+      "id": 59,
+      "slug": "how-to-evaluate-marketing-roi-ecommerce",
+      "title": "How to actually evaluate marketing ROI for an ecommerce brand",
+      "keyword": "how to evaluate marketing ROI ecommerce",
+      "tier": 3,
+      "angle": "MER, ROAS, contribution margin, payback period. Why most agency reports hide the real number. Founder-tier scorecard.",
+      "status": "pending"
+    },
+    {
+      "id": 60,
+      "slug": "ecommerce-founder-marketing-burnout",
+      "title": "The marketing burnout that hits every ecommerce founder around month 9",
+      "keyword": "ecommerce founder marketing burnout",
+      "tier": 3,
+      "angle": "Empathy-first piece. Why solo founders hit this wall. The three escape routes: hire, automate, outsource. AI-marketing as the hybrid path.",
+      "status": "pending"
+    }
+  ]
+}

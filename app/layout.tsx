@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { Inter, Fraunces, JetBrains_Mono } from "next/font/google";
+import { headers } from "next/headers";
 import { Analytics } from "@vercel/analytics/next";
 import "./globals.css";
 
@@ -119,7 +120,11 @@ const SERVICE_JSONLD = {
 const GA_ID = process.env.NEXT_PUBLIC_GA_MEASUREMENT_ID?.trim();
 const GSC_VERIFICATION = process.env.NEXT_PUBLIC_GSC_VERIFICATION;
 
-export default function RootLayout({ children }: { children: React.ReactNode }) {
+export default async function RootLayout({ children }: { children: React.ReactNode }) {
+  // Per-request nonce set by middleware.ts. Forwarded via x-nonce request
+  // header. Inline scripts on this and every nested page must include
+  // `nonce={nonce}` to satisfy the CSP set in middleware.
+  const nonce = (await headers()).get("x-nonce") ?? undefined;
   return (
     <html
       lang="en"
@@ -131,8 +136,13 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         )}
         {GA_ID && (
           <>
-            <script async src={`https://www.googletagmanager.com/gtag/js?id=${GA_ID}`} />
             <script
+              async
+              nonce={nonce}
+              src={`https://www.googletagmanager.com/gtag/js?id=${GA_ID}`}
+            />
+            <script
+              nonce={nonce}
               dangerouslySetInnerHTML={{
                 __html: `window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag('js',new Date());gtag('config','${GA_ID}');`,
               }}
@@ -141,10 +151,12 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         )}
         <script
           type="application/ld+json"
+          nonce={nonce}
           dangerouslySetInnerHTML={{ __html: JSON.stringify(ORGANIZATION_JSONLD) }}
         />
         <script
           type="application/ld+json"
+          nonce={nonce}
           dangerouslySetInnerHTML={{ __html: JSON.stringify(SERVICE_JSONLD) }}
         />
       </head>

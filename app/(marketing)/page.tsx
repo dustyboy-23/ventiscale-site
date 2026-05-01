@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { headers } from "next/headers";
 import Link from "next/link";
 import {
   ArrowRight,
@@ -190,11 +191,14 @@ const ASSURANCES = [
   },
 ];
 
-export default function MarketingHome() {
+export default async function MarketingHome() {
+  const nonce = (await headers()).get("x-nonce") ?? undefined;
+
   return (
     <>
       <script
         type="application/ld+json"
+        nonce={nonce}
         dangerouslySetInnerHTML={{ __html: JSON.stringify(FAQ_JSONLD) }}
       />
       {/* ─────────────────────────────────────────────

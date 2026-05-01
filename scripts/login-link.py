@@ -8,11 +8,11 @@ Usage:
 
 Why this exists:
     Supabase's built-in email service is rate-limited to 2 magic links/hour
-    on the free tier and can't be raised until custom SMTP (Brevo) is wired
-    up via the dashboard. Until then, this script bypasses email entirely:
-    it calls the Supabase admin API to generate a token, then constructs
-    the click-through URL that hits /auth/confirm exactly like the real
-    email link would.
+    on the free tier and can't be raised until custom SMTP is wired up via
+    the dashboard. Until then, this script bypasses email entirely: it
+    calls the Supabase admin API to generate a token, then constructs the
+    click-through URL that hits /auth/confirm exactly like the real email
+    link would.
 
 Requires:
     NEXT_PUBLIC_SUPABASE_URL and SUPABASE_SERVICE_ROLE_KEY in .env.local.

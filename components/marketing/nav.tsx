@@ -8,8 +8,8 @@ import { cn } from "@/lib/utils";
 const LINKS = [
   { href: "/#services", label: "What we do" },
   { href: "/#how", label: "How it works" },
+  { href: "/blog", label: "Blog" },
   { href: "/#faq", label: "FAQ" },
-  { href: "/login", label: "Client login" },
 ];
 
 export function MarketingNav() {

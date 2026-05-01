@@ -1,11 +1,34 @@
 import Link from "next/link";
 
+const PILLARS = [
+  {
+    href: "/ai-marketing-for-ecommerce",
+    label: "AI marketing for ecommerce",
+  },
+  {
+    href: "/shopify-marketing-strategy",
+    label: "Shopify marketing strategy",
+  },
+  {
+    href: "/marketing-agency-alternatives",
+    label: "Marketing agency alternatives",
+  },
+  {
+    href: "/done-for-you-marketing-services",
+    label: "Done-for-you marketing",
+  },
+  {
+    href: "/ai-marketing-cost",
+    label: "AI marketing cost",
+  },
+];
+
 export function MarketingFooter() {
   return (
     <footer className="relative bg-[#07080C] border-t border-white/[0.06]">
       <div className="max-w-[1240px] mx-auto px-6 lg:px-10 py-14">
-        <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-8">
-          <Link href="/" className="flex items-center gap-2.5">
+        <div className="grid grid-cols-1 md:grid-cols-[auto_1fr_auto] gap-10 md:gap-16">
+          <Link href="/" className="flex items-center gap-2.5 self-start">
             <div className="relative w-7 h-7 rounded-md bg-gradient-to-br from-[#10E39A] via-[#5280FF] to-[#C8362B] p-[1px]">
               <div className="w-full h-full rounded-[5px] bg-[#07080C] flex items-center justify-center">
                 <span className="font-display text-[14px] font-bold text-white leading-none">
@@ -18,7 +41,28 @@ export function MarketingFooter() {
             </span>
           </Link>
 
-          <nav className="flex flex-wrap items-center gap-x-8 gap-y-3">
+          <div>
+            <p className="text-[11px] font-mono uppercase tracking-[0.14em] text-white/40 mb-4">
+              Guides
+            </p>
+            <ul className="grid grid-cols-1 sm:grid-cols-2 gap-y-2 gap-x-6">
+              {PILLARS.map((p) => (
+                <li key={p.href}>
+                  <Link
+                    href={p.href}
+                    className="text-[13px] font-medium text-white/60 hover:text-white transition-colors"
+                  >
+                    {p.label}
+                  </Link>
+                </li>
+              ))}
+            </ul>
+          </div>
+
+          <nav className="flex flex-col gap-3">
+            <p className="text-[11px] font-mono uppercase tracking-[0.14em] text-white/40 mb-1">
+              Venti Scale
+            </p>
             <Link
               href="/#services"
               className="text-[13px] font-medium text-white/60 hover:text-white transition-colors"
@@ -30,6 +74,18 @@ export function MarketingFooter() {
               className="text-[13px] font-medium text-white/60 hover:text-white transition-colors"
             >
               How it works
+            </Link>
+            <Link
+              href="/about"
+              className="text-[13px] font-medium text-white/60 hover:text-white transition-colors"
+            >
+              About
+            </Link>
+            <Link
+              href="/blog"
+              className="text-[13px] font-medium text-white/60 hover:text-white transition-colors"
+            >
+              Blog
             </Link>
             <Link
               href="/login"

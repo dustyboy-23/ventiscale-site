@@ -11,7 +11,7 @@ either approve+note or reject+note flows) to the Revisions Google Doc.
 
   any status with reviewer_notes set -> append section to Revisions doc
   with the note + status + date. Idempotent via a watermark file:
-  /home/dustin/.openclaw/workspace/ventiscale/ops/state/sg-video-sweep-notes.watermark
+  /home/dustin/venti-scale/portal/ops/state/sg-video-sweep-notes.watermark
 
 Idempotent on moves: skips files already in the correct subfolder.
 Idempotent on notes: only appends rows with reviewed_at > watermark,
