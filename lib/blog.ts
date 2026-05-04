@@ -511,6 +511,131 @@ export const posts: BlogPost[] = [
     ],
     image: "/blog/ecommerce-marketing-budget.jpg",
   },
+  {
+    slug: "ecommerce-welcome-email-series",
+    title:
+      "The ecommerce welcome email series that turns subscribers into buyers",
+    description:
+      "Welcome emails average 83% open rates. Here's the ecommerce welcome email series: 5 emails with subject lines, timing, and benchmarks that turn subscribers into buyers.",
+    date: "2026-05-01",
+    author: "Dustin Gilmour",
+    readTime: "8 min",
+    tags: [
+      "ecommerce",
+      "email marketing",
+      "welcome series",
+      "Klaviyo",
+      "automation",
+    ],
+    image: "/blog/ecommerce-welcome-email.jpg",
+  },
+  {
+    slug: "shopify-analytics-what-to-track",
+    title:
+      "Shopify analytics: the 7 numbers that actually matter (ignore the rest)",
+    description:
+      "Your Shopify dashboard has dozens of metrics. Here are the 7 Shopify analytics numbers small stores actually track to make money decisions.",
+    date: "2026-05-01",
+    author: "Dustin Gilmour",
+    readTime: "7 min",
+    tags: [
+      "shopify",
+      "ecommerce",
+      "analytics",
+      "conversion rate",
+      "growth strategy",
+    ],
+    image: "/blog/shopify-analytics-numbers.jpg",
+  },
+  {
+    slug: "ecommerce-homepage-conversion",
+    title:
+      "Why your ecommerce homepage isn't converting (and what to fix first)",
+    description:
+      "Average ecommerce conversion rate is 1.8–3%. Top Shopify stores hit 4.4%+. Here are the 5 homepage problems killing your conversions and how to fix them.",
+    date: "2026-05-02",
+    author: "Dustin Gilmour",
+    readTime: "7 min",
+    tags: [
+      "ecommerce",
+      "conversion rate",
+      "CRO",
+      "shopify",
+      "homepage optimization",
+    ],
+    image: "/blog/ecommerce-homepage-conversion.jpg",
+  },
+  {
+    slug: "tiktok-for-ecommerce-brands",
+    title:
+      "TikTok for ecommerce brands: what works in 2026 (and what's already dead)",
+    description:
+      "TikTok moves $112B in commerce this year. Here's what content formats work for ecommerce brands in 2026, what's dead, and why your attribution is wrong.",
+    date: "2026-05-02",
+    author: "Dustin Gilmour",
+    readTime: "8 min",
+    tags: [
+      "ecommerce",
+      "TikTok",
+      "social media",
+      "content strategy",
+      "TikTok Shop",
+    ],
+    image: "/blog/tiktok-ecommerce-brands.jpg",
+  },
+  {
+    slug: "instagram-reels-for-shopify",
+    title: "Instagram Reels for Shopify: the only 4 formats worth shooting",
+    description:
+      "Most Shopify brands waste time on Reels that never convert. The 4 formats that actually drive sales: product demo, founder story, UGC, and before/after.",
+    date: "2026-05-03",
+    author: "Dustin Gilmour",
+    readTime: "7 min",
+    tags: [
+      "ecommerce",
+      "Instagram",
+      "Shopify",
+      "social media",
+      "content strategy",
+    ],
+    image: "/blog/instagram-reels-shopify.jpg",
+  },
+  {
+    slug: "youtube-ecommerce-small-brand",
+    title:
+      "Should small ecommerce brands be on YouTube? Here's the honest math.",
+    description:
+      "YouTube delivers $4.80 per $1 spent. For ecommerce small brands, the ROI depends on your AOV, product type, and whether you can sustain it for 12 months.",
+    date: "2026-05-03",
+    author: "Dustin Gilmour",
+    readTime: "7 min",
+    tags: [
+      "ecommerce",
+      "YouTube",
+      "video marketing",
+      "content strategy",
+      "channel strategy",
+    ],
+    image: "/blog/youtube-ecommerce-small-brand.jpg",
+  },
+  {
+    slug: "first-1000-shopify-customers",
+    title:
+      "How to get your first 1,000 Shopify customers (without burning $10k on ads)",
+    description:
+      "Paid ads cost $68-84 per customer. Your first 1,000 would run $80k that way. Here's the 4-channel mix that works on a real budget.",
+    date: "2026-05-03",
+    author: "Dustin Gilmour",
+    readTime: "8 min",
+    tags: [
+      "shopify",
+      "ecommerce",
+      "customer acquisition",
+      "growth strategy",
+      "email marketing",
+    ],
+    image: "/blog/first-1000-shopify-customers.jpg",
+  },
 ];
 
 export function getPost(slug: string): BlogPost | undefined {
