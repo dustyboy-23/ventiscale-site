@@ -1,9 +1,9 @@
 {
   "meta": {
-    "updated": "2026-05-03",
+    "updated": "2026-05-04",
     "total": 60,
-    "published": 46,
-    "pending": 14,
+    "published": 47,
+    "pending": 13,
     "strategy": "Batch 2 (ids 31-60). Heavy ICP correction: ecom-first, AI category authority, decision/intent keywords. 3 posts/day, ~10 days of runway. id 34 published manually 4/29 as showcase post for the new SEO standards (BlogAuthorBio, statistic density, title CTR pattern).",
     "cron": "07:15, 13:15, 18:45 PT daily"
   },
@@ -484,7 +484,8 @@
       "keyword": "how AI marketing works",
       "tier": 1,
       "angle": "Pillar piece for AI cluster. Walk through the actual stack: training data, generation, human review, deployment. Strip the buzzwords. Position custom-AI-per-client as what's missing from generic tools.",
-      "status": "pending"
+      "status": "published",
+      "published": "2026-05-04"
     },
     {
       "id": 48,

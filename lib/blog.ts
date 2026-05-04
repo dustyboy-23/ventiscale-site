@@ -654,6 +654,17 @@ export const posts: BlogPost[] = [
     ],
     image: "/blog/ecommerce-product-page-mistakes.jpg",
   },
+  {
+    slug: "how-ai-marketing-actually-works",
+    title: "How AI marketing actually works (without the hype)",
+    description:
+      "84% of ecommerce brands call AI their top priority. Most can't explain what it does. Here's the real stack: training, generation, review — no buzzwords.",
+    date: "2026-05-04",
+    author: "Dustin Gilmour",
+    readTime: "8 min",
+    tags: ["AI marketing", "how AI works", "ecommerce", "marketing technology"],
+    image: "/blog/how-ai-marketing-works.jpg",
+  },
 ];
 
 export function getPost(slug: string): BlogPost | undefined {
