@@ -2,8 +2,8 @@
   "meta": {
     "updated": "2026-05-03",
     "total": 60,
-    "published": 45,
-    "pending": 15,
+    "published": 46,
+    "pending": 14,
     "strategy": "Batch 2 (ids 31-60). Heavy ICP correction: ecom-first, AI category authority, decision/intent keywords. 3 posts/day, ~10 days of runway. id 34 published manually 4/29 as showcase post for the new SEO standards (BlogAuthorBio, statistic density, title CTR pattern).",
     "cron": "07:15, 13:15, 18:45 PT daily"
   },
@@ -474,7 +474,8 @@
       "keyword": "ecommerce product page mistakes",
       "tier": 3,
       "angle": "Listicle. Each mistake with a specific fix. Photos, copy, social proof, urgency, mobile UX, FAQs.",
-      "status": "pending"
+      "status": "published",
+      "published": "2026-05-04"
     },
     {
       "id": 47,

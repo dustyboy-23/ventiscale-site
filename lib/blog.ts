@@ -636,6 +636,24 @@ export const posts: BlogPost[] = [
     ],
     image: "/blog/first-1000-shopify-customers.jpg",
   },
+  {
+    slug: "ecommerce-product-page-mistakes",
+    title:
+      "9 product page mistakes killing your ecommerce conversion rate",
+    description:
+      "The average Shopify store converts 1.4% of visitors. Top stores hit 4.7%. That gap lives almost entirely on your product page. Here are the 9 fixable mistakes.",
+    date: "2026-05-04",
+    author: "Dustin Gilmour",
+    readTime: "8 min",
+    tags: [
+      "ecommerce",
+      "conversion rate",
+      "CRO",
+      "shopify",
+      "product page",
+    ],
+    image: "/blog/ecommerce-product-page-mistakes.jpg",
+  },
 ];
 
 export function getPost(slug: string): BlogPost | undefined {
