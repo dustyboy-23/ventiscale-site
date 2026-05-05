@@ -687,6 +687,18 @@ export const posts: BlogPost[] = [
     tags: ["AI marketing", "ecommerce", "Klaviyo", "Shopify", "marketing tools"],
     image: "/blog/ai-ecommerce-tools.jpg",
   },
+  {
+    slug: "ai-content-vs-human-written",
+    title:
+      "AI content vs human-written content: where the line actually is in 2026",
+    description:
+      "Human content is 8x more likely to rank #1. AI social posts outperform humans in engagement. Here's where each one actually wins.",
+    date: "2026-05-05",
+    author: "Dustin Gilmour",
+    readTime: "8 min",
+    tags: ["AI marketing", "content strategy", "SEO", "ecommerce", "content marketing"],
+    image: "/blog/ai-content-vs-human.jpg",
+  },
 ];
 
 export function getPost(slug: string): BlogPost | undefined {
