@@ -665,6 +665,17 @@ export const posts: BlogPost[] = [
     tags: ["AI marketing", "how AI works", "ecommerce", "marketing technology"],
     image: "/blog/how-ai-marketing-works.jpg",
   },
+  {
+    slug: "chatgpt-vs-custom-ai-marketing",
+    title: "ChatGPT vs a custom AI: which one actually does your marketing?",
+    description:
+      "71% of marketers use ChatGPT. Most hate how generic the output sounds. Honest comparison: ChatGPT vs a brand-trained custom AI for ecommerce marketing.",
+    date: "2026-05-04",
+    author: "Dustin Gilmour",
+    readTime: "8 min",
+    tags: ["AI marketing", "ChatGPT", "custom AI", "ecommerce", "marketing tools"],
+    image: "/blog/chatgpt-vs-custom-ai.jpg",
+  },
 ];
 
 export function getPost(slug: string): BlogPost | undefined {
