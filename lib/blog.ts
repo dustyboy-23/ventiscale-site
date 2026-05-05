@@ -676,6 +676,17 @@ export const posts: BlogPost[] = [
     tags: ["AI marketing", "ChatGPT", "custom AI", "ecommerce", "marketing tools"],
     image: "/blog/chatgpt-vs-custom-ai.jpg",
   },
+  {
+    slug: "ai-tools-ecommerce-marketing",
+    title: "The AI marketing tools ecommerce brands are actually using in 2026",
+    description:
+      "Honest breakdown of Klaviyo AI, Shopify Magic, Postscript, and Triple Whale by revenue tier. What to use at $50k, $200k, and beyond.",
+    date: "2026-05-05",
+    author: "Dustin Gilmour",
+    readTime: "8 min",
+    tags: ["AI marketing", "ecommerce", "Klaviyo", "Shopify", "marketing tools"],
+    image: "/blog/ai-ecommerce-tools.jpg",
+  },
 ];
 
 export function getPost(slug: string): BlogPost | undefined {
