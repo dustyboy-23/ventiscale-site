@@ -723,6 +723,18 @@ export const posts: BlogPost[] = [
     tags: ["ecommerce", "AI marketing", "customer segmentation", "email marketing", "Klaviyo"],
     image: "/blog/ai-customer-segmentation.jpg",
   },
+  {
+    slug: "ai-seo-2026",
+    title:
+      "AI and SEO in 2026: what to actually do now that ChatGPT is the new search bar",
+    description:
+      "AI Overviews appear in 25% of Google searches. AI-referred visitors convert 23x higher than organic traffic. The GEO playbook for ecommerce brands.",
+    date: "2026-05-06",
+    author: "Dustin Gilmour",
+    readTime: "8 min",
+    tags: ["SEO", "AI marketing", "GEO", "ecommerce", "AI search"],
+    image: "/blog/ai-seo-2026.jpg",
+  },
 ];
 
 export function getPost(slug: string): BlogPost | undefined {
