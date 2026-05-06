@@ -711,6 +711,18 @@ export const posts: BlogPost[] = [
     tags: ["shopify", "ecommerce", "AI marketing", "product descriptions", "brand voice"],
     image: "/blog/ai-product-descriptions.jpg",
   },
+  {
+    slug: "ai-customer-segmentation-small-business",
+    title:
+      "AI customer segmentation for small ecommerce brands (you don't need 100k customers)",
+    description:
+      "AI customer segmentation works at 500 customers, not 500,000. Here's what to segment, which flows move money, and tools that don't need a data team.",
+    date: "2026-05-06",
+    author: "Dustin Gilmour",
+    readTime: "7 min",
+    tags: ["ecommerce", "AI marketing", "customer segmentation", "email marketing", "Klaviyo"],
+    image: "/blog/ai-customer-segmentation.jpg",
+  },
 ];
 
 export function getPost(slug: string): BlogPost | undefined {

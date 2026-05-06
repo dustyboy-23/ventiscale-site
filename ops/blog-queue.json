@@ -1,9 +1,9 @@
 {
   "meta": {
-    "updated": "2026-05-05",
+    "updated": "2026-05-06",
     "total": 60,
-    "published": 51,
-    "pending": 9,
+    "published": 52,
+    "pending": 8,
     "strategy": "Batch 2 (ids 31-60). Heavy ICP correction: ecom-first, AI category authority, decision/intent keywords. 3 posts/day, ~10 days of runway. id 34 published manually 4/29 as showcase post for the new SEO standards (BlogAuthorBio, statistic density, title CTR pattern).",
     "cron": "07:15, 13:15, 18:45 PT daily"
   },
@@ -534,7 +534,8 @@
       "keyword": "AI customer segmentation small business",
       "tier": 3,
       "angle": "Demystify the data myth. What you can segment on at 500-5000 customers. Lifecycle, AOV, product affinity, source. Real flows that move money.",
-      "status": "pending"
+      "status": "published",
+      "published": "2026-05-06"
     },
     {
       "id": 53,
