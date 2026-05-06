@@ -699,6 +699,18 @@ export const posts: BlogPost[] = [
     tags: ["AI marketing", "content strategy", "SEO", "ecommerce", "content marketing"],
     image: "/blog/ai-content-vs-human.jpg",
   },
+  {
+    slug: "ai-product-descriptions-shopify",
+    title:
+      "AI product descriptions for Shopify: how to do it without sounding like everyone else",
+    description:
+      "47% of Shopify brands use AI for product descriptions. Most get the same generic copy. Here's how to train AI on your actual brand voice so yours don't blend in.",
+    date: "2026-05-05",
+    author: "Dustin Gilmour",
+    readTime: "7 min",
+    tags: ["shopify", "ecommerce", "AI marketing", "product descriptions", "brand voice"],
+    image: "/blog/ai-product-descriptions.jpg",
+  },
 ];
 
 export function getPost(slug: string): BlogPost | undefined {

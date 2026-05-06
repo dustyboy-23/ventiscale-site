@@ -2,8 +2,8 @@
   "meta": {
     "updated": "2026-05-05",
     "total": 60,
-    "published": 50,
-    "pending": 10,
+    "published": 51,
+    "pending": 9,
     "strategy": "Batch 2 (ids 31-60). Heavy ICP correction: ecom-first, AI category authority, decision/intent keywords. 3 posts/day, ~10 days of runway. id 34 published manually 4/29 as showcase post for the new SEO standards (BlogAuthorBio, statistic density, title CTR pattern).",
     "cron": "07:15, 13:15, 18:45 PT daily"
   },
@@ -524,7 +524,8 @@
       "keyword": "AI product descriptions Shopify",
       "tier": 3,
       "angle": "Why generic AI tools produce identical-sounding copy. Brand-voice training as the differentiator. Practical workflow for solo founders.",
-      "status": "pending"
+      "status": "published",
+      "published": "2026-05-05"
     },
     {
       "id": 52,
