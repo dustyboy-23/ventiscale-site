@@ -759,6 +759,17 @@ export const posts: BlogPost[] = [
     tags: ["marketing agency", "agency red flags", "done for you", "small business", "ecommerce"],
     image: "/blog/marketing-agency-red-flags.jpg",
   },
+  {
+    slug: "how-to-switch-marketing-agencies",
+    title: "How to switch marketing agencies without breaking your business",
+    description:
+      "Asset retrieval, contract review, knowledge transfer, transition timeline. The tactical playbook for switching marketing agencies without losing momentum.",
+    date: "2026-05-07",
+    author: "Dustin Gilmour",
+    readTime: "8 min",
+    tags: ["marketing agency", "agency transition", "done for you", "small business", "contracts"],
+    image: "/blog/switch-marketing-agencies.jpg",
+  },
 ];
 
 export function getPost(slug: string): BlogPost | undefined {

@@ -1,9 +1,9 @@
 {
   "meta": {
-    "updated": "2026-05-06",
+    "updated": "2026-05-07",
     "total": 60,
-    "published": 55,
-    "pending": 5,
+    "published": 56,
+    "pending": 4,
     "strategy": "Batch 2 (ids 31-60). Heavy ICP correction: ecom-first, AI category authority, decision/intent keywords. 3 posts/day, ~10 days of runway. id 34 published manually 4/29 as showcase post for the new SEO standards (BlogAuthorBio, statistic density, title CTR pattern).",
     "cron": "07:15, 13:15, 18:45 PT daily"
   },
@@ -574,7 +574,8 @@
       "keyword": "how to switch marketing agencies",
       "tier": 2,
       "angle": "Tactical playbook. Asset retrieval, contract review, transition timeline, what to communicate to your old team. Reads as a service to readers actively considering us.",
-      "status": "pending"
+      "status": "published",
+      "published": "2026-05-07"
     },
     {
       "id": 57,
