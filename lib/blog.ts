@@ -735,6 +735,18 @@ export const posts: BlogPost[] = [
     tags: ["SEO", "AI marketing", "GEO", "ecommerce", "AI search"],
     image: "/blog/ai-seo-2026.jpg",
   },
+  {
+    slug: "what-does-ai-marketing-cost",
+    title:
+      "What does AI marketing actually cost? (And why most pricing is dishonest)",
+    description:
+      "AI marketing costs $150/mo for a DIY tool stack to $10,000+/mo for a full-service agency. The honest breakdown by tier, no discovery call required.",
+    date: "2026-05-06",
+    author: "Dustin Gilmour",
+    readTime: "8 min",
+    tags: ["AI marketing", "pricing", "marketing agency", "ecommerce", "small business"],
+    image: "/blog/ai-marketing-cost.jpg",
+  },
 ];
 
 export function getPost(slug: string): BlogPost | undefined {
