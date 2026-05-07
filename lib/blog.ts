@@ -747,6 +747,18 @@ export const posts: BlogPost[] = [
     tags: ["AI marketing", "pricing", "marketing agency", "ecommerce", "small business"],
     image: "/blog/ai-marketing-cost.jpg",
   },
+  {
+    slug: "marketing-agency-red-flags",
+    title:
+      "11 marketing agency red flags every founder should know before signing",
+    description:
+      "Most agency contracts protect the agency, not you. Here are the 11 red flags to check before you sign anything.",
+    date: "2026-05-07",
+    author: "Dustin Gilmour",
+    readTime: "9 min",
+    tags: ["marketing agency", "agency red flags", "done for you", "small business", "ecommerce"],
+    image: "/blog/marketing-agency-red-flags.jpg",
+  },
 ];
 
 export function getPost(slug: string): BlogPost | undefined {
