@@ -45,7 +45,7 @@ const IMAGE_URL = `https://www.ventiscale.com${IMAGE}`;
 const FAQ_DATA = [
   {
     q: "What are month-to-month marketing services?",
-    a: "Month-to-month marketing services are agency agreements with no long-term commitment — you pay per month and can cancel without penalty. They typically include social media management, content creation, and email campaigns, but usually at a reduced scope compared to annual retainers.",
+    a: "Month-to-month marketing services are agency agreements with no long-term commitment. You pay per month and can cancel without penalty. They typically include social media management, content creation, and email campaigns, but usually at a reduced scope compared to annual retainers.",
   },
   {
     q: "Why do most marketing agencies require annual contracts?",
@@ -228,8 +228,8 @@ export default async function Post() {
           <p>
             A traditional marketing agency runs fixed overhead before you sign
             anything: copywriters, designers, account managers, media buyers, and the
-            platforms to run it all. SEMrush, Hootsuite, Klaviyo, Google Ads access
-            — that&apos;s $2,000-$4,000/month in tools alone before a single person
+            platforms to run it all. SEMrush, Hootsuite, Klaviyo, Google Ads access.
+            That&apos;s $2,000-$4,000/month in tools alone before a single person
             gets paid on your account.
           </p>
           <p>
@@ -421,8 +421,8 @@ export default async function Post() {
           </p>
           <p>
             When content execution runs on a model specifically trained on your brand
-            voice, product catalog, and audience patterns (not generic ChatGPT prompts
-            — a custom system that knows your business), the per-account overhead
+            voice, product catalog, and audience patterns (not generic ChatGPT prompts,
+            but a custom system that knows your business), the per-account overhead
             drops enough to absorb churn risk without locking clients in.
           </p>
           <p>
