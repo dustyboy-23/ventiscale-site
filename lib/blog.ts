@@ -788,6 +788,24 @@ export const posts: BlogPost[] = [
     ],
     image: "/blog/month-to-month-marketing.jpg",
   },
+  {
+    slug: "signs-marketing-agency-gaslighting",
+    title:
+      "5 signs your marketing agency is gaslighting you (and the metrics that prove it)",
+    description:
+      "Your agency's report says everything is up. Your revenue says otherwise. Here are the 5 signs they're hiding behind vanity metrics.",
+    date: "2026-05-08",
+    author: "Dustin Gilmour",
+    readTime: "8 min",
+    tags: [
+      "marketing agency",
+      "agency red flags",
+      "done for you",
+      "small business",
+      "ecommerce",
+    ],
+    image: "/blog/agency-gaslighting.jpg",
+  },
 ];
 
 export function getPost(slug: string): BlogPost | undefined {
