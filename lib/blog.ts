@@ -806,6 +806,17 @@ export const posts: BlogPost[] = [
     ],
     image: "/blog/agency-gaslighting.jpg",
   },
+  {
+    slug: "how-to-evaluate-marketing-roi-ecommerce",
+    title: "How to actually evaluate marketing ROI for an ecommerce brand",
+    description:
+      "ROAS lies. Here are the 4 numbers ecommerce founders need: MER, contribution margin, LTV:CAC, and payback period. Plus why most agencies hide them.",
+    date: "2026-05-08",
+    author: "Dustin Gilmour",
+    readTime: "7 min",
+    tags: ["ecommerce", "marketing ROI", "analytics", "MER", "ROAS"],
+    image: "/blog/marketing-roi-ecommerce.jpg",
+  },
 ];
 
 export function getPost(slug: string): BlogPost | undefined {
