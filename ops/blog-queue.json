@@ -2,8 +2,8 @@
   "meta": {
     "updated": "2026-05-07",
     "total": 60,
-    "published": 56,
-    "pending": 4,
+    "published": 57,
+    "pending": 3,
     "strategy": "Batch 2 (ids 31-60). Heavy ICP correction: ecom-first, AI category authority, decision/intent keywords. 3 posts/day, ~10 days of runway. id 34 published manually 4/29 as showcase post for the new SEO standards (BlogAuthorBio, statistic density, title CTR pattern).",
     "cron": "07:15, 13:15, 18:45 PT daily"
   },
@@ -584,7 +584,8 @@
       "keyword": "month to month marketing services",
       "tier": 2,
       "angle": "Why agency retainer culture exists. The economic reasons most agencies need lock-in. How AI changes the math. Direct Venti Scale wedge.",
-      "status": "pending"
+      "status": "published",
+      "published": "2026-05-07"
     },
     {
       "id": 58,

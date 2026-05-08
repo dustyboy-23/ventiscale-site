@@ -770,6 +770,24 @@ export const posts: BlogPost[] = [
     tags: ["marketing agency", "agency transition", "done for you", "small business", "contracts"],
     image: "/blog/switch-marketing-agencies.jpg",
   },
+  {
+    slug: "month-to-month-marketing-services",
+    title:
+      "Month-to-month marketing services: who actually offers them and why most don't",
+    description:
+      "The average agency retainer costs $3,500/month on a 12-month lock-in. Here's why most agencies won't go month-to-month, and who does.",
+    date: "2026-05-07",
+    author: "Dustin Gilmour",
+    readTime: "7 min",
+    tags: [
+      "marketing agency",
+      "month to month",
+      "done for you",
+      "small business",
+      "contracts",
+    ],
+    image: "/blog/month-to-month-marketing.jpg",
+  },
 ];
 
 export function getPost(slug: string): BlogPost | undefined {
