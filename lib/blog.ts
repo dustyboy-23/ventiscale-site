@@ -817,6 +817,18 @@ export const posts: BlogPost[] = [
     tags: ["ecommerce", "marketing ROI", "analytics", "MER", "ROAS"],
     image: "/blog/marketing-roi-ecommerce.jpg",
   },
+  {
+    slug: "ecommerce-founder-marketing-burnout",
+    title:
+      "The marketing burnout that hits every ecommerce founder around month 9",
+    description:
+      "73% of ecommerce founders aren't sure their marketing is working. Most hit the wall at month 9. Here's why it happens and the three ways out.",
+    date: "2026-05-09",
+    author: "Dustin Gilmour",
+    readTime: "7 min",
+    tags: ["ecommerce", "founder burnout", "marketing", "done for you", "small business"],
+    image: "/blog/ecommerce-founder-burnout.jpg",
+  },
 ];
 
 export function getPost(slug: string): BlogPost | undefined {
