@@ -829,6 +829,18 @@ export const posts: BlogPost[] = [
     tags: ["ecommerce", "founder burnout", "marketing", "done for you", "small business"],
     image: "/blog/ecommerce-founder-burnout.jpg",
   },
+  {
+    slug: "meta-advantage-plus-creative-volume",
+    title:
+      "Meta Advantage+ wants 1,000 creative variations. Your agency sends 10.",
+    description:
+      "Meta Advantage+ needs 300-1,000 ad creatives to optimize. Most agencies send 10 and charge $8K/month. Here's what the volume gap costs your ROAS.",
+    date: "2026-05-09",
+    author: "Dustin Gilmour",
+    readTime: "8 min",
+    tags: ["ecommerce", "Meta ads", "Advantage+", "paid ads", "AI marketing"],
+    image: "/blog/meta-advantage-plus-creative.jpg",
+  },
 ];
 
 export function getPost(slug: string): BlogPost | undefined {
