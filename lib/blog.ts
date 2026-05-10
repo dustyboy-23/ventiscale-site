@@ -841,6 +841,18 @@ export const posts: BlogPost[] = [
     tags: ["ecommerce", "Meta ads", "Advantage+", "paid ads", "AI marketing"],
     image: "/blog/meta-advantage-plus-creative.jpg",
   },
+  {
+    slug: "klaviyo-ai-autonomous-marketing-2026",
+    title:
+      "Klaviyo just launched autonomous email. Here's what ecommerce brands need to do now.",
+    description:
+      "Klaviyo's Spring 2026 drop ships 9 new AI features including Customer Agent and Smart Send Time per subscriber. Here's what changed and what to do about it.",
+    date: "2026-05-10",
+    author: "Dustin Gilmour",
+    readTime: "7 min",
+    tags: ["ecommerce", "email marketing", "Klaviyo", "AI marketing", "automation"],
+    image: "/blog/klaviyo-ai-autonomous-marketing.jpg",
+  },
 ];
 
 export function getPost(slug: string): BlogPost | undefined {
