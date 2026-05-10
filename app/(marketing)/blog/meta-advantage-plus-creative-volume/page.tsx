@@ -48,7 +48,7 @@ const IMAGE_URL = `https://www.ventiscale.com${IMAGE}`;
 const FAQ_DATA = [
   {
     q: "What is Meta Advantage+ and how does it work?",
-    a: "Meta Advantage+ is Meta&apos;s AI-driven ad system that automatically tests creative combinations, targets, and placements to find the best-performing mix. It requires high creative volume, ideally 300-1,000 variations per campaign, to learn which images, headlines, and offers convert for which audience segments.",
+    a: "Meta Advantage+ is Meta's AI-driven ad system that automatically tests creative combinations, targets, and placements to find the best-performing mix. It requires high creative volume, ideally 300-1,000 variations per campaign, to learn which images, headlines, and offers convert for which audience segments.",
   },
   {
     q: "How many ad creatives does Meta Advantage+ need to optimize properly?",
@@ -56,15 +56,15 @@ const FAQ_DATA = [
   },
   {
     q: "Why is my Meta ad ROAS declining in 2026?",
-    a: "DTC average CAC is up 40-60% since 2023 across most categories. One major factor is creative volume. Brands producing hundreds of AI-generated creative variations are winning the Meta auction before it starts. If your agency sends 10-15 creatives per campaign, you&apos;re competing at a structural disadvantage regardless of budget.",
+    a: "DTC average CAC is up 40-60% since 2023 across most categories. One major factor is creative volume. Brands producing hundreds of AI-generated creative variations are winning the Meta auction before it starts. If your agency sends 10-15 creatives per campaign, you're competing at a structural disadvantage regardless of budget.",
   },
   {
     q: "How do small ecommerce brands create 300+ ad creatives without a big team?",
     a: "AI creative generation tools like Creatify and AdStellar produce hundreds of ad variations from a product URL and brand guidelines in minutes. Creatify reported a 97% reduction in video production cost and a 90% drop in cost per video versus traditional production in 2026. This volume is now achievable for $400-$800/month in tool costs.",
   },
   {
-    q: "What&apos;s the difference between running Meta ads with an agency vs an AI-native system?",
-    a: "A traditional agency produces 10-15 creatives per campaign cycle and charges $8,000-$25,000/month in retainer. An AI-native system generates 300-1,000 creative variations at $400-$800/month in tool costs and a fraction of the management overhead. The output volume gap directly translates to how well Meta&apos;s algorithm can optimize your spend.",
+    q: "What's the difference between running Meta ads with an agency vs an AI-native system?",
+    a: "A traditional agency produces 10-15 creatives per campaign cycle and charges $8,000-$25,000/month in retainer. An AI-native system generates 300-1,000 creative variations at $400-$800/month in tool costs and a fraction of the management overhead. The output volume gap directly translates to how well Meta's algorithm can optimize your spend.",
   },
 ];
 
@@ -479,7 +479,7 @@ export default async function Post() {
 
           {/* Author bio */}
           <BlogAuthorBio
-            bioOverride="Founder of Venti Scale. I&apos;ve run Meta ad campaigns for ecommerce brands on both a traditional agency model and an AI-native creative stack. The volume gap is real and the ROAS difference shows up within the first campaign cycle."
+            bioOverride="Founder of Venti Scale. I've run Meta ad campaigns for ecommerce brands on both a traditional agency model and an AI-native creative stack. The volume gap is real and the ROAS difference shows up within the first campaign cycle."
             lastUpdated={DATE}
           />
 
