@@ -4,7 +4,7 @@ import { Eyebrow } from "@/components/marketing/eyebrow";
 import { BlogAuthorBio } from "@/components/marketing/blog-author-bio";
 
 export const metadata = {
-  title: "Klaviyo just launched autonomous email. Here&apos;s what ecommerce brands need to do now. | Venti Scale",
+  title: "Klaviyo just launched autonomous email. Here's what ecommerce brands need to do now. | Venti Scale",
   description:
     "Klaviyo's Spring 2026 drop ships 9 new AI features including Customer Agent and Smart Send Time per subscriber. Here's what changed and what to do about it.",
   openGraph: {
