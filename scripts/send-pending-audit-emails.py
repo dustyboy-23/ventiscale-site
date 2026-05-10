@@ -46,7 +46,7 @@ from typing import Optional
 
 PORTAL_ROOT = Path(__file__).resolve().parents[1]
 ENV_PATH = PORTAL_ROOT / ".env.local"
-TELEGRAM_ENV_PATH = Path("/home/dustin/.openclaw/.secure/telegram.env")
+TELEGRAM_ENV_PATH = Path("/home/dustin/.secure/telegram.env")
 
 GOG = os.environ.get("GOG_BIN", "/home/dustin/.local/bin/gog")
 SEND_FROM_ACCOUNT = "dustin@ventiscale.com"

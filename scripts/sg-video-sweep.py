@@ -48,6 +48,8 @@ VIDEO_REJECTED_FOLDER = "1Niu67a2yBFlkwUl04aM6STqo6ifIW3sf"
 VIDEO_POSTED_FOLDER = "11BpV3GhVp2T12vVYlj9yZp9fOnjV7LQQ"
 VIDEO_REVISIONS_DOC = "1mM7sUaKWWBxFkrckwwRZ0f8w4QPSQ9gzQkHu27_XnEs"
 PORTAL_ENV_PATH = Path(__file__).resolve().parent.parent / ".env.local"
+# SG repo .env carries GOG_KEYRING_PASSWORD + GOG_ACCOUNT; gog calls fail under cron without them
+SG_ENV_PATH = Path("/home/dustin/sprinkler-guard/.env")
 NOTES_WATERMARK_PATH = Path(__file__).resolve().parent.parent / "ops" / "state" / "sg-video-sweep-notes.watermark"
 
 TARGET_PARENT_BY_STATUS = {
@@ -204,6 +206,7 @@ def main() -> int:
     gog_path = args.gog if Path(args.gog).exists() else (shutil.which("gog") or args.gog)
 
     load_env_file(PORTAL_ENV_PATH)
+    load_env_file(SG_ENV_PATH)
     base_url = os.environ.get("NEXT_PUBLIC_SUPABASE_URL", "").rstrip("/")
     service_key = os.environ.get("SUPABASE_SERVICE_ROLE_KEY")
     if not (base_url and service_key):

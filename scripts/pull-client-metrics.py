@@ -29,7 +29,7 @@ CLIENT_CONFIG = {
     "sprinkler-guard": {
         "client_id": "12baae15-9b58-464e-9b21-a15f375ff979",
         "workspace_root": Path("/home/dustin/sprinkler-guard"),
-        "service_account": Path("/home/dustin/.openclaw/.secure/sprinkler-guard-ga.json"),
+        "service_account": Path("/home/dustin/.secure/sprinkler-guard-ga.json"),
         "ga4_property_id": "395712117",
         "gsc_site": "sc-domain:grassholesystem.com",
         "meta_ad_account": "act_3047045345618996",
