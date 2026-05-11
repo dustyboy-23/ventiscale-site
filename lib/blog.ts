@@ -853,6 +853,18 @@ export const posts: BlogPost[] = [
     tags: ["ecommerce", "email marketing", "Klaviyo", "AI marketing", "automation"],
     image: "/blog/klaviyo-ai-autonomous-marketing.jpg",
   },
+  {
+    slug: "ecommerce-cac-benchmarks-by-vertical",
+    title:
+      "Is your ecommerce CAC too high? The 2026 benchmarks by vertical.",
+    description:
+      "Fashion brands target $90-120 CAC. Beauty $90-130. Pet $68-90. If you don't know your vertical's benchmark, your agency can make any number look fine.",
+    date: "2026-05-10",
+    author: "Dustin Gilmour",
+    readTime: "7 min",
+    tags: ["ecommerce", "customer acquisition cost", "DTC", "paid media", "AI marketing"],
+    image: "/blog/ecommerce-cac-benchmarks.jpg",
+  },
 ];
 
 export function getPost(slug: string): BlogPost | undefined {
