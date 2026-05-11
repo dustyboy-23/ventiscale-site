@@ -21,7 +21,7 @@ export default async function TeamHealthPage({
     <>
       <PageHeader
         title="Health"
-        subtitle="Cron status, ad spend deltas, and threshold alerts per brand."
+        description="Cron status, ad spend deltas, and threshold alerts per brand."
       />
       <div className="mt-6 grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-3">
         {clients.map((c) => (

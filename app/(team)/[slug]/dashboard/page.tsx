@@ -35,36 +35,32 @@ export default async function TeamDashboardPage({
     <>
       <PageHeader
         title={`${greeting}.`}
-        subtitle={`${clients.length} brand${clients.length === 1 ? "" : "s"} under management.`}
+        description={`${clients.length} brand${clients.length === 1 ? "" : "s"} under management.`}
       />
 
       <section className="mt-6 grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-4">
         <KpiCard
           icon={Building2}
           label="Brands managed"
-          value={String(clients.length)}
-          accent="emerald"
+          value={clients.length}
         />
         <KpiCard
           icon={Activity}
           label="Posts published (last snapshot)"
-          value={snapshot?.totalPublished?.toLocaleString() ?? "—"}
-          accent="blue"
+          value={snapshot?.totalPublished ?? 0}
         />
         <KpiCard
           icon={TrendingUp}
           label="Avg ROAS"
-          value={snapshot?.avgRoas != null ? `${snapshot.avgRoas.toFixed(2)}x` : "—"}
-          accent="violet"
+          value={snapshot?.avgRoas ?? 0}
+          hint="x multiplier"
         />
         <KpiCard
           icon={AlertTriangle}
           label="Cron failures today"
-          value={String(snapshot?.cronFailuresToday ?? 0)}
-          accent={
-            snapshot?.cronFailuresToday && snapshot.cronFailuresToday > 0
-              ? "red"
-              : "slate"
+          value={snapshot?.cronFailuresToday ?? 0}
+          highlight={
+            !!(snapshot?.cronFailuresToday && snapshot.cronFailuresToday > 0)
           }
         />
       </section>

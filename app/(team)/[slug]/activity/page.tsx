@@ -19,7 +19,7 @@ export default async function TeamActivityPage({
     <>
       <PageHeader
         title="Activity"
-        subtitle="Cross-brand timeline. Who shipped what, where, and when."
+        description="Cross-brand timeline. Who shipped what, where, and when."
       />
       <Card>
         <div className="py-12 text-center text-sm text-[var(--color-text-muted)]">

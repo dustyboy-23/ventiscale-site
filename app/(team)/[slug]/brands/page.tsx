@@ -19,7 +19,7 @@ export default async function TeamBrandsPage({
     <>
       <PageHeader
         title="Brands"
-        subtitle={`${clients.length} under management. Click to switch into a client view.`}
+        description={`${clients.length} under management. Click to switch into a client view.`}
       />
       <div className="mt-6 grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-3">
         {clients.map((c) => (

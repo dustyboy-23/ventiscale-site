@@ -20,7 +20,7 @@ export default async function TeamVelocityPage({
     <>
       <PageHeader
         title="Velocity"
-        subtitle="Content output per person and per brand over the last 30 days."
+        description="Content output per person and per brand over the last 30 days."
       />
       <Card>
         <div className="py-12 text-center text-sm text-[var(--color-text-muted)]">

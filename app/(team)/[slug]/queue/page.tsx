@@ -19,7 +19,7 @@ export default async function TeamQueuePage({
     <>
       <PageHeader
         title="Queue"
-        subtitle="All content drafts across managed brands. Filter by status, brand, or assignee."
+        description="All content drafts across managed brands. Filter by status, brand, or assignee."
       />
       <Card>
         <div className="py-12 text-center text-sm text-[var(--color-text-muted)]">
