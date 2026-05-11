@@ -865,6 +865,18 @@ export const posts: BlogPost[] = [
     tags: ["ecommerce", "customer acquisition cost", "DTC", "paid media", "AI marketing"],
     image: "/blog/ecommerce-cac-benchmarks.jpg",
   },
+  {
+    slug: "ai-ad-creative-testing-ecommerce",
+    title:
+      "You're paying to test ad creatives. AI can predict the winners first.",
+    description:
+      "Most ecommerce brands burn $500-$2,000 per failed ad creative. AI pre-spend scoring tools now predict which ads win before you launch. Here's how.",
+    date: "2026-05-11",
+    author: "Dustin Gilmour",
+    readTime: "8 min",
+    tags: ["ecommerce", "paid ads", "AI marketing", "ad creative", "Meta ads"],
+    image: "/blog/ai-ad-creative-testing.jpg",
+  },
 ];
 
 export function getPost(slug: string): BlogPost | undefined {
