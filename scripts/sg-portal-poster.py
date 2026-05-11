@@ -222,12 +222,167 @@ def get_drive_mime(drive_file_id: str, gog_path: str) -> str:
     return (f or {}).get("mimeType", "") if isinstance(f, dict) else ""
 
 
+# Single-shot multipart works reliably under ~100 MB; FB closes the connection
+# (Errno 32 Broken pipe) on larger payloads. Threshold below routes to resumable.
+RESUMABLE_THRESHOLD_BYTES = 100 * 1024 * 1024
+
+
+def _fb_video_resumable_start(
+    file_size: int, *, page_id: str, page_token: str
+) -> Optional[dict]:
+    """Phase 1: announce the upload, get video_id + first chunk offsets."""
+    body = urllib.parse.urlencode({
+        "upload_phase": "start",
+        "access_token": page_token,
+        "file_size": str(file_size),
+    }).encode()
+    url = f"https://graph.facebook.com/{GRAPH_VERSION}/{page_id}/videos"
+    req = urllib.request.Request(url, data=body, method="POST")
+    try:
+        with urllib.request.urlopen(req, timeout=60) as resp:
+            return json.loads(resp.read())
+    except urllib.error.HTTPError as exc:
+        print(f"  [resumable.start] HTTP {exc.code}: {exc.read().decode()[:300]}", file=sys.stderr)
+    except Exception as exc:
+        print(f"  [resumable.start] error: {exc}", file=sys.stderr)
+    return None
+
+
+def _fb_video_resumable_transfer(
+    vid_path: Path,
+    upload_session_id: str,
+    start_offset: int,
+    end_offset: int,
+    *,
+    page_id: str,
+    page_token: str,
+) -> Optional[dict]:
+    """Phase 2: send one chunk, get next offsets. Repeat until start==end."""
+    with vid_path.open("rb") as f:
+        f.seek(start_offset)
+        chunk = f.read(end_offset - start_offset)
+
+    # FB transfer expects multipart with the chunk in `video_file_chunk`.
+    boundary = uuid.uuid4().hex
+    body = b""
+    for name, value in (
+        ("upload_phase", "transfer"),
+        ("upload_session_id", upload_session_id),
+        ("start_offset", str(start_offset)),
+        ("access_token", page_token),
+    ):
+        body += f"--{boundary}\r\n".encode()
+        body += f'Content-Disposition: form-data; name="{name}"\r\n\r\n'.encode()
+        body += value.encode() + b"\r\n"
+    body += f"--{boundary}\r\n".encode()
+    body += b'Content-Disposition: form-data; name="video_file_chunk"; filename="chunk"\r\n'
+    body += b"Content-Type: application/octet-stream\r\n\r\n"
+    body += chunk + b"\r\n"
+    body += f"--{boundary}--\r\n".encode()
+
+    url = f"https://graph.facebook.com/{GRAPH_VERSION}/{page_id}/videos"
+    req = urllib.request.Request(
+        url,
+        data=body,
+        headers={
+            "Content-Type": f"multipart/form-data; boundary={boundary}",
+            "Content-Length": str(len(body)),
+        },
+        method="POST",
+    )
+    try:
+        with urllib.request.urlopen(req, timeout=300) as resp:
+            return json.loads(resp.read())
+    except urllib.error.HTTPError as exc:
+        print(f"  [resumable.transfer @{start_offset}] HTTP {exc.code}: {exc.read().decode()[:300]}", file=sys.stderr)
+    except Exception as exc:
+        print(f"  [resumable.transfer @{start_offset}] error: {exc}", file=sys.stderr)
+    return None
+
+
+def _fb_video_resumable_finish(
+    upload_session_id: str,
+    caption: str,
+    *,
+    page_id: str,
+    page_token: str,
+) -> Optional[dict]:
+    """Phase 3: commit. Returns {success, post_id, video_id}."""
+    body = urllib.parse.urlencode({
+        "upload_phase": "finish",
+        "upload_session_id": upload_session_id,
+        "access_token": page_token,
+        "description": caption,
+    }).encode()
+    url = f"https://graph.facebook.com/{GRAPH_VERSION}/{page_id}/videos"
+    req = urllib.request.Request(url, data=body, method="POST")
+    try:
+        with urllib.request.urlopen(req, timeout=120) as resp:
+            return json.loads(resp.read())
+    except urllib.error.HTTPError as exc:
+        print(f"  [resumable.finish] HTTP {exc.code}: {exc.read().decode()[:300]}", file=sys.stderr)
+    except Exception as exc:
+        print(f"  [resumable.finish] error: {exc}", file=sys.stderr)
+    return None
+
+
+def fb_upload_video_resumable(
+    vid_path: Path, caption: str, *, page_id: str, page_token: str
+) -> Optional[str]:
+    """FB resumable upload for videos >100MB. Single-shot multipart drops the
+    connection (Errno 32 Broken pipe). Resumable splits into start/transfer/finish
+    phases per https://developers.facebook.com/docs/graph-api/video-uploads"""
+    file_size = vid_path.stat().st_size
+    start = _fb_video_resumable_start(file_size, page_id=page_id, page_token=page_token)
+    if not start:
+        return None
+    upload_session_id = start.get("upload_session_id")
+    video_id = start.get("video_id")
+    start_offset = int(start.get("start_offset", 0))
+    end_offset = int(start.get("end_offset", 0))
+    if not upload_session_id or not video_id:
+        print(f"  [resumable.start] missing session/video_id in response: {start}", file=sys.stderr)
+        return None
+
+    chunk_count = 0
+    while start_offset != end_offset:
+        next_off = _fb_video_resumable_transfer(
+            vid_path, upload_session_id, start_offset, end_offset,
+            page_id=page_id, page_token=page_token,
+        )
+        if not next_off:
+            return None
+        new_start = int(next_off.get("start_offset", 0))
+        new_end = int(next_off.get("end_offset", 0))
+        chunk_count += 1
+        if new_start == start_offset and new_end == end_offset:
+            print(f"  [resumable.transfer] no progress at offset {start_offset}, aborting", file=sys.stderr)
+            return None
+        start_offset, end_offset = new_start, new_end
+
+    finish = _fb_video_resumable_finish(
+        upload_session_id, caption, page_id=page_id, page_token=page_token
+    )
+    if not finish or not finish.get("success"):
+        print(f"  [resumable.finish] response: {finish}", file=sys.stderr)
+        return None
+    # FB returns video_id at start; the post_id on the page is video_id-suffixed.
+    post_id = finish.get("post_id") or video_id
+    print(f"  [resumable] uploaded {file_size} bytes in {chunk_count} chunks, post_id={post_id}")
+    return post_id
+
+
 def fb_upload_video(
     vid_path: Path, caption: str, *, page_id: str, page_token: str
 ) -> Optional[str]:
-    """Posts a video + caption to the FB page via the /videos endpoint.
-    For files under 100MB this single-request multipart works; larger
-    videos need the resumable upload flow which we'll add when needed."""
+    """Route to resumable upload for >100MB files; single-shot multipart for smaller."""
+    file_size = vid_path.stat().st_size
+    if file_size > RESUMABLE_THRESHOLD_BYTES:
+        return fb_upload_video_resumable(
+            vid_path, caption, page_id=page_id, page_token=page_token
+        )
+
+    # Original single-shot path for smaller videos
     vid_data = vid_path.read_bytes()
     boundary = uuid.uuid4().hex
     body = b""
