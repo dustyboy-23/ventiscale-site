@@ -877,6 +877,18 @@ export const posts: BlogPost[] = [
     tags: ["ecommerce", "paid ads", "AI marketing", "ad creative", "Meta ads"],
     image: "/blog/ai-ad-creative-testing.jpg",
   },
+  {
+    slug: "ai-video-ads-without-creators",
+    title:
+      "You're spending $3,000 per video ad. These ecommerce brands aren't.",
+    description:
+      "AI video tools convert product pages into UGC-style ads in minutes. Brands save $3K per video and produce 50x more creative variations. Here's how.",
+    date: "2026-05-11",
+    author: "Dustin Gilmour",
+    readTime: "7 min",
+    tags: ["ecommerce", "paid ads", "AI marketing", "video ads", "TikTok"],
+    image: "/blog/ai-video-ads-ecommerce.jpg",
+  },
 ];
 
 export function getPost(slug: string): BlogPost | undefined {
