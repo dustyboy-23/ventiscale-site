@@ -44,6 +44,7 @@ VIDEO_APPROVED_FOLDER = "1ifTmB9zkh6tMFDPNlE3a0ZszO3Upe2Va"
 VIDEO_REJECTED_FOLDER = "1Niu67a2yBFlkwUl04aM6STqo6ifIW3sf"
 VIDEO_POSTED_FOLDER = "11BpV3GhVp2T12vVYlj9yZp9fOnjV7LQQ"
 PORTAL_ENV_PATH = Path(__file__).resolve().parent.parent / ".env.local"
+SG_ENV_PATH = Path("/home/dustin/sprinkler-guard/.env")  # holds GOG_ACCOUNT + GOG_KEYRING_PASSWORD
 
 VIDEO_MIMES = (
     "video/mp4",
@@ -213,6 +214,7 @@ def main() -> int:
     gog_path = args.gog if Path(args.gog).exists() else (shutil.which("gog") or args.gog)
 
     load_env_file(PORTAL_ENV_PATH)
+    load_env_file(SG_ENV_PATH)  # gog auth env: GOG_ACCOUNT, GOG_KEYRING_PASSWORD
     base_url = os.environ.get("NEXT_PUBLIC_SUPABASE_URL", "").rstrip("/")
     service_key = os.environ.get("SUPABASE_SERVICE_ROLE_KEY")
     if not (base_url and service_key):

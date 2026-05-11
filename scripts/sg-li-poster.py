@@ -172,7 +172,9 @@ def post_via_existing_script(body_text: str, title: str) -> Optional[str]:
         temp_path = f.name
     try:
         result = subprocess.run(
-            ["/usr/bin/python3", str(LI_POST_SCRIPT), "--post-file", temp_path, "--json-output"],
+            # NOTE: post-sg-linkedin.py only supports --post-file + --dry-run.
+            # The URN-extraction loop below already handles its plain-text/JSON stdout.
+            ["/usr/bin/python3", str(LI_POST_SCRIPT), "--post-file", temp_path],
             capture_output=True,
             text=True,
             timeout=120,

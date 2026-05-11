@@ -58,6 +58,16 @@ PORTAL_ENV_PATH = (
     Path(__file__).resolve().parent.parent / ".env.local"
 )
 
+try:
+    from google import genai as _genai_preflight  # noqa: F401
+    from google.genai import types as _genai_types_preflight  # noqa: F401
+except ImportError as _e:
+    sys.stderr.write(
+        f"FATAL: google-genai missing ({_e}). "
+        "Install: /usr/bin/python3 -m pip install --user --break-system-packages google-genai\n"
+    )
+    sys.exit(2)
+
 
 def load_env_file(path: Path) -> None:
     if not path.exists():
