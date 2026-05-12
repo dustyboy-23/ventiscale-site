@@ -93,6 +93,7 @@ export default async function ServicesPage() {
         <script
           key={i}
           type="application/ld+json"
+          nonce={nonce}
           dangerouslySetInnerHTML={{ __html: JSON.stringify(schema) }}
         />
       ))}
