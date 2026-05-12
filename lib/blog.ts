@@ -900,6 +900,18 @@ export const posts: BlogPost[] = [
     tags: ["ecommerce", "paid ads", "TikTok", "Facebook ads", "AI marketing"],
     image: "/blog/tiktok-vs-facebook-ads.jpg",
   },
+  {
+    slug: "chatgpt-ads-ecommerce-2026",
+    title:
+      "OpenAI opened ChatGPT ads to every brand. Here's what ecommerce founders need to know.",
+    description:
+      "ChatGPT self-serve ads launched in May 2026 with no minimum spend. Target and Williams-Sonoma were first. Here's what ecommerce brands need to know before it gets crowded.",
+    date: "2026-05-12",
+    author: "Dustin Gilmour",
+    readTime: "8 min",
+    tags: ["ecommerce", "paid ads", "ChatGPT", "AI marketing", "advertising"],
+    image: "/blog/chatgpt-ads-ecommerce.jpg",
+  },
 ];
 
 export function getPost(slug: string): BlogPost | undefined {
