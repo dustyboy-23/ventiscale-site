@@ -889,6 +889,17 @@ export const posts: BlogPost[] = [
     tags: ["ecommerce", "paid ads", "AI marketing", "video ads", "TikTok"],
     image: "/blog/ai-video-ads-ecommerce.jpg",
   },
+  {
+    slug: "tiktok-ads-vs-facebook-ads-ecommerce-2026",
+    title: "Your agency runs Facebook ads. TikTok is half the price.",
+    description:
+      "TikTok CPC: $0.50. Facebook CPC: $1.09. The gap costs ecommerce brands 4,500 clicks per $5K in ad spend. Here's why agencies still pick Facebook.",
+    date: "2026-05-11",
+    author: "Dustin Gilmour",
+    readTime: "8 min",
+    tags: ["ecommerce", "paid ads", "TikTok", "Facebook ads", "AI marketing"],
+    image: "/blog/tiktok-vs-facebook-ads.jpg",
+  },
 ];
 
 export function getPost(slug: string): BlogPost | undefined {
