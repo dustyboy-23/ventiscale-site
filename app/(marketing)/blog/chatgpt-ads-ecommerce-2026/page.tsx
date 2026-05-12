@@ -7,7 +7,7 @@ export const metadata = {
   title:
     "OpenAI opened ChatGPT ads to every brand. Here's what ecommerce founders need to know. | Venti Scale",
   description:
-    "ChatGPT self-serve ads launched in May 2026 with no minimum spend. Target and Williams-Sonoma were first. Here's what ecommerce brands need to know before it gets crowded.",
+    "ChatGPT self-serve ads launched in May 2026 with no minimum spend. Here's what ecommerce brands need to know before it gets crowded.",
   openGraph: {
     title:
       "OpenAI opened ChatGPT ads to every brand. Here's what ecommerce founders need to know.",

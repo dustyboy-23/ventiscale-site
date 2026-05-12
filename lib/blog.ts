@@ -905,7 +905,7 @@ export const posts: BlogPost[] = [
     title:
       "OpenAI opened ChatGPT ads to every brand. Here's what ecommerce founders need to know.",
     description:
-      "ChatGPT self-serve ads launched in May 2026 with no minimum spend. Target and Williams-Sonoma were first. Here's what ecommerce brands need to know before it gets crowded.",
+      "ChatGPT self-serve ads launched in May 2026 with no minimum spend. Here's what ecommerce brands need to know before it gets crowded.",
     date: "2026-05-12",
     author: "Dustin Gilmour",
     readTime: "8 min",
