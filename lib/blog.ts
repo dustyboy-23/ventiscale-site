@@ -912,6 +912,18 @@ export const posts: BlogPost[] = [
     tags: ["ecommerce", "paid ads", "ChatGPT", "AI marketing", "advertising"],
     image: "/blog/chatgpt-ads-ecommerce.jpg",
   },
+  {
+    slug: "ai-agents-running-ad-campaigns-2026",
+    title:
+      "Every major ad platform just went AI-native. Your agency didn't.",
+    description:
+      "TikTok, Meta, and Google now let AI agents run your campaigns without a human touching Ads Manager. Here's what that means for your retainer.",
+    date: "2026-05-14",
+    author: "Dustin Gilmour",
+    readTime: "7 min",
+    tags: ["ecommerce", "paid ads", "AI marketing", "TikTok", "Meta Advantage+"],
+    image: "/blog/ai-ad-agents-2026.jpg",
+  },
 ];
 
 export function getPost(slug: string): BlogPost | undefined {
