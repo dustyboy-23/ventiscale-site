@@ -10,12 +10,12 @@ import { NextResponse, type NextRequest } from "next/server";
 //    components can read it (`headers().get('x-nonce')`), and emit a
 //    Content-Security-Policy with `'nonce-{value}'` for inline scripts.
 //
-// CSP rollout posture (M2): script-src lists BOTH 'nonce-{value}' AND
-// 'unsafe-inline'. Modern browsers honor the nonce and ignore the
-// 'unsafe-inline' fallback (per CSP3). Older browsers fall back to
-// 'unsafe-inline'. This gives a safe rollout window where pages without
-// a nonce attribute still execute. Future hardening: remove
-// 'unsafe-inline' once every inline script is confirmed nonce-tagged.
+// CSP posture (M3 — hardened 2026-05-14): script-src lists 'nonce-{value}'
+// only. The 5/11 audit confirmed all 244 inline <script> blocks across 84
+// files carry nonce={nonce}. After 72h+ clean soak of commit 5791b3b
+// (final un-nonced gap fix), 'unsafe-inline' removed. style-src keeps
+// 'unsafe-inline' because React emits inline styles and removing it
+// breaks the site.
 //
 // Designed to fail-open: if Supabase env vars are missing, the auth
 // refresh is skipped but the nonce + CSP still apply.
@@ -32,7 +32,7 @@ function generateNonce(): string {
 function buildCsp(nonce: string): string {
   return [
     "default-src 'self'",
-    `script-src 'self' 'nonce-${nonce}' 'unsafe-inline' https://www.googletagmanager.com https://va.vercel-scripts.com`,
+    `script-src 'self' 'nonce-${nonce}' https://www.googletagmanager.com https://va.vercel-scripts.com`,
     "style-src 'self' 'unsafe-inline'",
     "img-src 'self' data: blob: https://*.googleusercontent.com https://drive.google.com https://www.google-analytics.com",
     "font-src 'self' data:",
