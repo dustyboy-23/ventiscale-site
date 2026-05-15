@@ -924,6 +924,18 @@ export const posts: BlogPost[] = [
     tags: ["ecommerce", "paid ads", "AI marketing", "TikTok", "Meta Advantage+"],
     image: "/blog/ai-ad-agents-2026.jpg",
   },
+  {
+    slug: "email-paid-coordination-gap-ecommerce",
+    title:
+      "Your email and your Meta ads aren't talking. You're paying for it.",
+    description:
+      "Brands waste 8-15% of ad spend retargeting subscribers their next email would have converted. Here's how to fix the Klaviyo-Meta sync.",
+    date: "2026-05-15",
+    author: "Dustin Gilmour",
+    readTime: "7 min",
+    tags: ["ecommerce", "email marketing", "Meta ads", "Klaviyo", "paid ads"],
+    image: "/blog/email-paid-coordination.jpg",
+  },
 ];
 
 export function getPost(slug: string): BlogPost | undefined {
