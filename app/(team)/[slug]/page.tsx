@@ -6,5 +6,5 @@ export default async function TeamIndex({
   params: Promise<{ slug: string }>;
 }) {
   const { slug } = await params;
-  redirect(`/team/${slug}/dashboard`);
+  redirect(`/${slug}/dashboard`);
 }

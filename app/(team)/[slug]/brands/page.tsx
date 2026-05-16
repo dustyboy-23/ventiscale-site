@@ -45,7 +45,7 @@ export default async function TeamBrandsPage({
                   Open client view
                 </Link>
                 <Link
-                  href={`/team/${slug}/health#${c.slug}`}
+                  href={`/${slug}/health#${c.slug}`}
                   className="rounded border border-[var(--color-border)] px-2 py-1 text-[var(--color-text-muted)] hover:text-[var(--color-text)]"
                 >
                   Health

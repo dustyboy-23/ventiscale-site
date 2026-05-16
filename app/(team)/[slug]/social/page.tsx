@@ -36,7 +36,7 @@ export default async function SocialQueuePage({
         description="Scheduled posts across managed brands. Composer drafts, queue states, and per-platform delivery history."
         actions={
           <Link
-            href={`/team/${slug}/social/new`}
+            href={`/${slug}/social/new`}
             className="inline-flex items-center gap-1.5 rounded-lg bg-[var(--color-ink)] px-3.5 py-2 text-[13px] font-medium text-white hover:bg-[var(--color-ink)]/90 transition"
           >
             <Plus className="w-4 h-4" strokeWidth={2.5} />
@@ -75,7 +75,7 @@ export default async function SocialQueuePage({
             }
             action={
               <Link
-                href={`/team/${slug}/social/accounts`}
+                href={`/${slug}/social/accounts`}
                 className="text-[12px] font-medium text-[var(--color-accent)] hover:underline"
               >
                 Manage accounts →
@@ -109,7 +109,7 @@ function EmptyState({ slug }: { slug: string }) {
           Worker checks the queue once per minute.
         </p>
         <Link
-          href={`/team/${slug}/social/new`}
+          href={`/${slug}/social/new`}
           className="mt-5 inline-flex items-center gap-1.5 rounded-lg bg-[var(--color-ink)] px-3.5 py-2 text-[13px] font-medium text-white hover:bg-[var(--color-ink)]/90 transition"
         >
           <Plus className="w-4 h-4" strokeWidth={2.5} />
@@ -141,7 +141,7 @@ function PostsTable({ posts, slug }: { posts: ScheduledPostRow[]; slug: string }
             >
               <Td>
                 <Link
-                  href={`/team/${slug}/social/${post.id}`}
+                  href={`/${slug}/social/${post.id}`}
                   className="block py-4"
                 >
                   <div className="font-medium text-[var(--color-ink)] whitespace-nowrap">
@@ -154,24 +154,24 @@ function PostsTable({ posts, slug }: { posts: ScheduledPostRow[]; slug: string }
               </Td>
               <Td>
                 <Link
-                  href={`/team/${slug}/social/${post.id}`}
+                  href={`/${slug}/social/${post.id}`}
                   className="block py-4 max-w-md text-[var(--color-ink)] truncate"
                 >
                   {post.caption || <span className="text-[var(--color-ink-subtle)]">(no caption)</span>}
                 </Link>
               </Td>
               <Td>
-                <Link href={`/team/${slug}/social/${post.id}`} className="block py-4 text-[var(--color-ink-muted)] whitespace-nowrap">
+                <Link href={`/${slug}/social/${post.id}`} className="block py-4 text-[var(--color-ink-muted)] whitespace-nowrap">
                   {post.clientName}
                 </Link>
               </Td>
               <Td>
-                <Link href={`/team/${slug}/social/${post.id}`} className="block py-4">
+                <Link href={`/${slug}/social/${post.id}`} className="block py-4">
                   <PlatformIconList platforms={post.platforms} />
                 </Link>
               </Td>
               <Td>
-                <Link href={`/team/${slug}/social/${post.id}`} className="block py-4">
+                <Link href={`/${slug}/social/${post.id}`} className="block py-4">
                   <StatusBadge status={post.status} />
                 </Link>
               </Td>

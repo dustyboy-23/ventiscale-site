@@ -46,43 +46,43 @@ export default async function TeamLayout({
           </div>
           <nav className="flex items-center gap-4 text-sm">
             <a
-              href={`/team/${slug}/dashboard`}
+              href={`/${slug}/dashboard`}
               className="text-[var(--color-text-muted)] hover:text-[var(--color-text)]"
             >
               Dashboard
             </a>
             <a
-              href={`/team/${slug}/brands`}
+              href={`/${slug}/brands`}
               className="text-[var(--color-text-muted)] hover:text-[var(--color-text)]"
             >
               Brands
             </a>
             <a
-              href={`/team/${slug}/velocity`}
+              href={`/${slug}/velocity`}
               className="text-[var(--color-text-muted)] hover:text-[var(--color-text)]"
             >
               Velocity
             </a>
             <a
-              href={`/team/${slug}/health`}
+              href={`/${slug}/health`}
               className="text-[var(--color-text-muted)] hover:text-[var(--color-text)]"
             >
               Health
             </a>
             <a
-              href={`/team/${slug}/queue`}
+              href={`/${slug}/queue`}
               className="text-[var(--color-text-muted)] hover:text-[var(--color-text)]"
             >
               Queue
             </a>
             <a
-              href={`/team/${slug}/social`}
+              href={`/${slug}/social`}
               className="text-[var(--color-text-muted)] hover:text-[var(--color-text)]"
             >
               Social
             </a>
             <a
-              href={`/team/${slug}/activity`}
+              href={`/${slug}/activity`}
               className="text-[var(--color-text-muted)] hover:text-[var(--color-text)]"
             >
               Activity

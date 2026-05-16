@@ -71,7 +71,7 @@ export default async function TeamDashboardPage({
           {clients.map((c) => (
             <Card key={c.id}>
               <Link
-                href={`/team/${slug}/brands#${c.slug}`}
+                href={`/${slug}/brands#${c.slug}`}
                 className="flex items-center gap-3"
               >
                 <div
