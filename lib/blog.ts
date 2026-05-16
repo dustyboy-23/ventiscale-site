@@ -936,6 +936,18 @@ export const posts: BlogPost[] = [
     tags: ["ecommerce", "email marketing", "Meta ads", "Klaviyo", "paid ads"],
     image: "/blog/email-paid-coordination.jpg",
   },
+  {
+    slug: "dtc-marketing-agency-efficiency-gap",
+    title:
+      "Your DTC marketing budget has a 15% leak. Most agencies won't show you where.",
+    description:
+      "A 15% efficiency gap on $200K/month in DTC marketing spend costs $360K/year. Here's exactly where the money goes and how to close it.",
+    date: "2026-05-16",
+    author: "Dustin Gilmour",
+    readTime: "8 min",
+    tags: ["ecommerce", "DTC", "marketing agency", "marketing ROI", "AI marketing"],
+    image: "/blog/dtc-efficiency-gap.jpg",
+  },
 ];
 
 export function getPost(slug: string): BlogPost | undefined {
