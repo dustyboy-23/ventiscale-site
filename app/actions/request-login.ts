@@ -1,5 +1,6 @@
 "use server";
 
+import { headers } from "next/headers";
 import { createAdminClient } from "@/lib/supabase/admin";
 import { checkRateLimit } from "@/lib/rate-limit";
 
@@ -43,7 +44,15 @@ export async function requestMagicLink(emailRaw: string): Promise<RequestLoginRe
     return { ok: false, error: "supabase_misconfigured" };
   }
 
-  const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://www.ventiscale.com";
+  // Detect the request origin so magic links work both locally (localhost:3030)
+  // and in prod (www.ventiscale.com). Without this, prod was hardcoded and the
+  // local dev login form mailed prod links — user clicked, landed on the
+  // marketing site with ?code= that prod root doesn't handle. Origin: 2026-05-15.
+  // Env override still wins if explicitly set.
+  const h = await headers();
+  const host = h.get("host") ?? "www.ventiscale.com";
+  const proto = h.get("x-forwarded-proto") ?? (host.startsWith("localhost") ? "http" : "https");
+  const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || `${proto}://${host}`;
 
   const { data, error } = await admin.auth.admin.generateLink({
     type: "magiclink",
