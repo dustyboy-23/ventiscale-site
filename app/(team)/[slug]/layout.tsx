@@ -76,6 +76,12 @@ export default async function TeamLayout({
               Queue
             </a>
             <a
+              href={`/team/${slug}/social`}
+              className="text-[var(--color-text-muted)] hover:text-[var(--color-text)]"
+            >
+              Social
+            </a>
+            <a
               href={`/team/${slug}/activity`}
               className="text-[var(--color-text-muted)] hover:text-[var(--color-text)]"
             >
