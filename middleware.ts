@@ -30,9 +30,17 @@ function generateNonce(): string {
 }
 
 function buildCsp(nonce: string): string {
+  // React + Turbopack dev mode requires eval() for HMR + error introspection
+  // (reconstructing callstacks from React server components). Production
+  // never uses eval(); the M3-hardened script-src stays nonce-only there.
+  // Origin: 2026-05-15 — dev server blank-screened after CSP M3 landed 5/14.
+  const scriptSrc =
+    process.env.NODE_ENV === "development"
+      ? `script-src 'self' 'nonce-${nonce}' 'unsafe-eval' https://www.googletagmanager.com https://va.vercel-scripts.com`
+      : `script-src 'self' 'nonce-${nonce}' https://www.googletagmanager.com https://va.vercel-scripts.com`;
   return [
     "default-src 'self'",
-    `script-src 'self' 'nonce-${nonce}' https://www.googletagmanager.com https://va.vercel-scripts.com`,
+    scriptSrc,
     "style-src 'self' 'unsafe-inline'",
     "img-src 'self' data: blob: https://*.googleusercontent.com https://drive.google.com https://www.google-analytics.com",
     "font-src 'self' data:",
