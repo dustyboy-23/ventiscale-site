@@ -948,6 +948,18 @@ export const posts: BlogPost[] = [
     tags: ["ecommerce", "DTC", "marketing agency", "marketing ROI", "AI marketing"],
     image: "/blog/dtc-efficiency-gap.jpg",
   },
+  {
+    slug: "dtc-roas-declining-channel-mix-2026",
+    title:
+      "ROAS is falling 10% a year. The DTC brands winning anyway run this stack.",
+    description:
+      "Blended ROAS is down 4-10% YoY on every paid channel. Here's the email-first, paid-second channel mix that top DTC brands use to grow anyway.",
+    date: "2026-05-17",
+    author: "Dustin Gilmour",
+    readTime: "8 min",
+    tags: ["ecommerce", "DTC", "paid ads", "email marketing", "marketing strategy"],
+    image: "/blog/dtc-roas-channel-mix.jpg",
+  },
 ];
 
 export function getPost(slug: string): BlogPost | undefined {
