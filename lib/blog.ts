@@ -960,6 +960,18 @@ export const posts: BlogPost[] = [
     tags: ["ecommerce", "DTC", "paid ads", "email marketing", "marketing strategy"],
     image: "/blog/dtc-roas-channel-mix.jpg",
   },
+  {
+    slug: "ai-customer-service-ecommerce-2026",
+    title:
+      "Your store makes the sale. Your customer service loses the repeat order.",
+    description:
+      "65% of ecommerce revenue comes from repeat buyers. AI customer service prevents 85% of churn and pays back $3.50 per dollar invested. Here's the setup.",
+    date: "2026-05-18",
+    author: "Dustin Gilmour",
+    readTime: "8 min",
+    tags: ["ecommerce", "customer service", "AI marketing", "retention", "Klaviyo"],
+    image: "/blog/ai-customer-service-ecommerce.jpg",
+  },
 ];
 
 export function getPost(slug: string): BlogPost | undefined {
