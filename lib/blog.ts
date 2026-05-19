@@ -972,6 +972,18 @@ export const posts: BlogPost[] = [
     tags: ["ecommerce", "customer service", "AI marketing", "retention", "Klaviyo"],
     image: "/blog/ai-customer-service-ecommerce.jpg",
   },
+  {
+    slug: "shopify-sidekick-winter-2026",
+    title:
+      "Shopify just built the AI your agency charges $3,000 a month for.",
+    description:
+      "Shopify Winter '26 shipped Sidekick, Brand Voice Cloning, and native ChatGPT discoverability. Here's what that means for your agency relationship.",
+    date: "2026-05-19",
+    author: "Dustin Gilmour",
+    readTime: "8 min",
+    tags: ["shopify", "ecommerce", "AI marketing", "Shopify Magic", "marketing agency"],
+    image: "/blog/shopify-sidekick-winter-2026.jpg",
+  },
 ];
 
 export function getPost(slug: string): BlogPost | undefined {
