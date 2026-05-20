@@ -984,6 +984,18 @@ export const posts: BlogPost[] = [
     tags: ["shopify", "ecommerce", "AI marketing", "Shopify Magic", "marketing agency"],
     image: "/blog/shopify-sidekick-winter-2026.jpg",
   },
+  {
+    slug: "klaviyo-meta-advantage-plus-seed-audience",
+    title:
+      "Meta Advantage+ gets 4.52x ROAS when you sync Klaviyo. Most brands aren't.",
+    description:
+      "Meta Advantage+ delivers 4.52x ROAS with Klaviyo seed audiences vs 1.86x cold. Here's the exact setup most agencies skip.",
+    date: "2026-05-20",
+    author: "Dustin Gilmour",
+    readTime: "8 min",
+    tags: ["ecommerce", "Meta ads", "Klaviyo", "Advantage+", "AI marketing"],
+    image: "/blog/klaviyo-meta-advantage.jpg",
+  },
 ];
 
 export function getPost(slug: string): BlogPost | undefined {
