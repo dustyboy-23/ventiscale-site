@@ -996,6 +996,23 @@ export const posts: BlogPost[] = [
     tags: ["ecommerce", "Meta ads", "Klaviyo", "Advantage+", "AI marketing"],
     image: "/blog/klaviyo-meta-advantage.jpg",
   },
+  {
+    slug: "ecommerce-multi-agency-vendor-trap",
+    title: "4 agencies, 4 attribution models. Nobody owns your growth.",
+    description:
+      "Most $100K-$200K/month DTC brands run 4 separate agencies with conflicting attribution models. The problem isn't the vendors. It's the architecture.",
+    date: "2026-05-21",
+    author: "Dustin Gilmour",
+    readTime: "8 min",
+    tags: [
+      "ecommerce",
+      "DTC",
+      "marketing agency",
+      "attribution",
+      "agency stack",
+    ],
+    image: "/blog/ecommerce-multi-agency-trap.jpg",
+  },
 ];
 
 export function getPost(slug: string): BlogPost | undefined {
