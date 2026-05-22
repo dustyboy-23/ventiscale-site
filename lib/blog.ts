@@ -1013,6 +1013,24 @@ export const posts: BlogPost[] = [
     ],
     image: "/blog/ecommerce-multi-agency-trap.jpg",
   },
+  {
+    slug: "ai-ad-platform-product-url-to-campaign",
+    title:
+      "These AI platforms turn your product URL into a live ad campaign. No agency needed.",
+    description:
+      "Full-stack AI ad platforms turn a product URL into live Meta campaigns in under an hour. No designers. No agency retainer. Here's how they work.",
+    date: "2026-05-22",
+    author: "Dustin Gilmour",
+    readTime: "8 min",
+    tags: [
+      "ecommerce",
+      "paid ads",
+      "AI marketing",
+      "Meta ads",
+      "ad creative",
+    ],
+    image: "/blog/ai-ad-platform-ecommerce.jpg",
+  },
 ];
 
 export function getPost(slug: string): BlogPost | undefined {
