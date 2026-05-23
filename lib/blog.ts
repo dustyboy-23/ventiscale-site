@@ -1031,6 +1031,18 @@ export const posts: BlogPost[] = [
     ],
     image: "/blog/ai-ad-platform-ecommerce.jpg",
   },
+  {
+    slug: "sms-marketing-roi-ecommerce-2026",
+    title:
+      "SMS pays back $71 for every dollar. Most ecommerce brands are still ignoring it.",
+    description:
+      "SMS marketing delivers $71-79 ROI per $1 spent in 2026 — higher than email. Most DTC brands skip it or misuse it. Here's the flow setup that actually moves revenue.",
+    date: "2026-05-23",
+    author: "Dustin Gilmour",
+    readTime: "7 min",
+    tags: ["ecommerce", "SMS marketing", "email marketing", "Klaviyo", "DTC"],
+    image: "/blog/sms-ecommerce-roi.jpg",
+  },
 ];
 
 export function getPost(slug: string): BlogPost | undefined {
