@@ -1043,6 +1043,18 @@ export const posts: BlogPost[] = [
     tags: ["ecommerce", "SMS marketing", "email marketing", "Klaviyo", "DTC"],
     image: "/blog/sms-ecommerce-roi.jpg",
   },
+  {
+    slug: "klaviyo-composer-ecommerce-email-2026",
+    title:
+      "Your agency writes your email campaigns. Klaviyo now does it in one sentence.",
+    description:
+      "Klaviyo Composer generates complete email campaigns from a single prompt. Here's what that means for the $3K/month email retainer you're paying.",
+    date: "2026-05-24",
+    author: "Dustin Gilmour",
+    readTime: "7 min",
+    tags: ["ecommerce", "email marketing", "Klaviyo", "AI marketing", "DTC"],
+    image: "/blog/klaviyo-composer-email.jpg",
+  },
 ];
 
 export function getPost(slug: string): BlogPost | undefined {
