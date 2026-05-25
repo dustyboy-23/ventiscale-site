@@ -11,6 +11,24 @@ export interface BlogPost {
 
 export const posts: BlogPost[] = [
   {
+    slug: "ecommerce-ai-adoption-gap-2026",
+    title:
+      "89% of ecommerce brands run AI marketing. Your agency doesn't.",
+    description:
+      "89% of retailers now run AI in their marketing operations. If your agency hasn't rebuilt around AI infrastructure, you're paying 2024 prices for 2024 outputs.",
+    date: "2026-05-25",
+    author: "Dustin Gilmour",
+    readTime: "7 min",
+    tags: [
+      "ecommerce",
+      "AI marketing",
+      "marketing agency",
+      "DTC",
+      "ecommerce marketing",
+    ],
+    image: "/blog/ecommerce-ai-adoption.jpg",
+  },
+  {
     slug: "social-media-for-ecommerce-brands",
     title: "Most ecommerce brands post on social media wrong. Here's what actually works.",
     description:
