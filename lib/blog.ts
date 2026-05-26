@@ -11,6 +11,18 @@ export interface BlogPost {
 
 export const posts: BlogPost[] = [
   {
+    slug: "shopify-ai-discovery-chatgpt-2026",
+    title:
+      "Shopify's new channel is ChatGPT. Most stores aren't set up for it.",
+    description:
+      "AI-attributed orders on Shopify grew 15x since January 2025. Your products can now appear in ChatGPT and Google AI Mode. Most brands haven't set this up.",
+    date: "2026-05-26",
+    author: "Dustin Gilmour",
+    readTime: "7 min",
+    tags: ["shopify", "ecommerce", "AI marketing", "ChatGPT", "AI discovery"],
+    image: "/blog/shopify-ai-discovery.jpg",
+  },
+  {
     slug: "ecommerce-ai-adoption-gap-2026",
     title:
       "89% of ecommerce brands run AI marketing. Your agency doesn't.",
