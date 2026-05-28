@@ -11,6 +11,17 @@ export interface BlogPost {
 
 export const posts: BlogPost[] = [
   {
+    slug: "google-shopping-vs-meta-ads-ecommerce-2026",
+    title: "Your agency runs Meta. Google Shopping pays 3x more.",
+    description:
+      "Google Shopping delivers 5.17:1 ROAS in 2026. Meta delivers 1.86. Most agencies ignore this gap. Here's the real channel math and how to fix it.",
+    date: "2026-05-28",
+    author: "Dustin Gilmour",
+    readTime: "7 min",
+    tags: ["ecommerce", "paid ads", "Google Shopping", "Meta ads", "DTC"],
+    image: "/blog/google-shopping-meta-roas.jpg",
+  },
+  {
     slug: "shopify-ai-discovery-chatgpt-2026",
     title:
       "Shopify's new channel is ChatGPT. Most stores aren't set up for it.",
