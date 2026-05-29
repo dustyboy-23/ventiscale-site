@@ -11,6 +11,17 @@ export interface BlogPost {
 
 export const posts: BlogPost[] = [
   {
+    slug: "dtc-ad-spend-percentage-small-brands",
+    title: "Small DTC brands spend 30% of revenue on ads. Here's why that math never works.",
+    description:
+      "Sub-$1M DTC brands burn 25-35% of revenue on performance ads that reset every month. Here's the math that keeps them stuck, and what winning brands do instead.",
+    date: "2026-05-29",
+    author: "Dustin Gilmour",
+    readTime: "8 min",
+    tags: ["ecommerce", "DTC", "paid ads", "ad spend", "owned channels"],
+    image: "/blog/dtc-ad-spend-trap.jpg",
+  },
+  {
     slug: "google-shopping-vs-meta-ads-ecommerce-2026",
     title: "Your agency runs Meta. Google Shopping pays 3x more.",
     description:
