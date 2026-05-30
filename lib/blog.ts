@@ -11,6 +11,24 @@ export interface BlogPost {
 
 export const posts: BlogPost[] = [
   {
+    slug: "dtc-marketing-execution-volume-2026",
+    title:
+      "Your DTC agency runs a 2022 playbook. Here's what 2026 needs.",
+    description:
+      "Agency playbooks built before LLMs can't produce the execution volume DTC brands need today. Here's the math and what actually replaces it.",
+    date: "2026-05-30",
+    author: "Dustin Gilmour",
+    readTime: "8 min",
+    tags: [
+      "ecommerce",
+      "DTC",
+      "marketing agency",
+      "AI marketing",
+      "execution volume",
+    ],
+    image: "/blog/dtc-execution-gap-2026.jpg",
+  },
+  {
     slug: "dtc-ad-spend-percentage-small-brands",
     title: "Small DTC brands spend 30% of revenue on ads. Here's why that math never works.",
     description:
