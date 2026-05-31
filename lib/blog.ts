@@ -11,6 +11,18 @@ export interface BlogPost {
 
 export const posts: BlogPost[] = [
   {
+    slug: "meta-attribution-broken-ios-shopify-2026",
+    title:
+      "Meta inflates your ROAS by 40%. Here's what's actually happening.",
+    description:
+      "Meta's attribution gaps now run 40-70% for most Shopify brands. Here's why your dashboards never agree, what changed in January 2026, and how to find your real numbers.",
+    date: "2026-05-31",
+    author: "Dustin Gilmour",
+    readTime: "7 min",
+    tags: ["ecommerce", "Meta ads", "attribution", "ROAS", "paid ads"],
+    image: "/blog/meta-attribution-roas-breakdown.jpg",
+  },
+  {
     slug: "dtc-marketing-execution-volume-2026",
     title:
       "Your DTC agency runs a 2022 playbook. Here's what 2026 needs.",
