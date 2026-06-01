@@ -11,6 +11,18 @@ export interface BlogPost {
 
 export const posts: BlogPost[] = [
   {
+    slug: "ai-marketing-roi-vs-agency-retainer-2026",
+    title:
+      "AI marketing averages 171% ROI. Your agency retainer doesn't.",
+    description:
+      "74% of brands see positive AI marketing ROI within 12 months. Average return: 171%. Here's the math DTC founders aren't running on their agency retainers.",
+    date: "2026-06-01",
+    author: "Dustin Gilmour",
+    readTime: "7 min",
+    tags: ["ecommerce", "AI marketing", "marketing ROI", "agency retainer", "DTC"],
+    image: "/blog/ai-marketing-roi-analytics.jpg",
+  },
+  {
     slug: "meta-attribution-broken-ios-shopify-2026",
     title:
       "Meta inflates your ROAS by 40%. Here's what's actually happening.",
