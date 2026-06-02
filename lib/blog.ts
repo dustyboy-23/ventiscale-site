@@ -11,6 +11,18 @@ export interface BlogPost {
 
 export const posts: BlogPost[] = [
   {
+    slug: "klaviyo-ai-product-recommendations-2026",
+    title:
+      "Klaviyo AI recs hit 3.75% CTR. Most brands have never turned them on.",
+    description:
+      "Klaviyo AI product recommendations average 3.75% CTR. Top performers hit 8.79%. Most Shopify brands have never activated them. Here's how to fix that.",
+    date: "2026-06-02",
+    author: "Dustin Gilmour",
+    readTime: "7 min",
+    tags: ["ecommerce", "email marketing", "Klaviyo", "AI marketing", "automation"],
+    image: "/blog/klaviyo-ai-product-recs.jpg",
+  },
+  {
     slug: "ai-marketing-roi-vs-agency-retainer-2026",
     title:
       "AI marketing averages 171% ROI. Your agency retainer doesn't.",
