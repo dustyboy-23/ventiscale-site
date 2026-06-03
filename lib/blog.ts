@@ -11,6 +11,18 @@ export interface BlogPost {
 
 export const posts: BlogPost[] = [
   {
+    slug: "tiktok-shop-dtc-agency-gap-2026",
+    title:
+      "TikTok Shop is DTC's fastest-growing channel. Your agency has never touched it.",
+    description:
+      "TikTok Shop moves $112 billion in US commerce in 2026. Most agencies still run Meta-first playbooks with zero TikTok Shop capability. Here's the cost.",
+    date: "2026-06-03",
+    author: "Dustin Gilmour",
+    readTime: "8 min",
+    tags: ["ecommerce", "TikTok Shop", "DTC", "TikTok", "AI marketing"],
+    image: "/blog/tiktok-shop-ecommerce-2026.jpg",
+  },
+  {
     slug: "klaviyo-ai-product-recommendations-2026",
     title:
       "Klaviyo AI recs hit 3.75% CTR. Most brands have never turned them on.",
