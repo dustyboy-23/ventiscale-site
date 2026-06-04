@@ -11,6 +11,18 @@ export interface BlogPost {
 
 export const posts: BlogPost[] = [
   {
+    slug: "meta-advantage-plus-ai-video-ads-2026",
+    title:
+      "Your agency charges $3K per video. Meta AI makes them from photos.",
+    description:
+      "Meta Advantage+ generates video ads from product photos. Brands see 40% lower creative costs and 22% ROAS lift. Here's how to turn it on in 20 minutes.",
+    date: "2026-06-04",
+    author: "Dustin Gilmour",
+    readTime: "8 min",
+    tags: ["ecommerce", "Meta ads", "Advantage+", "AI marketing", "paid ads"],
+    image: "/blog/meta-ai-video-ads-2026.jpg",
+  },
+  {
     slug: "tiktok-shop-dtc-agency-gap-2026",
     title:
       "TikTok Shop is DTC's fastest-growing channel. Your agency has never touched it.",
