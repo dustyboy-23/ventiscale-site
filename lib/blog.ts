@@ -11,6 +11,18 @@ export interface BlogPost {
 
 export const posts: BlogPost[] = [
   {
+    slug: "marketing-dashboard-data-mirage-2026",
+    title:
+      "Your agency's dashboard shows green. Your revenue doesn't.",
+    description:
+      "26% of marketing budgets are wasted in 2026. Your marketing dashboard says green. Your revenue says otherwise. Here's what to actually track.",
+    date: "2026-06-05",
+    author: "Dustin Gilmour",
+    readTime: "7 min",
+    tags: ["ecommerce", "marketing ROI", "agency", "analytics", "DTC"],
+    image: "/blog/marketing-dashboard-data-mirage.jpg",
+  },
+  {
     slug: "meta-advantage-plus-ai-video-ads-2026",
     title:
       "Your agency charges $3K per video. Meta AI makes them from photos.",
