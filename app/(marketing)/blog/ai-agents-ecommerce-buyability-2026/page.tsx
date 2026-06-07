@@ -48,7 +48,7 @@ const IMAGE_URL = `https://www.ventiscale.com${IMAGE}`;
 const FAQ_DATA = [
   {
     q: "What is AI agent commerce in ecommerce?",
-    a: "AI agent commerce is when an AI system — like ChatGPT, Perplexity, or Apple Intelligence — completes a purchase on behalf of a consumer without requiring human input at each step. The agent researches, compares, selects, and checks out. AI-attributed orders on Shopify grew 15x between January 2025 and early 2026.",
+    a: "AI agent commerce is when an AI system like ChatGPT, Perplexity, or Apple Intelligence completes a purchase on behalf of a consumer without requiring human input at each step. The agent researches, compares, selects, and checks out. AI-attributed orders on Shopify grew 15x between January 2025 and early 2026.",
   },
   {
     q: "How do I check if my Shopify store is AI agent ready?",
@@ -60,11 +60,11 @@ const FAQ_DATA = [
   },
   {
     q: "Does AI Buyability affect my Google Shopping or Meta ads performance?",
-    a: "Yes, indirectly. The same structured data that helps AI agents complete purchases also feeds Google Merchant Center and Meta Catalog — the data sources behind Google Shopping and Meta Advantage+ recommendations. Fixing your product data for agent readiness improves both your AI commerce and paid ad performance simultaneously.",
+    a: "Yes, indirectly. The same structured data that helps AI agents complete purchases also feeds Google Merchant Center and Meta Catalog, the data sources behind Google Shopping and Meta Advantage+ recommendations. Fixing your product data for agent readiness improves both your AI commerce and paid ad performance simultaneously.",
   },
   {
     q: "What checkout setup works best for AI agent purchases?",
-    a: "Guest checkout with 4 or fewer steps is the baseline. AI agents can't create accounts or handle forced interstitials. If you're on Shopify, enable Shop Pay — it's the integration most AI agent platforms use for one-click completion. Remove any checkout popups and required fields an agent can't populate.",
+    a: "Guest checkout with 4 or fewer steps is the baseline. AI agents can't create accounts or handle forced interstitials. If you're on Shopify, enable Shop Pay, the integration most AI agent platforms use for one-click completion. Remove any checkout popups and required fields an agent can't populate.",
   },
 ];
 
@@ -179,8 +179,8 @@ export default async function Post() {
 
         <div className="prose-blog">
           <p>
-            A customer lands on your store. Except it&apos;s not a customer
-            — it&apos;s their AI agent. It reads your product data, checks your
+            A customer lands on your store. Except it&apos;s not a customer.
+            It&apos;s their AI agent. It reads your product data, checks your
             pricing, scans your checkout flow. Then it hits a wall and bounces.
             Your store wasn&apos;t built for this.
           </p>
@@ -203,11 +203,11 @@ export default async function Post() {
               </li>
               <li>
                 Most Shopify stores fail because product data, variant labels,
-                and checkout flows were built for human browsers — not bots
+                and checkout flows were built for human browsers, not bots
               </li>
               <li>
-                AI-attributed orders on Shopify grew 15x since January 2025 —
-                this channel is already moving product
+                AI-attributed orders on Shopify grew 15x since January 2025.
+                This channel is already moving product
               </li>
             </ul>
           </div>
@@ -231,8 +231,8 @@ export default async function Post() {
           <p>
             When someone uses ChatGPT to ask &quot;what&apos;s the best protein
             powder under $50 that ships fast,&quot; ChatGPT doesn&apos;t just
-            return links. In some cases it returns actual purchase options
-            — products it can add to cart and buy with one confirmation click.
+            return links. In some cases it returns actual purchase options,
+            products it can add to cart and buy with one confirmation click.
           </p>
 
           <p>
@@ -244,7 +244,7 @@ export default async function Post() {
           <p>
             AI-attributed orders on Shopify grew 15x between January 2025 and
             early 2026. That&apos;s not a rounding error. That&apos;s a new
-            channel opening up — and most brands aren&apos;t set up to receive
+            channel opening up, and most brands aren&apos;t set up to receive
             it. We covered how{" "}
             <Link href="/blog/shopify-ai-discovery-chatgpt-2026">
               Shopify&apos;s AI discovery integration with ChatGPT
@@ -288,7 +288,7 @@ export default async function Post() {
               Selltonomy AI Buyability
             </a>
             , launched in June 2026, runs your storefront through the same
-            process an AI agent uses when completing a purchase — and scores
+            process an AI agent uses when completing a purchase, and scores
             whether the agent can actually finish the job.
           </p>
 
@@ -313,8 +313,8 @@ export default async function Post() {
           </p>
 
           <p>
-            <strong>Can the agent trust your store?</strong> Trust signals
-            — reviews, policy pages, shipping timelines — are what AI agents
+            <strong>Can the agent trust your store?</strong> Reviews, policy
+            pages, and shipping timelines are what AI agents
             evaluate before completing a purchase. An agent acting on behalf of
             a consumer is more risk-averse than the consumer themselves. No
             clear return policy equals no transaction.
@@ -325,8 +325,8 @@ export default async function Post() {
             <p>
               AI agents completing purchases aren&apos;t browsing. They&apos;re
               executing. They have one job: complete the transaction or report
-              back that they can&apos;t. Your store either passes or fails
-              — there&apos;s no &quot;good enough.&quot;
+              back that they can&apos;t. Your store either passes or fails.
+              There&apos;s no &quot;good enough.&quot;
             </p>
           </div>
 
@@ -341,10 +341,10 @@ export default async function Post() {
           <p>
             <strong>Structured product data.</strong> Your product titles need a
             consistent format: Brand + Product Name + Key Spec + Variant.
-            &quot;Blue Sneakers Size 10&quot; fails. &quot;Nike Air Max 270
-            — Blue — Men&apos;s Size 10&quot; passes. Schema.org Product markup
+            &quot;Blue Sneakers Size 10&quot; fails. &quot;Nike Air Max 270,
+            Blue, Men&apos;s Size 10&quot; passes. Schema.org Product markup
             tells AI systems what your product is, what it costs, whether
-            it&apos;s in stock, and what variants exist — without the agent
+            it&apos;s in stock, and what variants exist, without the agent
             having to parse your page layout.
           </p>
 
@@ -360,7 +360,7 @@ export default async function Post() {
             <strong>Friction-free checkout.</strong> Guest checkout must work
             cleanly. No interstitials. No forced popups mid-checkout. No
             required fields an agent can&apos;t populate. If you&apos;re on
-            Shopify, enable Shop Pay — it&apos;s the integration most AI agent
+            Shopify, enable Shop Pay, the integration most AI agent
             platforms use for one-click completion. This is also one of the{" "}
             <Link href="/blog/ecommerce-product-page-mistakes">
               common product page mistakes killing your conversion rate
@@ -395,7 +395,7 @@ export default async function Post() {
 
           <p>
             Shopify&apos;s Winter 2026 update shipped native ChatGPT
-            discoverability — your product catalog can now appear directly in
+            discoverability. Your product catalog can now appear directly in
             ChatGPT for relevant queries. But showing up is step one. Getting
             the agent to complete the purchase is step two.
           </p>
@@ -425,7 +425,7 @@ export default async function Post() {
             The brands ignoring this are optimizing their Meta bids and watching
             cost per click climb. DTC customer acquisition costs are up 40-60%
             since 2023. Agent commerce converts at a fraction of that cost
-            — when your store is ready to receive it.
+            when your store is ready to receive it.
           </p>
 
           <div className="blog-stat-row">
@@ -461,7 +461,7 @@ export default async function Post() {
           <p>
             Then update your product descriptions for the top 20% of your SKUs
             by revenue. Those are the ones AI agents are most likely to
-            recommend — they optimize toward bestsellers and well-reviewed
+            recommend. They optimize toward bestsellers and well-reviewed
             products, not your full catalog.
           </p>
 
@@ -473,8 +473,8 @@ export default async function Post() {
 
           <p>
             I ran this exact audit for a mid-six-figure skincare brand last
-            month. Selltonomy flagged 14 of their 18 hero SKUs as agent-hostile
-            — almost entirely from inconsistent sizing info and forced account
+            month. Selltonomy flagged 14 of their 18 hero SKUs as agent-hostile,
+            almost entirely from inconsistent sizing info and forced account
             creation at checkout. Fixed both in one Shopify session. Within 30
             days, AI-attributed revenue showed up in their analytics for the
             first time.
