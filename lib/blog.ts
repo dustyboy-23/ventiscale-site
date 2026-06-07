@@ -11,6 +11,18 @@ export interface BlogPost {
 
 export const posts: BlogPost[] = [
   {
+    slug: "ai-agents-ecommerce-buyability-2026",
+    title:
+      "AI agents are shopping your store. Most Shopify brands aren't ready.",
+    description:
+      "AI agents can now complete purchases on your Shopify store. Selltonomy AI Buyability scores your readiness. Here's what to fix before you miss the wave.",
+    date: "2026-06-07",
+    author: "Dustin Gilmour",
+    readTime: "7 min",
+    tags: ["ecommerce", "AI marketing", "AI agents", "Shopify", "DTC"],
+    image: "/blog/ai-agents-ecommerce-shopping.jpg",
+  },
+  {
     slug: "marketing-dashboard-data-mirage-2026",
     title:
       "Your agency's dashboard shows green. Your revenue doesn't.",
