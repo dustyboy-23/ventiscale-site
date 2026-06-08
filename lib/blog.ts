@@ -11,6 +11,24 @@ export interface BlogPost {
 
 export const posts: BlogPost[] = [
   {
+    slug: "shopify-ai-agent-store-management-2026",
+    title:
+      "One Shopify brand handed customer service to an AI agent. Sales jumped 111%.",
+    description:
+      "Klaviyo's Customer Agent drove 111% sales growth for a DTC brand. Manus launched a Shopify connector with 248 PH votes. Here's what Shopify AI agents actually do.",
+    date: "2026-06-08",
+    author: "Dustin Gilmour",
+    readTime: "8 min",
+    tags: [
+      "ecommerce",
+      "Shopify",
+      "AI agents",
+      "customer service",
+      "Klaviyo",
+    ],
+    image: "/blog/shopify-ai-agent-store.jpg",
+  },
+  {
     slug: "ai-agents-ecommerce-buyability-2026",
     title:
       "AI agents are shopping your store. Most Shopify brands aren't ready.",
