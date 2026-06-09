@@ -11,6 +11,18 @@ export interface BlogPost {
 
 export const posts: BlogPost[] = [
   {
+    slug: "dtc-retention-tool-sprawl-2026",
+    title:
+      "You have the retention tools. You don't have the retention results.",
+    description:
+      "DTC brands spend 30-40% of their retention budget on software. Average repeat purchase rate sits at 25-30%. The tools aren't moving the number. Here's why.",
+    date: "2026-06-09",
+    author: "Dustin Gilmour",
+    readTime: "7 min",
+    tags: ["ecommerce", "retention marketing", "DTC", "Klaviyo", "email marketing"],
+    image: "/blog/dtc-retention-tool-sprawl.jpg",
+  },
+  {
     slug: "shopify-ai-agent-store-management-2026",
     title:
       "One Shopify brand handed customer service to an AI agent. Sales jumped 111%.",
