@@ -11,6 +11,18 @@ export interface BlogPost {
 
 export const posts: BlogPost[] = [
   {
+    slug: "ugc-creative-dtc-lower-cac-2026",
+    title:
+      "UGC creative cuts CAC by 44%. Most DTC brands still can't make it work.",
+    description:
+      "DTC brands using UGC creative see 44% lower CAC and 2.3x higher CTR than polished brand shoots. Here's why most can't systemize it.",
+    date: "2026-06-12",
+    author: "Dustin Gilmour",
+    readTime: "7 min",
+    tags: ["ecommerce", "paid ads", "UGC", "Meta Advantage+", "DTC", "creative"],
+    image: "/blog/ugc-creative-dtc.jpg",
+  },
+  {
     slug: "dtc-retention-tool-sprawl-2026",
     title:
       "You have the retention tools. You don't have the retention results.",
