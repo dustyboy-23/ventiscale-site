@@ -11,6 +11,18 @@ export interface BlogPost {
 
 export const posts: BlogPost[] = [
   {
+    slug: "dtc-ai-pilot-failure-rate-2026",
+    title:
+      "85% of DTC AI pilots never ship. Here's why yours stalled.",
+    description:
+      "Only 15% of DTC AI marketing pilots reach production. Here are the 4 failure modes killing your AI investment before it ships.",
+    date: "2026-06-13",
+    author: "Dustin Gilmour",
+    readTime: "7 min",
+    tags: ["ecommerce", "AI marketing", "DTC", "marketing strategy", "AI tools"],
+    image: "/blog/dtc-ai-pilot-failure.jpg",
+  },
+  {
     slug: "ugc-creative-dtc-lower-cac-2026",
     title:
       "UGC creative cuts CAC by 44%. Most DTC brands still can't make it work.",
