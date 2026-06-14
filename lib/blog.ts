@@ -15,7 +15,7 @@ export const posts: BlogPost[] = [
     title:
       "Klaviyo just automated what your email agency charges $3K a month for",
     description:
-      "Klaviyo Spring 2026 shipped AI Composer, Personalized Send Time (35% CTR lift), and identity resolution. Here's what that means for ecommerce brands paying email retainers.",
+      "Klaviyo Spring 2026 shipped AI Composer and Personalized Send Time (35% CTR lift). Here's what it means for ecommerce brands on email retainers.",
     date: "2026-06-14",
     author: "Dustin Gilmour",
     readTime: "7 min",

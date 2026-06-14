@@ -7,7 +7,7 @@ const SLUG = "klaviyo-ai-composer-spring-2026";
 const TITLE =
   "Klaviyo just automated what your email agency charges $3K a month for";
 const DESCRIPTION =
-  "Klaviyo Spring 2026 shipped AI Composer, Personalized Send Time (35% CTR lift), and identity resolution. Here's what that means for ecommerce brands paying email retainers.";
+  "Klaviyo Spring 2026 shipped AI Composer and Personalized Send Time (35% CTR lift). Here's what it means for ecommerce brands on email retainers.";
 const DATE = "2026-06-14";
 const IMAGE = "/blog/klaviyo-ai-composer-spring-2026.jpg";
 const IMAGE_URL = `https://www.ventiscale.com${IMAGE}`;
