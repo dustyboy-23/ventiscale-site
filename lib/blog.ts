@@ -11,6 +11,18 @@ export interface BlogPost {
 
 export const posts: BlogPost[] = [
   {
+    slug: "klaviyo-ai-composer-spring-2026",
+    title:
+      "Klaviyo just automated what your email agency charges $3K a month for",
+    description:
+      "Klaviyo Spring 2026 shipped AI Composer, Personalized Send Time (35% CTR lift), and identity resolution. Here's what that means for ecommerce brands paying email retainers.",
+    date: "2026-06-14",
+    author: "Dustin Gilmour",
+    readTime: "7 min",
+    tags: ["ecommerce", "email marketing", "Klaviyo", "AI marketing", "DTC", "agency"],
+    image: "/blog/klaviyo-ai-composer-spring-2026.jpg",
+  },
+  {
     slug: "dtc-ai-pilot-failure-rate-2026",
     title:
       "85% of DTC AI pilots never ship. Here's why yours stalled.",
