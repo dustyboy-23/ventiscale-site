@@ -11,6 +11,18 @@ export interface BlogPost {
 
 export const posts: BlogPost[] = [
   {
+    slug: "dtc-email-cac-vs-paid-acquisition-2026",
+    title:
+      "Shopify merchants spent $318 to get a customer. Email costs $12.",
+    description:
+      "The Shopify 2026 Global Commerce Report shows average merchant CAC hit $318. Email marketing delivers the same customer for $8-$15. Here's the math DTC brands need to run.",
+    date: "2026-06-15",
+    author: "Dustin Gilmour",
+    readTime: "7 min",
+    tags: ["ecommerce", "DTC", "customer acquisition cost", "email marketing", "paid ads"],
+    image: "/blog/dtc-email-cac-paid.jpg",
+  },
+  {
     slug: "klaviyo-ai-composer-spring-2026",
     title:
       "Klaviyo just automated what your email agency charges $3K a month for",
