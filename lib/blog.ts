@@ -15,7 +15,7 @@ export const posts: BlogPost[] = [
     title:
       "Shopify merchants spent $318 to get a customer. Email costs $12.",
     description:
-      "The Shopify 2026 Global Commerce Report shows average merchant CAC hit $318. Email marketing delivers the same customer for $8-$15. Here's the math DTC brands need to run.",
+      "Shopify merchant CAC hit $318 in 2026. Email acquires the same customer for $8-$15. Here's the acquisition math DTC brands need to run.",
     date: "2026-06-15",
     author: "Dustin Gilmour",
     readTime: "7 min",

@@ -7,12 +7,12 @@ export const metadata = {
   title:
     "Shopify merchants spent $318 to get a customer. Email costs $12. | Venti Scale",
   description:
-    "The Shopify 2026 Global Commerce Report shows average merchant CAC hit $318. Email marketing delivers the same customer for $8-$15. Here's the math DTC brands need to run.",
+    "Shopify merchant CAC hit $318 in 2026. Email acquires the same customer for $8-$15. Here's the acquisition math DTC brands need to run.",
   openGraph: {
     title:
       "Shopify merchants spent $318 to get a customer. Email costs $12.",
     description:
-      "The Shopify 2026 Global Commerce Report shows average merchant CAC hit $318. Email marketing delivers the same customer for $8-$15. Here's the math DTC brands need to run.",
+      "Shopify merchant CAC hit $318 in 2026. Email acquires the same customer for $8-$15. Here's the acquisition math DTC brands need to run.",
     url: "https://www.ventiscale.com/blog/dtc-email-cac-vs-paid-acquisition-2026",
     type: "article",
     images: [
@@ -29,7 +29,7 @@ export const metadata = {
     title:
       "Shopify merchants spent $318 to get a customer. Email costs $12.",
     description:
-      "The Shopify 2026 Global Commerce Report shows average merchant CAC hit $318. Email marketing delivers the same customer for $8-$15. Here's the math DTC brands need to run.",
+      "Shopify merchant CAC hit $318 in 2026. Email acquires the same customer for $8-$15. Here's the acquisition math DTC brands need to run.",
     images: ["https://www.ventiscale.com/blog/dtc-email-cac-paid.jpg"],
   },
 };
@@ -38,7 +38,7 @@ const SLUG = "dtc-email-cac-vs-paid-acquisition-2026";
 const TITLE =
   "Shopify merchants spent $318 to get a customer. Email costs $12.";
 const DESCRIPTION =
-  "The Shopify 2026 Global Commerce Report shows average merchant CAC hit $318. Email marketing delivers the same customer for $8-$15. Here's the math DTC brands need to run.";
+  "Shopify merchant CAC hit $318 in 2026. Email acquires the same customer for $8-$15. Here's the acquisition math DTC brands need to run.";
 const DATE = "2026-06-15";
 const IMAGE = "/blog/dtc-email-cac-paid.jpg";
 const IMAGE_URL = `https://www.ventiscale.com${IMAGE}`;
