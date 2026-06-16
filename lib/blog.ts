@@ -11,6 +11,17 @@ export interface BlogPost {
 
 export const posts: BlogPost[] = [
   {
+    slug: "ai-marketing-tool-price-war-2026",
+    title: "AI marketing tools just got cheaper. Your agency didn't.",
+    description:
+      "Google cut its AI suite from $7.99 to $4.99/month. Marketing automation ROI hits $5.44 per $1 spent. Your agency retainer hasn't moved. Here's the math.",
+    date: "2026-06-16",
+    author: "Dustin Gilmour",
+    readTime: "7 min",
+    tags: ["ecommerce", "AI marketing", "marketing agency", "DTC", "marketing tools"],
+    image: "/blog/ai-marketing-price-war.jpg",
+  },
+  {
     slug: "dtc-email-cac-vs-paid-acquisition-2026",
     title:
       "Shopify merchants spent $318 to get a customer. Email costs $12.",
