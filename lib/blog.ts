@@ -11,6 +11,17 @@ export interface BlogPost {
 
 export const posts: BlogPost[] = [
   {
+    slug: "email-sms-roi-vs-meta-ads-dtc-2026",
+    title: "Email returns $36 for every dollar. Meta returns $2. Your agency knows.",
+    description:
+      "Email marketing ROI hits $36-79 per dollar spent. Meta ROAS averages 2.18x. Most DTC brand budgets are built backwards.",
+    date: "2026-06-17",
+    author: "Dustin Gilmour",
+    readTime: "7 min",
+    tags: ["ecommerce", "email marketing", "DTC", "Meta ads", "marketing ROI", "SMS marketing"],
+    image: "/blog/email-sms-roi-vs-meta-ads.jpg",
+  },
+  {
     slug: "ai-marketing-tool-price-war-2026",
     title: "AI marketing tools just got cheaper. Your agency didn't.",
     description:
