@@ -11,6 +11,17 @@ export interface BlogPost {
 
 export const posts: BlogPost[] = [
   {
+    slug: "meta-ai-ad-label-ecommerce-2026",
+    title: "Meta flags AI ads now. Here's what ecommerce brands need to change.",
+    description:
+      "Meta auto-labels photorealistic AI imagery in ads as 'Made with AI.' Google followed March 5, 2026. Here's what DTC brands need to do about it.",
+    date: "2026-06-19",
+    author: "Dustin Gilmour",
+    readTime: "7 min",
+    tags: ["ecommerce", "Meta ads", "AI marketing", "paid ads", "DTC"],
+    image: "/blog/meta-ai-ad-label-ecommerce.jpg",
+  },
+  {
     slug: "email-sms-roi-vs-meta-ads-dtc-2026",
     title: "Email returns $36 for every dollar. Meta returns $2. Your agency knows.",
     description:
