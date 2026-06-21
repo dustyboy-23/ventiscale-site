@@ -7,12 +7,12 @@ export const metadata = {
   title:
     "Facebook AI Mode launched. Most ecommerce brands have nothing worth reading. | Venti Scale",
   description:
-    "Meta AI Mode on Facebook pulls answers from public posts, Groups, and Reels. 34% of US purchases involve AI agents now. Here's what ecommerce brands need to fix.",
+    "Meta AI Mode on Facebook pulls from public posts, Groups, and Reels. 34% of US purchases involve AI agents now. Here's what ecommerce brands need to fix.",
   openGraph: {
     title:
       "Facebook AI Mode launched. Most ecommerce brands have nothing worth reading.",
     description:
-      "Meta AI Mode on Facebook pulls answers from public posts, Groups, and Reels. 34% of US purchases involve AI agents now. Here's what ecommerce brands need to fix.",
+      "Meta AI Mode on Facebook pulls from public posts, Groups, and Reels. 34% of US purchases involve AI agents now. Here's what ecommerce brands need to fix.",
     url: "https://www.ventiscale.com/blog/meta-facebook-ai-mode-ecommerce-2026",
     type: "article",
     images: [
@@ -29,7 +29,7 @@ export const metadata = {
     title:
       "Facebook AI Mode launched. Most ecommerce brands have nothing worth reading.",
     description:
-      "Meta AI Mode on Facebook pulls answers from public posts, Groups, and Reels. 34% of US purchases involve AI agents now. Here's what ecommerce brands need to fix.",
+      "Meta AI Mode on Facebook pulls from public posts, Groups, and Reels. 34% of US purchases involve AI agents now. Here's what ecommerce brands need to fix.",
     images: [
       "https://www.ventiscale.com/blog/facebook-ai-mode-ecommerce.jpg",
     ],
@@ -40,7 +40,7 @@ const SLUG = "meta-facebook-ai-mode-ecommerce-2026";
 const TITLE =
   "Facebook AI Mode launched. Most ecommerce brands have nothing worth reading.";
 const DESCRIPTION =
-  "Meta AI Mode on Facebook pulls answers from public posts, Groups, and Reels. 34% of US purchases involve AI agents now. Here's what ecommerce brands need to fix.";
+  "Meta AI Mode on Facebook pulls from public posts, Groups, and Reels. 34% of US purchases involve AI agents now. Here's what ecommerce brands need to fix.";
 const DATE = "2026-06-21";
 const IMAGE = "/blog/facebook-ai-mode-ecommerce.jpg";
 const IMAGE_URL = `https://www.ventiscale.com${IMAGE}`;

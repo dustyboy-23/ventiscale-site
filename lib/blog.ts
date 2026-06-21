@@ -15,7 +15,7 @@ export const posts: BlogPost[] = [
     title:
       "Facebook AI Mode launched. Most ecommerce brands have nothing worth reading.",
     description:
-      "Meta AI Mode on Facebook pulls answers from public posts, Groups, and Reels. 34% of US purchases involve AI agents now. Here's what ecommerce brands need to fix.",
+      "Meta AI Mode on Facebook pulls from public posts, Groups, and Reels. 34% of US purchases involve AI agents now. Here's what ecommerce brands need to fix.",
     date: "2026-06-21",
     author: "Dustin Gilmour",
     readTime: "7 min",
