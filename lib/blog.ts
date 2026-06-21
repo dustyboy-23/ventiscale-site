@@ -11,6 +11,18 @@ export interface BlogPost {
 
 export const posts: BlogPost[] = [
   {
+    slug: "meta-facebook-ai-mode-ecommerce-2026",
+    title:
+      "Facebook AI Mode launched. Most ecommerce brands have nothing worth reading.",
+    description:
+      "Meta AI Mode on Facebook pulls answers from public posts, Groups, and Reels. 34% of US purchases involve AI agents now. Here's what ecommerce brands need to fix.",
+    date: "2026-06-21",
+    author: "Dustin Gilmour",
+    readTime: "7 min",
+    tags: ["ecommerce", "AI marketing", "Facebook", "Meta AI", "content strategy", "DTC"],
+    image: "/blog/facebook-ai-mode-ecommerce.jpg",
+  },
+  {
     slug: "meta-ai-ad-label-ecommerce-2026",
     title: "Meta flags AI ads now. Here's what ecommerce brands need to change.",
     description:
