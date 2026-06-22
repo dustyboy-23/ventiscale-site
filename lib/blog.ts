@@ -11,6 +11,18 @@ export interface BlogPost {
 
 export const posts: BlogPost[] = [
   {
+    slug: "ai-creative-beats-human-ads-ecommerce-2026",
+    title:
+      "AI-generated ads now outperform human creative. Here's the $100 AOV threshold.",
+    description:
+      "AI ad creative now matches or beats human work for ecommerce products under $100 AOV. Here's the Creatify, Predis.ai, AdCreative.ai benchmark.",
+    date: "2026-06-22",
+    author: "Dustin Gilmour",
+    readTime: "7 min",
+    tags: ["ecommerce", "paid ads", "AI marketing", "ad creative", "DTC", "Meta Advantage+"],
+    image: "/blog/ai-creative-ecommerce-ads.jpg",
+  },
+  {
     slug: "meta-facebook-ai-mode-ecommerce-2026",
     title:
       "Facebook AI Mode launched. Most ecommerce brands have nothing worth reading.",
