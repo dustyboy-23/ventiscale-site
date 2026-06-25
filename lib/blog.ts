@@ -11,6 +11,18 @@ export interface BlogPost {
 
 export const posts: BlogPost[] = [
   {
+    slug: "klaviyo-whatsapp-ecommerce-2026",
+    title:
+      "Klaviyo added WhatsApp. Most DTC brands haven't turned it on yet.",
+    description:
+      "Klaviyo's Customer Hub now runs automated brand-voice support on WhatsApp with 98% open rates. Here's what DTC brands need to set up before it gets crowded.",
+    date: "2026-06-25",
+    author: "Dustin Gilmour",
+    readTime: "7 min",
+    tags: ["ecommerce", "WhatsApp", "Klaviyo", "AI marketing", "DTC", "retention"],
+    image: "/blog/klaviyo-whatsapp-ecommerce.jpg",
+  },
+  {
     slug: "ai-creative-beats-human-ads-ecommerce-2026",
     title:
       "AI-generated ads now outperform human creative. Here's the $100 AOV threshold.",
