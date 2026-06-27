@@ -11,6 +11,18 @@ export interface BlogPost {
 
 export const posts: BlogPost[] = [
   {
+    slug: "dtc-audience-saturation-creative-velocity-2026",
+    title:
+      "Your DTC ad audience burns out every 2 weeks. Here's how to stay ahead.",
+    description:
+      "Audience saturation kills DTC campaigns in 2-3 weeks. DTC CAC hit $68-84 in 2026, up 40-60% since 2023. Creative velocity is the only fix that scales.",
+    date: "2026-06-27",
+    author: "Dustin Gilmour",
+    readTime: "7 min",
+    tags: ["ecommerce", "DTC", "paid ads", "audience saturation", "creative velocity", "AI marketing", "Meta ads"],
+    image: "/blog/dtc-audience-saturation.jpg",
+  },
+  {
     slug: "klaviyo-whatsapp-ecommerce-2026",
     title:
       "Klaviyo added WhatsApp. Most DTC brands haven't turned it on yet.",
