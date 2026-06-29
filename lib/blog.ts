@@ -11,6 +11,18 @@ export interface BlogPost {
 
 export const posts: BlogPost[] = [
   {
+    slug: "ecommerce-cac-by-vertical-2026",
+    title:
+      "Ecommerce CAC by vertical, 2026. Here's what you're actually paying.",
+    description:
+      "Ecommerce customer acquisition cost hit $68-$110 in 2026 depending on vertical. Beauty $110. Apparel $90. Pet $68-$90. Here's the full breakdown and what it means for your LTV math.",
+    date: "2026-06-29",
+    author: "Dustin Gilmour",
+    readTime: "7 min",
+    tags: ["ecommerce", "DTC", "customer acquisition cost", "CAC", "LTV", "paid ads", "retention"],
+    image: "/blog/ecommerce-cac-benchmarks.jpg",
+  },
+  {
     slug: "dtc-audience-saturation-creative-velocity-2026",
     title:
       "Your DTC ad audience burns out every 2 weeks. Here's how to stay ahead.",
