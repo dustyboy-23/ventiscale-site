@@ -6,11 +6,11 @@ import { BlogAuthorBio } from "@/components/marketing/blog-author-bio";
 export const metadata = {
   title: "Ecommerce CAC by vertical, 2026. Here's what you're actually paying. | Venti Scale",
   description:
-    "Ecommerce customer acquisition cost hit $68-$110 in 2026 depending on vertical. Beauty brands pay $110. Pet pays $68-$90. Here's the full breakdown and the math that determines if your CAC is actually a problem.",
+    "Beauty brands pay $110 per DTC customer in 2026. Apparel $90. Pet $68-$90. Here are the CAC benchmarks by vertical and the LTV math that actually matters.",
   openGraph: {
     title: "Ecommerce CAC by vertical, 2026. Here's what you're actually paying.",
     description:
-      "Ecommerce customer acquisition cost hit $68-$110 in 2026 depending on vertical. Beauty brands pay $110. Pet pays $68-$90. Here's the full breakdown and the math that determines if your CAC is actually a problem.",
+      "Beauty brands pay $110 per DTC customer in 2026. Apparel $90. Pet $68-$90. Here are the CAC benchmarks by vertical and the LTV math that actually matters.",
     url: "https://www.ventiscale.com/blog/ecommerce-cac-by-vertical-2026",
     type: "article",
     images: [
@@ -26,7 +26,7 @@ export const metadata = {
     card: "summary_large_image" as const,
     title: "Ecommerce CAC by vertical, 2026. Here's what you're actually paying.",
     description:
-      "Ecommerce customer acquisition cost hit $68-$110 in 2026 depending on vertical. Beauty brands pay $110. Pet pays $68-$90. Here's the full breakdown and the math that determines if your CAC is actually a problem.",
+      "Beauty brands pay $110 per DTC customer in 2026. Apparel $90. Pet $68-$90. Here are the CAC benchmarks by vertical and the LTV math that actually matters.",
     images: ["https://www.ventiscale.com/blog/ecommerce-cac-benchmarks.jpg"],
   },
 };
@@ -35,7 +35,7 @@ const SLUG = "ecommerce-cac-by-vertical-2026";
 const TITLE =
   "Ecommerce CAC by vertical, 2026. Here's what you're actually paying.";
 const DESCRIPTION =
-  "Ecommerce customer acquisition cost hit $68-$110 in 2026 depending on vertical. Beauty brands pay $110. Pet pays $68-$90. Here's the full breakdown and the math that determines if your CAC is actually a problem.";
+  "Beauty brands pay $110 per DTC customer in 2026. Apparel $90. Pet $68-$90. Here are the CAC benchmarks by vertical and the LTV math that actually matters.";
 const DATE = "2026-06-29";
 
 const FAQ_DATA = [
@@ -45,7 +45,7 @@ const FAQ_DATA = [
   },
   {
     q: "Which ecommerce vertical has the lowest customer acquisition cost?",
-    a: "Food and beverage brands see some of the lower CAC benchmarks at $53-$75, while pet care runs $68-$90. Electronics and luxury goods have the highest CAC at $100-$400+. The variation is driven by AOV, category competition, and repeat purchase rates — high-frequency consumables have better CAC tolerance than one-time luxury purchases.",
+    a: "Food and beverage brands see some of the lower CAC benchmarks at $53-$75, while pet care runs $68-$90. Electronics and luxury goods have the highest CAC at $100-$400+. The variation is driven by AOV, category competition, and repeat purchase rates. High-frequency consumables have better CAC tolerance than one-time luxury purchases.",
   },
   {
     q: "What is a good LTV to CAC ratio for DTC brands in 2026?",
@@ -531,7 +531,7 @@ export default async function Post() {
 
           {/* Author bio */}
           <BlogAuthorBio
-            bioOverride="Founder of Venti Scale. I build AI-powered retention and paid systems for DTC brands. I&apos;ve audited enough ecommerce accounts to know that most CAC panics are actually LTV calculation errors."
+            bioOverride="Founder of Venti Scale. I build AI-powered retention and paid systems for DTC brands. I've audited enough ecommerce accounts to know that most CAC panics are actually LTV calculation errors."
             lastUpdated={DATE}
           />
 
