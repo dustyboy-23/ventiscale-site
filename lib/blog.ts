@@ -15,7 +15,7 @@ export const posts: BlogPost[] = [
     title:
       "Meta Advantage+ is hitting 4.52x ROAS. Most ecommerce brands aren't using it.",
     description:
-      "Meta Advantage+ averages 4.52:1 ROAS vs 1.86-2.19:1 for standard campaigns. DTC brands paying $2,000-$8,000/month for media buyers are getting outperformed by Meta's own AI.",
+      "Meta Advantage+ hits 4.52:1 ROAS vs 1.86-2.19:1 for manually managed campaigns. DTC brands paying retainers are getting outperformed by Meta's own AI.",
     date: "2026-06-30",
     author: "Dustin Gilmour",
     readTime: "7 min",

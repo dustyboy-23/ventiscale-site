@@ -6,11 +6,11 @@ import { BlogAuthorBio } from "@/components/marketing/blog-author-bio";
 export const metadata = {
   title: "Meta Advantage+ is hitting 4.52x ROAS. Most ecommerce brands aren't using it. | Venti Scale",
   description:
-    "Meta Advantage+ averages 4.52:1 ROAS vs 1.86-2.19:1 for standard campaigns. DTC brands paying $2,000-$8,000/month for media buyers are getting outperformed by Meta's own AI.",
+    "Meta Advantage+ hits 4.52:1 ROAS vs 1.86-2.19:1 for manually managed campaigns. DTC brands paying retainers are getting outperformed by Meta's own AI.",
   openGraph: {
     title: "Meta Advantage+ is hitting 4.52x ROAS. Most ecommerce brands aren't using it.",
     description:
-      "Meta Advantage+ averages 4.52:1 ROAS vs 1.86-2.19:1 for standard campaigns. DTC brands paying $2,000-$8,000/month for media buyers are getting outperformed by Meta's own AI.",
+      "Meta Advantage+ hits 4.52:1 ROAS vs 1.86-2.19:1 for manually managed campaigns. DTC brands paying retainers are getting outperformed by Meta's own AI.",
     url: "https://www.ventiscale.com/blog/meta-advantage-plus-roas-ecommerce-2026",
     type: "article",
     images: [
@@ -26,7 +26,7 @@ export const metadata = {
     card: "summary_large_image" as const,
     title: "Meta Advantage+ is hitting 4.52x ROAS. Most ecommerce brands aren't using it.",
     description:
-      "Meta Advantage+ averages 4.52:1 ROAS vs 1.86-2.19:1 for standard campaigns. DTC brands paying $2,000-$8,000/month for media buyers are getting outperformed by Meta's own AI.",
+      "Meta Advantage+ hits 4.52:1 ROAS vs 1.86-2.19:1 for manually managed campaigns. DTC brands paying retainers are getting outperformed by Meta's own AI.",
     images: ["https://www.ventiscale.com/blog/meta-advantage-plus-roas.jpg"],
   },
 };
@@ -35,7 +35,7 @@ const SLUG = "meta-advantage-plus-roas-ecommerce-2026";
 const TITLE =
   "Meta Advantage+ is hitting 4.52x ROAS. Most ecommerce brands aren't using it.";
 const DESCRIPTION =
-  "Meta Advantage+ averages 4.52:1 ROAS vs 1.86-2.19:1 for standard campaigns. DTC brands paying $2,000-$8,000/month for media buyers are getting outperformed by Meta's own AI.";
+  "Meta Advantage+ hits 4.52:1 ROAS vs 1.86-2.19:1 for manually managed campaigns. DTC brands paying retainers are getting outperformed by Meta's own AI.";
 const DATE = "2026-06-30";
 
 const FAQ_DATA = [
