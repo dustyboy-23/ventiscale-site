@@ -11,6 +11,18 @@ export interface BlogPost {
 
 export const posts: BlogPost[] = [
   {
+    slug: "meta-advantage-plus-roas-ecommerce-2026",
+    title:
+      "Meta Advantage+ is hitting 4.52x ROAS. Most ecommerce brands aren't using it.",
+    description:
+      "Meta Advantage+ averages 4.52:1 ROAS vs 1.86-2.19:1 for standard campaigns. DTC brands paying $2,000-$8,000/month for media buyers are getting outperformed by Meta's own AI.",
+    date: "2026-06-30",
+    author: "Dustin Gilmour",
+    readTime: "7 min",
+    tags: ["ecommerce", "DTC", "Meta ads", "Advantage+", "ROAS", "paid social", "AI marketing"],
+    image: "/blog/meta-advantage-plus-roas.jpg",
+  },
+  {
     slug: "ecommerce-cac-by-vertical-2026",
     title:
       "Ecommerce CAC by vertical, 2026. Here's what you're actually paying.",
