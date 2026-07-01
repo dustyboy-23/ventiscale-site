@@ -11,6 +11,18 @@ export interface BlogPost {
 
 export const posts: BlogPost[] = [
   {
+    slug: "dtc-replace-agency-ai-stack-2026",
+    title:
+      "Your agency charges $14,200/month for what AI does for $869.",
+    description:
+      "A $12M DTC brand switched from a $14,200/month agency to an $869/month AI stack. 8-10 day turnarounds dropped to 24 hours. Here's exactly what changed.",
+    date: "2026-07-01",
+    author: "Dustin Gilmour",
+    readTime: "7 min",
+    tags: ["ecommerce", "DTC", "marketing agency", "AI marketing", "agency costs", "done for you"],
+    image: "/blog/dtc-agency-ai-switch.jpg",
+  },
+  {
     slug: "meta-advantage-plus-roas-ecommerce-2026",
     title:
       "Meta Advantage+ is hitting 4.52x ROAS. Most ecommerce brands aren't using it.",
