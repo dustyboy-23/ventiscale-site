@@ -11,6 +11,18 @@ export interface BlogPost {
 
 export const posts: BlogPost[] = [
   {
+    slug: "dtc-ai-creative-speed-2026",
+    title:
+      "48-hour creative is now the baseline. Agencies still take 8 days.",
+    description:
+      "AI-hybrid tools now deliver DTC creative in 48 hours at 20% of retainer cost. Traditional agencies average 8-10 days. That gap is your CAC problem.",
+    date: "2026-07-02",
+    author: "Dustin Gilmour",
+    readTime: "7 min",
+    tags: ["ecommerce", "DTC", "AI marketing", "creative agency", "CAC", "marketing speed", "done for you"],
+    image: "/blog/dtc-ai-creative-speed.jpg",
+  },
+  {
     slug: "dtc-replace-agency-ai-stack-2026",
     title:
       "Your agency charges $14,200/month for what AI does for $869.",
