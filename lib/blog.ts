@@ -11,6 +11,18 @@ export interface BlogPost {
 
 export const posts: BlogPost[] = [
   {
+    slug: "dtc-retention-revenue-2026",
+    title:
+      "You paid to acquire these customers. Your retention system is ignoring them.",
+    description:
+      "DTC brands leave 30-40% of retention revenue uncollected. Not because of the tools — because the system is stale. Here's what a working DTC retention marketing setup looks like.",
+    date: "2026-07-03",
+    author: "Dustin Gilmour",
+    readTime: "7 min",
+    tags: ["ecommerce", "DTC", "retention marketing", "email marketing", "Klaviyo", "AI marketing"],
+    image: "/blog/dtc-retention-revenue.jpg",
+  },
+  {
     slug: "dtc-ai-creative-speed-2026",
     title:
       "48-hour creative is now the baseline. Agencies still take 8 days.",
