@@ -15,7 +15,7 @@ export const posts: BlogPost[] = [
     title:
       "You paid to acquire these customers. Your retention system is ignoring them.",
     description:
-      "DTC brands leave 30-40% of retention revenue uncollected. Not because of the tools — because the system is stale. Here's what a working DTC retention marketing setup looks like.",
+      "DTC brands leave 30-40% of retention revenue on the table. The tools aren't the problem. The system is. Here's how DTC retention marketing actually runs.",
     date: "2026-07-03",
     author: "Dustin Gilmour",
     readTime: "7 min",

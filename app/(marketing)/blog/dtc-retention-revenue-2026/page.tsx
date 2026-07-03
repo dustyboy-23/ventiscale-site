@@ -6,11 +6,11 @@ import { BlogAuthorBio } from "@/components/marketing/blog-author-bio";
 export const metadata = {
   title: "You paid to acquire these customers. Your retention system is ignoring them. | Venti Scale",
   description:
-    "DTC brands leave 30-40% of retention revenue uncollected. Not because of the tools — because the system is stale. Here's what a working DTC retention marketing setup looks like.",
+    "DTC brands leave 30-40% of retention revenue on the table. The tools aren't the problem. The system is. Here's how DTC retention marketing actually runs.",
   openGraph: {
     title: "You paid to acquire these customers. Your retention system is ignoring them.",
     description:
-      "DTC brands leave 30-40% of retention revenue uncollected. Not because of the tools — because the system is stale. Here's what a working DTC retention marketing setup looks like.",
+      "DTC brands leave 30-40% of retention revenue on the table. The tools aren't the problem. The system is. Here's how DTC retention marketing actually runs.",
     url: "https://www.ventiscale.com/blog/dtc-retention-revenue-2026",
     type: "article",
     images: [
@@ -26,7 +26,7 @@ export const metadata = {
     card: "summary_large_image" as const,
     title: "You paid to acquire these customers. Your retention system is ignoring them.",
     description:
-      "DTC brands leave 30-40% of retention revenue uncollected. Not because of the tools — because the system is stale. Here's what a working DTC retention marketing setup looks like.",
+      "DTC brands leave 30-40% of retention revenue on the table. The tools aren't the problem. The system is. Here's how DTC retention marketing actually runs.",
     images: ["https://www.ventiscale.com/blog/dtc-retention-revenue.jpg"],
   },
 };
@@ -35,7 +35,7 @@ const SLUG = "dtc-retention-revenue-2026";
 const TITLE =
   "You paid to acquire these customers. Your retention system is ignoring them.";
 const DESCRIPTION =
-  "DTC brands leave 30-40% of retention revenue uncollected. Not because of the tools — because the system is stale. Here's what a working DTC retention marketing setup looks like.";
+  "DTC brands leave 30-40% of retention revenue on the table. The tools aren't the problem. The system is. Here's how DTC retention marketing actually runs.";
 const DATE = "2026-07-03";
 const IMAGE = "/blog/dtc-retention-revenue.jpg";
 const IMAGE_URL = `https://www.ventiscale.com${IMAGE}`;
