@@ -476,7 +476,7 @@ export default async function Post() {
           </div>
 
           <BlogAuthorBio
-            bioOverride="Founder of Venti Scale. I&apos;ve audited positioning-creative alignment for DTC brands burning $10-30K/month on new creative without touching their strategy. The pattern is always the same: the ads aren&apos;t the problem."
+            bioOverride="Founder of Venti Scale. I audit positioning-creative alignment for DTC brands burning $10-30K/month on new creative without touching their strategy. The pattern is always the same: the ads are not the problem."
             lastUpdated={DATE}
           />
 
