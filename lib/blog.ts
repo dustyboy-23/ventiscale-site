@@ -11,6 +11,18 @@ export interface BlogPost {
 
 export const posts: BlogPost[] = [
   {
+    slug: "dtc-positioning-creative-mismatch-cac-2026",
+    title:
+      "You keep testing new creative. Your positioning hasn't changed since 2022.",
+    description:
+      "Positioning-creative mismatch is the #1 driver of DTC CAC increases in 2026. Here's why swapping creatives doesn't fix a broken strategy, and what to do instead.",
+    date: "2026-07-04",
+    author: "Dustin Gilmour",
+    readTime: "8 min",
+    tags: ["ecommerce", "DTC", "positioning", "creative strategy", "CAC", "AI marketing"],
+    image: "/blog/dtc-positioning-creative-mismatch.jpg",
+  },
+  {
     slug: "dtc-retention-revenue-2026",
     title:
       "You paid to acquire these customers. Your retention system is ignoring them.",
