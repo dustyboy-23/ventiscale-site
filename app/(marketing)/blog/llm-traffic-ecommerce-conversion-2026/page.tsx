@@ -209,7 +209,7 @@ export default async function Post() {
             >
               Enrich Labs&apos; 2026 DTC guide
             </a>
-            , LLM-referred traffic ranks 4th for retail conversion rate across all traffic sources — ahead of Google Ads, ahead of Meta Ads, and ahead of most paid channels. The traffic volume is still smaller than paid. But the conversion rate is better, and the cost per visitor is zero.
+            , LLM-referred traffic ranks 4th for retail conversion rate across all traffic sources, ahead of Google Ads, ahead of Meta Ads, and ahead of most paid channels. The traffic volume is still smaller than paid. But the conversion rate is better, and the cost per visitor is zero.
           </p>
 
           <h2 id="what-llm-traffic-is">What LLM-referred traffic actually is</h2>
@@ -254,7 +254,7 @@ export default async function Post() {
           <div className="blog-callout">
             <div className="callout-label">Key insight</div>
             <p>
-              AI engines don&apos;t recommend brands randomly. They cite pages that directly and clearly answer the user&apos;s question. Brands that publish educational content — ingredient guides, comparison posts, how-to-choose articles — get cited. Brands with only product pages rarely do.
+              AI engines don&apos;t recommend brands randomly. They cite pages that directly and clearly answer the user&apos;s question. Brands that publish educational content (ingredient guides, comparison posts, how-to-choose articles) get cited. Brands with only product pages rarely do.
             </p>
           </div>
 
@@ -279,7 +279,7 @@ export default async function Post() {
           </div>
 
           <p>
-            I started tracking LLM referral sources for a client last quarter. Their product pages had zero ChatGPT citations in the first 60 days. A single blog post we published — an educational guide on how to choose the right product for their specific use case — got cited in 14 ChatGPT sessions within 30 days. The add-to-cart rate from those sessions was 3.1%. That&apos;s the gap.
+            I started tracking LLM referral sources for a client last quarter. Their product pages had zero ChatGPT citations in the first 60 days. A single blog post we published, an educational guide on how to choose the right product for their specific use case, got cited in 14 ChatGPT sessions within 30 days. The add-to-cart rate from those sessions was 3.1%. That&apos;s the gap.
           </p>
 
           <hr className="blog-divider" />
@@ -296,7 +296,7 @@ export default async function Post() {
             <Link href="/blog/shopify-ai-discovery-chatgpt-2026">
               Shopify AI discovery shift
             </Link>{" "}
-            showed this clearly — the stores getting cited are the ones structuring their content for extraction, not just for reading.
+            showed this clearly: the stores getting cited are the ones structuring their content for extraction, not just for reading.
           </p>
           <p>
             <strong>Product pages that explain why.</strong> Your product page doesn&apos;t need to become a blog post. But it does need to explain why this product solves the specific problem, not just what the product is. One well-written paragraph about the buyer problem you solve can get that page into AI results for the right question.
