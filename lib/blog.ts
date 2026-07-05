@@ -11,6 +11,18 @@ export interface BlogPost {
 
 export const posts: BlogPost[] = [
   {
+    slug: "llm-traffic-ecommerce-conversion-2026",
+    title:
+      "LLM-referred traffic converts at 2.47%. Above Google Ads. Above Meta.",
+    description:
+      "LLM-referred traffic from ChatGPT, Perplexity, and Gemini converts at 2.47% in retail. Above Google Ads and Meta Ads. Here's what ecom brands need to do.",
+    date: "2026-07-05",
+    author: "Dustin Gilmour",
+    readTime: "7 min",
+    tags: ["ecommerce", "DTC", "AI marketing", "AI search", "LLM traffic", "ChatGPT", "ecommerce conversion"],
+    image: "/blog/llm-traffic-ecommerce.jpg",
+  },
+  {
     slug: "dtc-positioning-creative-mismatch-cac-2026",
     title:
       "You keep testing new creative. Your positioning hasn't changed since 2022.",
