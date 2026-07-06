@@ -194,9 +194,10 @@ export default async function Post() {
                 per subscriber, and cross-channel product recs
               </li>
               <li>
-                Email already generates 15.9x more revenue per send than any
-                other channel — now it&apos;s learning to send itself at the
-                right moment for each individual
+                Automated email flows already generate well over 15x more
+                revenue per send than one-off campaigns — now it&apos;s
+                learning to send itself at the right moment for each
+                individual
               </li>
               <li>
                 The risk isn&apos;t missing the features. It&apos;s turning on
@@ -211,9 +212,9 @@ export default async function Post() {
           </div>
 
           <p>
-            Email is already the highest-ROI channel in ecommerce. Foundry
-            CRO&apos;s 2026 benchmarks put email at 15.9x more revenue per send
-            than any other channel. Adding AI that learns individual subscriber
+            Email is already the highest-ROI channel in ecommerce. Automated
+            flows routinely generate 15x or more revenue per send compared to
+            one-off campaigns. Adding AI that learns individual subscriber
             behavior on top of that is not a marginal improvement. It changes
             how you have to think about the whole program.
           </p>
@@ -326,8 +327,9 @@ export default async function Post() {
             <strong>Smart Send Time</strong> pays off for any brand with a
             functioning email program. If you&apos;re already sending campaigns,
             this costs nothing extra to enable and immediately improves delivery
-            timing. A 10-15% lift in open rates from better send timing is real
-            money on a list of even a few thousand subscribers. Turn it on first.
+            timing. Klaviyo reports a 35% lift in click rate on campaigns using
+            Personalized Send Time, which is real money on a list of even a
+            few thousand subscribers. Turn it on first.
           </p>
           <p>
             <strong>Next-best product recs</strong> are most valuable inside
@@ -352,8 +354,8 @@ export default async function Post() {
           <div className="blog-callout">
             <div className="callout-label">Key insight</div>
             <p>
-              DTC customer acquisition costs are up 40-60% since 2023 per
-              Yotpo&apos;s 2026 benchmarks. Email is the one channel where
+              DTC customer acquisition costs are up 40-60% since 2023 across
+              the industry. Email is the one channel where
               cost-per-conversion keeps dropping as your list grows. The brands
               winning right now are email-first. Klaviyo&apos;s Spring 2026
               features widen that advantage further. The cost math alone makes
