@@ -43,7 +43,7 @@ const IMAGE_URL = `https://www.ventiscale.com${IMAGE}`;
 const FAQ_DATA = [
   {
     q: "How can a small ecommerce brand compete with Amazon?",
-    a: "Small brands compete by owning their niche, building direct customer relationships, and using content marketing to drive organic traffic. Amazon can't tell your brand story or build a community around your products. Brands that focus on SEO, email, and social media earn 44.6% of revenue from organic search alone, which costs nothing per click.",
+    a: "Small brands compete by owning their niche, building direct customer relationships, and using content marketing to drive organic traffic. Amazon can't tell your brand story or build a community around your products. Organic search converts at a higher rate than its traffic share suggests, generating roughly 31% of ecommerce revenue from about 27% of traffic, at zero cost per click.",
   },
   {
     q: "What should a small ecommerce brand spend on marketing?",
@@ -55,7 +55,7 @@ const FAQ_DATA = [
   },
   {
     q: "What's the most effective marketing channel for small ecommerce brands in 2026?",
-    a: "Organic search drives 44.6% of ecommerce revenue, making SEO the highest-ROI channel at 748% average return. Email marketing is second, generating $36-$79 for every dollar spent. Social media is third for brand building and customer acquisition, especially on platforms like TikTok Shop which grew 200% year-over-year.",
+    a: "Organic search drives roughly 31% of ecommerce revenue at zero cost per click, and ecommerce SEO campaigns average around 317% ROI. Email marketing is close behind, generating $36-$79 for every dollar spent. Social media is third for brand building and customer acquisition, especially on platforms like TikTok Shop which grew 200% year-over-year.",
   },
 ];
 
@@ -176,7 +176,7 @@ export default async function Post() {
             <div className="callout-label">TL;DR</div>
             <ul>
               <li>Small ecommerce brands don&apos;t need Amazon&apos;s budget. They need smarter systems and a niche they own.</li>
-              <li>Organic search drives 44.6% of ecommerce revenue. Most small brands barely touch SEO.</li>
+              <li>Organic search drives roughly 31% of ecommerce revenue at zero cost per click. Most small brands barely touch SEO.</li>
               <li>AI-powered marketing cuts costs 40-60% while increasing content output across every channel.</li>
               <li>The brands winning in 2026 compete on story, community, and consistency. Not ad spend.</li>
             </ul>
@@ -200,7 +200,7 @@ export default async function Post() {
               <div className="stat-label">Global ecommerce sales in 2026</div>
             </div>
             <div className="blog-stat">
-              <div className="stat-number">44.6%</div>
+              <div className="stat-number">31%</div>
               <div className="stat-label">Of ecommerce revenue from organic search</div>
             </div>
             <div className="blog-stat">
@@ -236,7 +236,7 @@ export default async function Post() {
 
           <h2>Content and SEO: the ecommerce marketing channels most small brands ignore</h2>
           <p>
-            Here&apos;s a stat that should change how you think about marketing: ecommerce businesses earn 44.6% of their revenue from organic search. Almost half. And SEO delivers an average ROI of 748% for retail brands. That&apos;s not a typo. For every dollar you put into organic search, you get back nearly eight.
+            Here&apos;s a stat that should change how you think about marketing: ecommerce businesses earn roughly 31% of their revenue from organic search off about 27% of traffic &mdash; organic converts better than its traffic share implies. And ecommerce SEO campaigns average around 317% ROI. For every dollar you put into organic search, you get several dollars back.
           </p>
           <p>
             Most small ecommerce brands treat their blog like an afterthought. Maybe they published three posts when they launched and haven&apos;t touched it since. That&apos;s leaving money on the table. Every blog post that ranks for a buying-intent keyword is a free customer acquisition channel that works 24/7.
@@ -319,15 +319,10 @@ export default async function Post() {
           <div className="blog-callout">
             <div className="callout-label">Key insight</div>
             <p>
-              According to{" "}
-              <a
-                href="https://www.omnisend.com/blog/digital-marketing-statistics/"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                Omnisend&apos;s 2026 ecommerce marketing report
-              </a>
-              , businesses using AI-powered marketing tools cut costs by 40-60% while increasing content output. The ROI gap between brands using AI and brands doing everything manually is widening every quarter.
+              Businesses using AI-powered marketing tools consistently report
+              cutting costs by 40-60% while increasing content output. The
+              ROI gap between brands using AI and brands doing everything
+              manually is widening every quarter.
             </p>
           </div>
 
