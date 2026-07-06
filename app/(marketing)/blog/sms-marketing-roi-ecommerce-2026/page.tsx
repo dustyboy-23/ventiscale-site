@@ -420,8 +420,8 @@ export default async function Post() {
           </p>
 
           <p>
-            The WhatsApp expansion matters for brands selling internationally. WhatsApp has 2
-            billion active users with open rates that match SMS. For DTC brands with large
+            The WhatsApp expansion matters for brands selling internationally. WhatsApp has over
+            3 billion active users with open rates that match SMS. For DTC brands with large
             international subscriber bases, this unlocks the same high-ROI direct channel that
             SMS provides in North America, without requiring a separate platform.
           </p>
