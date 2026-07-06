@@ -428,9 +428,9 @@ export default async function Post() {
               <div className="stat-label">Top-quartile return per dollar</div>
             </div>
             <div className="blog-stat">
-              <div className="stat-number">17.6x</div>
+              <div className="stat-number">15.9x</div>
               <div className="stat-label">
-                Email flow revenue vs broadcast campaign revenue per recipient
+                Email flow revenue vs broadcast campaign revenue per send
               </div>
             </div>
           </div>
