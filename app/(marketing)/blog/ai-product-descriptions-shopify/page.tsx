@@ -6,11 +6,11 @@ import { BlogAuthorBio } from "@/components/marketing/blog-author-bio";
 export const metadata = {
   title: "AI product descriptions for Shopify: how to do it without sounding like everyone else | Venti Scale",
   description:
-    "47% of Shopify brands use AI for product descriptions. Most get the same generic copy. Here's how to train AI on your actual brand voice so yours don't blend in.",
+    "Most Shopify brands using AI for product descriptions. Most get the same generic copy. Here's how to train AI on your actual brand voice so yours don't blend in.",
   openGraph: {
     title: "AI product descriptions for Shopify: how to do it without sounding like everyone else",
     description:
-      "47% of Shopify brands use AI for product descriptions. Most get the same generic copy. Here's how to train AI on your actual brand voice so yours don't blend in.",
+      "Most Shopify brands using AI for product descriptions. Most get the same generic copy. Here's how to train AI on your actual brand voice so yours don't blend in.",
     url: "https://www.ventiscale.com/blog/ai-product-descriptions-shopify",
     type: "article",
     images: [
@@ -26,7 +26,7 @@ export const metadata = {
     card: "summary_large_image" as const,
     title: "AI product descriptions for Shopify: how to do it without sounding like everyone else",
     description:
-      "47% of Shopify brands use AI for product descriptions. Most get the same generic copy. Here's how to train AI on your actual brand voice so yours don't blend in.",
+      "Most Shopify brands using AI for product descriptions. Most get the same generic copy. Here's how to train AI on your actual brand voice so yours don't blend in.",
     images: ["https://www.ventiscale.com/blog/ai-product-descriptions.jpg"],
   },
 };
@@ -35,7 +35,7 @@ const SLUG = "ai-product-descriptions-shopify";
 const TITLE =
   "AI product descriptions for Shopify: how to do it without sounding like everyone else";
 const DESCRIPTION =
-  "47% of Shopify brands use AI for product descriptions. Most get the same generic copy. Here's how to train AI on your actual brand voice so yours don't blend in.";
+  "Most Shopify brands using AI for product descriptions. Most get the same generic copy. Here's how to train AI on your actual brand voice so yours don't blend in.";
 const DATE = "2026-05-05";
 const IMAGE = "/blog/ai-product-descriptions.jpg";
 const IMAGE_URL = `https://www.ventiscale.com${IMAGE}`;
@@ -189,8 +189,9 @@ export default async function Post() {
             <div className="callout-label">TL;DR</div>
             <ul>
               <li>
-                75% of Shopify merchants use AI tools. Product descriptions are
-                the #1 use case. Most get identical-sounding output.
+                Most Shopify merchants are already using AI tools, and product
+                descriptions are one of the top use cases. Most get
+                identical-sounding output.
               </li>
               <li>
                 Generic AI tools have no memory of your brand. Three tone presets
@@ -249,16 +250,6 @@ export default async function Post() {
           </div>
 
           <div className="blog-stat-row">
-            <div className="blog-stat">
-              <div className="stat-number">75%</div>
-              <div className="stat-label">of Shopify merchants use AI tools</div>
-            </div>
-            <div className="blog-stat">
-              <div className="stat-number">47%</div>
-              <div className="stat-label">
-                of online sellers use AI for product copy
-              </div>
-            </div>
             <div className="blog-stat">
               <div className="stat-number">23-33%</div>
               <div className="stat-label">
