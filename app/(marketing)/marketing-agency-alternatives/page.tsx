@@ -179,12 +179,13 @@ export default async function PillarPage() {
             and a screenshot of a Canva graphic. <em>Your gut already knows.</em>
           </p>
           <p>
-            You&apos;re not the only one. 67% of small business owners cite
-            agency cost or quality as their #1 marketing frustration. The
-            average agency retainer in 2026 sits at $3,000 to $5,000 per
-            month, and the average contract locks you in for 6 to 12 months
-            before you can leave. Most founders end up paying for an
-            expensive layer between themselves and the actual work.
+            You&apos;re not the only one. Agency cost and output quality
+            are consistently the top complaints founders raise about their
+            marketing spend. The average agency retainer in 2026 sits at
+            $3,000 to $5,000 per month, and the average contract locks you
+            in for 6 to 12 months before you can leave. Most founders end
+            up paying for an expensive layer between themselves and the
+            actual work.
           </p>
           <p>
             The good news: there are five real alternatives now, and each
@@ -198,8 +199,8 @@ export default async function PillarPage() {
             <ul>
               <li>
                 Average marketing agency retainer in 2026: $3,000-$5,000/month
-                with 6-12 month lock-in. 67% of small business owners cite
-                this as their #1 frustration.
+                with 6-12 month lock-in. Cost and output quality are the
+                most common founder complaints about that arrangement.
               </li>
               <li>
                 The 5 real alternatives: in-house hire ($95K-$160K/year fully
@@ -273,10 +274,6 @@ export default async function PillarPage() {
             <div className="blog-stat">
               <div className="stat-number">$3-5K</div>
               <div className="stat-label">avg monthly agency retainer 2026</div>
-            </div>
-            <div className="blog-stat">
-              <div className="stat-number">67%</div>
-              <div className="stat-label">small biz owners cite agency cost as #1 issue</div>
             </div>
             <div className="blog-stat">
               <div className="stat-number">6-12mo</div>
