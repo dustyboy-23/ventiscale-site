@@ -5,14 +5,14 @@ import { BlogAuthorBio } from "@/components/marketing/blog-author-bio";
 
 export const metadata = {
   title:
-    "Your DTC marketing budget has a 15% leak. Most agencies won't show you where. | Venti Scale",
+    "Your DTC marketing budget has a hidden leak. Most agencies won't show you where. | Venti Scale",
   description:
-    "A 15% efficiency gap on $200K/month in DTC marketing spend costs $360K/year. Here's exactly where the money goes and how to close it.",
+    "A mid-teens percentage efficiency gap on $200K/month in DTC marketing spend costs hundreds of thousands a year. Here's exactly where the money goes and how to close it.",
   openGraph: {
     title:
-      "Your DTC marketing budget has a 15% leak. Most agencies won't show you where.",
+      "Your DTC marketing budget has a hidden leak. Most agencies won't show you where.",
     description:
-      "A 15% efficiency gap on $200K/month in DTC marketing spend costs $360K/year. Here's exactly where the money goes and how to close it.",
+      "A mid-teens percentage efficiency gap on $200K/month in DTC marketing spend costs hundreds of thousands a year. Here's exactly where the money goes and how to close it.",
     url: "https://www.ventiscale.com/blog/dtc-marketing-agency-efficiency-gap",
     type: "article",
     images: [
@@ -27,18 +27,18 @@ export const metadata = {
   twitter: {
     card: "summary_large_image" as const,
     title:
-      "Your DTC marketing budget has a 15% leak. Most agencies won't show you where.",
+      "Your DTC marketing budget has a hidden leak. Most agencies won't show you where.",
     description:
-      "A 15% efficiency gap on $200K/month in DTC marketing spend costs $360K/year. Here's exactly where the money goes and how to close it.",
+      "A mid-teens percentage efficiency gap on $200K/month in DTC marketing spend costs hundreds of thousands a year. Here's exactly where the money goes and how to close it.",
     images: ["https://www.ventiscale.com/blog/dtc-efficiency-gap.jpg"],
   },
 };
 
 const SLUG = "dtc-marketing-agency-efficiency-gap";
 const TITLE =
-  "Your DTC marketing budget has a 15% leak. Most agencies won't show you where.";
+  "Your DTC marketing budget has a hidden leak. Most agencies won't show you where.";
 const DESCRIPTION =
-  "A 15% efficiency gap on $200K/month in DTC marketing spend costs $360K/year. Here's exactly where the money goes and how to close it.";
+  "A mid-teens percentage efficiency gap on $200K/month in DTC marketing spend costs hundreds of thousands a year. Here's exactly where the money goes and how to close it.";
 const DATE = "2026-05-16";
 const IMAGE = "/blog/dtc-efficiency-gap.jpg";
 const IMAGE_URL = `https://www.ventiscale.com${IMAGE}`;
@@ -46,7 +46,7 @@ const IMAGE_URL = `https://www.ventiscale.com${IMAGE}`;
 const FAQ_DATA = [
   {
     q: "What is the typical marketing efficiency gap for DTC brands working with agencies?",
-    a: "DTC brands working with traditional agencies average a 15% efficiency gap on their marketing spend, according to a 2026 analysis by Dark Room Agency. On a $200K/month budget, that's $360K/year in wasted spend through creative delays, retargeting overlap, and attribution gaps.",
+    a: "DTC brands working with traditional agencies commonly lose a mid-teens percentage of their marketing spend to friction, per Dark Room Agency's analysis of DTC agency relationships. On a $200K/month budget, even a 15% gap works out to $360K/year in wasted spend through creative delays, retargeting overlap, and attribution gaps.",
   },
   {
     q: "Why do DTC brands waste ad spend retargeting their own email subscribers?",
@@ -154,8 +154,8 @@ export default async function Post() {
         <div className="mt-8 mb-10">
           <Eyebrow>ECOMMERCE / DTC MARKETING</Eyebrow>
           <h1 className="font-display text-[32px] lg:text-[42px] leading-[1.1] tracking-[-0.02em] text-white mt-4 mb-4">
-            Your DTC marketing budget has a 15% leak. Most agencies won&apos;t
-            show you where.
+            Your DTC marketing budget has a hidden leak. Most agencies
+            won&apos;t show you where.
           </h1>
           <div className="flex items-center gap-3">
             <span className="font-mono text-[11px] tracking-[0.12em] uppercase text-white/35">
@@ -192,7 +192,7 @@ export default async function Post() {
             <div className="callout-label">TL;DR</div>
             <ul>
               <li>
-                DTC brands average a 15% marketing efficiency gap when working
+                A mid-teens percentage marketing efficiency gap is common when working
                 with traditional agencies. On $200K/month in spend, that&apos;s
                 $360K/year.
               </li>
@@ -216,7 +216,7 @@ export default async function Post() {
           <p>
             The DTC marketing efficiency gap is a structural problem, not a
             bad-agency problem. Traditional agencies aren&apos;t built for the
-            speed and volume DTC demands. The result is a predictable 15% bleed
+            speed and volume DTC demands. The result is a predictable bleed
             that shows up in almost every agency relationship I&apos;ve audited.
           </p>
 
@@ -225,11 +225,11 @@ export default async function Post() {
             <ol>
               <li>
                 <a href="#the-15-percent">
-                  The 15% number comes from real DTC spend data
+                  What a friction-driven efficiency gap actually costs
                 </a>
               </li>
               <li>
-                <a href="#where-money-leaks">Where the 15% actually goes</a>
+                <a href="#where-money-leaks">Where the gap actually goes</a>
               </li>
               <li>
                 <a href="#email-paid-overlap">
@@ -250,21 +250,22 @@ export default async function Post() {
           </div>
 
           <h2 id="the-15-percent">
-            The 15% number comes from real DTC spend data
+            What a friction-driven efficiency gap actually costs
           </h2>
           <p>
-            A 2026 analysis of DTC agency relationships by{" "}
+            Per{" "}
             <a
               href="https://www.darkroomagency.com/observatory/best-dtc-marketing-agency-2026"
               target="_blank"
               rel="noopener noreferrer"
             >
-              Dark Room Agency
-            </a>{" "}
-            found that brands working with full-service agencies average a 15%
-            efficiency gap vs. their actual performance potential. On a
-            $200K/month budget, that&apos;s $30K/month. $360K/year. Not
-            stolen. Just wasted on friction.
+              Dark Room Agency&apos;s analysis of DTC agency relationships
+            </a>
+            , even a modest efficiency gap from the wrong agency structure adds
+            up fast: on a $200K/month budget, a gap in the mid-teens percentage
+            range means tens of thousands of dollars a month in waste, and
+            hundreds of thousands annualized. Not stolen. Just wasted on
+            friction.
           </p>
           <p>
             Approval cycles that take 5 days instead of 1. Ad campaigns running
@@ -274,21 +275,6 @@ export default async function Post() {
             revenue. Every one of these has a dollar cost, and none of them show
             up in the agency&apos;s monthly deck.
           </p>
-
-          <div className="blog-stat-row">
-            <div className="blog-stat">
-              <div className="stat-number">15%</div>
-              <div className="stat-label">average agency efficiency gap</div>
-            </div>
-            <div className="blog-stat">
-              <div className="stat-number">$360K</div>
-              <div className="stat-label">wasted per year at $200K/mo spend</div>
-            </div>
-            <div className="blog-stat">
-              <div className="stat-number">40-60%</div>
-              <div className="stat-label">CAC increase since 2023</div>
-            </div>
-          </div>
 
           <p>
             DTC customer acquisition costs have risen 40-60% since 2023.
@@ -301,7 +287,7 @@ export default async function Post() {
 
           <hr className="blog-divider" />
 
-          <h2 id="where-money-leaks">Where the 15% actually goes</h2>
+          <h2 id="where-money-leaks">Where the gap actually goes</h2>
           <p>
             Four patterns account for almost all of the efficiency gap. In every
             DTC brand audit I&apos;ve done, at least three of these are running
