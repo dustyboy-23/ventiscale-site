@@ -50,7 +50,7 @@ const FAQ_DATA = [
   },
   {
     q: "How much does done-for-you social media management cost for a small business?",
-    a: "Done-for-you social media management costs $500 to $2,500 per month for small businesses in 2026. Basic packages covering 2 platforms start around $500 per month. Full-service packages with daily posting, community management, and strategy run $1,500 to $2,500 per month. That is 40 to 60 percent less than hiring a full-time social media employee.",
+    a: "Done-for-you social media management costs $500 to $2,500 per month for small businesses in 2026. Basic packages covering 2 platforms start around $500 per month. Full-service packages with daily posting, community management, and strategy run $1,500 to $2,500 per month. That is meaningfully less than hiring a full-time social media employee once you count salary, benefits, and management overhead.",
   },
   {
     q: "How long before done-for-you social media management shows results?",
@@ -323,18 +323,10 @@ export default async function Post() {
           <div className="blog-callout">
             <div className="callout-label">Key insight</div>
             <p>
-              According to{" "}
-              <a
-                href="https://sproutsocial.com/insights/social-media-statistics/"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                Sprout Social&apos;s 2026 data
-              </a>
-              , 71% of consumers who have a positive social media interaction
-              with a brand are likely to recommend it. Community management
-              isn&apos;t optional. It&apos;s where word-of-mouth starts in
-              2026.
+              Consumers who get a fast, genuine response from a brand on
+              social media are far more likely to buy from that brand again
+              and tell other people about it. Community management isn&apos;t
+              optional. It&apos;s where word-of-mouth starts.
             </p>
           </div>
 
@@ -379,10 +371,6 @@ export default async function Post() {
             <div className="blog-stat">
               <div className="stat-number">$500-$2.5K</div>
               <div className="stat-label">Sweet spot for small businesses</div>
-            </div>
-            <div className="blog-stat">
-              <div className="stat-number">250%</div>
-              <div className="stat-label">Average ROI on social campaigns</div>
             </div>
             <div className="blog-stat">
               <div className="stat-number">$3,500+</div>

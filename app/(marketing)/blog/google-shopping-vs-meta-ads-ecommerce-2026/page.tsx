@@ -380,7 +380,7 @@ export default async function Post() {
           <p>
             Email sits on top of both, converting warm traffic that didn&apos;t buy on
             the first visit and pulling past customers back for second and third orders.
-            DTC customer acquisition cost is up 40-60% since 2023 across every
+            DTC customer acquisition costs have been climbing steadily across every
             vertical. The brands absorbing that increase and still growing aren&apos;t
             spending more. They&apos;re spending differently. Getting 5.17x from a
             dollar on Shopping instead of 1.86x on Meta is part of what{" "}
@@ -406,7 +406,7 @@ export default async function Post() {
             <strong>2. What is my Google Shopping ROAS specifically, separate from blended ROAS?</strong> If they can&apos;t pull this number, Shopping isn&apos;t in their reporting stack, which means it&apos;s probably not running at all in your account.
           </p>
           <p>
-            <strong>3. Can you show me the Merchant Center product diagnostics?</strong> This reveals disapproved products, missing attributes, and feed health. A clean feed is a precondition for Shopping performance. Most accounts have 10-30% of their catalog disapproved and don&apos;t know it.
+            <strong>3. Can you show me the Merchant Center product diagnostics?</strong> This reveals disapproved products, missing attributes, and feed health. A clean feed is a precondition for Shopping performance. A surprising number of accounts have a chunk of their catalog disapproved and don&apos;t know it.
           </p>
           <p>
             <strong>4. What percentage of my budget is on intent-based channels vs. interruption channels?</strong> If 100% is on Meta, you&apos;re entirely in the interruption column. That&apos;s the right call for a brand new product launch with zero search volume. For a brand with 12 or more months of history and real search demand, it&apos;s leaving significant revenue on the table.

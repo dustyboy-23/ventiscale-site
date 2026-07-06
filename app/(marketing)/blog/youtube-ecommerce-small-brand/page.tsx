@@ -6,12 +6,12 @@ import { BlogAuthorBio } from "@/components/marketing/blog-author-bio";
 export const metadata = {
   title: "Should small ecommerce brands be on YouTube? Here's the honest math. | Venti Scale",
   description:
-    "YouTube delivers $4.80 per $1 spent. For ecommerce small brands, the ROI depends on your AOV, product type, and whether you can sustain it for 12 months.",
+    "YouTube can be a strong long-term channel for ecommerce. For small brands, the ROI depends on your AOV, product type, and whether you can sustain it for 12 months.",
   openGraph: {
     title:
       "Should small ecommerce brands be on YouTube? Here's the honest math.",
     description:
-      "YouTube delivers $4.80 per $1 spent. For ecommerce small brands, the ROI depends on your AOV, product type, and whether you can sustain it for 12 months.",
+      "YouTube can be a strong long-term channel for ecommerce. For small brands, the ROI depends on your AOV, product type, and whether you can sustain it for 12 months.",
     url: "https://www.ventiscale.com/blog/youtube-ecommerce-small-brand",
     type: "article",
     images: [
@@ -28,7 +28,7 @@ export const metadata = {
     title:
       "Should small ecommerce brands be on YouTube? Here's the honest math.",
     description:
-      "YouTube delivers $4.80 per $1 spent. For ecommerce small brands, the ROI depends on your AOV, product type, and whether you can sustain it for 12 months.",
+      "YouTube can be a strong long-term channel for ecommerce. For small brands, the ROI depends on your AOV, product type, and whether you can sustain it for 12 months.",
     images: [
       "https://www.ventiscale.com/blog/youtube-ecommerce-small-brand.jpg",
     ],
@@ -39,7 +39,7 @@ const SLUG = "youtube-ecommerce-small-brand";
 const TITLE =
   "Should small ecommerce brands be on YouTube? Here's the honest math.";
 const DESCRIPTION =
-  "YouTube delivers $4.80 per $1 spent. For ecommerce small brands, the ROI depends on your AOV, product type, and whether you can sustain it for 12 months.";
+  "YouTube can be a strong long-term channel for ecommerce. For small brands, the ROI depends on your AOV, product type, and whether you can sustain it for 12 months.";
 const DATE = "2026-05-03";
 const IMAGE = "/blog/youtube-ecommerce-small-brand.jpg";
 const IMAGE_URL = `https://www.ventiscale.com${IMAGE}`;
@@ -51,7 +51,7 @@ const FAQ_DATA = [
   },
   {
     q: "Should I use YouTube Shorts or long-form videos for my ecommerce store?",
-    a: "Use both, but for different goals. YouTube Shorts drive discovery (74% of Shorts views come from non-subscribers) but earn roughly $0.20 per thousand views. Long-form videos convert better and earn $3 to $6 per thousand views. Shorts pull people in; long-form turns them into buyers. Channels mixing both formats grow 41% faster than single-format channels.",
+    a: "Use both, but for different goals. YouTube Shorts drive discovery, since most Shorts views come from people who don't already follow you, but they monetize far worse than long-form. Long-form videos convert better and pay out significantly more per view. Shorts pull people in; long-form turns them into buyers. Channels mixing both formats tend to grow faster than single-format channels.",
   },
   {
     q: "What types of ecommerce products work best on YouTube?",
@@ -59,7 +59,7 @@ const FAQ_DATA = [
   },
   {
     q: "How does YouTube compare to TikTok for ecommerce sales?",
-    a: "TikTok converts impulse purchases at a 4.7% rate and moved over $112 billion in commerce in 2026. YouTube converts more slowly but builds durable traffic: a YouTube video generates leads for up to 7 years versus TikTok&apos;s 7-day content lifespan. The right channel depends on your product&apos;s consideration cycle. High-research products belong on YouTube. Impulse products belong on TikTok.",
+    a: "TikTok converts impulse purchases well and moves enormous volume in commerce. YouTube converts more slowly but builds durable traffic: a good YouTube video keeps generating views and leads for years, while a TikTok post's reach mostly plays out within days. The right channel depends on your product's consideration cycle. High-research products belong on YouTube. Impulse products belong on TikTok.",
   },
   {
     q: "How much time does running a YouTube channel for ecommerce actually take each week?",
@@ -178,11 +178,12 @@ export default async function Post() {
 
         <div className="prose-blog">
           <p>
-            YouTube delivers $4.80 for every $1 spent on video campaigns. That
-            number gets quoted at ecommerce conferences, in agency decks, and in
-            every &quot;why you need YouTube&quot; blog post. Less often quoted:
-            most small brands need 12 to 16 months of consistent posting before
-            that return shows up in any meaningful way.
+            YouTube gets pitched as one of the highest-ROI advertising channels
+            around, and for the right brand, the number holds up. That claim
+            gets quoted at ecommerce conferences, in agency decks, and in every
+            &quot;why you need YouTube&quot; blog post. Less often quoted: most
+            small brands need 12 to 16 months of consistent posting before that
+            return shows up in any meaningful way.
           </p>
           <p>
             So yes, YouTube works for ecommerce. The question is whether it
@@ -196,18 +197,18 @@ export default async function Post() {
             <div className="callout-label">TL;DR</div>
             <ul>
               <li>
-                YouTube for ecommerce small brands averages $4.80 return per $1
-                spent, but the ROI is concentrated in specific product types and
-                AOV ranges.
+                YouTube can be a strong-ROI channel for ecommerce, but the
+                return is concentrated in specific product types and AOV
+                ranges.
               </li>
               <li>
                 Expect 12 to 16 months of consistent posting before meaningful
                 traffic or revenue. Most brands quit at month 3 or 4.
               </li>
               <li>
-                Shorts drive discovery (74% of views from non-subscribers) but
-                earn $0.20 per thousand views. Long-form earns $3 to $6 and
-                actually converts.
+                Shorts drive discovery, since most Shorts views come from
+                non-subscribers, but they monetize far worse than long-form,
+                which actually converts.
               </li>
               <li>
                 If your average order value is under $100 and your product is
@@ -267,20 +268,20 @@ export default async function Post() {
             The ROI number everyone quotes (and what it leaves out)
           </h2>
           <p>
-            The $4.80 return figure comes from aggregated YouTube ad campaign
-            data across all business types and sizes. It includes brands with
-            hundreds of thousands of subscribers, large production budgets, and
-            years of audience data. It&apos;s a real number. It&apos;s just not
-            your number yet.
+            The headline ROI figures you see quoted come from aggregated
+            YouTube ad campaign data across all business types and sizes. That
+            includes brands with hundreds of thousands of subscribers, large
+            production budgets, and years of audience data. The averages are
+            real. They&apos;re just not your numbers yet.
           </p>
           <p>
             Here&apos;s what the headline stat doesn&apos;t tell you. Reaching
-            1,000 subscribers typically takes 70 to 80 videos for most
-            ecommerce channels. At two videos per week, that&apos;s 8 to 10
-            months of production before you have even a small audience. And 84%
-            of marketers who call YouTube effective are averaging across massive
-            brand accounts and creator programs, not solo Shopify stores with no
-            video team.
+            1,000 subscribers typically takes dozens of videos for most
+            ecommerce channels. At two videos per week, that&apos;s the better
+            part of a year of production before you have even a small
+            audience. Most marketers who call YouTube effective are averaging
+            across massive brand accounts and creator programs, not solo
+            Shopify stores with no video team.
           </p>
 
           <div className="blog-warning">
@@ -300,23 +301,6 @@ export default async function Post() {
             something that compounds and burning 6 months on a channel that
             quietly dies.
           </p>
-
-          <div className="blog-stat-row">
-            <div className="blog-stat">
-              <div className="stat-number">$4.80</div>
-              <div className="stat-label">Return per $1 on YouTube video</div>
-            </div>
-            <div className="blog-stat">
-              <div className="stat-number">70-80</div>
-              <div className="stat-label">Videos to reach 1K subscribers</div>
-            </div>
-            <div className="blog-stat">
-              <div className="stat-number">7 yrs</div>
-              <div className="stat-label">
-                YouTube content lifespan vs. 7 days on TikTok
-              </div>
-            </div>
-          </div>
 
           <hr className="blog-divider" />
 
@@ -346,7 +330,7 @@ export default async function Post() {
           <div className="blog-callout">
             <div className="callout-label">Key insight</div>
             <p>
-              According to{" "}
+              Per{" "}
               <a
                 href="https://www.shopify.com/blog/video-marketing-statistics"
                 target="_blank"
@@ -354,19 +338,20 @@ export default async function Post() {
               >
                 Shopify&apos;s video marketing research
               </a>
-              , 84% of consumers say a brand video directly influenced their
-              last purchase decision. For high-consideration products, that
-              influence happens in the research phase, which is exactly where
-              YouTube lives.
+              , video plays a measurable role in purchase decisions for most
+              online shoppers. For high-consideration products, that influence
+              happens in the research phase, which is exactly where YouTube
+              lives.
             </p>
           </div>
 
           <p>
-            There&apos;s also the longevity argument. A YouTube video generates
-            traffic and leads for up to 7 years after publishing. A TikTok post
-            is effectively dead after 7 days. If you&apos;re building for the
-            long term and you have the patience for the ramp, YouTube compounds
-            in a way no other short-form platform does. A good{" "}
+            There&apos;s also the longevity argument. A good YouTube video keeps
+            generating traffic and leads for years after publishing, while a
+            TikTok post&apos;s reach mostly plays out within days. If
+            you&apos;re building for the long term and you have the patience
+            for the ramp, YouTube compounds in a way no other short-form
+            platform does. A good{" "}
             <Link href="/shopify-marketing-strategy">
               Shopify marketing strategy
             </Link>{" "}
@@ -386,11 +371,10 @@ export default async function Post() {
             platform.&quot; Both approaches leave money on the table.
           </p>
           <p>
-            The numbers make the right move obvious. Shorts earn roughly $0.20
-            per thousand views. Long-form videos earn $3 to $6 per thousand
-            views, 15 to 30 times more. But 74% of Shorts views come from
-            non-subscribers, making them the single most efficient discovery
-            format on YouTube.
+            The numbers make the right move obvious. Shorts monetize much
+            worse per view than long-form videos do, but they get shown to a
+            much larger share of people who don&apos;t already follow you,
+            making them the single most efficient discovery format on YouTube.
           </p>
           <p>
             The strategy that works: Shorts are a funnel, not a revenue stream.
@@ -400,32 +384,9 @@ export default async function Post() {
             conversion happens.
           </p>
 
-          <div className="blog-stat-row">
-            <div className="blog-stat">
-              <div className="stat-number">74%</div>
-              <div className="stat-label">
-                Of Shorts views from non-subscribers
-              </div>
-            </div>
-            <div className="blog-stat">
-              <div className="stat-number">$0.20</div>
-              <div className="stat-label">Shorts RPM (per 1K views)</div>
-            </div>
-            <div className="blog-stat">
-              <div className="stat-number">$3-6</div>
-              <div className="stat-label">Long-form RPM (per 1K views)</div>
-            </div>
-            <div className="blog-stat">
-              <div className="stat-number">41%</div>
-              <div className="stat-label">
-                Faster growth mixing both formats
-              </div>
-            </div>
-          </div>
-
           <p>
-            One more data point worth knowing: mentioning your product in the
-            first 10 seconds of a Short drives 22% higher affiliate sales than
+            One more thing worth knowing: mentioning your product early in a
+            Short, in the first several seconds, consistently outperforms
             burying the mention later. Put the product on screen immediately.
             Don&apos;t warm up.
           </p>
@@ -492,8 +453,8 @@ export default async function Post() {
           </p>
           <p>
             Your average order value is under $100 and your product is
-            impulse-driven. TikTok Shop converts impulse purchases at a 4.7%
-            rate. YouTube&apos;s audience is there to research, not to buy on
+            impulse-driven. TikTok Shop converts impulse purchases well.
+            YouTube&apos;s audience is there to research, not to buy on
             the spot. If you sell something someone decides on in 30 seconds,
             YouTube is a poor fit for the consideration cycle.
           </p>
@@ -516,7 +477,7 @@ export default async function Post() {
             <div className="callout-label">Common mistake</div>
             <p>
               Treating YouTube and TikTok as interchangeable video platforms.
-              TikTok moved over $112 billion in commerce in 2026. For low-ticket
+              TikTok moves enormous volume in commerce. For low-ticket
               impulse products, that&apos;s the right ecosystem. Forcing a
               low-AOV impulse product into YouTube&apos;s research-mode audience
               is like running a flash sale in a library.
@@ -546,8 +507,8 @@ export default async function Post() {
           <p>
             Start with Shorts and long-form simultaneously from day one.
             Don&apos;t wait to build subscribers before posting long-form.
-            Channels mixing both formats grow 41% faster than those doing one
-            or the other.
+            Channels mixing both formats consistently grow faster than those
+            doing one or the other.
           </p>
           <p>
             For ecommerce, the highest-traffic long-form formats are product
