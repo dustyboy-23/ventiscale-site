@@ -314,17 +314,17 @@ export default async function Post() {
           <div className="blog-callout">
             <div className="callout-label">Key insight</div>
             <p>
-              According to{" "}
+              Hiring a marketing employee typically takes months from posting
+              the role to full productivity, and{" "}
               <a
                 href="https://www.roberthalf.com/us/en/insights/research/data-reveals-which-marketing-and-creative-roles-are-in-highest-demand"
                 target="_blank"
                 rel="noopener noreferrer"
               >
-                Robert Half&apos;s 2026 hiring research
-              </a>
-              , it takes 3 to 6 months to hire a marketing employee and another 3
-              to 6 months before they&apos;re fully productive. An agency starts
-              producing content in week one.
+                Robert Half&apos;s hiring research
+              </a>{" "}
+              shows skilled marketing talent is getting harder to find, not
+              easier. An agency starts producing content in week one.
             </p>
           </div>
 
