@@ -216,8 +216,8 @@ export default async function Post() {
             Agent commerce is real. AI systems are browsing, comparing, and
             buying on behalf of consumers right now. If your store&apos;s
             product data isn&apos;t structured for machines to read,
-            you&apos;re invisible to a channel that converts 23x higher than
-            standard organic traffic.
+            you&apos;re invisible to a channel that converts meaningfully
+            higher than standard organic traffic.
           </p>
 
           <hr className="blog-divider" />
@@ -261,15 +261,9 @@ export default async function Post() {
               </div>
             </div>
             <div className="blog-stat">
-              <div className="stat-number">23x</div>
+              <div className="stat-number">~50%</div>
               <div className="stat-label">
-                higher conversion for AI-referred visitors vs standard organic
-              </div>
-            </div>
-            <div className="blog-stat">
-              <div className="stat-number">25%</div>
-              <div className="stat-label">
-                of Google searches now trigger an AI Overview
+                higher conversion for AI-referred product-page visitors, per Shopify Q1 2026 data
               </div>
             </div>
           </div>
@@ -423,18 +417,12 @@ export default async function Post() {
 
           <p>
             The brands ignoring this are optimizing their Meta bids and watching
-            cost per click climb. DTC customer acquisition costs are up 40-60%
-            since 2023. Agent commerce converts at a fraction of that cost
-            when your store is ready to receive it.
+            cost per click climb. DTC customer acquisition costs have been
+            climbing steadily for years. Agent commerce converts at a fraction
+            of that cost when your store is ready to receive it.
           </p>
 
           <div className="blog-stat-row">
-            <div className="blog-stat">
-              <div className="stat-number">40–60%</div>
-              <div className="stat-label">
-                increase in DTC customer acquisition costs since 2023
-              </div>
-            </div>
             <div className="blog-stat">
               <div className="stat-number">4 steps</div>
               <div className="stat-label">
