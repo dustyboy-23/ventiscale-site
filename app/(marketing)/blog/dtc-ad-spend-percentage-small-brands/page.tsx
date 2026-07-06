@@ -342,9 +342,10 @@ export default async function Post() {
             <strong>SMS list for launches and promos.</strong> SMS delivers
             $71-79 ROI per dollar spent in 2026, higher than email. Most DTC
             brands don&apos;t have an SMS list. The ones that do use it for
-            product drops, back-in-stock, and VIP early access. The same
-            customer you spent $90 acquiring on Meta converts at 8-15x higher
-            rate via SMS than via retargeting ads.
+            product drops, back-in-stock, and VIP early access &mdash; a
+            channel that converts an already-warm customer at essentially
+            zero marginal cost, instead of paying to retarget them again on
+            Meta.
           </p>
           <p>
             <strong>Review velocity that sustains conversion rate.</strong> 93%
