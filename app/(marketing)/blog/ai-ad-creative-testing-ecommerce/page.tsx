@@ -55,7 +55,7 @@ const FAQ_DATA = [
   },
   {
     q: "Is pre-spend AI creative scoring better than A/B testing?",
-    a: "Pre-spend scoring and A/B testing serve different purposes. AI scoring eliminates structurally weak creatives before you spend anything, reducing wasted budget by 40-60% on low-quality launches. A/B testing still validates winners at scale. The winning workflow: use AI scoring to enter your tests with only your strongest candidates.",
+    a: "Pre-spend scoring and A/B testing serve different purposes. AI scoring eliminates structurally weak creatives before you spend anything, cutting a meaningful share of wasted budget on low-quality launches. A/B testing still validates winners at scale. The winning workflow: use AI scoring to enter your tests with only your strongest candidates.",
   },
   {
     q: "What does AI creative scoring cost compared to a creative agency?",
@@ -215,8 +215,8 @@ export default async function Post() {
             AI ad creative testing lets ecommerce brands score their creatives
             against patterns from millions of top-performing ads before a
             single dollar runs on Meta or TikTok. The tools doing this are not
-            household names yet. But the brands using them are cutting wasted
-            test spend by 40-60%.
+            household names yet. But the brands using them are cutting a real
+            chunk of wasted test spend before it ever hits an ad account.
           </p>
 
           <h2>Why testing ad creatives the old way is so expensive</h2>
