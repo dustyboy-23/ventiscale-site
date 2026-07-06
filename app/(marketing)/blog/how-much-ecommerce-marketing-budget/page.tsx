@@ -50,7 +50,7 @@ const FAQ_DATA = [
   },
   {
     q: "What is the average customer acquisition cost for ecommerce brands in 2026?",
-    a: "Average blended CAC for ecommerce brands in 2026 is $68-$84, up 40% since 2023. Fashion and beauty verticals average $90-$130. Electronics brands average $100-$377. Rising CAC is why retention channels like email and SMS are becoming the primary focus.",
+    a: "Blended CAC for ecommerce brands varies heavily by vertical, but it's up 40-60% since 2023 across the board. Fashion, beauty, and electronics tend to run well above the blended average. Rising CAC is why retention channels like email and SMS are becoming the primary focus.",
   },
   {
     q: "Is it worth paying a marketing agency retainer for a small ecommerce brand?",
@@ -242,21 +242,22 @@ export default async function Post() {
               <div className="stat-label">Revenue: standard ecom marketing budget</div>
             </div>
             <div className="blog-stat">
-              <div className="stat-number">40%</div>
+              <div className="stat-number">40-60%</div>
               <div className="stat-label">DTC CAC increase since 2023</div>
             </div>
             <div className="blog-stat">
-              <div className="stat-number">89%</div>
+              <div className="stat-number">~68%</div>
               <div className="stat-label">Facebook CPM increase since 2020</div>
             </div>
           </div>
 
           <p>
-            DTC customer acquisition costs rose 40% between 2023 and 2025 across
-            all verticals. Facebook CPMs are up 89% since 2020. If your
-            marketing budget hasn&apos;t grown proportionally with those
-            increases, you&apos;re getting less reach, fewer conversions, and
-            higher cost per sale from the same dollars. The math is unforgiving.
+            DTC customer acquisition costs are up 40-60% since 2023 across
+            all verticals. Facebook CPMs have climbed every year since 2020,
+            up roughly two-thirds over that span. If your marketing budget
+            hasn&apos;t grown proportionally with those increases, you&apos;re
+            getting less reach, fewer conversions, and higher cost per sale
+            from the same dollars. The math is unforgiving.
           </p>
 
           <hr className="blog-divider" />
@@ -298,18 +299,20 @@ export default async function Post() {
             <p>
               Signing a $2,000/month agency retainer when your revenue is
               $5,000/month. That&apos;s 40% of revenue going to overhead before
-              a single ad dollar runs. At this stage, average blended CAC is
-              $68-$84 for most verticals. Your margins probably don&apos;t
-              support paid acquisition yet. Fix retention first.
+              a single ad dollar runs. At this stage, your blended CAC through
+              paid channels is likely well into the double digits per
+              customer. Your margins probably don&apos;t support paid
+              acquisition yet. Fix retention first.
             </p>
           </div>
 
           <p>
-            Beauty and fashion verticals average $90-$130 CAC. Electronics
-            brands average $100-$377. If your product margin doesn&apos;t absorb
-            that cost and still leave profit, paid acquisition is a cash drain,
-            not a growth engine. Build retention first. Paid ads become viable
-            once you have proof of LTV and repeat purchase rate.
+            Beauty, fashion, and electronics verticals tend to run toward the
+            higher end of ecommerce CAC ranges. If your product margin
+            doesn&apos;t absorb that cost and still leave profit, paid
+            acquisition is a cash drain, not a growth engine. Build retention
+            first. Paid ads become viable once you have proof of LTV and
+            repeat purchase rate.
           </p>
 
           <hr className="blog-divider" />
@@ -415,9 +418,10 @@ export default async function Post() {
             Why agency retainers eat your marketing budget alive
           </h2>
           <p>
-            DTC CAC went up 60% between 2023 and 2025. Agency retainers did not
-            go down. You&apos;re paying more to acquire every customer and also
-            paying a fixed monthly overhead fee that has nothing to do with your
+            DTC CAC is up 40-60% since 2023, and has climbed more than 60%
+            over the past five years. Agency retainers did not go down.
+            You&apos;re paying more to acquire every customer and also paying
+            a fixed monthly overhead fee that has nothing to do with your
             results.
           </p>
           <p>
@@ -452,10 +456,10 @@ export default async function Post() {
               >
                 Eightx&apos;s 2026 DTC benchmarks
               </a>
-              , average ecommerce CAC rose 60% since 2023 while agency retainer
-              pricing stayed flat or increased. The spread between what you pay
-              to acquire customers and what you pay to manage that spend is
-              widening every quarter.
+              , average ecommerce CAC has climbed more than 60% over the past
+              five years. Agency retainer pricing hasn&apos;t come down to
+              compensate. The spread between what you pay to acquire customers
+              and what you pay to manage that spend is widening every quarter.
             </p>
           </div>
 
