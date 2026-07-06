@@ -307,11 +307,12 @@ export default async function Post() {
             &quot;live.&quot; None of it is working at capacity.
           </p>
           <p>
-            A full five-email welcome series converts 35% more subscribers than
-            a two-email series. A three-email abandoned cart arc recovers
-            15-18% of carts. A post-purchase sequence mapped to a second
-            purchase drives that second buy within 30 days for 12-20% of
-            first-time buyers.
+            Subscribers who get a full multi-email welcome series convert to a
+            first purchase at roughly 51% higher rates than those who get a
+            single welcome email. A three-email abandoned cart arc recovers
+            more of the sequence than a single reminder does. A post-purchase
+            sequence mapped to a second purchase meaningfully lifts how many
+            first-time buyers come back within 30 days.
           </p>
           <p>
             Most DTC brands have zero of that running correctly. You can check
@@ -442,7 +443,7 @@ export default async function Post() {
           </p>
           <p>
             The leverage is in{" "}
-            <Link href="/blog/retention-vs-acquisition">
+            <Link href="/blog/retention-vs-acquisition-ecommerce">
               increasing LTV from customers you already have
             </Link>{" "}
             rather than expanding your software subscription list. That&apos;s
@@ -481,7 +482,7 @@ export default async function Post() {
             <h3>Keep reading</h3>
             <div className="blog-related-grid">
               <Link
-                href="/blog/retention-vs-acquisition"
+                href="/blog/retention-vs-acquisition-ecommerce"
                 className="blog-related-card"
               >
                 <div className="related-title">

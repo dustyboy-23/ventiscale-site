@@ -52,7 +52,7 @@ const FAQ_DATA = [
   },
   {
     q: "Why does DTC CAC keep going up even with fresh creative?",
-    a: "Fresh creative layered on stale positioning optimizes the wrong variable. If your core message doesn't differentiate, no visual treatment saves it. DTC CAC is up 222% over eight years across most categories. Most of that climb isn't a targeting problem. It's a positioning problem dressed up as a creative problem.",
+    a: "Fresh creative layered on stale positioning optimizes the wrong variable. If your core message doesn't differentiate, no visual treatment saves it. DTC apparel CAC alone is up 222% over eight years, and every vertical shows a similar multi-year climb. Most of that climb isn't a targeting problem. It's a positioning problem dressed up as a creative problem.",
   },
   {
     q: "How do I know if my ecommerce brand has a positioning problem?",
@@ -199,7 +199,8 @@ export default async function Post() {
                 increases in 2026, per MHI Growth Engine&apos;s benchmarks.
               </li>
               <li>
-                DTC CAC is up 222% over eight years. Most brands blame the
+                DTC apparel CAC is up 222% over eight years, and every
+                vertical shows a similar trajectory. Most brands blame the
                 media buy. The actual problem is usually the message.
               </li>
               <li>
@@ -232,8 +233,9 @@ export default async function Post() {
             your competitors already say better.
           </p>
           <p>
-            DTC CAC has climbed 222% over the last eight years according to
-            Eightx.co&apos;s 2026 benchmarks. Brands tend to blame platform
+            DTC apparel CAC alone has climbed 222% over the last eight years,
+            per Ringly&apos;s 2026 analysis, and other verticals show a
+            similar multi-year climb. Brands tend to blame platform
             algorithm changes, rising CPMs, or iOS attribution decay. But the
             actual culprit for most brands sitting above{" "}
             <Link href="/blog/ecommerce-cac-by-vertical-2026">
@@ -426,9 +428,9 @@ export default async function Post() {
               <div className="stat-label">Top-quartile return per dollar</div>
             </div>
             <div className="blog-stat">
-              <div className="stat-number">15.9x</div>
+              <div className="stat-number">17.6x</div>
               <div className="stat-label">
-                Email flow revenue vs broadcast campaign revenue per send
+                Email flow revenue vs broadcast campaign revenue per recipient
               </div>
             </div>
           </div>
