@@ -199,8 +199,11 @@ export default async function Post() {
                 OpenAI says they don&apos;t influence the organic answers.
               </li>
               <li>
-                AI-referred traffic converts at 23x the rate of organic search.
-                The intent signal on ChatGPT is higher than any other ad platform.
+                AI-referred traffic converts meaningfully higher than organic
+                search across every study measuring it, with reported
+                multiples ranging from roughly 4x to over 20x depending on
+                industry. The intent signal on ChatGPT is higher than most
+                other ad platforms.
               </li>
             </ul>
           </div>
@@ -281,9 +284,9 @@ export default async function Post() {
               <div className="stat-label">Omnicom clients in first-wave tests</div>
             </div>
             <div className="blog-stat">
-              <div className="stat-number">23x</div>
+              <div className="stat-number">4x-20x+</div>
               <div className="stat-label">
-                Higher conversion rate for AI-referred traffic vs organic search
+                Reported conversion lift for AI-referred traffic vs organic search
               </div>
             </div>
           </div>
@@ -297,13 +300,15 @@ export default async function Post() {
             Anyone citing specific CPCs right now is guessing.
           </p>
           <p>
-            What does exist is the conversion data on AI-referred traffic. Research
-            from 2026 shows AI-referred visitors convert at 23 times the rate of
-            standard organic search visitors. That number comes from the intent
-            differential. Someone who found your product through a Google results
-            page might have been comparison-shopping ten brands. Someone who got a
-            recommendation from ChatGPT mid-question was asking specifically for a
-            buying signal.
+            What does exist is the conversion data on AI-referred traffic.
+            Multiple 2026 studies show AI-referred visitors converting well
+            above standard organic search visitors, with reported multiples
+            ranging from roughly 4x in broad cross-industry data up to 20x+
+            in narrower case studies. That gap comes from the intent
+            differential. Someone who found your product through a Google
+            results page might have been comparison-shopping ten brands.
+            Someone who got a recommendation from ChatGPT mid-question was
+            asking specifically for a buying signal.
           </p>
           <p>
             The audience numbers are real too. ChatGPT has 100 million daily active
