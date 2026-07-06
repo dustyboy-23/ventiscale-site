@@ -13,9 +13,9 @@ export const posts: BlogPost[] = [
   {
     slug: "llm-traffic-ecommerce-conversion-2026",
     title:
-      "LLM-referred traffic converts at 2.47%. Above Google Ads. Above Meta.",
+      "Your ChatGPT traffic already wants to buy. Most stores never notice.",
     description:
-      "LLM-referred traffic from ChatGPT, Perplexity, and Gemini converts at 2.47% in retail. Above Google Ads and Meta Ads. Here's what ecom brands need to do.",
+      "ChatGPT, Perplexity, and Gemini are sending pre-qualified buyers straight to ecommerce stores. Here's why that traffic converts differently, and what gets a store cited.",
     date: "2026-07-05",
     author: "Dustin Gilmour",
     readTime: "7 min",
