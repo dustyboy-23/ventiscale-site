@@ -50,7 +50,7 @@ const FAQ_DATA = [
   },
   {
     q: "Why do DTC brands waste ad spend retargeting their own email subscribers?",
-    a: "Brands waste 8-15% of ad spend retargeting subscribers who would have converted via the next email campaign. The Klaviyo subscriber list and the Meta retargeting audience are the same people, but most brands never sync them. Adding your active email list as a Meta exclusion audience eliminates this overlap immediately.",
+    a: "Brands waste ad spend retargeting subscribers who would have converted via the next email campaign. The Klaviyo subscriber list and the Meta retargeting audience are the same people, but most brands never sync them. Connecting email and Meta data instead drives 25-35% higher ROAS. Adding your active email list as a Meta exclusion audience eliminates this overlap immediately.",
   },
   {
     q: "What's the difference between ROAS and MER for DTC marketing?",
@@ -202,9 +202,10 @@ export default async function Post() {
                 overhead that pays for headcount instead of output.
               </li>
               <li>
-                Brands waste 8-15% of ad spend retargeting email subscribers
-                their next campaign would have converted for free. Syncing
-                Klaviyo with Meta exclusion audiences closes this immediately.
+                Brands waste ad spend retargeting email subscribers their next
+                campaign would have converted for free. Syncing Klaviyo with
+                Meta exclusion audiences closes this overlap and connecting
+                that data drives 25-35% higher ROAS.
               </li>
               <li>
                 AI-native marketing systems run the same output at 60-80% lower
@@ -277,9 +278,8 @@ export default async function Post() {
           </p>
 
           <p>
-            DTC customer acquisition costs have risen 40-60% since 2023.
-            Blended averages now run $68-84 per customer across most verticals,
-            with luxury hitting $175-400+. That&apos;s the context. Every
+            DTC customer acquisition costs keep climbing. Shopify puts the
+            average at $274 per customer, with apparel running $318. That&apos;s the context. Every
             dollar you waste on efficiency gaps is a dollar that could have
             bought a customer. The brands closing this gap aren&apos;t spending
             more. They&apos;re getting more out of what they already spend.
@@ -305,8 +305,8 @@ export default async function Post() {
             retargeting audience and your email list are the same people.
             You&apos;re paying $1-3 per click to retarget a subscriber your
             next Klaviyo flow would have converted for essentially nothing.
-            Brands waste 8-15% of ad spend this way, per Eightx&apos;s 2026
-            DTC analysis.
+            Connecting email and Meta data to close this overlap drives
+            25-35% higher ROAS.
           </p>
           <p>
             <strong>Attribution gaps.</strong> Agencies report ROAS because it

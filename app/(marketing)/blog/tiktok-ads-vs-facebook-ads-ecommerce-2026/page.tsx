@@ -264,7 +264,7 @@ export default async function Post() {
             ]}
             cons={[
               "$1.07-$1.11 CPC (54% more expensive than TikTok per click)",
-              "Meta Advantage+ needs 300-1,000 creative variations to fully optimize — most agencies send 10",
+              "Meta Advantage+ scales from 10-15 creative variations minimum to 50-100+ at high spend — most agencies still send fewer than 10",
               "CPM rising every quarter since 2023 as inventory competition increases",
               "Organic reach near zero without paid promotion",
             ]}
@@ -467,8 +467,9 @@ export default async function Post() {
             <Link href="/blog/meta-advantage-plus-creative-volume">
               Meta Advantage+ creative volume requirements
             </Link>
-            , Facebook needs 300-1,000 variations to properly optimize
-            its delivery algorithm. Most agencies send 10 on a
+            , Facebook&apos;s own guidance scales from 10-15 variations
+            minimum to 50-100+ at high spend to properly optimize its
+            delivery algorithm. Most agencies still send fewer than 10 on a
             $4,500/month retainer. <em>The math never worked.</em>
           </p>
           <p>

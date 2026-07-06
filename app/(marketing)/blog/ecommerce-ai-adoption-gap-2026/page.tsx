@@ -358,8 +358,9 @@ export default async function Post() {
             has bandwidth. AI generates variations continuously, scores predicted
             winners before spend, and surfaces top performers in real time.{" "}
             <Link href="/blog/meta-advantage-plus-creative-volume">
-              Meta Advantage+ needs 300 to 1,000 creative variations to optimize
-              properly. The average agency sends 10.
+              Meta&apos;s own guidance scales from 10-15 creative variations
+              minimum to 50-100+ at high spend. Most agencies still send
+              fewer than 10.
             </Link>
           </p>
           <p>

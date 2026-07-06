@@ -58,7 +58,7 @@ const FAQ_DATA = [
   },
   {
     q: "How many ad creative variations does Meta Advantage+ need to work properly?",
-    a: "Meta Advantage+ performs best with 300-1,000 creative variations in the campaign, per reporting from Marketing Brew. Most agencies deliver 10-20. AI creative tools generate hundreds of on-brand variations in hours, which is why brands using AI creative can build a real Advantage+ testing pool where agency-only production usually can't.",
+    a: "Meta's own guidance scales from 10-15 variations minimum up to 50-100+ at high spend. Most agencies still send fewer than 10. AI creative tools generate hundreds of on-brand variations in hours, which is why brands using AI creative can build a real Advantage+ testing pool where agency-only production usually can't.",
   },
   {
     q: "Will AI ad creative replace marketing agencies?",
@@ -200,9 +200,9 @@ export default async function Post() {
                 results, starting at $49/month.
               </li>
               <li>
-                Meta Advantage+ needs 300-1,000 creative variations to optimize,
-                per Marketing Brew&apos;s reporting. Agencies send 10-20. AI
-                generates hundreds in hours.
+                Meta&apos;s own guidance scales from 10-15 variations minimum
+                to 50-100+ at high spend. Most agencies still send fewer than
+                10. AI generates hundreds in hours.
               </li>
               <li>
                 Higher-AOV, higher-consideration products still benefit more
@@ -283,15 +283,16 @@ export default async function Post() {
           <div className="blog-callout">
             <div className="callout-label">The volume problem nobody talks about</div>
             <p>
-              Meta Advantage+ performs best with 300-1,000 creative variations
-              in the campaign. Most agencies deliver 10-20 and call it a full
-              launch. That&apos;s not a creative quality problem. That&apos;s a
-              volume problem. We covered the full breakdown in{" "}
+              Meta&apos;s own guidance scales from 10-15 variations minimum up
+              to 50-100+ at high spend. Most agencies still send fewer than 10
+              and call it a full launch. That&apos;s not a creative quality
+              problem. That&apos;s a volume problem. We covered the full
+              breakdown in{" "}
               <Link href="/blog/meta-advantage-plus-creative-volume">
                 what Meta Advantage+ actually needs for creative volume
               </Link>
               . The short version: 10 creatives gives the algorithm almost
-              nothing to work with. 500 gives it something to actually test.
+              nothing to work with. 50-100+ gives it something to actually test.
             </p>
           </div>
 

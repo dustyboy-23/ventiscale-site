@@ -99,7 +99,7 @@ export const posts: BlogPost[] = [
     title:
       "Your DTC ad audience burns out every 2 weeks. Here's how to stay ahead.",
     description:
-      "Audience saturation kills DTC campaigns in 2-3 weeks. DTC CAC hit $68-84 in 2026, up 40-60% since 2023. Creative velocity is the only fix that scales.",
+      "Audience saturation kills DTC campaigns in 2-3 weeks. Average ecommerce CAC is $274, per Shopify. Creative velocity is the only fix that scales.",
     date: "2026-06-27",
     author: "Dustin Gilmour",
     readTime: "7 min",
@@ -1020,7 +1020,7 @@ export const posts: BlogPost[] = [
     title:
       "How to get your first 1,000 Shopify customers (without burning $10k on ads)",
     description:
-      "Paid ads cost $68-84 per customer. Your first 1,000 would run $80k that way. Here's the 4-channel mix that works on a real budget.",
+      "Paid ads alone can run well into six figures to reach your first 1,000 customers. Here's the 4-channel mix that works on a real budget.",
     date: "2026-05-03",
     author: "Dustin Gilmour",
     readTime: "8 min",
@@ -1326,7 +1326,7 @@ export const posts: BlogPost[] = [
     title:
       "Your email and your Meta ads aren't talking. You're paying for it.",
     description:
-      "Brands waste 8-15% of ad spend retargeting subscribers their next email would have converted. Here's how to fix the Klaviyo-Meta sync.",
+      "Brands waste ad spend retargeting subscribers their next email would have converted. Connecting email and Meta data instead drives 25-35% higher ROAS. Here's how to fix the Klaviyo-Meta sync.",
     date: "2026-05-15",
     author: "Dustin Gilmour",
     readTime: "7 min",

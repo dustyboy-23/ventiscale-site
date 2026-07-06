@@ -404,9 +404,9 @@ export default async function Post() {
             </Link>{" "}
             at this revenue tier, the limiting factor stops being which tools
             you&apos;re using and starts being how well the AI understands your
-            specific brand. Generic tools produce generic output. Blended DTC
-            customer acquisition cost sits at $68-84 in 2026, up 40-60% since
-            2023 &mdash; and the gap between brands holding that number down
+            specific brand. Generic tools produce generic output. Shopify puts
+            average customer acquisition cost at $274, with apparel running
+            $318 &mdash; and the gap between brands holding that number down
             and brands bleeding on it isn&apos;t the platform. It&apos;s the
             quality and specificity of what those platforms are sending.
           </p>
@@ -421,8 +421,8 @@ export default async function Post() {
               <div className="stat-label">Klaviyo Customer Agent (intro rate)</div>
             </div>
             <div className="blog-stat">
-              <div className="stat-number">$68-84</div>
-              <div className="stat-label">Blended DTC customer acquisition cost, 2026</div>
+              <div className="stat-number">$274</div>
+              <div className="stat-label">Average ecommerce customer acquisition cost, per Shopify</div>
             </div>
           </div>
 

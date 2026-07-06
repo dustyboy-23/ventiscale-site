@@ -47,7 +47,7 @@ const FAQ_DATA = [
   },
   {
     q: "How much money does a failed ad creative cost an ecommerce brand?",
-    a: "A failed ad creative on Meta typically costs $500-$2,000 in wasted spend before you have enough data to know it isn't working. At a blended DTC CAC of $68-84, every failed creative test pushes your acquisition cost higher for that period.",
+    a: "A failed ad creative on Meta typically costs $500-$2,000 in wasted spend before you have enough data to know it isn't working. With Shopify putting average ecommerce CAC at $274 (apparel running $318), every failed creative test pushes your acquisition cost higher for that period.",
   },
   {
     q: "Can AI predict which ads will perform well on Meta and TikTok?",
@@ -204,9 +204,10 @@ export default async function Post() {
                 viable for small brands.
               </li>
               <li>
-                At a blended DTC CAC of $68-84, every failed creative test
-                compounds your acquisition cost. Pre-scoring stops the bleed
-                before it starts.
+                With average ecommerce CAC at $274 per Shopify (apparel
+                running $318), every failed creative test compounds your
+                acquisition cost. Pre-scoring stops the bleed before it
+                starts.
               </li>
             </ul>
           </div>
@@ -237,8 +238,8 @@ export default async function Post() {
 
           <div className="blog-stat-row">
             <div className="blog-stat">
-              <div className="stat-number">$68-84</div>
-              <div className="stat-label">Blended DTC CAC average in 2026</div>
+              <div className="stat-number">$274</div>
+              <div className="stat-label">Average ecommerce CAC, per Shopify</div>
             </div>
             <div className="blog-stat">
               <div className="stat-number">$3K</div>
@@ -261,8 +262,8 @@ export default async function Post() {
             >
               Foundry CRO&apos;s 2026 ecommerce benchmarks
             </a>
-            , blended DTC CAC rose 40-60% since 2023, pushing average
-            acquisition cost to $68-84 for most brands. Every dollar wasted on
+            , customer acquisition costs keep climbing, with Shopify putting
+            the average at $274 (apparel running $318). Every dollar wasted on
             a failing creative test raises your effective CAC for the period.
             You&apos;re not just losing the test spend. You&apos;re losing the
             customer revenue it would have funded.
@@ -377,8 +378,8 @@ export default async function Post() {
 
           <h2>What pre-scoring does to your CAC math</h2>
           <p>
-            At a blended CAC of $68-84, every creative test failure raises your
-            average acquisition cost for the month. Run three losing tests at
+            At an average ecommerce CAC of $274 per Shopify, every creative
+            test failure raises your average acquisition cost for the month. Run three losing tests at
             $1,500 each and your effective CAC jumps $4,500 in wasted spend
             across that period&apos;s new customers. That&apos;s not a
             rounding error. That&apos;s a channel that looked unprofitable
@@ -432,9 +433,9 @@ export default async function Post() {
             predicted score as the floor is a reasonable starting point.
           </p>
           <p>
-            Third, launch only your scored performers. Meta Advantage+ already
-            wants 300-1,000 creative variations to optimize properly, as we
-            covered in the{" "}
+            Third, launch only your scored performers. Meta Advantage+&apos;s
+            own guidance already scales from 10-15 variations minimum to
+            50-100+ at high spend, as we covered in the{" "}
             <Link href="/blog/meta-advantage-plus-creative-volume">
               Advantage+ creative volume breakdown
             </Link>

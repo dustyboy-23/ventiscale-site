@@ -448,8 +448,9 @@ export default async function Post() {
             You&apos;re spending money on ads to acquire customers and sending
             them to a funnel with no email sequence to close them. You&apos;re
             retargeting buyers who were already in a conversion email flow. DTC
-            brands lose 8-15% of ad spend retargeting customers who were about
-            to receive a conversion email anyway.
+            brands waste ad spend retargeting customers who were about
+            to receive a conversion email anyway, when connecting that data
+            instead drives 25-35% higher ROAS.
           </p>
           <p>
             When no one owns the full funnel, everyone owns the gap. The gap is
@@ -463,10 +464,9 @@ export default async function Post() {
 
           <div className="blog-stat-row">
             <div className="blog-stat">
-              <div className="stat-number">8-15%</div>
+              <div className="stat-number">25-35%</div>
               <div className="stat-label">
-                ad spend wasted on redundant retargeting of email-conversion
-                customers
+                higher ROAS from connecting email and Meta retargeting data
               </div>
             </div>
             <div className="blog-stat">

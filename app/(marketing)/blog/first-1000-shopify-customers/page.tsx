@@ -7,12 +7,12 @@ export const metadata = {
   title:
     "How to get your first 1,000 Shopify customers (without burning $10k on ads) | Venti Scale",
   description:
-    "Paid ads alone can run $80k to reach your first 1,000 customers. Here's the 4-channel mix that works on a real budget.",
+    "Paid ads alone can run well into six figures to reach your first 1,000 customers. Here's the 4-channel mix that works on a real budget.",
   openGraph: {
     title:
       "How to get your first 1,000 Shopify customers (without burning $10k on ads)",
     description:
-      "Paid ads alone can run $80k to reach your first 1,000 customers. Here's the 4-channel mix that works on a real budget.",
+      "Paid ads alone can run well into six figures to reach your first 1,000 customers. Here's the 4-channel mix that works on a real budget.",
     url: "https://www.ventiscale.com/blog/first-1000-shopify-customers",
     type: "article",
     images: [
@@ -29,7 +29,7 @@ export const metadata = {
     title:
       "How to get your first 1,000 Shopify customers (without burning $10k on ads)",
     description:
-      "Paid ads alone can run $80k to reach your first 1,000 customers. Here's the 4-channel mix that works on a real budget.",
+      "Paid ads alone can run well into six figures to reach your first 1,000 customers. Here's the 4-channel mix that works on a real budget.",
     images: [
       "https://www.ventiscale.com/blog/first-1000-shopify-customers.jpg",
     ],
@@ -40,7 +40,7 @@ const SLUG = "first-1000-shopify-customers";
 const TITLE =
   "How to get your first 1,000 Shopify customers (without burning $10k on ads)";
 const DESCRIPTION =
-  "Paid ads alone can run $80k to reach your first 1,000 customers. Here's the 4-channel mix that works on a real budget.";
+  "Paid ads alone can run well into six figures to reach your first 1,000 customers. Here's the 4-channel mix that works on a real budget.";
 const DATE = "2026-05-03";
 const IMAGE = "/blog/first-1000-shopify-customers.jpg";
 const IMAGE_URL = `https://www.ventiscale.com${IMAGE}`;
@@ -64,7 +64,7 @@ const FAQ_DATA = [
   },
   {
     q: "How much should I spend on marketing to get my first 1,000 Shopify customers?",
-    a: "A lean-budget path to 1,000 customers runs $500-1,000 per month on micro-influencer posts plus your time on content. Avoid heavy paid ad spend until you have 20+ reviews, a homepage converting above 2%, and at least one email automation running. Brands that go paid-first without those foundations typically spend $80,000+ to reach 1,000 customers.",
+    a: "A lean-budget path to 1,000 customers runs $500-1,000 per month on micro-influencer posts plus your time on content. Avoid heavy paid ad spend until you have 20+ reviews, a homepage converting above 2%, and at least one email automation running. Brands that go paid-first without those foundations typically spend well into six figures to reach 1,000 customers, in line with Shopify's published average CAC of $274 per customer.",
   },
 ];
 
@@ -182,9 +182,10 @@ export default async function Post() {
             You open Shopify. You create a Meta ad. You set a $30 daily budget.
             Three weeks and $630 later, you&apos;ve made 9 sales. You think the
             ad needs work. The real problem is that paid social CAC for
-            unproven DTC brands runs well past what a new store can sustain,
-            and building your first 1,000 Shopify customers that way can
-            easily cost $50,000-80,000 before you see a real return.
+            unproven DTC brands runs well past what a new store can sustain
+            &mdash; Shopify puts average ecommerce CAC at $274 per customer
+            &mdash; and building your first 1,000 Shopify customers that way
+            can easily run into six figures before you see a real return.
           </p>
           <p>
             Most new stores go paid-first. They run out of budget before the

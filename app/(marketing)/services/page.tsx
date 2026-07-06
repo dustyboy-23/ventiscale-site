@@ -156,8 +156,8 @@ export default async function ServicesPage() {
           <p>
             30-50 pieces of monthly content production. Blog posts, landing
             pages, product copy, comparison articles. Optimized for both
-            Google and AI search citations (32.5% of AI citations go to
-            comparison content specifically).
+            Google and AI search citations (comparison-format content earns a
+            disproportionate share of AI citations).
           </p>
           <p>
             Includes keyword research, internal linking architecture (cluster
