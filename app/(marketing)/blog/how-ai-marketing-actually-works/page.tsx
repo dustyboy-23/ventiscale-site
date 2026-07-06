@@ -409,12 +409,8 @@ export default async function Post() {
 
           <div className="blog-stat-row">
             <div className="blog-stat">
-              <div className="stat-number">36%</div>
-              <div className="stat-label">increase in repeat purchases with AI-driven post-sale sequences</div>
-            </div>
-            <div className="blog-stat">
-              <div className="stat-number">20-30%</div>
-              <div className="stat-label">reduction in cart abandonment using AI-powered follow-up</div>
+              <div className="stat-number">23.7%</div>
+              <div className="stat-label">conversion lift from AI-personalized product copy, per controlled retail testing</div>
             </div>
           </div>
 
