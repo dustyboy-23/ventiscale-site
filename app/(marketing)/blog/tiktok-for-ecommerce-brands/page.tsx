@@ -6,11 +6,11 @@ import { BlogAuthorBio } from "@/components/marketing/blog-author-bio";
 export const metadata = {
   title: "TikTok for ecommerce brands: what works in 2026 (and what's already dead) | Venti Scale",
   description:
-    "TikTok moves $112B in commerce this year. Here's what content formats work for ecommerce brands in 2026, what's dead, and why your attribution is wrong.",
+    "TikTok Shop moves $112B globally this year. Here's what content formats work for ecommerce brands in 2026, what's dead, and why your attribution is wrong.",
   openGraph: {
     title: "TikTok for ecommerce brands: what works in 2026 (and what's already dead)",
     description:
-      "TikTok moves $112B in commerce this year. Here's what content formats work for ecommerce brands in 2026, what's dead, and why your attribution is wrong.",
+      "TikTok Shop moves $112B globally this year. Here's what content formats work for ecommerce brands in 2026, what's dead, and why your attribution is wrong.",
     url: "https://www.ventiscale.com/blog/tiktok-for-ecommerce-brands",
     type: "article",
     images: [
@@ -26,7 +26,7 @@ export const metadata = {
     card: "summary_large_image" as const,
     title: "TikTok for ecommerce brands: what works in 2026 (and what's already dead)",
     description:
-      "TikTok moves $112B in commerce this year. Here's what content formats work for ecommerce brands in 2026, what's dead, and why your attribution is wrong.",
+      "TikTok Shop moves $112B globally this year. Here's what content formats work for ecommerce brands in 2026, what's dead, and why your attribution is wrong.",
     images: ["https://www.ventiscale.com/blog/tiktok-ecommerce-brands.jpg"],
   },
 };
@@ -35,7 +35,7 @@ const SLUG = "tiktok-for-ecommerce-brands";
 const TITLE =
   "TikTok for ecommerce brands: what works in 2026 (and what's already dead)";
 const DESCRIPTION =
-  "TikTok moves $112B in commerce this year. Here's what content formats work for ecommerce brands in 2026, what's dead, and why your attribution is wrong.";
+  "TikTok Shop moves $112B globally this year. Here's what content formats work for ecommerce brands in 2026, what's dead, and why your attribution is wrong.";
 const DATE = "2026-05-02";
 const IMAGE = "/blog/tiktok-ecommerce-brands.jpg";
 const IMAGE_URL = `https://www.ventiscale.com${IMAGE}`;
@@ -457,17 +457,11 @@ export default async function Post() {
             Add a one-question post-purchase survey: &quot;How did you first
             hear about us?&quot; I track brand search volume in Google Search
             Console alongside TikTok campaign activity. When TikTok ramps up,
-            brand search follows within 2-3 weeks. That correlation is the real
-            signal. According to{" "}
-            <a
-              href="https://www.webfx.com/blog/social-media/tiktok-benchmarks/"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              WebFX&apos;s 2026 TikTok marketing benchmarks
-            </a>
-            , true TikTok impact runs 3-4x higher than last-click dashboards
-            report for most ecommerce brands.
+            brand search follows within 2-3 weeks. That correlation is the
+            real signal. Advertisers who&apos;ve switched from a 7-day to a
+            28-day attribution window report discovering 63-79% more
+            conversions they weren&apos;t crediting to TikTok, in line with
+            what TikTok&apos;s own post-purchase survey data shows.
           </p>
 
           <figure className="blog-image">

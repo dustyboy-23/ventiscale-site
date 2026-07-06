@@ -360,12 +360,12 @@ export default async function Post() {
           <div className="blog-callout">
             <div className="callout-label">Key insight</div>
             <p>
-              Health and wellness brands average 47.66% gross margin, but often
-              see contribution margin drop to 15&ndash;20% after CAC is
-              factored in. The gap between gross margin and contribution margin
-              is where your profit disappears. Most stores don&apos;t track
-              both, which is why they think they&apos;re fine until they
-              aren&apos;t.
+              Health and wellness brands average 47.66% contribution margin
+              before acquisition costs are layered in, but many stores in the
+              category still land at 15&ndash;20% once CAC is factored in. The
+              gap between the two numbers is where your profit disappears.
+              Most stores don&apos;t track both, which is why they think
+              they&apos;re fine until they aren&apos;t.
             </p>
           </div>
 
@@ -375,7 +375,7 @@ export default async function Post() {
             5. Customer acquisition cost (CAC)
           </h2>
           <p>
-            CAC is up 40&ndash;60% across DTC verticals since 2021. Fashion
+            CAC is up 40&ndash;60% across DTC verticals since 2023. Fashion
             brands now average $90&ndash;120 per new customer. Beauty and
             skincare runs $90&ndash;130. Electronics can hit $100&ndash;377.
             These aren&apos;t bad numbers unless your AOV and margin
@@ -392,7 +392,7 @@ export default async function Post() {
           <div className="blog-stat-row">
             <div className="blog-stat">
               <div className="stat-number">40&ndash;60%</div>
-              <div className="stat-label">DTC CAC increase since 2021</div>
+              <div className="stat-label">DTC CAC increase since 2023</div>
             </div>
             <div className="blog-stat">
               <div className="stat-number">5&ndash;7x</div>

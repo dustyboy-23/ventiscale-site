@@ -235,8 +235,8 @@ export default async function Post() {
               <div className="stat-label">Posts Brand Voice Cloning trains on</div>
             </div>
             <div className="blog-stat">
-              <div className="stat-number">40%</div>
-              <div className="stat-label">Sales lift Shopify claims with Sidekick</div>
+              <div className="stat-number">40&ndash;60%</div>
+              <div className="stat-label">Target cut to low-complexity merchant work</div>
             </div>
           </div>
 
@@ -277,10 +277,10 @@ export default async function Post() {
               >
                 Presta&apos;s 2026 Shopify Sidekick guide
               </a>
-              , Sidekick now covers 15 discrete task categories including pricing, inventory,
-              content, and customer data analysis. Shopify claims merchants using it see a 40%
-              lift in sales-related decisions made per week because the time barrier to acting
-              on data drops to near zero.
+              , Sidekick now spans pricing, inventory, content, and customer data analysis, with
+              a target of cutting high-volume, low-complexity merchant work by 40&ndash;60%. The
+              time barrier to acting on data drops to near zero once the agent can execute
+              directly instead of just reporting.
             </p>
           </div>
 

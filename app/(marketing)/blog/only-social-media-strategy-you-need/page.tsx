@@ -282,12 +282,8 @@ export default async function Post() {
               </div>
             </div>
             <div className="blog-stat">
-              <div className="stat-number">$5.20</div>
-              <div className="stat-label">ROI per $1 spent on managed social media</div>
-            </div>
-            <div className="blog-stat">
-              <div className="stat-number">41%</div>
-              <div className="stat-label">ROI from short-form video content</div>
+              <div className="stat-number">1</div>
+              <div className="stat-label">Platform, mastered, beats five platforms half-done</div>
             </div>
           </div>
 
@@ -306,17 +302,10 @@ export default async function Post() {
           <div className="blog-callout">
             <div className="callout-label">Key insight</div>
             <p>
-              According to{" "}
-              <a
-                href="https://sproutsocial.com/insights/social-media-statistics/"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                Sprout Social&apos;s 2026 research
-              </a>
-              , brands posting consistently 5+ times per week see 2.5x higher profile
-              visits and significantly stronger engagement rates than brands posting 1-2
-              times per week. The gap between consistent and inconsistent compounds fast.
+              Brands that post consistently, several times a week, tend to see
+              meaningfully more profile visits and stronger engagement than brands
+              posting once or twice a week. The gap between consistent and
+              inconsistent compounds fast.
             </p>
           </div>
 
@@ -339,12 +328,6 @@ export default async function Post() {
               <div className="stat-number">3.70%</div>
               <div className="stat-label">
                 TikTok engagement rate vs. 0.15% on Facebook
-              </div>
-            </div>
-            <div className="blog-stat">
-              <div className="stat-number">2.5x</div>
-              <div className="stat-label">
-                More profile visits from consistent posting
               </div>
             </div>
           </div>

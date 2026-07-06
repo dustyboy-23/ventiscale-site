@@ -43,7 +43,7 @@ const IMAGE_URL = `https://www.ventiscale.com${IMAGE}`;
 const FAQ_DATA = [
   {
     q: "Does UGC creative actually perform better than professional brand content for DTC ads?",
-    a: "Yes. UGC-focused creative achieves 44% lower CAC and 2.3x higher CTR compared to polished brand-produced content for fashion and beauty DTC brands, according to 2026 benchmark data. The performance gap is consistent across Meta and TikTok and widens at higher ad spend levels.",
+    a: "Yes. UGC-focused creative typically runs 30-45% lower CAC and 2-4x higher CTR compared to polished brand-produced content for fashion and beauty DTC brands. The performance gap is consistent across Meta and TikTok and widens at higher ad spend levels.",
   },
   {
     q: "How many UGC creative assets does a DTC brand need per month?",
@@ -174,17 +174,10 @@ export default async function Post() {
 
         <div className="prose-blog">
           <p>
-            44% lower CAC. 2.3x higher click-through rate. UGC-focused creative
-            outperforms polished brand-produced content on both metrics,
-            according to{" "}
-            <a
-              href="https://foundrycro.com/blog/dtc-fashion-marketing-benchmarks-2026/"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              2026 DTC creative performance benchmarks
-            </a>{" "}
-            across fashion and beauty brands. The numbers aren&apos;t close.
+            Roughly 30-45% lower CAC. Up to 2-4x higher click-through rate.
+            UGC-focused creative outperforms polished brand-produced content
+            on both metrics, consistently, across fashion and beauty DTC
+            brands. The numbers aren&apos;t close.
           </p>
           <p>
             And yet most DTC brands still run polished studio shoots as their

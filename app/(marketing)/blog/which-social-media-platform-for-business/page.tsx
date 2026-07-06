@@ -49,7 +49,7 @@ const FAQ_DATA = [
   },
   {
     q: "Is TikTok worth it for small businesses in 2026?",
-    a: "Yes, if your audience is under 40 and you can commit to 3-5 short videos per week. 71% of brands are now active on TikTok. Skip it if your customers are over 50, if you sell to other businesses, or if you can&apos;t realistically produce video content every week.",
+    a: "Yes, if your audience is under 40 and you can commit to 3-5 short videos per week. Only about 26% of marketers currently run TikTok campaigns, which means less competition for attention right now. Skip it if your customers are over 50, if you sell to other businesses, or if you can&apos;t realistically produce video content every week.",
   },
   {
     q: "Should small businesses be on LinkedIn?",
@@ -298,17 +298,18 @@ export default async function Post() {
           <div className="blog-callout">
             <div className="callout-label">Key insight</div>
             <p>
-              According to{" "}
+              Platform demographic data makes the decision straightforward.{" "}
               <a
                 href="https://sproutsocial.com/insights/new-social-media-demographics/"
                 target="_blank"
                 rel="noopener noreferrer"
               >
                 Sprout Social&apos;s 2026 demographics research
-              </a>
-              , small businesses that match platform to customer demographic
-              see 3x higher engagement than those who pick based on personal
-              preference or platform size alone.
+              </a>{" "}
+              breaks down exactly who uses each platform by age, income, and
+              intent. Small businesses that pick a platform based on where
+              their actual customers spend time consistently outperform ones
+              that pick based on personal preference or platform size alone.
             </p>
           </div>
 
@@ -371,10 +372,12 @@ export default async function Post() {
 
           <h2>TikTok and YouTube: where video buys attention</h2>
           <p>
-            71% of brands are active on TikTok. It&apos;s not just for dancing
-            teens anymore. Local businesses are going viral teaching homeowners
-            what plumbers don&apos;t want them to know. Ecommerce brands are
-            doing seven figures off organic TikTok alone.
+            Only about 26% of marketers currently run TikTok campaigns, which
+            means there&apos;s still real organic upside for brands willing
+            to show up. It&apos;s not just for dancing teens anymore. Local
+            businesses are going viral teaching homeowners what plumbers
+            don&apos;t want them to know. Ecommerce brands are doing seven
+            figures off organic TikTok alone.
           </p>
           <p>
             TikTok wins for anyone under 40 as the target audience and anyone
