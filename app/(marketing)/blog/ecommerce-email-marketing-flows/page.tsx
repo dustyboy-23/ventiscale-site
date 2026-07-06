@@ -428,8 +428,9 @@ export default async function Post() {
             <div className="callout-label">Key insight</div>
             <p>
               The fastest path to higher LTV isn&apos;t ads. It&apos;s a second
-              purchase. Customers who buy twice are 5x more likely to buy a third
-              time. Post-purchase email is the trigger for that second transaction.
+              purchase. Once a customer buys twice, the odds of a third purchase
+              jump to roughly 50% or higher. Post-purchase email is the trigger
+              for that second transaction.
             </p>
           </div>
 

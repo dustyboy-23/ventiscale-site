@@ -50,7 +50,7 @@ const FAQ_DATA = [
   },
   {
     q: "What is the average customer acquisition cost for ecommerce in 2026?",
-    a: "The average ecommerce customer acquisition cost is $318 in 2026, up 40% from 2023 according to Shopify\u2019s Global Commerce Report. Organic channels like email ($510 CAC) and SEO ($647) cost significantly less than paid search ($1,200) or social ads ($1,100).",
+    a: "The average ecommerce customer acquisition cost is $318 in 2026, up from $274 the year before, according to Shopify\u2019s Global Commerce Report. Organic channels like email ($8-15 CAC) and SEO/content cost dramatically less than paid search or paid social, which regularly run 5-10x higher per customer.",
   },
   {
     q: "Does email marketing still work for small ecommerce brands?",
@@ -223,15 +223,16 @@ export default async function Post() {
 
           <h2>The ad math that&apos;s killing small brands</h2>
           <p>
-            Here&apos;s what you&apos;re up against. Paid search costs $1,200
-            per customer. Social media ads cost $1,100. Those numbers are
-            lifetime channel CAC, not per-click. They include every dollar you
-            spend on the channel divided by every customer it produces.
+            Here&apos;s what you&apos;re up against. Paid search and paid
+            social CAC for most ecommerce brands runs well into the hundreds
+            of dollars per customer once you account for every dollar spent
+            on the channel divided by every customer it actually produces.
           </p>
           <p>
-            Now compare that to organic channels. SEO costs $647 per customer.
-            Email costs $510. Referral programs cost $400. The gap is massive.
-            And it gets wider every year as more brands pile into the same ad
+            Now compare that to organic channels. Email marketing acquires
+            customers for as little as $8-15. SEO-driven content costs a
+            fraction of paid once it&apos;s ranking. The gap is massive. And
+            it gets wider every year as more brands pile into the same ad
             auctions.
           </p>
 
@@ -245,17 +246,17 @@ export default async function Post() {
               <div className="stat-label">CAC increase since 2023</div>
             </div>
             <div className="blog-stat">
-              <div className="stat-number">$1,200</div>
-              <div className="stat-label">Paid search CAC per customer</div>
+              <div className="stat-number">$8-15</div>
+              <div className="stat-label">Email marketing CAC per customer</div>
             </div>
           </div>
 
           <p>
             The worst part: every year more brands pile into the same ad
-            auctions. Facebook CPMs have nearly doubled in three years. Google
-            CPCs keep climbing. You&apos;re paying more for less reach. And the
-            moment you stop spending, the traffic disappears. No compounding.
-            No equity. Just a meter running.
+            auctions. Facebook CPMs are up roughly 47% over the last three
+            years. Google CPCs keep climbing too. You&apos;re paying more for
+            less reach. And the moment you stop spending, the traffic
+            disappears. No compounding. No equity. Just a meter running.
           </p>
           <p>
             Small brands can&apos;t win the bidding war against bigger
