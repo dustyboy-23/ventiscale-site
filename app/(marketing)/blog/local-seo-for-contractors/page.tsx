@@ -50,11 +50,11 @@ const FAQ_DATA = [
   },
   {
     q: "How many Google reviews does a contractor need to rank locally?",
-    a: "There's no magic number, but contractors need a minimum 4-star average to be considered by most homeowners, with 68% refusing to hire businesses below that threshold. Every 10 new reviews increases your conversion rate by 2.8%, so building reviews consistently matters more than hitting a specific count.",
+    a: "There's no magic number, but contractors need a minimum 4-star average to be considered by most homeowners, with 68% refusing to hire businesses below that threshold. Building reviews consistently and steadily matters more than hitting a specific count, since both volume and recency feed into local ranking.",
   },
   {
     q: "Does a contractor need a website to rank in local SEO?",
-    a: "You can rank in the Google 3-pack without a website, but having one significantly boosts your rankings since on-page website signals account for 19% of local pack rankings. A simple, fast-loading site with your services, service area, and contact info is enough to make a real difference.",
+    a: "You can rank in the Google 3-pack without a website, but having one significantly boosts your rankings since on-page website signals account for a meaningful share of local pack rankings. A simple, fast-loading site with your services, service area, and contact info is enough to make a real difference.",
   },
 ];
 
@@ -272,11 +272,11 @@ export default async function Post() {
               <div className="stat-label">Google Business Profile signals</div>
             </div>
             <div className="blog-stat">
-              <div className="stat-number">19%</div>
+              <div className="stat-number">~15%</div>
               <div className="stat-label">On-page website signals</div>
             </div>
             <div className="blog-stat">
-              <div className="stat-number">16%</div>
+              <div className="stat-number">~20%</div>
               <div className="stat-label">Review signals</div>
             </div>
           </div>
@@ -304,15 +304,9 @@ export default async function Post() {
           </p>
           <p>
             91% of homeowners say online reviews matter when choosing a contractor.
-            68% won&apos;t consider hiring anyone with less than a 4-star rating. And{" "}
-            <a
-              href="https://www.brightlocal.com/resources/local-seo-statistics/"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              according to BrightLocal&apos;s 2026 local SEO research
-            </a>
-            , every 10 new reviews you earn increases your conversion rate by 2.8%.
+            68% won&apos;t consider hiring anyone with less than a 4-star rating.
+            Review volume and freshness both feed directly into how Google
+            ranks you locally, so consistent new reviews compound over time.
           </p>
           <p>
             Reviews are the hardest signal to fake and the most trusted signal
@@ -339,9 +333,11 @@ export default async function Post() {
             <div className="callout-label">Key insight</div>
             <p>
               Responding to reviews matters more than most contractors realize.
-              Responding to just 25% of your reviews improves conversion by 4.1%.
-              Reply to every review, including the negative ones. Keep responses brief
-              and professional. It shows future customers you&apos;re paying attention.
+              Businesses that reply to reviews regularly see meaningfully more
+              revenue than those that never respond. Reply to every review,
+              including the negative ones. Keep responses brief and
+              professional. It shows future customers you&apos;re paying
+              attention.
             </p>
           </div>
 
@@ -392,7 +388,7 @@ export default async function Post() {
           </h2>
           <p>
             Your website reinforces or undermines everything else you&apos;re doing.
-            On-page signals account for 19% of your local pack ranking. These are the
+            On-page signals account for a meaningful share of your local pack ranking. These are the
             things that matter most.
           </p>
           <p>

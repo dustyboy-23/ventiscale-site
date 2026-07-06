@@ -378,7 +378,7 @@ export default async function Post() {
           <p>
             According to{" "}
             <a
-              href="https://seranking.com/blog/marketing-agency-pricing/"
+              href="https://seranking.com/blog/seo-pricing/"
               target="_blank"
               rel="noopener noreferrer"
             >
@@ -396,9 +396,9 @@ export default async function Post() {
               <div className="stat-label">Of agencies charge under $1K/mo</div>
             </div>
             <div className="blog-stat">
-              <div className="stat-number">30%</div>
+              <div className="stat-number">$2K-4K</div>
               <div className="stat-label">
-                Of founder time spent managing the agency
+                Typical monthly tools + platform overhead
               </div>
             </div>
             <div className="blog-stat">
@@ -412,8 +412,8 @@ export default async function Post() {
           <h2 id="how-ai-changes-the-math">How AI changes the economics</h2>
           <p>
             Traditional agency overhead is the structural problem. Salaries for a
-            full creative team, account managers, strategy directors, plus the 30% of
-            your own time you&apos;ll spend managing the agency relationship. All of
+            full creative team, account managers, strategy directors, plus a real
+            chunk of your own time spent managing the agency relationship. All of
             it adds up to a cost model that demands commitment to break even.
           </p>
           <p>

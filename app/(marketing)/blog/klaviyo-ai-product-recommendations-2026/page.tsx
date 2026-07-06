@@ -239,18 +239,18 @@ export default async function Post() {
             fresh at send time.
           </p>
           <p>
-            I reviewed several accounts that made the switch from static grids
-            to Klaviyo AI recs in early 2026. The CTR delta was real in every
-            case. The smallest improvement was 2.4x. The biggest was over 9x.
-            The average landed right where{" "}
+            The CTR gap between static grids and AI-powered recs is
+            consistent across accounts, not a one-off result. Per{" "}
             <a
               href="https://stormy.ai/blog/klaviyo-ai-features-ecommerce-automation-2026"
               target="_blank"
               rel="noopener noreferrer"
             >
               Klaviyo&apos;s 2026 AI feature benchmarks
-            </a>{" "}
-            sit: just over 3.5%.
+            </a>
+            , AI-powered recommendations lift CTR to 3.75% on average, with
+            top performers spiking to 8.79%, against a static-grid baseline
+            well under 1%.
           </p>
 
           <div className="blog-stat-row">

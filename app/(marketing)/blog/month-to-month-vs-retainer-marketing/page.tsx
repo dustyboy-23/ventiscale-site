@@ -96,25 +96,24 @@ export default async function Post() {
           <div className="blog-tldr">
             <div className="callout-label">TL;DR</div>
             <ul>
-              <li>Long marketing contracts (6-12 months) exist because services are afraid you&apos;ll leave. Confident services don&apos;t need lock-in.</li>
-              <li>Month-to-month is the standard for AI-powered DFY services and most modern marketing platforms under $10K/month in 2026.</li>
-              <li>Contract length is one of the most diagnostic signals about service quality. Long contracts often correlate with mediocre delivery.</li>
-              <li>Services that earn next month&apos;s payment every month tend to produce more consistent quality than locked-in services.</li>
-              <li>Long contracts make sense for enterprise ($10K+/month) and defined project work (launch campaigns). For ongoing operations under $10K/month, month-to-month wins.</li>
+              <li>Some long marketing contracts exist because services want insurance against you leaving before the work proves itself, not because the work needs a long timeline.</li>
+              <li>Month-to-month is increasingly the standard for AI-powered DFY services and modern marketing platforms under $10K/month in 2026.</li>
+              <li>The contract length itself isn&apos;t proof of quality either way. What matters is whether the length matches a real resourcing or project need, or exists purely to suppress churn.</li>
+              <li>Services that have to earn next month&apos;s payment every month face different incentives than services already locked in.</li>
+              <li>Long contracts make more sense for enterprise ($10K+/month) and defined project work (launch campaigns). For ongoing operations under $10K/month, month-to-month is usually the better test of whether the work is actually working.</li>
             </ul>
           </div>
 
           <ComparisonMethodology
-            intro="I&apos;ve signed both kinds of marketing contracts. I&apos;ve also cataloged 200+ marketing services for client recommendations and tracked their contract terms against client satisfaction scores. The correlation is clearer than I expected, and the structural reasons behind it are real, not aesthetic."
+            intro="I&apos;ve signed both kinds of marketing contracts, and I&apos;ve watched founders get burned by the long-contract model more than once. This is a structural argument about incentives, not a claim to have run a formal industry study. Independent research on agency retention actually shows retainers outperforming project work on tenure and churn, so treat the framing below as our operating philosophy, not a settled statistic."
             criteria={[
               "Minimum commitment length",
               "Cancellation notice period and any early termination fees",
               "What gets handed back on exit (data, prompts, brand assets)",
               "Auto-renewal terms and the opt-out window",
-              "Client satisfaction score correlation across contract lengths",
               "Where each model honestly fits (no marketing spin)",
             ]}
-            experience="The 4.2/5 vs 2.9/5 satisfaction gap below is from real cross-service tracking, not vendor self-reports. The pattern held across price tiers and verticals."
+            experience="Structural incentives matter more than a single satisfaction number. A service that has to earn next month&apos;s payment every month faces different pressure than one that&apos;s already locked in, whatever the specific numbers turn out to be for any given agency."
           />
 
           <ComparisonOption
@@ -124,8 +123,7 @@ export default async function Post() {
               "30-day notice, no early termination fees, full data handover on exit",
               "Service has to earn next month&apos;s payment every month (structural quality pressure)",
               "Front-loaded value: visible results in month 1, not promised in month 6",
-              "4.2/5 average client satisfaction (highest tier across contract types)",
-              "70-80% retention past month 6 (voluntary, not locked-in)",
+              "Retention has to be earned voluntarily every month, not enforced by contract",
               "AI-compressed onboarding makes month 1 break-even possible for the service",
             ]}
             cons={[
@@ -149,10 +147,8 @@ export default async function Post() {
               "Some agencies give better pricing in exchange for the longer commitment",
             ]}
             cons={[
-              "30-40% renew at end of 12-month contract (most clients want out)",
-              "2.9/5 average satisfaction (lowest tier across contract structures)",
               "50-100% early termination fees on remaining contract value",
-              "Reduced churn pressure means quality often drifts by month 6",
+              "Reduced churn pressure can let quality drift without you noticing until renewal",
               "60-90 day notice clauses trap you past evaluation windows",
               "Auto-renewal clauses with short opt-out windows are common",
             ]}
@@ -209,42 +205,46 @@ export default async function Post() {
             pressure squarely on the service, where it belongs.
           </p>
 
-          <h2>What contract length actually predicts</h2>
+          <h2>What contract length actually signals</h2>
           <p>
-            Looking across 200+ marketing services we&apos;ve cataloged for
-            comparison purposes, contract length correlates strongly with
-            service quality outcomes:
+            This is a structural argument, not a formal study result. Worth
+            being honest about the counterpoint: published research on agency
+            retention generally shows retainer relationships lasting longer
+            and churning less than pure project work, because ongoing
+            engagements let value compound. That&apos;s a different comparison
+            than month-to-month-with-no-lock-in versus long-contract-with-lock-in,
+            but it means you shouldn&apos;t take &quot;long contract&quot; and &quot;bad service&quot;
+            as automatically correlated. The pattern we care about is narrower.
           </p>
           <p>
-            <strong>Month-to-month services:</strong> 4.2/5 average client
-            satisfaction. 70-80% of clients retained after month 6. Real-time
-            output access. Senior-level direct communication.
+            <strong>Month-to-month services</strong> have to earn renewal
+            every 30 days with nothing forcing you to stay. Real-time output
+            access and senior-level direct communication tend to come with
+            that model because the service has no slack to hide behind.
           </p>
           <p>
-            <strong>3-month minimum services:</strong> 3.7/5 average. 55-65% retention.
-            Mixed reporting cadence.
+            <strong>Long-contract services (6-12+ months)</strong> can
+            deliver excellent work too, especially at the enterprise tier
+            where dedicated resourcing genuinely requires commitment. The risk
+            isn&apos;t the contract length itself. It&apos;s a service using
+            the lock-in as insurance against being fired for mediocre work
+            rather than as a resourcing necessity.
           </p>
           <p>
-            <strong>6-month minimum services:</strong> 3.3/5 average. 45-55%
-            retention (counted as locked-in clients, not voluntary stays).
-          </p>
-          <p>
-            <strong>12+ month contracts:</strong> 2.9/5 average. 30-40% renew
-            at end of contract.
-          </p>
-          <p>
-            <em>The correlation is consistent across price tiers and verticals.</em>{" "}
-            Contract length predicts service quality more reliably than price,
-            company size, or stated capabilities.
+            <em>The question worth asking isn&apos;t &quot;how long is the contract,&quot;
+            it&apos;s &quot;why does the length exist.&quot;</em> A contract that matches
+            a real resourcing or project need is a different animal from one
+            that exists purely to suppress churn.
           </p>
 
           <div className="blog-callout">
             <div className="callout-label">Key insight</div>
             <p>
               The honest test: if a service&apos;s work justifies retention,
-              they don&apos;t need a contract to keep you. Long contracts are
-              insurance against the possibility that the service isn&apos;t
-              good enough to retain on its own merits.
+              they don&apos;t need a contract to keep you. A long contract
+              that exists purely to prevent cancellation is insurance against
+              the possibility that the service isn&apos;t good enough to
+              retain on its own merits.
             </p>
           </div>
 

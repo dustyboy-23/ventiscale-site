@@ -211,16 +211,26 @@ export default async function Post() {
           </p>
 
           <h2>
-            There are 232,000 coaches in the U.S. That&apos;s your competition.
+            There are 232,000+ coaches in the U.S. That&apos;s your competition.
           </h2>
           <p>
-            The coaching industry hit{" "}
+            A 2025{" "}
+            <a
+              href="https://www.businesswire.com/news/home/20251204763253/en/United-States-Professional-Coaching-Industry-Report-2025-an-Army-of-232000-Coaches-Serving-Clients-Creating-a-16-Billion-Industry-That-Has-More-Than-Doubled-Since-2016---ResearchAndMarkets.com"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              ResearchAndMarkets industry report
+            </a>{" "}
+            counted over 232,000 professional coaches in the U.S. alone, and
+            the global coaching industry is projected to hit roughly $5.8
+            billion in 2026 per{" "}
             <a
               href="https://simply.coach/blog/icf-coaching-statistics-industry-insights/"
               target="_blank"
               rel="noopener noreferrer"
             >
-              $5.8 billion in 2026
+              ICF-sourced industry data
             </a>
             . That&apos;s great if you&apos;re already established. If
             you&apos;re trying to grow, it means the market is flooded.
@@ -395,9 +405,9 @@ export default async function Post() {
               </div>
             </div>
             <div className="blog-stat">
-              <div className="stat-number">75%</div>
+              <div className="stat-number">96%</div>
               <div className="stat-label">
-                Of coaching clients are repeat buyers
+                Of coaching clients say they&apos;d repeat the process (ICF)
               </div>
             </div>
           </div>
