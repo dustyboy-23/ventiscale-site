@@ -317,18 +317,10 @@ export default async function Post() {
           <div className="blog-callout">
             <div className="callout-label">Key insight</div>
             <p>
-              According to{" "}
-              <a
-                href="https://sproutsocial.com/insights/social-media-management-cost/"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                Sprout Social&apos;s 2025 social media management pricing report
-              </a>
-              , businesses that spend $2,000 to $5,000 per month see 3x higher
-              engagement than those spending under $1,000. The gap isn&apos;t
-              about budget alone, it&apos;s about what that budget buys in
-              strategy and production quality.
+              Businesses that spend $2,000 to $5,000 per month tend to see
+              meaningfully higher engagement than those spending under
+              $1,000. The gap isn&apos;t about budget alone, it&apos;s about
+              what that budget buys in strategy and production quality.
             </p>
           </div>
 
@@ -406,8 +398,8 @@ export default async function Post() {
               <div className="stat-label">In-house hire, fully loaded</div>
             </div>
             <div className="blog-stat">
-              <div className="stat-number">3x</div>
-              <div className="stat-label">Engagement gap at $2K+ vs under $1K</div>
+              <div className="stat-number">15-25%</div>
+              <div className="stat-label">Of marketing budget should go to social</div>
             </div>
           </div>
 
