@@ -270,10 +270,10 @@ export default async function Post() {
             Rewrite the opening 2 sentences of your product description as an
             outcome. &quot;Fits a 13-inch laptop, a full day of snacks, and
             still doesn&apos;t look like a hiking pack.&quot; Lead with what
-            they&apos;ll experience. Then back it up with specs.
-            Outcome-first descriptions show 28% higher add-to-cart rates than
-            spec-first copy according to Baymard Institute research. The spec
-            still matters. It just doesn&apos;t belong at the top.
+            they&apos;ll experience. Then back it up with specs. Buyers
+            connect with what a product does for them faster than they parse
+            a spec sheet. The spec still matters. It just doesn&apos;t belong
+            at the top.
           </p>
 
           <hr className="blog-divider" />
@@ -466,8 +466,8 @@ export default async function Post() {
             That&apos;s revenue with zero additional traffic cost.
           </p>
           <p>
-            Generic &quot;top sellers&quot; recommendations underperform by 35%
-            vs brand-trained product affinity suggestions (Klaviyo, 2025). The
+            Generic &quot;top sellers&quot; recommendations consistently
+            underperform brand-trained, affinity-based suggestions. The
             brands getting this right aren&apos;t just showing any product.
             They&apos;re showing the right product for that specific buyer based
             on what they viewed and what similar customers bought next.
