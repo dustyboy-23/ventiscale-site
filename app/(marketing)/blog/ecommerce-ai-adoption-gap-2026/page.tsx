@@ -46,7 +46,7 @@ const IMAGE_URL = `https://www.ventiscale.com${IMAGE}`;
 const FAQ_DATA = [
   {
     q: "What percentage of ecommerce brands are using AI marketing in 2026?",
-    a: "89% of retailers are now deploying AI in their marketing operations or running structured trials, according to 2026 research from ALM Corp. AI adoption in ecommerce has crossed the mainstream threshold. The question for most brands is no longer whether to use AI marketing but whether their current marketing partner is already running it for them.",
+    a: "89% of retail and CPG companies are actively using or testing AI applications, per McKinsey&apos;s research. AI adoption in ecommerce has crossed the mainstream threshold, though full-scale implementation still lags well behind that adoption number. The question for most brands is no longer whether to use AI marketing but whether their current marketing partner is already running it for them.",
   },
   {
     q: "Why isn't my marketing agency using AI for my campaigns?",
@@ -176,19 +176,11 @@ export default async function Post() {
 
         <div className="prose-blog">
           <p>
-            Three years ago, 41% of retailers had AI marketing pilots running.
-            Last year the number crossed 70%. Today,{" "}
-            <a
-              href="https://almcorp.com/blog/ai-powered-marketing-automation/"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              according to ALM Corp&apos;s 2026 AI adoption research
-            </a>
-            , 89% of retailers are deploying AI in their marketing operations or
-            running structured trials. The adoption window closed. You&apos;re
-            not evaluating a trend. You&apos;re measuring how far behind
-            you&apos;ve already fallen.
+            AI marketing pilots were an early-adopter thing a few years ago.
+            Today, according to McKinsey&apos;s research, 89% of retail and
+            CPG companies are actively using or testing AI applications. The
+            adoption window closed. You&apos;re not evaluating a trend.
+            You&apos;re measuring how far behind you&apos;ve already fallen.
           </p>
           <p>
             And the gap that matters most isn&apos;t between brands using AI and
@@ -232,11 +224,10 @@ export default async function Post() {
 
           <h2 id="adoption-curve">The adoption curve is already done</h2>
           <p>
-            In 2023, AI marketing was something early adopters tested in pilots.
-            In 2024, the cautious majority started structured trials. By 2025,
-            the mainstream crossed over. The 89% figure from ALM Corp&apos;s
-            2026 research isn&apos;t a prediction. It&apos;s the current
-            operating reality of your market.
+            AI marketing was something early adopters tested in pilots a
+            couple years ago. Now it&apos;s the mainstream default. McKinsey&apos;s
+            89% figure for retail and CPG AI adoption isn&apos;t a prediction.
+            It&apos;s the current operating reality of your market.
           </p>
           <p>What the 89% are running looks like this:</p>
           <ul>
@@ -405,9 +396,9 @@ export default async function Post() {
               </div>
             </div>
             <div className="blog-stat">
-              <div className="stat-number">300-1k</div>
+              <div className="stat-number">50-100+</div>
               <div className="stat-label">
-                Ad variations Meta Advantage+ needs to optimize
+                Ad variations Meta recommends at high spend tiers
               </div>
             </div>
             <div className="blog-stat">
