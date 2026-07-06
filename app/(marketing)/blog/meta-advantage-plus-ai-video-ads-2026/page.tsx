@@ -6,11 +6,11 @@ import { BlogAuthorBio } from "@/components/marketing/blog-author-bio";
 export const metadata = {
   title: "Your agency charges $3K per video. Meta AI makes them from photos. | Venti Scale",
   description:
-    "Meta Advantage+ generates video ads from product photos. Brands see 40% lower creative costs and 22% ROAS lift. Here's how to turn it on in 20 minutes.",
+    "Meta Advantage+ generates video ads from product photos, cutting creative costs up to 40%. Here's how to turn it on in 20 minutes.",
   openGraph: {
     title: "Your agency charges $3K per video. Meta AI makes them from photos.",
     description:
-      "Meta Advantage+ generates video ads from product photos. Brands see 40% lower creative costs and 22% ROAS lift. Here's how to turn it on in 20 minutes.",
+      "Meta Advantage+ generates video ads from product photos, cutting creative costs up to 40%. Here's how to turn it on in 20 minutes.",
     url: "https://www.ventiscale.com/blog/meta-advantage-plus-ai-video-ads-2026",
     type: "article",
     images: [
@@ -26,7 +26,7 @@ export const metadata = {
     card: "summary_large_image" as const,
     title: "Your agency charges $3K per video. Meta AI makes them from photos.",
     description:
-      "Meta Advantage+ generates video ads from product photos. Brands see 40% lower creative costs and 22% ROAS lift. Here's how to turn it on in 20 minutes.",
+      "Meta Advantage+ generates video ads from product photos, cutting creative costs up to 40%. Here's how to turn it on in 20 minutes.",
     images: ["https://www.ventiscale.com/blog/meta-ai-video-ads-2026.jpg"],
   },
 };
@@ -35,7 +35,7 @@ const SLUG = "meta-advantage-plus-ai-video-ads-2026";
 const TITLE =
   "Your agency charges $3K per video. Meta AI makes them from photos.";
 const DESCRIPTION =
-  "Meta Advantage+ generates video ads from product photos. Brands see 40% lower creative costs and 22% ROAS lift. Here's how to turn it on in 20 minutes.";
+  "Meta Advantage+ generates video ads from product photos, cutting creative costs up to 40%. Here's how to turn it on in 20 minutes.";
 const DATE = "2026-06-04";
 const IMAGE = "/blog/meta-ai-video-ads-2026.jpg";
 const IMAGE_URL = `https://www.ventiscale.com${IMAGE}`;
@@ -51,7 +51,7 @@ const FAQ_DATA = [
   },
   {
     q: "Does Meta AI video actually improve ROAS?",
-    a: "Yes. Brands using AI-generated video in Advantage+ Shopping Campaigns average 22% higher ROAS compared to static-only campaigns, according to Meta data reported by benly.ai. The improvement comes from Meta's algorithm optimizing across more format variation.",
+    a: "Early testing shows AI-generated video performs within 10-15% of professional productions for direct response campaigns, per Meta data reported by benly.ai, while cutting creative production costs by up to 40%. The value is less about beating professional video on performance and more about matching it at a fraction of the cost and time, which lets you run far more format variation.",
   },
   {
     q: "Can you use Meta AI video with any campaign type?",
@@ -176,7 +176,8 @@ export default async function Post() {
             Meta Advantage+ has been automatically generating video ads from static
             product images since February 2026. It&apos;s free inside Ads Manager. It
             ships with no production budget, no video file, no design brief. Brands
-            running it average 22% higher ROAS and 40% lower creative costs.
+            running it cut creative production costs by up to 40%, with output
+            performing within 10-15% of professionally produced video.
           </p>
           <p>
             Most agencies haven&apos;t set it up. Most brands don&apos;t know it exists.
@@ -190,8 +191,9 @@ export default async function Post() {
                 photos. No production budget, no designer, no file upload.
               </li>
               <li>
-                Brands using AI video in Advantage+ Shopping Campaigns average 22% ROAS
-                lift and 40% lower creative production costs.
+                Brands using AI video in Advantage+ Shopping Campaigns cut creative
+                production costs by up to 40%, with output performing within
+                10-15% of professionally produced video.
               </li>
               <li>
                 The feature is already inside your Ads Manager. Activation takes under 20
@@ -207,8 +209,8 @@ export default async function Post() {
           <p>
             Meta Advantage+ AI video is a live feature that converts your static product
             images into short-form video ad variations automatically. Brands using it
-            average 22% ROAS lift and 40% lower creative production costs compared to
-            static-only campaigns.
+            cut creative production costs by up to 40%, with output performing within
+            10-15% of professionally produced video for direct response campaigns.
           </p>
 
           <h2>What Meta Advantage+ AI video actually does</h2>
@@ -239,16 +241,16 @@ export default async function Post() {
             >
               Meta&apos;s Advantage+ performance data reported by benly.ai
             </a>
-            , brands combining AI-generated video with Advantage+ Shopping Campaigns
-            average 22% higher ROAS than brands running static-only creatives. Creative
-            production costs drop 40% because generation happens inside the platform, not
-            a studio.
+            , creative production costs drop by up to 40% because generation
+            happens inside the platform, not a studio, and early tests show
+            the AI-generated output performing within 10-15% of professional
+            productions for direct response campaigns.
           </p>
 
           <div className="blog-stat-row">
             <div className="blog-stat">
-              <div className="stat-number">22%</div>
-              <div className="stat-label">Average ROAS lift with AI video</div>
+              <div className="stat-number">10-15%</div>
+              <div className="stat-label">Gap vs. professional production quality</div>
             </div>
             <div className="blog-stat">
               <div className="stat-number">40%</div>
@@ -273,8 +275,8 @@ export default async function Post() {
             One home goods brand was paying $2,200/month for 8 video creatives. After
             activating Meta AI video and redirecting that budget to media spend, they were
             running 60+ video variations per month and added 20% more fuel to the ads
-            that were already making money. Factor in the 22% ROAS improvement from
-            format optimization and the total return flipped fast.
+            that were already making money. Factor in the extra format-testing
+            volume the AI made possible and the total return flipped fast.
           </p>
           <p>
             The pattern I keep seeing: brands treat creative production as a fixed cost.
@@ -297,7 +299,9 @@ export default async function Post() {
             <Link href="/blog/meta-advantage-plus-creative-volume">
               how Advantage+ needs creative volume to optimize
             </Link>
-            . The algorithm performs best with 300-1,000 variations. Static-only
+            . The algorithm scales its testing budget with spend level, and
+            most brands running meaningful ad budgets need well beyond the
+            10-20 assets that suffice at the entry level. Static-only
             campaigns cap out fast. AI-generated video solves the volume problem without
             a proportional cost increase.
           </p>
