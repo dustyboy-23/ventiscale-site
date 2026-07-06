@@ -292,30 +292,30 @@ export default async function Post() {
           <div className="blog-callout">
             <div className="callout-label">Key insight</div>
             <p>
-              According to{" "}
+              Per{" "}
               <a
                 href="https://stormy.ai/blog/klaviyo-customer-agent-shopify-tutorial-2026"
                 target="_blank"
                 rel="noopener noreferrer"
               >
-                Stormy&apos;s 2026 Klaviyo setup guide
+                Stormy&apos;s Klaviyo setup guide
               </a>
               , Klaviyo&apos;s Customer Agent handles customer service with brand
-              voice and seamless human handoff, now extended to WhatsApp. Brands
-              using AI customer service resolve 85% of queries without human
-              intervention.
+              voice and seamless human handoff, now extended to WhatsApp. A
+              meaningful share of routine queries get resolved without a human
+              ever picking up the thread.
             </p>
           </div>
 
           <p>
             The AI product recommendation layer inside Customer Hub is worth
-            noting too. Klaviyo&apos;s recommendation engine averages 3.75% CTR
-            inside messages, with top-performing stores hitting 8.79%. When a
-            customer opens a WhatsApp message and the &quot;you might also
-            like&quot; block shows something actually relevant, the click rate on
-            that recommendation beats what you&apos;d get in the same email.
-            Higher open rates times higher click rates is a meaningful difference
-            in revenue per send.
+            noting too. Klaviyo&apos;s recommendation engine drives real
+            click-through inside messages. When a customer opens a WhatsApp
+            message and the &quot;you might also like&quot; block shows
+            something actually relevant, the click rate on that recommendation
+            beats what you&apos;d get in the same email. Higher open rates
+            times higher click rates is a meaningful difference in revenue per
+            send.
           </p>
 
           <hr className="blog-divider" />
@@ -352,14 +352,6 @@ export default async function Post() {
             <div className="blog-stat">
               <div className="stat-number">$71-79</div>
               <div className="stat-label">SMS ROI per $1 spent</div>
-            </div>
-            <div className="blog-stat">
-              <div className="stat-number">3.75%</div>
-              <div className="stat-label">Klaviyo AI rec CTR avg</div>
-            </div>
-            <div className="blog-stat">
-              <div className="stat-number">85%</div>
-              <div className="stat-label">CS queries resolved by AI</div>
             </div>
           </div>
 
