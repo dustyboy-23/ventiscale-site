@@ -390,17 +390,27 @@ export default async function Post() {
           <div className="blog-callout">
             <div className="callout-label">Key insight</div>
             <p>
-              According to{" "}
+              Per{" "}
+              <a
+                href="https://foundrycro.com/blog/ecommerce-marketing-benchmarks-2026/"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                Foundry CRO&apos;s 2026 ecommerce marketing benchmarks
+              </a>
+              , Meta Advantage+ seeded with strong first-party signal achieves
+              4.52x ROAS (22% above manually managed campaigns), compared to
+              1.86-2.19x for standard Advantage+ running on Meta&apos;s
+              general population. Syncing Klaviyo&apos;s{" "}
               <a
                 href="https://stormy.ai/blog/shopify-ads-optimization-2026-pmax-meta-advantage-plus"
                 target="_blank"
                 rel="noopener noreferrer"
               >
-                2026 Shopify ads optimization benchmarks
-              </a>
-              , brands syncing Klaviyo predictive segments as Meta Advantage+ seed
-              audiences consistently achieve 4.52x ROAS compared to 1.86-2.19x for
-              brands running Advantage+ on Meta&apos;s general population.
+                Predictive Analytics segments as seed audiences
+              </a>{" "}
+              is exactly the kind of first-party signal that unlocks that
+              lift.
             </p>
           </div>
 
