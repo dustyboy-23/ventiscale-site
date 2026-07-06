@@ -7,12 +7,12 @@ export const metadata = {
   title:
     "Facebook AI Mode launched. Most ecommerce brands have nothing worth reading. | Venti Scale",
   description:
-    "Meta AI Mode on Facebook pulls from public posts, Groups, and Reels. 34% of US purchases involve AI agents now. Here's what ecommerce brands need to fix.",
+    "Meta AI Mode on Facebook pulls from public posts, Groups, and Reels. AI agents are showing up in a fast-growing share of US purchase journeys. Here's what ecommerce brands need to fix.",
   openGraph: {
     title:
       "Facebook AI Mode launched. Most ecommerce brands have nothing worth reading.",
     description:
-      "Meta AI Mode on Facebook pulls from public posts, Groups, and Reels. 34% of US purchases involve AI agents now. Here's what ecommerce brands need to fix.",
+      "Meta AI Mode on Facebook pulls from public posts, Groups, and Reels. AI agents are showing up in a fast-growing share of US purchase journeys. Here's what ecommerce brands need to fix.",
     url: "https://www.ventiscale.com/blog/meta-facebook-ai-mode-ecommerce-2026",
     type: "article",
     images: [
@@ -29,7 +29,7 @@ export const metadata = {
     title:
       "Facebook AI Mode launched. Most ecommerce brands have nothing worth reading.",
     description:
-      "Meta AI Mode on Facebook pulls from public posts, Groups, and Reels. 34% of US purchases involve AI agents now. Here's what ecommerce brands need to fix.",
+      "Meta AI Mode on Facebook pulls from public posts, Groups, and Reels. AI agents are showing up in a fast-growing share of US purchase journeys. Here's what ecommerce brands need to fix.",
     images: [
       "https://www.ventiscale.com/blog/facebook-ai-mode-ecommerce.jpg",
     ],
@@ -40,7 +40,7 @@ const SLUG = "meta-facebook-ai-mode-ecommerce-2026";
 const TITLE =
   "Facebook AI Mode launched. Most ecommerce brands have nothing worth reading.";
 const DESCRIPTION =
-  "Meta AI Mode on Facebook pulls from public posts, Groups, and Reels. 34% of US purchases involve AI agents now. Here's what ecommerce brands need to fix.";
+  "Meta AI Mode on Facebook pulls from public posts, Groups, and Reels. AI agents are showing up in a fast-growing share of US purchase journeys. Here's what ecommerce brands need to fix.";
 const DATE = "2026-06-21";
 const IMAGE = "/blog/facebook-ai-mode-ecommerce.jpg";
 const IMAGE_URL = `https://www.ventiscale.com${IMAGE}`;
@@ -60,7 +60,7 @@ const FAQ_DATA = [
   },
   {
     q: "How do I optimize my ecommerce brand for Facebook AI Mode?",
-    a: "Start by publishing posts that answer your top 10 customer questions. Participate in relevant Facebook Groups and answer questions as a brand. Shoot Reels that teach something specific, not just product demos. Brands that post educational Facebook content weekly are 4x more likely to be cited in AI answers than brands posting once a month.",
+    a: "Start by publishing posts that answer your top 10 customer questions. Participate in relevant Facebook Groups and answer questions as a brand. Shoot Reels that teach something specific, not just product demos. Brands that post educational Facebook content weekly build AI-citation authority far faster than brands posting once a month.",
   },
   {
     q: "Does Facebook AI Mode replace paid ads for ecommerce brands?",
@@ -187,9 +187,9 @@ export default async function Post() {
           </p>
           <p>
             Meta AI Mode launched June 15, 2026. It&apos;s not a paid placement. It&apos;s
-            not part of Advantage+. It runs entirely on organic content. And 34% of US
-            online purchases now involve an AI agent at some point in the journey, up
-            from 9% just a year ago.
+            not part of Advantage+. It runs entirely on organic content. And AI agents
+            are showing up in a growing share of US online purchase journeys, a trend
+            that&apos;s accelerating fast.
           </p>
 
           <div className="blog-tldr">
@@ -200,8 +200,8 @@ export default async function Post() {
                 Facebook posts, Groups, and Reels — organic content, not ads.
               </li>
               <li>
-                34% of US purchases now involve an AI agent (Q1 2026), up from 9% a
-                year ago. Facebook just became a source layer for those agents.
+                AI agents are involved in a growing share of US purchase journeys.
+                Facebook just became a source layer for those agents.
               </li>
               <li>
                 Educational content gets cited. Product catalog posts, &quot;Shop
@@ -253,14 +253,6 @@ export default async function Post() {
               <div className="stat-number">3B</div>
               <div className="stat-label">Monthly active Facebook users</div>
             </div>
-            <div className="blog-stat">
-              <div className="stat-number">34%</div>
-              <div className="stat-label">US purchases involve AI agents now</div>
-            </div>
-            <div className="blog-stat">
-              <div className="stat-number">9%</div>
-              <div className="stat-label">That number one year ago</div>
-            </div>
           </div>
 
           <hr className="blog-divider" />
@@ -300,10 +292,11 @@ export default async function Post() {
           <div className="blog-callout">
             <div className="callout-label">Key insight</div>
             <p>
-              DTC brands using AI-driven content optimization saw a 9% reduction in
-              CAC and 14% improvement in inventory sell-through in Q1 2026. The brands
-              building content systems now are the ones lowering acquisition costs
-              while everyone else bids them up.
+              DTC brands leaning into AI-driven content and organic discovery are
+              seeing real reductions in acquisition cost while everyone else keeps
+              bidding paid channels up. The brands building content systems now are
+              the ones lowering acquisition costs while everyone else pays more for
+              the same customers.
             </p>
           </div>
 
@@ -366,11 +359,11 @@ export default async function Post() {
             produce zero organic traction.
           </p>
           <p>
-            76% of marketing budgets are wasted per agency audits. A chunk of that
-            waste is paid spend going into a platform where the brand has no organic
-            authority. You&apos;re paying to show ads to people who can&apos;t find any
-            proof your brand knows what it&apos;s talking about. Facebook AI Mode makes
-            that credibility gap more expensive, not less.
+            A meaningful share of marketing budgets gets wasted every year, and a
+            chunk of that waste is paid spend going into a platform where the brand
+            has no organic authority. You&apos;re paying to show ads to people who
+            can&apos;t find any proof your brand knows what it&apos;s talking about.
+            Facebook AI Mode makes that credibility gap more expensive, not less.
           </p>
           <p>
             The fix is treating Facebook content like a search asset. Consistent,
@@ -416,9 +409,9 @@ export default async function Post() {
           <div className="blog-callout">
             <div className="callout-label">Key insight</div>
             <p>
-              Brands that post educational Facebook content weekly are 4x more likely
-              to be cited in AI-generated answers than brands posting once a month.
-              Consistency matters more than production quality at this stage.
+              Brands that post educational Facebook content weekly build far more
+              AI-citation authority than brands posting once a month. Consistency
+              matters more than production quality at this stage.
             </p>
           </div>
 
@@ -452,7 +445,7 @@ export default async function Post() {
             If your Facebook content is basically dead right now, the window to fix it
             before AI citation gets competitive is closing. The{" "}
             <Link href="/blog/ai-agents-ecommerce-buyability-2026">
-              AI agents handling 34% of US purchases
+              AI agents increasingly shaping US purchase decisions
             </Link>{" "}
             are learning from content that exists today. Give them something worth
             citing.
