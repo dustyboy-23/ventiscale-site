@@ -194,8 +194,8 @@ export default async function Post() {
             <ul>
               <li>
                 TikTok&apos;s median CPC ($0.50) is 54% cheaper than
-                Facebook ($1.07-$1.11) in 2026, per Foundry CRO&apos;s
-                benchmark study of 600+ ecommerce brands.
+                Facebook ($1.07-$1.11) in 2026, per Foundry CRO&apos;s 2026
+                benchmark compilation.
               </li>
               <li>
                 At $5K/month ad spend, the gap means 4,500+ more clicks per
@@ -220,7 +220,7 @@ export default async function Post() {
           </div>
 
           <ComparisonMethodology
-            intro="I&apos;ve run this split-test directly. Same creative concept, same targeting demographics, different platforms for a beauty accessories client at $8K/month ad spend. TikTok delivered 12,400 clicks at $0.47 average CPC. Facebook delivered 7,200 clicks at $1.08. Same budget, 72% more traffic from TikTok. The benchmark numbers below also draw from Foundry CRO&apos;s 2026 Ecommerce Marketing Benchmarks across 600+ DTC brands."
+            intro="I&apos;ve run this split-test directly. Same creative concept, same targeting demographics, different platforms for a beauty accessories client at $8K/month ad spend. TikTok delivered 12,400 clicks at $0.47 average CPC. Facebook delivered 7,200 clicks at $1.08. Same budget, 72% more traffic from TikTok. The benchmark numbers below also draw from Foundry CRO&apos;s 2026 Ecommerce Marketing Benchmarks, a compilation pulling from 100+ industry sources."
             criteria={[
               "Cost per click (CPC) at comparable audience targeting depth",
               "CPM (cost per 1,000 impressions) and organic reach overlap",
@@ -282,8 +282,8 @@ export default async function Post() {
             >
               2026 Ecommerce Marketing Benchmarks
             </a>{" "}
-            tracked paid social CPC across 600+ DTC brands. The gap
-            isn&apos;t marginal.
+            compiles paid social CPC data from over 100 industry sources.
+            The gap isn&apos;t marginal.
           </p>
 
           <div className="blog-stat-row">
