@@ -6,11 +6,11 @@ import { BlogAuthorBio } from "@/components/marketing/blog-author-bio";
 export const metadata = {
   title: "Can AI replace your marketing team? Here's what actually happens | Venti Scale",
   description:
-    "AI handles 65% of marketing execution tasks already. Here's what it replaces, what it can't, and what it means for small businesses in 2026.",
+    "AI already handles a large share of marketing execution tasks. Here's what it replaces, what it can't, and what it means for small businesses in 2026.",
   openGraph: {
     title: "Can AI replace your marketing team? Here's what actually happens",
     description:
-      "AI handles 65% of marketing execution tasks already. Here's what it replaces, what it can't, and what it means for small businesses in 2026.",
+      "AI already handles a large share of marketing execution tasks. Here's what it replaces, what it can't, and what it means for small businesses in 2026.",
     url: "https://www.ventiscale.com/blog/ai-replace-marketing-team",
     type: "article",
     images: [
@@ -26,7 +26,7 @@ export const metadata = {
     card: "summary_large_image" as const,
     title: "Can AI replace your marketing team? Here's what actually happens",
     description:
-      "AI handles 65% of marketing execution tasks already. Here's what it replaces, what it can't, and what it means for small businesses in 2026.",
+      "AI already handles a large share of marketing execution tasks. Here's what it replaces, what it can't, and what it means for small businesses in 2026.",
     images: ["https://www.ventiscale.com/blog/ai-replace-marketing-team.jpg"],
   },
 };
@@ -35,7 +35,7 @@ const SLUG = "ai-replace-marketing-team";
 const TITLE =
   "Can AI replace your marketing team? Here's what actually happens";
 const DESCRIPTION =
-  "AI handles 65% of marketing execution tasks already. Here's what it replaces, what it can't, and what it means for small businesses in 2026.";
+  "AI already handles a large share of marketing execution tasks. Here's what it replaces, what it can't, and what it means for small businesses in 2026.";
 const DATE = "2026-04-21";
 const IMAGE = "/blog/ai-replace-marketing-team.jpg";
 const IMAGE_URL = `https://www.ventiscale.com${IMAGE}`;
@@ -43,7 +43,7 @@ const IMAGE_URL = `https://www.ventiscale.com${IMAGE}`;
 const FAQ_DATA = [
   {
     q: "Can AI fully replace a marketing team?",
-    a: "No. AI can automate 65% of marketing execution tasks including content drafting, scheduling, email sequencing, and ad copy generation. But it can't replace strategic positioning, authentic brand voice, relationship building, or high-stakes judgment calls. The teams combining AI execution with human strategy are outperforming both all-human and all-AI setups by a significant margin.",
+    a: "No. AI can automate a large share of marketing execution tasks including content drafting, scheduling, email sequencing, and ad copy generation. But it can't replace strategic positioning, authentic brand voice, relationship building, or high-stakes judgment calls. Teams combining AI execution with human strategy are outperforming both all-human and all-AI setups.",
   },
   {
     q: "What marketing tasks can AI actually do?",
@@ -189,7 +189,7 @@ export default async function Post() {
             <div className="callout-label">TL;DR</div>
             <ul>
               <li>
-                AI already handles 65% of marketing execution tasks including
+                AI already handles a large share of marketing execution tasks including
                 content drafting, email sequences, scheduling, and ad copy.
               </li>
               <li>
@@ -263,10 +263,6 @@ export default async function Post() {
 
           <div className="blog-stat-row">
             <div className="blog-stat">
-              <div className="stat-number">65%</div>
-              <div className="stat-label">of marketing tasks AI can automate</div>
-            </div>
-            <div className="blog-stat">
               <div className="stat-number">91%</div>
               <div className="stat-label">of marketers actively using AI</div>
             </div>
@@ -279,17 +275,19 @@ export default async function Post() {
           <div className="blog-callout">
             <div className="callout-label">Key insight</div>
             <p>
-              According to{" "}
+              Per{" "}
               <a
                 href="https://www.activecampaign.com/blog/ai-marketing-statistics"
                 target="_blank"
                 rel="noopener noreferrer"
               >
-                ActiveCampaign&apos;s 2026 marketing data
-              </a>{" "}
-              across 180,000 businesses, teams combining AI execution with
-              human strategy generate 30% more leads and 2.6x higher revenue
-              than all-human teams working the same hours.
+                ActiveCampaign&apos;s marketing data
+              </a>
+              , the large majority of marketers now say AI has meaningfully
+              affected how they work, and most businesses report AI helps
+              them save on costs while freeing up time for strategic work.
+              Teams combining AI execution with human strategy consistently
+              outperform all-human teams working the same hours.
             </p>
           </div>
 
@@ -378,14 +376,6 @@ export default async function Post() {
             <div className="blog-stat">
               <div className="stat-number">$47B</div>
               <div className="stat-label">AI marketing industry in 2026</div>
-            </div>
-            <div className="blog-stat">
-              <div className="stat-number">30%</div>
-              <div className="stat-label">more leads for AI-powered teams</div>
-            </div>
-            <div className="blog-stat">
-              <div className="stat-number">2.6x</div>
-              <div className="stat-label">higher revenue vs human-only teams</div>
             </div>
           </div>
 
