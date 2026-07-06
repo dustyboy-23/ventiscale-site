@@ -32,7 +32,7 @@ const COMPARISONS = [
     agency: "$3,000-$5,000",
     venti: "$1,500-$2,500 (mid-tier) or $2,500-$5,000 (full-service)",
     advantage: "venti",
-    note: "AI replaces junior account-manager labor. 40-60% cost savings at comparable output.",
+    note: "AI replaces junior account-manager labor. You pay for the senior work, not the markup for a team of juniors behind it.",
   },
   {
     aspect: "Contract length",
