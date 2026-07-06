@@ -193,7 +193,8 @@ export default async function Post() {
                 marketing, you&apos;re doing a full-time job for free.
               </li>
               <li>
-                63% of businesses outsourced marketing in 2025. The other 37%
+                Over half of small and mid-sized US businesses outsource at
+                least some of their marketing. The ones that don&apos;t
                 aren&apos;t saving money. They&apos;re losing it slower.
               </li>
               <li>
