@@ -7,9 +7,10 @@ type Status = "idle" | "loading" | "success" | "error";
 
 type Props = {
   variant?: "hero" | "block";
+  ctaLabel?: string;
 };
 
-export function AuditForm({ variant = "hero" }: Props) {
+export function AuditForm({ variant = "hero", ctaLabel = "Get my free AI audit" }: Props) {
   const baseId = useId();
   const nameId = `${baseId}-name`;
   const businessId = `${baseId}-business`;
@@ -231,7 +232,7 @@ export function AuditForm({ variant = "hero" }: Props) {
             </>
           ) : (
             <>
-              Get my free AI audit
+              {ctaLabel}
               <ArrowRight className="w-4 h-4" strokeWidth={2.25} />
             </>
           )}
