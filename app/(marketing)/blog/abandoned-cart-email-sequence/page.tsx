@@ -19,19 +19,19 @@ const FAQ_DATA = [
   },
   {
     q: "How much revenue does a 3-email abandoned cart sequence recover?",
-    a: "10% to 30% of lost cart value, depending on price point and brand affinity. Klaviyo's 2024 ecommerce benchmark report shows abandoned cart emails generate $5.81 in revenue per recipient on average, with a 41.18% open rate and 9.5% click rate. A 3-email sequence outperforms a single email by roughly 69% in total recovered revenue.",
+    a: "Roughly 15-20% of abandoned cart value for a well-run sequence, versus a much lower rate for a single email. Klaviyo's 2024 benchmark report puts the platform average for abandoned cart flows at $3.65 revenue per recipient, a 50.5% open rate, and a 6.25% click rate, with top performers reaching $28.89 per recipient. Multi-email sequences consistently outperform single-email flows by a wide margin.",
   },
   {
     q: "What's the best timing for abandoned cart emails?",
-    a: "Email 1 fires at 1 hour after abandonment, email 2 at 24 hours, email 3 at 72 hours. Sending the first email within 1 hour produces 33% more conversions than waiting 24 hours. After 72 hours, conversion rates drop below 3% and most brands stop the sequence.",
+    a: "Email 1 fires at 1 hour after abandonment, email 2 at 24 hours, email 3 at 72 hours. Sending the first email within 1 hour converts meaningfully better than waiting 24 hours (Omnisend's analysis of 2.1 billion emails found roughly 3x the conversion rate). After 72 hours, response rates drop sharply and most brands stop the sequence.",
   },
   {
     q: "Should an abandoned cart email include a discount code?",
-    a: "Only on email 3. Discounts on email 1 train customers to abandon carts on purpose to get the code. Save the discount for the final email when the alternative is losing the sale entirely. A 10% off code on email 3 typically lifts recovery rate from 12% to 18%.",
+    a: "Only on email 3. Discounts on email 1 train customers to abandon carts on purpose to get the code. Save the discount for the final email when the alternative is losing the sale entirely. A 10% off code on email 3 meaningfully lifts recovery rate on the sequence.",
   },
   {
     q: "What subject line works best for abandoned cart emails?",
-    a: "Plain-text subject lines outperform marketing-heavy ones by 22% in open rate. \"You left something behind\" and \"Did you forget this?\" beat \"Complete your order and save 15%!\" almost every time. The first email should feel like a friendly nudge, not a sales pitch.",
+    a: "Plain, low-key subject lines consistently outperform marketing-heavy ones in open rate. \"You left something behind\" and \"Did you forget this?\" beat \"Complete your order and save 15%!\" almost every time. The first email should feel like a friendly nudge, not a sales pitch.",
   },
 ];
 
@@ -196,22 +196,24 @@ export default async function Post() {
                 Institute). Mobile hits 78%.
               </li>
               <li>
-                A well-run 3-email sequence recovers 10-30% of abandoned
-                cart revenue. The median is around 18%.
+                A well-run 3-email sequence recovers roughly 15-20% of
+                abandoned cart revenue, well above what a single email
+                pulls in.
               </li>
               <li>
                 Optimal timing: email 1 at 1 hour, email 2 at 24 hours,
-                email 3 at 72 hours. Earlier first emails convert 33%
-                better than 24-hour delays.
+                email 3 at 72 hours. Earlier first emails convert
+                substantially better than 24-hour delays.
               </li>
               <li>
                 Save the discount for email 3 only. Discounting email 1
                 trains customers to abandon carts on purpose.
               </li>
               <li>
-                Klaviyo benchmark data shows abandoned cart emails generate
-                $5.81 per recipient on average, with 41.18% open rate
-                and 9.5% click rate.
+                Klaviyo's benchmark data puts abandoned cart flows at
+                $3.65 revenue per recipient on average, with a 50.5%
+                open rate and 6.25% click rate (top performers reach
+                $28.89 per recipient).
               </li>
             </ul>
           </div>
@@ -243,11 +245,11 @@ export default async function Post() {
               <div className="stat-label">avg cart abandonment rate</div>
             </div>
             <div className="blog-stat">
-              <div className="stat-number">$5.81</div>
+              <div className="stat-number">$3.65</div>
               <div className="stat-label">avg revenue per cart email recipient</div>
             </div>
             <div className="blog-stat">
-              <div className="stat-number">41.18%</div>
+              <div className="stat-number">50.5%</div>
               <div className="stat-label">avg open rate on abandoned cart emails</div>
             </div>
           </div>
@@ -259,8 +261,9 @@ export default async function Post() {
             handles a different stage of customer hesitation.
           </p>
           <p>
-            Here&apos;s the structure that recovers 18% on average,
-            ranging up to 30% for high-trust brands with strong reviews.
+            Here&apos;s the structure that recovers 15-20% on average,
+            with high-trust brands and strong reviews pushing toward the
+            top of that range.
           </p>
 
           <h2>Email 1: 1 hour after abandonment</h2>
@@ -273,9 +276,10 @@ export default async function Post() {
             something behind&quot; or &quot;Did you forget this?&quot;
           </p>
           <p>
-            Plain-text style subject lines beat marketing-heavy ones by
-            22% in open rate. The first email shouldn&apos;t look like an
-            ad. It should look like a quick note from a friend.
+            Plain, conversational subject lines consistently beat
+            marketing-heavy ones on open rate. The first email
+            shouldn&apos;t look like an ad. It should look like a quick
+            note from a friend.
           </p>
           <p>
             <strong>Body:</strong> Show the cart contents (image, product
@@ -284,9 +288,10 @@ export default async function Post() {
             click to finish.&quot;
           </p>
           <p>
-            Sending email 1 within 1 hour generates 33% more conversions
-            than waiting 24 hours. The faster you fire, the warmer the
-            intent.
+            Sending email 1 within 1 hour converts substantially better
+            than waiting 24 hours — Omnisend's analysis of 2.1 billion
+            emails found roughly 3x the conversion rate at the 1-hour mark.
+            The faster you fire, the warmer the intent.
           </p>
 
           <h2>Email 2: 24 hours after abandonment</h2>
@@ -321,9 +326,9 @@ export default async function Post() {
             <div className="callout-label">Key insight</div>
             <p>
               The 24-hour email is where most brands quit. They send 1
-              and 2, and call it a sequence. That leaves about 11% of
-              recoverable revenue on the floor because email 3 catches
-              the buyers who needed one final push.
+              and 2, and call it a sequence. That leaves real recoverable
+              revenue on the floor because email 3 catches the buyers who
+              needed one final push.
             </p>
           </div>
 
@@ -340,8 +345,8 @@ export default async function Post() {
           <p>
             By 72 hours, the customer is likely gone unless something
             tips them. This is where the 10% off code earns its keep. A
-            10% discount on email 3 typically lifts recovery rate from
-            12% to 18% on a 3-email sequence.
+            discount on email 3 meaningfully lifts recovery rate on a
+            3-email sequence.
           </p>
           <p>
             If your margins don&apos;t support 10% off, scarcity works
@@ -357,9 +362,9 @@ export default async function Post() {
 
           <h2>The 4 mistakes that kill recovery rate</h2>
           <p>
-            Most brands lose 60% of their potential abandoned cart
-            revenue not because the sequence is bad, but because of one
-            of these four mistakes.
+            Most brands leave a large share of their potential abandoned
+            cart revenue on the table not because the sequence is bad,
+            but because of one of these four mistakes.
           </p>
 
           <h2>1. Discounting email 1</h2>
@@ -375,18 +380,18 @@ export default async function Post() {
           <h2>2. Sending all 3 emails as the same template</h2>
           <p>
             Each email needs a different angle. If email 2 is a copy of
-            email 1 with a different subject line, the click-through
-            rate drops 40% by email 2 and another 60% by email 3. The
-            customer recognizes the loop and tunes out.
+            email 1 with a different subject line, click-through rate
+            drops sharply by email 2 and again by email 3. The customer
+            recognizes the loop and tunes out.
           </p>
 
           <h2>3. Generic copy that ignores the cart contents</h2>
           <p>
             &quot;You left something in your cart!&quot; is a template.
             &quot;Your Cabin Field Jacket in Olive (size M) is still
-            waiting&quot; is a recovery email. Klaviyo&apos;s data shows
-            personalized cart-contents subject lines lift open rate by
-            18% over generic ones.
+            waiting&quot; is a recovery email. Personalized,
+            cart-contents-specific subject lines consistently outperform
+            generic ones on open rate.
           </p>
 
           <h2>4. No mobile optimization</h2>
