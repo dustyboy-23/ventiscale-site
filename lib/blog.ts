@@ -11,6 +11,18 @@ export interface BlogPost {
 
 export const posts: BlogPost[] = [
   {
+    slug: "dtc-fired-marketing-team-ai-agents-2026",
+    title:
+      "He paid $15K/month for marketing. He fired his team. Profits tripled.",
+    description:
+      "One DTC founder paid $15K/month for a marketing team where emails took 3 days to write. He fired everyone. Replaced them with AI. Profits tripled in 3 months.",
+    date: "2026-07-06",
+    author: "Dustin Gilmour",
+    readTime: "7 min",
+    tags: ["ecommerce", "DTC", "AI marketing", "marketing team", "done for you", "AI agents"],
+    image: "/blog/dtc-fired-team-ai-2026.jpg",
+  },
+  {
     slug: "llm-traffic-ecommerce-conversion-2026",
     title:
       "LLM-referred traffic converts at 2.47%. Above Google Ads. Above Meta.",
