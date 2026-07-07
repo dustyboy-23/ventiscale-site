@@ -194,7 +194,7 @@ export default async function Post() {
             </span>
             <span className="text-white/15">&middot;</span>
             <span className="font-mono text-[11px] tracking-[0.12em] uppercase text-white/35">
-              16 min read
+              17 min read
             </span>
           </div>
         </div>
@@ -244,11 +244,64 @@ export default async function Post() {
             Traditional agencies built decades of norms around discovery calls, contracts, and account managers, for better or worse. AI marketing agencies are new enough that no shared standard exists for what "human review" means, how errors get caught, or what you're entitled to ask before you sign. <a href="https://www.census.gov/library/stories/2026/05/ai-use-businesses.html" target="_blank" rel="noopener noreferrer">Adoption is also uneven by company size</a>: 37% of firms with 250 or more employees report using AI in operations, versus under 20% of firms with four or fewer employees. The small end of the market, where this confusion hits hardest, is also the least served by clear information. Ninety-five percent of B2B marketers <a href="https://contentmarketinginstitute.com/articles/b2b-content-marketing-trends-research" target="_blank" rel="noopener noreferrer">say their organizations now use AI-powered applications</a>, which means the category is mainstream on the vendor side well before it's mainstream on the buyer-education side.
           </p>
 
+          <div className="blog-fig">
+            <div className="blog-fig-card">
+              <p className="fig-title">Everyone adopted AI. Quality didn't follow.</p>
+              <p className="fig-sub">Adoption is near-universal. Getting output worth publishing is not.</p>
+              <div className="blog-bars">
+                <div className="blog-bar" data-tone="green">
+                  <div className="bar-head"><span className="bar-lab">B2B orgs using AI-powered apps</span><span className="bar-val">95%</span></div>
+                  <div className="bar-track"><div className="bar-fill" style={{ width: "95%" }}></div></div>
+                </div>
+                <div className="blog-bar" data-tone="green">
+                  <div className="bar-head"><span className="bar-lab">Marketing teams using AI in some form</span><span className="bar-val">86.4%</span></div>
+                  <div className="bar-track"><div className="bar-fill" style={{ width: "86.4%" }}></div></div>
+                </div>
+                <div className="blog-bar" data-tone="amber">
+                  <div className="bar-head"><span className="bar-lab">B2B marketers who say quality actually improved</span><span className="bar-val">58%</span></div>
+                  <div className="bar-track"><div className="bar-fill" style={{ width: "58%" }}></div></div>
+                </div>
+              </div>
+              <p className="fig-note">It's lopsided by size, too: 37% of firms with 250 or more staff use AI in operations, versus under 20% of firms with four or fewer. The small end, where the confusion hits hardest, is the least served.</p>
+              <p className="fig-src">CMI B2B Content Marketing 2026 · HubSpot 2026 · U.S. Census Bureau 2026</p>
+            </div>
+          </div>
+
           <h2 id="what-an-ai-marketing-agency-actually-does-the-4-real-compone">What an AI marketing agency actually does (the 4 real components)</h2>
 
           <p>
             Strip away the pitch decks and an AI marketing agency worth paying for does four things. Here's each one, honestly, including where it falls short. <a href="https://www.ventiscale.com/services" target="_blank" rel="noopener noreferrer">Our own breakdown of these by service line lives on the pricing tiers page</a> if you want the specifics behind any one of them.
           </p>
+
+          <div className="blog-fig">
+            <div className="blog-fig-card">
+              <p className="fig-title">The four real components</p>
+              <p className="fig-sub">Strip the pitch decks and it's four things. The second is the one tools skip.</p>
+              <div className="blog-nodes">
+                <div className="blog-node">
+                  <span className="node-idx">01</span>
+                  <h4>AI content &amp; social production</h4>
+                  <p>Drafts blogs, captions, and ad variations at a volume no human team matches. First draft, not final.</p>
+                </div>
+                <div className="blog-node node-key">
+                  <span className="node-idx">02</span>
+                  <h4>Human strategy &amp; review</h4>
+                  <p>A person, ideally the same one every time, reads it against your voice before anything ships.</p>
+                  <span className="node-flag">the layer tools don't have</span>
+                </div>
+                <div className="blog-node">
+                  <span className="node-idx">03</span>
+                  <h4>Paid media management</h4>
+                  <p>AI generates creative at scale; a human sets strategy and budget. Faster testing loops.</p>
+                </div>
+                <div className="blog-node">
+                  <span className="node-idx">04</span>
+                  <h4>Reporting &amp; accountability</h4>
+                  <p>What shipped and when, in something you can check yourself, not a PDF three weeks late.</p>
+                </div>
+              </div>
+            </div>
+          </div>
 
           <h3>1. AI-driven content and social production</h3>
 
@@ -340,18 +393,24 @@ export default async function Post() {
             These three get compared constantly and rarely fairly, usually by whichever one is writing the comparison. Here's the honest version. <a href="https://www.ventiscale.com/vs-agency" target="_blank" rel="noopener noreferrer">We wrote the longer version of this comparison separately</a> if you want the full breakdown.
           </p>
 
-          <table>
-            <thead>
-              <tr><th></th><th>AI marketing tool</th><th>Traditional agency</th><th>AI marketing agency</th></tr>
-            </thead>
-            <tbody>
-              <tr><td>Human review</td><td>None built in</td><td>Yes, often junior staff</td><td>Yes, ideally senior/founder-level</td></tr>
-              <tr><td>Pricing model</td><td>Flat software fee</td><td>Retainer, often opaque</td><td>Tiered service fee, often public</td></tr>
-              <tr><td>Typical contract</td><td>Month-to-month</td><td>6-12 months</td><td>Month-to-month</td></tr>
-              <tr><td>Output volume</td><td>Depends entirely on you</td><td>Limited by staff headcount</td><td>High, AI-driven</td></tr>
-              <tr><td>Accountability</td><td>You own every mistake</td><td>Account manager, indirect</td><td>Direct, since AI and human are both traceable</td></tr>
-            </tbody>
-          </table>
+          <div className="blog-fig">
+            <div className="blog-fig-card">
+              <p className="fig-title">Same three letters. Three different things you'd buy.</p>
+              <p className="fig-sub">A tool, a traditional agency, and an AI agency are not the same purchase.</p>
+              <div className="blog-compare-scroll">
+                <table className="blog-compare">
+                  <thead><tr><th></th><th>AI marketing tool</th><th>Traditional agency</th><th className="col-key cell-key">AI marketing agency<span className="col-key-badge">real one</span></th></tr></thead>
+                  <tbody>
+                    <tr><th>Human review</th><td>None built in</td><td>Often junior staff</td><td className="cell-key">Senior / founder-level</td></tr>
+                    <tr><th>Pricing model</th><td>Flat software fee</td><td>Retainer, often opaque</td><td className="cell-key">Tiered, often public</td></tr>
+                    <tr><th>Contract</th><td>Month-to-month</td><td>Long lock-in</td><td className="cell-key">Month-to-month</td></tr>
+                    <tr><th>Output volume</th><td>Depends on you</td><td>Limited by headcount</td><td className="cell-key">High, AI-driven</td></tr>
+                    <tr><th>Accountability</th><td>You own every mistake</td><td>Account manager, indirect</td><td className="cell-key">Direct and traceable</td></tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
 
           <h3>Why the trust gap exists</h3>
 
@@ -431,25 +490,13 @@ export default async function Post() {
             A few red flags are specific enough to this category that they're worth naming directly, since nobody selling you the service is going to volunteer them.
           </p>
 
-          <p>
-            <strong>Promise a specific ranking, revenue number, or lead count.</strong> No agency, AI-powered or not, controls Google's algorithm or your market. A vendor promising a page-one spot or a specific revenue lift is promising something outside their control, which is worth noticing regardless of how confident it sounds.
-          </p>
-
-          <p>
-            <strong>Publish AI content with zero human review.</strong> If nobody at the agency reads what goes out under your name before it's live, you are the quality control, whether or not you signed up to be.
-          </p>
-
-          <p>
-            <strong>Hide pricing behind a required sales call.</strong> Pricing opacity is a traditional-agency pattern this category doesn't need to inherit. If ranges exist, they can be published, the way ours are.
-          </p>
-
-          <p>
-            <strong>Lock you into a long contract without explaining why.</strong> Long contracts exist in traditional agencies partly because the human-heavy delivery model needs time to pay off for the agency. An AI-driven delivery model doesn't carry the same cost structure, so a long lock-in from an AI marketing agency deserves a direct question about why it exists.
-          </p>
-
-          <p>
-            <strong>Imply results faster than the work can actually produce them.</strong> Real numbers, when they come, usually show up in the first 30 to 60 days depending on where you're starting from. Anyone promising faster than that as a guarantee is selling urgency, not a realistic timeline.
-          </p>
+          <ul className="blog-flags">
+            <li><span className="flag-mark">✕</span><span><span className="flag-t">Promise a specific ranking, revenue number, or lead count</span><span className="flag-d">No agency controls Google's algorithm or your market. Promising a page-one spot or a specific revenue lift is promising something outside their control.</span></span></li>
+            <li><span className="flag-mark">✕</span><span><span className="flag-t">Publish AI content with zero human review</span><span className="flag-d">If nobody reads what goes out under your name before it's live, you are the quality control, whether or not you signed up to be.</span></span></li>
+            <li><span className="flag-mark">✕</span><span><span className="flag-t">Hide pricing behind a required sales call</span><span className="flag-d">Pricing opacity is a traditional-agency pattern this category doesn't need to inherit. If ranges exist, they can be published.</span></span></li>
+            <li><span className="flag-mark">✕</span><span><span className="flag-t">Lock you into a long contract without explaining why</span><span className="flag-d">An AI-driven delivery model doesn't carry the cost structure that justifies a long lock-in, so it deserves a direct question about why it's there.</span></span></li>
+            <li><span className="flag-mark">✕</span><span><span className="flag-t">Imply results faster than the work can produce them</span><span className="flag-d">Real numbers usually show up in the first 30 to 60 days depending on where you start. Anyone promising faster is selling urgency, not a timeline.</span></span></li>
+          </ul>
 
           <h3>Why these specific red flags, and not others</h3>
 
