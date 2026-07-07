@@ -11,6 +11,18 @@ export interface BlogPost {
 
 export const posts: BlogPost[] = [
   {
+    slug: "ai-workflow-automation-roi-ecommerce-2026",
+    title:
+      "Ecommerce marketing automation pays 280% ROI. You're not running it.",
+    description:
+      "AI workflow automation returns 280-520% ROI in year 1 for ecommerce brands. 240 hours saved. Here's what to automate first and the math behind it.",
+    date: "2026-07-07",
+    author: "Dustin Gilmour",
+    readTime: "7 min",
+    tags: ["ecommerce", "DTC", "marketing automation", "AI marketing", "email marketing", "ROI"],
+    image: "/blog/ai-automation-roi-ecommerce.jpg",
+  },
+  {
     slug: "ai-marketing-agency",
     title:
       "What Is an AI Marketing Agency? A 2026 Buyer's Guide",
