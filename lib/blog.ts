@@ -11,6 +11,18 @@ export interface BlogPost {
 
 export const posts: BlogPost[] = [
   {
+    slug: "ai-marketing-agency",
+    title:
+      "What Is an AI Marketing Agency? A 2026 Buyer's Guide",
+    description:
+      "What an AI marketing agency actually does, what it costs, and how to spot a real one from a tool wearing the label. An honest, founder-written guide.",
+    date: "2026-07-06",
+    author: "Dustin Gilmour",
+    readTime: "16 min",
+    tags: ["AI Marketing", "Agencies"],
+    image: "/blog/ai-marketing-agency.jpg",
+  },
+  {
     slug: "dtc-fired-marketing-team-ai-agents-2026",
     title:
       "He paid $15K/month for marketing. He fired his team. Profits tripled.",
