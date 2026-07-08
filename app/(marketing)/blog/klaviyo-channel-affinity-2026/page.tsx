@@ -49,7 +49,7 @@ const FAQ_DATA = [
   },
   {
     q: "How does Klaviyo autonomous marketing work?",
-    a: "Klaviyo autonomous marketing uses behavioral data — opens, clicks, reply rates, push taps — to make per-subscriber decisions about when to send, which channel to use, and which products to recommend. The July 2026 release added cross-channel routing via channel affinity and Customer Agent events so marketing flows can see recent support interactions before firing.",
+    a: "Klaviyo autonomous marketing uses behavioral data (opens, clicks, reply rates, push taps) to make per-subscriber decisions about when to send, which channel to use, and which products to recommend. The July 2026 release added cross-channel routing via channel affinity and Customer Agent events so marketing flows can see recent support interactions before firing.",
   },
   {
     q: "What channels does Klaviyo channel affinity support?",
@@ -57,11 +57,11 @@ const FAQ_DATA = [
   },
   {
     q: "How much do open rates improve with Klaviyo channel affinity?",
-    a: "Brands with active SMS and WhatsApp lists typically see 15-30% higher effective open rates because high-affinity subscribers get routed off email — where average open rates sit at 20-25% — onto SMS and WhatsApp, where open rates hit 82-98%. The lift depends on how many subscribers already prefer a non-email channel.",
+    a: "Brands with active SMS and WhatsApp lists typically see 15-30% higher effective open rates because high-affinity subscribers get routed off email (where average open rates sit at 20-25%) onto SMS and WhatsApp, where open rates hit 82-98%. The lift depends on how many subscribers already prefer a non-email channel.",
   },
   {
     q: "Does Klaviyo channel affinity replace a marketing agency?",
-    a: "Klaviyo channel affinity replaces the manual segmentation and cross-channel coordination work that agencies bill $5-15K/month to perform. It does not replace strategy, offer development, or campaign creativity. Brands still need someone deciding what to send — the platform now handles where and when automatically.",
+    a: "Klaviyo channel affinity replaces the manual segmentation and cross-channel coordination work that agencies bill $5-15K/month to perform. It does not replace strategy, offer development, or campaign creativity. Brands still need someone deciding what to send. The platform now handles where and when automatically.",
   },
 ];
 
@@ -178,8 +178,8 @@ export default async function Post() {
           <p>
             Your subscriber gets an email Monday. They don&apos;t open it. You
             fire off an SMS Thursday. They ignore that too. You dig into the
-            profile and find they&apos;ve opened every WhatsApp message you
-            &apos;ve ever sent — 98% open rate, every single time. Your
+            profile and find they&apos;ve opened every WhatsApp message you&apos;ve
+            ever sent. 98% open rate, every single time. Your
             automations still sent them an email.
           </p>
           <p>
@@ -192,8 +192,8 @@ export default async function Post() {
             <ul>
               <li>
                 Klaviyo&apos;s biggest AI release routes each subscriber&apos;s
-                messages to their most responsive channel — email, SMS,
-                WhatsApp, or push — automatically, with no manual segmentation.
+                messages to their most responsive channel (email, SMS,
+                WhatsApp, or push) automatically, with no manual segmentation.
               </li>
               <li>
                 The same logic now covers cross-channel product recommendations,
@@ -216,7 +216,7 @@ export default async function Post() {
             Klaviyo channel affinity identifies each subscriber&apos;s
             highest-engagement channel using behavioral history across email,
             SMS, WhatsApp, and push, then routes that subscriber&apos;s next
-            message there automatically — no extra flows, no manual segments, no
+            message there automatically. No extra flows, no manual segments, no
             spreadsheets mapping who prefers what.
           </p>
 
@@ -302,7 +302,7 @@ export default async function Post() {
               Cross-channel product recommendations now follow the same affinity
               logic. Product recs built from browse and purchase data now surface
               through SMS and push for subscribers whose affinity score sits off
-              email — not just in the email inbox where high-value customers
+              email. Not just in the email inbox where high-value customers
               stopped paying attention months ago.
             </p>
           </div>
@@ -340,7 +340,7 @@ export default async function Post() {
               Paying an agency for &quot;cross-channel strategy&quot; without
               asking them to show you subscriber-level channel preference data.
               If they can&apos;t pull it up in Klaviyo within 30 seconds,
-              they&apos;re not managing channels — they&apos;re managing one
+              they&apos;re not managing channels. They&apos;re managing one
               channel and billing you for four.
             </p>
           </div>
@@ -368,7 +368,7 @@ export default async function Post() {
               email and SMS return $36-79 per dollar compared to Meta&apos;s
               $1.86-2.19
             </Link>{" "}
-            — channel affinity is how you capture that upside without manual
+and channel affinity is how you capture that upside without manual
             overhead eating the margin.
           </p>
 
@@ -403,7 +403,7 @@ export default async function Post() {
           </p>
           <p>
             After this release: Customer Agent events feed into your flow logic.
-            You can set a suppression — no upsell or reorder flow within 72
+            You can set a suppression: no upsell or reorder flow within 72
             hours of a support event resolving. Or you can flip it: trigger a
             personal apology or loyalty discount flow specifically after a
             complaint closes. The systems finally share information.
@@ -426,7 +426,7 @@ export default async function Post() {
           </p>
           <p>
             <strong>SMS first.</strong> Klaviyo&apos;s SMS setup runs inside the
-            same platform — no separate vendor, no separate data silo. An
+            same platform. No separate vendor, no separate data silo. An
             opt-in popup takes under a day to configure. SMS also gives you the
             biggest open rate jump off email, so affinity routing starts showing
             value faster.
@@ -454,7 +454,7 @@ export default async function Post() {
             <Link href="/blog/dtc-retention-revenue-2026">
               Most DTC brands leave 30-40% of retention revenue on the table
             </Link>{" "}
-            — misconfigured channel mix is one of the leading reasons. Channel
+and misconfigured channel mix is one of the leading reasons. Channel
             affinity closes the gap by routing subscribers to wherever they
             actually pay attention, not wherever your flow assumed they would.
           </p>
