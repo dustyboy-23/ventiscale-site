@@ -11,6 +11,18 @@ export interface BlogPost {
 
 export const posts: BlogPost[] = [
   {
+    slug: "klaviyo-channel-affinity-2026",
+    title:
+      "Klaviyo knows which channel your customer checks. Your agency is still guessing.",
+    description:
+      "Klaviyo's biggest AI release routes each subscriber's messages to their most responsive channel automatically. Here's what changed and what to do now.",
+    date: "2026-07-08",
+    author: "Dustin Gilmour",
+    readTime: "7 min",
+    tags: ["ecommerce", "email marketing", "Klaviyo", "AI marketing", "DTC", "retention", "SMS marketing"],
+    image: "/blog/klaviyo-channel-affinity.jpg",
+  },
+  {
     slug: "ai-workflow-automation-roi-ecommerce-2026",
     title:
       "Ecommerce marketing automation pays 280% ROI. You're not running it.",
