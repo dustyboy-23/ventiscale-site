@@ -11,6 +11,18 @@ export interface BlogPost {
 
 export const posts: BlogPost[] = [
   {
+    slug: "dtc-creative-volume-cac-2026",
+    title:
+      "Your DTC ads aren't failing because of targeting. They're failing because of volume.",
+    description:
+      "DTC brands ship 2-4 ad creatives per month when platforms need 30-50. CAC is up 40-60% and it's not a targeting problem. Here's the math.",
+    date: "2026-07-09",
+    author: "Dustin Gilmour",
+    readTime: "7 min",
+    tags: ["ecommerce", "DTC", "paid ads", "ad creative", "CAC", "creative volume", "AI marketing"],
+    image: "/blog/dtc-creative-volume-cac.jpg",
+  },
+  {
     slug: "klaviyo-channel-affinity-2026",
     title:
       "Klaviyo knows which channel your customer checks. Your agency is still guessing.",
