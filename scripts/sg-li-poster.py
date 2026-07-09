@@ -24,6 +24,7 @@ Cron suggestion (PT, weekdays at 8 AM matching LI defaults):
 import argparse
 import json
 import os
+import re
 import subprocess
 import sys
 import tempfile
@@ -38,6 +39,13 @@ SG_CLIENT_SLUG = "sprinkler-guard"
 LI_POST_SCRIPT = Path("/home/dustin/sprinkler-guard/.claude/skills/sprinkler-guard-linkedin/scripts/post-sg-linkedin.py")
 LI_QUEUE_PATH = Path("/home/dustin/sprinkler-guard/content/linkedin/li-queue.json")
 PORTAL_ENV_PATH = Path(__file__).resolve().parent.parent / ".env.local"
+
+# Drive mirror: every successful publish also uploads a Google Doc to
+# 05 - LinkedIn Posts/ in Ken's client hub so his Drive view stays current.
+# Non-fatal — failure here logs a warning and continues (the LI post is
+# already live at this point).
+DRIVE_LI_FOLDER = "1BiMgBh6iTeI1SRA4PVKlHiPxXgTQFhIT"
+GOG_PATH = "/home/dustin/sprinkler-guard/ops/scripts/gog.sh"
 
 
 def load_env_file(path: Path) -> None:
@@ -221,6 +229,36 @@ def mark_published(row_id, urn, *, base_url, service_key):
     )
 
 
+def sync_to_drive(title: str, body: str, urn: str, pillar: str, posted_date: str) -> None:
+    """Upload the just-published LI post as a Google Doc to 05 - LinkedIn Posts/.
+    Non-fatal: caller wraps in try/except. Drive folder ID + gog path are
+    module-level constants. Doc shape matches the one-time port done 2026-05-16
+    (title header, posted+pillar metadata, body, LinkedIn URL footer)."""
+    safe_title = re.sub(r'[\\/:*?"<>|]', "", (title or "Untitled")).strip()[:80]
+    drive_name = f"{posted_date} - {safe_title}"
+    doc = f"# {safe_title}\n\n**Posted:** {posted_date}"
+    if pillar:
+        doc += f"  |  **Pillar:** {pillar}"
+    doc += "\n\n---\n\n" + body.strip() + "\n\n---\n\n"
+    if urn and urn.startswith("urn:li:share:"):
+        doc += f"[View on LinkedIn](https://www.linkedin.com/feed/update/{urn}/)\n"
+    with tempfile.NamedTemporaryFile(mode="w", suffix=".md", delete=False) as f:
+        f.write(doc)
+        tmp_path = f.name
+    try:
+        subprocess.run(
+            ["bash", GOG_PATH, "drive", "upload", tmp_path,
+             "--parent", DRIVE_LI_FOLDER, "--name", drive_name,
+             "--convert-to", "doc"],
+            check=True, capture_output=True, text=True, timeout=30,
+        )
+    finally:
+        try:
+            os.unlink(tmp_path)
+        except OSError:
+            pass
+
+
 def update_queue_posted(queue_id_int: int, urn: str) -> None:
     """Best-effort: mark the queue entry as posted to keep the queue truth aligned."""
     if not LI_QUEUE_PATH.exists():
@@ -294,13 +332,32 @@ def main() -> int:
 
         mark_published(row["id"], urn, base_url=base_url, service_key=service_key)
         # Sync back to queue.json if the external_id was a li-queue ref
+        pillar = ""
         if ext_id.startswith("li-queue-"):
             try:
                 queue_id_int = int(ext_id.split("li-queue-", 1)[1])
                 update_queue_posted(queue_id_int, urn)
+                # Pull pillar from li-queue for the Drive doc metadata
+                if LI_QUEUE_PATH.exists():
+                    for entry in json.loads(LI_QUEUE_PATH.read_text()):
+                        if entry.get("id") == queue_id_int:
+                            pillar = entry.get("pillar", "") or ""
+                            break
             except ValueError:
                 pass
         print(f"     posted: {urn}")
+        # Mirror to Drive 05 - LinkedIn Posts/ for Ken's portal-side visibility
+        try:
+            sync_to_drive(
+                title=title or (row.get("title") or "Untitled"),
+                body=body,
+                urn=urn,
+                pillar=pillar,
+                posted_date=datetime.now().strftime("%Y-%m-%d"),
+            )
+            print(f"     drive: synced to 05 - LinkedIn Posts/")
+        except Exception as e:
+            print(f"     warn: Drive sync failed (non-fatal): {e}")
         posted += 1
 
     print()

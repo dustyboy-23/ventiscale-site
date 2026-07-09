@@ -16,12 +16,14 @@ import {
   Shield,
   Eye,
   ArrowLeft,
+  Sparkles,
 } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { enterDemo, exitDemo } from "@/app/actions/demo";
 
 const NAV = [
   { href: "/dashboard", label: "Dashboard", icon: LayoutDashboard },
+  { href: "/insights", label: "Insights", icon: Sparkles },
   { href: "/content", label: "Content", icon: Calendar },
   { href: "/campaigns", label: "Email", icon: Mail },
   { href: "/reports", label: "Reports", icon: FileText },
@@ -34,6 +36,7 @@ const FOOTER_NAV = [
 
 const REAL_CLIENT_NAV_HREFS = new Set([
   "/dashboard",
+  "/insights",
   "/content",
   "/reports",
   "/files",
