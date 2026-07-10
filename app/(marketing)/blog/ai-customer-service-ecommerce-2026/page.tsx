@@ -228,10 +228,10 @@ export default async function Post() {
           </p>
           <p>
             Brands are currently losing an average of $29 on each newly
-            acquired customer when you factor in CAC fully. With blended DTC
-            CAC running $68-84 per customer and climbing, that hole only gets
-            deeper. The only path to real profitability is LTV. And LTV depends
-            entirely on whether those customers come back.
+            acquired customer when you factor in CAC fully. With Shopify
+            putting average ecommerce CAC at $274 and climbing, that hole only
+            gets deeper. The only path to real profitability is LTV. And LTV
+            depends entirely on whether those customers come back.
           </p>
           <p>
             A 5% increase in customer retention boosts profits by 25-95%.

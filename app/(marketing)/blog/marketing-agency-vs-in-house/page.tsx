@@ -27,7 +27,7 @@ const FAQ_DATA = [
   },
   {
     q: "Can a marketing agency replace an entire in-house marketing team?",
-    a: "Yes. A single agency replaces 2-4 in-house roles for most small businesses. You get strategists, content creators, designers, and analysts for the price of one mid-level employee. 78% of agencies operate on monthly retainers in 2026, meaning you get consistent, full-service execution without the HR overhead.",
+    a: "Yes. A single agency replaces 2-4 in-house roles for most small businesses. You get strategists, content creators, designers, and analysts for the price of one mid-level employee. Most agencies operate on monthly retainers, meaning you get consistent, full-service execution without the HR overhead.",
   },
 ];
 
@@ -251,9 +251,11 @@ export default async function Post() {
             >
               Bureau of Labor Statistics
             </a>
-            , benefits cost employers an average of $23,696 per worker per year.
-            That&apos;s health insurance, retirement contributions, paid leave,
-            and legally required taxes. Then add the tools. Marketing software
+            , benefits run close to 30% on top of wages for the average
+            private-sector worker, roughly $28,000-$29,000 a year on a
+            $90,000-$100,000 salary. That&apos;s health insurance, retirement
+            contributions, paid leave, and legally required taxes. Then add
+            the tools. Marketing software
             alone runs $3,000 to $12,000 per year. Think scheduling platforms,
             design tools, analytics subscriptions, SEO software, email
             platforms. Your employee needs all of them.
@@ -357,10 +359,11 @@ export default async function Post() {
           <div className="blog-callout">
             <div className="callout-label">Key insight</div>
             <p>
-              78% of marketing agencies operate on monthly retainers in 2026, up
-              from 64% in 2023. This means predictable costs, no surprise
-              invoices, and the ability to cancel if it&apos;s not working. Try
-              that with a W-2 employee.
+              The monthly retainer is the dominant pricing model in marketing
+              agencies today, used by the large majority of shops in some
+              form. This means predictable costs, no surprise invoices, and
+              the ability to cancel if it&apos;s not working. Try that with a
+              W-2 employee.
             </p>
           </div>
 

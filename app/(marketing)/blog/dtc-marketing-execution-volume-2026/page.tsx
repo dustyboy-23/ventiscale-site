@@ -44,7 +44,7 @@ const IMAGE_URL = `https://www.ventiscale.com${IMAGE}`;
 const FAQ_DATA = [
   {
     q: "What is the DTC marketing execution gap?",
-    a: "The DTC execution gap is the difference between the content volume DTC brands need to compete in 2026 and what manual teams or traditional agencies produce. Darkroom Agency&apos;s 2026 report quantified it: execution volume requirements now permanently exceed what any small in-house team produces manually. Meta Advantage+ alone needs 300-1,000 creative variations to optimize, while most agencies deliver 10-15.",
+    a: "The DTC execution gap is the difference between the content volume DTC brands need to compete in 2026 and what manual teams or traditional agencies produce. Darkroom Agency&apos;s 2026 report quantified it: execution volume requirements now permanently exceed what any small in-house team produces manually. Meta&apos;s own creative guidance scales up to 50-100+ variations at high spend tiers, while most agencies deliver 10-15 regardless of budget.",
   },
   {
     q: "Why are traditional marketing agencies stuck on old playbooks?",
@@ -52,7 +52,7 @@ const FAQ_DATA = [
   },
   {
     q: "How many creative variations does Meta Advantage+ actually need?",
-    a: "Meta Advantage+ needs between 300 and 1,000 ad creative variations to fully optimize its delivery algorithm in 2026. With fewer variations, the algorithm can&apos;t test and learn effectively, which directly suppresses ROAS. Most traditional agencies deliver 10-15 variations per month — a 20-100x gap that&apos;s a direct cause of underperforming Meta campaigns.",
+    a: "Meta&apos;s own guidance scales with spend, from roughly 10-15 concepts at $100-300/day up to 50-100+ at $5,000+/day, to fully optimize its delivery algorithm in 2026. With fewer variations than that, the algorithm can&apos;t test and learn effectively, which directly suppresses ROAS. Most traditional agencies deliver 10-15 variations per month regardless of a client&apos;s spend tier — a gap that&apos;s a direct cause of underperforming Meta campaigns at higher budgets.",
   },
   {
     q: "How does AI marketing execution produce more volume?",
@@ -196,8 +196,9 @@ export default async function Post() {
                 produce.
               </li>
               <li>
-                Meta Advantage+ needs 300-1,000 creative variations to optimize
-                fully. Most agencies send 10-15 per month.
+                Meta&apos;s guidance scales up to 50-100+ creative variations
+                at high spend tiers. Most agencies send 10-15 per month
+                regardless of budget.
               </li>
               <li>
                 DTC CAC is up 40-60% since 2023. Low creative volume makes this
@@ -223,18 +224,20 @@ export default async function Post() {
             The execution math that changed DTC marketing in 2026
           </h2>
           <p>
-            Run the numbers on Meta Advantage+. The platform needs between 300
-            and 1,000 ad creative variations to fully optimize its delivery
-            algorithm. With fewer variations, it can&apos;t test and learn.
-            ROAS stays suppressed. Most agencies deliver 10-15 variations per
-            month at the $3,000-8,000 retainer tier. That&apos;s not a minor
-            gap. That&apos;s a 20-100x deficit between what the platform needs
-            and what your agency provides.
+            Run the numbers on Meta Advantage+. Meta&apos;s own guidance
+            scales creative volume with spend, climbing to 50-100+ variations
+            at high daily budgets. With fewer variations, it can&apos;t test
+            and learn. ROAS stays suppressed. Most agencies deliver 10-15
+            variations per month at the $3,000-8,000 retainer tier regardless
+            of the client&apos;s actual spend tier. That&apos;s not a minor
+            gap at higher budgets. That&apos;s a real deficit between what
+            the platform needs and what your agency provides.
           </p>
           <p>
-            Email has the same problem. Brands with 5 or more automated flows
-            earn 31% more email revenue than brands running fewer. Each flow
-            requires copywriting, A/B tested subject lines, segmentation logic,
+            Email has the same problem. Automated flows generate 37-41% of
+            total email revenue from just 2-5% of send volume, but only if
+            the full flow stack is actually built out. Each flow requires
+            copywriting, A/B tested subject lines, segmentation logic,
             and ongoing optimization. A manually-staffed agency managing 10
             clients can&apos;t build and maintain that stack for everyone. Most
             clients get one or two flows, set up once, rarely touched again.
@@ -242,9 +245,9 @@ export default async function Post() {
 
           <div className="blog-stat-row">
             <div className="blog-stat">
-              <div className="stat-number">300-1K</div>
+              <div className="stat-number">50-100+</div>
               <div className="stat-label">
-                Creative variations Meta Advantage+ needs to optimize
+                Creative variations Meta recommends at high spend
               </div>
             </div>
             <div className="blog-stat">
@@ -374,8 +377,10 @@ export default async function Post() {
           <div className="blog-callout">
             <div className="callout-label">The volume signal</div>
             <p>
-              AI agent deployment delivers an average 171% ROI across U.S.
-              enterprises, per MasterOfCode&apos;s 2026 analysis. The return is
+              Successful agentic AI deployments return an average 171% ROI
+              (192% in the US specifically), per 2026 Forrester and BCG data
+              &mdash; though that&apos;s the ROI for the minority of
+              deployments that actually reach production. The return is
               highest in marketing execution tasks — content generation, creative
               production, and campaign management — where AI compounds output
               without compounding cost.

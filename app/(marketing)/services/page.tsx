@@ -132,7 +132,8 @@ export default async function ServicesPage() {
           <p>
             <strong>Welcome series</strong> (3 emails over 7 days, 40-50% open
             rate, 4-8% conversion). <strong>Abandoned cart sequence</strong>{" "}
-            (3 emails at 1h/24h/72h, recovers 18%+ of lost revenue).{" "}
+            (3 emails at 1h/24h/72h, recovers revenue you&apos;re currently
+            losing to carts nobody follows up on).{" "}
             <strong>Post-purchase flow</strong> (cross-sell, education, review
             request). <strong>Browse abandonment</strong> (single targeted
             email at 24h). <strong>Winback campaign</strong> (60-90 day
@@ -146,7 +147,7 @@ export default async function ServicesPage() {
           <p>
             Deeper context: see{" "}
             <Link href="/blog/abandoned-cart-email-sequence">
-              the abandoned cart sequence that recovers 18%
+              the abandoned cart sequence that recovers lost revenue
             </Link>
             .
           </p>
@@ -155,8 +156,8 @@ export default async function ServicesPage() {
           <p>
             30-50 pieces of monthly content production. Blog posts, landing
             pages, product copy, comparison articles. Optimized for both
-            Google and AI search citations (32.5% of AI citations go to
-            comparison content specifically).
+            Google and AI search citations (comparison-format content earns a
+            disproportionate share of AI citations).
           </p>
           <p>
             Includes keyword research, internal linking architecture (cluster

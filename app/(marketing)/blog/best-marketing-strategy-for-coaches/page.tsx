@@ -50,7 +50,7 @@ const FAQ_DATA = [
   },
   {
     q: "Do online coaches need social media to get clients?",
-    a: "Yes. 82% of coaching clients research their coach online before reaching out. Social media is where that research happens. Coaches with no active presence lose clients to competitors who show up consistently, even if the competitor&apos;s coaching quality is lower.",
+    a: "Yes. Most prospective coaching clients research a coach online before reaching out, and social media is where that research happens. Coaches with no active presence lose clients to competitors who show up consistently, even if the competitor&apos;s coaching quality is lower.",
   },
   {
     q: "When should an online coach outsource their marketing?",
@@ -245,9 +245,9 @@ export default async function Post() {
               <div className="stat-label">Certified coaches worldwide</div>
             </div>
             <div className="blog-stat">
-              <div className="stat-number">82%</div>
+              <div className="stat-number">60%</div>
               <div className="stat-label">
-                Research a coach online before hiring
+                Of coaches now offer online courses to add income
               </div>
             </div>
           </div>
@@ -263,10 +263,10 @@ export default async function Post() {
             <div className="callout-label">Common mistake</div>
             <p>
               Relying solely on referrals for client acquisition.
-              Referral-dependent coaches experience 40-60% revenue swings month
-              to month because they can&apos;t control the flow of new
-              prospects. You need a system that generates leads whether or not
-              someone recommends you this week.
+              Referral-dependent coaches routinely see feast-or-famine
+              revenue swings month to month because they can&apos;t control
+              the flow of new prospects. You need a system that generates
+              leads whether or not someone recommends you this week.
             </p>
           </div>
 
@@ -338,17 +338,19 @@ export default async function Post() {
           <div className="blog-callout">
             <div className="callout-label">Key insight</div>
             <p>
-              According to the{" "}
+              The{" "}
               <a
                 href="https://coachingfederation.org/research/global-coaching-study"
                 target="_blank"
                 rel="noopener noreferrer"
               >
                 ICF Global Coaching Study
-              </a>
-              , coaches who combine digital marketing with a structured sales
-              process earn 2.5x more than those relying on organic reach alone.
-              The system matters more than any single tactic.
+              </a>{" "}
+              tracks a coaching industry that&apos;s nearly doubled in
+              revenue since 2023 while practitioner count keeps climbing.
+              More coaches chasing a growing pie means visibility, not just
+              skill, increasingly decides who gets the clients. The system
+              matters more than any single tactic.
             </p>
           </div>
 

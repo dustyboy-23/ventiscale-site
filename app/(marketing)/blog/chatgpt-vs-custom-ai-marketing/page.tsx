@@ -283,17 +283,12 @@ export default async function Post() {
             What ChatGPT gives you (and where it falls short)
           </h2>
           <p>
-            ChatGPT is the world&apos;s most used writing tool.{" "}
-            <a
-              href="https://www.averi.ai/blog/the-state-of-ai-content-marketing-2026-benchmarks-report"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              71% of marketers who use AI tools report using ChatGPT
-            </a>
-            . That adoption isn&apos;t an accident. It&apos;s genuinely fast,
-            surprisingly capable for general tasks, and cheap enough that
-            almost no one questions it. I used it myself for months.
+            ChatGPT is the world&apos;s most used writing tool. 71% of
+            marketers who use AI tools report using ChatGPT, well ahead of
+            Grammarly and Gemini. That adoption isn&apos;t an accident.
+            It&apos;s genuinely fast, surprisingly capable for general tasks,
+            and cheap enough that almost no one questions it. I used it
+            myself for months.
           </p>
           <p>
             What it does well: first drafts, subject line variations,

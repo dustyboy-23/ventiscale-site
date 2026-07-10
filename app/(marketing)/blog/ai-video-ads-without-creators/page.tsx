@@ -54,7 +54,7 @@ const FAQ_DATA = [
   },
   {
     q: "How many ad creative variations do Meta Advantage+ campaigns need?",
-    a: "Meta Advantage+ campaigns perform best with 300-1,000 creative variations to find the combinations that convert. Most ecommerce brands run fewer than 15. Getting to 100+ variations manually at $3,000 per video would cost $300,000 or more.",
+    a: "Meta's own creative guidance scales with spend, from roughly 10-15 concepts at $100-300/day up to 50-100+ at $5,000+/day. Most ecommerce brands run fewer than 15 regardless of spend tier. Getting to 100+ variations manually at $3,000 per video would cost $300,000 or more.",
   },
   {
     q: "What is Creatify and how do ecommerce brands use it?",
@@ -203,8 +203,9 @@ export default async function Post() {
                 allows
               </li>
               <li>
-                Meta Advantage+ needs 300-1,000 creative variations to
-                optimize. Most ecommerce brands run fewer than 15.
+                Meta&apos;s creative guidance scales up to 50-100+ variations
+                at high spend tiers. Most ecommerce brands run fewer than 15
+                regardless of budget.
               </li>
               <li>
                 TikTok&apos;s median CPC is $0.50 vs. $1.07-$1.11 on Meta —
@@ -246,9 +247,10 @@ export default async function Post() {
             $500 to $5,000 depending on creator tier, deliverables, and usage
             rights. You need fresh hook variations every time one fatigues. You
             need separate cuts for TikTok, Reels, and Meta feed. If
-            you&apos;re running Advantage+, Meta wants up to 1,000 variations
-            to optimize properly. At $3,000 per video, that math
-            doesn&apos;t work for a brand doing $50,000 a month.
+            you&apos;re running Advantage+ at real spend, Meta&apos;s own
+            guidance calls for 50-100+ variations to optimize properly. At
+            $3,000 per video, that math doesn&apos;t work for a brand doing
+            $50,000 a month.
           </p>
 
           <div className="blog-stat-row">
@@ -334,12 +336,12 @@ export default async function Post() {
             The agencies aren&apos;t wrong because they&apos;re lazy.
             They&apos;re stuck on a pricing model where each video costs real
             money, so they limit volume to protect margin. At $3,000 per video,
-            300 variations would cost $900,000. Nobody&apos;s approving that
+            100 variations would cost $300,000. Nobody&apos;s approving that
             budget.
           </p>
           <p>
-            At AI production costs — roughly $30 per video — 300 variations
-            costs $9,000. That&apos;s a real number for a serious ecommerce
+            At AI production costs — roughly $30 per video — 100 variations
+            costs $3,000. That&apos;s a real number for a serious ecommerce
             brand. Achievable in a week, not a year.
           </p>
           <p>
@@ -412,8 +414,8 @@ export default async function Post() {
               <div className="stat-label">Product URL to finished ad</div>
             </div>
             <div className="blog-stat">
-              <div className="stat-number">1,000</div>
-              <div className="stat-label">Max variations Meta Advantage+ can use</div>
+              <div className="stat-number">50-100+</div>
+              <div className="stat-label">Variations Meta recommends at high spend</div>
             </div>
           </div>
 

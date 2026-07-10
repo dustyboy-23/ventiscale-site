@@ -60,7 +60,7 @@ const FAQ_DATA = [
   },
   {
     q: "How does AI marketing lower ecommerce customer acquisition cost?",
-    a: "AI marketing reduces ecommerce CAC through three levers: higher organic content volume reduces paid dependency, strong email flows convert subscribers at 15.9x the rate of standard campaigns, and faster creative testing reduces wasted ad spend. Brands using AI-powered marketing typically see blended CAC drop 20-35% within 90 days.",
+    a: "AI marketing reduces ecommerce CAC through three levers: higher organic content volume reduces paid dependency, strong email flows generate roughly 15.9x more revenue per send than broadcast campaigns (Foundry CRO, 2026), and faster creative testing reduces wasted ad spend. Brands using AI-powered marketing typically see blended CAC drop 20-35% within 90 days.",
   },
   {
     q: "Should I compare my CAC to industry averages or my vertical benchmark?",
@@ -314,11 +314,12 @@ export default async function Post() {
             your real CAC.
           </p>
           <p>
-            <strong>Market saturation.</strong> DTC brand count grew 36% in
-            three years. More brands targeting the same audiences in the same
-            auctions creates structural CPM pressure that doesn&apos;t resolve
-            by spending more. It resolves by reducing how much you depend on
-            those auctions.
+            <strong>Market saturation.</strong> The DTC market kept growing
+            through the post-2022 shakeout instead of consolidating. More
+            brands targeting the same audiences in the same auctions creates
+            structural CPM pressure that doesn&apos;t resolve by spending
+            more. It resolves by reducing how much you depend on those
+            auctions.
           </p>
 
           <div className="blog-callout">

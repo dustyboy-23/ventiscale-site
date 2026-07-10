@@ -374,13 +374,13 @@ export default async function Post() {
 
           <div className="blog-stat-row">
             <div className="blog-stat">
-              <div className="stat-number">$62K</div>
+              <div className="stat-number">$52K</div>
               <div className="stat-label">
-                Average marketing manager salary
+                Average marketing coordinator salary
               </div>
             </div>
             <div className="blog-stat">
-              <div className="stat-number">68%</div>
+              <div className="stat-number">~40%</div>
               <div className="stat-label">
                 Of owners increasing marketing spend in 2026
               </div>
@@ -390,8 +390,9 @@ export default async function Post() {
           <div className="blog-callout">
             <div className="callout-label">Key insight</div>
             <p>
-              68% of small business owners plan to increase their marketing
-              budget in 2026, according to{" "}
+              Nearly 40% of small business owners plan to increase their
+              marketing budget in 2026, with another 54% holding steady,
+              according to{" "}
               <a
                 href="https://localiq.com/blog/small-business-marketing-trends-report-2026/"
                 target="_blank"

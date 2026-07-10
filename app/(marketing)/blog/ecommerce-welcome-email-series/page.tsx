@@ -58,7 +58,7 @@ const FAQ_DATA = [
   },
   {
     q: "How do I make welcome emails feel personal and not like a template?",
-    a: "Train the sequence on your actual brand voice: real customer language from reviews, your specific product details, and your founder story. Klaviyo&apos;s AI send-time optimization adds a 26% lift in open rates by learning each subscriber&apos;s best engagement window. Brands using AI-personalized sequences see 41% better click-through rates than those using static templates.",
+    a: "Train the sequence on your actual brand voice: real customer language from reviews, your specific product details, and your founder story. Klaviyo&apos;s AI send-time optimization has shown click rate lifts as high as 35% for top-performing campaigns by learning each subscriber&apos;s best engagement window. Brands using AI-personalized sequences consistently see meaningfully better click-through rates than those using static templates.",
   },
   {
     q: "What's the difference between a welcome email and a welcome series?",
@@ -201,8 +201,9 @@ export default async function Post() {
                 by nearly 50%.
               </li>
               <li>
-                AI send-time optimization adds a 26% lift in open rates on top of a
-                well-structured sequence. Klaviyo does this automatically.
+                AI send-time optimization has shown click rate lifts as high
+                as 35% for top campaigns on top of a well-structured
+                sequence. Klaviyo does this automatically.
               </li>
             </ul>
           </div>
@@ -422,16 +423,12 @@ export default async function Post() {
 
           <div className="blog-stat-row">
             <div className="blog-stat">
-              <div className="stat-number">+26%</div>
-              <div className="stat-label">Open rate lift from AI send-time optimization</div>
+              <div className="stat-number">+35%</div>
+              <div className="stat-label">Top-campaign click rate lift from AI send-time optimization</div>
             </div>
             <div className="blog-stat">
-              <div className="stat-number">+41%</div>
-              <div className="stat-label">CTR improvement with AI personalization</div>
-            </div>
-            <div className="blog-stat">
-              <div className="stat-number">42.1%</div>
-              <div className="stat-label">Avg open rate on AI-triggered automated flows</div>
+              <div className="stat-number">83.6%</div>
+              <div className="stat-label">Avg open rate on welcome emails</div>
             </div>
           </div>
 

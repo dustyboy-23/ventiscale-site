@@ -41,7 +41,7 @@ const DATE = "2026-04-20";
 const FAQ_DATA = [
   {
     q: "What is the most common marketing mistake small businesses make?",
-    a: "Posting content with no clear strategy or goal. 46% of small businesses post on social media with no plan, which means they're spending time without any way to know if it's working. Content without a strategy is just noise — it doesn't build an audience, generate leads, or move anyone closer to buying.",
+    a: "Posting content with no clear strategy or goal. Nearly half of small businesses post on social media without a documented plan, which means they're spending time without any way to know if it's working. Content without a strategy is just noise — it doesn't build an audience, generate leads, or move anyone closer to buying.",
   },
   {
     q: "How do I know if my marketing is actually working?",
@@ -169,10 +169,10 @@ export default async function Post() {
 
         <div className="prose-blog">
           <p>
-            46% of small businesses post on social media with no plan. No goal.
-            No audience strategy. No way to know if anything&apos;s working.
-            They&apos;re just posting. And wondering why customers aren&apos;t
-            coming.
+            Nearly half of small businesses post on social media with no
+            documented plan. No goal. No audience strategy. No way to know if
+            anything&apos;s working. They&apos;re just posting. And wondering
+            why customers aren&apos;t coming.
           </p>
           <p>
             The hard truth about small business marketing mistakes is that they
@@ -186,8 +186,9 @@ export default async function Post() {
             <div className="callout-label">TL;DR</div>
             <ul>
               <li>
-                46% of small businesses post content with no strategy, wasting
-                time and budget on content that goes nowhere.
+                Nearly half of small businesses post content with no
+                documented strategy, wasting time and budget on content that
+                goes nowhere.
               </li>
               <li>
                 Poor targeting and unfocused marketing wastes 40-64% of the
@@ -277,8 +278,8 @@ export default async function Post() {
 
           <div className="blog-stat-row">
             <div className="blog-stat">
-              <div className="stat-number">46%</div>
-              <div className="stat-label">Post with no content plan</div>
+              <div className="stat-number">~50%</div>
+              <div className="stat-label">Post with no documented content plan</div>
             </div>
             <div className="blog-stat">
               <div className="stat-number">64%</div>
@@ -421,17 +422,19 @@ export default async function Post() {
           <div className="blog-callout">
             <div className="callout-label">Key insight</div>
             <p>
-              According to{" "}
+              The{" "}
               <a
                 href="https://www.sba.gov/blog/marketing-mistakes-can-haunt-your-business"
                 target="_blank"
                 rel="noopener noreferrer"
               >
-                the U.S. Small Business Administration
-              </a>
-              , businesses that track marketing metrics and adjust strategy based
-              on data consistently outperform those that don&apos;t. The gap
-              isn&apos;t budget. It&apos;s attention.
+                U.S. Small Business Administration
+              </a>{" "}
+              advises using the analytics tools built into social platforms,
+              email services, and marketing apps to learn what&apos;s working
+              and fine-tune from there. Businesses that actually do this build
+              a feedback loop. Most don&apos;t bother, which is the real gap:
+              not budget, attention.
             </p>
           </div>
 
@@ -478,12 +481,12 @@ export default async function Post() {
               <div className="stat-label">Per week on DIY marketing</div>
             </div>
             <div className="blog-stat">
-              <div className="stat-number">62%</div>
-              <div className="stat-label">Can&apos;t measure their own ROI</div>
+              <div className="stat-number">66%</div>
+              <div className="stat-label">Struggle to track marketing ROI consistently</div>
             </div>
             <div className="blog-stat">
-              <div className="stat-number">80%</div>
-              <div className="stat-label">Of SMBs say marketing is their top challenge</div>
+              <div className="stat-number">60%</div>
+              <div className="stat-label">Say finding new customers is a top challenge</div>
             </div>
           </div>
 

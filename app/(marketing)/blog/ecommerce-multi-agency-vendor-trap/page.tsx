@@ -18,19 +18,19 @@ const FAQ_DATA = [
   },
   {
     q: "How much does a fragmented marketing agency stack cost in wasted spend?",
-    a: "A 15% efficiency gap on $200,000/month in marketing spend costs $360,000 per year. A 20% gap costs $480,000 annually. The waste comes from agencies optimizing for their own channel metrics rather than shared business outcomes. Source: DarkRoom Agency 2026 DTC Benchmark Report.",
+    a: "If a wrong agency structure creates even a modest efficiency gap on a large monthly marketing budget, the annualized waste runs into hundreds of thousands of dollars for a $200K/month brand. The waste comes from agencies optimizing for their own channel metrics rather than shared business outcomes.",
   },
   {
     q: "What is the attribution conflict problem with multiple marketing agencies?",
-    a: "When you run 4 agencies across 4 channels, each agency reports on their channel as if it&apos;s the only one driving revenue. Email claims every purchase that touched an email. Paid media claims every purchase that saw an ad. Total claimed revenue can run 2-3x your actual revenue, which means no one is accountable when growth stalls.",
+    a: "When you run 4 agencies across 4 channels, each agency reports on their channel as if it&apos;s the only one driving revenue. Email claims every purchase that touched an email. Paid media claims every purchase that saw an ad. Total claimed revenue can run well above your actual revenue, which means no one is accountable when growth stalls.",
   },
   {
     q: "Is a unified marketing stack better than specialized agencies for ecommerce?",
-    a: "For brands under $500K/month revenue, yes. Unified stacks eliminate the coordination overhead and attribution conflicts that fragment multi-agency setups. Above $500K/month, specialized agencies can add value if they share a data layer. The issue is most don&apos;t. Source: DarkRoom Agency 2026 DTC Benchmark Report.",
+    a: "For brands under $500K/month revenue, yes. Unified stacks eliminate the coordination overhead and attribution conflicts that fragment multi-agency setups. Above $500K/month, specialized agencies can add value if they share a data layer. The issue is most don&apos;t.",
   },
   {
     q: "How do I know if my agency stack is causing an efficiency problem?",
-    a: "Three signals: 1) Each agency&apos;s reported conversions add up to more than your actual revenue. 2) You spend 5+ hours per week in coordination calls between vendors. 3) When growth stalls, each agency points to the others. Any one of these is a fragmentation problem. All three mean you&apos;re losing $300K-$500K/year to coordination overhead alone.",
+    a: "Three signals: 1) Each agency&apos;s reported conversions add up to more than your actual revenue. 2) You spend several hours per week in coordination calls between vendors. 3) When growth stalls, each agency points to the others. Any one of these is a fragmentation problem. All three together usually mean real money lost to coordination overhead alone.",
   },
 ];
 
@@ -188,19 +188,19 @@ export default async function Post() {
             <div className="callout-label">TL;DR</div>
             <ul>
               <li>
-                The average DTC brand at $100K-$200K/month runs 4 separate
-                agencies with incompatible attribution models. Each reports on
-                their channel in isolation.
+                Many DTC brands at $100K-$200K/month run 4 separate agencies
+                with incompatible attribution models. Each reports on their
+                channel in isolation.
               </li>
               <li>
-                A 15% efficiency gap on $200K/month in spend costs $360,000 per
-                year. Most fragmented stacks run 15-20% gaps because
-                optimization signals conflict.
+                Even a modest efficiency gap on a $200K/month spend adds up to
+                real annual waste. Fragmented stacks lose money to conflicting
+                optimization signals more often than founders realize.
               </li>
               <li>
                 When each agency claims the same conversion, your total reported
-                revenue can be 2-3x your actual revenue. Nobody is accountable
-                when growth stalls.
+                revenue can run well above your actual revenue. Nobody is
+                accountable when growth stalls.
               </li>
               <li>
                 The fix is a shared data layer and single attribution model, not
@@ -211,12 +211,13 @@ export default async function Post() {
           </div>
 
           <p>
-            A fragmented ecommerce marketing agency stack costs $360,000 to
-            $480,000 per year on a $200K/month marketing budget. The waste
-            isn&apos;t bad vendors. It&apos;s the coordination overhead,
-            attribution conflicts, and misaligned optimization signals that
-            happen when four separate teams optimize for four separate metrics
-            with no shared accountability for business outcomes.
+            A fragmented ecommerce marketing agency stack can waste a
+            substantial share of a $200K/month marketing budget every year.
+            The waste isn&apos;t bad vendors. It&apos;s the coordination
+            overhead, attribution conflicts, and misaligned optimization
+            signals that happen when four separate teams optimize for four
+            separate metrics with no shared accountability for business
+            outcomes.
           </p>
 
           <h2 id="sequential-hiring-trap">The sequential hiring trap</h2>
@@ -237,35 +238,14 @@ export default async function Post() {
             agency&apos;s monthly fee.
           </p>
           <p>
-            One founder on Reddit described reverse-engineering his $5,000/month
-            agency retainer: 40% overhead and profit, 30% sales commission, 20%
-            account managers, and 10% to the junior who actually pushed the
-            buttons. &quot;I wasn&apos;t paying for elite marketing
-            performance,&quot; he wrote. &quot;I was funding their sales
-            machine.&quot; Multiply that by four vendors and you see the
-            structural problem.
+            One founder on Reddit described reverse-engineering his
+            $5,000/month agency retainer and finding that most of it went to
+            overhead, sales commission, and account management layers, with
+            only a small slice actually paying for the work getting done.
+            &quot;I wasn&apos;t paying for elite marketing performance,&quot;
+            he wrote. &quot;I was funding their sales machine.&quot; Multiply
+            that by four vendors and you see the structural problem.
           </p>
-
-          <div className="blog-stat-row">
-            <div className="blog-stat">
-              <div className="stat-number">4</div>
-              <div className="stat-label">
-                avg vendors for $100K-$200K/mo DTC brands
-              </div>
-            </div>
-            <div className="blog-stat">
-              <div className="stat-number">$360K</div>
-              <div className="stat-label">
-                annual waste at a 15% efficiency gap on $200K/mo spend
-              </div>
-            </div>
-            <div className="blog-stat">
-              <div className="stat-number">3x</div>
-              <div className="stat-label">
-                reported vs actual revenue in worst-case attribution conflicts
-              </div>
-            </div>
-          </div>
 
           <hr className="blog-divider" />
 
@@ -286,8 +266,8 @@ export default async function Post() {
           <p>
             But the same customer who saw an ad, opened an email, and watched a
             TikTok gets claimed by all three. Your agencies collectively report
-            $900,000 in attributed revenue. Your Shopify dashboard says
-            $380,000. Nobody is lying. Everyone is using their own rules.
+            attributed revenue well above what your Shopify dashboard actually
+            shows. Nobody is lying. Everyone is using their own rules.
           </p>
           <p>
             When growth stalls, each agency points to the others. Paid says
@@ -314,25 +294,27 @@ export default async function Post() {
 
           <h2 id="efficiency-gap-math">What the efficiency gap actually costs</h2>
           <p>
-            The{" "}
+            Per{" "}
             <a
               href="https://www.darkroomagency.com/observatory/best-dtc-marketing-agency-2026"
               target="_blank"
               rel="noopener noreferrer"
             >
-              DarkRoom Agency 2026 DTC Benchmark Report
-            </a>{" "}
-            puts the efficiency gap for fragmented marketing stacks at 15-20%
-            of total spend. On a $200,000/month marketing budget, that&apos;s
-            $30,000 to $40,000 per month in wasted spend. Annualized:
-            $360,000 to $480,000.
+              DarkRoom Agency&apos;s DTC marketing analysis
+            </a>
+            , even a modest efficiency gap from the wrong agency structure adds
+            up fast: on a $200,000/month marketing budget, a gap in the
+            mid-teens percentage range means tens of thousands of dollars a
+            month in wasted spend, and hundreds of thousands annualized.
+            Vendor coordination alone can eat 15-20 hours a month of
+            management time.
           </p>
           <p>The waste has three sources:</p>
           <p>
             <strong>1. Audience overlap.</strong> Your paid media agency
             retargets subscribers your email agency was about to convert anyway.
-            You pay $15-25 CPM to reach someone who was 48 hours from a
-            zero-cost email conversion. We covered the specifics of this in{" "}
+            You pay real CPM to reach someone who was about to convert for free
+            through email. We covered the specifics of this in{" "}
             <Link href="/blog/email-paid-coordination-gap-ecommerce">
               how the Klaviyo-Meta sync gap drains ecommerce ad spend
             </Link>
@@ -347,12 +329,11 @@ export default async function Post() {
             controls.
           </p>
           <p>
-            <strong>3. Coordination overhead.</strong> The average
-            fragmented-stack brand spends 5-8 hours per week in agency
-            coordination calls. At a founder hourly rate of $200, that&apos;s
-            $1,000-$1,600 per week in lost productivity. Annualized:
-            $52,000-$83,000 in founder time spent on calls that wouldn&apos;t
-            exist with a unified stack.
+            <strong>3. Coordination overhead.</strong> Fragmented-stack brands
+            routinely spend several hours a week in agency coordination calls.
+            Multiply that against a founder's real hourly value and it adds up
+            to a meaningful chunk of lost productivity every year, spent on
+            calls that wouldn&apos;t exist with a unified stack.
           </p>
 
           <figure className="blog-image">
@@ -435,14 +416,16 @@ export default async function Post() {
             rates for coordination work, not specialist-rate work.
           </p>
           <p>
-            The 2026 DTC benchmark data shows blended ROAS across fragmented
-            stacks averaging 2.87:1 and declining 4-10% year over year.
-            Unified stacks running{" "}
+            Per FoundryCRO&apos;s 2026 ecommerce benchmarks, overall blended
+            ecommerce ROAS sits at 2.87:1 and is declining industry-wide as
+            cost inflation outpaces conversion gains. Meta Advantage+ campaigns
+            seeded with warm audiences hit 4.52:1 in the same data, well above
+            the blended average. Unified stacks running{" "}
             <Link href="/blog/klaviyo-meta-advantage-plus-seed-audience">
               Klaviyo-seeded Meta Advantage+
             </Link>{" "}
-            hit 4.52:1 on the same channels. The architecture is doing more
-            work than the agencies.
+            are positioned to capture that gap on the same channels. The
+            architecture is doing more work than the agencies.
           </p>
 
           <hr className="blog-divider" />
@@ -470,7 +453,7 @@ export default async function Post() {
             <strong>3. Calculate your coordination overhead.</strong> Count the
             hours per week you and your team spend on agency coordination calls,
             report reconciliation, and cross-vendor communication. Multiply by
-            your realistic hourly rate. If it&apos;s above $1,000/week, the
+            your realistic hourly rate. If that number is significant, the
             coordination cost alone is a case for architectural change,
             independent of any quality issues with the agencies themselves.
           </p>

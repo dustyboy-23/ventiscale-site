@@ -52,7 +52,7 @@ const FAQ_DATA = [
   },
   {
     q: "How much does a Shopify AI agent cost?",
-    a: "Klaviyo's Customer Agent is included in existing Klaviyo plans starting at $45/month with no additional charge. The Manus Shopify Connector is available through the Manus platform. Most brands already on Klaviyo can activate AI agent features today at zero extra cost.",
+    a: "Klaviyo's Customer Agent runs as an add-on: roughly $140/month at the introductory rate (regular rate $200/month), which includes 50 monthly conversations with overages billed per conversation beyond that. The Manus Shopify Connector is available through the Manus platform. Both cost something extra on top of your base Klaviyo or Shopify plan.",
   },
   {
     q: "What tasks can a Shopify AI agent actually automate?",
@@ -207,8 +207,8 @@ export default async function Post() {
                 without human input.
               </li>
               <li>
-                Most of this is available today through Klaviyo at no extra
-                cost. Most founders haven&apos;t activated it.
+                Most of this is available today as a Klaviyo add-on. Most
+                founders haven&apos;t activated it.
               </li>
             </ul>
           </div>
@@ -429,11 +429,11 @@ export default async function Post() {
           <h2 id="how-to-set-this-up">How to actually set this up</h2>
           <p>
             If you&apos;re already on Klaviyo, you can start today. The
-            Customer Agent is included in existing plans at no additional cost.
-            Navigate to your Klaviyo AI features, connect your Shopify store,
-            and enable Customer Agent. The onboarding pulls your product
-            catalog, order history, and return policies automatically. Setup
-            takes under 30 minutes.
+            Customer Agent is an add-on to existing plans. Navigate to your
+            Klaviyo AI features, connect your Shopify store, and enable
+            Customer Agent. The onboarding pulls your product catalog, order
+            history, and return policies automatically. Setup takes under 30
+            minutes.
           </p>
           <p>
             For the{" "}

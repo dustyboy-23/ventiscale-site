@@ -64,7 +64,7 @@ const FAQ_DATA = [
   },
   {
     q: "When should I fire my marketing agency?",
-    a: "Consider leaving if two or more of these are true: you've been live for 90+ days and can't identify which channel drove revenue last month; ROAS or CAC has shown no improvement over 3 consecutive months; you're spending more than 30% of your time managing their requests instead of running your business.",
+    a: "Consider leaving if two or more of these are true: you've been live for 90+ days and can't identify which channel drove revenue last month; ROAS or CAC has shown no improvement over 3 consecutive months; you're spending a disproportionate share of your time managing their requests instead of running your business.",
   },
 ];
 
@@ -201,14 +201,15 @@ export default async function Post() {
                 like, and what their reporting actually measures.
               </li>
               <li>
-                Teams managing agencies spend 30% of their time on agency
-                management instead of running their business. Vague deliverables
-                and unclear accountability make this worse.
+                Teams managing agencies routinely lose real chunks of their
+                week to agency management instead of running their business.
+                Vague deliverables and unclear accountability make this worse.
               </li>
               <li>
-                A 15% efficiency gap at $200,000/month in ad spend equals
-                $360,000 of annual waste. You can&apos;t catch that gap if your
-                reports show reach instead of revenue.
+                A mid-teens percentage efficiency gap at $200,000/month in ad
+                spend adds up to hundreds of thousands in annual waste. You
+                can&apos;t catch that gap if your reports show reach instead
+                of revenue.
               </li>
               <li>
                 All 11 red flags below are checkable before you sign anything.
@@ -396,18 +397,20 @@ export default async function Post() {
           <div className="blog-callout">
             <div className="callout-label">Key insight</div>
             <p>
-              According to{" "}
+              Per{" "}
               <a
                 href="https://www.darkroomagency.com/observatory/best-dtc-marketing-agency-2026"
                 target="_blank"
                 rel="noopener noreferrer"
               >
-                DarkRoom&apos;s 2026 DTC agency analysis
+                DarkRoom&apos;s DTC agency analysis
               </a>
-              , the most common founder complaint is agencies that optimize for
-              relationship preservation over performance honesty. When bad months
-              get blamed on external factors, founders lose the feedback loop
-              they need to course-correct.
+              , the agencies that actually move the needle are the integrated
+              ones, not fragmented vendor stacks split across specialists. A
+              common founder complaint that fits that pattern: agencies that
+              optimize for relationship preservation over performance honesty.
+              When bad months get blamed on external factors, founders lose the
+              feedback loop they need to course-correct.
             </p>
           </div>
 
@@ -445,8 +448,9 @@ export default async function Post() {
             You&apos;re spending money on ads to acquire customers and sending
             them to a funnel with no email sequence to close them. You&apos;re
             retargeting buyers who were already in a conversion email flow. DTC
-            brands lose 8-15% of ad spend retargeting customers who were about
-            to receive a conversion email anyway.
+            brands waste ad spend retargeting customers who were about
+            to receive a conversion email anyway, when connecting that data
+            instead drives 25-35% higher ROAS.
           </p>
           <p>
             When no one owns the full funnel, everyone owns the gap. The gap is
@@ -460,10 +464,9 @@ export default async function Post() {
 
           <div className="blog-stat-row">
             <div className="blog-stat">
-              <div className="stat-number">8-15%</div>
+              <div className="stat-number">25-35%</div>
               <div className="stat-label">
-                ad spend wasted on redundant retargeting of email-conversion
-                customers
+                higher ROAS from connecting email and Meta retargeting data
               </div>
             </div>
             <div className="blog-stat">
@@ -537,8 +540,8 @@ export default async function Post() {
             metrics, you&apos;ve found the final red flag. Attribution is
             genuinely hard. But it&apos;s not impossible, and any agency
             charging a real retainer should have a clear model connecting spend
-            to revenue. Around 30% of small business marketing budgets go to
-            channels with no measurable return. That&apos;s not bad luck.
+            to revenue. A meaningful share of small business marketing budgets
+            go to channels with no measurable return. That&apos;s not bad luck.
             That&apos;s what happens when nobody&apos;s accountable for tying
             the work to the money.
           </p>

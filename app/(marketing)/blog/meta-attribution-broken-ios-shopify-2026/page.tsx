@@ -417,10 +417,10 @@ export default async function Post() {
           <p>
             <strong>Run Meta&apos;s Conversions API alongside your Pixel.</strong>{" "}
             CAPI sends conversion events server-side, bypassing the iOS Pixel
-            block. Running both together recovers 15-30% of the iOS conversion
-            signal you&apos;ve been missing. Your Shopify admin has a native
-            CAPI integration now. It takes about 20 minutes to set up and
-            it&apos;s free.
+            block. Running both together typically recovers 60-75% of the iOS
+            conversion signal you&apos;ve been missing. Your Shopify admin has
+            a native CAPI integration now. It takes about 20 minutes to set up
+            and it&apos;s free.
           </p>
           <p>
             <strong>Use Marketing Efficiency Ratio as your north star.</strong>{" "}
@@ -450,18 +450,18 @@ export default async function Post() {
           <div className="blog-callout">
             <div className="callout-label">Key insight</div>
             <p>
-              Server-side tracking via Conversions API recovers 15-30% of lost
-              iOS conversion signal. Combined with a blended MER metric, most
-              brands can get within 15-20% of accurate attribution without
-              replacing their entire analytics stack. See{" "}
+              Server-side tracking via Conversions API typically recovers
+              60-75% of lost iOS conversion tracking on its own, per{" "}
               <a
                 href="https://www.get-ryze.ai/blog/meta-ads-ios-tracking-issues-fix-attribution"
                 target="_blank"
                 rel="noopener noreferrer"
               >
                 independent iOS attribution research
-              </a>{" "}
-              for the full breakdown on recovery rates.
+              </a>
+              . Combined with a blended MER metric, most brands can get close
+              to accurate attribution without replacing their entire analytics
+              stack.
             </p>
           </div>
 

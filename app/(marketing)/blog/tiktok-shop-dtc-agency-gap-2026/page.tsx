@@ -7,7 +7,7 @@ const SLUG = "tiktok-shop-dtc-agency-gap-2026";
 const TITLE =
   "TikTok Shop is DTC's fastest-growing channel. Your agency has never touched it.";
 const DESCRIPTION =
-  "TikTok Shop moves $112 billion in US commerce in 2026. Most agencies still run Meta-first playbooks with zero TikTok Shop capability. Here's the cost.";
+  "TikTok Shop's US GMV is projected to surpass $20 billion in 2026. Most agencies still run Meta-first playbooks with zero TikTok Shop capability. Here's the cost.";
 const DATE = "2026-06-03";
 const IMAGE = "/blog/tiktok-shop-ecommerce-2026.jpg";
 const IMAGE_URL = `https://www.ventiscale.com${IMAGE}`;
@@ -184,8 +184,9 @@ export default async function Post() {
             <div className="callout-label">TL;DR</div>
             <ul>
               <li>
-                TikTok moves $112 billion in US commerce in 2026, and TikTok
-                Shop is the fastest-growing part of that
+                TikTok Shop's US GMV is projected to surpass $20 billion in
+                2026, and it&apos;s one of the fastest-growing commerce
+                channels DTC brands have access to
               </li>
               <li>
                 Most DTC agencies were built around Meta and Google and
@@ -242,8 +243,8 @@ export default async function Post() {
 
           <div className="blog-stat-row">
             <div className="blog-stat">
-              <div className="stat-number">$112B</div>
-              <div className="stat-label">TikTok US commerce volume 2026</div>
+              <div className="stat-number">$20B+</div>
+              <div className="stat-label">TikTok Shop US GMV, projected 2026</div>
             </div>
             <div className="blog-stat">
               <div className="stat-number">170M</div>
@@ -309,16 +310,16 @@ export default async function Post() {
           <div className="blog-callout">
             <div className="callout-label">Key insight</div>
             <p>
-              According to{" "}
+              Most DTC agency capability lists, like{" "}
               <a
                 href="https://invademarketing.com/best-digital-marketing-agencies-for-dtc-e-commerce-brands-2026/"
                 target="_blank"
                 rel="noopener noreferrer"
               >
-                Invade Marketing&apos;s 2026 DTC agency landscape report
+                Invade Marketing&apos;s DTC agency landscape overview
               </a>
-              , TikTok Shop management remains one of the most significant
-              service gaps across DTC agencies today. The fastest-growing brands
+              , describe TikTok expertise in terms of paid media and short-form
+              content, not TikTok Shop specifically. The fastest-growing brands
               on TikTok aren&apos;t running the most ads. They&apos;re running
               the best creator affiliate programs — affiliates who produce native
               Shop content, earn commissions on sales, and don&apos;t require a
@@ -333,10 +334,11 @@ export default async function Post() {
           <h2>What you lose while your agency sits this out</h2>
 
           <p>
-            TikTok Shop&apos;s growth is real and compounding. TikTok moves
-            $112 billion in US commerce in 2026. At the same time,{" "}
+            TikTok Shop&apos;s growth is real and compounding. Its US GMV is
+            projected to surpass $20 billion in 2026, on top of roughly $112
+            billion globally. At the same time,{" "}
             <Link href="/blog/tiktok-for-ecommerce-brands">
-              DTC brands are watching Meta CAC inflate 40-60% since 2023
+              DTC brands are watching Meta CAC climb steadily
             </Link>
             . TikTok Shop is growing while Meta&apos;s efficiency is declining.
             That&apos;s a meaningful channel shift, and most agencies are sitting
@@ -367,12 +369,6 @@ export default async function Post() {
           </p>
 
           <div className="blog-stat-row">
-            <div className="blog-stat">
-              <div className="stat-number">40-60%</div>
-              <div className="stat-label">
-                DTC CAC increase on Meta since 2023
-              </div>
-            </div>
             <div className="blog-stat">
               <div className="stat-number">5-20%</div>
               <div className="stat-label">

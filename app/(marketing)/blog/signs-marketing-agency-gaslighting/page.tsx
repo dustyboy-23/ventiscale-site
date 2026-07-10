@@ -195,8 +195,9 @@ export default async function Post() {
             <div className="callout-label">TL;DR</div>
             <ul>
               <li>
-                48% of clients have fired an agency over poor communication.
-                Vanity metrics are the delivery mechanism.
+                48% of clients cite dissatisfaction with delivery as the
+                reason they&apos;re rethinking their agency. Vanity metrics
+                are the delivery mechanism.
               </li>
               <li>
                 The 5 signs: vanity metric reports, silent attribution model
@@ -268,18 +269,11 @@ export default async function Post() {
             it&apos;s not leading the report.
           </p>
           <p>
-            According to{" "}
-            <a
-              href="https://agencyanalytics.com/blog/marketing-agency-benchmarks-2025"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              AgencyAnalytics&apos; 2025 industry benchmarks
-            </a>
-            , 36% of CFOs view marketing as a cost center. Not because marketing
-            doesn&apos;t work. Because the reports they receive are dominated by
-            activity metrics instead of revenue outcomes. CFOs stop trusting
-            marketing because marketing agencies taught them to.
+            A Viant study found 36% of CFOs cite CMOs&apos; use of vanity
+            metrics as a top concern. Not because marketing doesn&apos;t
+            work. Because the reports they receive are dominated by activity
+            metrics instead of revenue outcomes. CFOs stop trusting marketing
+            because marketing agencies taught them to.
           </p>
           <p>
             <strong>The metric to demand:</strong> Marketing Efficiency Ratio.
@@ -293,7 +287,7 @@ export default async function Post() {
             <div className="blog-stat">
               <div className="stat-number">48%</div>
               <div className="stat-label">
-                of clients have fired an agency over poor communication
+                cite dissatisfaction with delivery when rethinking their agency
               </div>
             </div>
             <div className="blog-stat">

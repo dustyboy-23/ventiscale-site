@@ -167,10 +167,12 @@ export default async function Post() {
 
         <div className="prose-blog">
           <p>
-            73% of small business owners have no real marketing budget. They
-            have a vague sense that they should spend &quot;some money&quot; on
-            marketing, so they pay for a few tools, boost a post when they
-            remember, and call it a strategy. Then they wonder why nothing grows.
+            73% of small business owners aren&apos;t confident their marketing
+            is actually working. Most don&apos;t have a real budget behind
+            it, either. They have a vague sense that they should spend
+            &quot;some money&quot; on marketing, so they pay for a few tools,
+            boost a post when they remember, and call it a strategy. Then
+            they wonder why nothing grows.
           </p>
           <p>
             A marketing budget isn&apos;t about how much you can afford to spend.

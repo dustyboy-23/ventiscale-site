@@ -189,8 +189,9 @@ export default async function Post() {
                 what you post to why you post it.
               </li>
               <li>
-                Businesses that plan content in advance are 3x more likely to
-                report marketing success.
+                The most successful content marketers are far more likely to
+                have a documented strategy than the least successful ones
+                (80% vs 52%, per CMI&apos;s B2B research).
               </li>
               <li>
                 The 4 parts every small business needs: content pillars, a
@@ -237,18 +238,11 @@ export default async function Post() {
           </div>
 
           <p>
-            According to the{" "}
-            <a
-              href="https://contentmarketinginstitute.com/articles/b2b-content-marketing-research/"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              Content Marketing Institute
-            </a>
-            , 73% of businesses with a documented content strategy report marketing
-            success, compared to 40% without one. The word &quot;documented&quot; is
-            doing a lot of work there. It doesn&apos;t mean complicated. It means
-            intentional.
+            According to the Content Marketing Institute&apos;s B2B research,
+            80% of the most successful content marketers have a documented
+            content strategy, compared to just 52% of the least successful
+            ones. The word &quot;documented&quot; is doing a lot of work
+            there. It doesn&apos;t mean complicated. It means intentional.
           </p>
 
           <hr className="blog-divider" />
@@ -301,9 +295,9 @@ export default async function Post() {
               </div>
             </div>
             <div className="blog-stat">
-              <div className="stat-number">3x</div>
+              <div className="stat-number">80% vs 52%</div>
               <div className="stat-label">
-                More marketing success with a documented content plan
+                Top vs bottom content marketers with a documented strategy
               </div>
             </div>
             <div className="blog-stat">

@@ -7,12 +7,12 @@ export const metadata = {
   title:
     "Ecommerce content marketing: what to publish when you sell physical products | Venti Scale",
   description:
-    "Content marketing generates 3x more leads than paid ads at 62% lower cost. Here's exactly what to publish when you sell physical products.",
+    "Content marketing builds owned audience that outbound ads can't. Here's exactly what to publish when you sell physical products.",
   openGraph: {
     title:
       "Ecommerce content marketing: what to publish when you sell physical products",
     description:
-      "Content marketing generates 3x more leads than paid ads at 62% lower cost. Here's exactly what to publish when you sell physical products.",
+      "Content marketing builds owned audience that outbound ads can't. Here's exactly what to publish when you sell physical products.",
     url: "https://www.ventiscale.com/blog/ecommerce-content-marketing",
     type: "article",
     images: [
@@ -29,7 +29,7 @@ export const metadata = {
     title:
       "Ecommerce content marketing: what to publish when you sell physical products",
     description:
-      "Content marketing generates 3x more leads than paid ads at 62% lower cost. Here's exactly what to publish when you sell physical products.",
+      "Content marketing builds owned audience that outbound ads can't. Here's exactly what to publish when you sell physical products.",
     images: [
       "https://www.ventiscale.com/blog/ecommerce-content-marketing.jpg",
     ],
@@ -40,7 +40,7 @@ const SLUG = "ecommerce-content-marketing";
 const TITLE =
   "Ecommerce content marketing: what to publish when you sell physical products";
 const DESCRIPTION =
-  "Content marketing generates 3x more leads than paid ads at 62% lower cost. Here's exactly what to publish when you sell physical products.";
+  "Content marketing builds owned audience that outbound ads can't. Here's exactly what to publish when you sell physical products.";
 const DATE = "2026-04-30";
 const IMAGE = "/blog/ecommerce-content-marketing.jpg";
 const IMAGE_URL = `https://www.ventiscale.com${IMAGE}`;
@@ -48,7 +48,7 @@ const IMAGE_URL = `https://www.ventiscale.com${IMAGE}`;
 const FAQ_DATA = [
   {
     q: "What is ecommerce content marketing?",
-    a: "Ecommerce content marketing means publishing blog posts, social content, videos, and emails that teach or inspire your potential customers so they find you and trust you before you ever ask for a sale. Brands with a documented content strategy generate 3.5x more conversions than those without one.",
+    a: "Ecommerce content marketing means publishing blog posts, social content, videos, and emails that teach or inspire your potential customers so they find you and trust you before you ever ask for a sale. Brands with a documented, consistent content strategy convert noticeably better than those posting sporadically.",
   },
   {
     q: "What type of content works best for physical product ecommerce brands?",
@@ -56,7 +56,7 @@ const FAQ_DATA = [
   },
   {
     q: "How often should an ecommerce brand publish content?",
-    a: "Publish at minimum once per week to see compounding results. Weekly publishers generate 3.5x more conversions than monthly publishers. A realistic rhythm for a $10K+/month ecommerce brand is 5-7 social posts per week, 2-4 blog posts per month, and 1-2 email newsletters per week.",
+    a: "Publish at minimum once per week to see compounding results. Brands that publish weekly consistently outperform brands that post occasionally. A realistic rhythm for a $10K+/month ecommerce brand is 5-7 social posts per week, 2-4 blog posts per month, and 1-2 email newsletters per week.",
   },
   {
     q: "How much does ecommerce content marketing cost?",
@@ -194,8 +194,9 @@ export default async function Post() {
             <div className="callout-label">TL;DR</div>
             <ul>
               <li>
-                Ecommerce content marketing generates 3x more leads than
-                outbound advertising at 62% lower cost.
+                Ecommerce content marketing builds owned audience that keeps
+                paying you back after you stop actively promoting a post, unlike
+                outbound ads.
               </li>
               <li>
                 Physical product brands need 4 content types: education, social
@@ -204,12 +205,13 @@ export default async function Post() {
               </li>
               <li>
                 Short-form video delivers 49% ROI, the highest of any single
-                content format in 2026, and it&apos;s the one most brands skip
-                because they think they need a studio.
+                content format, according to HubSpot&apos;s marketing
+                benchmarks, and it&apos;s the one most brands skip because they
+                think they need a studio.
               </li>
               <li>
-                Weekly publishers convert 3.5x more visitors than brands that
-                post occasionally. Consistency beats creative quality every time.
+                Weekly publishers consistently out-convert brands that post
+                occasionally. Consistency beats creative quality every time.
               </li>
             </ul>
           </div>
@@ -218,40 +220,25 @@ export default async function Post() {
             Ecommerce content marketing means publishing content that teaches,
             inspires, or helps your potential customers so they find you through
             search, trust you through education, and buy from you before you
-            ever run a paid ad. Brands with a documented content strategy
-            generate 3.5x more conversions than those without one.
+            ever run a paid ad. Brands with a documented, consistent content
+            strategy convert noticeably better than those posting sporadically.
           </p>
 
           <h2>The cost of ignoring content</h2>
           <p>
-            Customer acquisition costs for ecommerce brands rose 40-60% between
-            2023 and 2025. Paid social CPMs keep climbing. Meta&apos;s
-            algorithm keeps shifting. The brands outrunning that trend share one
-            thing: they built owned-channel foundations before the paid market
-            got expensive. Content is how you build one.
+            Customer acquisition costs for ecommerce brands have been climbing
+            for years. Paid social CPMs keep rising. Meta&apos;s algorithm
+            keeps shifting. The brands outrunning that trend share one thing:
+            they built owned-channel foundations before the paid market got
+            expensive. Content is how you build one.
           </p>
           <p>
-            Organic search alone drives 44.6% of revenue for retail and
-            ecommerce businesses. That traffic has no cost-per-click. It
+            Organic search drives a meaningful share of revenue for retail and
+            ecommerce businesses, and that traffic has no cost-per-click. It
             doesn&apos;t stop when your budget pauses. A blog post written today
-            keeps pulling in qualified visitors 18 months from now. A paid ad
-            goes dark the moment you stop paying.
+            keeps pulling in qualified visitors well over a year from now. A
+            paid ad goes dark the moment you stop paying.
           </p>
-
-          <div className="blog-stat-row">
-            <div className="blog-stat">
-              <div className="stat-number">3x</div>
-              <div className="stat-label">More leads vs outbound at 62% lower cost</div>
-            </div>
-            <div className="blog-stat">
-              <div className="stat-number">44.6%</div>
-              <div className="stat-label">Of ecommerce revenue from organic search</div>
-            </div>
-            <div className="blog-stat">
-              <div className="stat-number">3.5x</div>
-              <div className="stat-label">More conversions from weekly publishers</div>
-            </div>
-          </div>
 
           <p>
             I&apos;ve watched ecommerce brands at every revenue stage make the
@@ -281,8 +268,8 @@ export default async function Post() {
             deficient in magnesium and why it&apos;s ruining your sleep.&quot;
             The product becomes the obvious solution. This is why{" "}
             <Link href="/blog/social-media-for-ecommerce-brands">
-              ecommerce brands that post educational content see 3-5x more
-              engagement
+              ecommerce brands that post educational content see meaningfully
+              higher engagement
             </Link>{" "}
             than brands running product-photo feeds.
           </p>
@@ -291,9 +278,9 @@ export default async function Post() {
             <strong>2. Social proof.</strong> Screenshots of real reviews.
             Unboxing clips from actual customers. UGC reposts. Before-and-after
             results with specific numbers. When someone else says your product
-            works, it carries 10x the credibility of your own copy. Make
-            collecting and publishing social proof a weekly system, not a
-            quarterly effort.
+            works, it carries far more credibility than your own copy ever
+            will. Make collecting and publishing social proof a weekly system,
+            not a quarterly effort.
           </p>
 
           <p>
@@ -430,10 +417,6 @@ export default async function Post() {
               <div className="stat-number">$800-3K/mo</div>
               <div className="stat-label">Typical cost to outsource content production</div>
             </div>
-            <div className="blog-stat">
-              <div className="stat-number">62%</div>
-              <div className="stat-label">Lower cost vs outbound for same lead volume</div>
-            </div>
           </div>
 
           <p>
@@ -454,8 +437,8 @@ export default async function Post() {
             The most common ecommerce content marketing mistake isn&apos;t bad
             content. It&apos;s inconsistent content. A great post once a month
             is invisible. Decent posts five times a week build an audience.
-            Weekly publishers generate 3.5x more conversions than monthly
-            publishers. That gap compounds every month you let it run.
+            Weekly publishers consistently out-convert monthly publishers, and
+            that gap compounds every month you let it run.
           </p>
           <p>
             The brands that have figured this out have removed the execution

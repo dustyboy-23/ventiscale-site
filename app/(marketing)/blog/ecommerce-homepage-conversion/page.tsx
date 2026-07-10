@@ -6,11 +6,11 @@ import { BlogAuthorBio } from "@/components/marketing/blog-author-bio";
 export const metadata = {
   title: "Why your ecommerce homepage isn't converting (and what to fix first) | Venti Scale",
   description:
-    "Average ecommerce conversion rate is 1.8–3%. Top Shopify stores hit 4.4%+. Here are the 5 homepage problems killing your conversions and how to fix them.",
+    "Most ecommerce homepages lose visitors before they scroll. Here are the 5 homepage problems killing your conversions and how to fix them.",
   openGraph: {
     title: "Why your ecommerce homepage isn't converting (and what to fix first)",
     description:
-      "Average ecommerce conversion rate is 1.8–3%. Top Shopify stores hit 4.4%+. Here are the 5 homepage problems killing your conversions and how to fix them.",
+      "Most ecommerce homepages lose visitors before they scroll. Here are the 5 homepage problems killing your conversions and how to fix them.",
     url: "https://www.ventiscale.com/blog/ecommerce-homepage-conversion",
     type: "article",
     images: [
@@ -26,7 +26,7 @@ export const metadata = {
     card: "summary_large_image" as const,
     title: "Why your ecommerce homepage isn't converting (and what to fix first)",
     description:
-      "Average ecommerce conversion rate is 1.8–3%. Top Shopify stores hit 4.4%+. Here are the 5 homepage problems killing your conversions and how to fix them.",
+      "Most ecommerce homepages lose visitors before they scroll. Here are the 5 homepage problems killing your conversions and how to fix them.",
     images: ["https://www.ventiscale.com/blog/ecommerce-homepage-conversion.jpg"],
   },
 };
@@ -35,7 +35,7 @@ const SLUG = "ecommerce-homepage-conversion";
 const TITLE =
   "Why your ecommerce homepage isn't converting (and what to fix first)";
 const DESCRIPTION =
-  "Average ecommerce conversion rate is 1.8–3%. Top Shopify stores hit 4.4%+. Here are the 5 homepage problems killing your conversions and how to fix them.";
+  "Most ecommerce homepages lose visitors before they scroll. Here are the 5 homepage problems killing your conversions and how to fix them.";
 const DATE = "2026-05-02";
 const IMAGE = "/blog/ecommerce-homepage-conversion.jpg";
 const IMAGE_URL = `https://www.ventiscale.com${IMAGE}`;
@@ -43,11 +43,11 @@ const IMAGE_URL = `https://www.ventiscale.com${IMAGE}`;
 const FAQ_DATA = [
   {
     q: "What's a good ecommerce homepage conversion rate?",
-    a: "A good ecommerce homepage conversion rate is 2.5–3% for an established store. The top 25% of Shopify stores convert at 4.4% or higher. If you're below 1.5%, fixing your homepage before spending more on ads will deliver faster ROI than any new campaign.",
+    a: "A good ecommerce homepage conversion rate depends on your category, but the gap between an average store and a top-performing one is usually a homepage problem, not a traffic problem. If your rate feels low, fixing your homepage before spending more on ads will deliver faster ROI than any new campaign.",
   },
   {
     q: "What should be above the fold on an ecommerce homepage?",
-    a: "Four things: a headline stating the customer's desired outcome (not a product description), a hero image showing the product in use, one primary CTA button, and your strongest trust signal. Nielsen Norman Group research shows 57% of all user viewing time is spent above the fold. Everything a visitor needs to decide 'I'm in the right place' should load before they scroll.",
+    a: "Four things: a headline stating the customer's desired outcome (not a product description), a hero image showing the product in use, one primary CTA button, and your strongest trust signal. Visitors spend most of their time above the fold before deciding whether to scroll. Everything a visitor needs to decide 'I'm in the right place' should load before they scroll.",
   },
   {
     q: "Why is my ecommerce homepage not converting?",
@@ -55,11 +55,11 @@ const FAQ_DATA = [
   },
   {
     q: "How much does page speed affect ecommerce conversion rates?",
-    a: "Page speed has a direct measurable impact. Pages loading in 2.4 seconds see a 1.9% conversion rate. Pages that take 5.7 seconds drop to 0.6%, a 68% decline from the same traffic. A 1-second delay costs the average Shopify store roughly 7% of conversions.",
+    a: "Page speed has a direct measurable impact on conversion. Slower load times mean more visitors leave before the page even renders, and every second of delay compounds that loss on the same paid traffic you already bought.",
   },
   {
     q: "How do I improve my ecommerce homepage conversion rate fast?",
-    a: "Start with three changes: rewrite your headline to lead with the customer's desired outcome instead of a product description, move your top social proof metric above the fold, and remove every CTA except the primary one. These three changes alone typically move conversion rate by 0.5 to 1 full percentage point without a redesign.",
+    a: "Start with three changes: rewrite your headline to lead with the customer's desired outcome instead of a product description, move your top social proof metric above the fold, and remove every CTA except the primary one. These three changes alone typically move the needle without a full redesign.",
   },
 ];
 
@@ -180,24 +180,22 @@ export default async function Post() {
           </p>
           <p>
             The ads weren&apos;t the problem. Your homepage was. Most ecommerce
-            founders pour money into traffic before they&apos;ve fixed the
-            ecommerce homepage conversion rate. The average is 1.8% to 3%. Top-quartile
-            Shopify stores hit 4.4% or higher. Going from 1.8% to 3% on the
-            same traffic adds 64% more revenue for zero additional ad spend.
+            founders pour money into traffic before they&apos;ve fixed their
+            homepage conversion rate. Even a modest improvement on the same
+            traffic adds real revenue for zero additional ad spend.
           </p>
 
           <div className="blog-tldr">
             <div className="callout-label">TL;DR</div>
             <ul>
               <li>
-                The average ecommerce conversion rate is 1.8–3%. The top 25% of
-                Shopify stores hit 4.4%+. The gap is almost always the
-                homepage, not the traffic.
+                The gap between an average-converting store and a top-performing
+                one is almost always the homepage, not the traffic.
               </li>
               <li>
-                57% of all user viewing time happens above the fold (Nielsen
-                Norman Group). If your value prop isn&apos;t clear in the first
-                5 seconds, most visitors leave before they scroll.
+                Most visitors decide whether to stay above the fold. If your
+                value prop isn&apos;t clear in the first few seconds, most
+                visitors leave before they scroll.
               </li>
               <li>
                 The three biggest homepage killers: weak value proposition,
@@ -205,8 +203,9 @@ export default async function Post() {
                 for the same click.
               </li>
               <li>
-                Going from 1.8% to 2.5% conversion on a $5,000/month ad budget
-                adds over $17,000 in monthly revenue from the same traffic.
+                A meaningful conversion-rate improvement on your existing ad
+                budget can add thousands in monthly revenue from the same
+                traffic, without spending another dollar on ads.
               </li>
             </ul>
           </div>
@@ -214,53 +213,40 @@ export default async function Post() {
           <p>
             Fixing your ecommerce homepage conversion rate is the
             highest-ROI marketing move available to most Shopify stores. A
-            1-percentage-point conversion gain on existing traffic typically
+            meaningful conversion gain on existing traffic typically
             outperforms doubling your ad spend.
           </p>
 
           <h2 id="the-math">The math behind your ecommerce homepage conversion rate</h2>
           <p>
-            Run the numbers. You&apos;re spending $5,000/month on paid traffic.
-            Your store converts at 1.8%. You&apos;re making roughly $45,000/month.
+            Run the numbers for your own store. Take your current conversion rate,
+            model what even a modest improvement would add in monthly revenue on
+            your existing traffic, and compare that to what it would cost to
+            generate the same revenue by scaling ad spend instead. The homepage
+            fix almost always wins.
           </p>
           <p>
-            Fix conversion to 2.5% (the industry average) and you&apos;re at
-            $62,500/month. From the same traffic. Zero additional ad spend.
-            That&apos;s $17,500 more per month, every month, just from getting
-            average.
+            Fixing conversion doesn&apos;t require more traffic or more budget.
+            It requires the same visitors converting at a slightly higher rate,
+            every month, for free.
           </p>
           <p>
-            Customer acquisition costs are up 40 to 60% since 2023. The brands
-            still growing aren&apos;t spending more on ads. They&apos;re keeping
-            more of the traffic they already paid for. I&apos;ve reviewed over 50
+            Customer acquisition costs keep climbing. The brands still growing
+            aren&apos;t spending more on ads. They&apos;re keeping more of the
+            traffic they already paid for. I&apos;ve reviewed dozens of
             ecommerce homepages through Venti Scale audits. The same five
-            problems appear on 80% of them. None of them require a redesign.
+            problems show up again and again. None of them require a redesign.
             They require targeted edits that take an afternoon.
           </p>
-
-          <div className="blog-stat-row">
-            <div className="blog-stat">
-              <div className="stat-number">1.8–3%</div>
-              <div className="stat-label">Average ecommerce conversion rate</div>
-            </div>
-            <div className="blog-stat">
-              <div className="stat-number">4.4%+</div>
-              <div className="stat-label">Top 25% of Shopify stores</div>
-            </div>
-            <div className="blog-stat">
-              <div className="stat-number">60%+</div>
-              <div className="stat-label">Of store traffic is mobile</div>
-            </div>
-          </div>
 
           <hr className="blog-divider" />
 
           <h2 id="first-five-seconds">What happens in the first 5 seconds</h2>
           <p>
-            Nielsen Norman Group research shows users spend 57% of their viewing
-            time above the fold. They decide in about 5 seconds whether
-            they&apos;re in the right place. If your homepage doesn&apos;t pass
-            that test, everything below it is invisible.
+            Visitors spend most of their time on a page above the fold, and
+            they decide in seconds whether they&apos;re in the right place. If
+            your homepage doesn&apos;t pass that test, everything below it is
+            invisible.
           </p>
           <p>Above the fold, you need four things. Nothing more.</p>
           <p>
@@ -352,14 +338,14 @@ export default async function Post() {
             would have been convinced by them already left.
           </p>
           <p>
-            72% of consumers say positive reviews increase their trust in a
-            business, according to{" "}
+            Most consumers say positive reviews make them more likely to trust
+            and buy from a business, according to{" "}
             <a
               href="https://brightlocal.com/research/local-consumer-review-survey/"
               target="_blank"
               rel="noopener noreferrer"
             >
-              BrightLocal&apos;s 2025 consumer survey
+              BrightLocal&apos;s consumer review survey
             </a>
             . But that trust signal only works if it appears before visitors
             decide to bounce.
@@ -393,25 +379,6 @@ export default async function Post() {
             </figcaption>
           </figure>
 
-          <div className="blog-stat-row">
-            <div className="blog-stat">
-              <div className="stat-number">69.8%</div>
-              <div className="stat-label">Average cart abandonment rate</div>
-            </div>
-            <div className="blog-stat">
-              <div className="stat-number">23%</div>
-              <div className="stat-label">
-                Conversions killed by forced account creation
-              </div>
-            </div>
-            <div className="blog-stat">
-              <div className="stat-number">68%</div>
-              <div className="stat-label">
-                Conversion drop from 2.4s to 5.7s load time
-              </div>
-            </div>
-          </div>
-
           <hr className="blog-divider" />
 
           <h2 id="cta-hierarchy">The CTA hierarchy problem</h2>
@@ -434,10 +401,10 @@ export default async function Post() {
           <div className="blog-callout">
             <div className="callout-label">Key insight</div>
             <p>
-              The Shopify stores converting above 3% consistently have a mobile
+              The best-converting Shopify stores consistently have a mobile
               homepage that functions like a single-page funnel: headline, hero
               image, CTA, review count, then product grid. That&apos;s it. The
-              ones stuck at 1.5% have a rotating hero carousel, three promo
+              lowest-converting ones have a rotating hero carousel, three promo
               banners, a sticky header popup, and six navigation links
               competing for the first click. Simplicity isn&apos;t lazy design.
               It&apos;s the highest-converting layout pattern in ecommerce.
@@ -470,17 +437,17 @@ export default async function Post() {
             sparse, it&apos;s probably right.
           </p>
           <p>
-            <strong>4. Fix page speed.</strong> Pages loading past 5 seconds
-            see 68% fewer conversions than pages loading in 2.4 seconds. Run
-            your store through Google PageSpeed Insights. Fix the items in the
+            <strong>4. Fix page speed.</strong> Slower load times mean fewer
+            conversions on the exact same traffic. Run your store through
+            Google PageSpeed Insights. Fix the items in the
             &quot;Opportunities&quot; section before you touch anything else.
             Images are almost always the first culprit.
           </p>
           <p>
-            <strong>5. Audit your mobile homepage.</strong> Mobile is 60%+ of
-            most stores&apos; traffic and converts at 1.5–2% versus
-            desktop&apos;s 3–4%. If your mobile homepage has the same element
-            density as your desktop version, you&apos;re bleeding half your
+            <strong>5. Audit your mobile homepage.</strong> Mobile makes up
+            most stores&apos; traffic and typically converts lower than
+            desktop. If your mobile homepage has the same element density as
+            your desktop version, you&apos;re bleeding a large share of your
             traffic before they&apos;ve read a single line. Open your store on
             your phone and time how long it takes to find the main CTA.
           </p>
@@ -526,7 +493,7 @@ export default async function Post() {
           </div>
 
           <BlogAuthorBio
-            bioOverride="Founder of Venti Scale. I've reviewed over 50 ecommerce homepages through Venti Scale audits. The conversion gaps in this post are the exact same ones I find on 80% of stores. Every fix here is one I've run personally."
+            bioOverride="Founder of Venti Scale. I've reviewed dozens of ecommerce homepages through Venti Scale audits. The conversion gaps in this post are the ones I find on most stores. Every fix here is one I've run personally."
             lastUpdated={DATE}
           />
 

@@ -44,7 +44,7 @@ const IMAGE_URL = `https://www.ventiscale.com${IMAGE}`;
 const FAQ_DATA = [
   {
     q: "How do I know if I should outsource my marketing?",
-    a: "If you\u2019re spending more than 10 hours per week on marketing tasks and not seeing measurable growth in leads or revenue, it\u2019s time to outsource. 52% of small businesses already outsource some or all of their marketing because the ROI on their own time is too low.",
+    a: "If you\u2019re spending more than 10 hours per week on marketing tasks and not seeing measurable growth in leads or revenue, it\u2019s time to outsource. 52% of businesses already plan to outsource one or more processes, and marketing is one of the first functions to go, because the ROI on their own time is too low.",
   },
   {
     q: "How much does it cost to outsource marketing for a small business?",
@@ -186,8 +186,9 @@ export default async function Post() {
             <div className="callout-label">TL;DR</div>
             <ul>
               <li>
-                52% of small businesses already outsource some or all of their
-                marketing. The other 48% are mostly burned out.
+                52% of businesses already plan to outsource one or more
+                processes, and marketing is one of the first to go. The ones
+                still DIY-ing it are mostly burned out.
               </li>
               <li>
                 DIY marketing eats 10 to 20 hours per week. That&apos;s a
@@ -212,11 +213,12 @@ export default async function Post() {
               target="_blank"
               rel="noopener noreferrer"
             >
-              52% of US small businesses
+              52% of businesses
             </a>{" "}
-            already outsource at least some of their marketing in 2026. The ones
-            who don&apos;t are either growing slowly or burning out. Here are
-            the five signs that it&apos;s your turn.
+            already plan to outsource one or more processes, and marketing is
+            consistently one of the first functions to go. The ones who
+            don&apos;t are either growing slowly or burning out. Here are the
+            five signs that it&apos;s your turn.
           </p>
 
           <h2>1. Your content calendar is mostly empty</h2>
@@ -244,9 +246,9 @@ export default async function Post() {
             <div className="callout-label">Common mistake</div>
             <p>
               Every week your page sits dormant, you&apos;re training the
-              algorithm to forget you exist. After 30 days of inactivity,
-              platforms reduce your organic reach by up to 70%. Getting it back
-              takes months.
+              algorithm to forget you exist. Extended inactivity tanks your
+              organic reach, and getting it back takes months of consistent
+              posting to rebuild.
             </p>
           </div>
 
@@ -281,7 +283,7 @@ export default async function Post() {
             <div className="blog-stat">
               <div className="stat-number">52%</div>
               <div className="stat-label">
-                of SMBs outsource marketing in 2026
+                of businesses plan to outsource a process like marketing
               </div>
             </div>
             <div className="blog-stat">
@@ -352,7 +354,7 @@ export default async function Post() {
           </p>
           <p>
             And here&apos;s the thing your potential customers are already
-            comparing. 73% of consumers check a business&apos;s social media
+            comparing. Most consumers research a business on social media
             before making a purchase decision. When they see your competitor
             posting daily with polished graphics and your page hasn&apos;t been
             updated in a month, they pick the competitor. It&apos;s the same
@@ -365,9 +367,9 @@ export default async function Post() {
 
           <div className="blog-stat-row">
             <div className="blog-stat">
-              <div className="stat-number">73%</div>
+              <div className="stat-number">67%</div>
               <div className="stat-label">
-                of consumers check social before buying
+                of social media users research products before buying
               </div>
             </div>
             <div className="blog-stat">

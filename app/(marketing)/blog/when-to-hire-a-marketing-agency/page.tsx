@@ -193,8 +193,10 @@ export default async function Post() {
                 marketing, you&apos;re doing a full-time job for free.
               </li>
               <li>
-                63% of businesses outsourced marketing in 2025. The other 37%
-                aren&apos;t saving money. They&apos;re losing it slower.
+                Over a third of small businesses already outsource at least
+                one function, and digital marketing is one of the most
+                common. The ones that don&apos;t outsource aren&apos;t
+                saving money. They&apos;re losing it slower.
               </li>
               <li>
                 A marketing hire costs $75K+ per year. An AI-powered agency runs
@@ -246,8 +248,8 @@ export default async function Post() {
               <div className="stat-label">Opportunity cost at $20K/month revenue</div>
             </div>
             <div className="blog-stat">
-              <div className="stat-number">63%</div>
-              <div className="stat-label">Of businesses now outsource marketing</div>
+              <div className="stat-number">37%</div>
+              <div className="stat-label">Of small businesses outsource at least one function</div>
             </div>
           </div>
 
@@ -313,17 +315,19 @@ export default async function Post() {
           <div className="blog-callout">
             <div className="callout-label">Key insight</div>
             <p>
-              According to{" "}
+              Hiring a marketing employee takes real time once you count
+              posting the role, interviewing, and ramp-up to full
+              productivity, and{" "}
               <a
                 href="https://www.roberthalf.com/us/en/insights/research/data-reveals-which-marketing-and-creative-roles-are-in-highest-demand"
                 target="_blank"
                 rel="noopener noreferrer"
               >
-                Robert Half&apos;s 2026 hiring research
-              </a>
-              , it takes 3 to 6 months to hire a marketing employee and another 3
-              to 6 months before they&apos;re fully productive. An agency starts
-              producing content in week one.
+                Robert Half&apos;s hiring research
+              </a>{" "}
+              shows 45% of marketing and creative leaders say finding skilled
+              professionals is harder than it was a year ago. An agency
+              starts producing content in week one.
             </p>
           </div>
 
@@ -333,8 +337,8 @@ export default async function Post() {
               <div className="stat-label">Weekly threshold to outsource</div>
             </div>
             <div className="blog-stat">
-              <div className="stat-number">3-6 mo</div>
-              <div className="stat-label">Time to hire a marketing employee</div>
+              <div className="stat-number">~2 mo</div>
+              <div className="stat-label">Average time to hire a marketing employee</div>
             </div>
             <div className="blog-stat">
               <div className="stat-number">50-70%</div>

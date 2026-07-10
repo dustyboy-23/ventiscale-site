@@ -6,11 +6,11 @@ import { BlogAuthorBio } from "@/components/marketing/blog-author-bio";
 export const metadata = {
   title: "Your DTC ad audience burns out every 2 weeks. Here's how to stay ahead. | Venti Scale",
   description:
-    "Audience saturation kills DTC campaigns in 2-3 weeks. DTC CAC hit $68-84 in 2026, up 40-60% since 2023. Creative velocity is the only fix that scales.",
+    "Audience saturation kills DTC campaigns in 2-3 weeks. Average ecommerce CAC is $274, per Shopify. Creative velocity is the only fix that scales.",
   openGraph: {
     title: "Your DTC ad audience burns out every 2 weeks. Here's how to stay ahead.",
     description:
-      "Audience saturation kills DTC campaigns in 2-3 weeks. DTC CAC hit $68-84 in 2026, up 40-60% since 2023. Creative velocity is the only fix that scales.",
+      "Audience saturation kills DTC campaigns in 2-3 weeks. Average ecommerce CAC is $274, per Shopify. Creative velocity is the only fix that scales.",
     url: "https://www.ventiscale.com/blog/dtc-audience-saturation-creative-velocity-2026",
     type: "article",
     images: [
@@ -26,7 +26,7 @@ export const metadata = {
     card: "summary_large_image" as const,
     title: "Your DTC ad audience burns out every 2 weeks. Here's how to stay ahead.",
     description:
-      "Audience saturation kills DTC campaigns in 2-3 weeks. DTC CAC hit $68-84 in 2026, up 40-60% since 2023. Creative velocity is the only fix that scales.",
+      "Audience saturation kills DTC campaigns in 2-3 weeks. Average ecommerce CAC is $274, per Shopify. Creative velocity is the only fix that scales.",
     images: ["https://www.ventiscale.com/blog/dtc-audience-saturation.jpg"],
   },
 };
@@ -35,7 +35,7 @@ const SLUG = "dtc-audience-saturation-creative-velocity-2026";
 const TITLE =
   "Your DTC ad audience burns out every 2 weeks. Here’s how to stay ahead.";
 const DESCRIPTION =
-  "Audience saturation kills DTC campaigns in 2-3 weeks. DTC CAC hit $68-84 in 2026, up 40-60% since 2023. Creative velocity is the only fix that scales.";
+  "Audience saturation kills DTC campaigns in 2-3 weeks. Average ecommerce CAC is $274, per Shopify. Creative velocity is the only fix that scales.";
 const DATE = "2026-06-27";
 
 const FAQ_DATA = [
@@ -187,7 +187,7 @@ export default async function Post() {
                 kills campaigns in 2-3 weeks without fresh creative.
               </li>
               <li>
-                DTC CAC hit $68-84 in 2026, up 40-60% since 2023. Meta ROAS
+                Average ecommerce CAC is $274, per Shopify. Meta ROAS
                 dropped to 1.86:1. The margin for error is gone.
               </li>
               <li>
@@ -222,9 +222,9 @@ export default async function Post() {
             </a>{" "}
             confirms audience saturation is now the #1 problem reported by DTC
             paid media managers, ahead of rising CPMs and iOS signal loss.
-            Average DTC customer acquisition cost hit $68-84, up 40-60% since
-            2023. Average Meta ROAS dropped to 1.86:1. The median ecommerce
-            brand is barely above break-even on paid.
+            Shopify puts average ecommerce customer acquisition cost at $274
+            (apparel running $318). Average Meta ROAS dropped to 1.86:1. The
+            median ecommerce brand is barely above break-even on paid.
           </p>
           <p>
             The underlying reason isn&apos;t just competition for clicks.
@@ -239,8 +239,8 @@ export default async function Post() {
 
           <div className="blog-stat-row">
             <div className="blog-stat">
-              <div className="stat-number">$68-84</div>
-              <div className="stat-label">Average DTC CAC in 2026</div>
+              <div className="stat-number">$274</div>
+              <div className="stat-label">Average ecommerce CAC, per Shopify</div>
             </div>
             <div className="blog-stat">
               <div className="stat-number">1.86:1</div>

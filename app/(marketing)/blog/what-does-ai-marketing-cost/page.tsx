@@ -50,7 +50,7 @@ const FAQ_DATA = [
   },
   {
     q: "Is AI marketing cheaper than traditional marketing?",
-    a: "Yes, by 30-50% for equivalent output volume. A traditional full-service agency runs $4,000-$15,000/month. An AI-powered equivalent runs $2,500-$8,000/month because execution is faster. The caveat: cheap AI tools without a strategy layer produce generic content that won't move your numbers.",
+    a: "Generally yes, for equivalent output volume. A traditional full-service agency runs $4,000-$15,000/month. An AI-powered equivalent runs $2,500-$8,000/month because execution is faster. The caveat: cheap AI tools without a strategy layer produce generic content that won't move your numbers.",
   },
   {
     q: "What should be included in an AI marketing agency retainer?",
@@ -261,8 +261,8 @@ export default async function Post() {
               <div className="stat-label">Full-service AI agency retainer ceiling</div>
             </div>
             <div className="blog-stat">
-              <div className="stat-number">62%</div>
-              <div className="stat-label">Of small businesses planning to increase AI marketing spend in 2026</div>
+              <div className="stat-number">200x</div>
+              <div className="stat-label">Price spread between DIY and enterprise AI marketing</div>
             </div>
           </div>
 
@@ -301,19 +301,20 @@ export default async function Post() {
           <div className="blog-callout">
             <div className="callout-label">Key insight</div>
             <p>
-              A $500/month AI tool stack often has a true all-in cost of
-              $6,000-$10,000/month once you add implementation, training time, and
+              A cheap-looking AI tool stack often has a true all-in cost several
+              times higher once you add implementation, training time, and
               personnel hours to run it. Per{" "}
               <a
                 href="https://foundrycro.com/blog/ecommerce-marketing-benchmarks-2026/"
                 target="_blank"
                 rel="noopener noreferrer"
               >
-                Foundry CRO&apos;s 2026 ecommerce benchmarks
+                Foundry CRO&apos;s ecommerce benchmarks
               </a>
-              , top-quartile DTC brands outsource execution to keep operator time
-              on product and operations, not content queues. Their median CAC is
-              $42 versus $68-$84 for brands running DIY.
+              , DTC customer acquisition costs run $45-$70 on average, and brands
+              that keep operator time on product and operations instead of content
+              queues tend to hold CAC down more consistently than brands running
+              marketing DIY.
             </p>
           </div>
 
@@ -373,11 +374,11 @@ export default async function Post() {
             what you&apos;ll spend managing the agency once you sign.
           </p>
           <p>
-            Founders managing an AI marketing agency typically spend 30% of their
-            workweek on coordination: briefing, reviewing drafts, approving,
+            Founders managing an AI marketing agency often spend a real chunk of
+            their workweek on coordination: briefing, reviewing drafts, approving,
             giving feedback, waiting for revisions, and chasing status updates. If
-            you signed up to free yourself from marketing work and you&apos;re still
-            doing 12 hours of it every week, you didn&apos;t buy an agency. You
+            you signed up to free yourself from marketing work and you&apos;re
+            still doing hours of it every week, you didn&apos;t buy an agency. You
             bought an employee who needs constant training.
           </p>
 
@@ -405,21 +406,6 @@ export default async function Post() {
             to understand what each tool tier actually delivers before committing to
             an agency contract.
           </p>
-
-          <div className="blog-stat-row">
-            <div className="blog-stat">
-              <div className="stat-number">222%</div>
-              <div className="stat-label">DTC customer acquisition cost increase over 8 years</div>
-            </div>
-            <div className="blog-stat">
-              <div className="stat-number">$36-$79</div>
-              <div className="stat-label">Email revenue generated per $1 spent (top-performing brands)</div>
-            </div>
-            <div className="blog-stat">
-              <div className="stat-number">30-50%</div>
-              <div className="stat-label">Cost reduction vs. traditional agency for equivalent output</div>
-            </div>
-          </div>
 
           <hr className="blog-divider" />
 

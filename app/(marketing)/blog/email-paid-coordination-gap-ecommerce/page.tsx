@@ -7,12 +7,12 @@ export const metadata = {
   title:
     "Your email and your Meta ads aren't talking. You're paying for it. | Venti Scale",
   description:
-    "Brands waste 8-15% of ad spend retargeting subscribers their next email would have converted. Here's how to fix the Klaviyo-Meta sync.",
+    "Brands that connect email and Meta ad data see meaningfully higher ROAS by cutting wasted spend on subscribers their email would have converted anyway. Here's how to fix the Klaviyo-Meta sync.",
   openGraph: {
     title:
       "Your email and your Meta ads aren't talking. You're paying for it.",
     description:
-      "Brands waste 8-15% of ad spend retargeting subscribers their next email would have converted. Here's how to fix the Klaviyo-Meta sync.",
+      "Brands that connect email and Meta ad data see meaningfully higher ROAS by cutting wasted spend on subscribers their email would have converted anyway. Here's how to fix the Klaviyo-Meta sync.",
     url: "https://www.ventiscale.com/blog/email-paid-coordination-gap-ecommerce",
     type: "article",
     images: [
@@ -29,7 +29,7 @@ export const metadata = {
     title:
       "Your email and your Meta ads aren't talking. You're paying for it.",
     description:
-      "Brands waste 8-15% of ad spend retargeting subscribers their next email would have converted. Here's how to fix the Klaviyo-Meta sync.",
+      "Brands that connect email and Meta ad data see meaningfully higher ROAS by cutting wasted spend on subscribers their email would have converted anyway. Here's how to fix the Klaviyo-Meta sync.",
     images: [
       "https://www.ventiscale.com/blog/email-paid-coordination.jpg",
     ],
@@ -40,7 +40,7 @@ const SLUG = "email-paid-coordination-gap-ecommerce";
 const TITLE =
   "Your email and your Meta ads aren't talking. You're paying for it.";
 const DESCRIPTION =
-  "Brands waste 8-15% of ad spend retargeting subscribers their next email would have converted. Here's how to fix the Klaviyo-Meta sync.";
+  "Brands that connect email and Meta ad data see meaningfully higher ROAS by cutting wasted spend on subscribers their email would have converted anyway. Here's how to fix the Klaviyo-Meta sync.";
 const DATE = "2026-05-15";
 const IMAGE = "/blog/email-paid-coordination.jpg";
 const IMAGE_URL = `https://www.ventiscale.com${IMAGE}`;
@@ -52,7 +52,7 @@ const FAQ_DATA = [
   },
   {
     q: "How much ad spend do ecommerce brands waste by not suppressing email subscribers?",
-    a: "According to the State of DTC 2026 report, brands waste 8-15% of their total ad spend retargeting customers who would have converted through email anyway. On a $10,000/month ad budget that is $800-$1,500 in avoidable waste every single month.",
+    a: "Advertisers who connect their email and Meta ads data typically see 25-35% higher ROAS by eliminating wasted spend on customers already converting through email. On a $10,000/month ad budget, that gap is real money left on the table every single month.",
   },
   {
     q: "How do I sync my Klaviyo list with Meta ads for suppression?",
@@ -179,9 +179,9 @@ export default async function Post() {
 
         <div className="prose-blog">
           <p>
-            The State of DTC 2026 found that ecommerce brands waste 8-15% of
-            their total ad spend retargeting customers who would have converted
-            through email anyway. Not bad creatives. Not wrong audiences.
+            Advertisers who connect their email and Meta ads data see 25-35%
+            higher ROAS, largely by cutting spend on customers who would have
+            converted through email anyway. Not bad creatives. Not wrong audiences.
             Customers who were already on the email list and would have bought
             from the next flow. That money is just gone.
           </p>
@@ -196,8 +196,9 @@ export default async function Post() {
             <div className="callout-label">TL;DR</div>
             <ul>
               <li>
-                Brands waste 8-15% of ad spend retargeting email subscribers
-                who&apos;d have bought from the next flow anyway.
+                Connecting email and Meta ads data lifts ROAS 25-35% by
+                cutting spend on subscribers who&apos;d have bought from the
+                next flow anyway.
               </li>
               <li>
                 Suppression lists fix this: sync your Klaviyo list to Meta and
@@ -262,17 +263,18 @@ export default async function Post() {
 
           <hr className="blog-divider" />
 
-          <h2 id="the-bleed">The 8-15% you&apos;re bleeding every month</h2>
+          <h2 id="the-bleed">The waste you&apos;re bleeding every month</h2>
           <p>
-            Run the math on your own account. If you spend $10,000/month on
-            Meta, 8-15% waste means $800-$1,500 going to people your email
-            would have converted. At $30,000/month, that&apos;s $2,400-$4,500
-            per month. $48,000-$90,000 per year. In avoidable waste.
+            Run the math on your own account. Advertisers who eliminate this
+            overlap by connecting email and Meta ads data see 25-35% higher
+            ROAS. On a $10,000/month Meta budget, that&apos;s a meaningful
+            chunk of spend that was going to people your email would have
+            converted anyway. At $30,000/month, that gap scales fast.
           </p>
           <p>
             This number compounds with CAC. Average DTC CAC has increased 40%
             over the past two years. You&apos;re already paying more per
-            customer than you were in 2024. Burning 8-15% of that budget on
+            customer than you were in 2024. Burning budget on
             email-suppressible audiences makes the math worse. The only brands
             growing profitably right now are the ones squeezing waste out of
             every channel. This is one of the easiest places to squeeze.
@@ -280,9 +282,9 @@ export default async function Post() {
 
           <div className="blog-stat-row">
             <div className="blog-stat">
-              <div className="stat-number">8-15%</div>
+              <div className="stat-number">25-35%</div>
               <div className="stat-label">
-                of ad spend wasted on email-convertible audiences
+                Higher ROAS from connecting email + Meta ads data
               </div>
             </div>
             <div className="blog-stat">
@@ -475,7 +477,7 @@ export default async function Post() {
           </h2>
           <p>
             A brand spending $15,000/month on Meta with this coordination in
-            place recovers roughly $1,200-$2,250 in wasted spend in month one.
+            place sees ROAS improve meaningfully within the first month.
             That is not from running better ads. It is from stopping the
             bleed.
           </p>

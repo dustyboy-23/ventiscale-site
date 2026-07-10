@@ -4,13 +4,13 @@ import { Eyebrow } from "@/components/marketing/eyebrow";
 import { BlogAuthorBio } from "@/components/marketing/blog-author-bio";
 
 export const metadata = {
-  title: "85% of DTC AI pilots never ship. Here's why yours stalled. | Venti Scale",
+  title: "88% of DTC AI pilots never ship. Here's why yours stalled. | Venti Scale",
   description:
-    "Only 15% of DTC AI marketing pilots reach production. Here are the 4 failure modes killing your AI investment before it ships.",
+    "Only 12% of DTC AI marketing pilots reach production. Here are the 4 failure modes killing your AI investment before it ships.",
   openGraph: {
-    title: "85% of DTC AI pilots never ship. Here's why yours stalled.",
+    title: "88% of DTC AI pilots never ship. Here's why yours stalled.",
     description:
-      "Only 15% of DTC AI marketing pilots reach production. Here are the 4 failure modes killing your AI investment before it ships.",
+      "Only 12% of DTC AI marketing pilots reach production. Here are the 4 failure modes killing your AI investment before it ships.",
     url: "https://www.ventiscale.com/blog/dtc-ai-pilot-failure-rate-2026",
     type: "article",
     images: [
@@ -24,17 +24,17 @@ export const metadata = {
   },
   twitter: {
     card: "summary_large_image" as const,
-    title: "85% of DTC AI pilots never ship. Here's why yours stalled.",
+    title: "88% of DTC AI pilots never ship. Here's why yours stalled.",
     description:
-      "Only 15% of DTC AI marketing pilots reach production. Here are the 4 failure modes killing your AI investment before it ships.",
+      "Only 12% of DTC AI marketing pilots reach production. Here are the 4 failure modes killing your AI investment before it ships.",
     images: ["https://www.ventiscale.com/blog/dtc-ai-pilot-failure.jpg"],
   },
 };
 
 const SLUG = "dtc-ai-pilot-failure-rate-2026";
-const TITLE = "85% of DTC AI pilots never ship. Here's why yours stalled.";
+const TITLE = "88% of DTC AI pilots never ship. Here's why yours stalled.";
 const DESCRIPTION =
-  "Only 15% of DTC AI marketing pilots reach production. Here are the 4 failure modes killing your AI investment before it ships.";
+  "Only 12% of DTC AI marketing pilots reach production. Here are the 4 failure modes killing your AI investment before it ships.";
 const DATE = "2026-06-13";
 const IMAGE = "/blog/dtc-ai-pilot-failure.jpg";
 const IMAGE_URL = `https://www.ventiscale.com${IMAGE}`;
@@ -42,7 +42,7 @@ const IMAGE_URL = `https://www.ventiscale.com${IMAGE}`;
 const FAQ_DATA = [
   {
     q: "Why do most DTC AI marketing pilots fail to reach production?",
-    a: "Only 15% of DTC AI marketing pilots reach production, according to Google Cloud's 2026 AI agent trends report. The primary failure mode is operational: brands treat AI as a tool to add to an existing workflow instead of rebuilding the workflow around AI output. Without a named owner, brand-voice training, a fast review gate, and a defined schedule, pilots stay in demo mode indefinitely.",
+    a: "Only about 12% of AI pilots reach production, per widely-cited 2026 industry research (Iris.ai puts it at 12%, MIT's research found an even starker 5%). The primary failure mode is operational: brands treat AI as a tool to add to an existing workflow instead of rebuilding the workflow around AI output. Without a named owner, brand-voice training, a fast review gate, and a defined schedule, pilots stay in demo mode indefinitely.",
   },
   {
     q: "How long does it take to get AI marketing into production for a DTC brand?",
@@ -58,7 +58,7 @@ const FAQ_DATA = [
   },
   {
     q: "Should a DTC brand build their own AI marketing stack or use a service?",
-    a: "DTC brands under $200K per month almost always waste money building their own AI marketing stack. The tools cost $300-800 per month, custom training takes 60-90 days, and the internal team still reviews everything manually. A done-for-you AI marketing service delivers the same output at a lower monthly cost without the setup time or the 85% failure rate.",
+    a: "DTC brands under $200K per month almost always waste money building their own AI marketing stack. The tools cost $300-800 per month, custom training takes 60-90 days, and the internal team still reviews everything manually. A done-for-you AI marketing service delivers the same output at a lower monthly cost without the setup time or the 88% failure rate.",
   },
 ];
 
@@ -150,7 +150,7 @@ export default async function Post() {
         <div className="mt-8 mb-10">
           <Eyebrow>ECOMMERCE / AI MARKETING</Eyebrow>
           <h1 className="font-display text-[32px] lg:text-[42px] leading-[1.1] tracking-[-0.02em] text-white mt-4 mb-4">
-            85% of DTC AI pilots never ship. Here&apos;s why yours stalled.
+            88% of DTC AI pilots never ship. Here&apos;s why yours stalled.
           </h1>
           <div className="flex items-center gap-3">
             <span className="font-mono text-[11px] tracking-[0.12em] uppercase text-white/35">
@@ -177,16 +177,11 @@ export default async function Post() {
             auto-renewed and nobody on your team had touched it in six weeks.
           </p>
           <p>
-            That&apos;s not bad luck. That&apos;s the default outcome. According to{" "}
-            <a
-              href="https://cloud.google.com/resources/content/ai-agent-trends-2026"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              Google Cloud&apos;s 2026 AI agent trends report
-            </a>
-            , only 15% of DTC brand AI pilot programs reach actual production. The
-            other 85% stall somewhere between &quot;promising demo&quot; and
+            That&apos;s not bad luck. That&apos;s the default outcome. Widely-cited
+            2026 industry research puts AI pilot-to-production rates around
+            12% (some estimates go as low as 5%). Only a small fraction of DTC
+            brand AI pilot programs reach actual production. The
+            rest stall somewhere between &quot;promising demo&quot; and
             &quot;real campaign.&quot;
           </p>
 
@@ -194,7 +189,8 @@ export default async function Post() {
             <div className="callout-label">TL;DR</div>
             <ul>
               <li>
-                Only 15% of DTC AI marketing pilots reach production. The other 85%
+                Only around 12% of AI marketing pilots reach production
+                (some research puts it as low as 5%). The vast majority
                 die between the demo and the first real campaign.
               </li>
               <li>
@@ -215,7 +211,7 @@ export default async function Post() {
           </div>
 
           <p>
-            The 15% that ship AI marketing into production don&apos;t have better
+            The 12% that ship AI marketing into production don&apos;t have better
             tools. They have a defined process that turns AI output into a campaign
             on a schedule, every week, without a team meeting to approve each piece.
             That&apos;s the entire difference.
@@ -230,11 +226,11 @@ export default async function Post() {
 
           <div className="blog-stat-row">
             <div className="blog-stat">
-              <div className="stat-number">85%</div>
-              <div className="stat-label">of DTC AI pilots never reach production</div>
+              <div className="stat-number">88%</div>
+              <div className="stat-label">of AI pilots never reach production</div>
             </div>
             <div className="blog-stat">
-              <div className="stat-number">15%</div>
+              <div className="stat-number">12%</div>
               <div className="stat-label">that actually ship vs. those that stall</div>
             </div>
             <div className="blog-stat">
@@ -336,7 +332,7 @@ export default async function Post() {
 
           <hr className="blog-divider" />
 
-          <h2>The 15% that ship: what they did differently</h2>
+          <h2>The 12% that ship: what they did differently</h2>
 
           <p>
             Brands that get AI marketing into production share four patterns. None
@@ -397,7 +393,8 @@ export default async function Post() {
             process once the pilot validates the tool. Most DTC brands don&apos;t.
             The same team that&apos;s too busy to run consistent marketing now is
             going to be responsible for turning a successful pilot into a production
-            system. That&apos;s why 85% stall even when the pilot goes well.
+            system. That&apos;s why the vast majority stall even when the
+            pilot goes well.
           </p>
 
           <p>
@@ -412,12 +409,12 @@ export default async function Post() {
 
           <div className="blog-stat-row">
             <div className="blog-stat">
-              <div className="stat-number">74%</div>
-              <div className="stat-label">of brands see positive AI marketing ROI within 12 months</div>
+              <div className="stat-number">75%</div>
+              <div className="stat-label">of marketing leaders report positive ROI from AI investment</div>
             </div>
             <div className="blog-stat">
-              <div className="stat-number">171%</div>
-              <div className="stat-label">average AI marketing ROI when production is running</div>
+              <div className="stat-number">$5.44</div>
+              <div className="stat-label">avg return per $1 spent on marketing automation</div>
             </div>
           </div>
 
@@ -426,9 +423,9 @@ export default async function Post() {
             <Link href="/blog/ai-marketing-roi-vs-agency-retainer-2026">
               AI marketing ROI math
             </Link>{" "}
-            actually looks like in practice: 74% of brands see positive AI marketing
-            ROI within 12 months. The ones that don&apos;t are mostly the 85% whose
-            pilots never shipped.
+            actually looks like in practice: the large majority of marketing
+            leaders who&apos;ve invested in AI report positive ROI. The ones
+            that don&apos;t are mostly the brands whose pilots never shipped.
           </p>
 
           <p>
@@ -478,8 +475,8 @@ export default async function Post() {
                 className="blog-related-card"
               >
                 <div className="related-title">
-                  AI marketing averages 171% ROI. Your agency retainer
-                  doesn&apos;t.
+                  AI marketing beats the agency retainer on ROI. Here&apos;s
+                  the math.
                 </div>
                 <div className="related-meta">7 min read</div>
               </Link>
