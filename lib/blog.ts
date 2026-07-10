@@ -11,6 +11,18 @@ export interface BlogPost {
 
 export const posts: BlogPost[] = [
   {
+    slug: "ai-product-search-ecommerce-2026",
+    title:
+      "Shoppers are asking ChatGPT what to buy. Most DTC brands don't show up.",
+    description:
+      "LLM-referred traffic converts at 2.47% — above Google Ads. ChatGPT, Perplexity, and Google AI Overviews are now product discovery engines. Most DTC brands are invisible in them.",
+    date: "2026-07-10",
+    author: "Dustin Gilmour",
+    readTime: "7 min",
+    tags: ["ecommerce", "DTC", "AI marketing", "AI search", "ChatGPT", "product discovery", "GEO"],
+    image: "/blog/ai-product-search-ecommerce.jpg",
+  },
+  {
     slug: "dtc-creative-volume-cac-2026",
     title:
       "Your DTC ads aren't failing because of targeting. They're failing because of volume.",
