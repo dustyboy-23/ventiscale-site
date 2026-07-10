@@ -6,11 +6,11 @@ import { BlogAuthorBio } from "@/components/marketing/blog-author-bio";
 export const metadata = {
   title: "Shoppers are asking ChatGPT what to buy. Most DTC brands don't show up. | Venti Scale",
   description:
-    "LLM-referred traffic converts at 2.47% — above Google Ads. ChatGPT, Perplexity, and Google AI Overviews are now product discovery engines. Most DTC brands are invisible in them.",
+    "LLM-referred traffic converts at 2.47%, above Google Ads. ChatGPT, Perplexity, and Google AI Overviews are now product discovery engines. Most DTC brands are invisible in them.",
   openGraph: {
     title: "Shoppers are asking ChatGPT what to buy. Most DTC brands don't show up.",
     description:
-      "LLM-referred traffic converts at 2.47% — above Google Ads. ChatGPT, Perplexity, and Google AI Overviews are now product discovery engines. Most DTC brands are invisible in them.",
+      "LLM-referred traffic converts at 2.47%, above Google Ads. ChatGPT, Perplexity, and Google AI Overviews are now product discovery engines. Most DTC brands are invisible in them.",
     url: "https://www.ventiscale.com/blog/ai-product-search-ecommerce-2026",
     type: "article",
     images: [
@@ -18,7 +18,7 @@ export const metadata = {
         url: "https://www.ventiscale.com/blog/ai-product-search-ecommerce.jpg",
         width: 1200,
         height: 630,
-        alt: "AI product search ecommerce — shopper discovering products through ChatGPT and Perplexity",
+        alt: "AI product search ecommerce: shopper discovering products through ChatGPT and Perplexity",
       },
     ],
   },
@@ -26,7 +26,7 @@ export const metadata = {
     card: "summary_large_image" as const,
     title: "Shoppers are asking ChatGPT what to buy. Most DTC brands don't show up.",
     description:
-      "LLM-referred traffic converts at 2.47% — above Google Ads. ChatGPT, Perplexity, and Google AI Overviews are now product discovery engines. Most DTC brands are invisible in them.",
+      "LLM-referred traffic converts at 2.47%, above Google Ads. ChatGPT, Perplexity, and Google AI Overviews are now product discovery engines. Most DTC brands are invisible in them.",
     images: ["https://www.ventiscale.com/blog/ai-product-search-ecommerce.jpg"],
   },
 };
@@ -35,7 +35,7 @@ const SLUG = "ai-product-search-ecommerce-2026";
 const TITLE =
   "Shoppers are asking ChatGPT what to buy. Most DTC brands don’t show up.";
 const DESCRIPTION =
-  "LLM-referred traffic converts at 2.47% — above Google Ads. ChatGPT, Perplexity, and Google AI Overviews are now product discovery engines. Most DTC brands are invisible in them.";
+  "LLM-referred traffic converts at 2.47%, above Google Ads. ChatGPT, Perplexity, and Google AI Overviews are now product discovery engines. Most DTC brands are invisible in them.";
 const DATE = "2026-07-10";
 const IMAGE = "/blog/ai-product-search-ecommerce.jpg";
 const IMAGE_URL = `https://www.ventiscale.com${IMAGE}`;
@@ -47,11 +47,11 @@ const FAQ_DATA = [
   },
   {
     q: "How much traffic does AI product search send to ecommerce stores?",
-    a: "LLM-referred traffic currently converts at 2.47% in retail — higher than Google Ads (1.5–2.0%) and Meta Ads (1.0–1.5%). Shopify merchants saw AI-attributed orders grow 15x between January 2025 and May 2026. The channel is still a small percentage of total traffic but it’s the highest-intent traffic most brands receive.",
+    a: "LLM-referred traffic currently converts at 2.47% in retail, higher than Google Ads (1.5–2.0%) and Meta Ads (1.0–1.5%). Shopify merchants saw AI-attributed orders grow 15x between January 2025 and May 2026. The channel is still a small percentage of total traffic but it’s the highest-intent traffic most brands receive.",
   },
   {
     q: "What is Lantern and how does it help with AI shopping visibility?",
-    a: "Lantern is an agentic commerce platform that monitors how your products appear across AI shopping portals including ChatGPT, Perplexity, and Google AI Overviews. It works like Google Search Console for AI search — showing which portals surface your products, which queries you match, and what’s blocking visibility. It then prioritizes fixes by revenue impact.",
+    a: "Lantern is an agentic commerce platform that monitors how your products appear across AI shopping portals including ChatGPT, Perplexity, and Google AI Overviews. It works like Google Search Console for AI search, showing which portals surface your products, which queries you match, and what’s blocking visibility. It then prioritizes fixes by revenue impact.",
   },
   {
     q: "How do I get my Shopify products to show up in ChatGPT shopping results?",
@@ -59,7 +59,7 @@ const FAQ_DATA = [
   },
   {
     q: "Does optimizing for AI product search hurt traditional SEO?",
-    a: "No. The signals that improve AI shopping visibility — structured data, strong content, review velocity — are the same signals Google’s traditional algorithm rewards. AI shopping optimization and classic SEO reinforce each other. There is no tradeoff.",
+    a: "No. The signals that improve AI shopping visibility (structured data, strong content, review velocity) are the same signals Google’s traditional algorithm rewards. AI shopping optimization and classic SEO reinforce each other. There is no tradeoff.",
   },
 ];
 
@@ -168,7 +168,7 @@ export default async function Post() {
         <div className="blog-hero">
           <img
             src={IMAGE}
-            alt="AI product search ecommerce — shopper discovering products through ChatGPT and Perplexity shopping portals"
+            alt="AI product search ecommerce: shopper discovering products through ChatGPT and Perplexity shopping portals"
           />
         </div>
 
@@ -194,9 +194,9 @@ export default async function Post() {
                 purchase.
               </li>
               <li>
-                LLM-referred traffic converts at 2.47% in retail &mdash; higher than
-                Google Ads and Meta Ads. Shopify saw AI-attributed orders grow 15x
-                since January 2025.
+                LLM-referred traffic converts at 2.47% in retail, higher than Google
+                Ads and Meta Ads. Shopify saw AI-attributed orders grow 15x since
+                January 2025.
               </li>
               <li>
                 Lantern, launched July 7, is the first platform built specifically to
@@ -216,8 +216,8 @@ export default async function Post() {
             and product descriptions that answer the questions buyers actually type.
             That foundation is what AI shopping portals read when deciding who to
             surface. It&apos;s the same principle that drives every channel we&apos;ve
-            ever seen mature &mdash; and the brands that move early on AI product
-            search are building a first-mover advantage right now.
+            ever seen mature. The brands that move early on AI product search are
+            building a first-mover advantage right now.
           </p>
 
           <h2>What AI product search looks like in 2026</h2>
@@ -275,8 +275,8 @@ export default async function Post() {
             Shopify store doesn&apos;t have structured data declaring product name,
             price, availability, and aggregate review rating, AI systems can&apos;t
             parse your catalog cleanly. Most Shopify themes output incomplete schema
-            by default &mdash; missing brand fields, missing availability markup,
-            missing review aggregates. The result: AI portals skip you.
+            by default: missing brand fields, missing availability markup, missing
+            review aggregates. The result: AI portals skip you.
           </p>
           <p>
             <strong>Merchant feed completeness</strong> is next. Google Merchant
@@ -293,8 +293,8 @@ export default async function Post() {
             &quot;best magnesium for people who can&apos;t stay asleep,&quot; the AI
             reads your product page. If it says &quot;pure magnesium glycinate, 400mg,
             formulated for sleep quality, no laxative effect, third-party tested&quot;
-            &mdash; you match. If it says &quot;premium supplement for wellness&quot;
-            &mdash; you don&apos;t.
+            That&apos;s a match. If it says &quot;premium supplement for wellness,&quot;
+            it&apos;s not.
           </p>
 
           <div className="blog-callout">
@@ -320,8 +320,8 @@ export default async function Post() {
             <Link href="/blog/llm-traffic-ecommerce-conversion-2026">
               how LLM-referred traffic converts at 2.47%
             </Link>{" "}
-            &mdash; the reason that number is so high is that buyers who ask an AI for
-            a specific product recommendation are already in purchase mode. They&apos;re
+            . The reason that number is so high: buyers who ask an AI for a specific
+            product recommendation are already in purchase mode. They&apos;re
             not browsing. They&apos;re deciding. The AI has already done the research
             for them.
           </p>
@@ -335,9 +335,9 @@ export default async function Post() {
             strategies. None of it transfers to AI shopping portals.
           </p>
           <p>
-            The organic infrastructure that AI portals actually use &mdash; structured
-            data, merchant feeds, rich product content &mdash; got deprioritized
-            because it wasn&apos;t driving measurable immediate revenue. It felt like
+            The organic infrastructure AI portals actually use: structured data,
+            merchant feeds, rich product content. It got deprioritized because it
+            wasn&apos;t driving measurable immediate revenue. It felt like
             optional cleanup work. Now that AI shopping is a real discovery channel,
             that infrastructure gap is a visibility gap.
           </p>
@@ -346,7 +346,7 @@ export default async function Post() {
             <div className="callout-label">Common mistake</div>
             <p>
               Assuming your Shopify theme handles structured data automatically. Most
-              themes output incomplete Product schema &mdash; missing review aggregates,
+              themes output incomplete Product schema: missing review aggregates,
               missing brand fields, missing availability status. Run your top product
               pages through Google&apos;s Rich Results Test before assuming yours are
               clean.
@@ -357,8 +357,8 @@ export default async function Post() {
             I audited AI shopping visibility for three client stores in Q2 2026. Every
             single one had Schema errors on their top SKUs. Two had Google Merchant
             Center feeds that hadn&apos;t synced correctly in months. One had product
-            descriptions written purely for keyword density &mdash; they answered
-            Google crawlers but not the conversational questions buyers type into
+            descriptions written purely for keyword density. They answered Google
+            crawlers but not the conversational questions buyers type into
             ChatGPT. That store was invisible in every AI portal we tested.
           </p>
           <p>
@@ -427,7 +427,7 @@ export default async function Post() {
             </a>
             . Fix every error. Make sure each product declares price, availability,
             brand, name, and aggregate review rating. This is the table stakes step
-            &mdash; without clean schema, AI portals can&apos;t read your catalog.
+            . Without clean schema, AI portals can&apos;t read your catalog.
           </p>
           <p>
             <strong>Refresh your Google Merchant Center feed.</strong> If you&apos;re
@@ -449,8 +449,8 @@ export default async function Post() {
           <p>
             <strong>Build review velocity on your top SKUs.</strong> If your
             best-selling products have fewer than 20 reviews, that&apos;s the priority.
-            A post-purchase email sequence &mdash; sent 7 to 10 days after confirmed
-            delivery &mdash; moves this number faster than any other tactic. This
+            A post-purchase email sequence sent 7 to 10 days after confirmed delivery
+            moves this number faster than any other tactic. This
             connects directly to the AI discoverability work we covered in{" "}
             <Link href="/blog/shopify-ai-discovery-chatgpt-2026">
               setting up Shopify for AI product discovery
