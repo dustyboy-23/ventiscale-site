@@ -6,12 +6,12 @@ import { BlogAuthorBio } from "@/components/marketing/blog-author-bio";
 export const metadata = {
   title: "AI and SEO in 2026: what to actually do now that ChatGPT is the new search bar | Venti Scale",
   description:
-    "AI Overviews appear in 25% of Google searches. AI-referred visitors convert 23x higher than organic traffic. The GEO playbook for ecommerce brands.",
+    "AI Overviews now show up constantly in Google search, and chat-based search is only growing. The GEO playbook for ecommerce brands.",
   openGraph: {
     title:
       "AI and SEO in 2026: what to actually do now that ChatGPT is the new search bar",
     description:
-      "AI Overviews appear in 25% of Google searches. AI-referred visitors convert 23x higher than organic traffic. The GEO playbook for ecommerce brands.",
+      "AI Overviews now show up constantly in Google search, and chat-based search is only growing. The GEO playbook for ecommerce brands.",
     url: "https://www.ventiscale.com/blog/ai-seo-2026",
     type: "article",
     images: [
@@ -28,7 +28,7 @@ export const metadata = {
     title:
       "AI and SEO in 2026: what to actually do now that ChatGPT is the new search bar",
     description:
-      "AI Overviews appear in 25% of Google searches. AI-referred visitors convert 23x higher than organic traffic. The GEO playbook for ecommerce brands.",
+      "AI Overviews now show up constantly in Google search, and chat-based search is only growing. The GEO playbook for ecommerce brands.",
     images: ["https://www.ventiscale.com/blog/ai-seo-2026.jpg"],
   },
 };
@@ -37,7 +37,7 @@ const SLUG = "ai-seo-2026";
 const TITLE =
   "AI and SEO in 2026: what to actually do now that ChatGPT is the new search bar";
 const DESCRIPTION =
-  "AI Overviews appear in 25% of Google searches. AI-referred visitors convert 23x higher than organic traffic. The GEO playbook for ecommerce brands.";
+  "AI Overviews now show up constantly in Google search, and chat-based search is only growing. The GEO playbook for ecommerce brands.";
 const DATE = "2026-05-06";
 const IMAGE = "/blog/ai-seo-2026.jpg";
 const IMAGE_URL = `https://www.ventiscale.com${IMAGE}`;
@@ -49,19 +49,19 @@ const FAQ_DATA = [
   },
   {
     q: "How do I get my content cited by ChatGPT or Perplexity?",
-    a: "Answer the core question in your first 2-3 sentences, add Article and FAQPage schema markup, include 2-3 specific statistics per 300 words of body copy, name the author with verifiable credentials, and update your content within the last 12 months. Content with proper schema markup shows 30-40% higher AI citation visibility compared to content without it.",
+    a: "Answer the core question in your first 2-3 sentences, add Article and FAQPage schema markup, include specific statistics and named sources in your body copy, name the author with verifiable credentials, and keep your content updated. AI engines favor content that gives them a clean, quotable, well-sourced answer to extract.",
   },
   {
     q: "Does schema markup actually help AI search engines find my content?",
-    a: "Yes. Content with proper schema markup shows 30-40% higher AI visibility. FAQPage schema is the highest-leverage single tactic per page. Article schema with the image field increases citation eligibility. BreadcrumbList helps AI engines understand site structure. All three together are the 2026 minimum for ecommerce brands targeting AI search citations.",
+    a: "Yes. Schema markup gives AI crawlers structured data they can parse without guessing at page content. FAQPage schema is the highest-leverage single tactic per page. Article schema with the image field increases citation eligibility. BreadcrumbList helps AI engines understand site structure. All three together are a reasonable 2026 minimum for ecommerce brands targeting AI search citations.",
   },
   {
     q: "How much traffic do AI search engines actually send right now?",
-    a: "AI search engines currently account for under 1% of total website referral traffic. ChatGPT specifically drives about 0.21% of referral traffic. The volume is small but the quality is not: AI-referred visitors convert 23x higher than organic search visitors. AI-referred sessions grew 527% year-over-year from 2024 to 2025, and the channel is still accelerating at 130-150% YoY.",
+    a: "AI search engines still send a small share of total website referral traffic today, well under traditional organic search. The volume is small but the quality tends to be high: visitors arriving from an AI answer already know what they want and are further along in the buying decision. That volume is growing quickly as chat-based search adoption climbs.",
   },
   {
     q: "What is the single highest-impact change I can make for AI SEO today?",
-    a: "Rewrite your opening paragraphs so the core question is answered in the first 3 sentences. AI engines extract answers from the opening of a page. If your first paragraph is a warm-up or context-setting, you get skipped for someone who leads with the answer. A direct, specific claim with one stat in sentences 1-3 is the fastest way to improve AI citation rate across existing content.",
+    a: "Rewrite your opening paragraphs so the core question is answered in the first 3 sentences. AI engines extract answers from the opening of a page. If your first paragraph is a warm-up or context-setting, you get skipped for someone who leads with the answer. A direct, specific, well-sourced claim in sentences 1-3 is the fastest way to improve your odds of being cited across existing content.",
   },
 ];
 
@@ -181,11 +181,10 @@ export default async function Post() {
             never visit your site.
           </p>
           <p>
-            That&apos;s not a future problem. ChatGPT processes 2.5 billion
-            prompts a day. AI Overviews appear in 25% of all Google searches.
-            Google&apos;s own traffic share dropped from 35% to 28% in under a
-            year. The way people find information changed. Most ecommerce brands
-            haven&apos;t adjusted.
+            That&apos;s not a future problem. ChatGPT handles billions of
+            prompts a day. AI Overviews show up across a huge share of Google
+            searches now. The way people find information changed. Most
+            ecommerce brands haven&apos;t adjusted.
           </p>
 
           <div className="blog-tldr">
@@ -196,8 +195,10 @@ export default async function Post() {
                 AI engines, not just indexed by crawlers.
               </li>
               <li>
-                AI-referred visitors convert 23x higher than organic search
-                traffic. AI-referred sessions grew 527% year-over-year.
+                AI-referred visitors tend to convert far higher than organic
+                search traffic because they arrive already informed and
+                further along in the decision. AI-referred sessions are
+                growing fast year-over-year.
               </li>
               <li>
                 Five signals drive AI citations: direct answer in paragraph 1,
@@ -205,8 +206,8 @@ export default async function Post() {
                 and recent publish date.
               </li>
               <li>
-                47% of brands have zero GEO strategy. The first-mover window is
-                open right now.
+                Most brands still have zero GEO strategy. The first-mover
+                window is open right now.
               </li>
             </ul>
           </div>
@@ -226,45 +227,29 @@ export default async function Post() {
             Search is shifting faster than the analytics show
           </h2>
           <p>
-            The raw numbers look small. ChatGPT sends about 0.21% of total
-            website referral traffic today. That sounds irrelevant until you see
-            what that traffic actually does. AI-referred visitors convert at 23x
-            the rate of organic search visitors. They already know what they
-            want. They read an AI summary that mentioned your brand, and they
-            came to act.
+            The raw referral numbers still look small next to traditional
+            organic search. That sounds irrelevant until you see what that
+            traffic actually does. AI-referred visitors convert at a
+            dramatically higher rate than organic search visitors. They
+            already know what they want. They read an AI summary that
+            mentioned your brand, and they came to act.
           </p>
           <p>
-            AI-referred sessions grew 527% from the first half of 2024 to the
-            same period in 2025. That&apos;s not a trend. That&apos;s a
-            structural shift in where purchase decisions get made. And
-            it&apos;s still early innings. The brands building GEO authority now
-            will own those citations when volume catches up to quality.
+            AI-referred sessions are growing fast year over year. That&apos;s
+            not a trend. That&apos;s a structural shift in where purchase
+            decisions get made. And it&apos;s still early innings. The brands
+            building GEO authority now will own those citations when volume
+            catches up to quality.
           </p>
 
-          <div className="blog-stat-row">
-            <div className="blog-stat">
-              <div className="stat-number">527%</div>
-              <div className="stat-label">AI-referred session growth YoY</div>
-            </div>
-            <div className="blog-stat">
-              <div className="stat-number">23x</div>
-              <div className="stat-label">
-                Higher conversion vs organic search
-              </div>
-            </div>
-            <div className="blog-stat">
-              <div className="stat-number">25%</div>
-              <div className="stat-label">Of Google searches show AI Overviews</div>
-            </div>
-          </div>
-
           <p>
-            The click problem matters too. With AI Mode active in Google, 93% of
-            queries end without a click to any website. Traditional SEO
-            optimized for the click. GEO optimizes for the citation. If ChatGPT
-            summarizes your answer and names your brand, you get the trust signal
-            whether they click or not. That&apos;s worth more than position 3 in
-            a standard SERP where nobody scrolls down anyway.
+            The click problem matters too. A large and growing share of
+            AI-assisted searches end without a click to any website at all.
+            Traditional SEO optimized for the click. GEO optimizes for the
+            citation. If ChatGPT summarizes your answer and names your brand,
+            you get the trust signal whether they click or not. That&apos;s
+            worth more than a mid-page ranking in a standard SERP where nobody
+            scrolls down anyway.
           </p>
 
           <hr className="blog-divider" />
@@ -289,18 +274,21 @@ export default async function Post() {
           <div className="blog-callout">
             <div className="callout-label">Key insight</div>
             <p>
-              According to{" "}
+              Per{" "}
               <a
                 href="https://searchengineland.com/mastering-generative-engine-optimization-in-2026-full-guide-469142"
                 target="_blank"
                 rel="noopener noreferrer"
               >
-                Search Engine Land&apos;s 2026 GEO guide
+                Search Engine Land&apos;s GEO guide
               </a>
-              , comparison articles earn 32.5% of all AI citations, the highest
-              share of any content format. If competitors have comparison content
-              in your category and yours is missing, they get cited every time
-              someone asks that question.
+              , AI engines strongly favor earned, authoritative third-party
+              sources over brand-owned content when deciding what to cite.
+              Comparison and &quot;versus&quot; style content tends to earn a
+              disproportionate share of citations in ecommerce and marketing
+              categories. If competitors have comparison content in your
+              category and yours is missing, they get cited every time someone
+              asks that question.
             </p>
           </div>
 
@@ -345,23 +333,22 @@ export default async function Post() {
           </p>
           <p>
             <strong>Schema markup.</strong> This is the most mechanical fix and
-            the most ignored. Content with proper Article, FAQPage, and
-            BreadcrumbList schema shows 30-40% higher AI visibility. AI crawlers
-            parse schema before they parse prose. If the data isn&apos;t in the
-            markup, you&apos;re asking the engine to do extra work. It
-            won&apos;t.
+            the most ignored. AI crawlers parse schema before they parse prose.
+            Content with proper Article, FAQPage, and BreadcrumbList schema
+            gives the engine structured data it can extract cleanly. If the
+            data isn&apos;t in the markup, you&apos;re asking the engine to do
+            extra work. It won&apos;t.
           </p>
           <p>
             <strong>Data density.</strong> Vague content doesn&apos;t get cited.
             Specific content does. &quot;Most brands see improvement&quot; gets
-            skipped. &quot;Brands posting 5+ times per week see 2.5x higher
-            conversion from social traffic&quot; gets used. Include 2-3 real
-            statistics per 300 words of body copy, with sources named.
+            skipped. A specific, sourced number gets used. Include a few real
+            statistics per section of body copy, with sources named.
           </p>
           <p>
-            <strong>Content freshness.</strong> Content updated within the last
-            12 months earns 3.2x more AI citations than content older than 24
-            months. This isn&apos;t about rewriting everything. Update the date,
+            <strong>Content freshness.</strong> Content updated recently tends
+            to earn more AI citations than content that has sat untouched for
+            years. This isn&apos;t about rewriting everything. Update the date,
             freshen a stat, add a new section. The freshness signal matters more
             than the rewrite depth.
           </p>
@@ -414,11 +401,10 @@ export default async function Post() {
           </p>
           <p>
             <strong>Use attributed blockquotes for cited data.</strong>{" "}
-            Princeton and Georgia Tech GEO research found that attributed quotes
-            in HTML blockquote tags earn a 41% boost in AI citation visibility.
-            If you&apos;re citing a stat from Klaviyo or HubSpot, wrap it in a
-            blockquote with attribution. Don&apos;t just inline it as a plain
-            sentence.
+            GEO research consistently points to attribution as a trust signal
+            AI engines weigh when choosing what to cite. If you&apos;re citing
+            a stat from Klaviyo or HubSpot, wrap it in a blockquote with clear
+            attribution. Don&apos;t just inline it as a plain sentence.
           </p>
           <p>
             <strong>Add 2-5 outbound links to authoritative sources.</strong>{" "}
@@ -428,41 +414,24 @@ export default async function Post() {
             information network. One external link per post is the minimum.
           </p>
 
-          <div className="blog-stat-row">
-            <div className="blog-stat">
-              <div className="stat-number">30-40%</div>
-              <div className="stat-label">Higher AI visibility with schema</div>
-            </div>
-            <div className="blog-stat">
-              <div className="stat-number">41%</div>
-              <div className="stat-label">
-                Citation boost from attributed blockquotes
-              </div>
-            </div>
-            <div className="blog-stat">
-              <div className="stat-number">3.2x</div>
-              <div className="stat-label">
-                More citations for content &lt;12 months old
-              </div>
-            </div>
-          </div>
-
           <hr className="blog-divider" />
 
           <h2 id="window-now">Why the next 24 months are the window</h2>
           <p>
-            47% of brands have no GEO strategy right now. Zero. They&apos;re
+            Most brands still have no GEO strategy right now. Zero. They&apos;re
             optimizing for a Google that&apos;s losing share while ignoring the
-            channel that converts 23x higher. That&apos;s not a gap you can
-            close in a week once you realize it. GEO authority builds the same
-            way organic SEO authority builds: slowly, then all at once.
+            channel that converts at a far higher rate. That&apos;s not a gap
+            you can close in a week once you realize it. GEO authority builds
+            the same way organic SEO authority builds: slowly, then all at
+            once.
           </p>
           <p>
-            AI search is growing at 130-150% year-over-year. The volume is small
-            today. It won&apos;t be small in 18 months. The brands getting cited
-            in ChatGPT and Perplexity right now are building the same kind of
-            first-mover advantage that early SEO adopters had in 2012. Most of
-            those positions compounded for years before competitors caught up.
+            AI search volume is small today relative to traditional organic
+            search, but it&apos;s growing fast. It won&apos;t be small in 18
+            months. The brands getting cited in ChatGPT and Perplexity right
+            now are building the same kind of first-mover advantage that early
+            SEO adopters had in 2012. Most of those positions compounded for
+            years before competitors caught up.
           </p>
           <p>
             If you&apos;re already running{" "}

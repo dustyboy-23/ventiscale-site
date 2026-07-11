@@ -299,17 +299,10 @@ export default async function Post() {
           <div className="blog-callout">
             <div className="callout-label">Key insight</div>
             <p>
-              According to{" "}
-              <a
-                href="https://www.kreadoai.com/article/best-ai-ad-creative-generators-ecommerce"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                Kreado AI&apos;s 2026 ecommerce creative compliance guide
-              </a>
-              , brands using AI for product placement on real photography rather
-              than pure AI generation often avoid the label entirely — while
-              still getting 70-80% of the efficiency benefit.
+              Brands using AI for product placement on real photography rather
+              than pure AI generation often avoid the label entirely, while
+              still capturing most of the speed and cost benefit that made AI
+              creative tools worth adopting in the first place.
             </p>
           </div>
 

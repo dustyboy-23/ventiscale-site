@@ -341,26 +341,21 @@ export default async function Post() {
             random.
           </p>
           <p>
-            The 43% of business owners who worry about AI content sounding
-            generic are worried about the wrong thing. They should worry about
-            not posting at all. A dead social media page does more damage to your
+            The business owners who worry about AI content sounding generic
+            are worried about the wrong thing. They should worry about not
+            posting at all. A dead social media page does more damage to your
             brand than a well-written AI post ever could.
           </p>
 
           <div className="blog-callout">
             <div className="callout-label">Key insight</div>
             <p>
-              According to{" "}
-              <a
-                href="https://www.hubspot.com/state-of-marketing"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                HubSpot&apos;s 2026 State of Marketing report
-              </a>
-              , 88% of marketers now use AI tools in their daily workflow. The
-              question isn&apos;t whether AI can do the work. It&apos;s whether
-              you have someone who knows how to point it in the right direction.
+              According to Salesforce&apos;s 2026 State of Marketing data, 88%
+              of marketers now use AI tools in their daily workflow, and
+              HubSpot&apos;s own 2026 research puts AI use for content
+              creation at 80%. The question isn&apos;t whether AI can do the
+              work. It&apos;s whether you have someone who knows how to point
+              it in the right direction.
             </p>
           </div>
 

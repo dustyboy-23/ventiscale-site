@@ -242,16 +242,19 @@ export default async function Post() {
             contacts. The AI features included in that base plan are send-time
             optimization (5-10% open rate lift over manual scheduling),
             predictive segments that identify customers likely to buy again, and
-            AI-assisted subject lines that{" "}
+            AI-assisted subject line generation. US ecommerce email marketing
+            returns{" "}
             <a
               href="https://foundrycro.com/blog/ecommerce-marketing-benchmarks-2026/"
               target="_blank"
               rel="noopener noreferrer"
             >
-              average 26% higher open rates
-            </a>{" "}
-            than manually written ones. AI-driven email campaigns deliver 41%
-            more revenue than non-AI campaigns at the same list size.
+              $72 per $1 spent on average
+            </a>
+            , and AI-powered email programs (send-time, segmentation, and
+            copy working together, not a single bolted-on feature) deliver
+            roughly 41% more revenue than manual campaigns at the same list
+            size, per Salesforce&apos;s benchmark data.
           </p>
 
           <div className="blog-stat-row">
@@ -401,10 +404,11 @@ export default async function Post() {
             </Link>{" "}
             at this revenue tier, the limiting factor stops being which tools
             you&apos;re using and starts being how well the AI understands your
-            specific brand. Generic tools produce generic output. The gap between
-            top-quartile ecommerce brands averaging a $42 customer acquisition
-            cost and median brands averaging $84 isn&apos;t the platform. It&apos;s
-            the quality and specificity of what those platforms are sending.
+            specific brand. Generic tools produce generic output. Shopify puts
+            average customer acquisition cost at $274, with apparel running
+            $318 &mdash; and the gap between brands holding that number down
+            and brands bleeding on it isn&apos;t the platform. It&apos;s the
+            quality and specificity of what those platforms are sending.
           </p>
 
           <div className="blog-stat-row">
@@ -417,8 +421,8 @@ export default async function Post() {
               <div className="stat-label">Klaviyo Customer Agent (intro rate)</div>
             </div>
             <div className="blog-stat">
-              <div className="stat-number">$42</div>
-              <div className="stat-label">Top-quartile ecom CAC vs $84 median</div>
+              <div className="stat-number">$274</div>
+              <div className="stat-label">Average ecommerce customer acquisition cost, per Shopify</div>
             </div>
           </div>
 

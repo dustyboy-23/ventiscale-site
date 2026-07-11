@@ -43,11 +43,11 @@ const IMAGE_URL = `https://www.ventiscale.com${IMAGE}`;
 const FAQ_DATA = [
   {
     q: "How much does it cost to get leads as a contractor?",
-    a: "Contractor lead costs range from $52 for referral leads to $135 for lead aggregator platforms like HomeAdvisor in 2026. SEO-generated leads average $74 per lead, making them the best balance of cost and quality. Google Local Services Ads fall in between at about $92 per lead.",
+    a: "Contractor lead costs vary widely by channel. SEO and Google Business Profile leads run roughly $10-63 at maturity, Google Local Services Ads average around $53 per lead, and third-party aggregator platforms like HomeAdvisor and Angi typically run $75-175+ per shared lead (and since those leads go to 3-4 contractors at once, the effective cost per booked job is often $800+). Owned channels consistently beat rented ones on cost per booked job.",
   },
   {
     q: "What is the best way for contractors to get more leads?",
-    a: "Google Business Profile optimization is the single highest-ROI lead source for contractors in 2026. Profiles with 20+ project photos get up to 520% more contacts than incomplete profiles. Combine that with consistent reviews and local SEO, and you have a lead engine that runs 24/7 without paying per click.",
+    a: "Google Business Profile optimization is the single highest-ROI lead source for contractors in 2026. Profiles with 100+ project photos get up to 520% more calls than photo-sparse profiles, and complete profiles overall get roughly 7x more clicks than incomplete ones. Combine that with consistent reviews and local SEO, and you have a lead engine that runs 24/7 without paying per click.",
   },
   {
     q: "How important are Google reviews for contractors?",
@@ -55,7 +55,7 @@ const FAQ_DATA = [
   },
   {
     q: "Should contractors use lead generation websites like HomeAdvisor?",
-    a: "Lead aggregator platforms cost an average of $135 per lead, nearly double the cost of SEO leads at $74. They also share your leads with 3-4 other contractors, which tanks your close rate. They can supplement your pipeline, but building owned channels like your Google Business Profile and website gives you better leads at lower cost.",
+    a: "Lead aggregator platforms typically run $75-175+ per shared lead, well above the $10-63 range for mature SEO and Google Business Profile leads. They also share your leads with 3-4 other contractors, which tanks your close rate. They can supplement your pipeline, but building owned channels like your Google Business Profile and website gives you better leads at lower cost.",
   },
 ];
 
@@ -186,13 +186,14 @@ export default async function Post() {
             <div className="callout-label">TL;DR</div>
             <ul>
               <li>
-                Google Business Profile optimization can increase contractor
-                contacts by up to 520%. It&apos;s free and most contractors
-                haven&apos;t touched theirs.
+                A photo-rich Google Business Profile can increase calls by up
+                to 520%. It&apos;s free and most contractors haven&apos;t
+                touched theirs.
               </li>
               <li>
-                SEO-generated leads cost $74 on average vs. $135 for lead
-                aggregator platforms like HomeAdvisor.
+                Mature SEO and Google Business Profile leads run $10-63 on
+                average vs. $75-175+ per shared lead on aggregator platforms
+                like HomeAdvisor.
               </li>
               <li>
                 Contractors who respond to inquiries within 5 minutes are 9x
@@ -233,13 +234,13 @@ export default async function Post() {
             <div className="blog-stat">
               <div className="stat-number">520%</div>
               <div className="stat-label">
-                More contacts with optimized GBP photos
+                More calls with a photo-rich (100+) GBP
               </div>
             </div>
             <div className="blog-stat">
-              <div className="stat-number">$74</div>
+              <div className="stat-number">$10-63</div>
               <div className="stat-label">
-                Average cost per SEO lead vs. $135 for aggregators
+                Mature SEO lead cost vs. $75-175+ for aggregators
               </div>
             </div>
             <div className="blog-stat">
@@ -338,11 +339,11 @@ export default async function Post() {
           <div className="blog-warning">
             <div className="callout-label">Common mistake</div>
             <p>
-              Paying $135 per lead on HomeAdvisor while your Google Business
-              Profile sits empty and your website doesn&apos;t mention the cities
-              you serve. You&apos;re renting leads when you could own the
-              pipeline. SEO leads cost $74 on average and they&apos;re exclusive
-              to you.
+              Paying $75-175+ per shared lead on HomeAdvisor while your Google
+              Business Profile sits empty and your website doesn&apos;t
+              mention the cities you serve. You&apos;re renting leads when
+              you could own the pipeline. Mature SEO leads cost a fraction of
+              that and they&apos;re exclusive to you.
             </p>
           </div>
 
@@ -436,10 +437,11 @@ export default async function Post() {
           <div className="blog-callout">
             <div className="callout-label">Key insight</div>
             <p>
-              Referral leads cost an average of $52 compared to $135 for lead
-              aggregator platforms. A simple referral system with 5-10
-              trade partners can generate more high-quality leads than any paid
-              channel.
+              Referral leads close at a much higher rate than paid channels
+              (industry data puts it around 50-65%) and cost you nothing per
+              lead, just the time to ask. A simple referral system with 5-10
+              trade partners can generate more high-quality leads than any
+              paid channel.
             </p>
           </div>
 

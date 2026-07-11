@@ -248,9 +248,9 @@ export default async function Post() {
               <div className="stat-label">Of Google searches are local</div>
             </div>
             <div className="blog-stat">
-              <div className="stat-number">5x</div>
+              <div className="stat-number">520%</div>
               <div className="stat-label">
-                More calls with a complete Google profile
+                More calls with 100+ Google profile photos
               </div>
             </div>
           </div>
@@ -264,8 +264,9 @@ export default async function Post() {
             Photos of your work. A description that says what you do and where.
           </p>
           <p>
-            Businesses with complete Google profiles get 5x more calls than ones
-            with partial listings. That&apos;s not a small bump. That&apos;s the
+            Complete Google Business profiles get roughly 7x more clicks than
+            incomplete ones, and businesses with 100+ photos see up to 520%
+            more calls. That&apos;s not a small bump. That&apos;s the
             difference between your phone ringing and wondering where the next
             job is coming from.
           </p>

@@ -222,15 +222,8 @@ export default async function Post() {
           <h2>The numbers most agency reports don&apos;t show you</h2>
 
           <p>
-            According to{" "}
-            <a
-              href="https://mhigrowthengine.com/blog/dtc-advertising-benchmarks-2026/"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              2026 DTC advertising benchmarks from MHI Growth Engine
-            </a>
-            , here&apos;s what each channel actually returns per dollar spent:
+            Here&apos;s what each channel actually returns per dollar spent,
+            based on widely-cited industry benchmarks:
           </p>
 
           <ul>

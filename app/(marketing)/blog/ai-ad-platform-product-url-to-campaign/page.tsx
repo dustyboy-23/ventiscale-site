@@ -267,9 +267,10 @@ export default async function Post() {
           </h2>
           <p>
             Meta Advantage+ is an AI optimization system. It needs creative
-            volume to work. The algorithm requires 300-1,000 ad variations to
-            test before it can reliably identify winners and allocate budget
-            toward them.
+            volume to work. Meta&apos;s own guidance scales with spend: roughly
+            10-15 creative concepts at $100-300/day, climbing to 50-100+ at
+            $5,000+/day. Feed it fewer than that and it can&apos;t reliably
+            separate winners from noise.
           </p>
           <p>
             Most agencies send you 10 creatives a month. Some send 5. When the
@@ -292,10 +293,11 @@ export default async function Post() {
           <div className="blog-callout">
             <div className="callout-label">Key insight</div>
             <p>
-              Brands feeding Advantage+ 50+ creatives per month see 2-3x better
-              ROAS than brands feeding it 5-10, because the algorithm has enough
-              signal to find real winners instead of optimizing toward the
-              least-bad option it&apos;s been given.
+              Brands feeding Advantage+ high creative volume consistently
+              outperform brands feeding it 5-10 variations a month, because
+              the algorithm has enough signal to find real winners instead
+              of optimizing toward the least-bad option it&apos;s been
+              given.
             </p>
           </div>
 
@@ -389,16 +391,12 @@ export default async function Post() {
 
           <div className="blog-stat-row">
             <div className="blog-stat">
-              <div className="stat-number">171%</div>
-              <div className="stat-label">Average ROI on AI deployments</div>
-            </div>
-            <div className="blog-stat">
-              <div className="stat-number">74%</div>
-              <div className="stat-label">Hit positive ROI in year one</div>
-            </div>
-            <div className="blog-stat">
               <div className="stat-number">$200-800</div>
               <div className="stat-label">AI platform vs $4K-10K agency/mo</div>
+            </div>
+            <div className="blog-stat">
+              <div className="stat-number">10-20%</div>
+              <div className="stat-label">of agency cost for comparable volume</div>
             </div>
           </div>
 

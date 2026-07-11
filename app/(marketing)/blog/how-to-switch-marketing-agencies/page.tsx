@@ -284,9 +284,11 @@ export default async function Post() {
             <strong>Email platform.</strong> Confirm the Klaviyo or Mailchimp
             account is registered to your business email, not the
             agency&apos;s. Your email list is your most valuable owned marketing
-            asset. A list of 10,000 engaged subscribers is worth $30,000-$100,000
-            in annual revenue when properly worked. Make sure it&apos;s legally
-            and operationally yours before you start any transition conversation.
+            asset. Ecommerce lists commonly generate somewhere in the range of
+            $10-$50 in annual revenue per engaged subscriber, so a list of even
+            a few thousand names carries real dollar value. Make sure it&apos;s
+            legally and operationally yours before you start any transition
+            conversation.
           </p>
           <p>
             <strong>Analytics and tracking.</strong> Confirm you have GA4 admin
@@ -315,9 +317,9 @@ export default async function Post() {
 
           <div className="blog-stat-row">
             <div className="blog-stat">
-              <div className="stat-number">30%</div>
+              <div className="stat-number">12-18 mo</div>
               <div className="stat-label">
-                of founder time spent managing agencies rather than strategy
+                of institutional knowledge lost with a bad handoff
               </div>
             </div>
             <div className="blog-stat">
@@ -390,10 +392,10 @@ export default async function Post() {
                 target="_blank"
                 rel="noopener noreferrer"
               >
-                Mercer Island Group&apos;s agency transition research
+                Mercer Island Group&apos;s agency transition guide
               </a>
-              , brands that complete a formal knowledge transfer cut new-agency
-              ramp time by 40-60%.
+              , a documented handoff is one of the biggest levers founders
+              have to shorten a new agency&apos;s ramp-up period.
             </p>
           </div>
 

@@ -6,11 +6,11 @@ import { BlogAuthorBio } from "@/components/marketing/blog-author-bio";
 export const metadata = {
   title: "You paid to acquire these customers. Your retention system is ignoring them. | Venti Scale",
   description:
-    "DTC brands leave 30-40% of retention revenue on the table. The tools aren't the problem. The system is. Here's how DTC retention marketing actually runs.",
+    "DTC brands leave 30-40% of total revenue on the table. The tools aren't the problem. The system is. Here's how DTC retention marketing actually runs.",
   openGraph: {
     title: "You paid to acquire these customers. Your retention system is ignoring them.",
     description:
-      "DTC brands leave 30-40% of retention revenue on the table. The tools aren't the problem. The system is. Here's how DTC retention marketing actually runs.",
+      "DTC brands leave 30-40% of total revenue on the table. The tools aren't the problem. The system is. Here's how DTC retention marketing actually runs.",
     url: "https://www.ventiscale.com/blog/dtc-retention-revenue-2026",
     type: "article",
     images: [
@@ -26,7 +26,7 @@ export const metadata = {
     card: "summary_large_image" as const,
     title: "You paid to acquire these customers. Your retention system is ignoring them.",
     description:
-      "DTC brands leave 30-40% of retention revenue on the table. The tools aren't the problem. The system is. Here's how DTC retention marketing actually runs.",
+      "DTC brands leave 30-40% of total revenue on the table. The tools aren't the problem. The system is. Here's how DTC retention marketing actually runs.",
     images: ["https://www.ventiscale.com/blog/dtc-retention-revenue.jpg"],
   },
 };
@@ -35,7 +35,7 @@ const SLUG = "dtc-retention-revenue-2026";
 const TITLE =
   "You paid to acquire these customers. Your retention system is ignoring them.";
 const DESCRIPTION =
-  "DTC brands leave 30-40% of retention revenue on the table. The tools aren't the problem. The system is. Here's how DTC retention marketing actually runs.";
+  "DTC brands leave 30-40% of total revenue on the table. The tools aren't the problem. The system is. Here's how DTC retention marketing actually runs.";
 const DATE = "2026-07-03";
 const IMAGE = "/blog/dtc-retention-revenue.jpg";
 const IMAGE_URL = `https://www.ventiscale.com${IMAGE}`;
@@ -43,7 +43,7 @@ const IMAGE_URL = `https://www.ventiscale.com${IMAGE}`;
 const FAQ_DATA = [
   {
     q: "What percentage of DTC revenue comes from repeat customers?",
-    a: "Repeat customers drive 65-80% of total ecommerce revenue for mature DTC brands. Despite that, the average brand leaves 30-40% of potential retention revenue uncollected because flows are stale, unsegmented, or mistimed against actual buying cycles.",
+    a: "Repeat customers drive 65-80% of total ecommerce revenue for mature DTC brands. Despite that, the average brand leaves 30-40% of total revenue on the table because retention flows are stale, unsegmented, or mistimed against actual buying cycles.",
   },
   {
     q: "What is the most common DTC retention marketing mistake?",
@@ -182,27 +182,28 @@ export default async function Post() {
           </p>
 
           <p>
-            According to{" "}
+            Per{" "}
             <a
               href="https://www.darkroomagency.com/observatory/retention-marketing-agency-klaviyo-ecommerce-2026"
               target="_blank"
               rel="noopener noreferrer"
             >
-              Darkroom Agency&apos;s 2026 DTC Observatory
+              Darkroom Agency&apos;s DTC Observatory
             </a>
-            , brands in the $5M-$50M range leave 30-40% of their retention
-            revenue uncollected. Not from a lack of tools. From stale flows,
-            no segmentation logic, and zero coordination between email and paid
-            media.
+            , most DTC brands leave 30-40% of total revenue on the table
+            because their retention systems are broken or stale. On a $10M
+            brand, that&apos;s $1.5M-$2M sitting uncaptured. Not from a lack
+            of tools. From stale flows, no segmentation logic, and zero
+            coordination between email and paid media.
           </p>
 
           <div className="blog-tldr">
             <div className="callout-label">TL;DR</div>
             <ul>
               <li>
-                DTC brands leave 30-40% of potential retention revenue
-                uncollected. Most have Klaviyo active and assume the job is done.
-                It&apos;s not.
+                DTC brands leave 30-40% of total revenue on the table due to
+                broken or stale retention systems. Most have Klaviyo active and
+                assume the job is done. It&apos;s not.
               </li>
               <li>
                 The tool isn&apos;t the problem. Default flows set at launch and
@@ -273,7 +274,7 @@ export default async function Post() {
             <div className="blog-stat">
               <div className="stat-number">30-40%</div>
               <div className="stat-label">
-                of DTC retention revenue left uncollected
+                of total revenue left on the table by broken retention systems
               </div>
             </div>
             <div className="blog-stat">

@@ -6,7 +6,7 @@ import { BlogAuthorBio } from "@/components/marketing/blog-author-bio";
 const SLUG = "marketing-dashboard-data-mirage-2026";
 const TITLE = "Your agency's dashboard shows green. Your revenue doesn't.";
 const DESCRIPTION =
-  "26% of marketing budgets are wasted in 2026. Your marketing dashboard says green. Your revenue says otherwise. Here's what to actually track.";
+  "A quarter or more of marketing budgets go to waste in 2026. Your marketing dashboard says green. Your revenue says otherwise. Here's what to actually track.";
 const DATE = "2026-06-05";
 const IMAGE = "/blog/marketing-dashboard-data-mirage.jpg";
 const IMAGE_URL = `https://www.ventiscale.com${IMAGE}`;
@@ -43,11 +43,11 @@ const FAQ_DATA = [
   },
   {
     q: "What percentage of marketing budgets are wasted in 2026?",
-    a: "26% of marketing budgets are wasted in 2026, according to Deep Marketing research. The study identified the Data Mirage — dashboards showing metric success that never translates to revenue — as the primary driver of this waste.",
+    a: "Independent research puts marketing budget waste somewhere between a quarter and half of total spend in 2026, depending on the category (ad fraud, media inefficiency, and data decay all contribute). DemandScience's research calls the underlying pattern the Data Mirage — dashboards showing metric success that never translates to revenue.",
   },
   {
     q: "What metrics should ecommerce founders track instead of impressions and reach?",
-    a: "Three metrics predict revenue: Customer Acquisition Cost by channel (DTC average is $68-$84), email revenue attribution (email returns $36-$79 per $1 spent), and 30-day retention rate (DTC average is 31%, top performers hit 45-55%). These numbers show whether marketing is actually working.",
+    a: "Three metrics predict revenue: Customer Acquisition Cost by channel (varies heavily but up 40-60% since 2023), email revenue attribution (email returns $36-$79 per $1 spent), and 30-day retention rate (DTC average is 31%, top performers hit 45-55%). These numbers show whether marketing is actually working.",
   },
   {
     q: "How do I know if my marketing agency is showing me accurate data?",
@@ -55,7 +55,7 @@ const FAQ_DATA = [
   },
   {
     q: "What is the Data Mirage in marketing?",
-    a: "The Data Mirage is a term from Deep Marketing's 2026 research describing the gap between dashboard metrics and actual revenue. A brand's reach doubles, impressions triple, reports show green — while revenue stays flat. It happens when agencies optimize for metrics they control rather than outcomes founders care about.",
+    a: "The Data Mirage is a term from DemandScience's 2026 research describing the gap between dashboard metrics and actual revenue. A brand's reach doubles, impressions triple, reports show green — while revenue stays flat. It happens when agencies optimize for metrics they control rather than outcomes founders care about.",
   },
 ];
 
@@ -169,11 +169,10 @@ export default async function Post() {
 
         <div className="prose-blog">
           <p>
-            Seventy percent of marketing leaders feel confident about their
-            results. Forty-two percent of those same leaders admit their
-            marketing dashboard doesn&apos;t reflect what&apos;s actually
-            happening in revenue. That gap has a name. Deep Marketing calls it
-            the Data Mirage.
+            Roughly 70% of marketing leaders feel confident their budgets are
+            deployed effectively. Over 40% of those same leaders admit their
+            spend isn&apos;t delivering its full value. That gap has a name.
+            DemandScience calls it the Data Mirage.
           </p>
           <p>
             Your agency&apos;s weekly report shows impressions up, reach up,
@@ -185,8 +184,8 @@ export default async function Post() {
             <div className="callout-label">TL;DR</div>
             <ul>
               <li>
-                26% of marketing budgets go to waste in 2026 — most founders
-                never find out because the dashboard hides it.
+                A quarter or more of marketing budgets go to waste in 2026 —
+                most founders never find out because the dashboard hides it.
               </li>
               <li>
                 Agencies report impressions, reach, and engagement because
@@ -237,25 +236,25 @@ export default async function Post() {
             >
               research published by PPC Land
             </a>
-            , 70% of marketing leaders feel confident about their results. But
-            41.6% of those same leaders privately admit their dashboards
-            don&apos;t reflect actual revenue performance. You can&apos;t have
-            70% confidence and 41.6% admitted inaccuracy without a lot of
-            people lying to themselves.
+            , 70.4% of marketing leaders are confident their budgets are
+            deployed effectively. But 41.6% of those same leaders acknowledge
+            that a portion of their investment isn&apos;t delivering its full
+            value. You can&apos;t hold both of those beliefs at once without a
+            lot of people lying to themselves.
           </p>
 
           <div className="blog-stat-row">
             <div className="blog-stat">
-              <div className="stat-number">26%</div>
+              <div className="stat-number">25%+</div>
               <div className="stat-label">of marketing budgets wasted in 2026</div>
             </div>
             <div className="blog-stat">
-              <div className="stat-number">70%</div>
-              <div className="stat-label">of leaders feel confident in results</div>
+              <div className="stat-number">70.4%</div>
+              <div className="stat-label">of leaders confident budgets work</div>
             </div>
             <div className="blog-stat">
               <div className="stat-number">41.6%</div>
-              <div className="stat-label">admit dashboards don&apos;t match revenue</div>
+              <div className="stat-label">admit spend isn&apos;t delivering full value</div>
             </div>
           </div>
 
@@ -310,9 +309,9 @@ export default async function Post() {
           </p>
           <p>
             <strong>Customer Acquisition Cost by channel</strong> — not
-            blended total, split by channel. The average DTC CAC in 2026 is
-            $68-$84 depending on vertical. Beauty runs $90-$130. Electronics
-            hits $100-$377. If your CAC is trending up and LTV
+            blended total, split by channel. DTC CAC is up 40-60% since 2023
+            across the board, with beauty and electronics running well above
+            the blended average. If your CAC is trending up and LTV
             isn&apos;t keeping pace, you&apos;re going backward regardless of
             what your reach numbers say. A blended ROAS number hides which
             channel is dragging the average down.

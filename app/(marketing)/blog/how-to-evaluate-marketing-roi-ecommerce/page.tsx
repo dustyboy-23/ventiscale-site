@@ -55,7 +55,7 @@ const FAQ_DATA = [
   },
   {
     q: "What should the payback period be for an ecommerce brand?",
-    a: "Payback period should be under 12 months for a sustainable DTC brand. Under 6 months is healthy and gives you flexibility to reinvest in growth. Over 18 months means you are betting on long-term retention that may not materialize, especially with blended DTC CAC now running $68 to $84 on average and up 40 to 60% since 2023.",
+    a: "Payback period should be under 12 months for a sustainable DTC brand. Under 6 months is healthy and gives you flexibility to reinvest in growth. Over 18 months means you are betting on long-term retention that may not materialize, especially with blended DTC CAC up 40 to 60% since 2023.",
   },
   {
     q: "Why do agencies report ROAS instead of MER?",
@@ -246,9 +246,9 @@ export default async function Post() {
               <div className="stat-label">Meta CPM increase in 2025</div>
             </div>
             <div className="blog-stat">
-              <div className="stat-number">$68–84</div>
+              <div className="stat-number">40-60%</div>
               <div className="stat-label">
-                Average blended ecommerce CAC in 2026
+                Blended DTC CAC increase since 2023
               </div>
             </div>
           </div>

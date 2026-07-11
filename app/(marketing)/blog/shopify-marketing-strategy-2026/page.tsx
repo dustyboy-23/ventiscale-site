@@ -172,10 +172,11 @@ export default async function Post() {
 
         <div className="prose-blog">
           <p>
-            73% of Shopify stores never cross $10,000 a month in revenue. The
-            difference between that 73% and the ones that scale isn&apos;t
-            budget. The Shopify marketing strategy most stores run is one
-            channel with no system behind it. That&apos;s the real problem.
+            Most Shopify stores never cross $10,000 a month in revenue. The
+            difference between those stores and the ones that scale
+            isn&apos;t budget. The Shopify marketing strategy most stores run
+            is one channel with no system behind it. That&apos;s the real
+            problem.
           </p>
           <p>
             A real stack means four channels working together. Organic pulls in
@@ -289,19 +290,11 @@ export default async function Post() {
           <div className="blog-callout">
             <div className="callout-label">Key insight</div>
             <p>
-              AI-driven search traffic, from ChatGPT, Perplexity, and Google&apos;s
-              AI Overviews, converts 31% higher than traditional organic traffic
-              according to{" "}
-              <a
-                href="https://www.omnisend.com/blog/digital-marketing-statistics/"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                Omnisend&apos;s 2026 marketing statistics report
-              </a>
-              . Stores with FAQ schema markup and clear, specific product content
-              are getting cited by AI engines. That&apos;s a new traffic channel
-              most stores aren&apos;t optimizing for yet.
+              AI-generated summaries, like Google&apos;s AI Overviews, now show
+              up in a meaningful share of searches, and that share is growing
+              fast. Stores with FAQ schema markup and clear, specific product
+              content are getting cited by AI engines. That&apos;s a new
+              traffic channel most stores aren&apos;t optimizing for yet.
             </p>
           </div>
 
@@ -386,9 +379,10 @@ export default async function Post() {
             that ROAS drops. Another reason to build the email layer first.
           </p>
           <p>
-            TikTok Shop is the channel worth watching. It grew 87.3% year over
-            year and projects $23 billion in US sales in 2026. For ecommerce
-            brands selling to consumers under 40,{" "}
+            TikTok Shop is the channel worth watching. It grew 68-84% year
+            over year depending on the measurement window and is projected to
+            hit $23 billion in US sales in 2026. For ecommerce brands selling
+            to consumers under 40,{" "}
             <Link href="/blog/ecommerce-customers-without-ad-budget">
               TikTok CPMs run 40-50% cheaper than Facebook
             </Link>{" "}

@@ -394,8 +394,9 @@ export default async function Post() {
               >
                 Ringly.io&apos;s 2026 ecommerce SEO research
               </a>
-              , stores with fully validated Product and AggregateRating schema
-              see 20&ndash;28% higher CTR on targeted product pages.
+              , pages with schema markup see 20&ndash;40% higher click-through
+              rates, and rich results (the kind star ratings and price badges
+              create) see CTR gains as high as 82% over standard listings.
             </p>
           </div>
 

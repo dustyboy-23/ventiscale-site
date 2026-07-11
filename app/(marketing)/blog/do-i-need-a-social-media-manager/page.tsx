@@ -230,9 +230,10 @@ export default async function Post() {
           <h2 id="posting-consistently">1. Are you posting at least 5 times a week?</h2>
           <p>
             Not 5 times when you feel inspired. Five times every single week. The
-            algorithm rewards consistency above everything else. Brands posting 5+
-            times per week see 2.5x higher conversion from social traffic compared to
-            those posting once or twice.
+            algorithm rewards consistency above everything else. Brands posting 5-7
+            times per week consistently outperform brands posting once or twice on
+            reach and conversion from social traffic, and posting fewer than 3 times
+            a week shows a sharp drop-off.
           </p>
           <p>
             Most small business owners know this. They also know they haven&apos;t

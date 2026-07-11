@@ -448,9 +448,10 @@ export default async function PillarPage() {
 
           <h2>Channel 1: Email and flows</h2>
           <p>
-            Email is the highest-ROI channel in ecommerce. Klaviyo data
-            shows the average ecom store earns $36 for every $1 spent on
-            email. AI marketing in email means: welcome series, abandoned
+            Email is the highest-ROI channel in ecommerce. Industry-wide
+            data puts average email marketing ROI around $36-42 for every
+            $1 spent, with ecommerce brands on the higher end of that
+            range. AI marketing in email means: welcome series, abandoned
             cart sequences, post-purchase flows, winback campaigns,
             browse abandonment, and broadcast campaigns.
           </p>
@@ -478,11 +479,12 @@ export default async function PillarPage() {
           </p>
           <p>
             The 2026 reality is that AI search (ChatGPT, Perplexity,
-            Google AI Overviews) now handles 12-18% of English-language
-            informational queries. That means content optimized for AI
+            Google AI Overviews) now handles roughly 15-20% of
+            informational query volume. That means content optimized for AI
             citation matters as much as content optimized for traditional
-            search. Comparison-format content gets 32.5% of AI citations
-            specifically. This pillar page is itself an example.
+            search. Comparison-format content leads AI citations at 32.5%,
+            per Frase&apos;s content-format analysis. This pillar page is
+            itself an example.
           </p>
           <p>
             The economics of content marketing for ecommerce:

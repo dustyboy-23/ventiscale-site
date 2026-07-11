@@ -42,15 +42,15 @@ const IMAGE_URL = `https://www.ventiscale.com${IMAGE}`;
 const FAQ_DATA = [
   {
     q: "When should I send a review request email for a Shopify order?",
-    a: "Send your review request 7-10 days after delivery confirmation for physical products. This gives customers time to receive and use the item while the experience is fresh. Response rates drop below 2% after 30 days. For digital products, 2-3 days after purchase is the sweet spot.",
+    a: "Send your review request 7-10 days after delivery confirmation for physical products. This gives customers time to receive and use the item while the experience is fresh. Response rates fall to single digits after 30 days. For digital products, 2-3 days after purchase is the sweet spot.",
   },
   {
     q: "What is the best free Shopify review app?",
-    a: "Judge.me is the best free Shopify review app for most stores. The free plan includes unlimited automated review request emails, photo reviews, Google Rich Snippets schema, and a 98% pass rate on Google's Rich Results Test. Shopify's built-in Product Reviews app does not send automated emails, which is a critical limitation for growing your review count.",
+    a: "Judge.me is the best free Shopify review app for most stores. The free plan includes unlimited automated review request emails, photo reviews, and Google Rich Snippets schema that's eligible for star ratings in search results out of the box. Shopify's built-in Product Reviews app does not send automated emails, which is a critical limitation for growing your review count.",
   },
   {
     q: "Can I offer a discount in exchange for a Shopify product review?",
-    a: "Yes, you can offer an incentive for leaving a review, but you cannot tie the incentive to a positive review specifically. Offering 10-15% off for any photo review is FTC-compliant as long as you don't condition the discount on star rating. Stores using photo review incentives see 4x higher response rates than text-only requests.",
+    a: "Yes, you can offer an incentive for leaving a review, but you cannot tie the incentive to a positive review specifically. Offering 10-15% off for any photo review is FTC-compliant as long as you don't condition the discount on star rating. Product pages with photo or video reviews convert at roughly 4x the rate of text-only reviews, which is why the photo incentive is worth the discount cost.",
   },
   {
     q: "How many reviews does a Shopify product need to lift conversions?",
@@ -58,7 +58,7 @@ const FAQ_DATA = [
   },
   {
     q: "Why aren't my review request emails getting responses?",
-    a: "The most common reason is timing. If you're sending review requests 30+ days after purchase, most customers have forgotten the order. Move the send window to 7-10 days post-delivery. The second most common reason is the subject line. Generic 'Please review your order' emails see 1-3% open rates. Personalized subject lines referencing the specific product name hit 18-25% open rates.",
+    a: "The most common reason is timing. If you're sending review requests 30+ days after purchase, most customers have forgotten the order. Move the send window to 7-10 days post-delivery. The second most common reason is the subject line. Generic 'Please review your order' emails consistently underperform. Personalized subject lines referencing the specific product name can lift open rates by 50% or more.",
   },
 ];
 
@@ -230,9 +230,10 @@ export default async function Post() {
               Capital One Shopping&apos;s 2026 online review research
             </a>
             , visitors who interact with reviews convert 102.4% higher than
-            average. 40% of shoppers refuse to buy a product with no reviews at
-            all. And that conversion lift compounds as you add more reviews per
-            product.
+            average. Separate research puts the number of shoppers who flatly
+            won&apos;t buy a product with zero reviews at 44%, higher still for
+            younger buyers. That conversion lift compounds as you add more
+            reviews per product.
           </p>
 
           <div className="blog-stat-row">
@@ -307,9 +308,10 @@ export default async function Post() {
           <h2>Step 2: Subject lines that get opened</h2>
           <p>
             Generic subject lines kill your open rate before the email has a
-            chance. &quot;Please review your recent order&quot; gets 1-3% open
-            rates. Personalized subject lines referencing the specific product
-            hit 18-25%.
+            chance. &quot;Please review your recent order&quot; reads like
+            every other automated email in the inbox. Personalized subject
+            lines referencing the specific product can lift open rates by 50%
+            or more over generic ones.
           </p>
           <p>What works:</p>
           <ul>
@@ -385,9 +387,10 @@ export default async function Post() {
           <p>
             If your product and post-purchase experience are strong, you
             don&apos;t need a discount at all. A well-timed, personal email at
-            day 8 post-delivery to a satisfied customer can hit 15-20% review
-            conversion without any offer. Get the timing and subject line right
-            first. Add the incentive if response rates are still low.
+            day 8 post-delivery to a satisfied customer can convert a
+            meaningful share of buyers into reviewers without any offer. Get
+            the timing and subject line right first. Add the incentive if
+            response rates are still low.
           </p>
 
           <hr className="blog-divider" />
@@ -407,11 +410,11 @@ export default async function Post() {
           <p>
             <strong>Judge.me (free plan):</strong> Best for stores under $1M
             GMV. Unlimited automated review request emails. Photo and video
-            reviews. Google Rich Snippets with a 98% pass rate on
-            Google&apos;s Rich Results Test. Clean theme integration on every
-            major Shopify theme. There&apos;s almost no reason to pay for a
-            review app at this stage when Judge.me&apos;s free plan covers
-            everything.
+            reviews. Google Rich Snippets schema built in, so star ratings are
+            eligible to show in search results out of the box. Clean theme
+            integration on every major Shopify theme. There&apos;s almost no
+            reason to pay for a review app at this stage when Judge.me&apos;s
+            free plan covers everything.
           </p>
           <p>
             <strong>Loox ($9+/mo):</strong> Best for visual brands between $1-5M

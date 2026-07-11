@@ -390,10 +390,12 @@ export default async function Post() {
           <div className="blog-callout">
             <div className="callout-label">Key insight</div>
             <p>
-              Brands using all four segment types generate 2.4x more email
-              revenue per subscriber than brands sending non-segmented campaigns,
-              according to 2026 Klaviyo benchmarks. The gap between segmented and
-              unsegmented senders has widened every year since 2022.
+              Klaviyo&apos;s 2026 segmentation benchmark report (2.5 billion
+              emails analyzed) found segmented campaigns generate roughly 3x
+              higher earnings per recipient than non-segmented sends, plus
+              higher open and click rates on top of that. The gap between
+              segmented and unsegmented senders has widened every year since
+              2022.
             </p>
           </div>
 

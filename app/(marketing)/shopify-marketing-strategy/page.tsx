@@ -349,8 +349,8 @@ export default async function PillarPage() {
           <p>
             <strong>AI search optimization.</strong> ChatGPT, Perplexity, and
             Google AI Overviews now handle 12-18% of English-language queries.
-            Comparison content gets 32.5% of AI citations. Add comparison-format
-            articles to your content plan. We covered the full GEO playbook
+            Comparison-format content earns a disproportionate share of AI
+            citations. Add comparison-format articles to your content plan. We covered the full GEO playbook
             at{" "}
             <Link href="/blog/ai-cutting-marketing-costs">
               AI cut my marketing costs 60%

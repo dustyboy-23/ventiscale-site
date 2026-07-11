@@ -291,10 +291,12 @@ export default async function Post() {
             brand into the average ecommerce voice.
           </p>
           <p>
-            Klaviyo&apos;s data shows brand-consistent email content lifts open
-            rates 18-22% over generic templated content. Social engagement
-            shows similar deltas. The compounding effect over 6-12 months is
-            often the difference between a brand that grows and one that plateaus.
+            Personalized, targeted email content consistently outperforms
+            generic templated sends &mdash; Litmus has measured dynamic
+            personalization lifting open rates by roughly 26% over static
+            templates. Brand-consistent, non-generic copy plays into that
+            same effect. The compounding effect over 6-12 months is often the
+            difference between a brand that grows and one that plateaus.
           </p>
 
           <h2>What we built at Venti Scale</h2>

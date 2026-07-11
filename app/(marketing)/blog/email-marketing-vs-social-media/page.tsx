@@ -55,7 +55,7 @@ const FAQ_DATA = [
   },
   {
     q: "Do small businesses need both email marketing and social media?",
-    a: "Yes. Social media and email marketing serve different stages of the customer journey. Social builds awareness and trust with people who don't know you yet. Email converts and retains people who already do. Businesses running both channels see 3x higher customer lifetime value than those relying on one channel alone.",
+    a: "Yes. Social media and email marketing serve different stages of the customer journey. Social builds awareness and trust with people who don't know you yet. Email converts and retains people who already do. Businesses running multiple coordinated channels consistently see higher customer lifetime value than those relying on one channel alone.",
   },
 ];
 
@@ -214,18 +214,13 @@ export default async function Post() {
 
           <h2 id="email-math">The math on email marketing that most people ignore</h2>
           <p>
-            Email marketing returns $42 for every $1 spent, according to{" "}
-            <a
-              href="https://www.emailmonday.com/email-marketing-roi-statistics/"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              industry-wide ROI data from Emailmonday
-            </a>
-            . That&apos;s not $42 for a good campaign or a lucky week. That&apos;s
-            the average across industries. Compare that to $2.80 for social
-            media ads or $1.35 for display ads, and the gap becomes hard to
-            ignore.
+            Email marketing returns $36-$42 for every $1 spent, a figure that
+            traces back to the Data & Marketing Association and shows up
+            consistently across industry benchmark reports year after year.
+            That&apos;s not $42 for a good campaign or a lucky week. That&apos;s
+            the average across industries. Compare that to roughly $2.80 for
+            social media ads or $1.35 for display ads, and the gap becomes hard
+            to ignore.
           </p>
           <p>
             More striking: email acquires 40 times more customers than Facebook
@@ -299,10 +294,6 @@ export default async function Post() {
               <div className="stat-number">3-4%</div>
               <div className="stat-label">Instagram organic reach per post</div>
             </div>
-            <div className="blog-stat">
-              <div className="stat-number">25-30%</div>
-              <div className="stat-label">TikTok reach per post</div>
-            </div>
           </div>
 
           <div className="blog-warning">
@@ -326,10 +317,12 @@ export default async function Post() {
             horizon than most owners realize.
           </p>
           <p>
-            Notice the platform difference in those reach numbers. TikTok
-            reaches 25-30% of your followers per post, which is roughly 10x
-            better than Facebook or Instagram. If organic reach matters to your
-            strategy and you haven&apos;t committed to one platform yet,{" "}
+            Platform algorithms differ a lot here. TikTok&apos;s For You feed
+            distributes content based on engagement signals rather than
+            follower count, so a good post can reach far beyond your existing
+            followers in a way Facebook and Instagram rarely do anymore. If
+            organic reach matters to your strategy and you haven&apos;t
+            committed to one platform yet,{" "}
             <Link href="/blog/which-social-media-platform-for-business">
               picking the right social platform for your business
             </Link>{" "}
@@ -393,11 +386,11 @@ export default async function Post() {
           <div className="blog-callout">
             <div className="callout-label">Key insight</div>
             <p>
-              Businesses using both email and social media see 3x higher
-              customer lifetime value than those relying on a single channel.
-              The combination works because each channel covers a different
-              stage of the buyer journey. Remove either one and the funnel
-              leaks.
+              Businesses using both email and social media consistently see
+              higher customer lifetime value than those relying on a single
+              channel. The combination works because each channel covers a
+              different stage of the buyer journey. Remove either one and the
+              funnel leaks.
             </p>
           </div>
 

@@ -258,8 +258,8 @@ export default async function Post() {
 
           <div className="blog-stat-row">
             <div className="blog-stat">
-              <div className="stat-number">$1.3T</div>
-              <div className="stat-label">Social commerce by 2026</div>
+              <div className="stat-number">$2.1T</div>
+              <div className="stat-label">Global social commerce market in 2026</div>
             </div>
             <div className="blog-stat">
               <div className="stat-number">59%</div>
@@ -289,16 +289,10 @@ export default async function Post() {
           <div className="blog-callout">
             <div className="callout-label">Key insight</div>
             <p>
-              According to{" "}
-              <a
-                href="https://www.shopify.com/blog/social-commerce"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                Shopify&apos;s social commerce research
-              </a>
-              , brands posting 5+ times per week see 2.5x higher conversion rates from
-              social traffic compared to brands posting 1-2 times per week.
+              Brands that post 5+ times per week consistently outperform brands
+              posting once or twice a week on social-driven conversion. The
+              algorithm rewards accounts that show up, and so does the
+              audience that gets used to seeing you.
             </p>
           </div>
 

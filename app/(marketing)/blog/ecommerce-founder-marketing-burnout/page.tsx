@@ -239,18 +239,11 @@ export default async function Post() {
             they owe. A debt that compounds every day they don&apos;t pay it.
           </p>
           <p>
-            Research compiled by{" "}
-            <a
-              href="https://www.postcardmania.com/blog/small-business-marketing-statistics-definitive-guide/"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              PostcardMania&apos;s 2026 marketing statistics report
-            </a>{" "}
-            found that small business owners spend an average of 20 hours per
-            week on marketing tasks. At month 9, you&apos;re usually running a
-            business that needs 40+ hours of operational attention. The
-            marketing hours have to come from somewhere.
+            A Constant Contact survey found that small business owners spend
+            an average of 20 hours per week on marketing tasks. At month 9,
+            you&apos;re usually running a business that needs 40+ hours of
+            operational attention. The marketing hours have to come from
+            somewhere.
           </p>
           <p>
             They come from evenings. Weekends. The time you used to spend

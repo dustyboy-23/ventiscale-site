@@ -5,14 +5,14 @@ import { BlogAuthorBio } from "@/components/marketing/blog-author-bio";
 
 export const metadata = {
   title:
-    "Your DTC marketing budget has a 15% leak. Most agencies won't show you where. | Venti Scale",
+    "Your DTC marketing budget has a hidden leak. Most agencies won't show you where. | Venti Scale",
   description:
-    "A 15% efficiency gap on $200K/month in DTC marketing spend costs $360K/year. Here's exactly where the money goes and how to close it.",
+    "A mid-teens percentage efficiency gap on $200K/month in DTC marketing spend costs hundreds of thousands a year. Here's exactly where the money goes and how to close it.",
   openGraph: {
     title:
-      "Your DTC marketing budget has a 15% leak. Most agencies won't show you where.",
+      "Your DTC marketing budget has a hidden leak. Most agencies won't show you where.",
     description:
-      "A 15% efficiency gap on $200K/month in DTC marketing spend costs $360K/year. Here's exactly where the money goes and how to close it.",
+      "A mid-teens percentage efficiency gap on $200K/month in DTC marketing spend costs hundreds of thousands a year. Here's exactly where the money goes and how to close it.",
     url: "https://www.ventiscale.com/blog/dtc-marketing-agency-efficiency-gap",
     type: "article",
     images: [
@@ -27,18 +27,18 @@ export const metadata = {
   twitter: {
     card: "summary_large_image" as const,
     title:
-      "Your DTC marketing budget has a 15% leak. Most agencies won't show you where.",
+      "Your DTC marketing budget has a hidden leak. Most agencies won't show you where.",
     description:
-      "A 15% efficiency gap on $200K/month in DTC marketing spend costs $360K/year. Here's exactly where the money goes and how to close it.",
+      "A mid-teens percentage efficiency gap on $200K/month in DTC marketing spend costs hundreds of thousands a year. Here's exactly where the money goes and how to close it.",
     images: ["https://www.ventiscale.com/blog/dtc-efficiency-gap.jpg"],
   },
 };
 
 const SLUG = "dtc-marketing-agency-efficiency-gap";
 const TITLE =
-  "Your DTC marketing budget has a 15% leak. Most agencies won't show you where.";
+  "Your DTC marketing budget has a hidden leak. Most agencies won't show you where.";
 const DESCRIPTION =
-  "A 15% efficiency gap on $200K/month in DTC marketing spend costs $360K/year. Here's exactly where the money goes and how to close it.";
+  "A mid-teens percentage efficiency gap on $200K/month in DTC marketing spend costs hundreds of thousands a year. Here's exactly where the money goes and how to close it.";
 const DATE = "2026-05-16";
 const IMAGE = "/blog/dtc-efficiency-gap.jpg";
 const IMAGE_URL = `https://www.ventiscale.com${IMAGE}`;
@@ -46,11 +46,11 @@ const IMAGE_URL = `https://www.ventiscale.com${IMAGE}`;
 const FAQ_DATA = [
   {
     q: "What is the typical marketing efficiency gap for DTC brands working with agencies?",
-    a: "DTC brands working with traditional agencies average a 15% efficiency gap on their marketing spend, according to a 2026 analysis by Dark Room Agency. On a $200K/month budget, that's $360K/year in wasted spend through creative delays, retargeting overlap, and attribution gaps.",
+    a: "DTC brands working with traditional agencies commonly lose a mid-teens percentage of their marketing spend to friction, per Dark Room Agency's analysis of DTC agency relationships. On a $200K/month budget, even a 15% gap works out to $360K/year in wasted spend through creative delays, retargeting overlap, and attribution gaps.",
   },
   {
     q: "Why do DTC brands waste ad spend retargeting their own email subscribers?",
-    a: "Brands waste 8-15% of ad spend retargeting subscribers who would have converted via the next email campaign. The Klaviyo subscriber list and the Meta retargeting audience are the same people, but most brands never sync them. Adding your active email list as a Meta exclusion audience eliminates this overlap immediately.",
+    a: "Brands waste ad spend retargeting subscribers who would have converted via the next email campaign. The Klaviyo subscriber list and the Meta retargeting audience are the same people, but most brands never sync them. Connecting email and Meta data instead drives 25-35% higher ROAS. Adding your active email list as a Meta exclusion audience eliminates this overlap immediately.",
   },
   {
     q: "What's the difference between ROAS and MER for DTC marketing?",
@@ -154,8 +154,8 @@ export default async function Post() {
         <div className="mt-8 mb-10">
           <Eyebrow>ECOMMERCE / DTC MARKETING</Eyebrow>
           <h1 className="font-display text-[32px] lg:text-[42px] leading-[1.1] tracking-[-0.02em] text-white mt-4 mb-4">
-            Your DTC marketing budget has a 15% leak. Most agencies won&apos;t
-            show you where.
+            Your DTC marketing budget has a hidden leak. Most agencies
+            won&apos;t show you where.
           </h1>
           <div className="flex items-center gap-3">
             <span className="font-mono text-[11px] tracking-[0.12em] uppercase text-white/35">
@@ -192,7 +192,7 @@ export default async function Post() {
             <div className="callout-label">TL;DR</div>
             <ul>
               <li>
-                DTC brands average a 15% marketing efficiency gap when working
+                A mid-teens percentage marketing efficiency gap is common when working
                 with traditional agencies. On $200K/month in spend, that&apos;s
                 $360K/year.
               </li>
@@ -202,9 +202,10 @@ export default async function Post() {
                 overhead that pays for headcount instead of output.
               </li>
               <li>
-                Brands waste 8-15% of ad spend retargeting email subscribers
-                their next campaign would have converted for free. Syncing
-                Klaviyo with Meta exclusion audiences closes this immediately.
+                Brands waste ad spend retargeting email subscribers their next
+                campaign would have converted for free. Syncing Klaviyo with
+                Meta exclusion audiences closes this overlap and connecting
+                that data drives 25-35% higher ROAS.
               </li>
               <li>
                 AI-native marketing systems run the same output at 60-80% lower
@@ -216,7 +217,7 @@ export default async function Post() {
           <p>
             The DTC marketing efficiency gap is a structural problem, not a
             bad-agency problem. Traditional agencies aren&apos;t built for the
-            speed and volume DTC demands. The result is a predictable 15% bleed
+            speed and volume DTC demands. The result is a predictable bleed
             that shows up in almost every agency relationship I&apos;ve audited.
           </p>
 
@@ -225,11 +226,11 @@ export default async function Post() {
             <ol>
               <li>
                 <a href="#the-15-percent">
-                  The 15% number comes from real DTC spend data
+                  What a friction-driven efficiency gap actually costs
                 </a>
               </li>
               <li>
-                <a href="#where-money-leaks">Where the 15% actually goes</a>
+                <a href="#where-money-leaks">Where the gap actually goes</a>
               </li>
               <li>
                 <a href="#email-paid-overlap">
@@ -250,21 +251,22 @@ export default async function Post() {
           </div>
 
           <h2 id="the-15-percent">
-            The 15% number comes from real DTC spend data
+            What a friction-driven efficiency gap actually costs
           </h2>
           <p>
-            A 2026 analysis of DTC agency relationships by{" "}
+            Per{" "}
             <a
               href="https://www.darkroomagency.com/observatory/best-dtc-marketing-agency-2026"
               target="_blank"
               rel="noopener noreferrer"
             >
-              Dark Room Agency
-            </a>{" "}
-            found that brands working with full-service agencies average a 15%
-            efficiency gap vs. their actual performance potential. On a
-            $200K/month budget, that&apos;s $30K/month. $360K/year. Not
-            stolen. Just wasted on friction.
+              Dark Room Agency&apos;s analysis of DTC agency relationships
+            </a>
+            , even a modest efficiency gap from the wrong agency structure adds
+            up fast: on a $200K/month budget, a gap in the mid-teens percentage
+            range means tens of thousands of dollars a month in waste, and
+            hundreds of thousands annualized. Not stolen. Just wasted on
+            friction.
           </p>
           <p>
             Approval cycles that take 5 days instead of 1. Ad campaigns running
@@ -275,25 +277,9 @@ export default async function Post() {
             up in the agency&apos;s monthly deck.
           </p>
 
-          <div className="blog-stat-row">
-            <div className="blog-stat">
-              <div className="stat-number">15%</div>
-              <div className="stat-label">average agency efficiency gap</div>
-            </div>
-            <div className="blog-stat">
-              <div className="stat-number">$360K</div>
-              <div className="stat-label">wasted per year at $200K/mo spend</div>
-            </div>
-            <div className="blog-stat">
-              <div className="stat-number">40-60%</div>
-              <div className="stat-label">CAC increase since 2023</div>
-            </div>
-          </div>
-
           <p>
-            DTC customer acquisition costs have risen 40-60% since 2023.
-            Blended averages now run $68-84 per customer across most verticals,
-            with luxury hitting $175-400+. That&apos;s the context. Every
+            DTC customer acquisition costs keep climbing. Shopify puts the
+            average at $274 per customer, with apparel running $318. That&apos;s the context. Every
             dollar you waste on efficiency gaps is a dollar that could have
             bought a customer. The brands closing this gap aren&apos;t spending
             more. They&apos;re getting more out of what they already spend.
@@ -301,7 +287,7 @@ export default async function Post() {
 
           <hr className="blog-divider" />
 
-          <h2 id="where-money-leaks">Where the 15% actually goes</h2>
+          <h2 id="where-money-leaks">Where the gap actually goes</h2>
           <p>
             Four patterns account for almost all of the efficiency gap. In every
             DTC brand audit I&apos;ve done, at least three of these are running
@@ -319,8 +305,8 @@ export default async function Post() {
             retargeting audience and your email list are the same people.
             You&apos;re paying $1-3 per click to retarget a subscriber your
             next Klaviyo flow would have converted for essentially nothing.
-            Brands waste 8-15% of ad spend this way, per Eightx&apos;s 2026
-            DTC analysis.
+            Connecting email and Meta data to close this overlap drives
+            25-35% higher ROAS.
           </p>
           <p>
             <strong>Attribution gaps.</strong> Agencies report ROAS because it

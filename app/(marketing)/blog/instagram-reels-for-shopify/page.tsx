@@ -51,7 +51,7 @@ const FAQ_DATA = [
   },
   {
     q: "Do Instagram Reels actually drive sales for Shopify brands?",
-    a: "Yes. 79% of Gen Z shoppers have made a purchase after watching a Reel, and 48% of users take follow-up action after watching a product video. The key is format. Product demo and before/after Reels convert because they show the outcome. Talking-head intros with logo screens do not.",
+    a: "Yes. Roughly half of Gen Z shoppers report buying something after watching a short-form video like a Reel, and most consumers say video content has influenced a purchase decision. The key is format. Product demo and before/after Reels convert because they show the outcome. Talking-head intros with logo screens do not.",
   },
   {
     q: "How do I get customer reaction videos for Instagram Reels?",
@@ -198,8 +198,9 @@ export default async function Post() {
                 cadence.
               </li>
               <li>
-                79% of Gen Z shoppers have purchased a product after watching a Reel.
-                Format determines whether you capture that intent or lose it.
+                Roughly half of Gen Z shoppers say they&apos;ve purchased a
+                product after watching a Reel. Format determines whether you
+                capture that intent or lose it.
               </li>
               <li>
                 All 4 formats can be batch-shot in 90 minutes. No studio needed.
@@ -281,7 +282,7 @@ export default async function Post() {
               <div className="stat-label">Higher CTR for Reels ads vs. static</div>
             </div>
             <div className="blog-stat">
-              <div className="stat-number">79%</div>
+              <div className="stat-number">~50%</div>
               <div className="stat-label">Of Gen Z buyers acted after a Reel</div>
             </div>
           </div>
@@ -376,16 +377,10 @@ export default async function Post() {
           <p>
             This is the highest-trust format in ecommerce video. When someone who
             wasn&apos;t paid to say good things says good things, it carries weight
-            that no brand content can replicate. According to{" "}
-            <a
-              href="https://sproutsocial.com/insights/instagram-stats/"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              Sprout Social&apos;s 2025 Instagram research
-            </a>
-            , user-generated content earns 3x higher click-through rates than
-            brand-produced content on the same platform.
+            that no brand content can replicate. UGC-style ads commonly earn
+            roughly 4x the click-through rate of polished, professionally
+            produced brand creative, and Nielsen has found the large majority
+            of consumers trust UGC more than traditional advertising.
           </p>
           <p>
             Getting it: email your last 50 customers with a simple ask.
@@ -443,8 +438,8 @@ export default async function Post() {
 
           <div className="blog-stat-row">
             <div className="blog-stat">
-              <div className="stat-number">48%</div>
-              <div className="stat-label">Of users act after watching a product video</div>
+              <div className="stat-number">85%</div>
+              <div className="stat-label">Of consumers say video convinced them to buy</div>
             </div>
             <div className="blog-stat">
               <div className="stat-number">$6.20</div>

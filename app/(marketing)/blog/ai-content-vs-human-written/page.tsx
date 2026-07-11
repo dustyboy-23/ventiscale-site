@@ -19,11 +19,11 @@ const IMAGE_URL = `https://www.ventiscale.com${IMAGE}`;
 const FAQ_DATA = [
   {
     q: "Does AI content rank on Google?",
-    a: "Yes, AI content reaches Google's top 10 at a 57% rate, nearly identical to human content at 58% (Semrush, 42,000 posts). The meaningful gap is at position #1, where human content is 8x more likely to land. On long-tail, low-competition keywords the difference nearly disappears. On competitive head terms, human writing wins by a significant margin.",
+    a: "Yes. AI-flagged content shows up throughout Google's top 10 (Semrush's 42,000-post study), and the gap between AI and human content narrows a lot from position 5 downward. The meaningful gap is at position #1, where human content is 8x more likely to land (80% human-written vs 9% AI-generated). On long-tail, low-competition keywords the difference nearly disappears. On competitive head terms, human writing wins by a significant margin.",
   },
   {
     q: "Can readers tell if content is AI-written?",
-    a: "In blind tests, 84% of readers can't distinguish AI content from human content. Detection isn't the main risk. The bigger finding: 52% of readers disengage once they learn content is AI-generated, even when the quality is unchanged. The trust contract breaks before the quality does. Disclosure matters more than detection.",
+    a: "In blind tests, most readers struggle to reliably distinguish AI content from human content, and some studies even show readers preferring the AI version when they don't know which is which. Detection isn't the main risk. The bigger finding: roughly half of readers report disengaging once they learn content is AI-generated, even when the quality is unchanged. The trust contract breaks before the quality does. Disclosure matters more than detection.",
   },
   {
     q: "Does AI content perform better on social media?",
@@ -194,17 +194,18 @@ export default async function Post() {
             <ul>
               <li>
                 Human content is 8x more likely to rank #1 on competitive
-                keywords. At positions 2-10, AI and human perform nearly
-                identically (57% vs 58% in top 10 per Semrush, 42,000 posts).
+                keywords (Semrush, 42,000 posts: 80% human-written vs 9%
+                AI-generated at position 1). The gap narrows sharply from
+                position 5 down.
               </li>
               <li>
                 AI-generated social posts outperform human posts in engagement.
                 Different medium, different rules.
               </li>
               <li>
-                84% of readers can&apos;t detect AI content in blind tests. 52%
-                disengage once they find out. The risk isn&apos;t detection
-                — it&apos;s disclosure.
+                Most readers can&apos;t reliably detect AI content in blind
+                tests, and roughly half disengage once they find out it&apos;s
+                AI. The risk isn&apos;t detection — it&apos;s disclosure.
               </li>
               <li>
                 For ecommerce brands: AI for volume (social, email, product
@@ -215,15 +216,15 @@ export default async function Post() {
           </div>
 
           <p>
-            AI content reaches Google&apos;s top 10 at a 57% rate. Human
-            content at 58%. The gap closes almost entirely at position #1,
-            where human writing is 8x more likely to win. On social, AI posts
-            outperform. The line isn&apos;t AI vs human written. It&apos;s
-            channel, format, and trust contract.
+            AI-flagged content shows up throughout Google&apos;s top 10, and
+            the gap with human content narrows sharply below position #1
+            &mdash; where human writing is 8x more likely to win. On social,
+            AI posts outperform. The line isn&apos;t AI vs human written.
+            It&apos;s channel, format, and trust contract.
           </p>
 
           <ComparisonMethodology
-            intro="Yes, I&apos;ve run both for ecommerce clients. The data below comes from real campaigns I&apos;ve managed alongside the Semrush 42,000-post study — the largest head-to-head published to date — and NP Digital&apos;s 6-month SERP tracking of 20,000 URLs."
+            intro="Yes, I&apos;ve run both for ecommerce clients. The data below comes from real campaigns I&apos;ve managed alongside the Semrush 42,000-post study — the largest head-to-head published to date — and NP Digital&apos;s 5-month traffic study across 744 articles on 68 websites."
             criteria={[
               "SEO performance by position — position-1 and position-8 are completely different numbers",
               "Social media engagement rates — AI and search behave differently here",
@@ -241,13 +242,13 @@ export default async function Post() {
               "10-20x faster production: a 1,000-word post in minutes, not 3-4 hours",
               "AI social posts outperform humans in likes, comments, shares (U of Minnesota, GPT-4 study)",
               "Email A/B testing at real scale — 10 subject line variants where humans produce 2",
-              "57% top-10 rate in Google, nearly identical to human content's 58% — gap lives at position-1, not page-1",
+              "Shows up throughout Google's top 10 — the real gap vs human content lives at position-1, not page-1",
               "Consistent brand voice when trained on your content, not generic templates",
             ]}
             cons={[
               "Human content 8x more likely to rank #1 on competitive head terms (Semrush, 42,000 posts)",
               "Generic AI sounds like every competitor's tool — same training data, same output",
-              "52% reader disengagement after disclosure on trust-sensitive content",
+              "Roughly half of readers disengage after disclosure on trust-sensitive content",
               "No cultural antenna — AI works from training data, not real-time observation",
             ]}
             idealUseCase="You need daily social content, email flows, product descriptions, and FAQ pages at volume. Your 2-3 cornerstone SEO posts per week still come from a human."
@@ -281,11 +282,10 @@ export default async function Post() {
             number everyone quotes: human content is 8x more likely to rank #1.
           </p>
           <p>
-            Here&apos;s the number nobody quotes: AI and human content land in
-            Google&apos;s top 10 at almost identical rates. 57% for AI, 58% for
-            human.{" "}
+            Here&apos;s the number nobody quotes: from position 5 downward,
+            the gap between AI-flagged and human content narrows sharply.{" "}
             <em>
-              The gap is almost entirely at position #1. Not across page one.
+              The gap is sharpest at position #1, not across page one.
             </em>
           </p>
           <p>
@@ -293,11 +293,11 @@ export default async function Post() {
             time winning it.
           </p>
           <p>
-            NP Digital tracked 20,000 URLs for 6 months and found human posts
-            generated 5.44x more traffic over that period. The gap widened
-            specifically on competitive head terms, where position-1 gets 30%
-            of clicks and position-8 gets 3%. On long-tail, low-competition
-            keywords, the gap almost disappears.
+            NP Digital tracked 744 articles across 68 websites over 5 months
+            and found human-written posts generated 5.44x more traffic than
+            AI-generated posts by month 5. On long-tail, low-competition
+            keywords, the gap between AI and human content is much smaller
+            than on competitive head terms.
           </p>
           <p>
             That distinction matters for how you allocate effort. You
@@ -313,9 +313,9 @@ export default async function Post() {
               </div>
             </div>
             <div className="blog-stat">
-              <div className="stat-number">57% vs 58%</div>
+              <div className="stat-number">80% vs 9%</div>
               <div className="stat-label">
-                AI vs human in top 10 — nearly identical
+                Human vs AI-generated share of position-1 results
               </div>
             </div>
             <div className="blog-stat">
@@ -432,14 +432,16 @@ export default async function Post() {
             The disclosure problem nobody talks about
           </h2>
           <p>
-            84% of readers can&apos;t detect AI-written content in blind tests.
+            Most readers can&apos;t reliably pick out AI-written content in
+            blind tests, and in some studies they even prefer it once they
+            don&apos;t know which is which.
           </p>
           <p>So detection isn&apos;t the problem.</p>
           <p>Disclosure is.</p>
           <p>
-            Once readers know content is AI-written, 52% disengage. Not because
-            the quality dropped — it&apos;s still the same content. The trust
-            contract changed.
+            Once readers know content is AI-written, roughly half report
+            disengaging. Not because the quality dropped — it&apos;s still
+            the same content. The trust contract changed.
           </p>
           <p>
             This matters most in industries where credibility is the product:
@@ -470,27 +472,21 @@ export default async function Post() {
 
           <div className="blog-stat-row">
             <div className="blog-stat">
-              <div className="stat-number">84%</div>
+              <div className="stat-number">~52%</div>
               <div className="stat-label">
-                Readers who can&apos;t detect AI in blind tests
-              </div>
-            </div>
-            <div className="blog-stat">
-              <div className="stat-number">52%</div>
-              <div className="stat-label">
-                Disengagement rate after AI disclosure
+                Readers who say they disengage after AI disclosure
               </div>
             </div>
             <div className="blog-stat">
               <div className="stat-number">97%</div>
               <div className="stat-label">
-                Content marketers using AI in 2026
+                Content marketers planning to use AI in 2026
               </div>
             </div>
             <div className="blog-stat">
-              <div className="stat-number">62%</div>
+              <div className="stat-number">73%</div>
               <div className="stat-label">
-                High-performing teams using hybrid workflow
+                Top-performing teams combining AI with human writing
               </div>
             </div>
           </div>

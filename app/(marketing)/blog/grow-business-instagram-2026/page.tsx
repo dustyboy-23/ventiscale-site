@@ -308,10 +308,9 @@ export default async function Post() {
                 rel="noopener noreferrer"
               >
                 Buffer&apos;s 2026 Instagram posting frequency research
-              </a>{" "}
-              (analyzed 2 million posts), accounts that post Reels 4-5 times
-              per week see 2.3x more profile visits and 1.8x more link clicks
-              than accounts posting at lower frequency. Consistency compounds.
+              </a>
+              , posting 3-5 times weekly can boost reach per post by roughly
+              12% compared to sporadic posting. Consistency compounds.
             </p>
           </div>
 

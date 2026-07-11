@@ -437,7 +437,7 @@ export default async function Post() {
                 className="blog-related-card"
               >
                 <div className="related-title">
-                  AI marketing averages 171% ROI. Your agency retainer doesn&apos;t.
+                  AI marketing beats the agency retainer on ROI. Here&apos;s the math.
                 </div>
                 <div className="related-meta">7 min read</div>
               </Link>

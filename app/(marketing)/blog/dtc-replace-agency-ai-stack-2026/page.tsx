@@ -217,7 +217,7 @@ export default async function Post() {
             Agency retainers aren&apos;t priced by deliverable. They&apos;re priced by overhead: account managers, project coordinators, weekly strategy calls, quarterly business reviews, and the infrastructure to run all of it. The person actually writing your email or posting your content makes up a fraction of the bill.
           </p>
           <p>
-            DarkroomAgency&apos;s 2026 DTC report put it plainly: a $4,000/month budget spread across five channels means each channel gets roughly 20% of one person&apos;s attention. <em>That&apos;s maintenance mode. Not growth mode.</em> You&apos;re paying for presence, not performance.
+            The math is simple: a $4,000/month budget spread across five channels means each channel gets a thin sliver of one person&apos;s attention. <em>That&apos;s maintenance mode. Not growth mode.</em> You&apos;re paying for presence, not performance.
           </p>
           <p>
             The Enrich Labs case brand had 8-10 day content turnarounds. A campaign that should take four hours was taking almost two weeks by the time it cleared approval cycles. Every revision meant another round of feedback emails. Every email meant another three-day delay. Meanwhile their competitors shipped twice as much content at half the cost.
