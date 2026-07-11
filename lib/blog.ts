@@ -11,6 +11,18 @@ export interface BlogPost {
 
 export const posts: BlogPost[] = [
   {
+    slug: "dtc-blended-roas-ads-2026",
+    title:
+      "Your Meta ROAS looks great. Your blended ROAS is the problem.",
+    description:
+      "68% of DTC brands underestimate their real CAC by 20-40%. The reason: per-channel ROAS hides what you actually spend. Here's what blended ROAS shows instead.",
+    date: "2026-07-11",
+    author: "Dustin Gilmour",
+    readTime: "8 min",
+    tags: ["ecommerce", "DTC", "paid ads", "ROAS", "Meta ads", "Google ads", "AI marketing"],
+    image: "/blog/dtc-blended-roas-ads.jpg",
+  },
+  {
     slug: "ai-product-search-ecommerce-2026",
     title:
       "Shoppers are asking ChatGPT what to buy. Most DTC brands don't show up.",
