@@ -11,6 +11,18 @@ export interface BlogPost {
 
 export const posts: BlogPost[] = [
   {
+    slug: "dtc-multi-vendor-agency-gap-2026",
+    title:
+      "Your DTC marketing stack has three vendors and one gap nobody owns.",
+    description:
+      "Fragmented agency stacks are 20-30% less efficient than integrated models. Here's what the coordination gap between your paid media, email, and creative vendors actually costs.",
+    date: "2026-07-12",
+    author: "Dustin Gilmour",
+    readTime: "7 min",
+    tags: ["ecommerce", "DTC", "marketing agency", "agency alternatives", "multi-vendor", "AI marketing", "marketing efficiency"],
+    image: "/blog/dtc-multi-vendor-agency-gap.jpg",
+  },
+  {
     slug: "dtc-blended-roas-ads-2026",
     title:
       "Your Meta ROAS looks great. Your blended ROAS is the problem.",
