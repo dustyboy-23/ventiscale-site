@@ -7,7 +7,7 @@ export const metadata = {
   title:
     "Your DTC marketing stack has three vendors and one gap nobody owns. | Venti Scale",
   description:
-    "Fragmented agency stacks are 20-30% less efficient than integrated models. Here&apos;s what the coordination gap between your paid media, email, and creative vendors actually costs.",
+    "Multi-vendor marketing stacks lose 20-30% efficiency vs integrated models. Here's what the vendor coordination gap costs DTC brands.",
   openGraph: {
     title:
       "Your DTC marketing stack has three vendors and one gap nobody owns.",
