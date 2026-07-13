@@ -11,6 +11,18 @@ export interface BlogPost {
 
 export const posts: BlogPost[] = [
   {
+    slug: "dtc-ai-ad-creative-cost-2026",
+    title:
+      "Ad creative is $19/month now. Your agency is still charging retainer.",
+    description:
+      "New AI tools turn one product photo into UGC videos, cinematic ads, and static creatives in under 2 minutes. Here's what that means for DTC ad budgets.",
+    date: "2026-07-13",
+    author: "Dustin Gilmour",
+    readTime: "7 min",
+    tags: ["ecommerce", "DTC", "ad creative", "AI marketing", "agency alternatives", "Meta ads", "marketing budget"],
+    image: "/blog/dtc-ai-ad-creative-cost.jpg",
+  },
+  {
     slug: "dtc-multi-vendor-agency-gap-2026",
     title:
       "Your DTC marketing stack has three vendors and one gap nobody owns.",
