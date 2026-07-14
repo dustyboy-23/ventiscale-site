@@ -11,6 +11,18 @@ export interface BlogPost {
 
 export const posts: BlogPost[] = [
   {
+    slug: "klaviyo-autonomous-agent-cx-ecommerce-2026",
+    title:
+      "Klaviyo just became your CX team. Your agency didn't see this coming.",
+    description:
+      "Klaviyo's Customer Agent handles chat, email, text, and WhatsApp autonomously. Here's what that means for ecommerce brands still paying for separate CX tools.",
+    date: "2026-07-14",
+    author: "Dustin Gilmour",
+    readTime: "7 min",
+    tags: ["ecommerce", "DTC", "Klaviyo", "AI marketing", "customer service", "CX", "email marketing", "WhatsApp"],
+    image: "/blog/klaviyo-autonomous-agent-cx.jpg",
+  },
+  {
     slug: "dtc-ai-ad-creative-cost-2026",
     title:
       "Ad creative is $19/month now. Your agency is still charging retainer.",
