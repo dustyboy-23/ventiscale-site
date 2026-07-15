@@ -11,6 +11,18 @@ export interface BlogPost {
 
 export const posts: BlogPost[] = [
   {
+    slug: "dtc-top-performer-cac-gap-2026",
+    title:
+      "Your competitors have a 44% lower CAC. Here's what they figured out.",
+    description:
+      "The top 25% of DTC brands in competitive categories achieve 44% lower CAC than the average. Here's the 3-part system that separates them.",
+    date: "2026-07-15",
+    author: "Dustin Gilmour",
+    readTime: "7 min",
+    tags: ["ecommerce", "DTC", "CAC", "performance marketing", "AI marketing", "creative testing", "DTC benchmarks"],
+    image: "/blog/dtc-positioning-cac-strategy.jpg",
+  },
+  {
     slug: "klaviyo-autonomous-agent-cx-ecommerce-2026",
     title:
       "Klaviyo just became your CX team. Your agency didn't see this coming.",
