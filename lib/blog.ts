@@ -11,6 +11,17 @@ export interface BlogPost {
 
 export const posts: BlogPost[] = [
   {
+    slug: "dtc-marketing-in-house-ai-2026",
+    title: "DTC brands fired their agencies. AI made it finally work.",
+    description:
+      "70% of marketers have already moved work in-house. Glossier, Lush, Deux, and Public did it at scale. Here's why it's working now when it used to fail.",
+    date: "2026-07-16",
+    author: "Dustin Gilmour",
+    readTime: "7 min",
+    tags: ["ecommerce", "DTC", "marketing agency", "agency alternatives", "AI marketing", "in-house marketing"],
+    image: "/blog/dtc-marketing-in-house-ai.jpg",
+  },
+  {
     slug: "dtc-top-performer-cac-gap-2026",
     title:
       "Your competitors have a 44% lower CAC. Here's what they figured out.",
