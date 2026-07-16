@@ -170,9 +170,9 @@ export default async function Post() {
           <p>
             Glossier. Lush. Deux. Public. In 2026, some of the most-watched DTC
             brands took their marketing almost entirely in-house. The move
-            everyone said would fail — because in-house teams are expensive,
-            slow, and impossible to staff — is suddenly working. Something
-            changed. That something is AI.
+            everyone said would fail: too expensive, too slow, too hard to
+            staff. It&apos;s suddenly working. Something changed. That something
+            is AI.
           </p>
           <p>
             For years, &quot;going in-house&quot; was a threat founders made
@@ -212,7 +212,7 @@ export default async function Post() {
             The DTC in-house marketing shift is real and it&apos;s accelerating.
             What changed isn&apos;t that agencies got worse. It&apos;s that the
             platforms brands were paying agencies to manage built AI directly
-            into the interface — and now a founder with two operators and a
+            into the interface. Now a founder with two operators and a
             $300/month software stack can run what used to require a six-person
             team.
           </p>
@@ -267,10 +267,10 @@ export default async function Post() {
 
           <h2 id="why-failed">Why in-house used to fail</h2>
           <p>
-            The math was the problem. A five-person DTC marketing team — paid
+            The math was the problem. A five-person DTC marketing team: paid
             media manager, email specialist, creative director, content manager,
-            social manager — runs $520K to $700K annually when you fully load
-            the cost. That includes salary, benefits, software subscriptions
+            social manager. That stack runs $520K to $700K annually when you
+            fully load the cost. That includes salary, benefits, software subscriptions
             ($30K&ndash;$60K/yr), and recruiting costs of $20K&ndash;$40K per
             hire. Every time someone quits, you&apos;re out 50&ndash;75% of
             their annual salary just to replace them.
@@ -304,8 +304,8 @@ export default async function Post() {
           </div>
 
           <p>
-            So in-house made sense strategically — control, speed, brand
-            knowledge, accountability — but the economics didn&apos;t work.
+            So in-house made sense strategically: control, speed, brand
+            knowledge, accountability. But the economics didn&apos;t work.
             You&apos;d spend more to get slower results staffed by people who
             were learning your brand on your dime. Most founders tried it once
             and went back to the agency.
@@ -323,7 +323,7 @@ export default async function Post() {
             budget allocation autonomously. You don&apos;t need a paid media
             manager in an ops meeting to make those calls. The platform makes
             them, faster and with more data than any human can process.
-            Klaviyo&apos;s Spring 2026 update shipped autonomous email — full
+            Klaviyo&apos;s Spring 2026 update shipped autonomous email: full
             campaign generation from a single prompt, per-subscriber send times,
             and a Customer Agent that handles chat and WhatsApp without a human
             in the loop. AI creative tools turn one product photo into 30 ad
@@ -345,7 +345,7 @@ export default async function Post() {
           <p>
             I spent years watching how agencies bill for this work. Strategy
             meetings. Weekly reports. Creative briefs. Approval rounds. A lot of
-            what you were paying for was coordination overhead — people talking
+            what you were paying for was coordination overhead: people talking
             about the work instead of doing it. AI removed the coordination
             layer. The output that required a six-person team now comes from a
             two-person operation where one of those &quot;people&quot; is
@@ -369,14 +369,14 @@ export default async function Post() {
             customer understanding, the strategic calls. Production gets handed
             to AI. That&apos;s the model. And it&apos;s why 46% of companies
             are now running hybrid structures instead of pure agency or pure
-            in-house — one operator plus AI-native tools beats a six-person
-            team on speed, and a $180K/yr agency retainer on cost.
+            in-house. One operator plus AI-native tools beats a six-person
+            team on speed and a $180K/yr agency retainer on cost.
           </p>
 
           <figure className="blog-image">
             <img
               src="/blog/dtc-marketing-in-house-ai.jpg"
-              alt="Startup team working together at a table with laptops — the lean in-house model for DTC brands"
+              alt="Startup team working together at a table with laptops, the lean in-house model for DTC brands"
             />
             <figcaption>The lean in-house model: operators who run AI tools, not teams who do manual execution.</figcaption>
           </figure>
@@ -407,8 +407,8 @@ export default async function Post() {
             have AI in the execution layer, whether that&apos;s in-house, hybrid,
             or through a service that was built around AI from the start. If
             your current agency doesn&apos;t have a clear answer for what AI
-            does in their stack, that&apos;s a problem worth looking at —
-            start with the{" "}
+            does in their stack, that&apos;s a problem worth looking at. Start
+            with the{" "}
             <Link href="/blog/marketing-agency-red-flags">
               11 agency red flags
             </Link>{" "}
@@ -423,7 +423,7 @@ export default async function Post() {
             <Link href="/marketing-agency-alternatives">
               marketing agency alternatives
             </Link>{" "}
-            look like in 2026 — not a different agency, but a different model.
+            look like in 2026. Not a different agency. A different model.
           </p>
 
           {/* FAQ */}
@@ -439,7 +439,7 @@ export default async function Post() {
 
           {/* Author bio */}
           <BlogAuthorBio
-            bioOverride="Founder of Venti Scale. I spent years watching DTC brands burn agency budgets on junior execution. I built the AI-powered alternative I&apos;d actually want as a founder — full execution, no junior team between you and me."
+            bioOverride="Founder of Venti Scale. I spent years watching DTC brands burn agency budgets on junior execution. I built the AI-powered alternative I&apos;d actually want as a founder: full execution, no junior team between you and me."
             lastUpdated={DATE}
           />
 
