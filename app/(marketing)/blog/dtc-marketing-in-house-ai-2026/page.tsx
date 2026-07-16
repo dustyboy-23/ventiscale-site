@@ -6,7 +6,7 @@ import { BlogAuthorBio } from "@/components/marketing/blog-author-bio";
 export const metadata = {
   title: "DTC brands fired their agencies. AI made it finally work. | Venti Scale",
   description:
-    "70% of marketers have already moved work in-house. Glossier, Lush, Deux, and Public did it at scale. Here&apos;s why it&apos;s working now when it used to fail.",
+    "70% of marketers have already moved work in-house. Glossier, Lush, Deux, and Public did it at scale. Here's why it's working now when it used to fail.",
   openGraph: {
     title: "DTC brands fired their agencies. AI made it finally work.",
     description:
@@ -42,18 +42,18 @@ const IMAGE_URL = `https://www.ventiscale.com${IMAGE}`;
 const FAQ_DATA = [
   {
     q: "Are DTC brands actually moving marketing in-house?",
-    a: "Yes. 70% of ANA member marketers shifted work from agencies to in-house over the last three years, according to ANA&apos;s 2025 In-House Agency Fact Book. Brands like Glossier, Lush, Deux, and Public have done it at scale.",
+    a: "Yes. 70% of ANA member marketers shifted work from agencies to in-house over the last three years, according to ANA's 2025 In-House Agency Fact Book. Brands like Glossier, Lush, Deux, and Public have done it at scale.",
   },
   {
     q: "What does it cost to build an in-house marketing team for a DTC brand?",
-    a: "A five-person in-house team runs $520K&ndash;$700K annually fully loaded, including salary, benefits, software ($30K&ndash;$60K/yr), and recruiting costs ($20K&ndash;$40K per hire). A full-service agency retainer runs $120K&ndash;$240K annually for comparable output. The cost gap is why most brands never made in-house work before AI changed the execution math.",
+    a: "A five-person in-house team runs $520K–$700K annually fully loaded, including salary, benefits, software ($30K–$60K/yr), and recruiting costs ($20K–$40K per hire). A full-service agency retainer runs $120K–$240K annually for comparable output. The cost gap is why most brands never made in-house work before AI changed the execution math.",
   },
   {
     q: "How do AI tools make in-house DTC marketing viable now?",
     a: "AI tools compress what used to require five specialists into what one or two operators can run. Campaign optimization, email generation, ad creative production, and audience management are now handled by the platforms themselves. The execution layer that required a full team now runs on software, which means in-house becomes viable at a fraction of the old cost.",
   },
   {
-    q: "What&apos;s the alternative if I&apos;m not ready to go fully in-house?",
+    q: "What's the alternative if I'm not ready to go fully in-house?",
     a: "The fastest-growing model is a hybrid: one or two in-house operators running an AI-native stack, with a done-for-you partner handling the parts that require depth. 46% of companies now use this structure. It delivers in-house control without in-house headcount.",
   },
 ];
