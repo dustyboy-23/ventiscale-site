@@ -7,7 +7,7 @@ const SLUG = "dtc-graveyard-50-brands-platform-dependency-2026";
 const TITLE =
   "50 DTC brands failed in 4 years. The pattern is what your agency is still running.";
 const DESCRIPTION =
-  "50 DTC brands collapsed between 2022 and 2026. 76% concentrated in a single channel. 94% lacked loyalty infrastructure. The pattern is consistent. Your agency is still running it.";
+  "76% of 50 failed DTC brands relied on one channel. 94% built no loyalty program. CAC rose 68%. The pattern is consistent. Your agency is still running it.";
 const DATE = "2026-07-17";
 const IMAGE = "/blog/dtc-graveyard-platform-dependency.jpg";
 const IMAGE_URL = `https://www.ventiscale.com${IMAGE}`;

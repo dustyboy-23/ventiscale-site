@@ -15,7 +15,7 @@ export const posts: BlogPost[] = [
     title:
       "50 DTC brands failed in 4 years. The pattern is what your agency is still running.",
     description:
-      "50 DTC brands collapsed between 2022 and 2026. 76% concentrated in a single channel. 94% lacked loyalty infrastructure. The pattern is consistent. Your agency is still running it.",
+      "76% of 50 failed DTC brands relied on one channel. 94% built no loyalty program. CAC rose 68%. The pattern is consistent. Your agency is still running it.",
     date: "2026-07-17",
     author: "Dustin Gilmour",
     readTime: "7 min",
