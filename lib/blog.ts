@@ -11,6 +11,25 @@ export interface BlogPost {
 
 export const posts: BlogPost[] = [
   {
+    slug: "dtc-graveyard-50-brands-platform-dependency-2026",
+    title:
+      "50 DTC brands failed in 4 years. The pattern is what your agency is still running.",
+    description:
+      "50 DTC brands collapsed between 2022 and 2026. 76% concentrated in a single channel. 94% lacked loyalty infrastructure. The pattern is consistent. Your agency is still running it.",
+    date: "2026-07-17",
+    author: "Dustin Gilmour",
+    readTime: "7 min",
+    tags: [
+      "ecommerce",
+      "DTC",
+      "marketing agency",
+      "platform dependency",
+      "retention marketing",
+      "paid social",
+    ],
+    image: "/blog/dtc-graveyard-platform-dependency.jpg",
+  },
+  {
     slug: "dtc-marketing-in-house-ai-2026",
     title: "DTC brands fired their agencies. AI made it finally work.",
     description:
