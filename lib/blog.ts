@@ -11,6 +11,25 @@ export interface BlogPost {
 
 export const posts: BlogPost[] = [
   {
+    slug: "marketing-agency-ai-staff-retainer-2026",
+    title:
+      "Your agency is cutting staff with AI. Your retainer didn't change.",
+    description:
+      "Agencies cut 47,000 jobs in 2026 using AI while keeping traditional 15-20% margins. Your retainer didn't move. Here's what's actually happening inside your agency.",
+    date: "2026-07-18",
+    author: "Dustin Gilmour",
+    readTime: "7 min",
+    tags: [
+      "ecommerce",
+      "DTC",
+      "marketing agency",
+      "AI marketing",
+      "agency alternatives",
+      "agency costs",
+    ],
+    image: "/blog/agency-ai-staff-retainer.jpg",
+  },
+  {
     slug: "dtc-graveyard-50-brands-platform-dependency-2026",
     title:
       "50 DTC brands failed in 4 years. The pattern is what your agency is still running.",
