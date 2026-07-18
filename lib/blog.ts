@@ -15,7 +15,7 @@ export const posts: BlogPost[] = [
     title:
       "Your agency is cutting staff with AI. Your retainer didn't change.",
     description:
-      "Agencies cut 47,000 jobs in 2026 using AI while keeping traditional 15-20% margins. Your retainer didn't move. Here's what's actually happening inside your agency.",
+      "Agencies cut 47,000 jobs in 2026 using AI while margins stay at 15-20%. Your retainer didn't move. Here's what's actually happening inside your agency.",
     date: "2026-07-18",
     author: "Dustin Gilmour",
     readTime: "7 min",

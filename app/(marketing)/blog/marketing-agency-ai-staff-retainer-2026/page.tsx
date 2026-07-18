@@ -6,11 +6,11 @@ import { BlogAuthorBio } from "@/components/marketing/blog-author-bio";
 export const metadata = {
   title: "Your agency is cutting staff with AI. Your retainer didn't change. | Venti Scale",
   description:
-    "Agencies cut 47,000 jobs in 2026 using AI while keeping traditional 15-20% margins. Your retainer didn't move. Here's what's actually happening inside your agency.",
+    "Agencies cut 47,000 jobs in 2026 using AI while margins stay at 15-20%. Your retainer didn't move. Here's what's actually happening inside your agency.",
   openGraph: {
     title: "Your agency is cutting staff with AI. Your retainer didn't change.",
     description:
-      "Agencies cut 47,000 jobs in 2026 using AI while keeping traditional 15-20% margins. Your retainer didn't move. Here's what's actually happening inside your agency.",
+      "Agencies cut 47,000 jobs in 2026 using AI while margins stay at 15-20%. Your retainer didn't move. Here's what's actually happening inside your agency.",
     url: "https://www.ventiscale.com/blog/marketing-agency-ai-staff-retainer-2026",
     type: "article",
     images: [
@@ -26,7 +26,7 @@ export const metadata = {
     card: "summary_large_image" as const,
     title: "Your agency is cutting staff with AI. Your retainer didn't change.",
     description:
-      "Agencies cut 47,000 jobs in 2026 using AI while keeping traditional 15-20% margins. Your retainer didn't move. Here's what's actually happening inside your agency.",
+      "Agencies cut 47,000 jobs in 2026 using AI while margins stay at 15-20%. Your retainer didn't move. Here's what's actually happening inside your agency.",
     images: ["https://www.ventiscale.com/blog/agency-ai-staff-retainer.jpg"],
   },
 };
@@ -35,7 +35,7 @@ const SLUG = "marketing-agency-ai-staff-retainer-2026";
 const TITLE =
   "Your agency is cutting staff with AI. Your retainer didn't change.";
 const DESCRIPTION =
-  "Agencies cut 47,000 jobs in 2026 using AI while keeping traditional 15-20% margins. Your retainer didn't move. Here's what's actually happening inside your agency.";
+  "Agencies cut 47,000 jobs in 2026 using AI while margins stay at 15-20%. Your retainer didn't move. Here's what's actually happening inside your agency.";
 const DATE = "2026-07-18";
 const IMAGE = "/blog/agency-ai-staff-retainer.jpg";
 const IMAGE_URL = `https://www.ventiscale.com${IMAGE}`;
