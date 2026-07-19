@@ -11,6 +11,24 @@ export interface BlogPost {
 
 export const posts: BlogPost[] = [
   {
+    slug: "agency-retainer-true-cost-ecommerce-2026",
+    title: "Your agency quoted 15%. You're paying 28%.",
+    description:
+      "Marketing agency retainers are quoted at 10-20% of ad spend. The effective rate runs 25-29% once creative, landing pages, and ad-tech fees are added. Here's how to find your real number.",
+    date: "2026-07-19",
+    author: "Dustin Gilmour",
+    readTime: "7 min",
+    tags: [
+      "ecommerce",
+      "DTC",
+      "marketing agency",
+      "agency costs",
+      "agency retainer",
+      "AI marketing",
+    ],
+    image: "/blog/agency-retainer-true-cost.jpg",
+  },
+  {
     slug: "marketing-agency-ai-staff-retainer-2026",
     title:
       "Your agency is cutting staff with AI. Your retainer didn't change.",
