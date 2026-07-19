@@ -6,11 +6,11 @@ import { BlogAuthorBio } from "@/components/marketing/blog-author-bio";
 export const metadata = {
   title: "Your agency quoted 15%. You're paying 28%. | Venti Scale",
   description:
-    "Marketing agency retainers are quoted at 10-20% of ad spend. The effective rate runs 25-29% once creative, landing pages, and ad-tech fees are added. Here's how to find your real number.",
+    "Agency retainers are quoted at 10-20% of ad spend. The effective rate hits 25-29% once creative and ad-tech are added. Here's how to find your real number.",
   openGraph: {
     title: "Your agency quoted 15%. You're paying 28%.",
     description:
-      "Marketing agency retainers are quoted at 10-20% of ad spend. The effective rate runs 25-29% once creative, landing pages, and ad-tech fees are added. Here's how to find your real number.",
+      "Agency retainers are quoted at 10-20% of ad spend. The effective rate hits 25-29% once creative and ad-tech are added. Here's how to find your real number.",
     url: "https://www.ventiscale.com/blog/agency-retainer-true-cost-ecommerce-2026",
     type: "article",
     images: [
@@ -34,7 +34,7 @@ export const metadata = {
 const SLUG = "agency-retainer-true-cost-ecommerce-2026";
 const TITLE = "Your agency quoted 15%. You're paying 28%.";
 const DESCRIPTION =
-  "Marketing agency retainers are quoted at 10-20% of ad spend. The effective rate runs 25-29% once creative, landing pages, and ad-tech fees are added. Here's how to find your real number.";
+  "Agency retainers are quoted at 10-20% of ad spend. The effective rate hits 25-29% once creative and ad-tech are added. Here's how to find your real number.";
 const DATE = "2026-07-19";
 const IMAGE = "/blog/agency-retainer-true-cost.jpg";
 const IMAGE_URL = `https://www.ventiscale.com${IMAGE}`;
@@ -306,7 +306,11 @@ export default async function Post() {
             The real problem is the incentive structure. Your agency earns the same fee whether your revenue grows or falls. When results slow, the default move is often to add scope rather than question the strategy. A new creative package gets proposed. A new channel test gets scoped. The invoice grows. The revenue doesn&apos;t.
           </p>
           <p>
-            I&apos;ve walked through enough invoices with founders to recognize the pattern. The founder is paying 28% effective, thinks they&apos;re paying 15%, and the agency just proposed an additional retainer for &quot;SMS expansion.&quot; The problem usually isn&apos;t the SMS channel. It&apos;s the model that rewards activity over results.
+            I&apos;ve walked through enough invoices with founders to recognize the pattern. The founder is paying 28% effective, thinks they&apos;re paying 15%, and the agency just proposed an additional retainer for &quot;SMS expansion.&quot; The problem usually isn&apos;t the SMS channel. It&apos;s the model that rewards activity over results. If you want to spot this earlier, the{" "}
+            <Link href="/blog/signs-marketing-agency-gaslighting">
+              signs your agency is gaslighting you on performance
+            </Link>{" "}
+            are usually visible well before the invoice audit.
           </p>
 
           <div className="blog-callout">
