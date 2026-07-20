@@ -11,6 +11,25 @@ export interface BlogPost {
 
 export const posts: BlogPost[] = [
   {
+    slug: "adstellar-ai-campaign-management-ecommerce-2026",
+    title:
+      "AdStellar AI runs the full ad campaign loop. No agency. No designer. $49.",
+    description:
+      "AdStellar AI creates ad creatives, builds Meta campaigns, and identifies winners for $49/month. Here's what ecommerce brands need to know.",
+    date: "2026-07-20",
+    author: "Dustin Gilmour",
+    readTime: "7 min",
+    tags: [
+      "ecommerce",
+      "DTC",
+      "paid ads",
+      "AI marketing",
+      "campaign management",
+      "Meta ads",
+    ],
+    image: "/blog/adstellar-campaign-management.jpg",
+  },
+  {
     slug: "agency-retainer-true-cost-ecommerce-2026",
     title: "Your agency quoted 15%. You're paying 28%.",
     description:
