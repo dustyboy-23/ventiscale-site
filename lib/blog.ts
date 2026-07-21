@@ -11,6 +11,25 @@ export interface BlogPost {
 
 export const posts: BlogPost[] = [
   {
+    slug: "meta-advantage-plus-muse-creative-2026",
+    title:
+      "Meta's AI creative model just changed. Your June tests are already stale.",
+    description:
+      "Muse Image rolled into Meta Advantage+ Creative on July 7. 8 million advertisers. New quality baseline. Here's what DTC brands need to re-test now.",
+    date: "2026-07-21",
+    author: "Dustin Gilmour",
+    readTime: "7 min",
+    tags: [
+      "ecommerce",
+      "DTC",
+      "Meta ads",
+      "Advantage+",
+      "AI marketing",
+      "ad creative",
+    ],
+    image: "/blog/meta-muse-creative-2026.jpg",
+  },
+  {
     slug: "adstellar-ai-campaign-management-ecommerce-2026",
     title:
       "AdStellar AI runs the full ad campaign loop. No agency. No designer. $49.",
