@@ -11,6 +11,24 @@ export interface BlogPost {
 
 export const posts: BlogPost[] = [
   {
+    slug: "dtc-paid-cac-vs-blended-cac-2026",
+    title: "Your blended CAC looks fine. Your paid CAC is 2-3x worse.",
+    description:
+      "The average ecommerce brand has a blended CAC of $68-$84. Strip out email and organic and that number doubles. Here's what the paid vs blended gap actually tells you.",
+    date: "2026-07-22",
+    author: "Dustin Gilmour",
+    readTime: "7 min",
+    tags: [
+      "ecommerce",
+      "DTC",
+      "CAC",
+      "paid acquisition",
+      "customer acquisition cost",
+      "DTC benchmarks",
+    ],
+    image: "/blog/dtc-paid-cac-blended.jpg",
+  },
+  {
     slug: "meta-advantage-plus-muse-creative-2026",
     title:
       "Meta's AI creative model just changed. Your June tests are already stale.",
