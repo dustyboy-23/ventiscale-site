@@ -386,10 +386,10 @@ export default async function Post() {
           <h2>How owned channels change the paid CAC math</h2>
           <p>
             The most direct way to close the gap between paid and blended CAC: grow
-            owned channels. Email acquisition runs $8-$15 per new customer on average,
-            far below the blended average and a fraction of typical paid costs. When
-            email and SMS contribute more new customers, the blended average improves
-            without touching the paid campaigns at all.
+            owned channels. Email reactivates existing subscribers at near-zero
+            marginal cost. Referral flows bring in customers without touching ad
+            spend. When email and SMS contribute more new customers, the blended
+            average improves without touching the paid campaigns at all.
           </p>
           <p>
             This isn&apos;t an argument to cut paid spend. It&apos;s an argument to
