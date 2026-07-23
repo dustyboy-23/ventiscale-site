@@ -11,6 +11,25 @@ export interface BlogPost {
 
 export const posts: BlogPost[] = [
   {
+    slug: "chatgpt-ads-ecommerce-2026",
+    title: "ChatGPT runs ads now. Here's what DTC brands should do about it.",
+    description:
+      "OpenAI launched self-serve ChatGPT ads on July 22, 2026. 900 million weekly users. Early advertisers call it expensive with unclear returns. Here's the smarter play.",
+    date: "2026-07-23",
+    author: "Dustin Gilmour",
+    readTime: "7 min",
+    tags: [
+      "ecommerce",
+      "DTC",
+      "ChatGPT",
+      "AI marketing",
+      "paid ads",
+      "AI advertising",
+      "OpenAI",
+    ],
+    image: "/blog/chatgpt-ads-ecommerce-2026.jpg",
+  },
+  {
     slug: "dtc-paid-cac-vs-blended-cac-2026",
     title: "Your blended CAC looks fine. Your paid CAC is 2-3x worse.",
     description:
