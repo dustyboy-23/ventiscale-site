@@ -11,6 +11,25 @@ export interface BlogPost {
 
 export const posts: BlogPost[] = [
   {
+    slug: "tiktok-creative-fatigue-agency-2026",
+    title: "TikTok creative fatigues in 10 days. Your agency refreshes monthly.",
+    description:
+      "TikTok ad creative saturates in 7-10 days. At 4 exposures, conversion drops 45%. Most agencies send creatives monthly. Here's why your campaigns keep dying.",
+    date: "2026-07-24",
+    author: "Dustin Gilmour",
+    readTime: "7 min",
+    tags: [
+      "ecommerce",
+      "DTC",
+      "TikTok",
+      "paid ads",
+      "ad creative",
+      "creative fatigue",
+      "AI marketing",
+    ],
+    image: "/blog/meta-tiktok-creative-quality-2026.jpg",
+  },
+  {
     slug: "chatgpt-ads-ecommerce-2026",
     title: "ChatGPT runs ads now. Here's what DTC brands should do about it.",
     description:
