@@ -11,6 +11,26 @@ export interface BlogPost {
 
 export const posts: BlogPost[] = [
   {
+    slug: "canva-grow-performance-marketing-ecommerce-2026",
+    title:
+      "Canva runs the whole ad loop now. Most ecommerce brands haven't noticed.",
+    description:
+      "Canva Grow 2.0 automates the full performance marketing workflow from design to optimization across Meta, TikTok, and LinkedIn. Here's what it means for small DTC brands.",
+    date: "2026-07-25",
+    author: "Dustin Gilmour",
+    readTime: "7 min",
+    tags: [
+      "ecommerce",
+      "DTC",
+      "Canva",
+      "performance marketing",
+      "paid ads",
+      "AI marketing",
+      "ad creative",
+    ],
+    image: "/blog/canva-grow-ecommerce-ads.jpg",
+  },
+  {
     slug: "tiktok-creative-fatigue-agency-2026",
     title: "TikTok creative fatigues in 10 days. Your agency refreshes monthly.",
     description:
