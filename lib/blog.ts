@@ -11,6 +11,26 @@ export interface BlogPost {
 
 export const posts: BlogPost[] = [
   {
+    slug: "dtc-email-flows-vs-campaigns-revenue-2026",
+    title:
+      "Email flows drive 37% of email revenue. Most brands barely touch them.",
+    description:
+      "Automated email flows are 2% of sends but drive 37% of email revenue. Most DTC email agencies focus on campaigns. Here's what they're not building.",
+    date: "2026-07-26",
+    author: "Dustin Gilmour",
+    readTime: "7 min",
+    tags: [
+      "ecommerce",
+      "DTC",
+      "email marketing",
+      "Klaviyo",
+      "email automation",
+      "retention marketing",
+      "AI marketing",
+    ],
+    image: "/blog/dtc-email-flows-revenue.jpg",
+  },
+  {
     slug: "canva-grow-performance-marketing-ecommerce-2026",
     title:
       "Canva runs the whole ad loop now. Most ecommerce brands haven't noticed.",
