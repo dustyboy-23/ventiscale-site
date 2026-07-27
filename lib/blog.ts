@@ -11,6 +11,26 @@ export interface BlogPost {
 
 export const posts: BlogPost[] = [
   {
+    slug: "autonomous-ai-ad-management-dtc-2026",
+    title:
+      "Autonomous AI now runs your ads. Your agency still sends the weekly report.",
+    description:
+      "Madgicx, Omneky, and Needle now run Meta and Google ad accounts autonomously. Here's what's replacing the account management layer your agency bills for.",
+    date: "2026-07-27",
+    author: "Dustin Gilmour",
+    readTime: "7 min",
+    tags: [
+      "ecommerce",
+      "DTC",
+      "paid ads",
+      "Meta ads",
+      "AI marketing",
+      "agency",
+      "ad management",
+    ],
+    image: "/blog/autonomous-ai-ad-management.jpg",
+  },
+  {
     slug: "dtc-email-flows-vs-campaigns-revenue-2026",
     title:
       "Email flows drive 37% of email revenue. Most brands barely touch them.",
