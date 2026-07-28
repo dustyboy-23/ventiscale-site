@@ -7,12 +7,12 @@ export const metadata = {
   title:
     "Every agency has an AI slide. Most can't answer 5 basic questions. | Venti Scale",
   description:
-    "In 2026 every marketing agency pitch has an AI slide. Here are the 5 questions that separate AI-native agencies from ones that added ChatGPT to a traditional workflow.",
+    "In 2026, every agency pitch has an AI slide. These 5 questions separate AI-native agencies from ones that just added ChatGPT to their workflow.",
   openGraph: {
     title:
       "Every agency has an AI slide. Most can't answer 5 basic questions.",
     description:
-      "In 2026 every marketing agency pitch has an AI slide. Here are the 5 questions that separate AI-native agencies from ones that added ChatGPT to a traditional workflow.",
+      "In 2026, every agency pitch has an AI slide. These 5 questions separate AI-native agencies from ones that just added ChatGPT to their workflow.",
     url: "https://www.ventiscale.com/blog/ai-agency-slide-ecommerce-2026",
     type: "article",
     images: [
@@ -29,7 +29,7 @@ export const metadata = {
     title:
       "Every agency has an AI slide. Most can't answer 5 basic questions.",
     description:
-      "In 2026 every marketing agency pitch has an AI slide. Here are the 5 questions that separate AI-native agencies from ones that added ChatGPT to a traditional workflow.",
+      "In 2026, every agency pitch has an AI slide. These 5 questions separate AI-native agencies from ones that just added ChatGPT to their workflow.",
     images: [
       "https://www.ventiscale.com/blog/ai-agency-slide-ecommerce.jpg",
     ],
@@ -40,7 +40,7 @@ const SLUG = "ai-agency-slide-ecommerce-2026";
 const TITLE =
   "Every agency has an AI slide. Most can't answer 5 basic questions.";
 const DESCRIPTION =
-  "In 2026 every marketing agency pitch has an AI slide. Here are the 5 questions that separate AI-native agencies from ones that added ChatGPT to a traditional workflow.";
+  "In 2026, every agency pitch has an AI slide. These 5 questions separate AI-native agencies from ones that just added ChatGPT to their workflow.";
 const DATE = "2026-07-28";
 const IMAGE = "/blog/ai-agency-slide-ecommerce.jpg";
 const IMAGE_URL = `https://www.ventiscale.com${IMAGE}`;
