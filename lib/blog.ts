@@ -15,7 +15,7 @@ export const posts: BlogPost[] = [
     title:
       "Every agency has an AI slide. Most can't answer 5 basic questions.",
     description:
-      "In 2026 every marketing agency pitch has an AI slide. Here are the 5 questions that separate AI-native agencies from ones that added ChatGPT to a traditional workflow.",
+      "In 2026, every agency pitch has an AI slide. These 5 questions separate AI-native agencies from ones that just added ChatGPT to their workflow.",
     date: "2026-07-28",
     author: "Dustin Gilmour",
     readTime: "7 min",
