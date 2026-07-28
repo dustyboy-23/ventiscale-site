@@ -11,6 +11,25 @@ export interface BlogPost {
 
 export const posts: BlogPost[] = [
   {
+    slug: "ai-agency-slide-ecommerce-2026",
+    title:
+      "Every agency has an AI slide. Most can't answer 5 basic questions.",
+    description:
+      "In 2026 every marketing agency pitch has an AI slide. Here are the 5 questions that separate AI-native agencies from ones that added ChatGPT to a traditional workflow.",
+    date: "2026-07-28",
+    author: "Dustin Gilmour",
+    readTime: "7 min",
+    tags: [
+      "ecommerce",
+      "DTC",
+      "marketing agency",
+      "AI marketing",
+      "agency evaluation",
+      "AI native",
+    ],
+    image: "/blog/ai-agency-slide-ecommerce.jpg",
+  },
+  {
     slug: "autonomous-ai-ad-management-dtc-2026",
     title:
       "Autonomous AI now runs your ads. Your agency still sends the weekly report.",
