@@ -6,12 +6,12 @@ import { BlogAuthorBio } from "@/components/marketing/blog-author-bio";
 export const metadata = {
   title: "Shopify writes your product copy for free. What are you paying your content agency for? | Venti Scale",
   description:
-    "Shopify Magic and Sidekick now write product descriptions, edit your photos, and draft email campaigns — all included with your plan. Here's what that means for your agency budget.",
+    "Shopify Magic now writes product descriptions, edits photos, and drafts email campaigns. Free with your plan. Here's what that means for your agency.",
   openGraph: {
     title:
       "Shopify writes your product copy for free. What are you paying your content agency for?",
     description:
-      "Shopify Magic and Sidekick now write product descriptions, edit your photos, and draft email campaigns — all included with your plan.",
+      "Shopify Magic now writes product descriptions, edits photos, and drafts email campaigns. All free with your plan. What is your agency charging for?",
     url: "https://www.ventiscale.com/blog/shopify-magic-content-ecommerce-2026",
     type: "article",
     images: [
@@ -28,7 +28,7 @@ export const metadata = {
     title:
       "Shopify writes your product copy for free. What are you paying your content agency for?",
     description:
-      "Shopify Magic and Sidekick now write product descriptions, edit your photos, and draft email campaigns — all included with your plan.",
+      "Shopify Magic now writes product descriptions, edits photos, and drafts email campaigns. All free with your plan. What is your agency charging for?",
     images: [
       "https://www.ventiscale.com/blog/shopify-magic-content-ecommerce.jpg",
     ],
@@ -39,7 +39,7 @@ const SLUG = "shopify-magic-content-ecommerce-2026";
 const TITLE =
   "Shopify writes your product copy for free. What are you paying your content agency for?";
 const DESCRIPTION =
-  "Shopify Magic and Sidekick now write product descriptions, edit your photos, and draft email campaigns — all included with your plan. Here's what that means for your agency budget.";
+  "Shopify Magic now writes product descriptions, edits photos, and drafts email campaigns. Free with your plan. Here's what that means for your agency.";
 const DATE = "2026-07-29";
 const IMAGE = "/blog/shopify-magic-content-ecommerce.jpg";
 const IMAGE_URL = `https://www.ventiscale.com${IMAGE}`;
@@ -47,7 +47,7 @@ const IMAGE_URL = `https://www.ventiscale.com${IMAGE}`;
 const FAQ_DATA = [
   {
     q: "Is Shopify Sidekick free?",
-    a: "Sidekick is included with every Shopify plan at no extra charge. You&apos;re already paying for it. Core content tools including product descriptions, photo editing, email campaign drafts, and social content generation are available across plans, with usage limits varying by tier.",
+    a: "Sidekick is included with every Shopify plan at no extra charge. You're already paying for it. Core content tools including product descriptions, photo editing, email campaign drafts, and social content generation are available across plans, with usage limits varying by tier.",
   },
   {
     q: "What can Shopify Magic write for me?",
@@ -55,7 +55,7 @@ const FAQ_DATA = [
   },
   {
     q: "Can Shopify Magic replace a content agency?",
-    a: "Shopify Magic replaces the execution layer — the writing, editing, and drafting work. It does not replace brand strategy, audience targeting, campaign sequencing, or performance analysis. Founders who use it well cut content production costs and redirect that budget toward strategy and media.",
+    a: "Shopify Magic replaces the execution layer: the writing, editing, and drafting work. It does not replace brand strategy, audience targeting, campaign sequencing, or performance analysis. Founders who use it well cut content production costs and redirect that budget toward strategy and media.",
   },
   {
     q: "What does Shopify Sidekick do for product photos?",
@@ -193,7 +193,7 @@ export default async function Post() {
             <ul>
               <li>
                 Shopify Magic and Sidekick handle product copy, photo editing, email
-                drafts, and social content — included with every plan at no extra cost.
+                drafts, and social content. All included with every plan at no extra cost.
               </li>
               <li>
                 These are the exact tasks content agencies build retainers around. The
@@ -205,7 +205,7 @@ export default async function Post() {
               </li>
               <li>
                 Founders running lean should use Shopify AI for execution and direct
-                agency budget toward strategy — or cut the agency entirely.
+                agency budget toward strategy. Or cut the agency entirely.
               </li>
             </ul>
           </div>
@@ -235,7 +235,7 @@ export default async function Post() {
           <p>
             <strong>Product copy.</strong> You paste in a product name and a few
             bullet points about what it does. Sidekick writes a full product
-            description optimized for search — headline, body, key benefits. I tested
+            description optimized for search: headline, body, key benefits. I tested
             this against agency-written copy across eight product categories. The gap
             is smaller than you&apos;d expect and the speed difference is enormous.
           </p>
@@ -243,7 +243,7 @@ export default async function Post() {
             <strong>Photo editing.</strong> The background removal and photo
             enhancement tools turn phone shots into clean product images. You get
             professional-grade catalog photos without a studio or a retoucher. If
-            you&apos;re running paid ads, this matters — ad creative is often the
+            you&apos;re running paid ads, this matters. Ad creative is often the
             bottleneck, and removing the retouching step from the cycle changes
             everything about your testing velocity.
           </p>
@@ -298,7 +298,7 @@ export default async function Post() {
             <div className="callout-label">Red flag</div>
             <p>
               If your agency sends you a monthly content report showing posts
-              published and emails sent — but no data on which drove revenue — you&apos;re
+              published and emails sent, but no data on which drove revenue, you&apos;re
               paying for production, not strategy. That&apos;s the exact gap Shopify AI
               just closed.
             </p>
@@ -328,12 +328,12 @@ export default async function Post() {
             for the specific audience segment that converts. It doesn&apos;t know
             that your buyers respond to scarcity framing and ignore benefit-led copy.
             That kind of knowledge comes from running campaigns, reading the data,
-            and making judgment calls — not from a prompt.
+            and making judgment calls. That knowledge doesn&apos;t come from a prompt.
           </p>
           <p>
             Sidekick doesn&apos;t build email sequences. It drafts individual
             campaigns. A welcome flow, an abandoned cart series, a post-purchase
-            sequence, a win-back campaign — those are architectural decisions about
+            sequence, a win-back campaign. Those are architectural decisions about
             what to send, when, to whom, and in what order. Sidekick writes the
             email. It doesn&apos;t tell you where that email sits in the funnel.
           </p>
@@ -398,7 +398,7 @@ export default async function Post() {
           <p>
             At Venti Scale, we use Shopify AI on the production side and build the
             strategy layer on top of it. Which sequences to run, which segments to
-            target, which creative angles to test — that&apos;s the work. The actual
+            target, which creative angles to test. That&apos;s the work. The actual
             writing is the easy part. Knowing what to write, when, and for whom is
             where brands win or lose.
           </p>
