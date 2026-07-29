@@ -11,6 +11,26 @@ export interface BlogPost {
 
 export const posts: BlogPost[] = [
   {
+    slug: "shopify-magic-content-ecommerce-2026",
+    title:
+      "Shopify writes your product copy for free. What are you paying your content agency for?",
+    description:
+      "Shopify Magic and Sidekick now write product descriptions, edit your photos, and draft email campaigns — all included with your plan. Here's what that means for your agency budget.",
+    date: "2026-07-29",
+    author: "Dustin Gilmour",
+    readTime: "7 min",
+    tags: [
+      "ecommerce",
+      "DTC",
+      "Shopify",
+      "AI tools",
+      "content marketing",
+      "Shopify Magic",
+      "Sidekick",
+    ],
+    image: "/blog/shopify-magic-content-ecommerce.jpg",
+  },
+  {
     slug: "ai-agency-slide-ecommerce-2026",
     title:
       "Every agency has an AI slide. Most can't answer 5 basic questions.",
