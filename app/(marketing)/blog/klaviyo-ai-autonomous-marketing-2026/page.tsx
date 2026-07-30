@@ -376,6 +376,18 @@ export default async function Post() {
             extends that owned stack further without adding vendor complexity.
           </p>
 
+          <figure className="blog-image">
+            <img
+              src="/blog/klaviyo-ai-autonomous-marketing.jpg"
+              alt="Klaviyo autonomous email marketing features showing Composer campaign generation and Personalized Send Time dashboard"
+            />
+            <figcaption>
+              Composer and Personalized Send Time are the two features that most
+              directly replace what agencies have been charging for as
+              &quot;email management&quot;
+            </figcaption>
+          </figure>
+
           <hr className="blog-divider" />
 
           <h2>What this means for brands paying for Klaviyo management</h2>
