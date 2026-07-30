@@ -1633,13 +1633,13 @@ export const posts: BlogPost[] = [
   {
     slug: "klaviyo-ai-autonomous-marketing-2026",
     title:
-      "Klaviyo just launched autonomous email. Here's what ecommerce brands need to do now.",
+      "Your agency runs 3 email campaigns a month. Klaviyo's AI runs 15.",
     description:
-      "Klaviyo's Spring 2026 drop ships 9 new AI features including Customer Agent and Smart Send Time per subscriber. Here's what changed and what to do about it.",
-    date: "2026-05-10",
+      "Klaviyo shipped 9 new AI features: Composer, Personalized Send Time, RCS messaging, and more. Here's what that means for brands paying agencies to manage email.",
+    date: "2026-07-30",
     author: "Dustin Gilmour",
     readTime: "7 min",
-    tags: ["ecommerce", "email marketing", "Klaviyo", "AI marketing", "automation"],
+    tags: ["ecommerce", "email marketing", "Klaviyo", "AI marketing", "autonomous marketing", "Composer"],
     image: "/blog/klaviyo-ai-autonomous-marketing.jpg",
   },
   {
