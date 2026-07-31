@@ -11,6 +11,27 @@ export interface BlogPost {
 
 export const posts: BlogPost[] = [
   {
+    slug: "ecommerce-ltv-cac-ratio-benchmarks-2026",
+    title:
+      "Your LTV:CAC is below 3:1. Your agency hasn't mentioned it.",
+    description:
+      "LTV:CAC below 3:1 means your DTC business is structurally unstable. Most agencies report ROAS instead. Here's the ratio that actually tells you if the model works.",
+    date: "2026-07-31",
+    author: "Dustin Gilmour",
+    readTime: "7 min",
+    tags: [
+      "ecommerce",
+      "DTC",
+      "LTV",
+      "CAC",
+      "DTC benchmarks",
+      "retention marketing",
+      "email marketing",
+      "AI marketing",
+    ],
+    image: "/blog/ecommerce-ltv-cac-ratio.jpg",
+  },
+  {
     slug: "shopify-magic-content-ecommerce-2026",
     title:
       "Shopify writes your product copy for free. What are you paying your content agency for?",
