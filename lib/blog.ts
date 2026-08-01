@@ -11,6 +11,25 @@ export interface BlogPost {
 
 export const posts: BlogPost[] = [
   {
+    slug: "dtc-affiliate-last-click-attribution-2026",
+    title:
+      "86% of affiliate programs pay the last click. The creator who sold them gets nothing.",
+    description:
+      "86% of affiliate programs globally run on last-click attribution. Coupon sites collect commissions for customers who were already going to buy. Here's how to fix it.",
+    date: "2026-08-01",
+    author: "Dustin Gilmour",
+    readTime: "7 min",
+    tags: [
+      "ecommerce",
+      "DTC",
+      "affiliate marketing",
+      "attribution",
+      "performance marketing",
+      "AI marketing",
+    ],
+    image: "/blog/dtc-affiliate-attribution.jpg",
+  },
+  {
     slug: "ecommerce-ltv-cac-ratio-benchmarks-2026",
     title:
       "Your LTV:CAC is below 3:1. Your agency hasn't mentioned it.",
