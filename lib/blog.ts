@@ -11,6 +11,27 @@ export interface BlogPost {
 
 export const posts: BlogPost[] = [
   {
+    slug: "creatify-ai-video-ads-ecommerce-2026",
+    title:
+      "DTC ads need 30 new creatives a month. AI makes 10 in 10 minutes.",
+    description:
+      "Creatify turns a product URL into 5-10 platform-ready video ads in under 10 minutes. Here's what the Tec-Do and Qula360 case study numbers actually show.",
+    date: "2026-08-02",
+    author: "Dustin Gilmour",
+    readTime: "7 min",
+    tags: [
+      "ecommerce",
+      "DTC",
+      "ad creative",
+      "AI marketing",
+      "video ads",
+      "Creatify",
+      "paid ads",
+      "creative velocity",
+    ],
+    image: "/blog/creatify-ai-video-ads.jpg",
+  },
+  {
     slug: "dtc-affiliate-last-click-attribution-2026",
     title:
       "86% of affiliate programs pay the last click. The creator who sold them gets nothing.",
