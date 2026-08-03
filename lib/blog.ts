@@ -11,6 +11,26 @@ export interface BlogPost {
 
 export const posts: BlogPost[] = [
   {
+    slug: "ai-marketing-adoption-gap-roi-2026",
+    title:
+      "79% of brands adopted AI marketing. Only 12% are seeing real results.",
+    description:
+      "Most brands bolted AI onto broken marketing structures and called it a strategy. Here's the gap between AI adoption and AI results — and what actually fixes it.",
+    date: "2026-08-03",
+    author: "Dustin Gilmour",
+    readTime: "7 min",
+    tags: [
+      "AI marketing",
+      "ecommerce",
+      "DTC",
+      "marketing ROI",
+      "AI adoption",
+      "marketing automation",
+      "agency alternatives",
+    ],
+    image: "/blog/ai-marketing-adoption-gap-2026.jpg",
+  },
+  {
     slug: "creatify-ai-video-ads-ecommerce-2026",
     title:
       "DTC ads need 30 new creatives a month. AI makes 10 in 10 minutes.",
