@@ -57,11 +57,11 @@ const FAQ_DATA = [
   },
   {
     q: "How long does it take for AI marketing to show results?",
-    a: "44% of teams using agent-driven AI see measurable ROI within six months. The timeline depends heavily on whether you&apos;re using AI as the core operating layer or bolting it onto existing processes — natively integrated AI stacks show results faster because they eliminate the friction of working around legacy systems.",
+    a: "44% of teams using agent-driven AI see measurable ROI within six months. The timeline depends heavily on whether you're using AI as the core operating layer or bolting it onto existing processes — natively integrated AI stacks show results faster because they eliminate the friction of working around legacy systems.",
   },
   {
     q: "Is AI marketing worth it for a small ecommerce brand?",
-    a: "Yes. AI agent workflows reduce manual marketing tasks by 60&ndash;80%, meaning a small brand can operate with the output volume of a much larger team. Vendor AI tools cost a fraction of what the same work costs in agency retainers or in-house headcount.",
+    a: "Yes. AI agent workflows reduce manual marketing tasks by 60-80%, meaning a small brand can operate with the output volume of a much larger team. Vendor AI tools cost a fraction of what the same work costs in agency retainers or in-house headcount.",
   },
 ];
 
@@ -468,7 +468,7 @@ export default async function Post() {
 
           {/* Author bio */}
           <BlogAuthorBio
-            bioOverride="Founder of Venti Scale. I&apos;ve audited AI marketing stacks for ecommerce brands across apparel, home goods, and supplements. The 79% vs 12% gap shows up in every single one."
+            bioOverride="Founder of Venti Scale. I've audited AI marketing stacks for ecommerce brands across apparel, home goods, and supplements. The 79% vs 12% gap shows up in every single one."
             lastUpdated={DATE}
           />
 
