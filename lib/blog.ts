@@ -11,6 +11,26 @@ export interface BlogPost {
 
 export const posts: BlogPost[] = [
   {
+    slug: "ai-creative-cac-reduction-dtc-2026",
+    title:
+      "AI ad creative cuts paid CAC by 14%. The gap is in how you test it.",
+    description:
+      "Brands running AI creative with algorithmic testing see a median 14% paid CAC reduction. Top performers hit 28%. The gap isn't the tools. It's testing volume.",
+    date: "2026-08-04",
+    author: "Dustin Gilmour",
+    readTime: "7 min",
+    tags: [
+      "ecommerce",
+      "DTC",
+      "paid ads",
+      "AI marketing",
+      "ad creative",
+      "CAC",
+      "Meta Advantage+",
+    ],
+    image: "/blog/ai-creative-cac-reduction-2026.jpg",
+  },
+  {
     slug: "ai-marketing-adoption-gap-roi-2026",
     title:
       "79% of brands adopted AI marketing. Only 12% are seeing real results.",
