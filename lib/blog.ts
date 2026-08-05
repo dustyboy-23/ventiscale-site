@@ -11,6 +11,26 @@ export interface BlogPost {
 
 export const posts: BlogPost[] = [
   {
+    slug: "eu-ai-act-ecommerce-chatbot-2026",
+    title:
+      "EU AI Act went live Aug 2. Your Klaviyo chatbot is now regulated.",
+    description:
+      "Article 50 of the EU AI Act requires AI chatbots to disclose they're AI before talking. US DTC brands with EU customers are in scope. Fines reach €15M.",
+    date: "2026-08-05",
+    author: "Dustin Gilmour",
+    readTime: "7 min",
+    tags: [
+      "ecommerce",
+      "DTC",
+      "EU AI Act",
+      "AI compliance",
+      "chatbot",
+      "AI marketing",
+      "Klaviyo",
+    ],
+    image: "/blog/eu-ai-act-ecommerce-chatbot.jpg",
+  },
+  {
     slug: "ai-creative-cac-reduction-dtc-2026",
     title:
       "AI ad creative cuts paid CAC by 14%. The gap is in how you test it.",
