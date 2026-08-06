@@ -11,6 +11,26 @@ export interface BlogPost {
 
 export const posts: BlogPost[] = [
   {
+    slug: "shhots-ai-ecommerce-ads-2026",
+    title:
+      "Your product shoot takes days. Shhots makes the ads in 2 minutes.",
+    description:
+      "Shhots AI turns a single product photo into UGC video ads and static creatives for every placement. No prompts, no designer, no wait. Starting at $19/month.",
+    date: "2026-08-06",
+    author: "Dustin Gilmour",
+    readTime: "7 min",
+    tags: [
+      "ecommerce",
+      "DTC",
+      "ad creative",
+      "AI marketing",
+      "video ads",
+      "UGC",
+      "paid ads",
+    ],
+    image: "/blog/shhots-ai-ecommerce-ads.jpg",
+  },
+  {
     slug: "eu-ai-act-ecommerce-chatbot-2026",
     title:
       "EU AI Act went live Aug 2. Your Klaviyo chatbot is now regulated.",
