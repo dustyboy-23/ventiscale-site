@@ -44,11 +44,11 @@ const FAQ_DATA = [
   },
   {
     q: "Does Shhots AI require a creative brief or prompt?",
-    a: "No. Shhots is built as a promptless generator. You upload your product photo and Shhots handles the entire pipeline — copy, scene, motion, voiceover — without a brief or any creative direction from you.",
+    a: "No. Shhots is built as a promptless generator. You upload your product photo and Shhots handles the entire pipeline: copy, scene, motion, and voiceover. No brief or creative direction from you.",
   },
   {
     q: "What ad formats does Shhots AI generate?",
-    a: "Shhots generates AI UGC ads and cinematic ads in 10-second and 15-second video formats, plus static creatives — all sized and optimized for Facebook, Instagram, TikTok, LinkedIn, and YouTube.",
+    a: "Shhots generates AI UGC ads and cinematic ads in 10-second and 15-second video formats, plus static creatives sized and optimized for Facebook, Instagram, TikTok, LinkedIn, and YouTube.",
   },
   {
     q: "How much does Shhots AI cost?",
