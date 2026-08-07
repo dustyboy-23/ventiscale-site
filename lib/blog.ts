@@ -11,6 +11,26 @@ export interface BlogPost {
 
 export const posts: BlogPost[] = [
   {
+    slug: "adskull-meta-ads-ai-ecommerce-2026",
+    title:
+      "Meta ad creative costs $0 now. Here's what AdSkull actually does.",
+    description:
+      "AdSkull generates Meta ad creatives from a product URL using 22 AI models. Free plan: 50 credits and 25 launches per month, no card required.",
+    date: "2026-08-07",
+    author: "Dustin Gilmour",
+    readTime: "7 min",
+    tags: [
+      "ecommerce",
+      "DTC",
+      "Meta ads",
+      "AI marketing",
+      "ad creative",
+      "paid ads",
+      "AI tools",
+    ],
+    image: "/blog/adskull-meta-ads.jpg",
+  },
+  {
     slug: "shhots-ai-ecommerce-ads-2026",
     title:
       "Your product shoot takes days. Shhots makes the ads in 2 minutes.",
