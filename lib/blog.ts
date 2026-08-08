@@ -11,6 +11,27 @@ export interface BlogPost {
 
 export const posts: BlogPost[] = [
   {
+    slug: "dtc-cac-inflation-paid-vs-owned-2026",
+    title:
+      "DTC CAC went up 24.7% last year. Your agency didn't change a thing.",
+    description:
+      "DTC customer acquisition cost rose 24.7% in 2025 and 222% over 8 years. Email delivers $42-45 per dollar. Here's why your agency keeps optimizing the wrong channel.",
+    date: "2026-08-08",
+    author: "Dustin Gilmour",
+    readTime: "7 min",
+    tags: [
+      "ecommerce",
+      "DTC",
+      "customer acquisition cost",
+      "CAC",
+      "paid acquisition",
+      "email marketing",
+      "retention marketing",
+      "AI marketing",
+    ],
+    image: "/blog/dtc-cac-inflation-2026.jpg",
+  },
+  {
     slug: "adskull-meta-ads-ai-ecommerce-2026",
     title:
       "Meta ad creative costs $0 now. Here's what AdSkull actually does.",
