@@ -11,6 +11,25 @@ export interface BlogPost {
 
 export const posts: BlogPost[] = [
   {
+    slug: "dtc-wrong-agency-fit-2026",
+    title: "You didn't hire a bad agency. You hired the wrong type.",
+    description:
+      "Most DTC brands fail with agencies not because they hired poorly but because they hired the wrong type for their constraint. Here's how to diagnose yours.",
+    date: "2026-08-09",
+    author: "Dustin Gilmour",
+    readTime: "7 min",
+    tags: [
+      "ecommerce",
+      "DTC",
+      "marketing agency",
+      "agency strategy",
+      "DTC growth",
+      "AI marketing",
+      "done-for-you marketing",
+    ],
+    image: "/blog/dtc-wrong-agency-fit.jpg",
+  },
+  {
     slug: "dtc-cac-inflation-paid-vs-owned-2026",
     title:
       "DTC CAC went up 24.7% last year. Your agency didn't change a thing.",
