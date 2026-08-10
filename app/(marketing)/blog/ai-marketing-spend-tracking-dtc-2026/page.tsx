@@ -46,7 +46,7 @@ const IMAGE_URL = `https://www.ventiscale.com${IMAGE}`;
 const FAQ_DATA = [
   {
     q: "How do I calculate ROI on AI marketing tools?",
-    a: "Divide your monthly spend on each AI tool by the revenue you can attribute to that channel in the same period. If your AI email tool costs $200/month and drove $4,000 in email-attributed revenue, that's a 20x return on that specific tool. The harder number to get right is attribution — email and content often warm a customer who converts later through a different channel. Use 60-90 day windows, not single sessions, before drawing conclusions.",
+    a: "Divide your monthly spend on each AI tool by the revenue you can attribute to that channel in the same period. If your AI email tool costs $200/month and drove $4,000 in email-attributed revenue, that's a 20x return on that specific tool. The harder number to get right is attribution. Email and content often warm a customer who converts later through a different channel. Use 60-90 day windows, not single sessions, before drawing conclusions.",
   },
   {
     q: "What AI marketing tools do most DTC brands use in 2026?",
