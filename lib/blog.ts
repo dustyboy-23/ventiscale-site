@@ -11,6 +11,26 @@ export interface BlogPost {
 
 export const posts: BlogPost[] = [
   {
+    slug: "ai-marketing-spend-tracking-dtc-2026",
+    title: "Most DTC founders can't say which AI marketing tool is working.",
+    description:
+      "Rippling burned 40% of its R&D budget on AI tokens with no tracking. DTC brands make the same mistake with their marketing stack. Here's how to fix it.",
+    date: "2026-08-10",
+    author: "Dustin Gilmour",
+    readTime: "7 min",
+    tags: [
+      "ecommerce",
+      "DTC",
+      "AI marketing",
+      "marketing ROI",
+      "AI tools",
+      "marketing stack",
+      "ecommerce marketing",
+      "done-for-you marketing",
+    ],
+    image: "/blog/ai-marketing-spend-tracking.jpg",
+  },
+  {
     slug: "dtc-wrong-agency-fit-2026",
     title: "You didn't hire a bad agency. You hired the wrong type.",
     description:
