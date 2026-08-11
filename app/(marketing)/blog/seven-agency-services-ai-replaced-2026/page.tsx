@@ -48,7 +48,7 @@ const FAQ_DATA = [
   },
   {
     q: "What should I still pay a marketing agency for in 2026?",
-    a: "Brand positioning strategy, founder-voice creative direction, and performance accountability are the three service lines worth paying for. Anything that AI platforms execute automatically — segmentation, send-time, product recommendations, ad bidding, basic catalog copy — shouldn't be a standalone line item in your retainer.",
+    a: "Brand positioning strategy, founder-voice creative direction, and performance accountability are the three service lines worth paying for. Anything that AI platforms execute automatically (segmentation, send-time, product recommendations, ad bidding, basic catalog copy) shouldn't be a standalone line item in your retainer.",
   },
   {
     q: "Is Meta Advantage+ Shopping replacing ad agency targeting work?",
@@ -56,7 +56,7 @@ const FAQ_DATA = [
   },
   {
     q: "How do I know if my agency is billing for AI-automated services?",
-    a: "Look at the deliverables list in your contract. If it includes email segmentation, send-time optimization, product recommendations, audience targeting, or basic content production — those are services AI platforms handle by default now. Ask your agency what their process adds on top of what the platform does automatically. If they can't answer specifically, you have your answer.",
+    a: "Look at the deliverables list in your contract. If it includes email segmentation, send-time optimization, product recommendations, audience targeting, or basic content production, those are services AI platforms handle by default now. Ask your agency what their process adds on top of what the platform does automatically. If they can't answer specifically, you have your answer.",
   },
 ];
 
@@ -203,9 +203,10 @@ export default async function Post() {
           </div>
 
           <p>
-            Seven specific marketing services — email segmentation, AI product recommendations,
-            send-time optimization, ad targeting, creative production, customer service routing, and
-            product copy — are now handled automatically by platforms ecommerce brands already use.
+            Seven specific marketing services are now handled automatically by platforms ecommerce
+            brands already use: email segmentation, AI product recommendations, send-time
+            optimization, ad targeting, creative production, customer service routing, and product
+            copy.
           </p>
 
           <h2 id="email-segmentation">1. Email list segmentation</h2>
@@ -332,7 +333,7 @@ export default async function Post() {
           <p>
             AdCreative.ai starts at $39 per month and generates static ad creatives from a product
             URL. Creatify produces 5-10 platform-ready video ads in under ten minutes. These
-            aren&apos;t rough drafts — they&apos;re format-native creatives ready for Meta, TikTok,
+            aren&apos;t rough drafts. They&apos;re format-native creatives ready for Meta, TikTok,
             and Google placements.
           </p>
 
@@ -367,7 +368,7 @@ export default async function Post() {
           <p>
             Some agency retainers include &quot;CX strategy&quot; or &quot;support ticket
             management&quot; as service lines. What they&apos;re usually describing is the routing
-            layer — which message goes where, what triggers an escalation, how to prioritize by
+            layer: which message goes where, what triggers an escalation, how to prioritize by
             urgency. That&apos;s the part that&apos;s now automated. What still needs a human:
             deciding how the brand sounds when something goes wrong. That tone decision doesn&apos;t
             come from a workflow configuration. It comes from knowing your customers.
@@ -439,7 +440,7 @@ export default async function Post() {
             also found that only 14% call their new-business pipeline &quot;very healthy.&quot; The
             agency market is already shifting. The question is whether your retainer has caught up.
             If you want to see which of these seven automations are actually running in your account
-            — and which ones you&apos;re still paying agency prices for — that&apos;s exactly what
+            and which ones you&apos;re still paying agency prices for. That&apos;s exactly what
             the free audit covers.
           </p>
 
