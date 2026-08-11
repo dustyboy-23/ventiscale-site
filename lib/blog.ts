@@ -11,6 +11,24 @@ export interface BlogPost {
 
 export const posts: BlogPost[] = [
   {
+    slug: "seven-agency-services-ai-replaced-2026",
+    title: "7 marketing services AI has replaced. Are you still paying for them?",
+    description:
+      "53% of agency owners say AI threatens their business. Here are 7 specific services AI already handles, and which ones your retainer is still charging for.",
+    date: "2026-08-11",
+    author: "Dustin Gilmour",
+    readTime: "7 min",
+    tags: [
+      "ecommerce",
+      "DTC",
+      "AI marketing",
+      "marketing agency",
+      "agency alternatives",
+      "done-for-you marketing",
+    ],
+    image: "/blog/agency-services-ai-replaced.jpg",
+  },
+  {
     slug: "ai-marketing-spend-tracking-dtc-2026",
     title: "Most DTC founders can't say which AI marketing tool is working.",
     description:
