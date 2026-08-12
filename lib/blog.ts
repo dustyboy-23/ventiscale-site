@@ -11,6 +11,25 @@ export interface BlogPost {
 
 export const posts: BlogPost[] = [
   {
+    slug: "amazon-ads-dtc-roas-ecommerce-2026",
+    title: "Your DTC ad spend is on Meta. The 3.14x ROAS is on Amazon.",
+    description:
+      "Amazon Advertising delivers 3.14x median ROAS vs Meta's 1.86x. HexClad made $1M switching budget. Most DTC brands have never run an Amazon ad.",
+    date: "2026-08-12",
+    author: "Dustin Gilmour",
+    readTime: "7 min",
+    tags: [
+      "ecommerce",
+      "DTC",
+      "Amazon Ads",
+      "paid ads",
+      "ROAS",
+      "AI marketing",
+      "ad spend",
+    ],
+    image: "/blog/amazon-ads-dtc-roas.jpg",
+  },
+  {
     slug: "seven-agency-services-ai-replaced-2026",
     title: "7 marketing services AI has replaced. Are you still paying for them?",
     description:
