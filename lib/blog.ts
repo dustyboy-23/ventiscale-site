@@ -11,6 +11,26 @@ export interface BlogPost {
 
 export const posts: BlogPost[] = [
   {
+    slug: "dtc-agency-management-overhead-ecommerce-2026",
+    title:
+      "You're paying to manage your marketing agency. Nobody told you that.",
+    description:
+      "Founders spend 15-20 hours a month managing their agencies. That overhead isn't on any invoice. Here's the real cost — and what to do about it.",
+    date: "2026-08-13",
+    author: "Dustin Gilmour",
+    readTime: "7 min",
+    tags: [
+      "ecommerce",
+      "DTC",
+      "marketing agency",
+      "agency costs",
+      "agency alternatives",
+      "AI marketing",
+      "done-for-you marketing",
+    ],
+    image: "/blog/dtc-agency-management-overhead.jpg",
+  },
+  {
     slug: "amazon-ads-dtc-roas-ecommerce-2026",
     title: "Your DTC ad spend is on Meta. The 3.14x ROAS is on Amazon.",
     description:
