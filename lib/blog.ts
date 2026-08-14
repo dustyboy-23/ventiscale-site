@@ -11,6 +11,26 @@ export interface BlogPost {
 
 export const posts: BlogPost[] = [
   {
+    slug: "dtc-ai-ad-creative-no-team-ecommerce-2026",
+    title:
+      "No creative team. No problem. AI just changed the math for DTC ads.",
+    description:
+      "Brands using AI creative report a 14% paid CAC reduction. Tools like Krev start at $39/month. Here's how DTC brands run paid ads without a creative team.",
+    date: "2026-08-14",
+    author: "Dustin Gilmour",
+    readTime: "7 min",
+    tags: [
+      "ecommerce",
+      "DTC",
+      "AI marketing",
+      "paid ads",
+      "ad creative",
+      "creative production",
+      "done-for-you marketing",
+    ],
+    image: "/blog/dtc-ai-ad-creative-no-team.jpg",
+  },
+  {
     slug: "dtc-agency-management-overhead-ecommerce-2026",
     title:
       "You're paying to manage your marketing agency. Nobody told you that.",
