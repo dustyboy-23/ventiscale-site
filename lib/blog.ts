@@ -11,6 +11,26 @@ export interface BlogPost {
 
 export const posts: BlogPost[] = [
   {
+    slug: "shopify-sidekick-flow-automation-ecommerce-2026",
+    title:
+      "Shopify just automated the thing you were paying your agency to do",
+    description:
+      "Shopify Sidekick now builds Flow automations from plain English. Here's what that means for your $1,200/mo agency retainer.",
+    date: "2026-08-15",
+    author: "Dustin Gilmour",
+    readTime: "7 min",
+    tags: [
+      "ecommerce",
+      "DTC",
+      "Shopify",
+      "AI marketing",
+      "marketing agency",
+      "automation",
+      "done-for-you marketing",
+    ],
+    image: "/blog/shopify-sidekick-flow.jpg",
+  },
+  {
     slug: "dtc-ai-ad-creative-no-team-ecommerce-2026",
     title:
       "No creative team. No problem. AI just changed the math for DTC ads.",
