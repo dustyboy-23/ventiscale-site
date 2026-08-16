@@ -11,6 +11,26 @@ export interface BlogPost {
 
 export const posts: BlogPost[] = [
   {
+    slug: "dtc-cac-payback-period-ecommerce-2026",
+    title:
+      "Your DTC CAC payback is over 120 days. That's not a targeting problem.",
+    description:
+      "CAC payback period is the metric your agency never shows you. Here's the formula, what healthy looks like, and why ROAS hides the truth.",
+    date: "2026-08-16",
+    author: "Dustin Gilmour",
+    readTime: "7 min",
+    tags: [
+      "ecommerce",
+      "DTC",
+      "CAC",
+      "customer acquisition cost",
+      "paid acquisition",
+      "marketing ROI",
+      "AI marketing",
+    ],
+    image: "/blog/dtc-cac-payback-period.jpg",
+  },
+  {
     slug: "shopify-sidekick-flow-automation-ecommerce-2026",
     title:
       "Shopify just automated the thing you were paying your agency to do",
