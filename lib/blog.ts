@@ -11,6 +11,27 @@ export interface BlogPost {
 
 export const posts: BlogPost[] = [
   {
+    slug: "klaviyo-composer-multichannel-2026",
+    title:
+      "One prompt. Klaviyo just sent your email, SMS, push, and WhatsApp.",
+    description:
+      "Klaviyo Composer generates full multichannel campaigns from one text prompt. Customer Agent handles order edits, returns, and subscriptions automatically.",
+    date: "2026-08-17",
+    author: "Dustin Gilmour",
+    readTime: "7 min",
+    tags: [
+      "ecommerce",
+      "DTC",
+      "Klaviyo",
+      "email marketing",
+      "SMS marketing",
+      "AI marketing",
+      "retention",
+      "done-for-you marketing",
+    ],
+    image: "/blog/klaviyo-composer-multichannel.jpg",
+  },
+  {
     slug: "dtc-cac-payback-period-ecommerce-2026",
     title:
       "Your DTC CAC payback is over 120 days. That's not a targeting problem.",
