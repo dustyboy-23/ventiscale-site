@@ -11,6 +11,27 @@ export interface BlogPost {
 
 export const posts: BlogPost[] = [
   {
+    slug: "email-marketing-roi-ecommerce-2026",
+    title:
+      "Email returns $36 for every $1. Here's why most brands never see it.",
+    description:
+      "Email marketing delivers $36-$79 per $1 spent in 2026. Most brands capture $0.18/email because they run campaigns instead of flows. Here's the gap explained.",
+    date: "2026-08-18",
+    author: "Dustin Gilmour",
+    readTime: "7 min",
+    tags: [
+      "ecommerce",
+      "DTC",
+      "email marketing",
+      "Klaviyo",
+      "marketing ROI",
+      "email flows",
+      "AI marketing",
+      "done-for-you marketing",
+    ],
+    image: "/blog/email-marketing-roi-vs-meta.jpg",
+  },
+  {
     slug: "klaviyo-composer-multichannel-2026",
     title:
       "One prompt. Klaviyo just sent your email, SMS, push, and WhatsApp.",
