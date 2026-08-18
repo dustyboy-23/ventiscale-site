@@ -6,11 +6,11 @@ import { BlogAuthorBio } from "@/components/marketing/blog-author-bio";
 export const metadata = {
   title: "Email returns $36 for every $1. Here's why most brands never see it. | Venti Scale",
   description:
-    "Email marketing delivers $36-$79 per $1 spent in 2026. Most brands capture $0.18/email because they run campaigns instead of flows. Here&apos;s the gap explained.",
+    "Email marketing delivers $36-$79 per $1 spent in 2026. Most brands capture $0.18/email because they run campaigns instead of flows. Here's the gap explained.",
   openGraph: {
     title: "Email returns $36 for every $1. Here's why most brands never see it.",
     description:
-      "Email marketing delivers $36-$79 per $1 spent in 2026. Most brands capture $0.18/email because they run campaigns instead of flows. Here&apos;s the gap explained.",
+      "Email marketing delivers $36-$79 per $1 spent in 2026. Most brands capture $0.18/email because they run campaigns instead of flows. Here's the gap explained.",
     url: "https://www.ventiscale.com/blog/email-marketing-roi-ecommerce-2026",
     type: "article",
     images: [
@@ -26,7 +26,7 @@ export const metadata = {
     card: "summary_large_image" as const,
     title: "Email returns $36 for every $1. Here's why most brands never see it.",
     description:
-      "Email marketing delivers $36-$79 per $1 spent in 2026. Most brands capture $0.18/email because they run campaigns instead of flows. Here&apos;s the gap explained.",
+      "Email marketing delivers $36-$79 per $1 spent in 2026. Most brands capture $0.18/email because they run campaigns instead of flows. Here's the gap explained.",
     images: ["https://www.ventiscale.com/blog/email-marketing-roi-vs-meta.jpg"],
   },
 };
@@ -43,7 +43,7 @@ const IMAGE_URL = `https://www.ventiscale.com${IMAGE}`;
 const FAQ_DATA = [
   {
     q: "What is the ROI of email marketing for ecommerce brands in 2026?",
-    a: "Email marketing delivers $36-$79 per $1 spent in 2026, with US ecommerce averaging $72 per $1. That return comes almost entirely from automated flows, not broadcast campaigns. Automated flows generate $2.87 per email sent versus $0.18 per email for campaigns — a 15.9x difference in revenue per send.",
+    a: "Email marketing delivers $36-$79 per $1 spent in 2026, with US ecommerce averaging $72 per $1. That return comes almost entirely from automated flows, not broadcast campaigns. Automated flows generate $2.87 per email sent versus $0.18 per email for campaigns. That's a 15.9x difference in revenue per send.",
   },
   {
     q: "Why do email campaigns have such low ROI compared to flows?",
@@ -51,11 +51,11 @@ const FAQ_DATA = [
   },
   {
     q: "How does email marketing ROI compare to Meta ads?",
-    a: "Meta ads return 1.86-2.19x ROAS in 2026. Email returns $36-$79 per $1 spent. The comparison isn&apos;t perfectly apples-to-apples because email ROI is measured against tool cost (Klaviyo, etc.) while Meta ROAS is measured against ad spend. But the point stands: owned channels return far more per dollar invested than paid acquisition.",
+    a: "Meta ads return 1.86-2.19x ROAS in 2026. Email returns $36-$79 per $1 spent. The comparison isn't perfectly apples-to-apples because email ROI is measured against tool cost (Klaviyo, etc.) while Meta ROAS is measured against ad spend. But the point stands: owned channels return far more per dollar invested than paid acquisition.",
   },
   {
     q: "Which email flows drive the most revenue for ecommerce stores?",
-    a: "Four flows drive the majority of email revenue: the welcome series (highest-converting because buyers are at peak interest), abandoned cart (directly recovers purchase intent), post-purchase (cross-sell and review collection), and winback (reactivates lapsed buyers before they&apos;re gone). Most stores have none of these set up properly.",
+    a: "Four flows drive the majority of email revenue: the welcome series (highest-converting because buyers are at peak interest), abandoned cart (directly recovers purchase intent), post-purchase (cross-sell and review collection), and winback (reactivates lapsed buyers before they're gone). Most stores have none of these set up properly.",
   },
   {
     q: "How long does it take to see ROI from email marketing?",
