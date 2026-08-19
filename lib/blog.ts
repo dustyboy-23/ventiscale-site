@@ -11,6 +11,27 @@ export interface BlogPost {
 
 export const posts: BlogPost[] = [
   {
+    slug: "dtc-conversion-rate-benchmark-ecommerce-2026",
+    title:
+      "Your DTC store converts at 1.17%. Here's why that's not a traffic problem.",
+    description:
+      "The median DTC site conversion rate is 1.17% across 17M sessions. Top Shopify stores hit 2.5-3%. The gap isn't traffic — it's everything after the click.",
+    date: "2026-08-19",
+    author: "Dustin Gilmour",
+    readTime: "7 min",
+    tags: [
+      "ecommerce",
+      "DTC",
+      "conversion rate",
+      "Shopify",
+      "DTC benchmarks",
+      "customer acquisition",
+      "AI marketing",
+      "done-for-you marketing",
+    ],
+    image: "/blog/dtc-conversion-rate.jpg",
+  },
+  {
     slug: "email-marketing-roi-ecommerce-2026",
     title:
       "Email returns $36 for every $1. Here's why most brands never see it.",
