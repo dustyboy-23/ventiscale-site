@@ -11,6 +11,26 @@ export interface BlogPost {
 
 export const posts: BlogPost[] = [
   {
+    slug: "meta-advantage-plus-generative-creative-2026",
+    title:
+      "Every Meta campaign runs AI creative now. Most DTC brands haven't noticed.",
+    description:
+      "Meta Advantage+ generative creative is now default, not opt-in. Image-to-video, AI music, virtual try-on: all standard. Here's what DTC brands need.",
+    date: "2026-08-20",
+    author: "Dustin Gilmour",
+    readTime: "7 min",
+    tags: [
+      "ecommerce",
+      "DTC",
+      "Meta ads",
+      "Advantage+",
+      "AI marketing",
+      "ad creative",
+      "done-for-you marketing",
+    ],
+    image: "/blog/meta-advantage-plus-generative-creative.jpg",
+  },
+  {
     slug: "dtc-conversion-rate-benchmark-ecommerce-2026",
     title:
       "Your DTC store converts at 1.17%. Here's why that's not a traffic problem.",
