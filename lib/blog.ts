@@ -11,6 +11,25 @@ export interface BlogPost {
 
 export const posts: BlogPost[] = [
   {
+    slug: "agency-principal-model-dtc-2026",
+    title: "Your agency isn't your agent. 85% of brands are catching on.",
+    description:
+      "85% of US B2C marketing executives are reviewing their media agency in 2026. Forrester's 33% principal-model number is why.",
+    date: "2026-08-21",
+    author: "Dustin Gilmour",
+    readTime: "7 min",
+    tags: [
+      "ecommerce",
+      "DTC",
+      "marketing agency",
+      "agency alternatives",
+      "agency review",
+      "AI marketing",
+      "done-for-you marketing",
+    ],
+    image: "/blog/agency-principal-model.jpg",
+  },
+  {
     slug: "meta-advantage-plus-generative-creative-2026",
     title:
       "Every Meta campaign runs AI creative now. Most DTC brands haven't noticed.",
