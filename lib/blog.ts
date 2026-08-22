@@ -11,6 +11,25 @@ export interface BlogPost {
 
 export const posts: BlogPost[] = [
   {
+    slug: "markable-ai-shoppable-video-ecommerce-2026",
+    title: "Markable converts raw footage to shoppable video. No editor needed.",
+    description:
+      "Markable's AI video editor converts raw footage to shoppable video in seconds. Social commerce is at $100B. Here's what DTC brands need to know.",
+    date: "2026-08-22",
+    author: "Dustin Gilmour",
+    readTime: "7 min",
+    tags: [
+      "ecommerce",
+      "DTC",
+      "AI marketing",
+      "shoppable video",
+      "social commerce",
+      "video marketing",
+      "content strategy",
+    ],
+    image: "/blog/markable-ai-shoppable-video.jpg",
+  },
+  {
     slug: "agency-principal-model-dtc-2026",
     title: "Your agency isn't your agent. 85% of brands are catching on.",
     description:
