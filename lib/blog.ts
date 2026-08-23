@@ -11,6 +11,26 @@ export interface BlogPost {
 
 export const posts: BlogPost[] = [
   {
+    slug: "dtc-ltv-cac-ratio-ecommerce-2026",
+    title: "The 3:1 LTV:CAC rule is SaaS math. Here's the DTC version.",
+    description:
+      "The 3:1 LTV:CAC rule was built for SaaS in 2010. DTC ecommerce runs at 1.5:1 to 3:1 median, 2.5:1 to 4:1 healthy. Here's what your ratio actually tells you.",
+    date: "2026-08-23",
+    author: "Dustin Gilmour",
+    readTime: "7 min",
+    tags: [
+      "ecommerce",
+      "DTC",
+      "LTV",
+      "CAC",
+      "unit economics",
+      "DTC benchmarks",
+      "AI marketing",
+      "done-for-you marketing",
+    ],
+    image: "/blog/dtc-ltv-cac-ratio-ecommerce.jpg",
+  },
+  {
     slug: "markable-ai-shoppable-video-ecommerce-2026",
     title: "Markable converts raw footage to shoppable video. No editor needed.",
     description:
