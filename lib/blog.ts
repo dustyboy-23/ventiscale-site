@@ -11,6 +11,26 @@ export interface BlogPost {
 
 export const posts: BlogPost[] = [
   {
+    slug: "dtc-true-cac-returns-apparel-ecommerce-2026",
+    title: "Your DTC CAC number is wrong. Returns are making it worse.",
+    description:
+      "Most DTC brands calculate CAC without factoring in return rates. Here's the true CAC formula every apparel founder needs to run.",
+    date: "2026-08-24",
+    author: "Dustin Gilmour",
+    readTime: "7 min",
+    tags: [
+      "ecommerce",
+      "DTC",
+      "CAC",
+      "return rate",
+      "DTC benchmarks",
+      "apparel",
+      "fashion ecommerce",
+      "done-for-you marketing",
+    ],
+    image: "/blog/dtc-true-cac-returns.jpg",
+  },
+  {
     slug: "dtc-ltv-cac-ratio-ecommerce-2026",
     title: "The 3:1 LTV:CAC rule is SaaS math. Here's the DTC version.",
     description:
