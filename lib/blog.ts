@@ -11,6 +11,26 @@ export interface BlogPost {
 
 export const posts: BlogPost[] = [
   {
+    slug: "dtc-fully-loaded-cac-channel-2026",
+    title: "Your agency shows you a $58 Meta CPA. Your real CAC is $212.",
+    description:
+      "Meta platform CPA runs $38-$58. Fully-loaded CAC runs $212-$230. Here's what's in the gap, why agencies report the smaller number, and how to run the real math.",
+    date: "2026-08-25",
+    author: "Dustin Gilmour",
+    readTime: "7 min",
+    tags: [
+      "ecommerce",
+      "DTC",
+      "CAC",
+      "customer acquisition cost",
+      "paid ads",
+      "Meta ads",
+      "DTC benchmarks",
+      "done-for-you marketing",
+    ],
+    image: "/blog/dtc-fully-loaded-cac-channel.jpg",
+  },
+  {
     slug: "dtc-true-cac-returns-apparel-ecommerce-2026",
     title: "Your DTC CAC number is wrong. Returns are making it worse.",
     description:
