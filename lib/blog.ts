@@ -11,6 +11,27 @@ export interface BlogPost {
 
 export const posts: BlogPost[] = [
   {
+    slug: "dtc-ad-spend-percentage-stage-2026",
+    title:
+      "59% of DTC brands spend over 30% of revenue on ads. The benchmark says 15–25%.",
+    description:
+      "Most DTC brands are stuck at startup-level ad spend ratios even past $5M. Here's the stage-by-stage benchmark, why it matters, and why your agency won't show it to you.",
+    date: "2026-08-26",
+    author: "Dustin Gilmour",
+    readTime: "7 min",
+    tags: [
+      "ecommerce",
+      "DTC",
+      "paid ads",
+      "ad spend",
+      "marketing budget",
+      "DTC benchmarks",
+      "AI marketing",
+      "done-for-you marketing",
+    ],
+    image: "/blog/dtc-ad-spend-percentage-stage.jpg",
+  },
+  {
     slug: "dtc-fully-loaded-cac-channel-2026",
     title: "Your agency shows you a $58 Meta CPA. Your real CAC is $212.",
     description:
