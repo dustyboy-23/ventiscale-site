@@ -449,7 +449,7 @@ export default async function Post() {
           </div>
 
           <BlogAuthorBio
-            bioOverride="Founder of Venti Scale. I&apos;ve walked the acquisition treadmill math with DTC founders at every revenue level. The problem is always the same. This post is what I walk every one of them through before we touch their ad account."
+            bioOverride="Founder of Venti Scale. I've walked the acquisition treadmill math with DTC founders at every revenue level. The problem is always the same. This post is what I walk every one of them through before we touch their ad account."
             lastUpdated={DATE}
           />
 
