@@ -11,6 +11,27 @@ export interface BlogPost {
 
 export const posts: BlogPost[] = [
   {
+    slug: "dtc-acquisition-treadmill-retention-2026",
+    title:
+      "Paid spend is up. Margins are down. You're on the acquisition treadmill.",
+    description:
+      "Most DTC brands scale paid acquisition while retention is flat. Here's the margin math that explains why growth isn't turning into profit.",
+    date: "2026-08-27",
+    author: "Dustin Gilmour",
+    readTime: "7 min",
+    tags: [
+      "ecommerce",
+      "DTC",
+      "retention marketing",
+      "customer acquisition",
+      "DTC benchmarks",
+      "email marketing",
+      "AI marketing",
+      "done-for-you marketing",
+    ],
+    image: "/blog/dtc-acquisition-treadmill-retention.jpg",
+  },
+  {
     slug: "dtc-ad-spend-percentage-stage-2026",
     title:
       "59% of DTC brands spend over 30% of revenue on ads. The benchmark says 15–25%.",
