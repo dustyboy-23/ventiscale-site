@@ -11,6 +11,27 @@ export interface BlogPost {
 
 export const posts: BlogPost[] = [
   {
+    slug: "meta-advantage-plus-threshold-small-brands-2026",
+    title:
+      "Meta halved Advantage+. Now most DTC brands can run AI campaigns.",
+    description:
+      "Meta dropped the Advantage+ Shopping threshold from 50 to 25 conversions per week. Here's what that unlocks for smaller ecommerce brands.",
+    date: "2026-08-28",
+    author: "Dustin Gilmour",
+    readTime: "7 min",
+    tags: [
+      "ecommerce",
+      "DTC",
+      "Meta ads",
+      "Advantage+",
+      "AI campaigns",
+      "paid ads",
+      "AI marketing",
+      "done-for-you marketing",
+    ],
+    image: "/blog/meta-advantage-plus-threshold.jpg",
+  },
+  {
     slug: "dtc-acquisition-treadmill-retention-2026",
     title:
       "Paid spend is up. Margins are down. You're on the acquisition treadmill.",
