@@ -11,6 +11,26 @@ export interface BlogPost {
 
 export const posts: BlogPost[] = [
   {
+    slug: "consumer-ai-skepticism-ecommerce-trust-2026",
+    title:
+      "52% of consumers are skeptical of AI. Generic AI content is making it worse.",
+    description:
+      "Consumer concern about AI rose from 37% to 52% in five years. Generic AI content is fueling it. Here's what custom AI does differently for ecommerce brands.",
+    date: "2026-08-29",
+    author: "Dustin Gilmour",
+    readTime: "7 min",
+    tags: [
+      "ecommerce",
+      "AI marketing",
+      "customer trust",
+      "brand voice",
+      "AI content",
+      "done-for-you marketing",
+      "DTC",
+    ],
+    image: "/blog/consumer-ai-skepticism-trust.jpg",
+  },
+  {
     slug: "meta-advantage-plus-threshold-small-brands-2026",
     title:
       "Meta halved Advantage+. Now most DTC brands can run AI campaigns.",
