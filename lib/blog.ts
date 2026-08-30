@@ -11,6 +11,28 @@ export interface BlogPost {
 
 export const posts: BlogPost[] = [
   {
+    slug: "klaviyo-predictive-clv-churn-ecommerce-2026",
+    title:
+      "Klaviyo can predict your next churn. Most brands don't have it turned on.",
+    description:
+      "Klaviyo's predictive analytics flags at-risk customers before they go cold. Here's what it does, what it requires, and why most brands never activate it.",
+    date: "2026-08-30",
+    author: "Dustin Gilmour",
+    readTime: "7 min",
+    tags: [
+      "ecommerce",
+      "DTC",
+      "Klaviyo",
+      "email marketing",
+      "retention",
+      "predictive analytics",
+      "churn",
+      "AI marketing",
+      "done-for-you marketing",
+    ],
+    image: "/blog/klaviyo-predictive-churn-ecommerce.jpg",
+  },
+  {
     slug: "consumer-ai-skepticism-ecommerce-trust-2026",
     title:
       "52% of consumers are skeptical of AI. Generic AI content is making it worse.",
