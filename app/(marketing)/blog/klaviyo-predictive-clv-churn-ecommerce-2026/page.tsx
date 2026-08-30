@@ -439,7 +439,7 @@ export default async function Post() {
           </div>
 
           <BlogAuthorBio
-            bioOverride="Founder of Venti Scale. I&apos;ve set up Klaviyo for a dozen ecommerce brands. Predictive churn is the first feature I activate after the welcome flow — and the one most accounts have never touched."
+            bioOverride="Founder of Venti Scale. I&apos;ve set up Klaviyo for a dozen ecommerce brands. Predictive churn is the first feature I activate after the welcome flow, and the one most accounts have never touched."
             lastUpdated={DATE}
           />
 
