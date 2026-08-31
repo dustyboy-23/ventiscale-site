@@ -11,6 +11,28 @@ export interface BlogPost {
 
 export const posts: BlogPost[] = [
   {
+    slug: "designkit-ai-product-video-dtc-2026",
+    title:
+      "TikTok Spark Ads get 2.4x more clicks. Your product photo gets zero.",
+    description:
+      "Designkit converts product photos into ready-to-use videos for TikTok, Instagram, YouTube, and your storefront. The production excuse for skipping video is gone.",
+    date: "2026-08-31",
+    author: "Dustin Gilmour",
+    readTime: "7 min",
+    tags: [
+      "ecommerce",
+      "DTC",
+      "ad creative",
+      "AI marketing",
+      "video ads",
+      "TikTok",
+      "Designkit",
+      "paid ads",
+      "done-for-you marketing",
+    ],
+    image: "/blog/designkit-ai-product-video.jpg",
+  },
+  {
     slug: "klaviyo-predictive-clv-churn-ecommerce-2026",
     title:
       "Klaviyo can predict your next churn. Most brands don't have it turned on.",
