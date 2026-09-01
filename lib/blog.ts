@@ -11,6 +11,28 @@ export interface BlogPost {
 
 export const posts: BlogPost[] = [
   {
+    slug: "hyperfx-ai-meta-google-ads-ecommerce-2026",
+    title:
+      "Advantage+ runs on every account now. The edge moved somewhere else.",
+    description:
+      "Meta Advantage+ and Google PMax are table stakes in 2026. Here's the cross-channel AI layer top DTC brands are running on top of them.",
+    date: "2026-09-01",
+    author: "Dustin Gilmour",
+    readTime: "7 min",
+    tags: [
+      "ecommerce",
+      "DTC",
+      "Meta ads",
+      "Google ads",
+      "AI marketing",
+      "Advantage+",
+      "paid ads",
+      "HyperFX",
+      "done-for-you marketing",
+    ],
+    image: "/blog/hyperfx-ai-meta-google-ads.jpg",
+  },
+  {
     slug: "designkit-ai-product-video-dtc-2026",
     title:
       "TikTok Spark Ads get 2.4x more clicks. Your product photo gets zero.",
