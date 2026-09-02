@@ -11,6 +11,28 @@ export interface BlogPost {
 
 export const posts: BlogPost[] = [
   {
+    slug: "meta-roas-inflation-dtc-ecommerce-2026",
+    title:
+      "Your Meta ROAS is lying. Nine DTC brands found out the hard way.",
+    description:
+      "Meta ROAS and CRM revenue are diverging. The median gap is 38%. Nine of 14 DTC brands scaled budgets on inflated numbers and saw no matching revenue lift.",
+    date: "2026-09-02",
+    author: "Dustin Gilmour",
+    readTime: "7 min",
+    tags: [
+      "ecommerce",
+      "DTC",
+      "Meta ads",
+      "ROAS",
+      "attribution",
+      "Advantage+",
+      "paid ads",
+      "AI marketing",
+      "done-for-you marketing",
+    ],
+    image: "/blog/meta-roas-inflation.jpg",
+  },
+  {
     slug: "hyperfx-ai-meta-google-ads-ecommerce-2026",
     title:
       "Advantage+ runs on every account now. The edge moved somewhere else.",
