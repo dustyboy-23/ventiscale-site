@@ -270,8 +270,12 @@ export default async function Post() {
             Klaviyo is the standard. AI handles flow logic, segmentation, and
             campaign copy. A brand with a working Klaviyo setup and proper
             flows sees email account for 30 to 45% of total revenue within 12
-            months. Most brands starting out are at 12 to 15%. The gap is
-            almost entirely about having the right flows built and running.
+            months. Most brands starting out are at 12 to 15%. We broke down
+            why that gap exists and how to close it in the{" "}
+            <Link href="/blog/email-marketing-roi-ecommerce-2026">
+              email marketing ROI breakdown for ecommerce
+            </Link>
+            . The short version: flows, not campaigns.
           </p>
           <p>
             The AI layer adds predictive segmentation, send-time optimization,
@@ -453,7 +457,7 @@ export default async function Post() {
           </div>
 
           <BlogAuthorBio
-            bioOverride="Founder of Venti Scale. I&apos;ve personally walked the math on AI stacks vs agency retainers across DTC brands at multiple revenue stages. These numbers come from real switches, not vendor pitch decks."
+            bioOverride="Founder of Venti Scale. I've personally walked the math on AI stacks vs agency retainers across DTC brands at multiple revenue stages. These numbers come from real switches, not vendor pitch decks."
             lastUpdated={DATE}
           />
 
