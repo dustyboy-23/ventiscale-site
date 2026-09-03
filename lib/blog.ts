@@ -11,6 +11,27 @@ export interface BlogPost {
 
 export const posts: BlogPost[] = [
   {
+    slug: "dtc-ai-marketing-stack-full-cost-2026",
+    title:
+      "One apparel brand replaced its $14,200 agency retainer with $400 in AI tools. Here's the full stack.",
+    description:
+      "A $12M apparel brand cut its $14,200/month agency to $400/month in AI tools. Email flows up 52%. SEO traffic up 89%. Here's every tool and what it costs.",
+    date: "2026-09-03",
+    author: "Dustin Gilmour",
+    readTime: "7 min",
+    tags: [
+      "ecommerce",
+      "DTC",
+      "AI marketing",
+      "marketing agency",
+      "agency alternatives",
+      "AI tools",
+      "marketing stack",
+      "done-for-you marketing",
+    ],
+    image: "/blog/dtc-ai-marketing-stack.jpg",
+  },
+  {
     slug: "meta-roas-inflation-dtc-ecommerce-2026",
     title:
       "Your Meta ROAS is lying. Nine DTC brands found out the hard way.",
