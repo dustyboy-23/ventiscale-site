@@ -11,6 +11,27 @@ export interface BlogPost {
 
 export const posts: BlogPost[] = [
   {
+    slug: "google-ads-campaign-structure-wasted-spend-2026",
+    title:
+      "Most Google Ads budgets waste 20-40% before they land a useful click.",
+    description:
+      "Unaudited Google Ads accounts waste 20-40% of budget on irrelevant traffic. The root cause isn't bad creative. It's campaign structure.",
+    date: "2026-09-04",
+    author: "Dustin Gilmour",
+    readTime: "7 min",
+    tags: [
+      "ecommerce",
+      "DTC",
+      "Google Ads",
+      "paid ads",
+      "campaign structure",
+      "wasted ad spend",
+      "AI marketing",
+      "done-for-you marketing",
+    ],
+    image: "/blog/google-ads-campaign-structure.jpg",
+  },
+  {
     slug: "dtc-ai-marketing-stack-full-cost-2026",
     title:
       "One apparel brand replaced its $14,200 agency retainer with $400 in AI tools. Here's the full stack.",
