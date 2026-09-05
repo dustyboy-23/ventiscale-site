@@ -11,6 +11,27 @@ export interface BlogPost {
 
 export const posts: BlogPost[] = [
   {
+    slug: "dtc-founder-marketing-hours-ai-stack-2026",
+    title:
+      "Your marketing takes 25 hours a week. A DTC founder cut it to 6.",
+    description:
+      "A $3.2M clean beauty DTC brand cut founder marketing time from 25 hours to 6 per week. Revenue grew 61% in four months. No agency. One part-time assistant.",
+    date: "2026-09-05",
+    author: "Dustin Gilmour",
+    readTime: "7 min",
+    tags: [
+      "ecommerce",
+      "DTC",
+      "AI marketing",
+      "marketing automation",
+      "lean team",
+      "founder marketing",
+      "done-for-you marketing",
+      "AI marketing stack",
+    ],
+    image: "/blog/dtc-founder-marketing-hours.jpg",
+  },
+  {
     slug: "google-ads-campaign-structure-wasted-spend-2026",
     title:
       "Most Google Ads budgets waste 20-40% before they land a useful click.",
