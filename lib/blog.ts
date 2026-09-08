@@ -11,6 +11,27 @@ export interface BlogPost {
 
 export const posts: BlogPost[] = [
   {
+    slug: "dtc-contribution-margin-collapse-2026",
+    title:
+      "Your DTC margins are at 22%. Your agency is celebrating a 3x ROAS.",
+    description:
+      "Median DTC contribution margins fell from ~35% to ~22% in two years. If your agency is optimizing ROAS while your margins compress, here's what to track instead.",
+    date: "2026-09-08",
+    author: "Dustin Gilmour",
+    readTime: "7 min",
+    tags: [
+      "ecommerce",
+      "DTC",
+      "contribution margin",
+      "ROAS",
+      "profitability",
+      "AI marketing",
+      "done-for-you marketing",
+      "ecommerce benchmarks",
+    ],
+    image: "/blog/dtc-contribution-margin.jpg",
+  },
+  {
     slug: "dtc-founder-marketing-hours-ai-stack-2026",
     title:
       "Your marketing takes 25 hours a week. A DTC founder cut it to 6.",
