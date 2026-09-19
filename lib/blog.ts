@@ -11,6 +11,26 @@ export interface BlogPost {
 
 export const posts: BlogPost[] = [
   {
+    slug: "shopify-storefront-mcp-agentic-commerce-2026",
+    title:
+      "Shopify added an MCP layer. AI agents can now buy from your store.",
+    description:
+      "Shopify Storefront MCP lets AI agents browse your catalog and complete purchases on a shopper's behalf. Here's what to configure before it gets crowded.",
+    date: "2026-09-19",
+    author: "Dustin Gilmour",
+    readTime: "7 min",
+    tags: [
+      "ecommerce",
+      "DTC",
+      "Shopify",
+      "AI marketing",
+      "agentic commerce",
+      "Shopify MCP",
+      "done-for-you marketing",
+    ],
+    image: "/blog/shopify-storefront-mcp-agentic-commerce.jpg",
+  },
+  {
     slug: "dtc-contribution-margin-collapse-2026",
     title:
       "Your DTC margins are at 22%. Your agency is celebrating a 3x ROAS.",
