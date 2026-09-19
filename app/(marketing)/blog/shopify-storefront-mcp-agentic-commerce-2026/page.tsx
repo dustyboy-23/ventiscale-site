@@ -40,7 +40,7 @@ export const metadata = {
 const FAQ_DATA = [
   {
     q: "What is Shopify Storefront MCP?",
-    a: "Shopify Storefront MCP is a feature that exposes your products, search, and cart to AI shopping agents using the Model Context Protocol (MCP) standard. It allows AI assistants to browse your catalog and complete purchases on a shopper&apos;s behalf, sending orders to your store without the shopper ever loading your homepage.",
+    a: "Shopify Storefront MCP is a feature that exposes your products, search, and cart to AI shopping agents using the Model Context Protocol (MCP) standard. It allows AI assistants to browse your catalog and complete purchases on a shopper's behalf, sending orders to your store without the shopper ever loading your homepage.",
   },
   {
     q: "How do I prepare my Shopify store for agentic checkout?",
@@ -52,7 +52,7 @@ const FAQ_DATA = [
   },
   {
     q: "Will AI agents actually complete purchases on my Shopify store?",
-    a: "Yes. Shopify Storefront MCP enables AI shopping assistants to browse products, add items to cart, and complete checkout on a shopper&apos;s behalf. Traffic arrives without a human ever loading your homepage. This mirrors how ChatGPT shopping integrations and Google AI Overviews already send purchase-ready visitors to product pages.",
+    a: "Yes. Shopify Storefront MCP enables AI shopping assistants to browse products, add items to cart, and complete checkout on a shopper's behalf. Traffic arrives without a human ever loading your homepage. This mirrors how ChatGPT shopping integrations and Google AI Overviews already send purchase-ready visitors to product pages.",
   },
   {
     q: "Does Shopify Storefront MCP cost extra?",
