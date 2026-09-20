@@ -6,7 +6,7 @@ import { BlogAuthorBio } from "@/components/marketing/blog-author-bio";
 export const metadata = {
   title: "Athleisure CAC is $88. Swimwear is $240. Your agency shows you one number. | Venti Scale",
   description:
-    "DTC fashion CAC ranges $53–$240 depending on category. Most agencies show you a blended number. Here&apos;s the 2026 sub-category breakdown every fashion founder needs.",
+    "DTC fashion CAC ranges $53–$240 depending on category. Most agencies show you a blended number. Here's the 2026 sub-category breakdown every fashion founder needs.",
   openGraph: {
     title: "Athleisure CAC is $88. Swimwear is $240. Your agency shows you one number.",
     description:
@@ -51,7 +51,7 @@ const FAQ_DATA = [
   },
   {
     q: "How should DTC fashion brands calculate CAC by category?",
-    a: "Run your total paid acquisition spend by product line divided by orders in that category over the prior 90 days. Lifetime numbers mask seasonal shifts. Compare to 2026 benchmarks: athleisure $53–$88, general apparel $59–$101, swimwear $64–$240. If you&apos;re consistently above the top of the range, you have a structural cost problem, not a targeting problem.",
+    a: "Run your total paid acquisition spend by product line divided by orders in that category over the prior 90 days. Lifetime numbers mask seasonal shifts. Compare to 2026 benchmarks: athleisure $53–$88, general apparel $59–$101, swimwear $64–$240. If you're consistently above the top of the range, you have a structural cost problem, not a targeting problem.",
   },
   {
     q: "What is the most effective way to reduce DTC fashion CAC in 2026?",
@@ -458,7 +458,7 @@ export default async function Post() {
 
           {/* Author bio */}
           <BlogAuthorBio
-            bioOverride="Founder of Venti Scale. I&apos;ve reviewed CAC data across DTC brands in fashion, home goods, and beauty. The sub-category spread in fashion is the most dramatic — and the most consistently hidden by agency reporting."
+            bioOverride="Founder of Venti Scale. I&apos;ve reviewed CAC data across DTC brands in fashion, home goods, and beauty. The sub-category gap in fashion is the most dramatic I&apos;ve seen, and the most consistently hidden by agency reporting."
             lastUpdated={DATE}
           />
 
