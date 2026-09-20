@@ -164,7 +164,7 @@ export default async function Post() {
         <div className="blog-hero">
           <img
             src={IMAGE}
-            alt="DTC fashion CAC benchmarks by category 2026 — racks of clothing in a retail setting"
+            alt="DTC fashion CAC benchmarks by category 2026, apparel racks showing the spread from athleisure to swimwear"
           />
         </div>
 
@@ -185,11 +185,11 @@ export default async function Post() {
             <ul>
               <li>
                 DTC fashion CAC ranges from $53 (athleisure, footwear) to $240+
-                (swimwear, lingerie) — five distinct categories, five different
+                (swimwear, lingerie). Five distinct categories, five different
                 benchmarks
               </li>
               <li>
-                CAC rose 24.7% in 2025 alone and 222% over eight years — the
+                CAC rose 24.7% in 2025 alone and 222% over eight years. The
                 number your agency uses as a baseline is already stale
               </li>
               <li>
@@ -197,7 +197,7 @@ export default async function Post() {
                 working and which aren&apos;t
               </li>
               <li>
-                Email returns $42–$45 per $1 spent — still the fastest lever
+                Email returns $42–$45 per $1 spent, still the fastest lever
                 to offset rising acquisition cost in fashion
               </li>
             </ul>
@@ -258,7 +258,7 @@ export default async function Post() {
           <div className="blog-callout">
             <div className="callout-label">Key insight</div>
             <p>
-              If you sell multiple product lines, run your CAC by line — not by
+              If you sell multiple product lines, run your CAC by line, not by
               campaign. A swimwear line and a basics line running the same Meta
               creative will produce acquisition numbers that are $80–$150 apart.
               Blending them hides both the problem and the opportunity.
@@ -283,8 +283,8 @@ export default async function Post() {
             means most DTC fashion brands lose 83–85% of customers after the
             first order. At those churn rates, you&apos;re paying acquisition
             cost on almost every order, every cycle. The brand that moves its
-            repeat rate from 16% to 22% doesn&apos;t just improve retention
-            — it fundamentally changes the unit economics on every paid
+            repeat rate from 16% to 22% doesn&apos;t just improve retention.
+            It fundamentally changes the unit economics on every paid
             acquisition dollar it was already spending.
           </p>
           <p>
@@ -317,7 +317,7 @@ export default async function Post() {
             that&apos;s structurally underwater.
           </p>
           <p>
-            DTC fashion CAC rose 24.7% in 2025 alone — and 222% over the past
+            DTC fashion CAC rose 24.7% in 2025 alone, and 222% over the past
             eight years. Agencies know these trends. They don&apos;t surface
             them in weekly reports because a 24.7% YoY CAC inflation number
             doesn&apos;t fit neatly into a &ldquo;wins&rdquo; column. The
@@ -378,7 +378,7 @@ export default async function Post() {
           <p>
             DTC fashion CAC went up 222% over eight years. Email ROI held at
             $42–$45 per $1 spent. Those two lines moving in opposite directions
-            is the most important chart in DTC fashion right now — and almost
+            is the most important chart in DTC fashion right now. Almost
             no agency is showing it to you.
           </p>
           <p>
@@ -427,7 +427,7 @@ export default async function Post() {
             acquiring to stand still. Moving that number by 4–5 points through
             post-purchase email and win-back flows does more for unit economics
             than shaving $20 off your Meta CAC. The apparel return rate also
-            matters here — at 24–26% industry average, every{" "}
+            matters here. At 24–26% industry average, every{" "}
             <Link href="/blog/dtc-true-cac-returns-apparel-ecommerce-2026">
               return is costing you acquisition dollars twice
             </Link>
