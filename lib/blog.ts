@@ -11,6 +11,27 @@ export interface BlogPost {
 
 export const posts: BlogPost[] = [
   {
+    slug: "dtc-fashion-cac-benchmarks-2026",
+    title:
+      "Athleisure CAC is $88. Swimwear is $240. Your agency shows you one number.",
+    description:
+      "DTC fashion CAC ranges $53–$240 depending on category. Most agencies show you a blended number. Here's the 2026 sub-category breakdown every fashion founder needs.",
+    date: "2026-09-20",
+    author: "Dustin Gilmour",
+    readTime: "7 min",
+    tags: [
+      "ecommerce",
+      "DTC",
+      "fashion",
+      "CAC",
+      "DTC benchmarks",
+      "customer acquisition cost",
+      "AI marketing",
+      "done-for-you marketing",
+    ],
+    image: "/blog/dtc-fashion-cac-benchmarks.jpg",
+  },
+  {
     slug: "shopify-storefront-mcp-agentic-commerce-2026",
     title:
       "Shopify added an MCP layer. AI agents can now buy from your store.",
