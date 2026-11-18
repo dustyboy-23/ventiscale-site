@@ -1,3 +1,4 @@
+import { BlogCta } from "@/components/marketing/blog-cta";
 import Link from "next/link";
 import { headers } from "next/headers";
 import { Eyebrow } from "@/components/marketing/eyebrow";
@@ -569,9 +570,7 @@ export default async function PillarPage() {
           </p>
           <p>
             If you want to see what this looks like for your specific business,
-            the audit form below takes 60-90 seconds. I review every submission
-            personally and email back a custom plan within 2 business days. No
-            forced call. If you&apos;re evaluating other DFY services or
+            every price is on the pricing page. Pick the services you want and I reply personally within one business day. No forced call. If you&apos;re evaluating other DFY services or
             alternatives first, see the comparison framework at{" "}
             <Link href="/marketing-agency-alternatives">
               marketing agency alternatives
@@ -662,15 +661,7 @@ export default async function PillarPage() {
             </div>
           </div>
 
-          <div className="blog-cta">
-            <h3>Want a transparent done-for-you plan for your business?</h3>
-            <p>
-              Submit a 60-90 second audit. I review every submission personally,
-              answer the 5 questions framework upfront, and email back a custom
-              plan within 2 business days. Month-to-month, no forced calls.
-            </p>
-            <a href="/#audit">Get my free audit</a>
-          </div>
+          <BlogCta />
         </div>
       </article>
     </>

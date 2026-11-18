@@ -297,9 +297,10 @@ function LoginPageInner() {
       {/* Top bar */}
       <header className="px-8 py-6 flex items-center justify-between">
         <div className="flex items-center gap-2.5">
-          <div className="w-8 h-8 rounded-lg bg-[var(--color-ink)] flex items-center justify-center">
-            <span className="text-white font-bold text-sm tracking-tight">VS</span>
-          </div>
+          <svg width="32" height="32" viewBox="0 0 32 32" fill="none" aria-hidden="true">
+            <rect width="32" height="32" rx="9" fill="#0F2E20" />
+            <path d="M8.4 10.6 L14.6 22.4 L23.8 8.4" stroke="#FFFFFF" strokeWidth="3.5" strokeLinecap="round" strokeLinejoin="round" />
+          </svg>
           <span className="text-[15px] font-semibold tracking-tight text-[var(--color-ink)]">
             Venti Scale
           </span>

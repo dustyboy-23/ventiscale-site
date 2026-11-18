@@ -2,6 +2,7 @@ import Link from "next/link";
 import { headers } from "next/headers";
 import { Eyebrow } from "@/components/marketing/eyebrow";
 import { BlogAuthorBio } from "@/components/marketing/blog-author-bio";
+import { BlogCta } from "@/components/marketing/blog-cta";
 
 const SLUG = "abandoned-cart-email-sequence";
 const TITLE =
@@ -493,11 +494,7 @@ export default async function Post() {
             </div>
           </div>
 
-          <div className="blog-cta">
-            <h3>Want to see what a real abandoned cart sequence looks like for your store?</h3>
-            <p>Submit a 60-90 second audit. I&apos;ll review your current setup and email back a custom growth plan. No call required.</p>
-            <a href="/#audit">Get my free audit</a>
-          </div>
+          <BlogCta />
         </div>
       </article>
     </>

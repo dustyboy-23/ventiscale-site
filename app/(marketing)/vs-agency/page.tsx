@@ -1,3 +1,4 @@
+import { BlogCta } from "@/components/marketing/blog-cta";
 import Link from "next/link";
 import { headers } from "next/headers";
 import { Eyebrow } from "@/components/marketing/eyebrow";
@@ -44,9 +45,9 @@ const COMPARISONS = [
   {
     aspect: "Onboarding time",
     agency: "3-4 weeks (discovery phase)",
-    venti: "5 days from audit to live operations",
+    venti: "About a week from start form to live work",
     advantage: "venti",
-    note: "We start shipping day 4. Discovery happens in the audit form, not a 3-week workshop.",
+    note: "Discovery happens in a 20-minute onboarding form, not a 3-week workshop.",
   },
   {
     aspect: "Who reviews your work",
@@ -265,15 +266,7 @@ export default async function VsAgencyPage() {
             {" "}— pricing across 5 tiers.
           </p>
 
-          <div className="blog-cta">
-            <h3>Audit before you decide</h3>
-            <p>
-              60-90 seconds. I review every submission and email back a
-              custom plan within 2 business days. The plan is yours to keep
-              regardless of whether we work together.
-            </p>
-            <a href="/#audit">Get my free audit</a>
-          </div>
+          <BlogCta />
         </div>
       </article>
     </>

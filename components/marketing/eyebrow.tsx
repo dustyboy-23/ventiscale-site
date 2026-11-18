@@ -1,3 +1,5 @@
+// Small category label. Used on blog posts and guide pages, where it names
+// the topic of the page. Not for decoration above ordinary headings.
 export function Eyebrow({
   children,
   variant = "default",
@@ -5,10 +7,10 @@ export function Eyebrow({
   children: React.ReactNode;
   variant?: "default" | "accent";
 }) {
-  const color = variant === "accent" ? "text-[#10E39A]" : "text-white/45";
   return (
     <span
-      className={`inline-block font-mono text-[11px] tracking-[0.18em] uppercase ${color}`}
+      className="inline-block text-[12.5px] font-semibold tracking-[0.06em] uppercase"
+      style={{ color: variant === "accent" ? "var(--color-leaf-deep)" : "var(--color-moss)" }}
     >
       {children}
     </span>

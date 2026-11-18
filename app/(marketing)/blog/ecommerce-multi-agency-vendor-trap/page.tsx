@@ -2,6 +2,7 @@ import Link from "next/link";
 import { headers } from "next/headers";
 import { Eyebrow } from "@/components/marketing/eyebrow";
 import { BlogAuthorBio } from "@/components/marketing/blog-author-bio";
+import { BlogCta } from "@/components/marketing/blog-cta";
 
 const SLUG = "ecommerce-multi-agency-vendor-trap";
 const TITLE = "4 agencies, 4 attribution models. Nobody owns your growth.";
@@ -509,15 +510,7 @@ export default async function Post() {
             </div>
           </div>
 
-          <div className="blog-cta">
-            <h3>Want to know what your agency stack is actually costing you?</h3>
-            <p>
-              Submit a 60-second audit. I review every submission personally and
-              map out where the coordination overhead and attribution waste is
-              coming from.
-            </p>
-            <a href="/#audit">Get my free audit</a>
-          </div>
+          <BlogCta />
         </div>
       </article>
     </>

@@ -28,9 +28,9 @@ const jetbrainsMono = JetBrains_Mono({
 
 const SITE_URL = "https://www.ventiscale.com";
 const SITE_NAME = "Venti Scale";
-const TITLE = "Venti Scale. Fire your marketing agency. Keep the growth.";
+const TITLE = "Venti Scale. Your marketing, handled. Prices on the page.";
 const DESCRIPTION =
-  "Done-for-you marketing for ecommerce brands, run on AI. Content, email, ads, SEO and reports, built around your business. Watch it work in your live portal.";
+  "Done-for-you marketing for small businesses: SEO, social media, email, ads and video editing. Flat monthly prices published on the site, one-time setup, no contract.";
 
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
@@ -45,15 +45,15 @@ export const metadata: Metadata = {
   publisher: SITE_NAME,
   keywords: [
     "done-for-you marketing",
-    "ecommerce marketing agency",
-    "AI marketing",
-    "marketing automation",
-    "ecommerce growth",
-    "Shopify marketing",
-    "email marketing",
-    "content marketing",
-    "SEO audit",
+    "small business marketing",
+    "marketing agency pricing",
+    "SEO and blog writing service",
+    "social media management",
+    "email marketing service",
+    "ads management",
+    "short-form video editing",
     "flat-fee marketing",
+    "month-to-month marketing",
   ],
   alternates: {
     canonical: SITE_URL,
@@ -61,7 +61,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: TITLE,
     description:
-      "Done-for-you marketing for ecommerce brands. Custom plan built for your business. Real portal, no contracts.",
+      "Done-for-you marketing for small businesses. Every price published. One-time setup, flat monthly, no contract.",
     url: SITE_URL,
     siteName: SITE_NAME,
     type: "website",
@@ -71,7 +71,7 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: TITLE,
     description:
-      "Done-for-you marketing for ecommerce brands. Custom plan built for your business. Real portal, no contracts.",
+      "Done-for-you marketing for small businesses. Every price published. One-time setup, flat monthly, no contract.",
     creator: "@ai_dustingilmour",
   },
   robots: {
@@ -112,7 +112,7 @@ const SERVICE_JSONLD = {
   "@type": "Service",
   name: "Venti Scale: Done-for-you marketing",
   provider: { "@type": "Organization", name: SITE_NAME, url: SITE_URL },
-  serviceType: "Ecommerce marketing management",
+  serviceType: "Small business marketing management",
   areaServed: "Worldwide",
   description: DESCRIPTION,
 };

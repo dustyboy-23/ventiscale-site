@@ -1,3 +1,4 @@
+import { BlogCta } from "@/components/marketing/blog-cta";
 import Link from "next/link";
 import { headers } from "next/headers";
 import { Eyebrow } from "@/components/marketing/eyebrow";
@@ -644,9 +645,7 @@ export default async function PillarPage() {
           </p>
           <p>
             If you&apos;re evaluating alternatives and want to see what
-            this looks like for your specific business, the free audit
-            below takes 60-90 seconds. I&apos;ll review your current
-            setup and email back a custom plan within 2 business days.
+            this looks like for your specific business, every price is on the pricing page. Pick the services you want and I&apos;ll reply personally within one business day.
             No call required.
           </p>
 
@@ -727,15 +726,7 @@ export default async function PillarPage() {
             </div>
           </div>
 
-          <div className="blog-cta">
-            <h3>Want a custom plan for your business in 2 business days?</h3>
-            <p>
-              Submit a 60-90 second audit. I review every submission personally
-              and email back a plan tailored to your stage. Month-to-month, no
-              forced calls, real founder responses.
-            </p>
-            <a href="/#audit">Get my free audit</a>
-          </div>
+          <BlogCta />
         </div>
       </article>
     </>

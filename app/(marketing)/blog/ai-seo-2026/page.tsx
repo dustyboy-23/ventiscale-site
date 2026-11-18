@@ -2,6 +2,7 @@ import Link from "next/link";
 import { headers } from "next/headers";
 import { Eyebrow } from "@/components/marketing/eyebrow";
 import { BlogAuthorBio } from "@/components/marketing/blog-author-bio";
+import { BlogCta } from "@/components/marketing/blog-cta";
 
 export const metadata = {
   title: "AI and SEO in 2026: what to actually do now that ChatGPT is the new search bar | Venti Scale",
@@ -493,14 +494,7 @@ export default async function Post() {
           </div>
 
           {/* CTA */}
-          <div className="blog-cta">
-            <h3>Want to see where your marketing stands?</h3>
-            <p>
-              Get a free AI-powered audit of your online presence. Takes 30
-              seconds.
-            </p>
-            <a href="/#audit">Get my free audit</a>
-          </div>
+          <BlogCta />
         </div>
       </article>
     </>

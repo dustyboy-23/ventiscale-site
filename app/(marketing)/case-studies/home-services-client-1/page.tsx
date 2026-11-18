@@ -1,3 +1,4 @@
+import { BlogCta } from "@/components/marketing/blog-cta";
 import Link from "next/link";
 import { headers } from "next/headers";
 import { Eyebrow } from "@/components/marketing/eyebrow";
@@ -245,14 +246,7 @@ export default async function CaseStudyPage() {
             first 14 days based on your specific channels and starting point.
           </p>
 
-          <div className="blog-cta">
-            <h3>14-day timeline for your business</h3>
-            <p>
-              The audit takes 60-90 seconds. The plan you get back covers
-              specific deliverables for your first 2 weeks. No call required.
-            </p>
-            <a href="/#audit">Get my free audit</a>
-          </div>
+          <BlogCta />
         </div>
       </article>
     </>

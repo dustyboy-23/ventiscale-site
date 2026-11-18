@@ -13,7 +13,7 @@ export default function PrivacyPage() {
         Privacy Policy
       </h1>
       <p className="font-mono text-[11px] tracking-[0.14em] uppercase text-white/45 mb-12">
-        Last updated: 2026-04-29
+        Last updated: 2026-11-17
       </p>
 
       <div className="prose-legal">
@@ -25,17 +25,18 @@ export default function PrivacyPage() {
         </p>
 
         <h2>2. What we collect</h2>
-        <p>When you submit the audit form on this website, we collect:</p>
+        <p>When you submit the start form or the audit form on this website, we collect:</p>
         <ul>
           <li>Your name</li>
           <li>Your business name and type</li>
-          <li>Your website URL</li>
+          <li>Your website URL, if you give one</li>
+          <li>The services you selected, if you used the start form</li>
           <li>Your email address</li>
           <li>Any notes or context you choose to share in the optional notes field</li>
         </ul>
         <p>
-          We also fetch and analyze the public HTML of the website you submit, in order
-          to produce the audit report you requested.
+          If you request an audit, we also fetch and analyze the public HTML of the
+          website you submit, in order to produce the audit report you requested.
         </p>
         <p>When you use the Venti Scale client portal, we collect:</p>
         <ul>
@@ -49,8 +50,9 @@ export default function PrivacyPage() {
 
         <h2>3. How we use it</h2>
         <ul>
-          <li>To run the audit you requested and email you the resulting report and growth plan</li>
-          <li>To follow up with you about that audit and the services we offer in connection with it</li>
+          <li>To reply to your start request with setup steps and pricing for the plan you chose</li>
+          <li>To run an audit you requested and email you the resulting report and growth plan</li>
+          <li>To follow up with you about that request and the services we offer in connection with it</li>
           <li>To provide the services you have contracted us for</li>
           <li>To maintain your client portal and the assets inside it</li>
           <li>To communicate with you about your account and your work</li>
@@ -63,10 +65,9 @@ export default function PrivacyPage() {
 
         <h2>4. Commercial communications and your right to opt out</h2>
         <p>
-          When you submit the audit form, you are expressly requesting that we send you
-          the audit report and growth plan you asked for. The email we send in response
-          contains both the audit findings and information about the services we
-          provide. We treat this as a commercial electronic message under Canada&apos;s
+          When you submit the start form or the audit form, you are expressly requesting
+          that we email you about the plan or audit you asked for. The email we send in
+          response contains that reply and information about the services we provide. We treat this as a commercial electronic message under Canada&apos;s
           Anti-Spam Legislation (CASL) and the United States CAN-SPAM Act.
         </p>
         <p>You can opt out of any further commercial communications from us at any time:</p>

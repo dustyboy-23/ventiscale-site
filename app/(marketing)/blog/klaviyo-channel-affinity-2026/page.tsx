@@ -2,6 +2,7 @@ import Link from "next/link";
 import { headers } from "next/headers";
 import { Eyebrow } from "@/components/marketing/eyebrow";
 import { BlogAuthorBio } from "@/components/marketing/blog-author-bio";
+import { BlogCta } from "@/components/marketing/blog-cta";
 
 export const metadata = {
   title: "Klaviyo knows which channel your customer checks. Your agency is still guessing. | Venti Scale",
@@ -545,14 +546,7 @@ and misconfigured channel mix is one of the leading reasons. Channel
             </div>
           </div>
 
-          <div className="blog-cta">
-            <h3>Want to see where your marketing stands?</h3>
-            <p>
-              Get a free AI-powered audit of your online presence. Takes 30
-              seconds.
-            </p>
-            <a href="/#audit">Get my free audit</a>
-          </div>
+          <BlogCta />
         </div>
       </article>
     </>

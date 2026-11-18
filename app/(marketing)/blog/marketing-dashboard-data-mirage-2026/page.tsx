@@ -2,6 +2,7 @@ import Link from "next/link";
 import { headers } from "next/headers";
 import { Eyebrow } from "@/components/marketing/eyebrow";
 import { BlogAuthorBio } from "@/components/marketing/blog-author-bio";
+import { BlogCta } from "@/components/marketing/blog-cta";
 
 const SLUG = "marketing-dashboard-data-mirage-2026";
 const TITLE = "Your agency's dashboard shows green. Your revenue doesn't.";
@@ -497,14 +498,7 @@ export default async function Post() {
           </div>
 
           {/* CTA */}
-          <div className="blog-cta">
-            <h3>Want to see where your marketing stands?</h3>
-            <p>
-              Get a free AI-powered audit of your online presence. Takes 30
-              seconds.
-            </p>
-            <a href="/#audit">Get my free audit</a>
-          </div>
+          <BlogCta />
         </div>
       </article>
     </>

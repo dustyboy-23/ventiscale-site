@@ -1,3 +1,4 @@
+import { BlogCta } from "@/components/marketing/blog-cta";
 import Link from "next/link";
 import { headers } from "next/headers";
 import { Eyebrow } from "@/components/marketing/eyebrow";
@@ -472,15 +473,7 @@ export default async function Post() {
             </div>
           </div>
 
-          <div className="blog-cta">
-            <h3>Want to know which model fits your business?</h3>
-            <p>
-              Submit a 60-90 second audit. I review every submission and
-              email back an honest recommendation, even if the answer is
-              &quot;a traditional agency is right for you.&quot;
-            </p>
-            <a href="/#audit">Get my free audit</a>
-          </div>
+          <BlogCta />
         </div>
       </article>
     </>

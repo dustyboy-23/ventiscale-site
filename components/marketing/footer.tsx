@@ -1,129 +1,90 @@
 import Link from "next/link";
+import { Logo } from "@/components/marketing/logo";
+import { SERVICES } from "@/lib/pricing";
 
-const PILLARS = [
-  {
-    href: "/ai-marketing-for-ecommerce",
-    label: "AI marketing for ecommerce",
-  },
-  {
-    href: "/shopify-marketing-strategy",
-    label: "Shopify marketing strategy",
-  },
-  {
-    href: "/marketing-agency-alternatives",
-    label: "Marketing agency alternatives",
-  },
-  {
-    href: "/done-for-you-marketing-services",
-    label: "Done-for-you marketing",
-  },
-  {
-    href: "/ai-marketing-cost",
-    label: "AI marketing cost",
-  },
+const GUIDES = [
+  { href: "/done-for-you-marketing-services", label: "Done-for-you marketing" },
+  { href: "/marketing-agency-alternatives", label: "Marketing agency alternatives" },
+  { href: "/ai-marketing-cost", label: "What AI marketing costs" },
+  { href: "/ai-marketing-for-ecommerce", label: "AI marketing for ecommerce" },
+  { href: "/shopify-marketing-strategy", label: "Shopify marketing strategy" },
 ];
+
+const COMPANY = [
+  { href: "/pricing", label: "Pricing" },
+  { href: "/how-it-works", label: "How it works" },
+  { href: "/about", label: "About" },
+  { href: "/blog", label: "Blog" },
+  { href: "/security", label: "Security" },
+  { href: "/login", label: "Client login" },
+];
+
+function Col({ title, children }: { title: string; children: React.ReactNode }) {
+  return (
+    <div>
+      <p className="text-[15px] font-semibold text-evergreen mb-3.5">{title}</p>
+      <ul className="grid gap-2.5">{children}</ul>
+    </div>
+  );
+}
+
+const linkCls = "text-[15.5px] text-moss hover:text-evergreen transition-colors";
 
 export function MarketingFooter() {
   return (
-    <footer className="relative bg-[#07080C] border-t border-white/[0.06]">
-      <div className="max-w-[1240px] mx-auto px-6 lg:px-10 py-14">
-        <div className="grid grid-cols-1 md:grid-cols-[auto_1fr_auto] gap-10 md:gap-16">
-          <Link href="/" className="flex items-center gap-2.5 self-start">
-            <div className="relative w-7 h-7 rounded-md bg-gradient-to-br from-[#10E39A] via-[#5280FF] to-[#C8362B] p-[1px]">
-              <div className="w-full h-full rounded-[5px] bg-[#07080C] flex items-center justify-center">
-                <span className="font-display text-[14px] font-bold text-white leading-none">
-                  V
-                </span>
-              </div>
-            </div>
-            <span className="font-display text-[17px] font-semibold tracking-tight text-white">
-              Venti Scale
-            </span>
-          </Link>
-
+    <footer className="vs-rule bg-paper">
+      <div className="vs-container py-14 lg:py-16">
+        <div className="grid gap-12 lg:grid-cols-[1.3fr_1fr_1fr_1.2fr]">
           <div>
-            <p className="text-[11px] font-mono uppercase tracking-[0.14em] text-white/40 mb-4">
-              Guides
+            <Link href="/" aria-label="Venti Scale home">
+              <Logo />
+            </Link>
+            <p className="vs-small mt-4 max-w-[26em]">
+              Done-for-you marketing for small businesses. Flat monthly prices,
+              no contract, run by one person who answers his own email.
             </p>
-            <ul className="grid grid-cols-1 sm:grid-cols-2 gap-y-2 gap-x-6">
-              {PILLARS.map((p) => (
-                <li key={p.href}>
-                  <Link
-                    href={p.href}
-                    className="text-[13px] font-medium text-white/60 hover:text-white transition-colors"
-                  >
-                    {p.label}
-                  </Link>
-                </li>
-              ))}
-            </ul>
-          </div>
-
-          <nav className="flex flex-col gap-3">
-            <p className="text-[11px] font-mono uppercase tracking-[0.14em] text-white/40 mb-1">
-              Venti Scale
-            </p>
-            <Link
-              href="/#services"
-              className="text-[13px] font-medium text-white/60 hover:text-white transition-colors"
-            >
-              What we do
-            </Link>
-            <Link
-              href="/#how"
-              className="text-[13px] font-medium text-white/60 hover:text-white transition-colors"
-            >
-              How it works
-            </Link>
-            <Link
-              href="/about"
-              className="text-[13px] font-medium text-white/60 hover:text-white transition-colors"
-            >
-              About
-            </Link>
-            <Link
-              href="/blog"
-              className="text-[13px] font-medium text-white/60 hover:text-white transition-colors"
-            >
-              Blog
-            </Link>
-            <Link
-              href="/login"
-              className="text-[13px] font-medium text-white/60 hover:text-white transition-colors"
-            >
-              Client login
-            </Link>
-            <Link
-              href="/security"
-              className="text-[13px] font-medium text-white/60 hover:text-white transition-colors"
-            >
-              Trust
-            </Link>
-            <a
-              href="mailto:hello@ventiscale.com"
-              className="text-[13px] font-medium text-white/60 hover:text-white transition-colors"
-            >
+            <a href="mailto:hello@ventiscale.com" className="vs-link inline-block mt-4 text-[15.5px]">
               hello@ventiscale.com
             </a>
-          </nav>
+          </div>
+
+          <Col title="Services">
+            {SERVICES.map((s) => (
+              <li key={s.id}>
+                <Link href={`/pricing#${s.id}`} className={linkCls}>
+                  {s.name}
+                </Link>
+              </li>
+            ))}
+          </Col>
+
+          <Col title="Venti Scale">
+            {COMPANY.map((l) => (
+              <li key={l.href}>
+                <Link href={l.href} className={linkCls}>
+                  {l.label}
+                </Link>
+              </li>
+            ))}
+          </Col>
+
+          <Col title="Guides">
+            {GUIDES.map((l) => (
+              <li key={l.href}>
+                <Link href={l.href} className={linkCls}>
+                  {l.label}
+                </Link>
+              </li>
+            ))}
+          </Col>
         </div>
 
-        <div className="mt-10 pt-6 border-t border-white/[0.04] flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2">
-          <p className="text-[11px] font-mono uppercase tracking-[0.14em] text-white/40">
-            © 2026 Venti Scale. Built with AI and kept honest by a human.
-          </p>
-          <p className="text-[11px] font-mono uppercase tracking-[0.14em] text-white/40">
-            <Link href="/privacy" className="hover:text-white transition-colors">
-              Privacy
-            </Link>
-            <span className="mx-2">·</span>
-            <Link href="/terms" className="hover:text-white transition-colors">
-              Terms
-            </Link>
-            <span className="mx-2">·</span>
-            <Link href="/data-deletion" className="hover:text-white transition-colors">
-              Data deletion
-            </Link>
+        <div className="vs-rule mt-12 pt-6 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3">
+          <p className="vs-small">© 2026 Venti Scale LLC</p>
+          <p className="vs-small flex gap-5">
+            <Link href="/privacy" className="hover:text-evergreen">Privacy</Link>
+            <Link href="/terms" className="hover:text-evergreen">Terms</Link>
+            <Link href="/data-deletion" className="hover:text-evergreen">Data deletion</Link>
           </p>
         </div>
       </div>

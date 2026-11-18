@@ -2,6 +2,7 @@ import Link from "next/link";
 import { headers } from "next/headers";
 import { Eyebrow } from "@/components/marketing/eyebrow";
 import { BlogAuthorBio } from "@/components/marketing/blog-author-bio";
+import { BlogCta } from "@/components/marketing/blog-cta";
 
 export const metadata = {
   title: "9 product page mistakes killing your ecommerce conversion rate | Venti Scale",
@@ -537,14 +538,7 @@ export default async function Post() {
             </div>
           </div>
 
-          <div className="blog-cta">
-            <h3>Want to see where your product pages stand?</h3>
-            <p>
-              Get a free AI-powered audit of your ecommerce store. I look at
-              your product pages, homepage, and email setup in one report.
-            </p>
-            <a href="/#audit">Get my free audit</a>
-          </div>
+          <BlogCta />
         </div>
       </article>
     </>

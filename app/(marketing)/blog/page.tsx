@@ -1,63 +1,57 @@
 import Link from "next/link";
-import { Eyebrow } from "@/components/marketing/eyebrow";
 import { getAllPosts } from "@/lib/blog";
 
+const SITE_URL = "https://www.ventiscale.com";
+
 export const metadata = {
-  title: "Blog | Venti Scale",
+  title: "Blog",
   description:
-    "Practical marketing advice for ecommerce brands, coaches, and local businesses. No fluff. Just what works.",
+    "Practical marketing advice for small businesses and online brands. Written by someone who does this every day.",
+  alternates: { canonical: `${SITE_URL}/blog` },
 };
+
+function formatDate(iso: string) {
+  return new Date(iso + "T00:00:00").toLocaleDateString("en-US", {
+    year: "numeric",
+    month: "short",
+    day: "numeric",
+  });
+}
 
 export default function BlogIndex() {
   const posts = getAllPosts();
 
   return (
-    <div className="max-w-[820px] mx-auto px-6 lg:px-10 py-20 lg:py-28">
-      <Eyebrow>BLOG</Eyebrow>
-      <h1 className="font-display text-[40px] lg:text-[52px] leading-[1.05] tracking-[-0.02em] text-white mt-4 mb-4">
-        Marketing that works
-      </h1>
-      <p className="text-[16px] leading-relaxed text-white/55 mb-14 max-w-[520px]">
-        Practical advice for growing your business online. Written by someone
-        who actually does this every day.
-      </p>
+    <section>
+      <div className="vs-container pt-10 pb-20 lg:pt-20 lg:pb-28">
+        <div className="max-w-[44em]">
+          <h1 className="vs-h1">Marketing that works, written down.</h1>
+          <p className="vs-lede mt-6">
+            Practical advice for growing a business online. {posts.length} articles, newest first.
+          </p>
+        </div>
 
-      <div className="flex flex-col gap-4">
-        {posts.map((post) => (
-          <Link
-            key={post.slug}
-            href={`/blog/${post.slug}`}
-            className="group block rounded-xl border border-white/[0.04] bg-white/[0.015] overflow-hidden transition-all hover:border-white/[0.08] hover:bg-white/[0.03]"
-          >
-            {post.image && (
-              <div className="w-full aspect-[1200/500] overflow-hidden">
-                <img
-                  src={post.image}
-                  alt={post.title}
-                  className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-[1.02]"
-                />
-              </div>
-            )}
-            <div className="px-6 py-5">
-              <div className="flex flex-wrap items-center gap-3 mb-2.5">
-                <span className="font-mono text-[11px] tracking-[0.12em] uppercase text-white/35">
-                  {post.date}
-                </span>
-                <span className="text-white/15">&middot;</span>
-                <span className="font-mono text-[11px] tracking-[0.12em] uppercase text-white/35">
-                  {post.readTime} read
-                </span>
-              </div>
-              <h2 className="text-[20px] lg:text-[22px] font-display font-medium leading-snug text-white/90 group-hover:text-white transition-colors mb-2">
-                {post.title}
-              </h2>
-              <p className="text-[14px] leading-relaxed text-white/45 group-hover:text-white/55 transition-colors">
-                {post.description}
-              </p>
-            </div>
-          </Link>
-        ))}
+        <ul className="vs-ledger list-none p-0 m-0 mt-12 lg:mt-16">
+          {posts.map((post) => (
+            <li key={post.slug} className="border-b border-line">
+              <Link
+                href={`/blog/${post.slug}`}
+                className="group grid gap-1.5 py-6 sm:grid-cols-[8.5em_1fr] sm:gap-8"
+              >
+                <p className="vs-small pt-1 tabular-nums">
+                  <time dateTime={post.date}>{formatDate(post.date)}</time>
+                </p>
+                <div>
+                  <h2 className="vs-h3 group-hover:text-leaf-deep transition-colors">
+                    {post.title}
+                  </h2>
+                  <p className="vs-body mt-2 text-[16px]">{post.description}</p>
+                </div>
+              </Link>
+            </li>
+          ))}
+        </ul>
       </div>
-    </div>
+    </section>
   );
 }

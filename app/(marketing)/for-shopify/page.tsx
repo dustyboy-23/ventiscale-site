@@ -1,3 +1,4 @@
+import { BlogCta } from "@/components/marketing/blog-cta";
 import Link from "next/link";
 import { headers } from "next/headers";
 import { Eyebrow } from "@/components/marketing/eyebrow";
@@ -216,15 +217,7 @@ export default async function ForShopifyPage() {
             {" "}— transparent pricing across 5 tiers.
           </p>
 
-          <div className="blog-cta">
-            <h3>Submit a Shopify-specific audit</h3>
-            <p>
-              I review every Shopify store personally and email back a
-              custom 5-channel plan within 2 business days. Specific to your
-              revenue tier and product category. No call required.
-            </p>
-            <a href="/#audit">Get my free audit</a>
-          </div>
+          <BlogCta />
         </div>
       </article>
     </>

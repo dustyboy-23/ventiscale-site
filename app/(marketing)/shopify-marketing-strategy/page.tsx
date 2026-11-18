@@ -1,3 +1,4 @@
+import { BlogCta } from "@/components/marketing/blog-cta";
 import Link from "next/link";
 import { headers } from "next/headers";
 import { Eyebrow } from "@/components/marketing/eyebrow";
@@ -666,16 +667,7 @@ export default async function PillarPage() {
             </div>
           </div>
 
-          <div className="blog-cta">
-            <h3>Want a Shopify-specific plan for your store?</h3>
-            <p>
-              Submit a 60-90 second audit. I review every Shopify store
-              personally and email back a 5-channel plan tailored to your
-              revenue tier and product category. Month-to-month, no forced
-              calls.
-            </p>
-            <a href="/#audit">Get my free audit</a>
-          </div>
+          <BlogCta />
         </div>
       </article>
     </>

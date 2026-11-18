@@ -40,6 +40,8 @@ const nextConfig: NextConfig = {
       { source: "/privacy.html", destination: "/privacy", permanent: true },
       { source: "/terms.html", destination: "/terms", permanent: true },
       { source: "/data-deletion.html", destination: "/data-deletion", permanent: true },
+      // 2026-11 redesign: services and prices live on one page.
+      { source: "/services", destination: "/pricing", permanent: true },
     ];
   },
   async headers() {

@@ -1,3 +1,4 @@
+import { BlogCta } from "@/components/marketing/blog-cta";
 import Link from "next/link";
 import { headers } from "next/headers";
 import { Eyebrow } from "@/components/marketing/eyebrow";
@@ -638,9 +639,7 @@ export default async function PillarPage() {
           </p>
           <p>
             If you want to see what this would look like for your specific
-            store, the audit form below takes 60-90 seconds. I&apos;ll
-            review your current setup and email back a custom plan within
-            2 business days. If you&apos;re evaluating multiple services,
+            store, every price is on the pricing page. Pick the services you want and I&apos;ll reply personally within one business day. If you&apos;re evaluating multiple services,
             see how to compare them with the framework at{" "}
             <Link href="/marketing-agency-alternatives">
               marketing agency alternatives: 5 options that beat the retainer trap
@@ -730,15 +729,7 @@ export default async function PillarPage() {
             </div>
           </div>
 
-          <div className="blog-cta">
-            <h3>Want to see how the AI stack runs for your store?</h3>
-            <p>
-              Submit a 60-90 second audit. I review every submission personally
-              and email back a plan tailored to your specific stack. Month-to-month,
-              no forced calls, real founder responses.
-            </p>
-            <a href="/#audit">Get my free audit</a>
-          </div>
+          <BlogCta />
         </div>
       </article>
     </>

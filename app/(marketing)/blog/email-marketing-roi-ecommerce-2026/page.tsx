@@ -2,6 +2,7 @@ import Link from "next/link";
 import { headers } from "next/headers";
 import { Eyebrow } from "@/components/marketing/eyebrow";
 import { BlogAuthorBio } from "@/components/marketing/blog-author-bio";
+import { BlogCta } from "@/components/marketing/blog-cta";
 
 export const metadata = {
   title: "Email returns $36 for every $1. Here's why most brands never see it. | Venti Scale",
@@ -492,13 +493,7 @@ export default async function Post() {
           </div>
 
           {/* CTA */}
-          <div className="blog-cta">
-            <h3>Want to know what your email is actually leaving on the table?</h3>
-            <p>
-              Get a free AI-powered audit of your email setup. Takes 30 seconds.
-            </p>
-            <a href="/#audit">Get my free audit</a>
-          </div>
+          <BlogCta />
         </div>
       </article>
     </>

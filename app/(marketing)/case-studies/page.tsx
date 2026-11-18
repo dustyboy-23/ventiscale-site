@@ -1,3 +1,4 @@
+import { BlogCta } from "@/components/marketing/blog-cta";
 import Link from "next/link";
 import { Eyebrow } from "@/components/marketing/eyebrow";
 
@@ -21,7 +22,7 @@ const CASE_STUDIES = [
   {
     slug: "home-services-client-1",
     title: "Home services client: from dead Facebook page to 4-post-a-day automated operation",
-    subtitle: "B2C home services, $2K MRR baseline → live multi-channel pipeline in 14 days",
+    subtitle: "B2C home services. Live multi-channel pipeline in 14 days.",
     metrics: ["13 LinkedIn posts queued", "14-day FB photo campaign live", "Real-time portal"],
     industry: "Home services",
   },
@@ -85,18 +86,10 @@ export default function CaseStudiesIndex() {
         </p>
         <p>
           If you want to know whether a similar setup could work for your
-          business, the audit is the fastest path. I&apos;ll tell you
-          honestly whether your situation is a fit.
+          business, start a plan and I&apos;ll tell you honestly whether your situation is a fit before you pay anything.
         </p>
 
-        <div className="blog-cta">
-          <h3>Audit your specific business</h3>
-          <p>
-            60-90 seconds. I review every submission personally and email
-            back a custom plan within 2 business days.
-          </p>
-          <a href="/#audit">Get my free audit</a>
-        </div>
+        <BlogCta />
       </div>
     </article>
   );

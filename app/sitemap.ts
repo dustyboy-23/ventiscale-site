@@ -69,10 +69,16 @@ export default function sitemap(): MetadataRoute.Sitemap {
       priority: 0.85,
     },
     {
-      url: `${SITE_URL}/services`,
+      url: `${SITE_URL}/pricing`,
       lastModified: now,
       changeFrequency: "monthly",
-      priority: 0.85,
+      priority: 0.95,
+    },
+    {
+      url: `${SITE_URL}/start`,
+      lastModified: now,
+      changeFrequency: "monthly",
+      priority: 0.8,
     },
     {
       url: `${SITE_URL}/for-shopify`,

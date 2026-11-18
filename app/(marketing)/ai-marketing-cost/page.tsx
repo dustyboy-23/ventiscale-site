@@ -1,3 +1,4 @@
+import { BlogCta } from "@/components/marketing/blog-cta";
 import Link from "next/link";
 import { headers } from "next/headers";
 import { Eyebrow } from "@/components/marketing/eyebrow";
@@ -539,10 +540,7 @@ export default async function PillarPage() {
             specifically to fail none of those red flags.
           </p>
           <p>
-            If you want a custom price quote based on your specific channel
-            needs, the audit form below takes 60-90 seconds. I review every
-            submission personally and email back a transparent plan including
-            exact pricing within 2 business days. No forced sales call. The
+            If you want exact pricing for the channels you need, every price is on the pricing page. Build your plan there and I reply personally within one business day. No forced sales call. The
             number you see is the number you pay.
           </p>
 
@@ -623,15 +621,7 @@ export default async function PillarPage() {
             </div>
           </div>
 
-          <div className="blog-cta">
-            <h3>Want a transparent price quote for your business?</h3>
-            <p>
-              Submit a 60-90 second audit. I review every submission personally
-              and email back exact pricing within 2 business days. No forced
-              call. The number you see is the number you pay.
-            </p>
-            <a href="/#audit">Get my free audit</a>
-          </div>
+          <BlogCta />
         </div>
       </article>
     </>

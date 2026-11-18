@@ -2,6 +2,7 @@ import Link from "next/link";
 import { headers } from "next/headers";
 import { Eyebrow } from "@/components/marketing/eyebrow";
 import { BlogAuthorBio } from "@/components/marketing/blog-author-bio";
+import { BlogCta } from "@/components/marketing/blog-cta";
 
 export const metadata = {
   title: "Ecommerce email marketing: the 5 flows that print money on autopilot | Venti Scale",
@@ -550,14 +551,7 @@ export default async function Post() {
             </div>
           </div>
 
-          <div className="blog-cta">
-            <h3>Want to see where your email is leaving money?</h3>
-            <p>
-              Get a free AI-powered audit of your marketing. We&apos;ll show you
-              exactly which flows are missing and what they&apos;re costing you.
-            </p>
-            <a href="/#audit">Get my free audit</a>
-          </div>
+          <BlogCta />
         </div>
       </article>
     </>

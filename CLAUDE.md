@@ -68,3 +68,15 @@ Before recommending an architecture decision, check these for recent changes:
 - `git log -10 --oneline` in this repo — recent commits
 
 CSP, auth, RLS, multi-tenancy, and routing all changed in the last 30 days. Don't assume.
+
+## Marketing site v5 (2026-11-17 redesign) — read before touching `app/(marketing)/`
+
+- **Light theme, scoped.** Everything public renders inside `.vs-site` (set in `app/(marketing)/layout.tsx`). Palette tokens live in `app/globals.css` `@theme`: `paper`, `mist`, `evergreen`, `moss`, `leaf`, `leaf-deep`, `highlighter`, `line`. Fonts: Bricolage Grotesque (display) + Figtree (body), loaded in the marketing layout only. The portal keeps Inter.
+- **Every price comes from `lib/pricing.ts`.** Services, setup fees, bundle discounts, bundles. The homepage rate sheet, `/pricing`, `/start`, `/api/start`, the OG image, `llms.txt` and the structured data all read it. Change a number there and nowhere else.
+- **The highlighter (`.vs-mark`) is for prices only.** Do not use it to decorate headings.
+- **Component classes are `vs-*`** (`vs-container`, `vs-section`, `vs-h1/h2/h3`, `vs-lede`, `vs-btn`, `vs-btn-quiet`, `vs-sheet`, `vs-ledger`, `vs-bundles`, `vs-steps`, `vs-faq`, `vs-input`). Match them. No gradients, no glow, no all-caps mono labels.
+- **Legacy bridge.** The 180 blog posts and the guide pages still use dark-era utilities (`text-white/60`, `border-white/[0.06]`). A block at the end of the v5 CSS remaps those to the light palette inside `.vs-site`. New components must NOT use `text-white` / `border-white` / `bg-white/[..]`: inside the site they no longer mean white.
+- **Blog post footer CTA = `<BlogCta />`** from `components/marketing/blog-cta.tsx`. Never paste a `<div className="blog-cta">` block. The blog writer prompt (`~/venti-scale/.claude/prompts/vs-blog-post.md`, paused) still emits the old block and the old "free audit" offer: fix the prompt before reviving that cron.
+- **Lead flow.** `/start` posts to `/api/start`, which saves to `audit_leads` (notes prefixed `[PLAN REQUEST]`, `reachable` left NULL so the audit email worker ignores it) and pings Telegram. It answers "sent" only if at least one of those worked. `/api/audit` still exists but nothing on the site calls it.
+- **Copy rules:** first person ("I"), no em dashes, never "quote", no "book a call". No invented testimonials, client counts or results. Third-party numbers on `/pricing` are cited and were read at source on 2026-11-17: re-read before changing them.
+- **`/services` 308-redirects to `/pricing`.** `id="audit"` on the homepage closing band exists only so old in-article `/#audit` links land somewhere useful.
