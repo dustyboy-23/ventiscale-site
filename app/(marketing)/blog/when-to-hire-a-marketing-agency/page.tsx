@@ -5,7 +5,7 @@ import { BlogAuthorBio } from "@/components/marketing/blog-author-bio";
 import { BlogCta } from "@/components/marketing/blog-cta";
 
 export const metadata = {
-  title: "When is the right time to hire a marketing agency? | Venti Scale",
+  title: "When is the right time to hire a marketing agency?",
   description:
     "When to hire a marketing agency: concrete revenue and time benchmarks that tell you it's time. No vague advice.",
   openGraph: {
@@ -78,18 +78,18 @@ export default async function Post() {
             author: {
               "@type": "Person",
               name: "Dustin Gilmour",
-              url: "https://ventiscale.com",
+              url: "https://www.ventiscale.com",
             },
             publisher: {
               "@type": "Organization",
               name: "Venti Scale",
-              url: "https://ventiscale.com",
+              url: "https://www.ventiscale.com",
             },
             datePublished: DATE,
             dateModified: DATE,
             mainEntityOfPage: {
               "@type": "WebPage",
-              "@id": `https://ventiscale.com/blog/${SLUG}`,
+              "@id": `https://www.ventiscale.com/blog/${SLUG}`,
             },
           }),
         }}
@@ -123,13 +123,13 @@ export default async function Post() {
                 "@type": "ListItem",
                 position: 1,
                 name: "Home",
-                item: "https://ventiscale.com",
+                item: "https://www.ventiscale.com",
               },
               {
                 "@type": "ListItem",
                 position: 2,
                 name: "Blog",
-                item: "https://ventiscale.com/blog",
+                item: "https://www.ventiscale.com/blog",
               },
               { "@type": "ListItem", position: 3, name: TITLE },
             ],
@@ -385,7 +385,7 @@ export default async function Post() {
             eyeballs.
           </p>
           <p>
-            If you&apos;re seeing more than a couple of these, read our guide
+            If you&apos;re seeing more than a couple of these, read my guide
             on{" "}
             <Link href="/blog/signs-you-should-stop-diy-marketing">
               the 5 signs you should stop DIY-ing your marketing
@@ -410,7 +410,7 @@ export default async function Post() {
           <p>
             <strong>Real deliverables.</strong> &quot;We&apos;ll manage your social
             media&quot; means nothing. How many posts per week? On which platforms?
-            What does reporting look like? Get specifics. We wrote a full breakdown
+            What does reporting look like? Get specifics. I wrote a full breakdown
             of{" "}
             <Link href="/blog/what-done-for-you-marketing-includes">
               what done-for-you marketing actually includes
@@ -418,9 +418,8 @@ export default async function Post() {
             if you want the checklist.
           </p>
           <p>
-            <strong>Results they can prove.</strong> Case studies. Screenshots.
-            Before and after numbers. If they can&apos;t show you what happened
-            with their last three clients, move on.
+            <strong>Deliverables they&apos;ll put a number on.</strong> What ships every month, counted and in
+            writing. If they can&apos;t tell you that before you pay, move on.
           </p>
           <p>
             <strong>No long-term contracts.</strong> Month-to-month means they have
@@ -440,22 +439,22 @@ export default async function Post() {
           <p>
             A traditional agency runs $5,000 to $25,000 per month. That&apos;s
             $60,000 to $300,000 per year. Better than a full team, but still steep
-            for most small businesses. We covered the{" "}
+            for most small businesses. I covered the{" "}
             <Link href="/blog/marketing-agency-vs-in-house">
               full math on agency vs in-house costs
             </Link>{" "}
             in a separate breakdown.
           </p>
           <p>
-            AI-powered agencies have changed the math entirely. At Venti Scale, every service has a flat monthly price you can see before you talk to anyone. Real metrics in your own{" "}
-            <Link href="/#how">client portal</Link>. A monthly report showing what&apos;s working. The AI handles execution at scale. Humans handle
-            the strategy. You handle running your business.
+            Flat-price services have changed the math. At <Link href="/pricing">Venti Scale</Link>, every service
+            has a monthly price you can see before you talk to anyone, plus one plain monthly report and a
+            dashboard you can open any time.
           </p>
           <p>
             46% of B2B companies are now using a hybrid model where they keep
             strategy in-house and outsource execution. That&apos;s exactly what
             working with an AI-powered agency looks like. You know your business
-            better than anyone. We make sure the world knows about it. If
+            better than anyone. I make sure people find out about it. If
             you&apos;re weighing this against the broader category, here&apos;s
             the full picture on{" "}
             <Link href="/marketing-agency-alternatives">

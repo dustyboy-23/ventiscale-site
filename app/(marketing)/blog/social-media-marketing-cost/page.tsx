@@ -5,7 +5,7 @@ import { BlogAuthorBio } from "@/components/marketing/blog-author-bio";
 import { BlogCta } from "@/components/marketing/blog-cta";
 
 export const metadata = {
-  title: "How much does social media marketing really cost in 2026? | Venti Scale",
+  title: "How much does social media marketing really cost in 2026?",
   description:
     "Honest numbers on social media marketing cost for small business in 2026. Freelancers, agencies, in-house, and what you actually get at each tier.",
   openGraph: {
@@ -78,18 +78,18 @@ export default async function Post() {
             author: {
               "@type": "Person",
               name: "Dustin Gilmour",
-              url: "https://ventiscale.com",
+              url: "https://www.ventiscale.com",
             },
             publisher: {
               "@type": "Organization",
               name: "Venti Scale",
-              url: "https://ventiscale.com",
+              url: "https://www.ventiscale.com",
             },
             datePublished: DATE,
             dateModified: DATE,
             mainEntityOfPage: {
               "@type": "WebPage",
-              "@id": `https://ventiscale.com/blog/${SLUG}`,
+              "@id": `https://www.ventiscale.com/blog/${SLUG}`,
             },
           }),
         }}
@@ -123,13 +123,13 @@ export default async function Post() {
                 "@type": "ListItem",
                 position: 1,
                 name: "Home",
-                item: "https://ventiscale.com",
+                item: "https://www.ventiscale.com",
               },
               {
                 "@type": "ListItem",
                 position: 2,
                 name: "Blog",
-                item: "https://ventiscale.com/blog",
+                item: "https://www.ventiscale.com/blog",
               },
               { "@type": "ListItem", position: 3, name: TITLE },
             ],
@@ -304,7 +304,7 @@ export default async function Post() {
             full time, deeply embedded in your brand. The upside is control.
             The downside is you&apos;re paying $10,000+ per month for one
             generalist instead of a specialist team. The real math on this is
-            covered in our{" "}
+            covered in my{" "}
             <Link href="/blog/marketing-agency-vs-in-house">
               agency vs in-house cost breakdown
             </Link>
@@ -418,7 +418,7 @@ export default async function Post() {
             $3,500 per month and cover two or three platforms well. This is
             where most small businesses land and where agency retainers make
             sense. If you&apos;re in this range and wondering about the switch,
-            check out our guide on{" "}
+            check out my guide on{" "}
             <Link href="/blog/signs-you-should-stop-diy-marketing">
               signs you should stop DIY-ing your marketing
             </Link>
@@ -431,29 +431,20 @@ export default async function Post() {
             revenue than the budget saves.
           </p>
 
-          <h2>Why Venti Scale charges what we charge</h2>
+          <h2>What I charge and why</h2>
           <p>
-            Every service has a flat monthly price, published on our pricing page. You get posts written and designed for you, AI-powered production that
-            keeps costs down, a human strategy layer that keeps the voice real,
-            and a monthly report showing what&apos;s working.
+            <Link href="/done-for-you-social-media">My social media plan</Link> has one flat monthly price, published on the page. You get 12 posts
+            a month written and designed for you, plus up to 8 of your own videos posted.
           </p>
           <p>
-            We&apos;re not the cheapest option. A generalist freelancer on
-            Fiverr will quote you less. We&apos;re not the most expensive
-            either. A premium agency will quote you 3x. We&apos;re the smart
-            middle ground that uses AI to deliver agency-quality output at
-            freelancer prices, and a human brain to make sure it doesn&apos;t
-            sound like a robot wrote it.
+            I&apos;m not the cheapest option. A generalist freelancer on Fiverr will charge you less. I&apos;m
+            not the most expensive either. AI does the heavy lifting on production, and I check the work so it
+            doesn&apos;t sound like a robot wrote it.
           </p>
           <p>
-            The{" "}
-            <Link href="/#services">full service breakdown</Link> is on the
-            homepage. If you want to see what your current marketing looks like
-            from the outside, grab the free audit below. It takes 30 seconds
-            and you&apos;ll know exactly what&apos;s working and what isn&apos;t.
-            For the full breakdown on{" "}
-            <Link href="/ai-marketing-cost">what AI marketing actually costs</Link>{" "}
-            in 2026, here are the line-item numbers.
+            The <Link href="/pricing">full price list</Link> is one click away. For the full breakdown on{" "}
+            <Link href="/ai-marketing-cost">what AI marketing actually costs</Link> in 2026, here are the
+            line-item numbers.
           </p>
 
           {/* FAQ */}

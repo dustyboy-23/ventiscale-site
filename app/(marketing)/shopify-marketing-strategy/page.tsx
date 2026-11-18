@@ -10,7 +10,7 @@ const SLUG = "shopify-marketing-strategy";
 const TITLE =
   "The Shopify marketing strategy that actually works in 2026 (5 channels, real numbers)";
 const DESCRIPTION =
-  "Most Shopify brands run 2 channels badly instead of 4 channels well. Here's the 2026 playbook: which channels move revenue, what each costs, and the order to build them in.";
+  "Most Shopify brands run 2 channels badly instead of 4 channels well. Here's which channels move revenue, what each costs and the order to build them in.";
 const DATE = "2026-04-29";
 const IMAGE = "/blog/shopify-marketing-strategy.jpg";
 const IMAGE_URL = `${SITE_URL}${IMAGE}`;
@@ -39,7 +39,7 @@ const FAQ_DATA = [
 ];
 
 export const metadata = {
-  title: `${TITLE} | Venti Scale`,
+  title: { absolute: "Shopify Marketing Strategy for 2026: 5 Channels That Work" },
   description: DESCRIPTION,
   alternates: {
     canonical: `${SITE_URL}/${SLUG}`,
@@ -290,9 +290,9 @@ export default async function PillarPage() {
             hours, and 72 hours after cart abandonment. Recovers 10-30% of lost
             revenue. We covered the full mechanics including subject lines and
             timing at{" "}
-            <Link href="/blog/abandoned-cart-email-sequence">
+            
               your abandoned cart emails leave money on the table
-            </Link>
+            
             .
           </p>
           <p>
@@ -354,7 +354,7 @@ export default async function PillarPage() {
             Comparison-format content earns a disproportionate share of AI
             citations. Add comparison-format articles to your content plan. We covered the full GEO playbook
             at{" "}
-            <Link href="/blog/ai-cutting-marketing-costs">
+            <Link href="/ai-marketing-cost">
               AI cut my marketing costs 60%
             </Link>
             {" "}and the broader AI marketing strategy at{" "}
@@ -432,7 +432,7 @@ export default async function PillarPage() {
           <p>
             We covered the specific content patterns that work for ecommerce
             at{" "}
-            <Link href="/blog/social-media-for-ecommerce-brands">
+            <Link href="/blog/only-social-media-strategy-you-need">
               most ecommerce brands post on social media wrong. Here&apos;s
               what actually works.
             </Link>
@@ -576,25 +576,21 @@ export default async function PillarPage() {
           </div>
 
           <BlogAuthorBio
-            bioOverride="Founder of Venti Scale. I run AI-powered marketing systems specifically for Shopify ecommerce founders. The 5-channel strategy on this page is what I deploy for real clients in the $5K-$200K monthly revenue range."
             lastUpdated="2026-04-29"
           />
 
           <div className="blog-related">
             <h3>Read the cluster — every channel in depth</h3>
             <div className="blog-related-grid">
-              <Link
-                href="/blog/abandoned-cart-email-sequence"
-                className="blog-related-card"
-              >
+              
                 <div className="related-title">
                   Your abandoned cart emails leave money on the table.
                   Here&apos;s the 3-email sequence that recovers 18%.
                 </div>
                 <div className="related-meta">7 min read</div>
-              </Link>
+              
               <Link
-                href="/blog/social-media-for-ecommerce-brands"
+                href="/blog/only-social-media-strategy-you-need"
                 className="blog-related-card"
               >
                 <div className="related-title">
@@ -612,16 +608,13 @@ export default async function PillarPage() {
                 </div>
                 <div className="related-meta">7 min read</div>
               </Link>
-              <Link
-                href="/blog/ecommerce-marketing-compete-with-amazon"
-                className="blog-related-card"
-              >
+              
                 <div className="related-title">
                   You can&apos;t outspend Amazon. Here&apos;s how small ecommerce
                   brands beat them anyway.
                 </div>
                 <div className="related-meta">7 min read</div>
-              </Link>
+              
               <Link
                 href="/blog/email-marketing-vs-social-media"
                 className="blog-related-card"

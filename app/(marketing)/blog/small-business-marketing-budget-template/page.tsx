@@ -5,7 +5,7 @@ import { BlogAuthorBio } from "@/components/marketing/blog-author-bio";
 import { BlogCta } from "@/components/marketing/blog-cta";
 
 export const metadata = {
-  title: "What should a small business marketing budget look like? | Venti Scale",
+  title: "What should a small business marketing budget look like?",
   description:
     "A real small business marketing budget template for 2026. How much to spend, where to put it, and what to cut first when money is tight.",
   openGraph: {
@@ -76,18 +76,18 @@ export default async function Post() {
             author: {
               "@type": "Person",
               name: "Dustin Gilmour",
-              url: "https://ventiscale.com",
+              url: "https://www.ventiscale.com",
             },
             publisher: {
               "@type": "Organization",
               name: "Venti Scale",
-              url: "https://ventiscale.com",
+              url: "https://www.ventiscale.com",
             },
             datePublished: DATE,
             dateModified: DATE,
             mainEntityOfPage: {
               "@type": "WebPage",
-              "@id": `https://ventiscale.com/blog/${SLUG}`,
+              "@id": `https://www.ventiscale.com/blog/${SLUG}`,
             },
           }),
         }}
@@ -121,13 +121,13 @@ export default async function Post() {
                 "@type": "ListItem",
                 position: 1,
                 name: "Home",
-                item: "https://ventiscale.com",
+                item: "https://www.ventiscale.com",
               },
               {
                 "@type": "ListItem",
                 position: 2,
                 name: "Blog",
-                item: "https://ventiscale.com/blog",
+                item: "https://www.ventiscale.com/blog",
               },
               { "@type": "ListItem", position: 3, name: TITLE },
             ],
@@ -445,7 +445,7 @@ export default async function Post() {
             <strong>Cut last:</strong> content, SEO, and email. These are your
             compounding assets. A blog post you wrote in January keeps driving
             leads in November. Kill them and you kill the engine that keeps
-            working when everything else is off. This is why we told people in{" "}
+            working when everything else is off. This is why I told people in{" "}
             <Link href="/blog/marketing-agency-vs-in-house">
               the agency vs. in-house breakdown
             </Link>{" "}
@@ -471,13 +471,9 @@ export default async function Post() {
             Doing one thing well beats doing five things badly.
           </p>
           <p>
-            <strong>Option two:</strong> hand the whole thing to someone who
-            does this for a living. At Venti Scale, we run the entire budget for
-            you. Content, email, social, ads, tools, reporting. You set the
-            monthly number, we allocate it across channels, track returns, and
-            shift the mix when something isn&apos;t working. You get a{" "}
-            <Link href="/#how">monthly report</Link> showing what each dollar
-            did. No spreadsheets. No guessing.
+            <strong>Option two:</strong> hand the work to someone who does this for a living.{" "}
+            <Link href="/pricing">Venti Scale</Link> has a flat monthly price for each service, so the number
+            you budget is the number you pay. Ad spend is separate and goes straight to Meta or Google.
           </p>
           <p>
             Either way, stop running marketing without a number attached to it.

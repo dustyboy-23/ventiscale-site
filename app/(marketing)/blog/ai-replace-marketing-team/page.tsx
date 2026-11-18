@@ -5,7 +5,7 @@ import { BlogAuthorBio } from "@/components/marketing/blog-author-bio";
 import { BlogCta } from "@/components/marketing/blog-cta";
 
 export const metadata = {
-  title: "Can AI replace your marketing team? Here's what actually happens | Venti Scale",
+  title: "Can AI Replace Your Marketing Team? What Really Happens",
   description:
     "AI already handles a large share of marketing execution tasks. Here's what it replaces, what it can't, and what it means for small businesses in 2026.",
   openGraph: {
@@ -78,18 +78,18 @@ export default async function Post() {
             author: {
               "@type": "Person",
               name: "Dustin Gilmour",
-              url: "https://ventiscale.com",
+              url: "https://www.ventiscale.com",
             },
             publisher: {
               "@type": "Organization",
               name: "Venti Scale",
-              url: "https://ventiscale.com",
+              url: "https://www.ventiscale.com",
             },
             datePublished: DATE,
             dateModified: DATE,
             mainEntityOfPage: {
               "@type": "WebPage",
-              "@id": `https://ventiscale.com/blog/${SLUG}`,
+              "@id": `https://www.ventiscale.com/blog/${SLUG}`,
             },
           }),
         }}
@@ -123,13 +123,13 @@ export default async function Post() {
                 "@type": "ListItem",
                 position: 1,
                 name: "Home",
-                item: "https://ventiscale.com",
+                item: "https://www.ventiscale.com",
               },
               {
                 "@type": "ListItem",
                 position: 2,
                 name: "Blog",
-                item: "https://ventiscale.com/blog",
+                item: "https://www.ventiscale.com/blog",
               },
               { "@type": "ListItem", position: 3, name: TITLE },
             ],
@@ -422,15 +422,9 @@ export default async function Post() {
             is worth reading before you decide.
           </p>
           <p>
-            At Venti Scale, that&apos;s exactly how we run it. AI execution
-            layer, human strategy layer, work going out every week.
-            You focus on your business. We handle the rest. If you&apos;re
-            weighing this against the broader category, here&apos;s the full
-            picture on{" "}
-            <Link href="/marketing-agency-alternatives">
-              marketing agency alternatives
-            </Link>
-            .
+            That&apos;s how I run <Link href="/pricing">Venti Scale</Link>. AI does the production, I do the
+            thinking, and the work goes out every week. If you&apos;re weighing this against other options,
+            here&apos;s the full picture on <Link href="/marketing-agency-alternatives">marketing agency alternatives</Link>.
           </p>
 
           <div className="blog-faq">
@@ -459,7 +453,7 @@ export default async function Post() {
                 <div className="related-meta">7 min read</div>
               </Link>
               <Link
-                href="/blog/ai-cutting-marketing-costs"
+                href="/ai-marketing-cost"
                 className="blog-related-card"
               >
                 <div className="related-title">

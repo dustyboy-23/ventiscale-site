@@ -5,7 +5,7 @@ import { BlogAuthorBio } from "@/components/marketing/blog-author-bio";
 import { BlogCta } from "@/components/marketing/blog-cta";
 
 export const metadata = {
-  title: "Which social media platform should your small business focus on? | Venti Scale",
+  title: "Which Social Media Platform Is Best for Your Small Business?",
   description:
     "Stop trying to be on every platform. Here's how to pick the best social media platform for your small business based on who you serve.",
   openGraph: {
@@ -76,18 +76,18 @@ export default async function Post() {
             author: {
               "@type": "Person",
               name: "Dustin Gilmour",
-              url: "https://ventiscale.com",
+              url: "https://www.ventiscale.com",
             },
             publisher: {
               "@type": "Organization",
               name: "Venti Scale",
-              url: "https://ventiscale.com",
+              url: "https://www.ventiscale.com",
             },
             datePublished: DATE,
             dateModified: DATE,
             mainEntityOfPage: {
               "@type": "WebPage",
-              "@id": `https://ventiscale.com/blog/${SLUG}`,
+              "@id": `https://www.ventiscale.com/blog/${SLUG}`,
             },
           }),
         }}
@@ -121,13 +121,13 @@ export default async function Post() {
                 "@type": "ListItem",
                 position: 1,
                 name: "Home",
-                item: "https://ventiscale.com",
+                item: "https://www.ventiscale.com",
               },
               {
                 "@type": "ListItem",
                 position: 2,
                 name: "Blog",
-                item: "https://ventiscale.com/blog",
+                item: "https://www.ventiscale.com/blog",
               },
               { "@type": "ListItem", position: 3, name: TITLE },
             ],
@@ -270,8 +270,8 @@ export default async function Post() {
             DTC brands, makers), Instagram is your primary and TikTok is your
             secondary. Facebook still works for ads. Focus the organic effort
             on the places where people discover products through visuals. This
-            is exactly the playbook we break down in our post on{" "}
-            <Link href="/blog/social-media-for-ecommerce-brands">
+            is exactly the playbook I break down in my post on{" "}
+            <Link href="/blog/only-social-media-strategy-you-need">
               what actually works on social for ecommerce brands
             </Link>
             .
@@ -289,8 +289,8 @@ export default async function Post() {
             <strong>If you&apos;re a coach or creator building a personal
             brand</strong>, Instagram plus one video platform (TikTok or
             YouTube Shorts). Your face sells your program. Same logic
-            we cover in{" "}
-            <Link href="/blog/why-coaches-need-social-media">
+            I cover in{" "}
+            <Link href="/blog/how-coaches-get-more-clients">
               why coaches need social media to stay visible
             </Link>
             .
@@ -440,7 +440,7 @@ export default async function Post() {
             The businesses that win on social media are the ones that either
             have an in-house content person or outsource to someone who makes
             sure it gets done. The &quot;I&apos;ll do it myself on weekends&quot;
-            plan almost never survives 90 days. Same math we run in our post
+            plan almost never survives 90 days. Same math as the post
             on{" "}
             <Link href="/blog/do-i-need-a-social-media-manager">
               whether you need a social media manager
@@ -448,14 +448,9 @@ export default async function Post() {
             .
           </p>
           <p>
-            That&apos;s the gap Venti Scale fills. You tell us who your customer
-            is, we pick the platforms, and we run them. Content native to each platform, a monthly report showing what&apos;s working. You get
-            back the 15 hours a week you were losing to social. For the broader
-            picture on{" "}
-            <Link href="/done-for-you-marketing-services">
-              done-for-you marketing services
-            </Link>
-            , here&apos;s the full breakdown.
+            If you want that handled,{" "}
+            <Link href="/done-for-you-social-media">my social media plan</Link> covers 12 posts a month across Facebook, Instagram and LinkedIn,
+            written and designed for you, plus your videos posted.
           </p>
 
           {/* FAQ */}

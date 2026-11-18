@@ -5,7 +5,7 @@ import { BlogAuthorBio } from "@/components/marketing/blog-author-bio";
 import { BlogCta } from "@/components/marketing/blog-cta";
 
 export const metadata = {
-  title: "Ecommerce CAC by vertical, 2026. Here's what you're actually paying. | Venti Scale",
+  title: "Ecommerce CAC by Industry: 2026 Benchmarks",
   description:
     "Beauty brands pay $110 per DTC customer in 2026. Apparel $90. Pet $68-$90. Here are the CAC benchmarks by vertical and the LTV math that actually matters.",
   openGraph: {
@@ -42,7 +42,7 @@ const DATE = "2026-06-29";
 const FAQ_DATA = [
   {
     q: "What is the average ecommerce customer acquisition cost in 2026?",
-    a: "Average ecommerce customer acquisition cost in 2026 ranges from $68 to $110 depending on vertical. Beauty brands average $110, apparel $90, supplements $89, food and beverage $75, and pet care $68-$90. Overall, ecommerce CAC has risen 40-60% since 2023 due to Meta CPM inflation of 19.2% YoY and increased competition across DTC categories.",
+    a: "Average ecommerce customer acquisition cost in 2026 ranges from $68 to $110 depending on vertical. Beauty brands average $110, apparel $90, supplements $89, food and beverage $75, and pet care $68-$90. Overall, ecommerce CAC has climbed sharply since 2023 due to Meta CPM inflation of 19.2% YoY and increased competition across DTC categories.",
   },
   {
     q: "Which ecommerce vertical has the lowest customer acquisition cost?",
@@ -54,7 +54,7 @@ const FAQ_DATA = [
   },
   {
     q: "Why did ecommerce customer acquisition costs rise so much since 2023?",
-    a: "Ecommerce CAC rose 40-60% since 2023 because of Meta CPM inflation (up 19.2% YoY in 2025, averaging $22.98 in Q4 2025) and Google CPC increases of 12.88% YoY. More DTC brands competing for the same ad inventory drove costs up across every vertical. Purchase intent held steady but the cost to reach buyers compounded each year.",
+    a: "Ecommerce CAC rose sharply since 2023 because of Meta CPM inflation (up 19.2% YoY in 2025, averaging $22.98 in Q4 2025) and Google CPC increases of 12.88% YoY. More DTC brands competing for the same ad inventory drove costs up across every vertical. Purchase intent held steady but the cost to reach buyers compounded each year.",
   },
   {
     q: "How do DTC brands lower their customer acquisition cost?",
@@ -81,18 +81,18 @@ export default async function Post() {
             author: {
               "@type": "Person",
               name: "Dustin Gilmour",
-              url: "https://ventiscale.com",
+              url: "https://www.ventiscale.com",
             },
             publisher: {
               "@type": "Organization",
               name: "Venti Scale",
-              url: "https://ventiscale.com",
+              url: "https://www.ventiscale.com",
             },
             datePublished: DATE,
             dateModified: DATE,
             mainEntityOfPage: {
               "@type": "WebPage",
-              "@id": `https://ventiscale.com/blog/${SLUG}`,
+              "@id": `https://www.ventiscale.com/blog/${SLUG}`,
             },
           }),
         }}
@@ -126,13 +126,13 @@ export default async function Post() {
                 "@type": "ListItem",
                 position: 1,
                 name: "Home",
-                item: "https://ventiscale.com",
+                item: "https://www.ventiscale.com",
               },
               {
                 "@type": "ListItem",
                 position: 2,
                 name: "Blog",
-                item: "https://ventiscale.com/blog",
+                item: "https://www.ventiscale.com/blog",
               },
               { "@type": "ListItem", position: 3, name: TITLE },
             ],
@@ -191,7 +191,7 @@ export default async function Post() {
             <ul>
               <li>
                 Ecommerce CAC averages $68-$110 in 2026 depending on vertical.
-                Up 40-60% since 2023 due to Meta CPM and Google CPC inflation.
+                Up sharply since 2023 due to Meta CPM and Google CPC inflation.
               </li>
               <li>
                 Beauty pays $110. Apparel $90. Supplements $89. Food $75. Pet
@@ -288,7 +288,7 @@ export default async function Post() {
 
           <hr className="blog-divider" />
 
-          <h2 id="why-cac-rose">Why CAC went up 40-60% since 2023</h2>
+          <h2 id="why-cac-rose">Why CAC went up sharply since 2023</h2>
 
           <p>
             Two forces drove it. Neither is fixable by bidding smarter.
@@ -353,12 +353,9 @@ export default async function Post() {
           </p>
 
           <p>
-            I&apos;ve worked with brands at $50K/mo that were panicking about
-            CAC while sitting on repeat purchase data that completely justified
-            the number. Their dashboard said $110 per customer. Their email
-            flows were converting 28% of those buyers into a second purchase
-            within 60 days. At a $90 AOV with two purchases in the first
-            quarter, those customers were already north of a 2:1 return.
+            A scary CAC isn&apos;t always a problem. Say your dashboard shows $110 per customer and your
+            average order is $90. A customer who buys twice in the first quarter has already spent $180.
+            That&apos;s why CAC only means something next to your repeat purchases.
           </p>
 
           <p>
@@ -413,9 +410,8 @@ export default async function Post() {
           </p>
 
           <p>
-            <strong>Branded search eats acquisition budget.</strong> Most accounts
-            I audit have 15-25% of paid search budget going to people who already
-            knew the brand name. That&apos;s not acquisition spend. That&apos;s
+            <strong>Branded search eats acquisition budget.</strong> A lot of paid search
+            budget goes to people who already knew the brand name. That&apos;s not acquisition spend. That&apos;s
             retention spend in the wrong column.
           </p>
 
@@ -423,9 +419,9 @@ export default async function Post() {
             <strong>Channel silos create a structural leak.</strong> If your paid
             ads and email aren&apos;t coordinated, you&apos;re likely paying to
             acquire customers your retention system should have kept. The{" "}
-            <Link href="/blog/email-sms-roi-vs-meta-ads-dtc-2026">
+            
               email vs. Meta ROI comparison
-            </Link>{" "}
+            {" "}
             makes this clear: email returns $36 for every dollar spent, but only
             if it&apos;s converting people you already acquired. When channels are
             siloed, the money doesn&apos;t stack. It leaks.
@@ -433,9 +429,9 @@ export default async function Post() {
 
           <p>
             This is also why{" "}
-            <Link href="/blog/dtc-audience-saturation-creative-velocity-2026">
+            
               audience saturation
-            </Link>{" "}
+            {" "}
             damages your CAC math faster than people expect. Once frequency hits
             3.0-4.0 in a 7-day window, you&apos;re paying Meta CPM to reach the
             same burned audience, not new buyers. Your CAC climbs not because
@@ -491,11 +487,8 @@ export default async function Post() {
           </p>
 
           <p>
-            At Venti Scale, I build the retention layer and the attribution view
-            together. Not two vendors sending separate reports. One system that
-            sees paid, email, and post-purchase in the same place. When your CAC
-            is $110 and your LTV is $340, that&apos;s a machine. When they&apos;re
-            disconnected, nobody knows which number to believe.
+            When CAC and lifetime value sit in separate reports, nobody knows which number to believe. Get
+            paid, email and repeat purchases into one view first. Then decide what to spend.
           </p>
 
           <div className="blog-stat-row">
@@ -532,7 +525,6 @@ export default async function Post() {
 
           {/* Author bio */}
           <BlogAuthorBio
-            bioOverride="Founder of Venti Scale. I build AI-powered retention and paid systems for DTC brands. I've audited enough ecommerce accounts to know that most CAC panics are actually LTV calculation errors."
             lastUpdated={DATE}
           />
 
@@ -540,26 +532,20 @@ export default async function Post() {
           <div className="blog-related">
             <h3>Keep reading</h3>
             <div className="blog-related-grid">
-              <Link
-                href="/blog/email-sms-roi-vs-meta-ads-dtc-2026"
-                className="blog-related-card"
-              >
+              
                 <div className="related-title">
                   Email returns $36 for every dollar. Meta returns $2. Your
                   agency knows.
                 </div>
                 <div className="related-meta">6 min read</div>
-              </Link>
-              <Link
-                href="/blog/dtc-audience-saturation-creative-velocity-2026"
-                className="blog-related-card"
-              >
+              
+              
                 <div className="related-title">
                   Your DTC ad audience burns out every 2 weeks. Here&apos;s how
                   to stay ahead.
                 </div>
                 <div className="related-meta">7 min read</div>
-              </Link>
+              
             </div>
           </div>
 

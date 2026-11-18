@@ -5,7 +5,7 @@ import { BlogAuthorBio } from "@/components/marketing/blog-author-bio";
 import { BlogCta } from "@/components/marketing/blog-cta";
 
 export const metadata = {
-  title: "Month-to-month marketing services: who actually offers them and why most don't | Venti Scale",
+  title: "Month-to-Month Marketing Services: Who Offers Them and Why",
   description:
     "The average agency retainer costs $3,500/month on a 12-month lock-in. Here's why most agencies won't go month-to-month, and who does.",
   openGraph: {
@@ -84,18 +84,18 @@ export default async function Post() {
             author: {
               "@type": "Person",
               name: "Dustin Gilmour",
-              url: "https://ventiscale.com",
+              url: "https://www.ventiscale.com",
             },
             publisher: {
               "@type": "Organization",
               name: "Venti Scale",
-              url: "https://ventiscale.com",
+              url: "https://www.ventiscale.com",
             },
             datePublished: DATE,
             dateModified: DATE,
             mainEntityOfPage: {
               "@type": "WebPage",
-              "@id": `https://ventiscale.com/blog/${SLUG}`,
+              "@id": `https://www.ventiscale.com/blog/${SLUG}`,
             },
           }),
         }}
@@ -129,13 +129,13 @@ export default async function Post() {
                 "@type": "ListItem",
                 position: 1,
                 name: "Home",
-                item: "https://ventiscale.com",
+                item: "https://www.ventiscale.com",
               },
               {
                 "@type": "ListItem",
                 position: 2,
                 name: "Blog",
-                item: "https://ventiscale.com/blog",
+                item: "https://www.ventiscale.com/blog",
               },
               { "@type": "ListItem", position: 3, name: TITLE },
             ],
@@ -427,11 +427,9 @@ export default async function Post() {
             drops enough to absorb churn risk without locking clients in.
           </p>
           <p>
-            I tested the alternative before building Venti Scale. I hired writers,
-            coordinated revisions, managed briefs, reviewed drafts. The overhead
-            forced the same calculus every other agency ends up in: you need locked-in
-            clients to justify the headcount. The AI-first operational model removes
-            that ceiling entirely.
+            Long contracts exist because agencies carry overhead. Writers, account managers and rounds of
+            revisions all need locked-in clients to pay for them. Take that overhead out and there&apos;s no
+            reason to lock anyone in.
           </p>
           <p>
             The result is month-to-month pricing without the tier-down quality
@@ -511,7 +509,6 @@ export default async function Post() {
           </div>
 
           <BlogAuthorBio
-            bioOverride="Founder of Venti Scale. I built a month-to-month model specifically because I watched founders get locked into agency contracts that underdelivered with no exit. I tested the staffed-agency model myself before going AI-first. Every Venti Scale client can cancel anytime. That accountability is baked into how the operation runs."
             lastUpdated={DATE}
           />
 

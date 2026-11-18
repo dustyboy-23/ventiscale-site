@@ -5,7 +5,7 @@ import { BlogAuthorBio } from "@/components/marketing/blog-author-bio";
 import { BlogCta } from "@/components/marketing/blog-cta";
 
 export const metadata = {
-  title: "Email marketing vs. social media: where should a small business spend its time? | Venti Scale",
+  title: "Email Marketing vs Social Media: Where to Spend Your Time",
   description:
     "Email delivers $42 for every $1 spent. Social organic reach is 2-5%. Here's the honest breakdown of where your time actually pays off.",
   openGraph: {
@@ -78,18 +78,18 @@ export default async function Post() {
             author: {
               "@type": "Person",
               name: "Dustin Gilmour",
-              url: "https://ventiscale.com",
+              url: "https://www.ventiscale.com",
             },
             publisher: {
               "@type": "Organization",
               name: "Venti Scale",
-              url: "https://ventiscale.com",
+              url: "https://www.ventiscale.com",
             },
             datePublished: DATE,
             dateModified: DATE,
             mainEntityOfPage: {
               "@type": "WebPage",
-              "@id": `https://ventiscale.com/blog/${SLUG}`,
+              "@id": `https://www.ventiscale.com/blog/${SLUG}`,
             },
           }),
         }}
@@ -123,13 +123,13 @@ export default async function Post() {
                 "@type": "ListItem",
                 position: 1,
                 name: "Home",
-                item: "https://ventiscale.com",
+                item: "https://www.ventiscale.com",
               },
               {
                 "@type": "ListItem",
                 position: 2,
                 name: "Blog",
-                item: "https://ventiscale.com/blog",
+                item: "https://www.ventiscale.com/blog",
               },
               { "@type": "ListItem", position: 3, name: TITLE },
             ],
@@ -467,13 +467,11 @@ export default async function Post() {
             report on Friday and see what worked.
           </p>
           <p>
-            At Venti Scale, we handle both because separating them doesn&apos;t
-            make sense. Your social content feeds your email list. Your emails
-            send people back to your best social posts. It runs as one
-            connected system, not two channels someone is half-managing. If
-            you&apos;re running a store, both channels live inside a bigger{" "}
-            <Link href="/shopify-marketing-strategy">Shopify marketing strategy</Link>{" "}
-            that ties content, email, and ads together.
+            You don&apos;t have to pick one. I run <Link href="/done-for-you-email-marketing">email</Link> and <Link href="/done-for-you-social-media">social media</Link> as separate
+            plans, and taking both lowers the monthly price. If you&apos;re running a store, both channels live
+            inside a bigger{" "}
+            <Link href="/shopify-marketing-strategy">Shopify marketing strategy</Link> that ties content, email
+            and ads together.
           </p>
           <p>
             If you&apos;re not sure how your current mix is performing, the{" "}

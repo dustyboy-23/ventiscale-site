@@ -10,7 +10,7 @@ const SLUG = "ai-marketing-cost";
 const TITLE =
   "AI marketing cost in 2026: real numbers across 5 tiers (and the pricing tactics most services hide)";
 const DESCRIPTION =
-  "AI marketing services cost between $100/month (DIY tools) and $5,000/month (full DFY) in 2026. Here's the honest breakdown of what each tier costs, what it includes, and the hidden charges most services don't disclose upfront.";
+  "AI marketing runs from about $100 a month for DIY tools to $5,000 for full service. Here's what each tier includes and the fees most services hide.";
 const DATE = "2026-04-29";
 const IMAGE = "/blog/ai-marketing-cost.jpg";
 const IMAGE_URL = `${SITE_URL}${IMAGE}`;
@@ -34,12 +34,12 @@ const FAQ_DATA = [
   },
   {
     q: "How does AI marketing pricing compare to a traditional marketing agency?",
-    a: "AI-powered marketing services cost 40-60% less than traditional agencies for comparable output. A traditional agency at $4,000/month allocates roughly $2,500 to junior staff salaries and overhead. An AI-powered DFY service at $1,500/month allocates $0 to that layer because AI replaces it. The senior strategist time stays similar. You pay for actual senior expertise, not for the agency's middle layer.",
+    a: "AI-powered marketing services usually cost less than traditional agencies because AI replaces the junior staff layer that a retainer pays for. You pay for senior expertise, not for the agency's middle layer.",
   },
 ];
 
 export const metadata = {
-  title: `${TITLE} | Venti Scale`,
+  title: { absolute: "How Much Does AI Marketing Cost? 2026 Prices by Tier" },
   description: DESCRIPTION,
   alternates: {
     canonical: `${SITE_URL}/${SLUG}`,
@@ -207,8 +207,8 @@ export default async function PillarPage() {
                 table-stakes.
               </li>
               <li>
-                AI-powered services cost 40-60% less than traditional agencies
-                because AI replaces the junior account-management labor.
+                AI-powered services usually cost less than traditional agencies because AI replaces the junior
+                account-management labor.
               </li>
               <li>
                 The break-even between DIY tools and DFY services depends on
@@ -264,10 +264,6 @@ export default async function PillarPage() {
             <div className="blog-stat">
               <div className="stat-number">10-25%</div>
               <div className="stat-label">of revenue should be marketing spend</div>
-            </div>
-            <div className="blog-stat">
-              <div className="stat-number">40-60%</div>
-              <div className="stat-label">savings vs traditional agency</div>
             </div>
           </div>
 
@@ -429,7 +425,7 @@ export default async function PillarPage() {
             you were quoted as incomplete.
           </p>
 
-          <h2>Hidden cost 2: Per-channel add-ons</h2>
+          <h2>Hidden cost 2: Add-ons that aren&apos;t in the headline price</h2>
           <p>
             The headline price covers 1-2 channels. Email is +$200/month.
             Paid social is +$400/month. SMS is +$300/month. Six channels
@@ -532,7 +528,6 @@ export default async function PillarPage() {
           </div>
 
           <BlogAuthorBio
-            bioOverride="Founder of Venti Scale. I publish exact pricing publicly because vague pricing was something I personally hated as an agency client. Every number on this page reflects what services actually charge in 2026, not what they advertise."
             lastUpdated="2026-04-29"
           />
 
@@ -540,7 +535,7 @@ export default async function PillarPage() {
             <h3>Read the cluster — every cost question in depth</h3>
             <div className="blog-related-grid">
               <Link
-                href="/blog/ai-cutting-marketing-costs"
+                href="/ai-marketing-cost"
                 className="blog-related-card"
               >
                 <div className="related-title">

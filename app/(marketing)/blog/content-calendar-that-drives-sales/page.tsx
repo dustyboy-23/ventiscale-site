@@ -5,7 +5,7 @@ import { BlogAuthorBio } from "@/components/marketing/blog-author-bio";
 import { BlogCta } from "@/components/marketing/blog-cta";
 
 export const metadata = {
-  title: "How to create a content calendar that actually drives sales | Venti Scale",
+  title: "How to create a content calendar that actually drives sales",
   description:
     "A content calendar for small business isn't a to-do list. Here's the 4-part system that connects your posts to real sales goals.",
   openGraph: {
@@ -78,18 +78,18 @@ export default async function Post() {
             author: {
               "@type": "Person",
               name: "Dustin Gilmour",
-              url: "https://ventiscale.com",
+              url: "https://www.ventiscale.com",
             },
             publisher: {
               "@type": "Organization",
               name: "Venti Scale",
-              url: "https://ventiscale.com",
+              url: "https://www.ventiscale.com",
             },
             datePublished: DATE,
             dateModified: DATE,
             mainEntityOfPage: {
               "@type": "WebPage",
-              "@id": `https://ventiscale.com/blog/${SLUG}`,
+              "@id": `https://www.ventiscale.com/blog/${SLUG}`,
             },
           }),
         }}
@@ -123,13 +123,13 @@ export default async function Post() {
                 "@type": "ListItem",
                 position: 1,
                 name: "Home",
-                item: "https://ventiscale.com",
+                item: "https://www.ventiscale.com",
               },
               {
                 "@type": "ListItem",
                 position: 2,
                 name: "Blog",
-                item: "https://ventiscale.com/blog",
+                item: "https://www.ventiscale.com/blog",
               },
               { "@type": "ListItem", position: 3, name: TITLE },
             ],
@@ -407,13 +407,9 @@ export default async function Post() {
             those hours on the parts of your business only you can do.
           </p>
           <p>
-            That second version is what we do at Venti Scale. We build the content pillars, the calendar and the posting schedule, then we run it for you. You see the results in a{" "}
-            <Link href="/#how">monthly report</Link>. You don&apos;t manage any of it.
-            For the broader picture on{" "}
-            <Link href="/done-for-you-marketing-services">
-              done-for-you marketing services
-            </Link>
-            , here&apos;s the full breakdown.
+            That second version is what <Link href="/done-for-you-social-media">my social media plan</Link> does. I plan the month, write and
+            design the posts and schedule them for you. For the broader picture on <Link href="/done-for-you-marketing-services">done-for-you marketing services</Link>, here&apos;s the full
+            breakdown.
           </p>
 
           <div className="blog-faq">

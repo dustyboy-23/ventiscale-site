@@ -5,8 +5,7 @@ import { BlogAuthorBio } from "@/components/marketing/blog-author-bio";
 import { BlogCta } from "@/components/marketing/blog-cta";
 
 export const metadata = {
-  title:
-    "How small ecommerce brands get customers without blowing their ad budget | Venti Scale",
+  title: "How to Get Ecommerce Customers Without a Big Ad Budget",
   description:
     "Ad costs up 40% since 2023. Here's how small ecommerce brands get more customers without burning cash on paid ads.",
   openGraph: {
@@ -47,7 +46,7 @@ const IMAGE_URL = `https://www.ventiscale.com${IMAGE}`;
 const FAQ_DATA = [
   {
     q: "How can a small ecommerce business get customers without paid ads?",
-    a: "Focus on three organic channels: social media content that educates instead of just showing products, email sequences that convert browsers at a 2.91% rate, and SEO content targeting the problems your product solves. These channels cost 40-60% less per customer than paid advertising.",
+    a: "Focus on three organic channels: social media content that educates instead of just showing products, email sequences that convert browsers at a 2.91% rate, and SEO content targeting the problems your product solves. These channels usually cost less per customer than paid advertising.",
   },
   {
     q: "What is the average customer acquisition cost for ecommerce in 2026?",
@@ -81,18 +80,18 @@ export default async function Post() {
             author: {
               "@type": "Person",
               name: "Dustin Gilmour",
-              url: "https://ventiscale.com",
+              url: "https://www.ventiscale.com",
             },
             publisher: {
               "@type": "Organization",
               name: "Venti Scale",
-              url: "https://ventiscale.com",
+              url: "https://www.ventiscale.com",
             },
             datePublished: DATE,
             dateModified: DATE,
             mainEntityOfPage: {
               "@type": "WebPage",
-              "@id": `https://ventiscale.com/blog/${SLUG}`,
+              "@id": `https://www.ventiscale.com/blog/${SLUG}`,
             },
           }),
         }}
@@ -126,13 +125,13 @@ export default async function Post() {
                 "@type": "ListItem",
                 position: 1,
                 name: "Home",
-                item: "https://ventiscale.com",
+                item: "https://www.ventiscale.com",
               },
               {
                 "@type": "ListItem",
                 position: 2,
                 name: "Blog",
-                item: "https://ventiscale.com/blog",
+                item: "https://www.ventiscale.com/blog",
               },
               { "@type": "ListItem", position: 3, name: TITLE },
             ],
@@ -193,8 +192,7 @@ export default async function Post() {
                 outspend the competition on paid channels.
               </li>
               <li>
-                Organic social, email, and SEO acquire customers at 40-60%
-                lower cost than paid ads.
+                Organic social, email, and SEO acquire customers at a lower cost than paid ads.
               </li>
               <li>
                 Automated email sequences convert browsers into buyers at a
@@ -209,7 +207,7 @@ export default async function Post() {
 
           <p>
             Small ecommerce brands that combine organic social, email, and SEO
-            get customers at 40-60% lower cost than brands relying on paid ads
+            get customers at a lower cost than brands relying on paid ads
             alone. That&apos;s not a guess. That&apos;s what the data shows
             across 4.8 million merchants in{" "}
             <a
@@ -282,9 +280,9 @@ export default async function Post() {
             or shows the product in real life. A skincare brand posting &quot;3
             ingredients that are secretly drying out your skin&quot; gets 10x the
             engagement of the same brand posting a product photo. Same product.
-            Completely different result. We broke this down in detail in our
+            Completely different result. I broke this down in detail in my
             guide on{" "}
-            <Link href="/blog/social-media-for-ecommerce-brands">
+            <Link href="/blog/only-social-media-strategy-you-need">
               what actually works for ecommerce social media
             </Link>
             .
@@ -365,7 +363,7 @@ export default async function Post() {
             <Link href="/blog/marketing-automation-small-business-guide">
               marketing automation
             </Link>
-            , we wrote the starter guide.
+            , I wrote the starter guide.
           </p>
 
           <hr className="blog-divider" />
@@ -438,9 +436,9 @@ export default async function Post() {
             anything you could create yourself. It&apos;s real. People trust it.
             And it costs you nothing. This is one of the strategies smart brands
             use to{" "}
-            <Link href="/blog/ecommerce-marketing-compete-with-amazon">
+            
               compete with much larger ecommerce companies
-            </Link>{" "}
+            {" "}
             without matching their ad budgets.
           </p>
 
@@ -461,14 +459,10 @@ export default async function Post() {
             always falls off.
           </p>
           <p>
-            That&apos;s what we built Venti Scale to solve. We run all three
-            channels for you. Daily social content. Automated email sequences.
-            SEO blog posts that rank. Real metrics in your own{" "}
-            <Link href="/#how">client portal</Link> so you can see exactly
-            what&apos;s working. You focus on the product. We bring in the
-            customers. For the broader picture on{" "}
-            <Link href="/ai-marketing-for-ecommerce">AI marketing for ecommerce</Link>
-            , here&apos;s the full breakdown.
+            If you&apos;d rather hand this off, I run all three: <Link href="/done-for-you-social-media">social media</Link>,{" "}
+            <Link href="/done-for-you-email-marketing">email</Link> and <Link href="/done-for-you-seo">SEO + blog</Link>, each at a flat monthly price. For the broader picture
+            on <Link href="/ai-marketing-for-ecommerce">AI marketing for ecommerce</Link>, here&apos;s the full
+            breakdown.
           </p>
 
           <div className="blog-faq">
@@ -487,7 +481,7 @@ export default async function Post() {
             <h3>Keep reading</h3>
             <div className="blog-related-grid">
               <Link
-                href="/blog/social-media-for-ecommerce-brands"
+                href="/blog/only-social-media-strategy-you-need"
                 className="blog-related-card"
               >
                 <div className="related-title">
@@ -496,15 +490,12 @@ export default async function Post() {
                 </div>
                 <div className="related-meta">6 min read</div>
               </Link>
-              <Link
-                href="/blog/ecommerce-marketing-compete-with-amazon"
-                className="blog-related-card"
-              >
+              
                 <div className="related-title">
                   Ecommerce marketing in 2026: what small brands need to compete
                 </div>
                 <div className="related-meta">8 min read</div>
-              </Link>
+              
             </div>
           </div>
 

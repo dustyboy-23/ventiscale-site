@@ -5,7 +5,7 @@ import { BlogAuthorBio } from "@/components/marketing/blog-author-bio";
 import { BlogCta } from "@/components/marketing/blog-cta";
 
 export const metadata = {
-  title: "5 ways contractors are getting more leads in 2026 | Venti Scale",
+  title: "5 ways contractors are getting more leads in 2026",
   description:
     "5 proven ways contractors get more leads in 2026. Google Business, reviews, local SEO, social proof. Real tactics, not generic advice.",
   openGraph: {
@@ -78,18 +78,18 @@ export default async function Post() {
             author: {
               "@type": "Person",
               name: "Dustin Gilmour",
-              url: "https://ventiscale.com",
+              url: "https://www.ventiscale.com",
             },
             publisher: {
               "@type": "Organization",
               name: "Venti Scale",
-              url: "https://ventiscale.com",
+              url: "https://www.ventiscale.com",
             },
             datePublished: DATE,
             dateModified: DATE,
             mainEntityOfPage: {
               "@type": "WebPage",
-              "@id": `https://ventiscale.com/blog/${SLUG}`,
+              "@id": `https://www.ventiscale.com/blog/${SLUG}`,
             },
           }),
         }}
@@ -123,13 +123,13 @@ export default async function Post() {
                 "@type": "ListItem",
                 position: 1,
                 name: "Home",
-                item: "https://ventiscale.com",
+                item: "https://www.ventiscale.com",
               },
               {
                 "@type": "ListItem",
                 position: 2,
                 name: "Blog",
-                item: "https://ventiscale.com/blog",
+                item: "https://www.ventiscale.com/blog",
               },
               { "@type": "ListItem", position: 3, name: TITLE },
             ],
@@ -311,7 +311,7 @@ export default async function Post() {
             Respond to every review too. Thank the good ones. Address the bad
             ones professionally. Google notices engagement. Homeowners notice
             professionalism. Both help you{" "}
-            <Link href="/blog/contractors-getting-clients-online">
+            <Link href="/blog/contractors-getting-more-leads">
               stand out in a sea of contractors who all look the same online
             </Link>
             .
@@ -465,16 +465,9 @@ export default async function Post() {
             your lead pipeline dries up three months later.
           </p>
           <p>
-            That&apos;s the gap Venti Scale fills. We run your{" "}
-            <Link href="/#services">entire online presence</Link>. Social media posts written and scheduled for you. Google Business Profile management.
-            Review generation campaigns. Local SEO optimization. You get a{" "}
-            <Link href="/#how">monthly report</Link> showing exactly
-            what&apos;s working. You don&apos;t touch anything. You focus on the
-            work. We make sure people find you. For the broader picture on{" "}
-            <Link href="/done-for-you-marketing-services">
-              done-for-you marketing services
-            </Link>
-            , here&apos;s the full breakdown.
+            If you&apos;d rather stay on the tools, <Link href="/done-for-you-seo">my SEO + blog plan</Link> gets your site found for the
+            jobs you actually want, and <Link href="/done-for-you-social-media">my social media plan</Link> keeps your pages busy. For the broader
+            picture on <Link href="/done-for-you-marketing-services">done-for-you marketing services</Link>, here&apos;s the full breakdown.
           </p>
 
           <div className="blog-faq">
@@ -493,7 +486,7 @@ export default async function Post() {
             <h3>Keep reading</h3>
             <div className="blog-related-grid">
               <Link
-                href="/blog/contractors-getting-clients-online"
+                href="/blog/contractors-getting-more-leads"
                 className="blog-related-card"
               >
                 <div className="related-title">

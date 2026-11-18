@@ -41,8 +41,8 @@ const FAQ_DATA = [
 ];
 
 export const metadata = {
-  title: `${TITLE} | Venti Scale`,
-  description: DESCRIPTION,
+  title: "Done-For-You Marketing vs Upwork Freelancers: Real Costs",
+  description: "Freelancers look cheaper until you count the hours you spend managing them. Here's what each option really costs and when each one makes sense.",
   openGraph: {
     title: TITLE,
     description: DESCRIPTION,
@@ -103,7 +103,7 @@ export default async function Post() {
           </div>
 
           <ComparisonMethodology
-            intro="I ran a freelancer-only marketing setup for 9 months across Upwork and direct hires before building Venti Scale. The numbers below come from that real coordination overhead, not theoretical math. I priced my own time conservatively at $50/hour."
+            intro="This compares what each option costs once you count your own time. Freelancer fees are the visible part. Coordination, onboarding and quality control are the part most comparisons leave out. Your time is priced at $50 an hour."
             criteria={[
               "Face-value monthly cost (just the freelancer fees)",
               "All-in cost when your coordination time is priced honestly",
@@ -112,7 +112,7 @@ export default async function Post() {
               "Hidden costs (onboarding, tool overlap, brand drift correction)",
               "What scenarios each model genuinely fits",
             ]}
-            experience="The 9 months of trying to coordinate 4 freelancers myself is what convinced me the DFY model needed to exist. The face-value math worked. The actual experience didn&apos;t."
+            experience="Freelancer math often looks better on paper than it feels to run. Keep that in mind when you compare the numbers below."
           />
 
           <ComparisonOption
@@ -269,11 +269,11 @@ export default async function Post() {
           </p>
           <p>
             Cost difference at face value: roughly equivalent ($1,500-2,500/month
-            either way). Cost difference once you price your time: DFY wins
-            by 40-60%.
+            either way). Cost difference once you price your time: DFY usually
+            wins, because you stop being the project manager.
           </p>
           <p>
-            We covered the broader category breakdown at{" "}
+            I covered the broader category breakdown at{" "}
             <Link href="/done-for-you-marketing-services">
               done-for-you marketing services: what&apos;s actually included
             </Link>
@@ -315,7 +315,6 @@ export default async function Post() {
           </div>
 
           <BlogAuthorBio
-            bioOverride="Founder of Venti Scale. I tried the freelancer route for 9 months before building Venti Scale. The hours I lost coordinating 4 freelancers is what convinced me the DFY model needed to exist."
             lastUpdated="2026-04-29"
           />
 

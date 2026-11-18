@@ -33,7 +33,7 @@ const FAQ_DATA = [
 ];
 
 export const metadata = {
-  title: `${TITLE} | Venti Scale`,
+  title: TITLE,
   description: DESCRIPTION,
   openGraph: {
     title: TITLE,
@@ -75,18 +75,18 @@ export default async function Post() {
             author: {
               "@type": "Person",
               name: "Dustin Gilmour",
-              url: "https://ventiscale.com",
+              url: "https://www.ventiscale.com",
             },
             publisher: {
               "@type": "Organization",
               name: "Venti Scale",
-              url: "https://ventiscale.com",
+              url: "https://www.ventiscale.com",
             },
             datePublished: DATE,
             dateModified: DATE,
             mainEntityOfPage: {
               "@type": "WebPage",
-              "@id": `https://ventiscale.com/blog/${SLUG}`,
+              "@id": `https://www.ventiscale.com/blog/${SLUG}`,
             },
           }),
         }}
@@ -120,13 +120,13 @@ export default async function Post() {
                 "@type": "ListItem",
                 position: 1,
                 name: "Home",
-                item: "https://ventiscale.com",
+                item: "https://www.ventiscale.com",
               },
               {
                 "@type": "ListItem",
                 position: 2,
                 name: "Blog",
-                item: "https://ventiscale.com/blog",
+                item: "https://www.ventiscale.com/blog",
               },
               { "@type": "ListItem", position: 3, name: TITLE },
             ],
@@ -509,14 +509,9 @@ export default async function Post() {
             </li>
           </ul>
           <p>
-            At Venti Scale, we built our service specifically for that first
-            group. Businesses doing under $2M that need professional marketing
-            without the $132K price tag. AI handles the execution. Human
-            strategists handle the thinking. You get a full marketing
-            department for less than the cost of one part-time hire. No
-            contracts. No 6-month commitments. Just results you can measure
-            in your{" "}
-            <Link href="/#how">client portal</Link> every week.
+            <Link href="/pricing">Venti Scale</Link> is built for that first group: businesses that need
+            marketing done properly without the cost of a full-time hire. You pick the services, each one has a
+            flat monthly price, and there&apos;s no contract.
           </p>
 
           <div className="blog-faq">
@@ -545,7 +540,7 @@ export default async function Post() {
                 <div className="related-meta">7 min read</div>
               </Link>
               <Link
-                href="/blog/ai-cutting-marketing-costs"
+                href="/ai-marketing-cost"
                 className="blog-related-card"
               >
                 <div className="related-title">

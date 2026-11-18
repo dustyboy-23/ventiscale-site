@@ -5,7 +5,7 @@ import { BlogAuthorBio } from "@/components/marketing/blog-author-bio";
 import { BlogCta } from "@/components/marketing/blog-cta";
 
 export const metadata = {
-  title: "The AI marketing tools ecommerce brands are actually using in 2026 | Venti Scale",
+  title: "The Best AI Marketing Tools for Ecommerce Brands in 2026",
   description:
     "Honest breakdown of Klaviyo AI, Shopify Magic, Postscript, and Triple Whale by revenue tier. What to use at $50k, $200k, and beyond.",
   openGraph: {
@@ -82,18 +82,18 @@ export default async function Post() {
             author: {
               "@type": "Person",
               name: "Dustin Gilmour",
-              url: "https://ventiscale.com",
+              url: "https://www.ventiscale.com",
             },
             publisher: {
               "@type": "Organization",
               name: "Venti Scale",
-              url: "https://ventiscale.com",
+              url: "https://www.ventiscale.com",
             },
             datePublished: DATE,
             dateModified: DATE,
             mainEntityOfPage: {
               "@type": "WebPage",
-              "@id": `https://ventiscale.com/blog/${SLUG}`,
+              "@id": `https://www.ventiscale.com/blog/${SLUG}`,
             },
           }),
         }}
@@ -127,13 +127,13 @@ export default async function Post() {
                 "@type": "ListItem",
                 position: 1,
                 name: "Home",
-                item: "https://ventiscale.com",
+                item: "https://www.ventiscale.com",
               },
               {
                 "@type": "ListItem",
                 position: 2,
                 name: "Blog",
-                item: "https://ventiscale.com/blog",
+                item: "https://www.ventiscale.com/blog",
               },
               { "@type": "ListItem", position: 3, name: TITLE },
             ],
@@ -223,10 +223,8 @@ export default async function Post() {
           <h2 id="under-50k">Under $50k/month: start with what&apos;s already there</h2>
 
           <p>
-            I run AI marketing stacks for ecommerce brands across different
-            revenue tiers. The most consistent mistake I see from sub-$50k
-            brands is paying for tools they don&apos;t have the volume to use.
-            At this stage, two platforms cover everything you actually need.
+            The most common mistake at this size is paying for tools you don&apos;t have the volume to use.
+            Under $50k a month, two platforms cover everything you actually need.
           </p>
 
           <p>
@@ -277,9 +275,9 @@ export default async function Post() {
             At this revenue tier, your primary job is building your email list
             and getting the five core flows live: welcome, abandoned cart,
             post-purchase, browse abandonment, and winback. The{" "}
-            <Link href="/blog/ecommerce-email-marketing-flows">
+            
               ecommerce email flows that drive the most revenue
-            </Link>{" "}
+            {" "}
             account for 41% of total email revenue from only 2% of your send
             volume. Get those live before you pay for anything else.
           </p>
@@ -324,9 +322,9 @@ export default async function Post() {
             per message. SMS as a channel delivers $71-79 ROI per $1 spent,
             which is the same range as email. For more on the math behind repeat
             customers,{" "}
-            <Link href="/blog/retention-vs-acquisition-ecommerce">
+            
               the retention vs acquisition economics for ecommerce brands
-            </Link>{" "}
+            {" "}
             shows exactly why these channels outperform paid acquisition at
             every revenue tier.
           </p>
@@ -449,7 +447,7 @@ export default async function Post() {
 
           <p>
             The comparison between{" "}
-            <Link href="/blog/chatgpt-vs-custom-ai-marketing">
+            <Link href="/blog/what-ai-marketing-agency-does">
               ChatGPT versus a custom AI trained on your brand
             </Link>{" "}
             makes this concrete. Same underlying model. Completely different
@@ -477,24 +475,20 @@ export default async function Post() {
           </div>
 
           <BlogAuthorBio
-            bioOverride="Founder of Venti Scale. I build AI-powered marketing stacks for ecommerce brands and test these tools myself before recommending them. Every tool and number in this post comes from real brand setups, not vendor datasheets."
             lastUpdated={DATE}
           />
 
           <div className="blog-related">
             <h3>Keep reading</h3>
             <div className="blog-related-grid">
-              <Link
-                href="/blog/ecommerce-email-marketing-flows"
-                className="blog-related-card"
-              >
+              
                 <div className="related-title">
                   The 5 email flows that print money on autopilot
                 </div>
                 <div className="related-meta">8 min read</div>
-              </Link>
+              
               <Link
-                href="/blog/chatgpt-vs-custom-ai-marketing"
+                href="/blog/what-ai-marketing-agency-does"
                 className="blog-related-card"
               >
                 <div className="related-title">

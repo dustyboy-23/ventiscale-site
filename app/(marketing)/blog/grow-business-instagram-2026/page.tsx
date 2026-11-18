@@ -5,7 +5,7 @@ import { BlogAuthorBio } from "@/components/marketing/blog-author-bio";
 import { BlogCta } from "@/components/marketing/blog-cta";
 
 export const metadata = {
-  title: "How to grow your business on Instagram in 2026 (without spending 4 hours a day) | Venti Scale",
+  title: "How to Grow Your Business on Instagram in 2026",
   description:
     "3 billion people use Instagram monthly. Here's how to grow your business on Instagram in 2026 without it eating your entire week.",
   openGraph: {
@@ -78,18 +78,18 @@ export default async function Post() {
             author: {
               "@type": "Person",
               name: "Dustin Gilmour",
-              url: "https://ventiscale.com",
+              url: "https://www.ventiscale.com",
             },
             publisher: {
               "@type": "Organization",
               name: "Venti Scale",
-              url: "https://ventiscale.com",
+              url: "https://www.ventiscale.com",
             },
             datePublished: DATE,
             dateModified: DATE,
             mainEntityOfPage: {
               "@type": "WebPage",
-              "@id": `https://ventiscale.com/blog/${SLUG}`,
+              "@id": `https://www.ventiscale.com/blog/${SLUG}`,
             },
           }),
         }}
@@ -123,13 +123,13 @@ export default async function Post() {
                 "@type": "ListItem",
                 position: 1,
                 name: "Home",
-                item: "https://ventiscale.com",
+                item: "https://www.ventiscale.com",
               },
               {
                 "@type": "ListItem",
                 position: 2,
                 name: "Blog",
-                item: "https://ventiscale.com/blog",
+                item: "https://www.ventiscale.com/blog",
               },
               { "@type": "ListItem", position: 3, name: TITLE },
             ],
@@ -450,17 +450,11 @@ export default async function Post() {
             mix. And someone accountable for results.
           </p>
           <p>
-            At Venti Scale, that&apos;s what we run. We handle Instagram for small businesses: posts written and designed, your Reels posted, captions optimized for search, and a monthly report showing exactly what&apos;s growing. You focus on your
-            business. Your Instagram grows in the background. If you&apos;re
-            running a store, Instagram is one channel inside a bigger{" "}
-            <Link href="/shopify-marketing-strategy">Shopify marketing strategy</Link>{" "}
-            that ties content, email, and ads together.
-          </p>
-          <p>
-            If you want to see what&apos;s actually holding your online presence
-            back, the{" "}
-            <a href="/#audit">free audit</a> takes 30 seconds and shows you
-            where the gaps are.
+            If you want Instagram handled, <Link href="/done-for-you-social-media">my social media plan</Link> covers it: posts written and
+            designed for you, your Reels posted, captions and hashtags done. If you&apos;re running a store,
+            Instagram is one channel inside a bigger{" "}
+            <Link href="/shopify-marketing-strategy">Shopify marketing strategy</Link> that ties content, email
+            and ads together.
           </p>
 
           <div className="blog-faq">

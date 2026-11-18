@@ -1,10 +1,13 @@
 import type { MetadataRoute } from "next";
 import { getAllPosts } from "@/lib/blog";
+import { SERVICES } from "@/lib/pricing";
 
 const SITE_URL = "https://www.ventiscale.com";
 
 export default function sitemap(): MetadataRoute.Sitemap {
-  const now = new Date();
+  // The date these pages last really changed. Bump it when their content changes:
+  // a date that moves on every crawl tells Google nothing.
+  const now = new Date("2026-11-18");
 
   const blogPosts = getAllPosts().map((post) => ({
     url: `${SITE_URL}/blog/${post.slug}`,
@@ -86,6 +89,12 @@ export default function sitemap(): MetadataRoute.Sitemap {
       changeFrequency: "monthly",
       priority: 0.85,
     },
+    ...SERVICES.map((s) => ({
+      url: `${SITE_URL}${s.href}`,
+      lastModified: now,
+      changeFrequency: "monthly" as const,
+      priority: 0.95,
+    })),
     ...blogPosts,
     {
       url: `${SITE_URL}/security`,

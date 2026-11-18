@@ -60,6 +60,9 @@ export function ServiceRows({ withPrice = false }: { withPrice?: boolean }) {
                     <dd>{s.notIncluded}</dd>
                   </div>
                 </dl>
+                <Link href={s.href} className="vs-link inline-block mt-4 text-[15.5px]">
+                  More about {s.name.toLowerCase().replace("seo", "SEO")}
+                </Link>
                 {withPrice && (
                   <Link href={`/start${planQuery([s.id])}`} className="vs-btn-quiet vs-row-start">
                     Start with {s.name.toLowerCase().replace("seo", "SEO")}

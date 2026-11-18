@@ -5,9 +5,8 @@ import { BlogAuthorBio } from "@/components/marketing/blog-author-bio";
 import { BlogCta } from "@/components/marketing/blog-cta";
 
 export const metadata = {
-  title: "Shoppers are asking ChatGPT what to buy. Most DTC brands don't show up. | Venti Scale",
-  description:
-    "LLM-referred traffic converts at 2.47%, above Google Ads. ChatGPT, Perplexity, and Google AI Overviews are now product discovery engines. Most DTC brands are invisible in them.",
+  title: "How to Get Your Products Recommended by ChatGPT",
+  description: "More shoppers ask ChatGPT what to buy. Here's why most stores don't show up, what to fix first and how to check where you stand.",
   openGraph: {
     title: "Shoppers are asking ChatGPT what to buy. Most DTC brands don't show up.",
     description:
@@ -82,18 +81,18 @@ export default async function Post() {
             author: {
               "@type": "Person",
               name: "Dustin Gilmour",
-              url: "https://ventiscale.com",
+              url: "https://www.ventiscale.com",
             },
             publisher: {
               "@type": "Organization",
               name: "Venti Scale",
-              url: "https://ventiscale.com",
+              url: "https://www.ventiscale.com",
             },
             datePublished: DATE,
             dateModified: DATE,
             mainEntityOfPage: {
               "@type": "WebPage",
-              "@id": `https://ventiscale.com/blog/${SLUG}`,
+              "@id": `https://www.ventiscale.com/blog/${SLUG}`,
             },
           }),
         }}
@@ -127,13 +126,13 @@ export default async function Post() {
                 "@type": "ListItem",
                 position: 1,
                 name: "Home",
-                item: "https://ventiscale.com",
+                item: "https://www.ventiscale.com",
               },
               {
                 "@type": "ListItem",
                 position: 2,
                 name: "Blog",
-                item: "https://ventiscale.com/blog",
+                item: "https://www.ventiscale.com/blog",
               },
               { "@type": "ListItem", position: 3, name: TITLE },
             ],
@@ -317,10 +316,10 @@ export default async function Post() {
             a trust proxy.
           </p>
           <p>
-            We already covered{" "}
-            <Link href="/blog/llm-traffic-ecommerce-conversion-2026">
+            I already covered{" "}
+            
               how LLM-referred traffic converts at 2.47%
-            </Link>{" "}
+            {" "}
             . The reason that number is so high: buyers who ask an AI for a specific
             product recommendation are already in purchase mode. They&apos;re
             not browsing. They&apos;re deciding. The AI has already done the research
@@ -355,12 +354,10 @@ export default async function Post() {
           </div>
 
           <p>
-            I audited AI shopping visibility for three client stores in Q2 2026. Every
-            single one had Schema errors on their top SKUs. Two had Google Merchant
-            Center feeds that hadn&apos;t synced correctly in months. One had product
-            descriptions written purely for keyword density. They answered Google
-            crawlers but not the conversational questions buyers type into
-            ChatGPT. That store was invisible in every AI portal we tested.
+            The usual problems are boring ones. Schema errors on your best-selling products. A Google
+            Merchant Center feed that hasn&apos;t synced properly in months. Product descriptions written for
+            keyword density instead of the questions people actually type into ChatGPT. Any one of those can
+            keep a store out of AI shopping answers.
           </p>
           <p>
             None of these founders were doing anything wrong. They just built for the
@@ -452,10 +449,10 @@ export default async function Post() {
             best-selling products have fewer than 20 reviews, that&apos;s the priority.
             A post-purchase email sequence sent 7 to 10 days after confirmed delivery
             moves this number faster than any other tactic. This
-            connects directly to the AI discoverability work we covered in{" "}
-            <Link href="/blog/shopify-ai-discovery-chatgpt-2026">
+            connects directly to the AI discoverability work I covered in{" "}
+            
               setting up Shopify for AI product discovery
-            </Link>
+            
             .
           </p>
 
@@ -479,11 +476,10 @@ export default async function Post() {
             first-movers right now.
           </p>
           <p>
-            At Venti Scale, AI shopping visibility is part of the technical audit we
-            run on every client&apos;s store during onboarding. Most brands have never
-            tested their Schema. Most have a Merchant Center feed they set up two
-            years ago and never maintained. Fixing that takes a few days. The payoff
-            compounds for months.
+            Most stores have never tested their Schema, and most Merchant Center feeds get set up once and
+            forgotten. If you&apos;d rather not do it yourself, my{" "}
+            <Link href="/done-for-you-seo">SEO + blog plan</Link> fixes your current pages and sets your site up so AI search can find
+            and quote you.
           </p>
 
           {/* FAQ */}
@@ -498,33 +494,26 @@ export default async function Post() {
           </div>
 
           <BlogAuthorBio
-            bioOverride="Founder of Venti Scale. I audited AI shopping portal visibility across three client stores in Q2 2026. Every one had Schema errors and stale Merchant Center feeds. This post is what I found and fixed."
             lastUpdated={DATE}
           />
 
           <div className="blog-related">
             <h3>Keep reading</h3>
             <div className="blog-related-grid">
-              <Link
-                href="/blog/llm-traffic-ecommerce-conversion-2026"
-                className="blog-related-card"
-              >
+              
                 <div className="related-title">
                   LLM-referred traffic converts at 2.47%. Above Google Ads. Above
                   Meta.
                 </div>
                 <div className="related-meta">7 min read</div>
-              </Link>
-              <Link
-                href="/blog/shopify-ai-discovery-chatgpt-2026"
-                className="blog-related-card"
-              >
+              
+              
                 <div className="related-title">
                   Shopify&apos;s new channel is ChatGPT. Most stores aren&apos;t set
                   up for it.
                 </div>
                 <div className="related-meta">7 min read</div>
-              </Link>
+              
             </div>
           </div>
 

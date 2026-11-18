@@ -14,7 +14,7 @@ const IMAGE = "/blog/dtc-graveyard-platform-dependency.jpg";
 const IMAGE_URL = `https://www.ventiscale.com${IMAGE}`;
 
 export const metadata = {
-  title: `${TITLE} | Venti Scale`,
+  title: "50 DTC Brands Failed in 4 Years. Here's the Pattern.",
   description: DESCRIPTION,
   openGraph: {
     title: TITLE,
@@ -79,18 +79,18 @@ export default async function Post() {
             author: {
               "@type": "Person",
               name: "Dustin Gilmour",
-              url: "https://ventiscale.com",
+              url: "https://www.ventiscale.com",
             },
             publisher: {
               "@type": "Organization",
               name: "Venti Scale",
-              url: "https://ventiscale.com",
+              url: "https://www.ventiscale.com",
             },
             datePublished: DATE,
             dateModified: DATE,
             mainEntityOfPage: {
               "@type": "WebPage",
-              "@id": `https://ventiscale.com/blog/${SLUG}`,
+              "@id": `https://www.ventiscale.com/blog/${SLUG}`,
             },
           }),
         }}
@@ -124,13 +124,13 @@ export default async function Post() {
                 "@type": "ListItem",
                 position: 1,
                 name: "Home",
-                item: "https://ventiscale.com",
+                item: "https://www.ventiscale.com",
               },
               {
                 "@type": "ListItem",
                 position: 2,
                 name: "Blog",
-                item: "https://ventiscale.com/blog",
+                item: "https://www.ventiscale.com/blog",
               },
               { "@type": "ListItem", position: 3, name: TITLE },
             ],
@@ -365,12 +365,9 @@ export default async function Post() {
           </div>
 
           <p>
-            I walked through this with a client in their first month working with us.
-            Their repeat purchase rate was under 20%. Their email list was essentially
-            unused. They had spent years building a Meta audience and had almost
-            nothing to show for it in terms of owned customers. We rebuilt their
-            email flows and SMS sequences before touching their ad spend. Retention
-            came first.
+            The fix starts somewhere boring. Look at your repeat purchase rate and how much you actually use
+            your email list. If you&apos;ve spent years building an audience on Meta and own almost none of
+            it, build your email flows and SMS sequences before you touch your ad spend. Retention comes first.
           </p>
 
           <hr className="blog-divider" />
@@ -399,7 +396,7 @@ export default async function Post() {
 
           <p>
             The same principle shows up in how founders are now thinking about{" "}
-            <Link href="/blog/dtc-marketing-in-house-ai-2026">
+            <Link href="/blog/marketing-agency-vs-in-house">
               bringing DTC marketing in-house with AI
             </Link>
             . The appeal is not just cost. It is control. An in-house operation
@@ -440,9 +437,9 @@ export default async function Post() {
           <p>
             This is why founders who have gone through one agency relationship tend
             to look at the{" "}
-            <Link href="/blog/email-sms-roi-vs-meta-ads-dtc-2026">
+            
               actual ROI math between email, SMS, and paid social
-            </Link>{" "}
+            {" "}
             and realize they had the budget prioritized backwards the whole time.
             Owned channels return more per dollar. They compound. They do not evaporate
             when a platform changes its rules.
@@ -495,25 +492,21 @@ export default async function Post() {
           </div>
 
           <BlogAuthorBio
-            bioOverride="Founder of Venti Scale. I've walked through the platform dependency math with DTC clients and rebuilt their channel mix from paid-first to owned-first. Everything in this post comes from running that process, not reading about it."
             lastUpdated={DATE}
           />
 
           <div className="blog-related">
             <h3>Keep reading</h3>
             <div className="blog-related-grid">
-              <Link
-                href="/blog/email-sms-roi-vs-meta-ads-dtc-2026"
-                className="blog-related-card"
-              >
+              
                 <div className="related-title">
                   Email returns $36 for every dollar. Meta returns $2. Your agency
                   knows.
                 </div>
                 <div className="related-meta">7 min read</div>
-              </Link>
+              
               <Link
-                href="/blog/dtc-marketing-in-house-ai-2026"
+                href="/blog/marketing-agency-vs-in-house"
                 className="blog-related-card"
               >
                 <div className="related-title">

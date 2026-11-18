@@ -6,7 +6,7 @@ import { BlogCta } from "@/components/marketing/blog-cta";
 
 export const metadata = {
   title:
-    "5 signs you should stop DIY-ing your marketing | Venti Scale",
+    "5 signs you should stop DIY-ing your marketing",
   description:
     "Should you outsource your marketing? These 5 signs mean it\u2019s time to stop doing it yourself and let someone else drive results.",
   openGraph: {
@@ -79,18 +79,18 @@ export default async function Post() {
             author: {
               "@type": "Person",
               name: "Dustin Gilmour",
-              url: "https://ventiscale.com",
+              url: "https://www.ventiscale.com",
             },
             publisher: {
               "@type": "Organization",
               name: "Venti Scale",
-              url: "https://ventiscale.com",
+              url: "https://www.ventiscale.com",
             },
             datePublished: DATE,
             dateModified: DATE,
             mainEntityOfPage: {
               "@type": "WebPage",
-              "@id": `https://ventiscale.com/blog/${SLUG}`,
+              "@id": `https://www.ventiscale.com/blog/${SLUG}`,
             },
           }),
         }}
@@ -124,13 +124,13 @@ export default async function Post() {
                 "@type": "ListItem",
                 position: 1,
                 name: "Home",
-                item: "https://ventiscale.com",
+                item: "https://www.ventiscale.com",
               },
               {
                 "@type": "ListItem",
                 position: 2,
                 name: "Blog",
-                item: "https://ventiscale.com/blog",
+                item: "https://www.ventiscale.com/blog",
               },
               { "@type": "ListItem", position: 3, name: TITLE },
             ],
@@ -444,15 +444,9 @@ export default async function Post() {
             weekends scheduling posts.
           </p>
           <p>
-            At Venti Scale, we build AI-powered marketing systems that run your
-            social media, content, and email on autopilot. You get regular posts on your main platforms, real analytics in your own{" "}
-            <Link href="/#how">client portal</Link>, and a monthly report showing what&apos;s working. The whole thing starts at a fraction
-            of what a single marketing hire would cost. If you&apos;re weighing
-            this against the broader category, here&apos;s the full picture on{" "}
-            <Link href="/marketing-agency-alternatives">
-              marketing agency alternatives
-            </Link>
-            .
+            When you hit that point, you can hand it off one piece at a time.{" "}
+            <Link href="/pricing">Every service and price is on one page</Link>, with no contract. If you&apos;re
+            weighing this against other options, here&apos;s the full picture on <Link href="/marketing-agency-alternatives">marketing agency alternatives</Link>.
           </p>
           <p>
             You can keep grinding through the Sunday night content planning
@@ -461,7 +455,7 @@ export default async function Post() {
             <Link href="/blog/what-done-for-you-marketing-includes">
               what done-for-you marketing includes
             </Link>
-            , we break down every deliverable.
+            , I break down every deliverable.
           </p>
 
           <div className="blog-faq">

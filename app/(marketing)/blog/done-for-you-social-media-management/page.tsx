@@ -5,10 +5,8 @@ import { BlogAuthorBio } from "@/components/marketing/blog-author-bio";
 import { BlogCta } from "@/components/marketing/blog-cta";
 
 export const metadata = {
-  title:
-    "Done-for-you social media management: what you actually get | Venti Scale",
-  description:
-    "What a month of done-for-you social media management looks like. Real deliverables, real costs, no fluff.",
+  title: "Done-For-You Social Media Management: What You Actually Get",
+  description: "What done-for-you social media management includes, what it costs and what most services leave out, so you know what you're paying for.",
   openGraph: {
     title:
       "Done-for-you social media management: what you get when you stop doing it yourself",
@@ -81,18 +79,18 @@ export default async function Post() {
             author: {
               "@type": "Person",
               name: "Dustin Gilmour",
-              url: "https://ventiscale.com",
+              url: "https://www.ventiscale.com",
             },
             publisher: {
               "@type": "Organization",
               name: "Venti Scale",
-              url: "https://ventiscale.com",
+              url: "https://www.ventiscale.com",
             },
             datePublished: DATE,
             dateModified: DATE,
             mainEntityOfPage: {
               "@type": "WebPage",
-              "@id": `https://ventiscale.com/blog/${SLUG}`,
+              "@id": `https://www.ventiscale.com/blog/${SLUG}`,
             },
           }),
         }}
@@ -126,13 +124,13 @@ export default async function Post() {
                 "@type": "ListItem",
                 position: 1,
                 name: "Home",
-                item: "https://ventiscale.com",
+                item: "https://www.ventiscale.com",
               },
               {
                 "@type": "ListItem",
                 position: 2,
                 name: "Blog",
-                item: "https://ventiscale.com/blog",
+                item: "https://www.ventiscale.com/blog",
               },
               { "@type": "ListItem", position: 3, name: TITLE },
             ],
@@ -257,7 +255,7 @@ export default async function Post() {
             That cycle repeats every month. Each month builds on the last. The
             strategy gets sharper, the content performs better, and your
             audience grows. The process is the same whether you&apos;re a{" "}
-            <Link href="/blog/contractors-getting-clients-online">
+            <Link href="/blog/contractors-getting-more-leads">
               contractor trying to get found online
             </Link>{" "}
             or a coach building a personal brand.
@@ -442,15 +440,9 @@ export default async function Post() {
             between you and them is they stopped trying to do it alone.
           </p>
           <p>
-            That&apos;s exactly the problem we built{" "}
-            <Link href="/#services">Venti Scale</Link> to solve. We combine
-            AI-powered content creation with human strategy to run your social
-            media operation from end to end. Posts written and scheduled for you.
-            A{" "}
-            <Link href="/#how">client portal</Link> where you see exactly
-            what&apos;s happening. A monthly report showing what&apos;s working.
-            You don&apos;t learn a new tool. You don&apos;t approve every post.
-            You just get your time back and watch your online presence grow.
+            That&apos;s the problem <Link href="/done-for-you-social-media">my social media plan</Link> solves. 12 posts a month written, designed
+            and scheduled for you on Facebook, Instagram and LinkedIn, plus up to 8 of your own videos posted.
+            You get a dashboard you can open any time and one plain monthly report.
           </p>
 
           <div className="blog-faq">

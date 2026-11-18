@@ -32,6 +32,10 @@ export async function GET() {
 
 Every price is public. Clients pick the services they want, see the total, and start without a sales call.
 
+## Service pages
+
+${SERVICES.map((s) => `- [${s.name}](${SITE_URL}${s.href}): ${s.outcome}.`).join("\n")}
+
 ## Core pages
 
 - [Home](${SITE_URL}/): What Venti Scale does, with a build-your-plan price sheet.

@@ -5,7 +5,7 @@ import { BlogAuthorBio } from "@/components/marketing/blog-author-bio";
 import { BlogCta } from "@/components/marketing/blog-cta";
 
 export const metadata = {
-  title: "How much should ecommerce brands actually spend on marketing? | Venti Scale",
+  title: "How Much Should Ecommerce Brands Spend on Marketing?",
   description:
     "Revenue-tier breakdown: what $5K, $50K, and $200K/month ecommerce brands should spend on marketing, and where the money should go.",
   openGraph: {
@@ -51,7 +51,7 @@ const FAQ_DATA = [
   },
   {
     q: "What is the average customer acquisition cost for ecommerce brands in 2026?",
-    a: "Blended CAC for ecommerce brands varies heavily by vertical, but it's up 40-60% since 2023 across the board. Fashion, beauty, and electronics tend to run well above the blended average. Rising CAC is why retention channels like email and SMS are becoming the primary focus.",
+    a: "Blended CAC for ecommerce brands varies heavily by vertical, but it's up sharply since 2023 across the board. Fashion, beauty, and electronics tend to run well above the blended average. Rising CAC is why retention channels like email and SMS are becoming the primary focus.",
   },
   {
     q: "Is it worth paying a marketing agency retainer for a small ecommerce brand?",
@@ -81,18 +81,18 @@ export default async function Post() {
             author: {
               "@type": "Person",
               name: "Dustin Gilmour",
-              url: "https://ventiscale.com",
+              url: "https://www.ventiscale.com",
             },
             publisher: {
               "@type": "Organization",
               name: "Venti Scale",
-              url: "https://ventiscale.com",
+              url: "https://www.ventiscale.com",
             },
             datePublished: DATE,
             dateModified: DATE,
             mainEntityOfPage: {
               "@type": "WebPage",
-              "@id": `https://ventiscale.com/blog/${SLUG}`,
+              "@id": `https://www.ventiscale.com/blog/${SLUG}`,
             },
           }),
         }}
@@ -126,13 +126,13 @@ export default async function Post() {
                 "@type": "ListItem",
                 position: 1,
                 name: "Home",
-                item: "https://ventiscale.com",
+                item: "https://www.ventiscale.com",
               },
               {
                 "@type": "ListItem",
                 position: 2,
                 name: "Blog",
-                item: "https://ventiscale.com/blog",
+                item: "https://www.ventiscale.com/blog",
               },
               { "@type": "ListItem", position: 3, name: TITLE },
             ],
@@ -243,17 +243,13 @@ export default async function Post() {
               <div className="stat-label">Revenue: standard ecom marketing budget</div>
             </div>
             <div className="blog-stat">
-              <div className="stat-number">40-60%</div>
-              <div className="stat-label">DTC CAC increase since 2023</div>
-            </div>
-            <div className="blog-stat">
               <div className="stat-number">~68%</div>
               <div className="stat-label">Facebook CPM increase since 2020</div>
             </div>
           </div>
 
           <p>
-            DTC customer acquisition costs are up 40-60% since 2023 across
+            DTC customer acquisition costs are up sharply since 2023 across
             all verticals. Facebook CPMs have climbed every year since 2020,
             up roughly two-thirds over that span. If your marketing budget
             hasn&apos;t grown proportionally with those increases, you&apos;re
@@ -284,9 +280,9 @@ export default async function Post() {
               cart sequence, and post-purchase flow can recover 15-20% of
               abandoned revenue automatically with zero ongoing ad spend. This is
               the same compounding logic behind the{" "}
-              <Link href="/blog/ecommerce-email-marketing-flows">
+              
                 five email flows that print money on autopilot
-              </Link>
+              
               .
             </li>
             <li>
@@ -346,9 +342,9 @@ export default async function Post() {
             spend with growth. Paid ads bring in new customers. Email and SMS
             keep them. A brand that acquires 100 customers and retains 40% will
             outperform a brand that acquires 200 and retains 15%. The{" "}
-            <Link href="/blog/retention-vs-acquisition-ecommerce">
+            
               retention vs. acquisition breakdown
-            </Link>{" "}
+            {" "}
             shows the exact LTV math, but the short version is that acquiring a
             new customer costs 5x more than keeping one who already bought from
             you.
@@ -395,7 +391,7 @@ export default async function Post() {
             upselling repeat buyers, and re-engaging customers who went quiet.
             None of that requires additional ad spend once it&apos;s running.
             For the full channel stack breakdown, the{" "}
-            <Link href="/blog/shopify-marketing-strategy-2026">
+            <Link href="/shopify-marketing-strategy">
               Shopify marketing strategy framework
             </Link>{" "}
             covers how each layer builds on the last.
@@ -419,20 +415,15 @@ export default async function Post() {
             Why agency retainers eat your marketing budget alive
           </h2>
           <p>
-            DTC CAC is up 40-60% since 2023, and has climbed more than 60%
-            over the past five years. Agency retainers did not go down.
+            DTC CAC is up sharply since 2023. Agency retainers did not go down.
             You&apos;re paying more to acquire every customer and also paying
             a fixed monthly overhead fee that has nothing to do with your
             results.
           </p>
           <p>
-            I&apos;ve run this comparison directly for clients: same
-            deliverables, same output volume, AI-trained systems versus
-            traditional agency model. The output that cost $8,000/month in
-            agency overhead in 2022 runs at $500-$1,500/month with an
-            AI-powered system reviewed by one strategist. That&apos;s a 70-80%
-            overhead reduction. That difference goes back into ads and content.
-            It compounds.
+            The biggest change to the budget math is what execution costs now. Work that used to need a full
+            agency team can be done by one experienced person using good AI tools, at a fraction of a
+            retainer. Whatever you save there can go back into ads and content.
           </p>
           <p>
             For a $50K/month brand with a $5,500 total marketing budget, a
@@ -477,23 +468,19 @@ export default async function Post() {
           </div>
 
           <BlogAuthorBio
-            bioOverride="Founder of Venti Scale. I've run the budget math for ecommerce brands at every revenue tier, from $5K/month founders deciding whether paid ads make sense yet to $200K brands rethinking their channel mix and agency overhead. Every number in this post comes from real client work."
             lastUpdated={DATE}
           />
 
           <div className="blog-related">
             <h3>Keep reading</h3>
             <div className="blog-related-grid">
-              <Link
-                href="/blog/retention-vs-acquisition-ecommerce"
-                className="blog-related-card"
-              >
+              
                 <div className="related-title">
                   Retention vs acquisition: where ecommerce founders waste the
                   most money
                 </div>
                 <div className="related-meta">7 min read</div>
-              </Link>
+              
               <Link
                 href="/blog/marketing-agency-vs-in-house"
                 className="blog-related-card"

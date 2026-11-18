@@ -10,7 +10,7 @@ const SLUG = "ai-marketing-for-ecommerce";
 const TITLE =
   "AI marketing for ecommerce: the 2026 playbook that runs your store while you sleep";
 const DESCRIPTION =
-  "Ecommerce founders are firing their agencies and replacing them with AI marketing stacks that produce 10x the output for 40-60% of the cost. Here's the full 2026 playbook: tools, channels, and what AI can't do.";
+  "What AI marketing actually does for an online store: the tools worth paying for, the channels to run first and what AI still can't do well.";
 const DATE = "2026-04-29";
 const IMAGE = "/blog/ai-marketing-ecommerce.jpg";
 const IMAGE_URL = `${SITE_URL}${IMAGE}`;
@@ -22,7 +22,7 @@ const FAQ_DATA = [
   },
   {
     q: "Is AI marketing better than hiring an ecommerce marketing agency?",
-    a: "For ecommerce brands doing $5K-500K/month in revenue, yes. AI marketing produces 40-60% lower cost per output than a traditional agency at comparable quality, with month-to-month flexibility and real-time visibility. The exception is enterprise-scale ecom ($1M+/month) where dedicated agency teams still beat tooling on relationship management and complex production budgets. The transition point in 2026 is around $500K monthly revenue.",
+    a: "For ecommerce brands doing $5K-500K/month in revenue, yes. AI marketing usually costs less per piece of work than a traditional agency, with month-to-month flexibility and real-time visibility. The exception is enterprise-scale ecom ($1M+/month) where dedicated agency teams still beat tooling on relationship management and complex production budgets. The transition point in 2026 is around $500K monthly revenue.",
   },
   {
     q: "What AI tools should a Shopify store use in 2026?",
@@ -39,7 +39,7 @@ const FAQ_DATA = [
 ];
 
 export const metadata = {
-  title: `${TITLE} | Venti Scale`,
+  title: { absolute: "AI Marketing for Ecommerce: The 2026 Playbook" },
   description: DESCRIPTION,
   alternates: {
     canonical: `${SITE_URL}/${SLUG}`,
@@ -183,9 +183,7 @@ export default async function PillarPage() {
             ecommerce. What it actually means, what tools work, what AI
             can&apos;t do well, what every Shopify store should run, and
             how to spot the difference between AI marketing that works
-            and AI marketing theater. Written from running this stack
-            for real clients, not from reading other people&apos;s
-            case studies.
+            and AI marketing theater.
           </p>
 
           <div className="blog-tldr">
@@ -256,10 +254,6 @@ export default async function PillarPage() {
               <div className="stat-label">monthly AI marketing stack cost</div>
             </div>
             <div className="blog-stat">
-              <div className="stat-number">40-60%</div>
-              <div className="stat-label">cost savings vs traditional agency</div>
-            </div>
-            <div className="blog-stat">
               <div className="stat-number">10x</div>
               <div className="stat-label">content output vs solo-founder DIY</div>
             </div>
@@ -313,7 +307,7 @@ export default async function PillarPage() {
             <strong>Total stack:</strong> $150-400/month at the high end.
             That&apos;s less than 8% of what a comparable agency retainer
             costs in 2026. The detailed cost breakdown is at{" "}
-            <Link href="/blog/ai-cutting-marketing-costs">
+            <Link href="/ai-marketing-cost">
               AI cut my marketing costs 60%. Here&apos;s where the money went.
             </Link>
           </p>
@@ -460,9 +454,9 @@ export default async function PillarPage() {
           <p>
             We covered the abandoned cart sequence specifically in deep
             detail at{" "}
-            <Link href="/blog/abandoned-cart-email-sequence">
+            
               your abandoned cart emails leave money on the table
-            </Link>
+            
             . The principles apply to every flow: brand-trained AI writes
             copy in your voice, segments fire on the right triggers, the
             human reviews tone before each campaign ships.
@@ -527,7 +521,7 @@ export default async function PillarPage() {
             Organic social is hard for AI because it requires cultural
             awareness, brand voice, and timing that generic models lack.
             We covered exactly why this is and what works at{" "}
-            <Link href="/blog/social-media-for-ecommerce-brands">
+            <Link href="/blog/only-social-media-strategy-you-need">
               most ecommerce brands post on social media wrong. Here&apos;s
               what actually works.
             </Link>
@@ -543,7 +537,7 @@ export default async function PillarPage() {
 
           <h2>Where ecommerce founders go wrong with AI marketing</h2>
           <p>
-            Three failure patterns we see repeatedly:
+            Three failure patterns show up again and again:
           </p>
           <p>
             <strong>Pattern 1: Founders set up the tools and quit.</strong>{" "}
@@ -633,7 +627,6 @@ export default async function PillarPage() {
           </div>
 
           <BlogAuthorBio
-            bioOverride="Founder of Venti Scale. I run AI-powered marketing systems for ecommerce brands daily. Every framework on this page is what I deploy for real clients, not what I read about."
             lastUpdated="2026-04-29"
           />
 
@@ -641,7 +634,7 @@ export default async function PillarPage() {
             <h3>Read the cluster — every channel in depth</h3>
             <div className="blog-related-grid">
               <Link
-                href="/blog/social-media-for-ecommerce-brands"
+                href="/blog/only-social-media-strategy-you-need"
                 className="blog-related-card"
               >
                 <div className="related-title">
@@ -650,28 +643,22 @@ export default async function PillarPage() {
                 </div>
                 <div className="related-meta">6 min read</div>
               </Link>
-              <Link
-                href="/blog/abandoned-cart-email-sequence"
-                className="blog-related-card"
-              >
+              
                 <div className="related-title">
                   Your abandoned cart emails leave money on the table.
                   Here&apos;s the 3-email sequence that recovers 18%.
                 </div>
                 <div className="related-meta">7 min read</div>
-              </Link>
-              <Link
-                href="/blog/ecommerce-marketing-compete-with-amazon"
-                className="blog-related-card"
-              >
+              
+              
                 <div className="related-title">
                   You can&apos;t outspend Amazon. Here&apos;s how small ecommerce
                   brands beat them anyway.
                 </div>
                 <div className="related-meta">7 min read</div>
-              </Link>
+              
               <Link
-                href="/blog/ai-cutting-marketing-costs"
+                href="/ai-marketing-cost"
                 className="blog-related-card"
               >
                 <div className="related-title">

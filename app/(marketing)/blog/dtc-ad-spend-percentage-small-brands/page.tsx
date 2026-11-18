@@ -5,7 +5,7 @@ import { BlogAuthorBio } from "@/components/marketing/blog-author-bio";
 import { BlogCta } from "@/components/marketing/blog-cta";
 
 export const metadata = {
-  title: "Small DTC brands spend 30% of revenue on ads. Here's why that math never works. | Venti Scale",
+  title: "What Percent of Revenue Should Small Brands Spend on Ads?",
   description:
     "Sub-$1M DTC brands burn 25-35% of revenue on performance ads that reset every month. Here's the math that keeps them stuck, and what winning brands do instead.",
   openGraph: {
@@ -48,7 +48,7 @@ const FAQ_DATA = [
   },
   {
     q: "Why are most small DTC brands unprofitable even with sales?",
-    a: "Small DTC brands lose money because blended ROAS averaged 2.87:1 in 2026 while profitability requires 4:1 or better at 50% margins. CAC has risen 40-60% since 2023 across every vertical. When ad spend is 30% of revenue and your margins are 40-50%, there&apos;s almost nothing left after COGS, fulfillment, and returns.",
+    a: "Small DTC brands lose money because blended ROAS averaged 2.87:1 in 2026 while profitability requires 4:1 or better at 50% margins. CAC has climbed sharply since 2023 across every vertical. When ad spend is 30% of revenue and your margins are 40-50%, there&apos;s almost nothing left after COGS, fulfillment, and returns.",
   },
   {
     q: "What is owned infrastructure in DTC marketing?",
@@ -82,18 +82,18 @@ export default async function Post() {
             author: {
               "@type": "Person",
               name: "Dustin Gilmour",
-              url: "https://ventiscale.com",
+              url: "https://www.ventiscale.com",
             },
             publisher: {
               "@type": "Organization",
               name: "Venti Scale",
-              url: "https://ventiscale.com",
+              url: "https://www.ventiscale.com",
             },
             datePublished: DATE,
             dateModified: DATE,
             mainEntityOfPage: {
               "@type": "WebPage",
-              "@id": `https://ventiscale.com/blog/${SLUG}`,
+              "@id": `https://www.ventiscale.com/blog/${SLUG}`,
             },
           }),
         }}
@@ -127,13 +127,13 @@ export default async function Post() {
                 "@type": "ListItem",
                 position: 1,
                 name: "Home",
-                item: "https://ventiscale.com",
+                item: "https://www.ventiscale.com",
               },
               {
                 "@type": "ListItem",
                 position: 2,
                 name: "Blog",
-                item: "https://ventiscale.com/blog",
+                item: "https://www.ventiscale.com/blog",
               },
               { "@type": "ListItem", position: 3, name: TITLE },
             ],
@@ -195,7 +195,7 @@ export default async function Post() {
                 after COGS, fulfillment, and returns.
               </li>
               <li>
-                CAC is up 40-60% since 2023. More ad spend doesn&apos;t fix
+                CAC is up sharply since 2023. More ad spend doesn&apos;t fix
                 structural CAC inflation. It makes it worse.
               </li>
               <li>
@@ -252,16 +252,12 @@ export default async function Post() {
               <div className="stat-number">4:1</div>
               <div className="stat-label">Minimum ROAS for profitability at 50% margins</div>
             </div>
-            <div className="blog-stat">
-              <div className="stat-number">40-60%</div>
-              <div className="stat-label">CAC increase since 2023</div>
-            </div>
           </div>
 
           <p>
             CAC is the other side of this. Beauty brands now spend $110 to
             acquire a customer. Apparel runs $90. Food and beverage is $75. Pet
-            care runs $68-90. These numbers are up 40-60% from 2023. Ad
+            care runs $68-90. These numbers are up sharply from 2023. Ad
             platforms got more expensive while conversion rates stayed flat or
             declined. Paying more to acquire the same customer is not a growth
             strategy. It&apos;s margin compression in slow motion.
@@ -307,14 +303,10 @@ export default async function Post() {
           </div>
 
           <p>
-            I&apos;ve run this exact comparison with brands across verticals.
-            The ones spending 30% of revenue on ads and fighting for
-            profitability are almost always under-invested in email,
-            under-invested in SMS, and have a review count that lags what their
-            product quality deserves. I set up the full email and SMS stack for
-            a skincare client spending $9,000/month in ads at 2.4:1 ROAS.
-            Email hit 34% of revenue within 75 days. Then I cut Meta spend by
-            25%. Revenue held. Margins improved by 8 points.
+            Brands spending 30% of revenue on ads and still fighting for profit are usually under-invested in
+            email, under-invested in SMS and short on reviews. Fix those first and more of the traffic you
+            already pay for turns into repeat buyers. Then you can test cutting ad spend from a stronger
+            position.
           </p>
 
           <hr className="blog-divider" />
@@ -334,9 +326,9 @@ export default async function Post() {
             abandoned cart, post-purchase, win-back. These automated sequences
             are responsible for 30-40% of ecommerce email revenue without anyone
             touching a keyboard each week. The full setup is in the guide to{" "}
-            <Link href="/blog/ecommerce-email-marketing-flows">
+            
               email flows that print money on autopilot
-            </Link>
+            
             .
           </p>
           <p>
@@ -397,9 +389,9 @@ export default async function Post() {
           </p>
           <p>
             The math on{" "}
-            <Link href="/blog/retention-vs-acquisition-ecommerce">
+            
               retention vs acquisition
-            </Link>{" "}
+            {" "}
             is unambiguous: it costs 5x more to acquire a new customer than to
             retain an existing one. Once you have 500+ customers, owned channel
             investment compounds on people who already trust you. That&apos;s
@@ -430,18 +422,11 @@ export default async function Post() {
             doing the job email should do for free.
           </p>
           <p>
-            No PDF reports. No discovery phases. No retainer lock-in. I built
-            Venti Scale to be the thing I wished existed: a system that builds
-            the owned infrastructure that makes every ad dollar work harder.
-            Email flows that convert the traffic ads bring in. SMS for launch
-            moments. Content that compounds. A client portal where you see the
-            actual revenue impact weekly, not a vanity metric deck. For founders
-            who want the full picture on what that looks like in practice, the
-            guide to{" "}
-            <Link href="/done-for-you-marketing-services">
-              done-for-you marketing services
-            </Link>{" "}
-            breaks it down by deliverable and cost.
+            If you want this handled, my{" "}
+            <Link href="/done-for-you-email-marketing">email marketing plan</Link> switches on your automatic emails and sends 2 campaigns a month.
+            The guide to{" "}
+            <Link href="/done-for-you-marketing-services">done-for-you marketing services</Link>{" "}
+            breaks down what each piece should cost.
           </p>
 
           {/* FAQ */}
@@ -457,7 +442,6 @@ export default async function Post() {
 
           {/* Author bio */}
           <BlogAuthorBio
-            bioOverride="Founder of Venti Scale. I build owned-channel infrastructure for DTC brands: email flows, SMS systems, and retention stacks that compound instead of resetting. Every client setup is reviewed by me before it ships."
             lastUpdated={DATE}
           />
 
@@ -465,26 +449,20 @@ export default async function Post() {
           <div className="blog-related">
             <h3>Keep reading</h3>
             <div className="blog-related-grid">
-              <Link
-                href="/blog/retention-vs-acquisition-ecommerce"
-                className="blog-related-card"
-              >
+              
                 <div className="related-title">
                   Retention vs acquisition: where ecommerce founders waste the
                   most money
                 </div>
                 <div className="related-meta">7 min read</div>
-              </Link>
-              <Link
-                href="/blog/ecommerce-email-marketing-flows"
-                className="blog-related-card"
-              >
+              
+              
                 <div className="related-title">
                   Ecommerce email marketing: the 5 flows that print money on
                   autopilot
                 </div>
                 <div className="related-meta">8 min read</div>
-              </Link>
+              
             </div>
           </div>
 

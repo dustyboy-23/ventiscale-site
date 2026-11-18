@@ -5,7 +5,7 @@ import { BlogAuthorBio } from "@/components/marketing/blog-author-bio";
 import { BlogCta } from "@/components/marketing/blog-cta";
 
 export const metadata = {
-  title: "How to Switch Marketing Agencies Without Breaking Your Business | Venti Scale",
+  title: "How to Switch Marketing Agencies Without Losing Momentum",
   description:
     "Asset retrieval, contract review, knowledge transfer, transition timeline. The tactical playbook for switching marketing agencies without losing momentum.",
   openGraph: {
@@ -81,18 +81,18 @@ export default async function Post() {
             author: {
               "@type": "Person",
               name: "Dustin Gilmour",
-              url: "https://ventiscale.com",
+              url: "https://www.ventiscale.com",
             },
             publisher: {
               "@type": "Organization",
               name: "Venti Scale",
-              url: "https://ventiscale.com",
+              url: "https://www.ventiscale.com",
             },
             datePublished: DATE,
             dateModified: DATE,
             mainEntityOfPage: {
               "@type": "WebPage",
-              "@id": `https://ventiscale.com/blog/${SLUG}`,
+              "@id": `https://www.ventiscale.com/blog/${SLUG}`,
             },
           }),
         }}
@@ -126,13 +126,13 @@ export default async function Post() {
                 "@type": "ListItem",
                 position: 1,
                 name: "Home",
-                item: "https://ventiscale.com",
+                item: "https://www.ventiscale.com",
               },
               {
                 "@type": "ListItem",
                 position: 2,
                 name: "Blog",
-                item: "https://ventiscale.com/blog",
+                item: "https://www.ventiscale.com/blog",
               },
               { "@type": "ListItem", position: 3, name: TITLE },
             ],
@@ -456,9 +456,8 @@ export default async function Post() {
             slipped.
           </p>
           <p>
-            I&apos;ve watched this happen with brands doing $200K/month in
-            revenue. A 6-week marketing pause at that scale costs $40,000-$80,000
-            in lost sales. The transition cost dwarfs whatever you were unhappy
+            The math gets ugly fast. If marketing drives a real share of your sales, every week it sits idle
+            is revenue you don&apos;t get back. That loss can easily be bigger than whatever you were unhappy
             about with the old agency.
           </p>
           <p>
@@ -497,7 +496,7 @@ export default async function Post() {
             they don&apos;t have to. The difference in service quality between
             these two structures is consistent and real. Read the full breakdown
             of{" "}
-            <Link href="/blog/month-to-month-vs-retainer-marketing">
+            <Link href="/blog/month-to-month-marketing-services">
               month-to-month vs retainer contracts
             </Link>{" "}
             if you want the full picture before your next conversation.
@@ -532,10 +531,8 @@ export default async function Post() {
             makes sense.
           </p>
           <p>
-            At Venti Scale, every client gets admin access to their own accounts
-            from day one. Month-to-month terms. A monthly report in plain English.
-            No discovery phase, no junior staff, no retainer theater. The audit
-            takes 30 seconds to request.
+            That&apos;s how I run <Link href="/pricing">Venti Scale</Link>. Your accounts stay yours, there&apos;s
+            no contract, and you get one plain monthly report.
           </p>
 
           <hr className="blog-divider" />
@@ -553,7 +550,6 @@ export default async function Post() {
 
           {/* Author bio */}
           <BlogAuthorBio
-            bioOverride="Founder of Venti Scale. I've been on both sides of agency transitions, as the new partner inheriting a broken handoff and as the advisor walking founders through the exit. Everything in this guide is from those real engagements."
             lastUpdated={DATE}
           />
 

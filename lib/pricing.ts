@@ -35,6 +35,8 @@ export const AD_SPEND_CAP = 3000;
 export interface Service {
   id: ServiceId;
   name: string;
+  /** The page that explains this service in full. */
+  href: string;
   /** What the owner gets out of it, in their words. Headline of the service row. */
   outcome: string;
   /** The one fact that says what ships, e.g. "4 articles a month". */
@@ -81,6 +83,7 @@ export const SERVICES: Service[] = [
   {
     id: "seo",
     name: "SEO + blog",
+    href: "/done-for-you-seo",
     outcome: "Show up when people search for what you sell",
     count: "4 articles a month",
     short: "4 articles a month, plus fixes to your pages",
@@ -101,6 +104,7 @@ export const SERVICES: Service[] = [
   {
     id: "social",
     name: "Social media",
+    href: "/done-for-you-social-media",
     outcome: "Keep your pages busy without touching them",
     count: "12 posts a month",
     short: "12 posts a month, plus your videos posted",
@@ -121,6 +125,7 @@ export const SERVICES: Service[] = [
   {
     id: "email",
     name: "Email marketing",
+    href: "/done-for-you-email-marketing",
     outcome: "Get past customers to come back",
     count: "2 campaigns a month",
     short: "Automatic emails, plus 2 campaigns a month",
@@ -146,6 +151,7 @@ export const SERVICES: Service[] = [
   {
     id: "ads",
     name: "Ads management",
+    href: "/ads-management",
     outcome: "Reach people who are ready to buy",
     count: "Checked every week",
     short: "Meta or Google ads, priced per channel",
@@ -172,6 +178,7 @@ export const SERVICES: Service[] = [
   {
     id: "video",
     name: "Video editing",
+    href: "/video-editing-service",
     outcome: "Turn phone clips into videos people watch",
     count: "12 short videos a month",
     short: "12 short videos a month, edited and posted",

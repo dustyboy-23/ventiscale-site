@@ -1,7 +1,7 @@
 import { Eyebrow } from "@/components/marketing/eyebrow";
 
 export const metadata = {
-  title: "Terms of Service | Venti Scale",
+  title: "Terms of Service",
   description: "Terms governing use of the Venti Scale website and client portal.",
 };
 

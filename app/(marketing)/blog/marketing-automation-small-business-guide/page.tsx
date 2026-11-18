@@ -5,7 +5,7 @@ import { BlogAuthorBio } from "@/components/marketing/blog-author-bio";
 import { BlogCta } from "@/components/marketing/blog-cta";
 
 export const metadata = {
-  title: "Marketing automation for small business: the 2026 starter guide | Venti Scale",
+  title: "Marketing Automation for Small Business: A Starter Guide",
   description:
     "45% of small businesses have marketing automation. Most aren't using it right. Here's what to automate, in what order, and what it really costs.",
   openGraph: {
@@ -77,18 +77,18 @@ export default async function Post() {
             author: {
               "@type": "Person",
               name: "Dustin Gilmour",
-              url: "https://ventiscale.com",
+              url: "https://www.ventiscale.com",
             },
             publisher: {
               "@type": "Organization",
               name: "Venti Scale",
-              url: "https://ventiscale.com",
+              url: "https://www.ventiscale.com",
             },
             datePublished: DATE,
             dateModified: DATE,
             mainEntityOfPage: {
               "@type": "WebPage",
-              "@id": `https://ventiscale.com/blog/${SLUG}`,
+              "@id": `https://www.ventiscale.com/blog/${SLUG}`,
             },
           }),
         }}
@@ -122,13 +122,13 @@ export default async function Post() {
                 "@type": "ListItem",
                 position: 1,
                 name: "Home",
-                item: "https://ventiscale.com",
+                item: "https://www.ventiscale.com",
               },
               {
                 "@type": "ListItem",
                 position: 2,
                 name: "Blog",
-                item: "https://ventiscale.com/blog",
+                item: "https://www.ventiscale.com/blog",
               },
               { "@type": "ListItem", position: 3, name: TITLE },
             ],
@@ -267,7 +267,7 @@ export default async function Post() {
           </p>
           <p>
             <strong>Mailchimp: $15/mo</strong> for the standard plan. Good for ecommerce with Shopify integration. But you&apos;ll outgrow it the moment you need branching logic or lead scoring. Then you&apos;re looking at $350/mo. And{" "}
-            <Link href="/blog/ai-cutting-marketing-costs">AI is changing what these tools can do</Link>
+            <Link href="/ai-marketing-cost">AI is changing what these tools can do</Link>
             , so the landscape shifts fast.
           </p>
           <p>
@@ -333,10 +333,8 @@ export default async function Post() {
             <Link href="/blog/what-done-for-you-marketing-includes">what a done-for-you marketing service covers</Link>.
           </p>
           <p>
-            At Venti Scale, we don&apos;t just set up your automations and walk away. We run the entire content and marketing engine. Social media posts written and scheduled for you. Email sequences that get updated monthly. Lead follow-up workflows. Analytics in your own{" "}
-            <Link href="/#how">client portal</Link>. You get a{" "}
-            <Link href="/#services">monthly report</Link>{" "}
-            showing what happened and what&apos;s coming next. You don&apos;t touch anything. For the broader category overview on{" "}
+            If you&apos;d rather have it done for you, <Link href="/done-for-you-email-marketing">my email marketing plan</Link> writes and switches on
+            4 automatic email series, then sends 2 campaigns a month. For the broader category overview on{" "}
             <Link href="/done-for-you-marketing-services">done-for-you marketing services</Link>, here&apos;s the full breakdown.
           </p>
 

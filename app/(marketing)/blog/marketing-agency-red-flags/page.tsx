@@ -5,8 +5,7 @@ import { BlogAuthorBio } from "@/components/marketing/blog-author-bio";
 import { BlogCta } from "@/components/marketing/blog-cta";
 
 export const metadata = {
-  title:
-    "11 marketing agency red flags every founder should know before signing | Venti Scale",
+  title: "11 Marketing Agency Red Flags to Spot Before You Sign",
   description:
     "Most agency contracts protect the agency, not you. Here are the 11 red flags to check before you sign anything.",
   openGraph: {
@@ -87,18 +86,18 @@ export default async function Post() {
             author: {
               "@type": "Person",
               name: "Dustin Gilmour",
-              url: "https://ventiscale.com",
+              url: "https://www.ventiscale.com",
             },
             publisher: {
               "@type": "Organization",
               name: "Venti Scale",
-              url: "https://ventiscale.com",
+              url: "https://www.ventiscale.com",
             },
             datePublished: DATE,
             dateModified: DATE,
             mainEntityOfPage: {
               "@type": "WebPage",
-              "@id": `https://ventiscale.com/blog/${SLUG}`,
+              "@id": `https://www.ventiscale.com/blog/${SLUG}`,
             },
           }),
         }}
@@ -132,13 +131,13 @@ export default async function Post() {
                 "@type": "ListItem",
                 position: 1,
                 name: "Home",
-                item: "https://ventiscale.com",
+                item: "https://www.ventiscale.com",
               },
               {
                 "@type": "ListItem",
                 position: 2,
                 name: "Blog",
-                item: "https://ventiscale.com/blog",
+                item: "https://www.ventiscale.com/blog",
               },
               { "@type": "ListItem", position: 3, name: TITLE },
             ],
@@ -286,8 +285,8 @@ export default async function Post() {
             deals. Junior staff manage accounts.
           </p>
           <p>
-            I&apos;ve sat through agency pitches where the partner presenting
-            the deck wouldn&apos;t be touching the account after signing.
+            Often the partner presenting the deck won&apos;t touch the account
+            after you sign.
             It&apos;s not always malicious. It&apos;s structural.
           </p>
           <p>
@@ -337,7 +336,7 @@ export default async function Post() {
             Month-to-month from day one should be the standard in 2026. If they
             won&apos;t offer it, the contract structure tells you everything
             about their confidence in their own service. The breakdown of{" "}
-            <Link href="/blog/month-to-month-vs-retainer-marketing">
+            <Link href="/blog/month-to-month-marketing-services">
               month-to-month vs retainer marketing services
             </Link>{" "}
             explains why agencies default to lock-ins and what it actually means
@@ -587,7 +586,6 @@ export default async function Post() {
 
           {/* Author bio */}
           <BlogAuthorBio
-            bioOverride="Founder of Venti Scale. I've sat through dozens of agency pitches and walked away from most of them. Every red flag on this list came from a real proposal or a client who came to me after getting burned."
             lastUpdated={DATE}
           />
 

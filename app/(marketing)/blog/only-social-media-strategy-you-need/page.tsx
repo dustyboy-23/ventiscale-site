@@ -5,7 +5,7 @@ import { BlogAuthorBio } from "@/components/marketing/blog-author-bio";
 import { BlogCta } from "@/components/marketing/blog-cta";
 
 export const metadata = {
-  title: "The only social media strategy a small business needs in 2026 | Venti Scale",
+  title: "The Only Social Media Strategy a Small Business Needs",
   description:
     "Stop chasing 47-step frameworks. Here's the only social media strategy a small business actually needs in 2026.",
   openGraph: {
@@ -76,18 +76,18 @@ export default async function Post() {
             author: {
               "@type": "Person",
               name: "Dustin Gilmour",
-              url: "https://ventiscale.com",
+              url: "https://www.ventiscale.com",
             },
             publisher: {
               "@type": "Organization",
               name: "Venti Scale",
-              url: "https://ventiscale.com",
+              url: "https://www.ventiscale.com",
             },
             datePublished: DATE,
             dateModified: DATE,
             mainEntityOfPage: {
               "@type": "WebPage",
-              "@id": `https://ventiscale.com/blog/${SLUG}`,
+              "@id": `https://www.ventiscale.com/blog/${SLUG}`,
             },
           }),
         }}
@@ -121,13 +121,13 @@ export default async function Post() {
                 "@type": "ListItem",
                 position: 1,
                 name: "Home",
-                item: "https://ventiscale.com",
+                item: "https://www.ventiscale.com",
               },
               {
                 "@type": "ListItem",
                 position: 2,
                 name: "Blog",
-                item: "https://ventiscale.com/blog",
+                item: "https://www.ventiscale.com/blog",
               },
               { "@type": "ListItem", position: 3, name: TITLE },
             ],
@@ -388,14 +388,8 @@ export default async function Post() {
             that you can&apos;t do both alone indefinitely.
           </p>
           <p>
-            At Venti Scale, we run this exact system for small businesses. Regular content, consistent voice, real metrics, and a monthly report
-            showing what&apos;s working. You don&apos;t have to become a content creator
-            to grow online. You just need someone making sure it happens every week. For
-            the broader picture on{" "}
-            <Link href="/done-for-you-marketing-services">
-              done-for-you marketing services
-            </Link>
-            , here&apos;s the full breakdown.
+            If you&apos;d rather not become a content creator, <Link href="/done-for-you-social-media">my social media plan</Link> runs this for
+            you every week. For the broader picture on <Link href="/done-for-you-marketing-services">done-for-you marketing services</Link>, here&apos;s the full breakdown.
           </p>
 
           <div className="blog-faq">

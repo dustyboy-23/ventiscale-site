@@ -5,8 +5,7 @@ import { BlogAuthorBio } from "@/components/marketing/blog-author-bio";
 import { BlogCta } from "@/components/marketing/blog-cta";
 
 export const metadata = {
-  title:
-    "How to automate your social media without losing your brand voice | Venti Scale",
+  title: "How to Automate Social Media Without Losing Your Voice",
   description:
     "83% of teams automate social posting. Most sound like robots. Here's how to automate social media for small business and still sound human.",
   openGraph: {
@@ -79,18 +78,18 @@ export default async function Post() {
             author: {
               "@type": "Person",
               name: "Dustin Gilmour",
-              url: "https://ventiscale.com",
+              url: "https://www.ventiscale.com",
             },
             publisher: {
               "@type": "Organization",
               name: "Venti Scale",
-              url: "https://ventiscale.com",
+              url: "https://www.ventiscale.com",
             },
             datePublished: DATE,
             dateModified: DATE,
             mainEntityOfPage: {
               "@type": "WebPage",
-              "@id": `https://ventiscale.com/blog/${SLUG}`,
+              "@id": `https://www.ventiscale.com/blog/${SLUG}`,
             },
           }),
         }}
@@ -124,13 +123,13 @@ export default async function Post() {
                 "@type": "ListItem",
                 position: 1,
                 name: "Home",
-                item: "https://ventiscale.com",
+                item: "https://www.ventiscale.com",
               },
               {
                 "@type": "ListItem",
                 position: 2,
                 name: "Blog",
-                item: "https://ventiscale.com/blog",
+                item: "https://www.ventiscale.com/blog",
               },
               { "@type": "ListItem", position: 3, name: TITLE },
             ],
@@ -382,7 +381,7 @@ export default async function Post() {
           <p>
             Total monthly cost for a basic automation stack: $70 to $265. And
             that&apos;s before your time. If you&apos;re curious about the broader
-            picture, we broke down{" "}
+            picture, I broke down{" "}
             <Link href="/blog/marketing-automation-small-business-guide">
               marketing automation for small business
             </Link>{" "}
@@ -460,22 +459,13 @@ export default async function Post() {
             the systems built.
           </p>
           <p>
-            At Venti Scale, we handle the entire stack. Voice documentation, AI
-            content generation calibrated to your brand, scheduling, human review on every post, and monthly reporting so you see
-            exactly what&apos;s working. You don&apos;t learn the tools. You
-            don&apos;t review drafts. You don&apos;t think about social media at
-            all.
+            If you&apos;d rather not run any of this yourself, that&apos;s what{" "}
+            <Link href="/done-for-you-social-media">my social media plan</Link> is for. I learn your brand and voice during setup, then write,
+            design and schedule 12 posts a month for you.
           </p>
           <p>
-            It&apos;s the same approach we use for{" "}
-            <Link href="/blog/what-ai-marketing-agency-does">
-              AI-powered marketing
-            </Link>
-            : AI handles the execution at scale, humans handle the strategy and
-            quality control. Your brand sounds like you. Your feed stays active.
-            Your time stays free. For the broader picture on{" "}
-            <Link href="/ai-marketing-for-ecommerce">AI marketing for ecommerce</Link>
-            , here&apos;s the full breakdown.
+            For the bigger picture, here&apos;s{" "}
+            <Link href="/blog/what-ai-marketing-agency-does">what an AI marketing agency actually does</Link>.
           </p>
 
           <div className="blog-faq">

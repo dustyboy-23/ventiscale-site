@@ -5,7 +5,7 @@ import { BlogAuthorBio } from "@/components/marketing/blog-author-bio";
 import { BlogCta } from "@/components/marketing/blog-cta";
 
 export const metadata = {
-  title: "Done-for-you marketing: what's actually in the box (and 4 red flags most agencies hide) | Venti Scale",
+  title: "What Done-For-You Marketing Includes (and 4 Red Flags)",
   description:
     "Most done-for-you agencies sell PDF reports and call it a service. Here's what the deliverables actually look like when an agency does the work right.",
   openGraph: {
@@ -78,18 +78,18 @@ export default async function Post() {
             author: {
               "@type": "Person",
               name: "Dustin Gilmour",
-              url: "https://ventiscale.com",
+              url: "https://www.ventiscale.com",
             },
             publisher: {
               "@type": "Organization",
               name: "Venti Scale",
-              url: "https://ventiscale.com",
+              url: "https://www.ventiscale.com",
             },
             datePublished: DATE,
             dateModified: DATE,
             mainEntityOfPage: {
               "@type": "WebPage",
-              "@id": `https://ventiscale.com/blog/${SLUG}`,
+              "@id": `https://www.ventiscale.com/blog/${SLUG}`,
             },
           }),
         }}
@@ -123,13 +123,13 @@ export default async function Post() {
                 "@type": "ListItem",
                 position: 1,
                 name: "Home",
-                item: "https://ventiscale.com",
+                item: "https://www.ventiscale.com",
               },
               {
                 "@type": "ListItem",
                 position: 2,
                 name: "Blog",
-                item: "https://ventiscale.com/blog",
+                item: "https://www.ventiscale.com/blog",
               },
               { "@type": "ListItem", position: 3, name: TITLE },
             ],
@@ -252,7 +252,7 @@ export default async function Post() {
             many posts per week. On which platforms. Who writes the copy. Who
             makes the graphics. How often you get reports. What metrics they
             track. This is the same discipline that{" "}
-            <Link href="/blog/contractors-getting-clients-online">
+            <Link href="/blog/contractors-getting-more-leads">
               contractors need when building an online presence
             </Link>
             . Know what you&apos;re buying before you buy it.
@@ -280,7 +280,7 @@ export default async function Post() {
             community engagement, and platform optimization. They should be in
             your accounts daily. Not once a week. Consistency is what makes
             social work. That&apos;s true whether you&apos;re{" "}
-            <Link href="/blog/social-media-for-ecommerce-brands">
+            <Link href="/blog/only-social-media-strategy-you-need">
               an ecommerce brand building a following
             </Link>{" "}
             or a local service company trying to stay visible.
@@ -432,10 +432,9 @@ export default async function Post() {
             results.
           </p>
           <p>
-            <strong>They won&apos;t show examples.</strong> Ask to see work
-            they&apos;ve done for other clients. Real content, real results, real
-            case studies. If they don&apos;t have them, that tells you
-            everything.
+            <strong>They won&apos;t say what you get.</strong> Ask for the exact monthly deliverables, counted.
+            How many posts, how many articles, how many emails. If they can&apos;t put a number on it, that tells
+            you everything.
           </p>
           <p>
             <strong>Everything is 100% automated.</strong> Automation is a tool.
@@ -470,7 +469,7 @@ export default async function Post() {
           <p>
             <strong>Real reporting on a schedule.</strong> Monthly reports with actual metrics. Follower growth, website traffic, conversions, ad
             performance. Numbers you can tie to revenue. The same way{" "}
-            <Link href="/blog/why-coaches-need-social-media">
+            <Link href="/blog/how-coaches-get-more-clients">
               coaches need visible proof their marketing works
             </Link>
             , you need data showing your investment is paying off.
@@ -490,12 +489,9 @@ export default async function Post() {
             team rates.
           </p>
           <p>
-            At Venti Scale, that&apos;s exactly how we work. AI handles the drafting and scheduling. Humans build
-            the strategy, monitor performance, and make the decisions that
-            algorithms can&apos;t. You get a{" "}
-            <Link href="/#how">client portal</Link> showing exactly what&apos;s
-            happening. Monthly reports with real numbers. And you don&apos;t
-            touch any of it unless you want to.
+            That&apos;s how I work at <Link href="/pricing">Venti Scale</Link>. AI handles the drafting and
+            scheduling. I set the plan and check the work. You get a dashboard you can open any time and one
+            plain monthly report.
           </p>
 
           <div className="blog-faq">
@@ -514,7 +510,7 @@ export default async function Post() {
             <h3>Keep reading</h3>
             <div className="blog-related-grid">
               <Link
-                href="/blog/social-media-for-ecommerce-brands"
+                href="/blog/only-social-media-strategy-you-need"
                 className="blog-related-card"
               >
                 <div className="related-title">
@@ -524,7 +520,7 @@ export default async function Post() {
                 <div className="related-meta">6 min read</div>
               </Link>
               <Link
-                href="/blog/contractors-getting-clients-online"
+                href="/blog/contractors-getting-more-leads"
                 className="blog-related-card"
               >
                 <div className="related-title">

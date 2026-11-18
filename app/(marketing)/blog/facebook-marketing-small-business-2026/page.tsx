@@ -5,7 +5,7 @@ import { BlogAuthorBio } from "@/components/marketing/blog-author-bio";
 import { BlogCta } from "@/components/marketing/blog-cta";
 
 export const metadata = {
-  title: "Facebook marketing for small business in 2026: dead, alive, or just slower? | Venti Scale",
+  title: "Is Facebook Marketing Still Worth It for Small Business?",
   description:
     "3 billion users. Half the engagement of 2018. Here's what still works on Facebook for small business and what's been quietly broken since 2024.",
   openGraph: {
@@ -76,18 +76,18 @@ export default async function Post() {
             author: {
               "@type": "Person",
               name: "Dustin Gilmour",
-              url: "https://ventiscale.com",
+              url: "https://www.ventiscale.com",
             },
             publisher: {
               "@type": "Organization",
               name: "Venti Scale",
-              url: "https://ventiscale.com",
+              url: "https://www.ventiscale.com",
             },
             datePublished: DATE,
             dateModified: DATE,
             mainEntityOfPage: {
               "@type": "WebPage",
-              "@id": `https://ventiscale.com/blog/${SLUG}`,
+              "@id": `https://www.ventiscale.com/blog/${SLUG}`,
             },
           }),
         }}
@@ -121,13 +121,13 @@ export default async function Post() {
                 "@type": "ListItem",
                 position: 1,
                 name: "Home",
-                item: "https://ventiscale.com",
+                item: "https://www.ventiscale.com",
               },
               {
                 "@type": "ListItem",
                 position: 2,
                 name: "Blog",
-                item: "https://ventiscale.com/blog",
+                item: "https://www.ventiscale.com/blog",
               },
               { "@type": "ListItem", position: 3, name: TITLE },
             ],
@@ -366,7 +366,7 @@ export default async function Post() {
             properly: testing creative, refining audiences, writing ads that
             convert, and pulling out the ones that don&apos;t. If you want a
             full breakdown of what small business marketing actually costs in
-            2026, we wrote a{" "}
+            2026, I wrote a{" "}
             <Link href="/blog/social-media-marketing-cost">
               full cost breakdown here
             </Link>
@@ -397,7 +397,7 @@ export default async function Post() {
             lead quality. If you&apos;re a local visual service (hair, food,
             interiors), Instagram carries more weight even though Facebook has
             more users. Picking the right platform for your business is its own
-            decision, and we walk through it in our{" "}
+            decision, and I walk through it in my{" "}
             <Link href="/blog/which-social-media-platform-for-business">
               platform strategy guide
             </Link>
@@ -430,15 +430,9 @@ export default async function Post() {
             eventually either outsource it or let it die.
           </p>
           <p>
-            At Venti Scale, we run the whole stack. Daily Page content, ad
-            creative and audience management, Messenger workflows, review
-            generation. You focus on serving the customers Facebook sends you.
-            We handle everything that gets them there. For the broader picture
-            on{" "}
-            <Link href="/done-for-you-marketing-services">
-              done-for-you marketing services
-            </Link>
-            , here&apos;s the full breakdown.
+            If you&apos;d rather not run this yourself, <Link href="/done-for-you-social-media">my social media plan</Link> covers your Facebook
+            posts and <Link href="/ads-management">my ads plan</Link> runs your Meta ads. For the broader picture on <Link href="/done-for-you-marketing-services">done-for-you marketing services</Link>, here&apos;s
+            the full breakdown.
           </p>
 
           <div className="blog-faq">

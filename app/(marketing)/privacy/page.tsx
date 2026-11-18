@@ -1,7 +1,7 @@
 import { Eyebrow } from "@/components/marketing/eyebrow";
 
 export const metadata = {
-  title: "Privacy Policy | Venti Scale",
+  title: "Privacy Policy",
   description: "How Venti Scale collects, uses, and protects your data.",
 };
 

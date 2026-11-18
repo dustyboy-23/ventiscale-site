@@ -10,7 +10,7 @@ const SLUG = "marketing-agency-alternatives";
 const TITLE =
   "Marketing agency alternatives: 5 options that beat the retainer trap (and how to pick)";
 const DESCRIPTION =
-  "Tired of paying $5,000/month to a junior account manager? Here are the 5 real alternatives to a traditional marketing agency, what each one costs, and which one fits your stage.";
+  "Paying too much for a marketing agency? Here are the 5 real alternatives, what each one costs and how to pick the right one for your business.";
 const DATE = "2026-04-29";
 const IMAGE = "/blog/marketing-agency-alternatives.jpg";
 const IMAGE_URL = `${SITE_URL}${IMAGE}`;
@@ -22,7 +22,7 @@ const FAQ_DATA = [
   },
   {
     q: "How does a done-for-you marketing service compare to a traditional agency?",
-    a: "Done-for-you marketing services (like Venti Scale, GrowthHit, AppSumo Stack) typically cost 40-60% less than traditional agencies for comparable output. The savings come from AI-powered execution replacing junior account managers. You still get a strategist, content production, and performance reporting. You don't get unlimited custom strategy calls or in-person workshops.",
+    a: "Done-for-you marketing services usually cost less than traditional agencies. The savings come from AI-powered execution replacing junior account managers. You still get a senior person setting direction, content production and reporting. You don't get unlimited custom strategy calls or in-person workshops.",
   },
   {
     q: "Is hiring an in-house marketer cheaper than an agency?",
@@ -39,7 +39,7 @@ const FAQ_DATA = [
 ];
 
 export const metadata = {
-  title: `${TITLE} | Venti Scale`,
+  title: { absolute: "5 Marketing Agency Alternatives That Cost Less (2026)" },
   description: DESCRIPTION,
   alternates: {
     canonical: `${SITE_URL}/${SLUG}`,
@@ -211,8 +211,7 @@ export default async function PillarPage() {
                 fractional CMO ($5,000-$15,000/month).
               </li>
               <li>
-                Cost-per-output, done-for-you services beat agencies by
-                40-60% for comparable execution because AI replaces the
+                Cost-per-output, done-for-you services usually beat agencies because AI replaces the
                 junior-account-manager layer.
               </li>
               <li>
@@ -374,7 +373,7 @@ export default async function PillarPage() {
           </p>
           <p>
             We covered this stack and what it actually does in detail at{" "}
-            <Link href="/blog/ai-cutting-marketing-costs">
+            <Link href="/ai-marketing-cost">
               AI cut my marketing costs 60%. Here&apos;s where the money went.
             </Link>{" "}
             and the deeper architectural breakdown at{" "}
@@ -418,8 +417,7 @@ export default async function PillarPage() {
             who want hands-off output with founder-level taste.
           </p>
           <p>
-            This is the category Venti Scale is in, and it&apos;s the
-            fastest-growing alternative segment in 2026. Done-for-you
+            This is the category Venti Scale is in. Done-for-you
             (DFY) services use AI tools internally to handle the
             execution that agencies used to assign to junior staff. A
             human senior strategist (often the founder of the DFY) sets
@@ -541,14 +539,10 @@ export default async function PillarPage() {
 
           <h2>Red flag 1: Forced sales calls before you can see the work</h2>
           <p>
-            If you can&apos;t evaluate the actual output before signing,
-            the service is selling on charm, not work. Real DFY services
-            and fractional CMOs publish their templates, case studies,
-            and process publicly. They let you submit a free audit or
-            review past work before you commit. Anyone who requires a
-            45-minute &quot;discovery call&quot; before showing you what
-            they actually produce is operating an agency model with a
-            different name.
+            If you can&apos;t see what you&apos;re buying before you sign, the service is selling on charm, not
+            work. Good services publish their prices, what ships each month and how the process runs. Anyone who
+            requires a 45-minute &quot;discovery call&quot; before telling you what they actually produce is
+            operating an agency model with a different name.
           </p>
           <p>
             The signs of a stop-the-loop relationship are well-documented
@@ -636,7 +630,6 @@ export default async function PillarPage() {
           </div>
 
           <BlogAuthorBio
-            bioOverride="Founder of Venti Scale. I built Venti Scale specifically because I burned out paying agency retainers for junior employees running templated work. This page is the framework I use to evaluate every alternative myself before recommending one to a client."
             lastUpdated="2026-04-29"
           />
 

@@ -10,7 +10,7 @@ const SLUG = "done-for-you-marketing-services";
 const TITLE =
   "Done-for-you marketing services: what's actually included, what to pay, and the 5 questions that filter out the bad ones";
 const DESCRIPTION =
-  "Done-for-you marketing services range from $500 to $10,000/month. Most are agency-with-extra-steps. Here's what real DFY includes, what it should cost, and the exact questions to ask before signing.";
+  "What done-for-you marketing includes, what it should cost and the 5 questions to ask before you sign up. Plain answers for small business owners.";
 const DATE = "2026-04-29";
 const IMAGE = "/blog/done-for-you-marketing-services.jpg";
 const IMAGE_URL = `${SITE_URL}${IMAGE}`;
@@ -26,7 +26,7 @@ const FAQ_DATA = [
   },
   {
     q: "Is done-for-you marketing better than hiring a marketing agency?",
-    a: "For businesses doing $5K-500K/month in revenue, yes. DFY services typically cost 40-60% less than a traditional agency at comparable output because AI replaces the junior account-management layer. The remaining differences are structural: DFY is usually month-to-month, agency is usually 6-12 month contracts. DFY usually has a portal showing real-time work, agency usually sends monthly PDFs. The trade-off: agencies handle larger budgets and complex multi-team campaigns better.",
+    a: "For most small businesses, yes. DFY services usually cost less than a traditional agency because AI replaces the junior account-management layer. The remaining differences are structural: DFY is usually month-to-month, agency is usually 6-12 month contracts. DFY usually has a portal showing real-time work, agency usually sends monthly PDFs. The trade-off: agencies handle larger budgets and complex multi-team campaigns better.",
   },
   {
     q: "What's the difference between done-for-you marketing and a virtual assistant?",
@@ -34,12 +34,12 @@ const FAQ_DATA = [
   },
   {
     q: "How do I evaluate done-for-you marketing services before signing up?",
-    a: "Five questions filter out 90% of bad services: 1) Can I see real-time output before signing? 2) Is the contract month-to-month? 3) Who reviews work before it ships and who do I communicate with day-to-day? 4) What's the cancellation process and what data do I get back? 5) Show me a case study with specific revenue numbers, not vanity metrics. Any service that can't answer all five clearly is selling on charm rather than work.",
+    a: "Five questions filter out most bad services: 1) Can I see exactly what I'm buying before I pay? 2) Is the contract month-to-month? 3) Who reviews work before it ships and who do I communicate with day-to-day? 4) What's the cancellation process and what data do I get back? 5) What ships each month, counted and in writing? Any service that can't answer all five clearly is selling on charm rather than work.",
   },
 ];
 
 export const metadata = {
-  title: `${TITLE} | Venti Scale`,
+  title: { absolute: "Done-For-You Marketing Services: What's Included + Prices" },
   description: DESCRIPTION,
   alternates: {
     canonical: `${SITE_URL}/${SLUG}`,
@@ -221,15 +221,12 @@ export default async function PillarPage() {
                 $2,500-5,000/month full-service (5+ channels).
               </li>
               <li>
-                DFY services typically cost 40-60% less than traditional agencies
-                at comparable output because AI replaces the junior
+                DFY services usually cost less than traditional agencies because AI replaces the junior
                 account-management layer.
               </li>
               <li>
-                The 5 questions that filter out 90% of bad services: real-time
-                output access, month-to-month structure, who reviews work,
-                cancellation/data handover, and case studies with revenue numbers
-                (not vanity metrics).
+                The 5 questions that filter out the bad services: what you can see before you pay, month-to-month
+                terms, who reviews the work, cancellation and data handover, and what ships each month, counted.
               </li>
               <li>
                 Most founders confuse DFY with VAs (task execution) or agency
@@ -275,9 +272,8 @@ export default async function PillarPage() {
             showing every output. Agencies usually send monthly PDF reports.
           </p>
           <p>
-            <strong>Cost structure.</strong> DFY services use AI for production,
-            making them 40-60% cheaper at comparable output. Agencies still bill
-            hours through a junior team.
+            <strong>Cost structure.</strong> DFY services use AI for production, which usually makes them
+            cheaper. Agencies still bill hours through a junior team.
           </p>
           <p>
             For the deeper agency comparison, see{" "}
@@ -291,10 +287,6 @@ export default async function PillarPage() {
             <div className="blog-stat">
               <div className="stat-number">$500-5K</div>
               <div className="stat-label">monthly DFY price range 2026</div>
-            </div>
-            <div className="blog-stat">
-              <div className="stat-number">40-60%</div>
-              <div className="stat-label">cost savings vs traditional agency</div>
             </div>
             <div className="blog-stat">
               <div className="stat-number">3+</div>
@@ -388,15 +380,13 @@ export default async function PillarPage() {
             </p>
           </div>
 
-          <h2>The 5 questions that filter out 90% of bad services</h2>
+          <h2>The 5 questions that filter out the bad services</h2>
 
-          <h2>Question 1: Can I see real-time output before signing?</h2>
+          <h2>Question 1: Can I see what I&apos;m buying before I pay?</h2>
           <p>
-            Real DFY services run client portals where you can see every output
-            in real time. They also publish public case studies, sample content,
-            and process documentation. The bad services hide behind &quot;you
-            have to sign up to see what we do&quot; or require a 45-minute
-            discovery call before showing any work.
+            Good DFY services publish their prices and spell out what ships each month. The bad ones hide
+            behind &quot;you have to sign up to see what we do&quot; or require a 45-minute discovery call
+            before they&apos;ll tell you anything.
           </p>
           <p>
             <strong>Red flag answer:</strong> &quot;Let&apos;s schedule a call
@@ -466,22 +456,18 @@ export default async function PillarPage() {
             transition support window.&quot;
           </p>
 
-          <h2>Question 5: Show me a case study with revenue numbers</h2>
+          <h2>Question 5: What ships each month, counted?</h2>
           <p>
-            Vanity metrics (impressions, follower count, engagement rate) tell
-            you nothing about whether a service moves money. Real case studies
-            include CAC, LTV, MER, repeat purchase rate, or specific revenue
-            attribution.
+            Vague promises are how bad services hide. &quot;Full-service social media&quot; could mean 30 posts
+            or 3. A real service tells you the number before you pay, so you can hold them to it.
           </p>
           <p>
-            <strong>Red flag answer:</strong> &quot;We grew their Instagram
-            from 2K to 12K followers.&quot; (Translation: we don&apos;t know if
-            we made them any money.)
+            <strong>Red flag answer:</strong> &quot;We&apos;ll take care of everything and adjust as we
+            go.&quot; (Translation: you won&apos;t know what you paid for.)
           </p>
           <p>
-            <strong>Green flag answer:</strong> &quot;Client X went from $18K
-            to $42K monthly revenue in 90 days. Email contributed $12K of that.
-            Paid social ROAS lifted from 2.1x to 3.4x. Here&apos;s the dashboard.&quot;
+            <strong>Green flag answer:</strong> &quot;12 posts and 4 articles a month. Here&apos;s the list, and
+            here&apos;s what isn&apos;t included.&quot;
           </p>
 
           <h2>How DFY differs from VAs and agencies</h2>
@@ -561,7 +547,6 @@ export default async function PillarPage() {
           </div>
 
           <BlogAuthorBio
-            bioOverride="Founder of Venti Scale, a done-for-you marketing service for small businesses. I built Venti Scale specifically to fail zero of the red flags listed on this page, because every red flag here was a thing I hated as an agency client myself."
             lastUpdated="2026-04-29"
           />
 

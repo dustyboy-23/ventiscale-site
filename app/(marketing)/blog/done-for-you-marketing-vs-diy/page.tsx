@@ -6,7 +6,7 @@ import { BlogCta } from "@/components/marketing/blog-cta";
 
 export const metadata = {
   title:
-    "Done-for-you marketing vs. DIY: the real cost comparison | Venti Scale",
+    "Done-for-you marketing vs. DIY: the real cost comparison",
   description:
     "DIY marketing costs more than you think. Side-by-side breakdown of done for you marketing vs DIY for small businesses.",
   openGraph: {
@@ -45,7 +45,7 @@ const IMAGE_URL = `https://www.ventiscale.com${IMAGE}`;
 const FAQ_DATA = [
   {
     q: "How much does done-for-you marketing cost for a small business?",
-    a: "Done-for-you marketing typically costs $500 to $2,500 per month for small businesses, depending on scope. Basic packages covering social media and content start around $500/month. Full-service packages including email, ads, and strategy run $1,500 to $2,500/month. That is 40-60% less than hiring an in-house marketing employee.",
+    a: "Done-for-you marketing typically costs $500 to $2,500 per month for small businesses, depending on scope. Basic packages covering social media and content start around $500/month. Full-service packages including email, ads, and strategy run $1,500 to $2,500/month. That is usually less than hiring an in-house marketing employee.",
   },
   {
     q: "Is DIY marketing worth it for a small business?",
@@ -79,18 +79,18 @@ export default async function Post() {
             author: {
               "@type": "Person",
               name: "Dustin Gilmour",
-              url: "https://ventiscale.com",
+              url: "https://www.ventiscale.com",
             },
             publisher: {
               "@type": "Organization",
               name: "Venti Scale",
-              url: "https://ventiscale.com",
+              url: "https://www.ventiscale.com",
             },
             datePublished: DATE,
             dateModified: DATE,
             mainEntityOfPage: {
               "@type": "WebPage",
-              "@id": `https://ventiscale.com/blog/${SLUG}`,
+              "@id": `https://www.ventiscale.com/blog/${SLUG}`,
             },
           }),
         }}
@@ -124,13 +124,13 @@ export default async function Post() {
                 "@type": "ListItem",
                 position: 1,
                 name: "Home",
-                item: "https://ventiscale.com",
+                item: "https://www.ventiscale.com",
               },
               {
                 "@type": "ListItem",
                 position: 2,
                 name: "Blog",
-                item: "https://ventiscale.com/blog",
+                item: "https://www.ventiscale.com/blog",
               },
               { "@type": "ListItem", position: 3, name: TITLE },
             ],
@@ -285,7 +285,7 @@ export default async function Post() {
             US commands $90,000 to $160,000 per year in salary. That&apos;s
             $7,500 to $13,000 per month before you add benefits, software
             subscriptions, training, and management overhead. If you want the
-            full breakdown of deliverables, we covered that in our guide to{" "}
+            full breakdown of deliverables, I covered that in my guide to{" "}
             <Link href="/blog/what-done-for-you-marketing-includes">
               what done-for-you marketing actually includes
             </Link>
@@ -304,10 +304,6 @@ export default async function Post() {
             <div className="blog-stat">
               <div className="stat-number">$7.5K+</div>
               <div className="stat-label">In-house hire per month</div>
-            </div>
-            <div className="blog-stat">
-              <div className="stat-number">40-60%</div>
-              <div className="stat-label">Cost savings outsourcing</div>
             </div>
           </div>
 
@@ -356,7 +352,7 @@ export default async function Post() {
               automating content creation and scheduling, they deliver
               full-service marketing at a fraction of traditional agency rates.
               That&apos;s{" "}
-              <Link href="/blog/ai-cutting-marketing-costs">
+              <Link href="/ai-marketing-cost">
                 how AI is cutting marketing costs by 60% for small businesses
               </Link>
               .
@@ -403,7 +399,7 @@ export default async function Post() {
           </p>
           <p>
             Same money. Wildly different outcomes. The same principle applies to
-            every marketing decision. As we covered in{" "}
+            every marketing decision. As I covered in{" "}
             <Link href="/blog/what-ai-marketing-agency-does">
               what an AI marketing agency actually does
             </Link>
@@ -435,11 +431,9 @@ export default async function Post() {
             </li>
           </ul>
           <p>
-            At Venti Scale, we run your entire marketing operation. Daily
-            content. Multi-platform posting. Monthly reports in your own{" "}
-            <Link href="/#how">client portal</Link>. AI-powered execution with
-            human strategy. You don&apos;t touch anything. Your marketing just
-            works.
+            That&apos;s what <Link href="/pricing">Venti Scale</Link> is. You pick the services you want, each
+            one has a flat monthly price, and I do the work. You get one plain monthly report and a dashboard
+            you can open any time.
           </p>
 
           <div className="blog-faq">
@@ -468,7 +462,7 @@ export default async function Post() {
                 <div className="related-meta">8 min read</div>
               </Link>
               <Link
-                href="/blog/ai-cutting-marketing-costs"
+                href="/ai-marketing-cost"
                 className="blog-related-card"
               >
                 <div className="related-title">

@@ -5,7 +5,7 @@ import { BlogAuthorBio } from "@/components/marketing/blog-author-bio";
 import { BlogCta } from "@/components/marketing/blog-cta";
 
 export const metadata = {
-  title: "Local SEO for Contractors: How to Show Up When Homeowners Search | Venti Scale",
+  title: "Local SEO for Contractors: Show Up When Homeowners Search",
   description:
     "46% of Google searches have local intent. If you're not in the top 3 results, homeowners never find you. Step-by-step local SEO guide for contractors.",
   openGraph: {
@@ -77,18 +77,18 @@ export default async function Post() {
             author: {
               "@type": "Person",
               name: "Dustin Gilmour",
-              url: "https://ventiscale.com",
+              url: "https://www.ventiscale.com",
             },
             publisher: {
               "@type": "Organization",
               name: "Venti Scale",
-              url: "https://ventiscale.com",
+              url: "https://www.ventiscale.com",
             },
             datePublished: DATE,
             dateModified: DATE,
             mainEntityOfPage: {
               "@type": "WebPage",
-              "@id": `https://ventiscale.com/blog/${SLUG}`,
+              "@id": `https://www.ventiscale.com/blog/${SLUG}`,
             },
           }),
         }}
@@ -122,13 +122,13 @@ export default async function Post() {
                 "@type": "ListItem",
                 position: 1,
                 name: "Home",
-                item: "https://ventiscale.com",
+                item: "https://www.ventiscale.com",
               },
               {
                 "@type": "ListItem",
                 position: 2,
                 name: "Blog",
-                item: "https://ventiscale.com/blog",
+                item: "https://www.ventiscale.com/blog",
               },
               { "@type": "ListItem", position: 3, name: TITLE },
             ],
@@ -344,7 +344,7 @@ export default async function Post() {
 
           <p>
             56% of homeowners check Google first when looking for contractor reviews.
-            This is also one of the top gaps we see in the{" "}
+            This is also one of the top gaps covered in the{" "}
             <Link href="/blog/contractors-getting-more-leads">
               5 ways contractors get more leads in 2026
             </Link>
@@ -453,24 +453,17 @@ export default async function Post() {
           </p>
           <p>
             The contractors who win online are the ones who treat their digital
-            presence like a job site. It needs regular attention. We cover more of
-            this in our breakdown of{" "}
-            <Link href="/blog/contractors-getting-clients-online">
+            presence like a job site. It needs regular attention. I cover more of
+            this in my breakdown of{" "}
+            <Link href="/blog/contractors-getting-more-leads">
               how contractors get found and win more business online
             </Link>
             , including what the ones doing it right have in common.
           </p>
           <p>
-            If you&apos;re great at your trade but don&apos;t want to think about any
-            of this, that&apos;s what we do at{" "}
-            <a href="/#how">Venti Scale</a>. We handle the consistent content and
-            online presence that keeps you visible while you&apos;re out on jobs. The
-            audit is free and takes 30 seconds to see exactly where you stand. For
-            the broader picture on{" "}
-            <Link href="/done-for-you-marketing-services">
-              done-for-you marketing services
-            </Link>
-            , here&apos;s the full breakdown.
+            If you&apos;re great at your trade but don&apos;t want to think about any of this,{" "}
+            <Link href="/done-for-you-seo">my SEO + blog plan</Link> keeps your site working while you&apos;re out on jobs. For the
+            broader picture on <Link href="/done-for-you-marketing-services">done-for-you marketing services</Link>, here&apos;s the full breakdown.
           </p>
 
           <div className="blog-faq">
@@ -489,7 +482,7 @@ export default async function Post() {
             <h3>Keep reading</h3>
             <div className="blog-related-grid">
               <Link
-                href="/blog/contractors-getting-clients-online"
+                href="/blog/contractors-getting-more-leads"
                 className="blog-related-card"
               >
                 <div className="related-title">

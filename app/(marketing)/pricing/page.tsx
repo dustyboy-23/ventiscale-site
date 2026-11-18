@@ -11,7 +11,7 @@ const all = quote(SERVICES.map((s) => s.id));
 
 export const metadata = {
   title: "Pricing",
-  description: `Every Venti Scale price on one page. Done-for-you SEO, social media, email, ads and video editing from ${money(from)} a month. Flat monthly prices, one-time setup, no contract.`,
+  description: `Every Venti Scale price on one page. Done-for-you SEO, social media, email, ads and video editing from ${money(from)} a month. One-time setup, no contract.`,
   alternates: { canonical: `${SITE_URL}/pricing` },
   openGraph: {
     title: "Venti Scale pricing",

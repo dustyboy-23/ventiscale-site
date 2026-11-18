@@ -2,7 +2,6 @@ import Link from "next/link";
 import { LogoMark } from "@/components/marketing/logo";
 
 type Props = {
-  bioOverride?: string;
   lastUpdated?: string;
 };
 
@@ -15,9 +14,8 @@ function formatDate(iso: string): string {
   });
 }
 
-export function BlogAuthorBio({ bioOverride, lastUpdated }: Props) {
+export function BlogAuthorBio({ lastUpdated }: Props) {
   const bio =
-    bioOverride ??
     "Founder of Venti Scale. I run marketing for small businesses and online stores, and I check every post here before it goes live.";
   return (
     <div className="blog-author">

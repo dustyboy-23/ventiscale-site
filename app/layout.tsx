@@ -56,8 +56,10 @@ export const metadata: Metadata = {
     "flat-fee marketing",
     "month-to-month marketing",
   ],
+  // Each page points at itself. A fixed URL here makes every page without its
+  // own canonical claim to be a copy of the homepage.
   alternates: {
-    canonical: SITE_URL,
+    canonical: "./",
   },
   openGraph: {
     title: HEADLINE,

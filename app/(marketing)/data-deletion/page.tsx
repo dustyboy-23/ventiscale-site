@@ -1,7 +1,7 @@
 import { Eyebrow } from "@/components/marketing/eyebrow";
 
 export const metadata = {
-  title: "Data Deletion | Venti Scale",
+  title: "Data Deletion",
   description: "How to request deletion of your data from Venti Scale systems.",
 };
 

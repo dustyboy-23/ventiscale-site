@@ -1,7 +1,7 @@
 import { Eyebrow } from "@/components/marketing/eyebrow";
 
 export const metadata = {
-  title: "Trust | Venti Scale",
+  title: "Trust",
   description:
     "How Venti Scale protects your data. Encrypted, isolated, never sold, and yours to delete at any time.",
 };

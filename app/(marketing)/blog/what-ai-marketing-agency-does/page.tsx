@@ -5,9 +5,8 @@ import { BlogAuthorBio } from "@/components/marketing/blog-author-bio";
 import { BlogCta } from "@/components/marketing/blog-cta";
 
 export const metadata = {
-  title: "An AI marketing agency isn't what you think. Here's what it actually does. | Venti Scale",
-  description:
-    "Not chatbots. Not automated tweets. A real AI marketing operation runs daily output trained on your business. Here's the breakdown.",
+  title: "What Is an AI Marketing Agency? What They Actually Do",
+  description: "An AI marketing agency uses AI for production and a person for strategy. Here's what they actually do, what they cost and how to spot a fake one.",
   openGraph: {
     title: "An AI marketing agency isn't what you think. Here's what it actually does.",
     description:
@@ -56,7 +55,7 @@ const FAQ_DATA = [
   },
   {
     q: "How much does an AI marketing agency cost?",
-    a: "AI marketing agencies typically charge 40-60% less than traditional agencies for comparable output. Entry-level packages start around $500 per month for small businesses, compared to $3,000-5,000 per month for a traditional agency with similar deliverables. The savings come from AI handling production work that used to require 3-4 people.",
+    a: "AI marketing agencies usually charge less than traditional agencies for similar work. Entry-level packages start around $500 per month for small businesses, compared to $3,000-5,000 per month for a traditional agency with similar deliverables. The savings come from AI handling production work that used to require 3-4 people.",
   },
 ];
 
@@ -78,18 +77,18 @@ export default async function Post() {
             author: {
               "@type": "Person",
               name: "Dustin Gilmour",
-              url: "https://ventiscale.com",
+              url: "https://www.ventiscale.com",
             },
             publisher: {
               "@type": "Organization",
               name: "Venti Scale",
-              url: "https://ventiscale.com",
+              url: "https://www.ventiscale.com",
             },
             datePublished: DATE,
             dateModified: DATE,
             mainEntityOfPage: {
               "@type": "WebPage",
-              "@id": `https://ventiscale.com/blog/${SLUG}`,
+              "@id": `https://www.ventiscale.com/blog/${SLUG}`,
             },
           }),
         }}
@@ -123,13 +122,13 @@ export default async function Post() {
                 "@type": "ListItem",
                 position: 1,
                 name: "Home",
-                item: "https://ventiscale.com",
+                item: "https://www.ventiscale.com",
               },
               {
                 "@type": "ListItem",
                 position: 2,
                 name: "Blog",
-                item: "https://ventiscale.com/blog",
+                item: "https://www.ventiscale.com/blog",
               },
               { "@type": "ListItem", position: 3, name: TITLE },
             ],
@@ -268,7 +267,7 @@ export default async function Post() {
             <strong>Social media management.</strong> Posting, scheduling,
             hashtag research, optimal timing analysis. The kind of work that
             takes a human social media manager 30+ hours a week happens
-            automatically. Just like we break down in our guide to{" "}
+            automatically. Just like I break down in my guide to{" "}
             <Link href="/blog/what-done-for-you-marketing-includes">
               what done-for-you marketing actually includes
             </Link>
@@ -334,7 +333,7 @@ export default async function Post() {
             A good AI marketing agency trains its systems on your brand voice,
             your audience, and your market position. The content sounds like you,
             not like a template.{" "}
-            <Link href="/blog/social-media-for-ecommerce-brands">
+            <Link href="/blog/only-social-media-strategy-you-need">
               Ecommerce brands posting educational content
             </Link>{" "}
             see 3x more engagement than brands posting generic product photos.
@@ -439,7 +438,7 @@ export default async function Post() {
             That&apos;s what happens when it&apos;s built right. The entire
             marketing operation runs without you so you can focus on your
             business. The same way{" "}
-            <Link href="/blog/contractors-getting-clients-online">
+            <Link href="/blog/contractors-getting-more-leads">
               the best contractors focus on their craft
             </Link>{" "}
             and let someone else handle getting found online.
@@ -452,12 +451,9 @@ export default async function Post() {
             wondering what to post.
           </p>
           <p>
-            At Venti Scale, we built this from scratch for small businesses.
-            Content written and scheduled for you. Monthly reports with real numbers. Human strategy making sure everything stays on-brand. All
-            powered by AI systems that run around the clock. You can see exactly{" "}
-            <Link href="/#how">how it works</Link> or grab a{" "}
-            <Link href="/#audit">free audit</Link> to see where you stand right
-            now.
+            That&apos;s how I run <Link href="/pricing">Venti Scale</Link>. AI does the heavy lifting and I check
+            the work before it goes out. You can see <Link href="/how-it-works">how it works</Link> and every
+            price before you talk to anyone.
           </p>
 
           <div className="blog-faq">
@@ -485,7 +481,7 @@ export default async function Post() {
                 <div className="related-meta">8 min read</div>
               </Link>
               <Link
-                href="/blog/social-media-for-ecommerce-brands"
+                href="/blog/only-social-media-strategy-you-need"
                 className="blog-related-card"
               >
                 <div className="related-title">

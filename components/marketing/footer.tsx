@@ -51,10 +51,9 @@ export function MarketingFooter() {
           <Col title="Services">
             {SERVICES.map((s) => (
               <li key={s.id}>
-                {/* Plain link on purpose: a full hash navigation opens the matching row. */}
-                <a href={`/pricing#${s.id}`} className={linkCls}>
+                <Link href={s.href} className={linkCls}>
                   {s.name}
-                </a>
+                </Link>
               </li>
             ))}
           </Col>

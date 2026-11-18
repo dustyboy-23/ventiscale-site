@@ -5,7 +5,7 @@ import { BlogAuthorBio } from "@/components/marketing/blog-author-bio";
 import { BlogCta } from "@/components/marketing/blog-cta";
 
 export const metadata = {
-  title: "Do I need a social media manager? 7 questions to ask first | Venti Scale",
+  title: "Do I need a social media manager? 7 questions to ask first",
   description:
     "Do I need a social media manager? These 7 questions will tell you. If 3+ answers are yes, it's time.",
   openGraph: {
@@ -44,7 +44,7 @@ const IMAGE_URL = `https://www.ventiscale.com${IMAGE}`;
 const FAQ_DATA = [
   {
     q: "How much does a social media manager cost for a small business?",
-    a: "A freelance social media manager costs $800 to $2,500 per month for most small businesses. An in-house hire runs $60,000 to $75,000 per year before benefits and tools. An AI-powered service like Venti Scale charges a flat monthly price and covers more than a solo freelancer.",
+    a: "A freelance social media manager costs $800 to $2,500 per month for most small businesses. An in-house hire runs $60,000 to $75,000 per year before benefits and tools. A done-for-you service like Venti Scale charges a flat monthly price with the number of posts agreed up front.",
   },
   {
     q: "What does a social media manager actually do?",
@@ -78,18 +78,18 @@ export default async function Post() {
             author: {
               "@type": "Person",
               name: "Dustin Gilmour",
-              url: "https://ventiscale.com",
+              url: "https://www.ventiscale.com",
             },
             publisher: {
               "@type": "Organization",
               name: "Venti Scale",
-              url: "https://ventiscale.com",
+              url: "https://www.ventiscale.com",
             },
             datePublished: DATE,
             dateModified: DATE,
             mainEntityOfPage: {
               "@type": "WebPage",
-              "@id": `https://ventiscale.com/blog/${SLUG}`,
+              "@id": `https://www.ventiscale.com/blog/${SLUG}`,
             },
           }),
         }}
@@ -123,13 +123,13 @@ export default async function Post() {
                 "@type": "ListItem",
                 position: 1,
                 name: "Home",
-                item: "https://ventiscale.com",
+                item: "https://www.ventiscale.com",
               },
               {
                 "@type": "ListItem",
                 position: 2,
                 name: "Blog",
-                item: "https://ventiscale.com/blog",
+                item: "https://www.ventiscale.com/blog",
               },
               { "@type": "ListItem", position: 3, name: TITLE },
             ],
@@ -385,17 +385,9 @@ export default async function Post() {
             everything for a flat monthly fee.
           </p>
           <p>
-            At Venti Scale, we run your entire social media operation. Strategy,
-            content creation, scheduling, engagement, reporting. You get a{" "}
-            <Link href="/#how">client portal</Link> showing exactly what&apos;s
-            happening and a monthly report proving it&apos;s working. No learning
-            curve. No hiring process. Your social media goes from inconsistent to
-            professional in a week. If you&apos;re weighing this against the
-            broader category, here&apos;s the full picture on{" "}
-            <Link href="/marketing-agency-alternatives">
-              marketing agency alternatives
-            </Link>
-            .
+            <Link href="/done-for-you-social-media">My social media plan</Link> is the middle option. 12 posts a month written and designed for
+            you, your videos posted, one flat monthly price and no hiring process. If you&apos;re weighing this
+            against other options, here&apos;s the full picture on <Link href="/marketing-agency-alternatives">marketing agency alternatives</Link>.
           </p>
 
           <div className="blog-faq">

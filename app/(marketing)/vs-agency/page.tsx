@@ -7,7 +7,7 @@ const SITE_URL = "https://www.ventiscale.com";
 const SLUG = "vs-agency";
 
 export const metadata = {
-  title: "Venti Scale vs a marketing agency",
+  title: { absolute: "Venti Scale vs a Marketing Agency: Side by Side" },
   description:
     "An honest side-by-side: price, contract, setup fees, who does the work, reporting and cancelling. Including where an agency is the better choice.",
   alternates: { canonical: `${SITE_URL}/${SLUG}` },

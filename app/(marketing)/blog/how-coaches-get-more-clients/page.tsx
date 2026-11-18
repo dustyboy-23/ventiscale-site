@@ -5,8 +5,7 @@ import { BlogAuthorBio } from "@/components/marketing/blog-author-bio";
 import { BlogCta } from "@/components/marketing/blog-cta";
 
 export const metadata = {
-  title:
-    "How to get more clients as a coach (without cold DMs or paid ads) | Venti Scale",
+  title: "How to Get More Coaching Clients Without Cold DMs or Ads",
   description:
     "How to get more clients as a coach in 2026. The organic playbook that fills your calendar without ads or cold outreach.",
   openGraph: {
@@ -79,18 +78,18 @@ export default async function Post() {
             author: {
               "@type": "Person",
               name: "Dustin Gilmour",
-              url: "https://ventiscale.com",
+              url: "https://www.ventiscale.com",
             },
             publisher: {
               "@type": "Organization",
               name: "Venti Scale",
-              url: "https://ventiscale.com",
+              url: "https://www.ventiscale.com",
             },
             datePublished: DATE,
             dateModified: DATE,
             mainEntityOfPage: {
               "@type": "WebPage",
-              "@id": `https://ventiscale.com/blog/${SLUG}`,
+              "@id": `https://www.ventiscale.com/blog/${SLUG}`,
             },
           }),
         }}
@@ -124,13 +123,13 @@ export default async function Post() {
                 "@type": "ListItem",
                 position: 1,
                 name: "Home",
-                item: "https://ventiscale.com",
+                item: "https://www.ventiscale.com",
               },
               {
                 "@type": "ListItem",
                 position: 2,
                 name: "Blog",
-                item: "https://ventiscale.com/blog",
+                item: "https://www.ventiscale.com/blog",
               },
               { "@type": "ListItem", position: 3, name: TITLE },
             ],
@@ -268,7 +267,7 @@ export default async function Post() {
 
           <p>
             This is the same dynamic{" "}
-            <Link href="/blog/social-media-for-ecommerce-brands">
+            <Link href="/blog/only-social-media-strategy-you-need">
               ecommerce brands face on social media
             </Link>
             . Everyone&apos;s doing the same thing. The ones who win get specific
@@ -439,8 +438,7 @@ export default async function Post() {
           </p>
           <p>
             Most coaches don&apos;t ask because it feels awkward. Get over it.
-            Your clients already think you&apos;re great. 99% satisfaction rate
-            across the industry. They want to tell people. Give them a reason and
+            Your clients already think you&apos;re great. They want to tell people. Give them a reason and
             a nudge.
           </p>
 
@@ -465,17 +463,14 @@ export default async function Post() {
             The fastest-growing coaches separate marketing from coaching. They
             focus on being great at what they sell. Someone else handles getting
             the word out. It&apos;s the same reason{" "}
-            <Link href="/blog/best-marketing-strategy-for-coaches">
+            <Link href="/blog/how-coaches-get-more-clients">
               the best marketing strategy for coaches
             </Link>{" "}
             involves building systems, not doing everything yourself.
           </p>
           <p>
-            At Venti Scale, that&apos;s what we do. We build the content engine,
-            run the social media, set up the email sequences, and keep everything
-            consistent. You get a{" "}
-            <Link href="/#how">client portal</Link> with real metrics. A monthly report showing what&apos;s working. And you don&apos;t touch any of
-            it.
+            If you&apos;d rather coach than do all this, I can run it for you. <Link href="/done-for-you-social-media">Social media</Link> and{" "}
+            <Link href="/done-for-you-email-marketing">email</Link> are flat monthly plans, and every price is on the page.
           </p>
           <p>
             Your job is coaching. Ours is making sure people find you. For the
@@ -502,7 +497,7 @@ export default async function Post() {
             <h3>Keep reading</h3>
             <div className="blog-related-grid">
               <Link
-                href="/blog/best-marketing-strategy-for-coaches"
+                href="/blog/how-coaches-get-more-clients"
                 className="blog-related-card"
               >
                 <div className="related-title">
@@ -511,7 +506,7 @@ export default async function Post() {
                 <div className="related-meta">8 min read</div>
               </Link>
               <Link
-                href="/blog/why-coaches-need-social-media"
+                href="/blog/how-coaches-get-more-clients"
                 className="blog-related-card"
               >
                 <div className="related-title">
