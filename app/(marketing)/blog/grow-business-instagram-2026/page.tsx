@@ -450,7 +450,7 @@ export default async function Post() {
             mix. And someone accountable for results.
           </p>
           <p>
-            If you want Instagram handled, <Link href="/done-for-you-social-media">my social media plan</Link> covers it: posts written and
+            If you want Instagram handled, <Link href="/social-media-management">my social media plan</Link> covers it: posts written and
             designed for you, your Reels posted, captions and hashtags done. If you&apos;re running a store,
             Instagram is one channel inside a bigger{" "}
             <Link href="/shopify-marketing-strategy">Shopify marketing strategy</Link> that ties content, email

@@ -388,7 +388,7 @@ export default async function Post() {
             that you can&apos;t do both alone indefinitely.
           </p>
           <p>
-            If you&apos;d rather not become a content creator, <Link href="/done-for-you-social-media">my social media plan</Link> runs this for
+            If you&apos;d rather not become a content creator, <Link href="/social-media-management">my social media plan</Link> runs this for
             you every week. For the broader picture on <Link href="/done-for-you-marketing-services">done-for-you marketing services</Link>, here&apos;s the full breakdown.
           </p>
 

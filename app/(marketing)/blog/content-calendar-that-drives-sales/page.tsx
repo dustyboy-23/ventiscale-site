@@ -407,7 +407,7 @@ export default async function Post() {
             those hours on the parts of your business only you can do.
           </p>
           <p>
-            That second version is what <Link href="/done-for-you-social-media">my social media plan</Link> does. I plan the month, write and
+            That second version is what <Link href="/social-media-management">my social media plan</Link> does. I plan the month, write and
             design the posts and schedule them for you. For the broader picture on <Link href="/done-for-you-marketing-services">done-for-you marketing services</Link>, here&apos;s the full
             breakdown.
           </p>

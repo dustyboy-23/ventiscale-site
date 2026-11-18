@@ -423,7 +423,7 @@ export default async function Post() {
           </p>
           <p>
             If you want this handled, my{" "}
-            <Link href="/done-for-you-email-marketing">email marketing plan</Link> switches on your automatic emails and sends 2 campaigns a month.
+            <Link href="/email-marketing-services">email marketing plan</Link> switches on your automatic emails and sends 2 campaigns a month.
             The guide to{" "}
             <Link href="/done-for-you-marketing-services">done-for-you marketing services</Link>{" "}
             breaks down what each piece should cost.

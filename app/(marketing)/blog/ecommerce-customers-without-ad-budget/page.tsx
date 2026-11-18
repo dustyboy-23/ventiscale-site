@@ -459,8 +459,8 @@ export default async function Post() {
             always falls off.
           </p>
           <p>
-            If you&apos;d rather hand this off, I run all three: <Link href="/done-for-you-social-media">social media</Link>,{" "}
-            <Link href="/done-for-you-email-marketing">email</Link> and <Link href="/done-for-you-seo">SEO + blog</Link>, each at a flat monthly price. For the broader picture
+            If you&apos;d rather hand this off, I run all three: <Link href="/social-media-management">social media</Link>,{" "}
+            <Link href="/email-marketing-services">email</Link> and <Link href="/seo-services-for-small-business">SEO + blog</Link>, each at a flat monthly price. For the broader picture
             on <Link href="/ai-marketing-for-ecommerce">AI marketing for ecommerce</Link>, here&apos;s the full
             breakdown.
           </p>

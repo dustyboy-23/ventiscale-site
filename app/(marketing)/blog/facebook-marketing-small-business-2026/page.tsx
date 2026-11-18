@@ -430,7 +430,7 @@ export default async function Post() {
             eventually either outsource it or let it die.
           </p>
           <p>
-            If you&apos;d rather not run this yourself, <Link href="/done-for-you-social-media">my social media plan</Link> covers your Facebook
+            If you&apos;d rather not run this yourself, <Link href="/social-media-management">my social media plan</Link> covers your Facebook
             posts and <Link href="/ads-management">my ads plan</Link> runs your Meta ads. For the broader picture on <Link href="/done-for-you-marketing-services">done-for-you marketing services</Link>, here&apos;s
             the full breakdown.
           </p>

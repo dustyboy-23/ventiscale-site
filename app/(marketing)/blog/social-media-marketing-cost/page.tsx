@@ -433,7 +433,7 @@ export default async function Post() {
 
           <h2>What I charge and why</h2>
           <p>
-            <Link href="/done-for-you-social-media">My social media plan</Link> has one flat monthly price, published on the page. You get 12 posts
+            <Link href="/social-media-management">My social media plan</Link> has one flat monthly price, published on the page. You get 12 posts
             a month written and designed for you, plus up to 8 of your own videos posted.
           </p>
           <p>

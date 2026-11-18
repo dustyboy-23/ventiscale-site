@@ -469,8 +469,8 @@ export default async function Post() {
             involves building systems, not doing everything yourself.
           </p>
           <p>
-            If you&apos;d rather coach than do all this, I can run it for you. <Link href="/done-for-you-social-media">Social media</Link> and{" "}
-            <Link href="/done-for-you-email-marketing">email</Link> are flat monthly plans, and every price is on the page.
+            If you&apos;d rather coach than do all this, I can run it for you. <Link href="/social-media-management">Social media</Link> and{" "}
+            <Link href="/email-marketing-services">email</Link> are flat monthly plans, and every price is on the page.
           </p>
           <p>
             Your job is coaching. Ours is making sure people find you. For the

@@ -83,7 +83,7 @@ export const SERVICES: Service[] = [
   {
     id: "seo",
     name: "SEO + blog",
-    href: "/done-for-you-seo",
+    href: "/seo-services-for-small-business",
     outcome: "Show up when people search for what you sell",
     count: "4 articles a month",
     short: "4 articles a month, plus fixes to your pages",
@@ -104,7 +104,7 @@ export const SERVICES: Service[] = [
   {
     id: "social",
     name: "Social media",
-    href: "/done-for-you-social-media",
+    href: "/social-media-management",
     outcome: "Keep your pages busy without touching them",
     count: "12 posts a month",
     short: "12 posts a month, plus your videos posted",
@@ -125,7 +125,7 @@ export const SERVICES: Service[] = [
   {
     id: "email",
     name: "Email marketing",
-    href: "/done-for-you-email-marketing",
+    href: "/email-marketing-services",
     outcome: "Get past customers to come back",
     count: "2 campaigns a month",
     short: "Automatic emails, plus 2 campaigns a month",

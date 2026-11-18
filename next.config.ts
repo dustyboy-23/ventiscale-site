@@ -45,6 +45,10 @@ const nextConfig: NextConfig = {
       { source: "/for-shopify", destination: "/pricing", permanent: true },
       // Old comparison quoted retired prices and "zero setup". /vs-agency is the current one.
       { source: "/blog/venti-scale-vs-traditional-agency", destination: "/vs-agency", permanent: true },
+      // Renamed the day they launched, once real search volumes were in.
+      { source: "/done-for-you-seo", destination: "/seo-services-for-small-business", permanent: true },
+      { source: "/done-for-you-social-media", destination: "/social-media-management", permanent: true },
+      { source: "/done-for-you-email-marketing", destination: "/email-marketing-services", permanent: true },
       // 2026-11 SEO pass: posts covering the same ground merged into the strongest page.
       { source: "/blog/ai-marketing-agency", destination: "/blog/what-ai-marketing-agency-does", permanent: true },
       { source: "/blog/how-ai-marketing-actually-works", destination: "/blog/what-ai-marketing-agency-does", permanent: true },

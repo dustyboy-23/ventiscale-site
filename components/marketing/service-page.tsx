@@ -3,6 +3,8 @@ import { headers } from "next/headers";
 import { Check, Minus } from "lucide-react";
 import { ClosingCta } from "@/components/marketing/sections";
 import { FaqList, faqJsonLd } from "@/components/marketing/faq";
+import { IndustryNumbers } from "@/components/marketing/industry-numbers";
+import { SERVICE_NUMBERS } from "@/lib/industry-numbers";
 import { SERVICE_PAGES } from "@/lib/service-pages";
 import {
   BUNDLE_DISCOUNT,
@@ -25,7 +27,7 @@ export function serviceDescription(id: ServiceId): string {
   const s = serviceById(id);
   const per = s.perChannel ? " per channel" : "";
   const what = s.short.startsWith("Meta") ? s.short : s.short.charAt(0).toLowerCase() + s.short.slice(1);
-  return `${s.name} done for you: ${what}. ${money(s.monthly)} a month${per}, no contract, every price on the page.`;
+  return `${SERVICE_PAGES[id].lead}: ${what}. ${money(s.monthly)} a month${per}, no contract, every price on the page.`;
 }
 
 export function serviceMetadata(id: ServiceId) {
@@ -128,7 +130,9 @@ export async function ServicePage({ id }: { id: ServiceId }) {
         </div>
       </section>
 
-      <section>
+      <IndustryNumbers items={SERVICE_NUMBERS[id]} />
+
+      <section className="vs-rule">
         <div className="vs-container vs-section">
           <div className="grid gap-10 lg:grid-cols-[minmax(0,4fr)_minmax(0,7fr)] lg:gap-16">
             <h2 className="vs-h2">{copy.work.heading}</h2>

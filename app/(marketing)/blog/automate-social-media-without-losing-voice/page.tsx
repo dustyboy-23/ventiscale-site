@@ -460,7 +460,7 @@ export default async function Post() {
           </p>
           <p>
             If you&apos;d rather not run any of this yourself, that&apos;s what{" "}
-            <Link href="/done-for-you-social-media">my social media plan</Link> is for. I learn your brand and voice during setup, then write,
+            <Link href="/social-media-management">my social media plan</Link> is for. I learn your brand and voice during setup, then write,
             design and schedule 12 posts a month for you.
           </p>
           <p>

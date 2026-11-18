@@ -462,7 +462,7 @@ export default async function Post() {
           </p>
           <p>
             If you&apos;re great at your trade but don&apos;t want to think about any of this,{" "}
-            <Link href="/done-for-you-seo">my SEO + blog plan</Link> keeps your site working while you&apos;re out on jobs. For the
+            <Link href="/seo-services-for-small-business">my SEO + blog plan</Link> keeps your site working while you&apos;re out on jobs. For the
             broader picture on <Link href="/done-for-you-marketing-services">done-for-you marketing services</Link>, here&apos;s the full breakdown.
           </p>
 

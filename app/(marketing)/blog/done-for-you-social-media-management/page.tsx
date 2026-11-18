@@ -440,7 +440,7 @@ export default async function Post() {
             between you and them is they stopped trying to do it alone.
           </p>
           <p>
-            That&apos;s the problem <Link href="/done-for-you-social-media">my social media plan</Link> solves. 12 posts a month written, designed
+            That&apos;s the problem <Link href="/social-media-management">my social media plan</Link> solves. 12 posts a month written, designed
             and scheduled for you on Facebook, Instagram and LinkedIn, plus up to 8 of your own videos posted.
             You get a dashboard you can open any time and one plain monthly report.
           </p>

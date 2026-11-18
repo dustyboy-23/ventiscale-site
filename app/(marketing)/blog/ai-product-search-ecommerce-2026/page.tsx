@@ -478,7 +478,7 @@ export default async function Post() {
           <p>
             Most stores have never tested their Schema, and most Merchant Center feeds get set up once and
             forgotten. If you&apos;d rather not do it yourself, my{" "}
-            <Link href="/done-for-you-seo">SEO + blog plan</Link> fixes your current pages and sets your site up so AI search can find
+            <Link href="/seo-services-for-small-business">SEO + blog plan</Link> fixes your current pages and sets your site up so AI search can find
             and quote you.
           </p>
 

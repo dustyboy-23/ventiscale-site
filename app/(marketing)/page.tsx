@@ -11,6 +11,8 @@ import {
   Steps,
 } from "@/components/marketing/sections";
 import { FaqList, HOME_FAQ, faqJsonLd } from "@/components/marketing/faq";
+import { IndustryNumbers } from "@/components/marketing/industry-numbers";
+import { HOME_NUMBERS } from "@/lib/industry-numbers";
 import { BUNDLE_DISCOUNT, CURRENCY, SERVICES } from "@/lib/pricing";
 
 const SITE_URL = "https://www.ventiscale.com";
@@ -137,6 +139,8 @@ export default async function Home() {
       </section>
 
       <DashboardProof />
+
+      <IndustryNumbers items={HOME_NUMBERS} heading="Why this work is worth doing." />
 
       {/* ─── Why the price is what it is ─── */}
       <section>

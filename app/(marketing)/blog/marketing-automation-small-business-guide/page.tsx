@@ -333,7 +333,7 @@ export default async function Post() {
             <Link href="/blog/what-done-for-you-marketing-includes">what a done-for-you marketing service covers</Link>.
           </p>
           <p>
-            If you&apos;d rather have it done for you, <Link href="/done-for-you-email-marketing">my email marketing plan</Link> writes and switches on
+            If you&apos;d rather have it done for you, <Link href="/email-marketing-services">my email marketing plan</Link> writes and switches on
             4 automatic email series, then sends 2 campaigns a month. For the broader category overview on{" "}
             <Link href="/done-for-you-marketing-services">done-for-you marketing services</Link>, here&apos;s the full breakdown.
           </p>

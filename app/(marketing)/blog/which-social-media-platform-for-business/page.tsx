@@ -449,7 +449,7 @@ export default async function Post() {
           </p>
           <p>
             If you want that handled,{" "}
-            <Link href="/done-for-you-social-media">my social media plan</Link> covers 12 posts a month across Facebook, Instagram and LinkedIn,
+            <Link href="/social-media-management">my social media plan</Link> covers 12 posts a month across Facebook, Instagram and LinkedIn,
             written and designed for you, plus your videos posted.
           </p>
 

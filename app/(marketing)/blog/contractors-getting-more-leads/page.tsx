@@ -465,8 +465,8 @@ export default async function Post() {
             your lead pipeline dries up three months later.
           </p>
           <p>
-            If you&apos;d rather stay on the tools, <Link href="/done-for-you-seo">my SEO + blog plan</Link> gets your site found for the
-            jobs you actually want, and <Link href="/done-for-you-social-media">my social media plan</Link> keeps your pages busy. For the broader
+            If you&apos;d rather stay on the tools, <Link href="/seo-services-for-small-business">my SEO + blog plan</Link> gets your site found for the
+            jobs you actually want, and <Link href="/social-media-management">my social media plan</Link> keeps your pages busy. For the broader
             picture on <Link href="/done-for-you-marketing-services">done-for-you marketing services</Link>, here&apos;s the full breakdown.
           </p>
 

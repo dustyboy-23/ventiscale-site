@@ -11,8 +11,10 @@ import type { ServiceId } from "@/lib/pricing";
 
 export interface ServicePageCopy {
   id: ServiceId;
-  /** <title>. Under 60 characters. */
+  /** <title>. Under 60 characters. Built around what buyers really search for. */
   title: string;
+  /** Opens the meta description, in the words people search with. */
+  lead: string;
   h1: string;
   lede: string;
   why: { heading: string; paras: string[] };
@@ -25,8 +27,9 @@ export interface ServicePageCopy {
 export const SERVICE_PAGES: Record<ServiceId, ServicePageCopy> = {
   seo: {
     id: "seo",
-    title: "Done-For-You SEO for Small Businesses | Venti Scale",
-    h1: "Done-for-you SEO that gets your business found on Google.",
+    title: "SEO Services for Small Business, Done For You | Venti Scale",
+    lead: "SEO services for small businesses",
+    h1: "SEO services for small businesses, done for you.",
     lede: "I write the articles, fix your pages and plan the keywords. You keep running your business while your site starts showing up for what you sell.",
     why: {
       heading: "If they can't find you, they call someone else.",
@@ -71,8 +74,9 @@ export const SERVICE_PAGES: Record<ServiceId, ServicePageCopy> = {
 
   social: {
     id: "social",
-    title: "Done-For-You Social Media Management | Venti Scale",
-    h1: "Done-for-you social media, so your pages never go quiet.",
+    title: "Social Media Management for Small Business | Venti Scale",
+    lead: "Social media management for small businesses",
+    h1: "Social media management for small businesses, done for you.",
     lede: "I write, design and schedule your posts every month, and post the videos you already have. You never have to think about what to post again.",
     why: {
       heading: "A dead page makes people wonder if you're still open.",
@@ -117,8 +121,9 @@ export const SERVICE_PAGES: Record<ServiceId, ServicePageCopy> = {
 
   email: {
     id: "email",
-    title: "Done-For-You Email Marketing Service | Venti Scale",
-    h1: "Done-for-you email marketing that brings past customers back.",
+    title: "Email Marketing Services for Small Business | Venti Scale",
+    lead: "Email marketing services for small businesses",
+    h1: "Email marketing services that bring past customers back.",
     lede: "I write your automatic emails, switch them on and send 2 campaigns a month. The people who already know you keep coming back.",
     why: {
       heading: "Your easiest sale is to someone who already bought.",
@@ -162,8 +167,9 @@ export const SERVICE_PAGES: Record<ServiceId, ServicePageCopy> = {
 
   ads: {
     id: "ads",
-    title: "Done-For-You Ads Management: Meta + Google | Venti Scale",
-    h1: "Done-for-you ads management on Meta and Google.",
+    title: "Facebook and Google Ads Management | Venti Scale",
+    lead: "Facebook and Google ads management for small businesses",
+    h1: "Facebook and Google ads management, done for you.",
     lede: "I build your campaigns, write and design the ads and check them every week. You pay one flat fee per channel, and your ad money goes straight to Meta or Google.",
     why: {
       heading: "Ads don't run themselves.",
@@ -208,8 +214,9 @@ export const SERVICE_PAGES: Record<ServiceId, ServicePageCopy> = {
 
   video: {
     id: "video",
-    title: "Done-For-You Video Editing Service | Venti Scale",
-    h1: "Done-for-you video editing for your phone clips.",
+    title: "Short-Form Video Editing Service | Venti Scale",
+    lead: "Short-form video editing service for small businesses",
+    h1: "A short-form video editing service for your phone clips.",
     lede: "You film on your phone and drop the clips in a folder. I edit them into short videos and post them to TikTok, Reels, Shorts and Facebook.",
     why: {
       heading: "You've got the footage. You just don't have the hours.",
