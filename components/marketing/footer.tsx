@@ -51,9 +51,10 @@ export function MarketingFooter() {
           <Col title="Services">
             {SERVICES.map((s) => (
               <li key={s.id}>
-                <Link href={`/pricing#${s.id}`} className={linkCls}>
+                {/* Plain link on purpose: a full hash navigation opens the matching row. */}
+                <a href={`/pricing#${s.id}`} className={linkCls}>
                   {s.name}
-                </Link>
+                </a>
               </li>
             ))}
           </Col>
@@ -81,7 +82,7 @@ export function MarketingFooter() {
 
         <div className="vs-rule mt-12 pt-6 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3">
           <p className="vs-small">
-            © 2026 Venti Scale LLC, Sheridan, WY 82801, USA. Run from British Columbia, Canada.
+            © 2026 Venti Scale LLC, Sheridan, WY 82801, USA
           </p>
           <p className="vs-small flex gap-5">
             <Link href="/privacy" className="hover:text-evergreen">Privacy</Link>

@@ -36,17 +36,19 @@ export const SETUP_CAP = 750;
 export interface Service {
   id: ServiceId;
   name: string;
+  /** What the owner gets out of it, in their words. Headline of the service row. */
+  outcome: string;
+  /** The one fact that says what ships, e.g. "4 articles a month". */
+  count: string;
   /** One short line shown on the rate sheet under the name. */
   short: string;
-  /** One or two plain sentences for the detail ledger. */
-  blurb: string;
   monthly: number;
   setup: number;
   /** True when `monthly` and `setup` are per channel (ads). */
   perChannel?: boolean;
-  /** What the monthly covers. */
+  /** What the monthly covers. Four short lines, no more. */
   includes: string[];
-  /** What the one-time setup fee covers. */
+  /** What the one-time setup fee covers. One short sentence. */
   setupCovers: string;
   /** The thing people assume is included but is not. Said plainly. */
   notIncluded: string;
@@ -58,8 +60,8 @@ export interface Service {
    * KEEP IN STEP with `includes`: if 12 posts becomes 8, change this too.
    */
   weeks: [WeekSlot, WeekSlot, WeekSlot, WeekSlot];
-  /** Optional link to real work of this kind. */
-  sample?: { label: string; href: string };
+  /** The month's total in words, shown beside the marks. */
+  monthTotal: string;
 }
 
 export interface WeekSlot {
@@ -80,123 +82,113 @@ export const SERVICES: Service[] = [
   {
     id: "seo",
     name: "SEO + blog",
+    outcome: "Show up when people search for what you sell",
+    count: "4 articles a month",
     short: "4 articles a month, plus fixes to your pages",
-    blurb:
-      "Articles your customers are searching for, published on your site every week, plus the behind-the-scenes fixes that help Google and AI search show them.",
     monthly: 450,
     setup: 300,
     includes: [
-      "4 blog articles a month, written for the searches your customers make",
-      "Keyword plan built around what you sell and where you sell it",
-      "Fixes to the pages you already have, so Google understands them",
-      "Pages set up so ChatGPT and Google's AI answers can quote you",
-      "Google Business Profile tuned once at setup, so you show up in Maps",
-      "Monthly report: what search brought in, what moved, what's next",
+      "4 articles a month on what your customers search for",
+      "Your current pages fixed so Google understands them",
+      "Set up so AI search can find and quote you",
+      "Google Business Profile tuned once at setup",
     ],
-    setupCovers:
-      "A full check of your site, research into what your customers search for, Google's free tracking tools connected, your Google Business Profile checked and tuned, and the first three months of topics planned.",
+    setupCovers: "A full site check, keyword research, your Google profile tuned and 3 months of topics planned.",
     notIncluded: "Building or redesigning your website.",
-    needs: "A login to your website so articles can be published.",
+    needs: "A login to your website.",
     weeks: every(1, "1 article"),
-    sample: { label: "Read real articles on the blog", href: "/blog" },
+    monthTotal: "4 articles",
   },
   {
     id: "social",
     name: "Social media",
+    outcome: "Keep your pages busy without touching them",
+    count: "12 posts a month",
     short: "12 posts a month, plus your videos posted",
-    blurb:
-      "Your pages stay active without you thinking about it. Posts written, designed and scheduled. Send videos and they go out too.",
     monthly: 350,
     setup: 200,
     includes: [
-      "12 posts a month (3 a week), written and designed in your brand",
-      "Up to 3 platforms: Facebook, Instagram, LinkedIn",
-      "Up to 8 of your own videos a month posted to Reels, TikTok and Shorts",
+      "12 posts a month, written and designed for you",
+      "Facebook, Instagram and LinkedIn",
+      "Up to 8 of your videos posted to Reels, TikTok and Shorts",
       "Captions, hashtags and scheduling handled",
-      "Monthly report: what went out and how it did",
     ],
-    setupCovers:
-      "Brand voice and look captured, accounts connected, post templates designed, first month planned.",
-    notIncluded:
-      "Replying to comments and DMs, and Google Business Profile posts. Those stay with you.",
-    needs: "Access to your pages, and a few photos of your real work.",
+    setupCovers: "Your brand look and voice, accounts connected and the first month planned.",
+    notIncluded: "Replying to comments and DMs, and Google Business Profile posts.",
+    needs: "Access to your pages and a few photos of your work.",
     weeks: every(3, "3 posts"),
+    monthTotal: "12 posts",
   },
   {
     id: "email",
     name: "Email marketing",
+    outcome: "Get past customers to come back",
+    count: "2 campaigns a month",
     short: "Automatic emails, plus 2 campaigns a month",
-    blurb:
-      "The emails that should already be going out, built and running: a welcome series, follow-ups, win-backs. Plus two fresh campaigns every month.",
     monthly: 350,
     setup: 400,
     includes: [
-      "4 automatic email series built at setup: a welcome, a follow-up after an enquiry or unfinished checkout, a review request, and a come-back email for quiet customers",
-      "2 campaigns a month: written, designed, sent",
-      "List cleanup so your emails keep landing in inboxes",
-      "Works with the email tool you already have (Mailchimp, Klaviyo and the rest)",
-      "Monthly report: sales or bookings first, then opens and clicks",
+      "4 automatic email series: welcome, follow-up, review request, come-back",
+      "2 campaigns a month, written, designed and sent",
+      "Your list kept clean so emails land in inboxes",
+      "Works with the email tool you already have",
     ],
-    setupCovers:
-      "The four automatic email series written, designed and switched on, your signup form connected, and a check that your emails reach inboxes.",
-    notIncluded:
-      "Your email tool's own subscription. You pay that to them directly.",
-    needs: "Access to your email tool. No tool or list yet? I set one up with you.",
+    setupCovers: "All 4 email series written and switched on, and your signup form connected.",
+    notIncluded: "Your email tool's own subscription.",
+    needs: "Access to your email tool. No tool yet? I set one up with you.",
     weeks: [
-      { units: 0, label: "Automatic emails" },
+      { units: 0, label: "Automatic emails running" },
       { units: 1, label: "1 campaign" },
-      { units: 0, label: "Automatic emails" },
+      { units: 0, label: "Automatic emails running" },
       { units: 1, label: "1 campaign" },
     ],
+    monthTotal: "2 campaigns",
   },
   {
     id: "ads",
     name: "Ads management",
+    outcome: "Reach people who are ready to buy",
+    count: "Checked every week",
     short: "Meta or Google ads, priced per channel",
-    blurb:
-      "Paid ads run by someone who checks them every week. One flat fee per channel, and your ad budget goes straight to Meta or Google.",
     monthly: 500,
     setup: 400,
     perChannel: true,
     includes: [
-      "Priced per channel: Meta (Facebook + Instagram) or Google (Search, Maps + YouTube)",
-      "Each channel covers up to $3,000 a month in ad spend",
-      "Ad copy and creative made for you, refreshed monthly",
-      "Checked every week: what to spend more on, what to switch off",
-      "Monthly report in plain numbers: what you spent, the calls, enquiries or sales it brought, and the cost of each",
+      "Meta or Google, priced per channel",
+      `Covers up to ${money(AD_SPEND_CAP)} a month in ad spend per channel`,
+      "Ads written and designed for you, refreshed monthly",
+      "Checked every week: what to push, what to switch off",
     ],
-    setupCovers:
-      "For each channel: the ad account set up properly, the first campaigns built, and tracking tested so you can see which ads bring calls, enquiries or sales.",
-    notIncluded:
-      "The ad spend itself. That is billed by the platform to your card, never through me.",
-    needs: "Admin access to your ad account, or I create one in your name.",
+    setupCovers: "Your ad account set up, first campaigns built and tracking tested.",
+    notIncluded: "The ad spend. Meta or Google bills your card directly.",
+    needs: "Admin access to your ad account, or I create one for you.",
     weeks: [
       { units: 1, label: "Fresh ads" },
       { units: 1, label: "Tune-up" },
       { units: 1, label: "Tune-up" },
       { units: 1, label: "Tune-up" },
     ],
+    monthTotal: "4 check-ins",
   },
   {
     id: "video",
     name: "Video editing",
+    outcome: "Turn phone clips into videos people watch",
+    count: "12 short videos a month",
     short: "12 short videos a month, edited and posted",
-    blurb:
-      "Send raw clips from your phone. Get back finished short videos with captions and pacing that holds attention, posted to every platform.",
     monthly: 750,
     setup: 200,
     includes: [
-      "12 short-form videos a month, edited from your raw footage",
-      "Captions, cuts, music and a hook in the first seconds",
-      "Posted to TikTok, Reels, Shorts and Facebook for you",
+      "12 short videos a month from your raw clips",
+      "Captions, cuts, music and a strong opening",
+      "Posted to TikTok, Reels, Shorts and Facebook",
       "One round of changes on every video",
-      "A shot list each month so you know what to film",
     ],
-    setupCovers:
-      "Your editing style set (captions, fonts, pacing), a shared upload folder, accounts connected.",
-    notIncluded: "Filming. You shoot it on your phone, I take it from there.",
-    needs: "Raw clips dropped in a shared folder. Phone footage is fine.",
+    setupCovers: "Your editing style set, a shared upload folder and accounts connected.",
+    notIncluded: "Filming. You shoot it on your phone.",
+    needs: "Raw clips in a shared folder. Phone footage is fine.",
     weeks: every(3, "3 videos"),
+    monthTotal: "12 videos",
   },
 ];
 

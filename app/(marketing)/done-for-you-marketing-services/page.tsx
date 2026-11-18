@@ -404,7 +404,7 @@ export default async function PillarPage() {
           </p>
           <p>
             <strong>Green flag answer:</strong> &quot;Here&apos;s the dashboard
-            you&apos;ll get. Here&apos;s sample work. Here&apos;s exactly what
+            you&apos;ll get. Here&apos;s exactly what
             ships each month, counted.&quot;
           </p>
 

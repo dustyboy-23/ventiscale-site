@@ -16,7 +16,6 @@ export const metadata = {
     description: DESCRIPTION,
     url: `${SITE_URL}/about`,
     type: "profile",
-    images: [{ url: `${SITE_URL}/dusty.webp`, width: 600, height: 600, alt: "Dustin Gilmour, founder of Venti Scale" }],
   },
 };
 
@@ -25,7 +24,6 @@ const PERSON_JSONLD = {
   "@type": "Person",
   name: "Dustin Gilmour",
   url: `${SITE_URL}/about`,
-  image: `${SITE_URL}/dusty.webp`,
   jobTitle: "Founder, Venti Scale",
   worksFor: { "@type": "Organization", name: "Venti Scale", url: SITE_URL },
   description:
@@ -59,22 +57,12 @@ export default async function AboutPage() {
 
       <section>
         <div className="vs-container pt-10 pb-16 lg:pt-20 lg:pb-24">
-          <div className="grid gap-10 lg:grid-cols-[minmax(0,7fr)_minmax(0,4fr)] lg:gap-16 lg:items-center">
-            <div>
-              <h1 className="vs-h1">Venti Scale is one person and a lot of good software.</h1>
-              <p className="vs-lede mt-6">
-                I&apos;m Dustin Gilmour. I run every account myself, from British Columbia, Canada
-                and wherever my laptop is that month.
-              </p>
-            </div>
-            {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img
-              src="/founder/dustin.webp"
-              alt="Dustin Gilmour, founder of Venti Scale"
-              width={600}
-              height={600}
-              className="w-full max-w-[300px] aspect-square rounded-[26px] object-cover lg:justify-self-end"
-            />
+          <div className="max-w-[46em]">
+            <h1 className="vs-h1">Venti Scale is one person and a lot of good software.</h1>
+            <p className="vs-lede mt-6">
+              I&apos;m Dustin Gilmour. I run every account myself, and when you email, I&apos;m the
+              one who answers.
+            </p>
           </div>
         </div>
       </section>

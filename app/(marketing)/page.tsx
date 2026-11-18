@@ -1,17 +1,16 @@
 import Link from "next/link";
 import { headers } from "next/headers";
-import { Check } from "lucide-react";
+import { Check, Minus } from "lucide-react";
 import { PlanBuilder } from "@/components/marketing/plan-builder";
 import {
   BundleTable,
   ClosingCta,
   DashboardProof,
   MonthView,
-  ServiceLedger,
+  ServiceRows,
   Steps,
 } from "@/components/marketing/sections";
 import { FaqList, HOME_FAQ, faqJsonLd } from "@/components/marketing/faq";
-import { SampleWork } from "@/components/marketing/samples";
 import { BUNDLE_DISCOUNT, CURRENCY, SERVICES, SETUP_CAP, money } from "@/lib/pricing";
 
 const SITE_URL = "https://www.ventiscale.com";
@@ -28,7 +27,7 @@ const OFFERS_JSONLD = {
   itemListElement: SERVICES.map((s) => ({
     "@type": "Offer",
     name: s.name,
-    description: s.blurb,
+    description: s.outcome,
     price: s.monthly,
     priceCurrency: CURRENCY,
     url: `${SITE_URL}/pricing#${s.id}`,
@@ -36,10 +35,12 @@ const OFFERS_JSONLD = {
       "@type": "UnitPriceSpecification",
       price: s.monthly,
       priceCurrency: CURRENCY,
-      unitText: "month",
+      unitText: s.perChannel ? "month per channel" : "month",
     },
   })),
 };
+
+const AGENCY_BILL = ["An office", "A sales team", "An account manager"];
 
 export default async function Home() {
   const nonce = (await headers()).get("x-nonce") ?? undefined;
@@ -57,19 +58,19 @@ export default async function Home() {
         dangerouslySetInnerHTML={{ __html: JSON.stringify(faqJsonLd(HOME_FAQ)) }}
       />
 
-      {/* ─── Hero: the price sheet is the picture ─── */}
+      {/* ─── Hero: their problem on the left, the price sheet on the right ─── */}
       <section>
         <div className="vs-container vs-hero pt-10 pb-16 lg:pt-20 lg:pb-28">
           <div className="grid gap-9 lg:grid-cols-[minmax(0,1.12fr)_minmax(0,1fr)] lg:grid-rows-[auto_auto] lg:gap-x-16 lg:gap-y-8">
             <div className="lg:col-start-1 lg:row-start-1 lg:self-end">
               <h1 className="vs-h1">
-                <span className="block">Your marketing, handled.</span>
-                <span className="block">The prices are right here.</span>
+                <span className="block">Your competitor isn&apos;t better than you.</span>
+                <span className="block">They&apos;re just easier to find.</span>
               </h1>
               <p className="vs-lede mt-6">
-                SEO, social media, email, ads and video, done for you. Built for local service
-                businesses, shops and small online stores. A flat monthly price, a one-time setup
-                fee per service, no contract.
+                You&apos;re busy doing the actual work, so the marketing never gets done. I do it
+                for you. SEO, social, email, ads and video for local businesses, shops and small
+                online stores.
               </p>
             </div>
 
@@ -90,11 +91,6 @@ export default async function Home() {
                   </li>
                 ))}
               </ul>
-              <p className="mt-7">
-                <Link href="#services" className="vs-link">
-                  See what&apos;s in each service
-                </Link>
-              </p>
             </div>
           </div>
         </div>
@@ -105,36 +101,10 @@ export default async function Home() {
         <div className="vs-container vs-section">
           <div className="max-w-[44em]">
             <h2 className="vs-h2">Five things you can stop doing yourself.</h2>
-            <p className="vs-lede mt-4">
-              Take one or take all five. Each has a flat monthly price and a one-time setup fee.
-              Here is exactly what you get for it.
-            </p>
+            <p className="vs-lede mt-4">Take one or take all five. Tap any of them to see what&apos;s in it.</p>
           </div>
-          <div className="mt-10 lg:mt-14">
-            <ServiceLedger />
-          </div>
-          <p className="vs-small mt-6">
-            Want the fine print? Setup details and what I need from you are on the{" "}
-            <Link href="/pricing" className="vs-link">
-              pricing page
-            </Link>
-            .
-          </p>
-        </div>
-      </section>
-
-      {/* ─── Sample work ─── */}
-      <section className="vs-rule">
-        <div className="vs-container vs-section">
-          <div className="max-w-[44em]">
-            <h2 className="vs-h2">What the work looks like.</h2>
-            <p className="vs-lede mt-4">
-              Four samples made for a pretend lawn care company, so you can judge the standard
-              before you spend anything. None of this is a client&apos;s.
-            </p>
-          </div>
-          <div className="mt-10 lg:mt-14">
-            <SampleWork />
+          <div className="mt-8 lg:mt-12">
+            <ServiceRows />
           </div>
         </div>
       </section>
@@ -146,8 +116,7 @@ export default async function Home() {
             <h2 className="vs-h2">Take more than one and the price drops.</h2>
             <p className="vs-lede mt-4">
               Two services is {BUNDLE_DISCOUNT[2] * 100}% off the monthly. Three or more is{" "}
-              {BUNDLE_DISCOUNT[3] * 100}% off, and setup is capped at {money(SETUP_CAP)} in total.
-              These three bundles are the ones that make sense for most small businesses.
+              {BUNDLE_DISCOUNT[3] * 100}% off, and setup is capped at {money(SETUP_CAP)}.
             </p>
           </div>
           <div className="mt-10 lg:mt-14">
@@ -171,10 +140,7 @@ export default async function Home() {
               <h3 className="vs-h2" style={{ fontSize: "clamp(26px, 3vw, 36px)" }}>
                 What a month looks like.
               </h3>
-              <p className="vs-body mt-4">
-                Each green mark is one piece of work going out. No billable hours. You can count
-                what you paid for.
-              </p>
+              <p className="vs-body mt-4">Each green mark is one piece of work going out.</p>
               <p className="mt-6">
                 <Link href="/how-it-works" className="vs-link">
                   The full walkthrough, day by day
@@ -188,56 +154,49 @@ export default async function Home() {
 
       <DashboardProof />
 
-      {/* ─── Why the price is what it is + who runs it ─── */}
-      <section className="vs-rule">
+      {/* ─── Why the price is what it is ─── */}
+      <section>
         <div className="vs-container vs-section">
-          <div className="grid gap-12 lg:grid-cols-[minmax(0,1fr)_minmax(0,1fr)] lg:gap-20">
+          <div className="grid gap-10 lg:grid-cols-[minmax(0,4fr)_minmax(0,7fr)] lg:gap-16 lg:items-center">
             <div>
               <h2 className="vs-h2">Why it costs less than an agency.</h2>
-              <div className="mt-6 grid gap-4 vs-body text-[17.5px]">
-                <p>
-                  An agency retainer pays for an office, a sales team, an account manager and the
-                  person doing your work. You&apos;re covering four salaries to get one person&apos;s
-                  output.
-                </p>
-                <p>
-                  Here, software does the drafting, the scheduling and the reporting. I do the
-                  thinking, the checking and the talking to you. That&apos;s the whole cost
-                  structure, so that&apos;s the whole price.
-                </p>
-                <p>
-                  It also means I only take on as many businesses as I can do properly.
-                </p>
-              </div>
+              <p className="vs-body mt-4 text-[17.5px]">
+                Software handles the drafting, scheduling and reporting, so there&apos;s no team to
+                pay for.
+              </p>
+              <p className="mt-5">
+                <Link href="/about" className="vs-link">
+                  More about how I work
+                </Link>
+              </p>
             </div>
 
-            <div className="flex flex-col sm:flex-row lg:flex-col gap-6 sm:gap-8">
-              {/* eslint-disable-next-line @next/next/no-img-element */}
-              <img
-                src="/founder/dustin.webp"
-                alt="Dustin Gilmour, founder of Venti Scale"
-                width={600}
-                height={600}
-                loading="lazy"
-                className="w-[168px] h-[168px] lg:w-[200px] lg:h-[200px] rounded-[22px] object-cover shrink-0"
-              />
+            <div className="vs-bill">
               <div>
-                <h2 className="vs-h3">Hi, I&apos;m Dustin. I run every account.</h2>
-                <div className="mt-3 grid gap-3 vs-body">
-                  <p>
-                    I started Venti Scale because too many small business owners get the same
-                    deal: a big monthly bill, a report nobody reads, and no idea what was actually
-                    done.
-                  </p>
-                  <p>
-                    So the deal here is simple. You see the price before you talk to me. You see
-                    the work as it goes out. When you email, I&apos;m the one who answers.
-                  </p>
-                </div>
-                <p className="mt-4">
-                  <Link href="/about" className="vs-link">
-                    More about me
-                  </Link>
+                <h3 className="vs-h3">An agency bill pays for</h3>
+                <ul className="vs-checks mt-4">
+                  {AGENCY_BILL.map((line) => (
+                    <li key={line} data-off="true">
+                      <Minus className="w-5 h-5" strokeWidth={2.4} aria-hidden="true" />
+                      <span>{line}</span>
+                    </li>
+                  ))}
+                  <li>
+                    <Check className="w-5 h-5" strokeWidth={2.4} aria-hidden="true" />
+                    <span>The person doing your work</span>
+                  </li>
+                </ul>
+              </div>
+              <div>
+                <h3 className="vs-h3">Your bill here pays for</h3>
+                <ul className="vs-checks mt-4">
+                  <li>
+                    <Check className="w-5 h-5" strokeWidth={2.4} aria-hidden="true" />
+                    <span>The person doing your work</span>
+                  </li>
+                </ul>
+                <p className="vs-small mt-4 text-[16px]">
+                  That&apos;s me, Dustin Gilmour. When you email, I&apos;m the one who answers.
                 </p>
               </div>
             </div>

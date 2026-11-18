@@ -43,7 +43,7 @@ export const HOME_FAQ: Faq[] = [
   },
   {
     q: "Do you work with businesses in my area?",
-    a: "Yes. Everything is done remotely, so it doesn't matter where you are. I'm based in British Columbia, Canada. Prices are in US dollars.",
+    a: "Yes. Everything is done remotely, so it doesn't matter where you are. Prices are in US dollars.",
   },
   {
     q: "Do you build websites?",

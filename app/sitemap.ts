@@ -86,18 +86,6 @@ export default function sitemap(): MetadataRoute.Sitemap {
       changeFrequency: "monthly",
       priority: 0.85,
     },
-    {
-      url: `${SITE_URL}/case-studies`,
-      lastModified: now,
-      changeFrequency: "monthly",
-      priority: 0.7,
-    },
-    {
-      url: `${SITE_URL}/case-studies/home-services-client-1`,
-      lastModified: now,
-      changeFrequency: "monthly",
-      priority: 0.6,
-    },
     ...blogPosts,
     {
       url: `${SITE_URL}/security`,

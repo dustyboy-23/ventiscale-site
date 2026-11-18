@@ -1,62 +1,34 @@
 import Link from "next/link";
 import { Check, Minus } from "lucide-react";
 import { enterDemo } from "@/app/actions/demo";
-import { MobileCollapse } from "@/components/marketing/mobile-collapse";
+import { OpenFromHash } from "@/components/marketing/open-from-hash";
 import { BUNDLES, SERVICES, money, planQuery, quote } from "@/lib/pricing";
 
 const perChannel = (on?: boolean) => (on ? " per channel" : "");
 
-/** Services as a ledger: what it is, what you get, what it costs. */
-export function ServiceLedger({ detailed = false }: { detailed?: boolean }) {
+/**
+ * One line per service: what it gets you, what ships, what it costs.
+ * Everything else stays folded until someone taps the row.
+ */
+export function ServiceRows() {
   return (
-    <div className="vs-ledger">
-      {SERVICES.map((s) => (
-        <article key={s.id} id={s.id} className="vs-ledger-row">
-          <div>
-            <h3 className="vs-h3">{s.name}</h3>
-            <p className="vs-body mt-2.5">{s.blurb}</p>
-            {s.sample && (
-              <p className="mt-3">
-                <Link href={s.sample.href} className="vs-link text-[15.5px]">
-                  {s.sample.label}
-                </Link>
-              </p>
-            )}
-            {detailed && (
-              <dl className="mt-5 grid gap-3 text-[15.5px] leading-[1.5]">
-                <div>
-                  <dt className="font-semibold">Setup covers</dt>
-                  <dd className="text-moss">{s.setupCovers}</dd>
-                </div>
-                <div>
-                  <dt className="font-semibold">I need from you</dt>
-                  <dd className="text-moss">{s.needs}</dd>
-                </div>
-                <div>
-                  <dt className="font-semibold">Not included</dt>
-                  <dd className="text-moss">{s.notIncluded}</dd>
-                </div>
-              </dl>
-            )}
-          </div>
+    <>
+      <OpenFromHash />
+      <div className="vs-rows">
+        {SERVICES.map((s) => (
+          <details key={s.id} id={s.id} name="service" className="vs-row">
+            <summary>
+              <h3 className="vs-row-outcome">{s.outcome}</h3>
+              <span className="vs-row-name">{s.name}</span>
+              <span className="vs-row-count">{s.count}</span>
+              <span className="vs-row-price vs-num">
+                <span className="vs-mark">{money(s.monthly)}</span>
+                <small>/mo{perChannel(s.perChannel)}</small>
+              </span>
+              <span className="vs-row-icon" aria-hidden="true" />
+            </summary>
 
-          {detailed ? (
-            <ul className="vs-checks">
-              {s.includes.map((line) => (
-                <li key={line}>
-                  <Check className="w-5 h-5" strokeWidth={2.4} aria-hidden="true" />
-                  <span>{line}</span>
-                </li>
-              ))}
-              {!detailed && (
-                <li data-off="true">
-                  <Minus className="w-5 h-5" strokeWidth={2.4} aria-hidden="true" />
-                  <span>Not included: {s.notIncluded.charAt(0).toLowerCase() + s.notIncluded.slice(1)}</span>
-                </li>
-              )}
-            </ul>
-          ) : (
-            <MobileCollapse label={`See what you get (${s.includes.length})`}>
+            <div className="vs-row-panel">
               <ul className="vs-checks">
                 {s.includes.map((line) => (
                   <li key={line}>
@@ -64,34 +36,35 @@ export function ServiceLedger({ detailed = false }: { detailed?: boolean }) {
                     <span>{line}</span>
                   </li>
                 ))}
-                {!detailed && (
-                  <li data-off="true">
-                    <Minus className="w-5 h-5" strokeWidth={2.4} aria-hidden="true" />
-                    <span>Not included: {s.notIncluded.charAt(0).toLowerCase() + s.notIncluded.slice(1)}</span>
-                  </li>
-                )}
               </ul>
-            </MobileCollapse>
-          )}
 
-          <div className="lg:text-right">
-            <p className="vs-num text-[30px] leading-none">
-              <span className="vs-mark">{money(s.monthly)}</span>
-              <span className="text-[15px] font-medium text-moss tracking-normal" style={{ fontFamily: "var(--font-vs-body)" }}>
-                {" "}
-                /mo{perChannel(s.perChannel)}
-              </span>
-            </p>
-            <p className="vs-small mt-2.5">
-              plus {money(s.setup)} setup{perChannel(s.perChannel)}, one time
-            </p>
-            <Link href={`/start${planQuery([s.id])}`} className="vs-link vs-tap inline-block mt-1.5 text-[15.5px]">
-              Start with {s.name.toLowerCase().replace("seo", "SEO")}
-            </Link>
-          </div>
-        </article>
-      ))}
-    </div>
+              <div>
+                <dl className="vs-row-facts">
+                  <div>
+                    <dt>
+                      {money(s.setup)} setup{perChannel(s.perChannel)}, one time
+                    </dt>
+                    <dd>{s.setupCovers}</dd>
+                  </div>
+                  <div>
+                    <dt>I need from you</dt>
+                    <dd>{s.needs}</dd>
+                  </div>
+                  <div>
+                    <dt>Not included</dt>
+                    <dd>{s.notIncluded}</dd>
+                  </div>
+                </dl>
+                <Link href={`/start${planQuery([s.id])}`} className="vs-btn-quiet vs-row-start">
+                  Start with {s.name.toLowerCase().replace("seo", "SEO")}
+                </Link>
+              </div>
+            </div>
+          </details>
+        ))}
+      </div>
+      <p className="vs-small mt-4">Every service comes with one plain monthly report.</p>
+    </>
   );
 }
 
@@ -106,7 +79,7 @@ export function BundleTable() {
             <div>
               <div className="flex items-center justify-between gap-3">
                 <h3 className="vs-h3">{b.name}</h3>
-                {b.recommended && <span className="vs-tag">Good place to start</span>}
+                {b.recommended && <span className="vs-tag">Start here</span>}
               </div>
               <p className="vs-small mt-2 min-h-[2.9em]">{b.forWho}</p>
             </div>
@@ -122,7 +95,7 @@ export function BundleTable() {
               <p className="vs-small mt-3">
                 {q.saved > 0 && (
                   <>
-                    <s>{money(q.listMonthly)}</s> separately. You save {money(q.saved)} a month.
+                    <s>{money(q.listMonthly)}</s> separately. Save {money(q.saved)} a month.
                     <br />
                   </>
                 )}
@@ -204,7 +177,7 @@ export function ClosingCta({ id }: { id?: string }) {
         <div className="grid gap-8 lg:grid-cols-[1.4fr_1fr] lg:items-end">
           <div>
             <h2 className="vs-h1" style={{ fontSize: "clamp(36px, 5vw, 60px)" }}>
-              Pick your services. See your price. Start this week.
+              Next time someone needs what you sell, be the one they find.
             </h2>
             <p className="vs-lede mt-5">
               Two minutes to send. I reply personally within one business day. Nothing is charged
@@ -241,9 +214,12 @@ export function MonthView() {
       </div>
       {SERVICES.map((s) => (
         <div key={s.id} className="vs-month-row">
-          <p className="vs-month-name">{s.name}</p>
+          <p className="vs-month-name">
+            {s.name}
+            <span className="vs-month-total">{s.monthTotal}</span>
+          </p>
           {s.weeks.map((w, i) => (
-            <div key={i} className="vs-month-cell" data-idle={w.units === 0}>
+            <div key={i}>
               <span className="vs-month-marks" aria-hidden="true">
                 {w.units === 0 ? (
                   <i className="vs-month-run" />
@@ -251,17 +227,16 @@ export function MonthView() {
                   Array.from({ length: w.units }).map((_, k) => <i key={k} />)
                 )}
               </span>
-              <span className="vs-month-label">
-                <span className="sr-only">Week {i + 1}: </span>
-                {w.label}
+              <span className="sr-only">
+                Week {i + 1}: {w.label}
               </span>
             </div>
           ))}
         </div>
       ))}
       <figcaption id="month-cap" className="vs-small mt-5">
-        All five services together: {total} pieces of work in a month, then one plain report at
-        the end of week 4. Take fewer services and you get fewer rows.
+        All five services: {total} pieces of work a month, plus one plain report. Dotted lines are
+        automatic emails running on their own.
       </figcaption>
     </figure>
   );

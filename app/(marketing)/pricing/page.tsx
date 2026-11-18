@@ -1,7 +1,7 @@
 import Link from "next/link";
 import { headers } from "next/headers";
 import { PlanBuilder } from "@/components/marketing/plan-builder";
-import { BundleTable, ClosingCta, ServiceLedger } from "@/components/marketing/sections";
+import { BundleTable, ClosingCta, ServiceRows } from "@/components/marketing/sections";
 import { FaqList, PRICING_FAQ, faqJsonLd } from "@/components/marketing/faq";
 import { BUNDLE_DISCOUNT, SERVICES, SETUP_CAP, money, quote } from "@/lib/pricing";
 
@@ -91,14 +91,11 @@ export default async function PricingPage() {
       <section id="services" className="vs-rule">
         <div className="vs-container vs-section">
           <div className="max-w-[44em]">
-            <h2 className="vs-h2">What each service includes.</h2>
-            <p className="vs-lede mt-4">
-              What you get every month, what the setup fee pays for, what I need from you, and what
-              is not part of it.
-            </p>
+            <h2 className="vs-h2">What&apos;s in each service.</h2>
+            <p className="vs-lede mt-4">Tap any of them to see the details.</p>
           </div>
-          <div className="mt-10 lg:mt-14">
-            <ServiceLedger detailed />
+          <div className="mt-8 lg:mt-12">
+            <ServiceRows />
           </div>
         </div>
       </section>

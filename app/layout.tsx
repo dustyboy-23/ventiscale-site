@@ -28,7 +28,8 @@ const jetbrainsMono = JetBrains_Mono({
 
 const SITE_URL = "https://www.ventiscale.com";
 const SITE_NAME = "Venti Scale";
-const TITLE = "Venti Scale. Your marketing, handled. Prices on the page.";
+const TITLE = "Done-for-you marketing for small businesses | Venti Scale";
+const HEADLINE = "Your competitor isn't better than you. They're just easier to find.";
 const DESCRIPTION =
   "Done-for-you marketing for small businesses: SEO, social media, email, ads and video editing. Flat monthly prices published on the site, one-time setup, no contract.";
 
@@ -59,7 +60,7 @@ export const metadata: Metadata = {
     canonical: SITE_URL,
   },
   openGraph: {
-    title: TITLE,
+    title: HEADLINE,
     description:
       "Done-for-you marketing for small businesses. Every price published. One-time setup, flat monthly, no contract.",
     url: SITE_URL,
@@ -69,7 +70,7 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: TITLE,
+    title: HEADLINE,
     description:
       "Done-for-you marketing for small businesses. Every price published. One-time setup, flat monthly, no contract.",
     creator: "@ai_dustingilmour",

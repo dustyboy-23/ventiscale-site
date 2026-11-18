@@ -2,7 +2,7 @@ import { ImageResponse } from "next/og";
 import { SERVICES, money } from "@/lib/pricing";
 
 export const runtime = "edge";
-export const alt = "Venti Scale. Your marketing, handled. The prices are right here.";
+export const alt = "Venti Scale. Your competitor isn't better than you. They're just easier to find.";
 export const size = { width: 1200, height: 630 };
 export const contentType = "image/png";
 
@@ -60,17 +60,17 @@ export default async function Image() {
           <div style={{ display: "flex", flexDirection: "column", gap: 20 }}>
             <div
               style={{
-                fontSize: 66,
+                fontSize: 56,
                 fontWeight: 700,
-                lineHeight: 1.02,
-                letterSpacing: -2.6,
-                maxWidth: 560,
+                lineHeight: 1.04,
+                letterSpacing: -2.2,
+                maxWidth: 570,
               }}
             >
-              Your marketing, handled. The prices are right here.
+              Your competitor isn&apos;t better than you. They&apos;re just easier to find.
             </div>
             <div style={{ fontSize: 25, color: MOSS, maxWidth: 520, lineHeight: 1.35 }}>
-              Flat monthly prices. One-time setup. No contract.
+              Done-for-you marketing. Flat monthly prices. No contract.
             </div>
           </div>
         </div>
@@ -108,7 +108,7 @@ export default async function Image() {
                   borderTop: i === 0 ? "none" : "1.5px solid rgba(15,46,32,0.12)",
                 }}
               >
-                <div style={{ fontSize: 26, fontWeight: 600 }}>{s.name}</div>
+                <div style={{ fontSize: 26, fontWeight: 600 }}>{s.perChannel ? "Ads, per channel" : s.name}</div>
                 <div style={{ display: "flex", alignItems: "baseline", gap: 4 }}>
                   <div
                     style={{

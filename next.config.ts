@@ -43,6 +43,10 @@ const nextConfig: NextConfig = {
       // 2026-11 redesign: services and prices live on one page.
       { source: "/services", destination: "/pricing", permanent: true },
       { source: "/for-shopify", destination: "/pricing", permanent: true },
+      // Anonymous, activity-only, and it described the April offer. Temporary so
+      // a real client result can take the URL back.
+      { source: "/case-studies", destination: "/pricing", permanent: false },
+      { source: "/case-studies/:path*", destination: "/pricing", permanent: false },
     ];
   },
   async headers() {

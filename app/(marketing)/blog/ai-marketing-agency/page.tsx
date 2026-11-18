@@ -422,7 +422,7 @@ export default async function Post() {
           <h3>The honest weaknesses</h3>
 
           <p>
-            This is a newer category than either alternative, which means fewer providers with a long track record and less standardization in what "human review" even means from one vendor to the next. You have to vet harder than you would with an established traditional agency, because the label alone doesn't tell you which of the two very different businesses you're evaluating. We've published one case study so far, with the client anonymized at their request, <a href="https://www.ventiscale.com/case-studies" target="_blank" rel="noopener noreferrer">which you can read here</a>. A newer category means less of a track record to point to, on our end included, and that's worth saying plainly rather than papering over.
+            This is a newer category than either alternative, which means fewer providers with a long track record and less standardization in what "human review" even means from one vendor to the next. You have to vet harder than you would with an established traditional agency, because the label alone doesn't tell you which of the two very different businesses you're evaluating. A newer category means less of a track record to point to, on our end included, and that's worth saying plainly rather than papering over.
           </p>
 
           <p>
