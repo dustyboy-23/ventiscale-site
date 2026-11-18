@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useId, useMemo, useState } from "react";
+import { useEffect, useId, useMemo, useRef, useState } from "react";
 import { Check, Loader2 } from "lucide-react";
 import { DEFAULT_PLAN, SERVICES, money, parsePlan, quote, type ServiceId } from "@/lib/pricing";
 
@@ -24,6 +24,15 @@ export function StartForm() {
   }, []);
 
   const q = useMemo(() => quote(ids), [ids]);
+
+  // The confirmation is shorter than the form, so without this the visitor is
+  // left looking at the footer after sending.
+  const doneRef = useRef<HTMLDivElement>(null);
+  useEffect(() => {
+    if (status !== "sent") return;
+    doneRef.current?.scrollIntoView({ block: "center", behavior: "auto" });
+    doneRef.current?.focus({ preventScroll: true });
+  }, [status]);
 
   function toggle(id: ServiceId) {
     setIds((cur) => (cur.includes(id) ? cur.filter((x) => x !== id) : [...cur, id]));
@@ -63,7 +72,7 @@ export function StartForm() {
 
   if (status === "sent") {
     return (
-      <div className="vs-sheet p-7 sm:p-9" role="status">
+      <div className="vs-sheet p-7 sm:p-9" role="status" ref={doneRef} tabIndex={-1}>
         <span className="grid place-items-center w-12 h-12 rounded-full bg-leaf text-paper">
           <Check className="w-6 h-6" strokeWidth={3} />
         </span>

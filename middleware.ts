@@ -42,10 +42,13 @@ function buildCsp(nonce: string): string {
     "default-src 'self'",
     scriptSrc,
     "style-src 'self' 'unsafe-inline'",
-    "img-src 'self' data: blob: https://*.googleusercontent.com https://drive.google.com https://www.google-analytics.com",
+    // GA4 endpoints per Google's CSP guide (tag-platform/security/guides/csp).
+    // 2026-11-17: www.google.com/g/collect was being refused by connect-src on
+    // every page view, so part of GA4's collection never left the browser.
+    "img-src 'self' data: blob: https://*.googleusercontent.com https://drive.google.com https://*.google-analytics.com https://*.googletagmanager.com https://www.google.com https://*.g.doubleclick.net",
     "font-src 'self' data:",
     "frame-src https://*.google.com https://drive.google.com",
-    "connect-src 'self' https://*.supabase.co https://www.google-analytics.com https://*.vercel-insights.com https://va.vercel-scripts.com",
+    "connect-src 'self' https://*.supabase.co https://*.google-analytics.com https://*.analytics.google.com https://*.googletagmanager.com https://www.google.com https://*.g.doubleclick.net https://*.vercel-insights.com https://va.vercel-scripts.com",
     "frame-ancestors 'none'",
     "base-uri 'self'",
     "form-action 'self'",
