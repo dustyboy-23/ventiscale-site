@@ -3,6 +3,14 @@ import { headers } from "next/headers";
 import { Eyebrow } from "@/components/marketing/eyebrow";
 import { BlogAuthorBio } from "@/components/marketing/blog-author-bio";
 import { BlogCta } from "@/components/marketing/blog-cta";
+import {
+  BarChart,
+  BlogSources,
+  Cite,
+  CompareTable,
+  StepFlow,
+  type BlogSource,
+} from "@/components/marketing/blog-visuals";
 import { SERVICES, money } from "@/lib/pricing";
 
 export const metadata = {
@@ -45,6 +53,16 @@ const IMAGE_URL = "https://www.ventiscale.com/opengraph-image";
 const social = SERVICES.find((s) => s.id === "social")!;
 const postsPerMonth = social.weeks.reduce((total, week) => total + week.units, 0);
 const costPerPost = Math.round(social.monthly / postsPerMonth);
+
+const SOURCES: BlogSource[] = [
+  { n: 1, label: "HeyOrca, How to Price Social Media Services (2026 agency survey)", href: "https://www.heyorca.com/blog/how-to-price-social-media-services-2026" },
+  { n: 2, label: "Sprout Social, Social media management cost", href: "https://sproutsocial.com/insights/social-media-management-cost/" },
+  { n: 3, label: "U.S. Bureau of Labor Statistics, Market Research Analysts and Marketing Specialists", href: "https://www.bls.gov/ooh/business-and-financial/market-research-analysts.htm" },
+  { n: 4, label: "U.S. Bureau of Labor Statistics, Employer Costs for Employee Compensation", href: "https://www.bls.gov/news.release/ecec.nr0.htm" },
+  { n: 5, label: "Buffer, Pricing", href: "https://buffer.com/pricing" },
+  { n: 6, label: "Later, Pricing", href: "https://later.com/pricing/" },
+  { n: 7, label: "Hootsuite, Plans", href: "https://www.hootsuite.com/plans" },
+];
 
 const FAQ_DATA = [
   {
@@ -175,13 +193,7 @@ export default async function Post() {
             Most agencies charge under $2,500 a month for social media
             management, and the most common price is $1,000 to $2,499. That
             comes from{" "}
-            <a
-              href="https://www.heyorca.com/blog/how-to-price-social-media-services-2026"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              HeyOrca&apos;s 2026 survey of almost 100 agencies
-            </a>
+            HeyOrca&apos;s 2026 survey of almost 100 agencies<Cite n={1} />
             , where 49% landed in that range and another 31% charged under
             $1,000. But social media management pricing only means something
             once you know what the money buys.
@@ -195,36 +207,18 @@ export default async function Post() {
             <div className="callout-label">TL;DR</div>
             <ul>
               <li>
-                <a
-                  href="https://www.heyorca.com/blog/how-to-price-social-media-services-2026"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                >
-                  80% of the agencies HeyOrca surveyed
-                </a>{" "}
+                80% of the agencies HeyOrca surveyed<Cite n={1} />{" "}
                 charge under $2,500 a month.
               </li>
               <li>
                 Freelancers tend to charge hourly.{" "}
-                <a
-                  href="https://sproutsocial.com/insights/social-media-management-cost/"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                >
-                  Sprout Social
-                </a>{" "}
+                Sprout Social<Cite n={2} />{" "}
                 estimates $20 to $150 an hour.
               </li>
               <li>
                 Hiring in-house costs far more. A close federal wage category
                 pays a median of{" "}
-                <a
-                  href="https://www.bls.gov/ooh/business-and-financial/market-research-analysts.htm"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                >
-                  $78,760 a year
-                </a>{" "}
+                $78,760 a year<Cite n={3} />{" "}
                 before benefits.
               </li>
               <li>
@@ -234,83 +228,45 @@ export default async function Post() {
             </ul>
           </div>
 
+          <CompareTable
+            title="What each option costs at a glance"
+            columns={["Who does the work", "What it costs", "Best when"]}
+            rows={[
+              ["Agency", "Most charge under $2,500 a month", "You want it all handled in one place"],
+              ["Done-for-you plan", "One flat monthly price for a set number of posts", "You want posts handled without managing anyone"],
+              ["Freelancer", "$20 to $150 an hour", "You have time to manage one person"],
+              ["Full-time hire", "About $9,400 a month with benefits", "Social media is a main way you sell"],
+              ["Do it yourself", "$5 to $99 a month for a tool, plus your time", "You have more time than money"],
+            ]}
+            source={[1, 2, 3, 4, 5, 7]}
+          />
+
           <h2 id="pricing-by-provider">
             Social media management pricing by who does the work
           </h2>
           <p>
             <strong>Agencies</strong>{" "}are the easiest group to pin down, because{" "}
-            <a
-              href="https://www.heyorca.com/blog/how-to-price-social-media-services-2026"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              HeyOrca asked them directly
-            </a>
+            HeyOrca asked them directly<Cite n={1} />
             . Most of the ranges you&apos;ll find online are estimates from
             companies selling social media services or software. That&apos;s
             why they&apos;re so wide. Agency prices break down like this.
           </p>
 
-          <div className="blog-stat-row">
-            <div className="blog-stat">
-              <div className="stat-number">31%</div>
-              <div className="stat-label">
-                <a
-                  href="https://www.heyorca.com/blog/how-to-price-social-media-services-2026"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                >
-                  under $1,000 a month
-                </a>
-              </div>
-            </div>
-            <div className="blog-stat">
-              <div className="stat-number">49%</div>
-              <div className="stat-label">
-                <a
-                  href="https://www.heyorca.com/blog/how-to-price-social-media-services-2026"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                >
-                  $1,000 to $2,499
-                </a>
-              </div>
-            </div>
-            <div className="blog-stat">
-              <div className="stat-number">9%</div>
-              <div className="stat-label">
-                <a
-                  href="https://www.heyorca.com/blog/how-to-price-social-media-services-2026"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                >
-                  $2,500 to $4,999
-                </a>
-              </div>
-            </div>
-            <div className="blog-stat">
-              <div className="stat-number">3%</div>
-              <div className="stat-label">
-                <a
-                  href="https://www.heyorca.com/blog/how-to-price-social-media-services-2026"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                >
-                  more than $5,000
-                </a>
-              </div>
-            </div>
-          </div>
+          <BarChart
+            title="What agencies charge each month for social media management"
+            source={1}
+            items={[
+              { label: "Under $1,000", value: 31 },
+              { label: "$1,000 to $2,499", value: 49 },
+              { label: "$2,500 to $4,999", value: 9 },
+              { label: "More than $5,000", value: 3 },
+            ]}
+            note="Share of agencies in HeyOrca's 2026 survey. These four price bands cover 92% of the agencies surveyed."
+          />
 
           <p>
             <strong>Freelancers</strong>{" "}often bill by the hour.{" "}
-            <a
-              href="https://sproutsocial.com/insights/social-media-management-cost/"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              Sprout Social
-            </a>{" "}
+            Sprout Social<Cite n={2} />{" "}
             puts freelance social media managers at $20 to $150 an hour, based
             on experience. That&apos;s an estimate, so treat it as a rough
             guide. Say a freelancer charges $50 an hour and spends 20 hours a
@@ -330,21 +286,9 @@ export default async function Post() {
             <strong>A full-time hire</strong>{" "}costs the most. A close match in
             federal wage data is market research analysts and marketing
             specialists, with{" "}
-            <a
-              href="https://www.bls.gov/ooh/business-and-financial/market-research-analysts.htm"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              median pay of $78,760 a year
-            </a>{" "}
+            median pay of $78,760 a year<Cite n={3} />{" "}
             in May 2025. Benefits come on top. Across private industry,{" "}
-            <a
-              href="https://www.bls.gov/news.release/ecec.nr0.htm"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              benefits made up 30% of what employers spent on workers
-            </a>{" "}
+            benefits made up 30% of what employers spent on workers<Cite n={4} />{" "}
             in June 2026. If your hire&apos;s benefits match that average,
             $78,760 in pay turns into about $112,500 a year, or roughly $9,400
             a month. It&apos;s a broad category and a junior hire can cost
@@ -361,29 +305,11 @@ export default async function Post() {
           <p>
             <strong>Doing it yourself</strong>{" "}looks cheapest because the tools
             are cheap.{" "}
-            <a
-              href="https://buffer.com/pricing"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              Buffer&apos;s Essentials plan
-            </a>{" "}
+            Buffer&apos;s Essentials plan<Cite n={5} />{" "}
             is $5 a month per channel, billed yearly.{" "}
-            <a
-              href="https://later.com/pricing/"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              Later&apos;s Starter plan
-            </a>{" "}
+            Later&apos;s Starter plan<Cite n={6} />{" "}
             is $18.75 a month, billed yearly.{" "}
-            <a
-              href="https://www.hootsuite.com/plans"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              Hootsuite&apos;s Standard plan
-            </a>{" "}
+            Hootsuite&apos;s Standard plan<Cite n={7} />{" "}
             is $99 per user a month on annual billing. But your time is the
             real bill. Say you spend 15 hours a month on it and your time&apos;s
             worth $40 an hour. That&apos;s $600 a month of work you aren&apos;t
@@ -394,13 +320,7 @@ export default async function Post() {
 
           <h2 id="what-drives-the-price">What actually drives the price</h2>
           <p>
-            <a
-              href="https://www.heyorca.com/blog/how-to-price-social-media-services-2026"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              HeyOrca&apos;s pricing guide
-            </a>{" "}
+            HeyOrca&apos;s pricing guide<Cite n={1} />{" "}
             breaks a price down into the work behind it: how much content you
             need, how many channels you&apos;re on, whether someone builds your
             strategy and who replies to your customers. A package with eight
@@ -420,76 +340,54 @@ export default async function Post() {
             What cheap packages leave out
           </h2>
           <p>
-            <a
-              href="https://www.heyorca.com/blog/how-to-price-social-media-services-2026"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              HeyOrca&apos;s survey
-            </a>{" "}
+            HeyOrca&apos;s survey<Cite n={1} />{" "}
             also shows what agencies put in a package. Content creation (97%),
             scheduling (96%) and strategy (93%) are in almost all of them.
             After that the list gets shorter. And a low-priced plan has the
             most reason to trim it. Check these six things first.
           </p>
+          <BarChart
+            title="What agencies include in a social media package"
+            source={1}
+            items={[
+              { label: "Content creation", value: 97 },
+              { label: "Scheduling", value: 96 },
+              { label: "Strategy", value: 93 },
+              { label: "Reporting", value: 81 },
+              { label: "Community management", value: 75 },
+              { label: "Paid social", value: 18 },
+            ]}
+            note="Share of agencies in HeyOrca's 2026 survey."
+          />
+
           <ul>
             <li>
               <strong>Replies to comments and DMs.</strong>{" "}
-              <a
-                href="https://www.heyorca.com/blog/how-to-price-social-media-services-2026"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                75% of agencies
-              </a>{" "}
+              75% of agencies<Cite n={1} />{" "}
               include community management, so about one in four don&apos;t.
               It takes real time, which makes it an easy thing to cut from a
               cheap plan.
             </li>
             <li>
               <strong>Reporting.</strong>{" "}
-              <a
-                href="https://www.heyorca.com/blog/how-to-price-social-media-services-2026"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                81% of agencies
-              </a>{" "}
+              81% of agencies<Cite n={1} />{" "}
               build it in, which leaves about one in five that don&apos;t.
             </li>
             <li>
               <strong>Strategy.</strong>{" "}
-              <a
-                href="https://www.heyorca.com/blog/how-to-price-social-media-services-2026"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                93% of agencies
-              </a>{" "}
+              93% of agencies<Cite n={1} />{" "}
               cover it. If your plan doesn&apos;t, you&apos;re the one
               deciding what gets posted and why.
             </li>
             <li>
               <strong>Ads.</strong>{" "}Only{" "}
-              <a
-                href="https://www.heyorca.com/blog/how-to-price-social-media-services-2026"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                18% of agencies
-              </a>{" "}
+              18% of agencies<Cite n={1} />{" "}
               put paid social in the package. And the ad spend is a separate
               bill on top of that.
             </li>
             <li>
               <strong>Video and extra channels.</strong>{" "}
-              <a
-                href="https://www.heyorca.com/blog/how-to-price-social-media-services-2026"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                HeyOrca&apos;s respondents
-              </a>{" "}
+              HeyOrca&apos;s respondents<Cite n={1} />{" "}
               named video and creative production, plus additional content or
               profiles, as common extras. Ask what each one adds to your bill.
             </li>
@@ -517,28 +415,16 @@ export default async function Post() {
             It takes a few minutes and it&apos;ll show you which price is
             really lower.
           </p>
-          <ol>
-            <li>
-              <strong>Get the cost per post.</strong>{" "}Divide what you&apos;d pay
-              each month by the number of posts.
-            </li>
-            <li>
-              <strong>Work out the first year.</strong>{" "}Say a plan costs $500 a
-              month with a $300 setup fee. Your first year costs $6,300.
-            </li>
-            <li>
-              <strong>Count your channels.</strong>{" "}Add the fee for any channel
-              the plan doesn&apos;t cover.
-            </li>
-            <li>
-              <strong>Find out who talks to your customers.</strong>{" "}If
-              that&apos;s still you, budget the hours.
-            </li>
-            <li>
-              <strong>Ask what you keep if you leave.</strong>{" "}Your accounts,
-              logins and content should stay yours.
-            </li>
-          </ol>
+          <StepFlow
+            title="Five checks before you pick a plan"
+            steps={[
+              { title: "Get the cost per post", body: "Divide what you'd pay each month by the number of posts." },
+              { title: "Work out the first year", body: "Say a plan costs $500 a month with a $300 setup fee. Your first year costs $6,300." },
+              { title: "Count your channels", body: "Add the fee for any channel the plan doesn't cover." },
+              { title: "Find out who talks to your customers", body: "If that's still you, budget the hours." },
+              { title: "Ask what you keep if you leave", body: "Your accounts, logins and content should stay yours." },
+            ]}
+          />
 
           <hr className="blog-divider" />
 
@@ -616,6 +502,8 @@ export default async function Post() {
               </details>
             ))}
           </div>
+
+          <BlogSources items={SOURCES} />
 
           <BlogAuthorBio lastUpdated={DATE} />
           <BlogCta />
