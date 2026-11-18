@@ -13,7 +13,7 @@ export default function TermsPage() {
         Terms of Service
       </h1>
       <p className="font-mono text-[11px] tracking-[0.14em] uppercase text-white/45 mb-12">
-        Last updated: 2026-11-17
+        Last updated: 2026-11-18
       </p>
 
       <div className="prose-legal">
@@ -68,10 +68,7 @@ export default function TermsPage() {
         <p>
           You can cancel any time by emailing hello@ventiscale.com. There are no
           long-term contracts and no cancellation fee. Work stops at the end of the
-          month you have paid for. First-month guarantee: if you are not satisfied
-          with the first month of a service, tell us within 30 days of that service
-          starting and we refund the monthly fee you paid for that month. Setup
-          fees are not refundable.
+          month you have paid for. Fees already paid are not refundable.
         </p>
 
         <h2>6. Intellectual property</h2>

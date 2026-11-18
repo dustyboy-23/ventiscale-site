@@ -187,12 +187,7 @@ export function StartForm() {
           <div className="vs-leader-row">
             <span className="vs-small">Setup, one time</span>
             <span className="vs-leader" />
-            <span className="vs-num">
-              {q.setup < q.setupList && (
-                <s className="text-[14px] font-medium text-moss mr-2">{money(q.setupList)}</s>
-              )}
-              {money(q.setup)}
-            </span>
+            <span className="vs-num">{money(q.setup)}</span>
           </div>
         </div>
       </fieldset>
@@ -247,8 +242,7 @@ export function StartForm() {
           )}
         </button>
         <p className="vs-small mt-3 text-center">
-          Nothing is charged today. I reply personally within one business day. First month
-          refunded if you&apos;re not happy.
+          Nothing is charged today. I reply personally within one business day.
         </p>
       </fieldset>
     </form>

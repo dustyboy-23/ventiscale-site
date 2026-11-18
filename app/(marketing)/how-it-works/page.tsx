@@ -20,7 +20,7 @@ const TIMELINE = [
   {
     when: "Day 1",
     title: "I reply with next steps",
-    body: "A personal email from me with your setup invoice and a short onboarding form. You only pay if you want to go ahead. If I think a different mix of services would serve you better, this is where I say it.",
+    body: "A personal email from me with your setup invoice and a short onboarding form. You only pay if you want to go ahead.",
   },
   {
     when: "Days 2 to 7",
@@ -40,7 +40,7 @@ const TIMELINE = [
   {
     when: "Every month",
     title: "One plain report",
-    body: "What went out, what it did, and what I'm changing next month. No 30-page PDF. If the numbers say something isn't working, I'll say it first.",
+    body: "What went out, what it did, and what I'm changing next month. No 30-page PDF.",
   },
 ];
 

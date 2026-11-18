@@ -180,7 +180,6 @@ export async function POST(req: Request) {
       `*Monthly:* ${money(q.monthly)}` +
       (q.saved > 0 ? ` (list ${money(q.listMonthly)}, ${q.discount * 100}% bundle)` : "") +
       `\n*Setup:* ${money(q.setup)}` +
-      (q.setup < q.setupList ? ` (capped, list ${money(q.setupList)})` : "") +
       (notes ? `\n\n*Their note:*\n${escapeMarkdown(notes)}` : "") +
       `\n\n_The site promised a reply within one business day._` +
       (stored ? "" : `\n⚠️ Not saved to the leads table. This message is the only copy.`),

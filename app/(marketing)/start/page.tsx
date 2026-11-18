@@ -12,7 +12,7 @@ export const metadata = {
 const NEXT = [
   {
     title: "I email you back",
-    body: "Within one business day, from my own inbox. If your plan doesn't fit what you need, I'll say so before you pay anything.",
+    body: "Within one business day, from my own inbox.",
   },
   {
     title: "You get a setup invoice and a short form",

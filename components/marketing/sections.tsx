@@ -7,10 +7,11 @@ import { BUNDLES, SERVICES, money, planQuery, quote } from "@/lib/pricing";
 const perChannel = (on?: boolean) => (on ? " per channel" : "");
 
 /**
- * One line per service: what it gets you, what ships, what it costs.
- * Everything else stays folded until someone taps the row.
+ * One line per service: what it gets you and what ships. Detail folds out on
+ * tap. Prices only appear inside the fold, and only on /pricing (`withPrice`):
+ * the homepage explains the work first and comes back to price at the bundles.
  */
-export function ServiceRows() {
+export function ServiceRows({ withPrice = false }: { withPrice?: boolean }) {
   return (
     <>
       <OpenFromHash />
@@ -21,10 +22,6 @@ export function ServiceRows() {
               <h3 className="vs-row-outcome">{s.outcome}</h3>
               <span className="vs-row-name">{s.name}</span>
               <span className="vs-row-count">{s.count}</span>
-              <span className="vs-row-price vs-num">
-                <span className="vs-mark">{money(s.monthly)}</span>
-                <small>/mo{perChannel(s.perChannel)}</small>
-              </span>
               <span className="vs-row-icon" aria-hidden="true" />
             </summary>
 
@@ -40,10 +37,18 @@ export function ServiceRows() {
 
               <div>
                 <dl className="vs-row-facts">
+                  {withPrice && (
+                    <div>
+                      <dt>Price</dt>
+                      <dd>
+                        <span className="vs-mark vs-num text-evergreen">{money(s.monthly)}</span> a
+                        month{perChannel(s.perChannel)}, plus {money(s.setup)} setup
+                        {perChannel(s.perChannel)}, one time.
+                      </dd>
+                    </div>
+                  )}
                   <div>
-                    <dt>
-                      {money(s.setup)} setup{perChannel(s.perChannel)}, one time
-                    </dt>
+                    <dt>Setup covers</dt>
                     <dd>{s.setupCovers}</dd>
                   </div>
                   <div>
@@ -55,9 +60,11 @@ export function ServiceRows() {
                     <dd>{s.notIncluded}</dd>
                   </div>
                 </dl>
-                <Link href={`/start${planQuery([s.id])}`} className="vs-btn-quiet vs-row-start">
-                  Start with {s.name.toLowerCase().replace("seo", "SEO")}
-                </Link>
+                {withPrice && (
+                  <Link href={`/start${planQuery([s.id])}`} className="vs-btn-quiet vs-row-start">
+                    Start with {s.name.toLowerCase().replace("seo", "SEO")}
+                  </Link>
+                )}
               </div>
             </div>
           </details>
@@ -99,8 +106,7 @@ export function BundleTable() {
                     <br />
                   </>
                 )}
-                Plus {q.setup < q.setupList && <s>{money(q.setupList)}</s>} {money(q.setup)} setup,
-                one time.
+Plus {money(q.setup)} setup, one time.
               </p>
             </div>
 

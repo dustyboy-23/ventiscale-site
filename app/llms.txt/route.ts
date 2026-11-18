@@ -5,7 +5,7 @@
 // Spec: https://llmstxt.org/
 
 import { getAllPosts } from "@/lib/blog";
-import { BUNDLE_DISCOUNT, SERVICES, SETUP_CAP, money, quote } from "@/lib/pricing";
+import { BUNDLE_DISCOUNT, SERVICES, money, quote } from "@/lib/pricing";
 
 const SITE_URL = "https://www.ventiscale.com";
 
@@ -47,12 +47,12 @@ Every price is public. Clients pick the services they want, see the total, and s
 
 ${serviceList}
 
-Bundle discount: two services, ${BUNDLE_DISCOUNT[2] * 100}% off the monthly total. Three or more, ${BUNDLE_DISCOUNT[3] * 100}% off. All five services together: ${money(all.monthly)} per month. With three or more services, total setup is capped at ${money(SETUP_CAP)}. The total above assumes one ad channel.
+Bundle discount: two services, ${BUNDLE_DISCOUNT[2] * 100}% off the monthly total. Three or more, ${BUNDLE_DISCOUNT[3] * 100}% off. All five services together: ${money(all.monthly)} per month. Setup fees are not discounted. The total above assumes one ad channel.
 
 ## Terms
 
 - Month to month. No contract and no cancellation fee.
-- First-month guarantee: the first month's fee is refunded if the client is not happy and says so within 30 days. Setup fees are not refunded.
+- Fees already paid are not refundable.
 - Ad spend is billed by Meta or Google directly to the client and is not included in the ads management fee.
 - Website design and builds are not offered.
 - The client keeps everything produced and all account access on cancellation.

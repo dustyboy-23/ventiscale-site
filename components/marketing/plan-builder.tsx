@@ -10,7 +10,6 @@ import {
   DEFAULT_CHANNELS,
   DEFAULT_PLAN,
   SERVICES,
-  SETUP_CAP,
   money,
   parsePlan,
   planQuery,
@@ -77,8 +76,8 @@ export function PlanBuilder({ title = "Your plan", animate = false }: Props) {
       : ids.length === 1
         ? `Add a second service and the monthly drops ${BUNDLE_DISCOUNT[2] * 100}%.`
         : ids.length === 2
-          ? `One more service: ${BUNDLE_DISCOUNT[3] * 100}% off, and setup is capped at ${money(SETUP_CAP)}.`
-          : `${BUNDLE_DISCOUNT[3] * 100}% off the monthly. Setup capped at ${money(SETUP_CAP)}.`;
+          ? `One more service takes the discount to ${BUNDLE_DISCOUNT[3] * 100}%.`
+          : `${BUNDLE_DISCOUNT[3] * 100}% bundle discount applied.`;
 
   return (
     <div className="vs-sheet" id="plan">
@@ -171,12 +170,7 @@ export function PlanBuilder({ title = "Your plan", animate = false }: Props) {
         </div>
         <div className="vs-total-row">
           <span className="vs-small">Setup, one time</span>
-          <span className="vs-num text-[18px]">
-            {q.setup < q.setupList && (
-              <s className="text-[14.5px] font-medium text-moss mr-2">{money(q.setupList)}</s>
-            )}
-            {money(q.setup)}
-          </span>
+          <span className="vs-num text-[18px]">{money(q.setup)}</span>
         </div>
         <p className="vs-small mt-3">{nextHint}</p>
 
@@ -192,7 +186,7 @@ export function PlanBuilder({ title = "Your plan", animate = false }: Props) {
           )}
         </div>
         <p className="vs-small mt-3 text-center">
-          No contract. Nothing is charged today. First month refunded if you&apos;re not happy.
+          No contract. Nothing is charged today.
         </p>
       </div>
 

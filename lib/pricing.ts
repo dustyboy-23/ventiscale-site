@@ -12,7 +12,8 @@
 //   - 2 services  = BUNDLE_DISCOUNT[2] off the monthly total.
 //   - 3+ services = BUNDLE_DISCOUNT[3] off the monthly total.
 //     (Ad channels do not count as extra services for the discount.)
-//   - Setup fees add up, but with 3+ services the total is capped at SETUP_CAP.
+//   - Setup fees add up and are never discounted.
+//   - No refunds, no guarantees, no other discounts (Dusty, 2026-11-18).
 //   - Discounted monthly totals round to the nearest $5.
 // ─────────────────────────────────────────────────────────────────────────
 
@@ -30,8 +31,6 @@ export const DEFAULT_CHANNELS: AdChannelId[] = ["meta"];
 /** Each ad channel's fee covers ad spend up to this much a month on that channel. */
 export const AD_SPEND_CAP = 3000;
 
-/** Total one-time setup never exceeds this once three or more services are picked. */
-export const SETUP_CAP = 750;
 
 export interface Service {
   id: ServiceId;
@@ -91,9 +90,9 @@ export const SERVICES: Service[] = [
       "4 articles a month on what your customers search for",
       "Your current pages fixed so Google understands them",
       "Set up so AI search can find and quote you",
-      "Google Business Profile tuned once at setup",
+      "A keyword plan built around what you sell",
     ],
-    setupCovers: "A full site check, keyword research, your Google profile tuned and 3 months of topics planned.",
+    setupCovers: "A full site check, keyword research and 3 months of topics planned.",
     notIncluded: "Building or redesigning your website.",
     needs: "A login to your website.",
     weeks: every(1, "1 article"),
@@ -214,9 +213,7 @@ export interface Quote {
   monthly: number;
   /** listMonthly - monthly */
   saved: number;
-  /** One-time setup before the cap. */
-  setupList: number;
-  /** One-time setup the client pays. */
+  /** One-time. Never discounted. */
   setup: number;
 }
 
@@ -240,7 +237,6 @@ export function quote(ids: readonly ServiceId[], channels?: readonly AdChannelId
   const listMonthly = picked.reduce((t, s) => t + s.monthly * unitsFor(s, ch), 0);
   const discount = discountFor(picked.length);
   const monthly = discount ? roundTo5(listMonthly * (1 - discount)) : listMonthly;
-  const setupList = picked.reduce((t, s) => t + s.setup * unitsFor(s, ch), 0);
   return {
     ids: picked.map((s) => s.id),
     services: picked,
@@ -249,8 +245,7 @@ export function quote(ids: readonly ServiceId[], channels?: readonly AdChannelId
     discount,
     monthly,
     saved: listMonthly - monthly,
-    setupList,
-    setup: picked.length >= 3 ? Math.min(setupList, SETUP_CAP) : setupList,
+    setup: picked.reduce((t, s) => t + s.setup * unitsFor(s, ch), 0),
   };
 }
 

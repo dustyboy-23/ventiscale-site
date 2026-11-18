@@ -3,7 +3,7 @@ import { headers } from "next/headers";
 import { PlanBuilder } from "@/components/marketing/plan-builder";
 import { BundleTable, ClosingCta, ServiceRows } from "@/components/marketing/sections";
 import { FaqList, PRICING_FAQ, faqJsonLd } from "@/components/marketing/faq";
-import { BUNDLE_DISCOUNT, SERVICES, SETUP_CAP, money, quote } from "@/lib/pricing";
+import { BUNDLE_DISCOUNT, SERVICES, money, quote } from "@/lib/pricing";
 
 const SITE_URL = "https://www.ventiscale.com";
 const from = Math.min(...SERVICES.map((s) => s.monthly));
@@ -70,9 +70,8 @@ export default async function PricingPage() {
                   ["Two services", `${BUNDLE_DISCOUNT[2] * 100}% off the monthly`],
                   ["Three or more", `${BUNDLE_DISCOUNT[3] * 100}% off the monthly`],
                   ["Ads", `${money(SERVICES.find((s) => s.id === "ads")!.monthly)} per channel`],
-                  ["Setup fee", `Once per service. ${money(SETUP_CAP)} cap for three or more`],
+                  ["Setup fee", "Once per service"],
                   ["Contract", "None. Month to month"],
-                  ["First month", "Refunded if you're not happy"],
                 ].map(([k, v]) => (
                   <div key={k} className="vs-leader-row py-2.5">
                     <dt className="font-semibold">{k}</dt>
@@ -95,7 +94,7 @@ export default async function PricingPage() {
             <p className="vs-lede mt-4">Tap any of them to see the details.</p>
           </div>
           <div className="mt-8 lg:mt-12">
-            <ServiceRows />
+            <ServiceRows withPrice />
           </div>
         </div>
       </section>

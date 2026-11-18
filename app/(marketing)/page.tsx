@@ -11,7 +11,7 @@ import {
   Steps,
 } from "@/components/marketing/sections";
 import { FaqList, HOME_FAQ, faqJsonLd } from "@/components/marketing/faq";
-import { BUNDLE_DISCOUNT, CURRENCY, SERVICES, SETUP_CAP, money } from "@/lib/pricing";
+import { BUNDLE_DISCOUNT, CURRENCY, SERVICES } from "@/lib/pricing";
 
 const SITE_URL = "https://www.ventiscale.com";
 
@@ -82,7 +82,7 @@ export default async function Home() {
               <ul className="grid gap-2.5 text-[16.5px] font-medium">
                 {[
                   "No contract. Cancel any month.",
-                  "First month refunded if you're not happy.",
+                  "Up and running in about a week.",
                   "Run by one person, not passed to a junior.",
                 ].map((t) => (
                   <li key={t} className="flex items-start gap-2.5">
@@ -109,27 +109,11 @@ export default async function Home() {
         </div>
       </section>
 
-      {/* ─── Bundles ─── */}
-      <section className="vs-band">
-        <div className="vs-container vs-section">
-          <div className="max-w-[44em]">
-            <h2 className="vs-h2">Take more than one and the price drops.</h2>
-            <p className="vs-lede mt-4">
-              Two services is {BUNDLE_DISCOUNT[2] * 100}% off the monthly. Three or more is{" "}
-              {BUNDLE_DISCOUNT[3] * 100}% off, and setup is capped at {money(SETUP_CAP)}.
-            </p>
-          </div>
-          <div className="mt-10 lg:mt-14">
-            <BundleTable />
-          </div>
-        </div>
-      </section>
-
       {/* ─── How it works ─── */}
-      <section id="how">
+      <section id="how" className="vs-rule">
         <div className="vs-container vs-section">
           <div className="max-w-[44em]">
-            <h2 className="vs-h2">From this page to work going out, in about a week.</h2>
+            <h2 className="vs-h2">Up and running in about a week.</h2>
           </div>
           <div className="mt-10 lg:mt-14">
             <Steps />
@@ -200,6 +184,26 @@ export default async function Home() {
                 </p>
               </div>
             </div>
+          </div>
+        </div>
+      </section>
+
+      {/* ─── Price comes back here, once they know what they'd be buying ─── */}
+      <section id="packages" className="vs-band">
+        <div className="vs-container vs-section">
+          <div className="max-w-[44em]">
+            <h2 className="vs-h2">Three easy ways to start.</h2>
+            <p className="vs-lede mt-4">
+              Two services is {BUNDLE_DISCOUNT[2] * 100}% off the monthly. Three or more is{" "}
+              {BUNDLE_DISCOUNT[3] * 100}% off. Want a different mix?{" "}
+              <Link href="/pricing" className="vs-link">
+                Build your own plan
+              </Link>
+              .
+            </p>
+          </div>
+          <div className="mt-10 lg:mt-14">
+            <BundleTable />
           </div>
         </div>
       </section>
