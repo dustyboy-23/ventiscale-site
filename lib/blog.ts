@@ -3,6 +3,7 @@ export interface BlogPost {
   title: string;
   description: string;
   date: string; // YYYY-MM-DD
+  updated?: string; // YYYY-MM-DD, set when a post is rewritten
   author: string;
   readTime: string;
   tags: string[];
@@ -417,7 +418,7 @@ export function getPost(slug: string): BlogPost | undefined {
 
 export function getAllPosts(): BlogPost[] {
   return [...posts].sort(
-    (a, b) => new Date(b.date).getTime() - new Date(a.date).getTime(),
+    (a, b) => new Date(b.updated ?? b.date).getTime() - new Date(a.updated ?? a.date).getTime(),
   );
 }
 

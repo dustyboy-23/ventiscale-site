@@ -39,7 +39,7 @@ export default function BlogIndex() {
                 className="group grid gap-1.5 py-6 sm:grid-cols-[8.5em_1fr] sm:gap-8"
               >
                 <p className="vs-small pt-1 tabular-nums">
-                  <time dateTime={post.date}>{formatDate(post.date)}</time>
+                  <time dateTime={post.updated ?? post.date}>{formatDate(post.updated ?? post.date)}</time>
                 </p>
                 <div>
                   <h2 className="vs-h3 group-hover:text-leaf-deep transition-colors">
