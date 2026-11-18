@@ -80,7 +80,9 @@ export function MarketingFooter() {
         </div>
 
         <div className="vs-rule mt-12 pt-6 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3">
-          <p className="vs-small">© 2026 Venti Scale LLC</p>
+          <p className="vs-small">
+            © 2026 Venti Scale LLC, Sheridan, WY 82801, USA. Run from British Columbia, Canada.
+          </p>
           <p className="vs-small flex gap-5">
             <Link href="/privacy" className="hover:text-evergreen">Privacy</Link>
             <Link href="/terms" className="hover:text-evergreen">Terms</Link>

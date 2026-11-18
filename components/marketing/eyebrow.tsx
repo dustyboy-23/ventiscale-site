@@ -9,7 +9,7 @@ export function Eyebrow({
 }) {
   return (
     <span
-      className="inline-block text-[12.5px] font-semibold tracking-[0.06em] uppercase"
+      className="inline-block text-[13px] font-semibold tracking-[0.06em] uppercase"
       style={{ color: variant === "accent" ? "var(--color-leaf-deep)" : "var(--color-moss)" }}
     >
       {children}

@@ -3,7 +3,7 @@ import { headers } from "next/headers";
 import { PlanBuilder } from "@/components/marketing/plan-builder";
 import { BundleTable, ClosingCta, ServiceLedger } from "@/components/marketing/sections";
 import { FaqList, PRICING_FAQ, faqJsonLd } from "@/components/marketing/faq";
-import { BUNDLE_DISCOUNT, SERVICES, money, quote } from "@/lib/pricing";
+import { BUNDLE_DISCOUNT, SERVICES, SETUP_CAP, money, quote } from "@/lib/pricing";
 
 const SITE_URL = "https://www.ventiscale.com";
 const from = Math.min(...SERVICES.map((s) => s.monthly));
@@ -69,8 +69,10 @@ export default async function PricingPage() {
                   ["One service", "List price"],
                   ["Two services", `${BUNDLE_DISCOUNT[2] * 100}% off the monthly`],
                   ["Three or more", `${BUNDLE_DISCOUNT[3] * 100}% off the monthly`],
+                  ["Ads", `${money(SERVICES.find((s) => s.id === "ads")!.monthly)} per channel`],
+                  ["Setup fee", `Once per service. ${money(SETUP_CAP)} cap for three or more`],
                   ["Contract", "None. Month to month"],
-                  ["Setup fee", "Once per service"],
+                  ["First month", "Refunded if you're not happy"],
                 ].map(([k, v]) => (
                   <div key={k} className="vs-leader-row py-2.5">
                     <dt className="font-semibold">{k}</dt>
@@ -107,7 +109,7 @@ export default async function PricingPage() {
             <h2 className="vs-h2">Ready-made bundles.</h2>
             <p className="vs-lede mt-4">
               The same services at the same prices, with the bundle discount already taken off.
-              All five together come to {money(all.monthly)} a month.
+              All five together, with one ad channel, come to {money(all.monthly)} a month.
             </p>
           </div>
           <div className="mt-10 lg:mt-14">
@@ -143,7 +145,7 @@ export default async function PricingPage() {
               <p className="vs-body mt-6">
                 Here, SEO with four articles a month is{" "}
                 <strong className="text-evergreen">{money(SERVICES[0].monthly)}</strong>, and all
-                five services together are{" "}
+                five services together, with one ad channel, are{" "}
                 <strong className="text-evergreen">{money(all.monthly)}</strong> a month.
               </p>
             </div>

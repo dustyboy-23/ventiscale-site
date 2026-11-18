@@ -127,34 +127,34 @@ function StubLogin({
 
       <div className="mt-6 pt-6 border-t border-[var(--color-border)] space-y-4">
         <div>
-          <div className="text-[11px] font-medium text-[var(--color-ink-subtle)] uppercase tracking-[0.08em] mb-2">
+          <div className="text-[13px] font-medium text-[var(--color-ink-subtle)] uppercase tracking-[0.08em] mb-2">
             Don&apos;t use Google?
           </div>
           <a
             href={MAILTO}
-            className="inline-flex items-center gap-1.5 text-[13px] font-medium text-[var(--color-accent)] hover:underline transition-colors"
+            className="inline-flex items-center gap-1.5 py-2.5 text-[14px] font-medium text-[var(--color-accent)] hover:underline transition-colors"
           >
             <Mail className="w-3.5 h-3.5" />
             Email Dusty for a one-time link
           </a>
-          <p className="text-[11px] text-[var(--color-ink-subtle)] mt-1.5 leading-relaxed">
+          <p className="text-[13px] text-[var(--color-ink-subtle)] mt-1.5 leading-relaxed">
             Real human, real reply. Usually inside an hour during business hours.
           </p>
         </div>
 
         <div>
-          <div className="text-[11px] font-medium text-[var(--color-ink-subtle)] uppercase tracking-[0.08em] mb-2">
+          <div className="text-[13px] font-medium text-[var(--color-ink-subtle)] uppercase tracking-[0.08em] mb-2">
             Not a client yet?
           </div>
           <form action={enterDemo}>
             <button
               type="submit"
-              className="text-[13px] font-medium text-[var(--color-accent)] hover:underline transition-colors"
+              className="inline-block py-2.5 text-[14px] font-medium text-[var(--color-accent)] hover:underline transition-colors"
             >
               Tour the live demo portal →
             </button>
           </form>
-          <p className="text-[11px] text-[var(--color-ink-subtle)] mt-1.5 leading-relaxed">
+          <p className="text-[13px] text-[var(--color-ink-subtle)] mt-1.5 leading-relaxed">
             See exactly what the portal looks like. Fictional brand, real interface.
           </p>
         </div>
@@ -307,7 +307,7 @@ function LoginPageInner() {
         </div>
         <a
           href="https://www.ventiscale.com"
-          className="text-[13px] text-[var(--color-ink-muted)] hover:text-[var(--color-ink)] transition-colors"
+          className="inline-block py-2.5 text-[14px] text-[var(--color-ink-muted)] hover:text-[var(--color-ink)] transition-colors"
         >
           Back to ventiscale.com →
         </a>
@@ -340,7 +340,7 @@ function LoginPageInner() {
       </main>
 
       <footer className="px-8 py-6 text-center">
-        <p className="text-[11px] text-[var(--color-ink-subtle)]">
+        <p className="text-[13px] text-[var(--color-ink-subtle)]">
           © 2026 Venti Scale · Secured by magic-link auth
         </p>
       </footer>

@@ -68,7 +68,10 @@ export default function TermsPage() {
         <p>
           You can cancel any time by emailing hello@ventiscale.com. There are no
           long-term contracts and no cancellation fee. Work stops at the end of the
-          month you have paid for.
+          month you have paid for. First-month guarantee: if you are not satisfied
+          with the first month of a service, tell us within 30 days of that service
+          starting and we refund the monthly fee you paid for that month. Setup
+          fees are not refundable.
         </p>
 
         <h2>6. Intellectual property</h2>

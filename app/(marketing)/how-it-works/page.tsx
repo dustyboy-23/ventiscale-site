@@ -115,7 +115,7 @@ export default function HowItWorksPage() {
               </p>
             </div>
             <div className="vs-table-wrap">
-              <table className="vs-table">
+              <table className="vs-table vs-table-stack">
                 <thead>
                   <tr>
                     <th scope="col">Service</th>

@@ -1,7 +1,10 @@
 import Link from "next/link";
 import { Check, Minus } from "lucide-react";
 import { enterDemo } from "@/app/actions/demo";
+import { MobileCollapse } from "@/components/marketing/mobile-collapse";
 import { BUNDLES, SERVICES, money, planQuery, quote } from "@/lib/pricing";
+
+const perChannel = (on?: boolean) => (on ? " per channel" : "");
 
 /** Services as a ledger: what it is, what you get, what it costs. */
 export function ServiceLedger({ detailed = false }: { detailed?: boolean }) {
@@ -37,31 +40,52 @@ export function ServiceLedger({ detailed = false }: { detailed?: boolean }) {
             )}
           </div>
 
-          <ul className="vs-checks">
-            {s.includes.map((line) => (
-              <li key={line}>
-                <Check className="w-5 h-5" strokeWidth={2.4} aria-hidden="true" />
-                <span>{line}</span>
-              </li>
-            ))}
-            {!detailed && (
-              <li data-off="true">
-                <Minus className="w-5 h-5" strokeWidth={2.4} aria-hidden="true" />
-                <span>Not included: {s.notIncluded.charAt(0).toLowerCase() + s.notIncluded.slice(1)}</span>
-              </li>
-            )}
-          </ul>
+          {detailed ? (
+            <ul className="vs-checks">
+              {s.includes.map((line) => (
+                <li key={line}>
+                  <Check className="w-5 h-5" strokeWidth={2.4} aria-hidden="true" />
+                  <span>{line}</span>
+                </li>
+              ))}
+              {!detailed && (
+                <li data-off="true">
+                  <Minus className="w-5 h-5" strokeWidth={2.4} aria-hidden="true" />
+                  <span>Not included: {s.notIncluded.charAt(0).toLowerCase() + s.notIncluded.slice(1)}</span>
+                </li>
+              )}
+            </ul>
+          ) : (
+            <MobileCollapse label={`See what you get (${s.includes.length})`}>
+              <ul className="vs-checks">
+                {s.includes.map((line) => (
+                  <li key={line}>
+                    <Check className="w-5 h-5" strokeWidth={2.4} aria-hidden="true" />
+                    <span>{line}</span>
+                  </li>
+                ))}
+                {!detailed && (
+                  <li data-off="true">
+                    <Minus className="w-5 h-5" strokeWidth={2.4} aria-hidden="true" />
+                    <span>Not included: {s.notIncluded.charAt(0).toLowerCase() + s.notIncluded.slice(1)}</span>
+                  </li>
+                )}
+              </ul>
+            </MobileCollapse>
+          )}
 
           <div className="lg:text-right">
             <p className="vs-num text-[30px] leading-none">
               <span className="vs-mark">{money(s.monthly)}</span>
               <span className="text-[15px] font-medium text-moss tracking-normal" style={{ fontFamily: "var(--font-vs-body)" }}>
                 {" "}
-                /mo
+                /mo{perChannel(s.perChannel)}
               </span>
             </p>
-            <p className="vs-small mt-2.5">plus {money(s.setup)} setup, one time</p>
-            <Link href={`/start${planQuery([s.id])}`} className="vs-link inline-block mt-3.5 text-[15.5px]">
+            <p className="vs-small mt-2.5">
+              plus {money(s.setup)} setup{perChannel(s.perChannel)}, one time
+            </p>
+            <Link href={`/start${planQuery([s.id])}`} className="vs-link vs-tap inline-block mt-1.5 text-[15.5px]">
               Start with {s.name.toLowerCase().replace("seo", "SEO")}
             </Link>
           </div>
@@ -102,7 +126,8 @@ export function BundleTable() {
                     <br />
                   </>
                 )}
-                Plus {money(q.setup)} setup, one time.
+                Plus {q.setup < q.setupList && <s>{money(q.setupList)}</s>} {money(q.setup)} setup,
+                one time.
               </p>
             </div>
 
@@ -118,6 +143,7 @@ export function BundleTable() {
                     )}
                     <span>
                       {s.name}
+                      {on && s.perChannel && " (1 channel)"}
                       {!on && <span className="sr-only"> (not in this bundle)</span>}
                     </span>
                   </li>

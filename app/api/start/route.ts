@@ -1,7 +1,7 @@
 import { NextResponse } from "next/server";
 import { createAdminClient } from "@/lib/supabase/admin";
 import { checkRateLimit } from "@/lib/rate-limit";
-import { money, parsePlan, quote } from "@/lib/pricing";
+import { money, parsePlan, planLabel, quote } from "@/lib/pricing";
 
 // "Start my plan" requests from the public site.
 //
@@ -120,7 +120,7 @@ export async function POST(req: Request) {
   const email = (body.email || "").trim();
   const notes = (body.notes || "").trim().slice(0, 2000);
   const url = cleanUrl(body.url || "");
-  const ids = parsePlan(body.plan);
+  const plan = parsePlan(body.plan);
 
   if (!name || name.length > 120) {
     return NextResponse.json({ ok: false, error: "Add your name so I know who I'm writing to." }, { status: 400 });
@@ -137,12 +137,12 @@ export async function POST(req: Request) {
       { status: 400 },
     );
   }
-  if (ids.length === 0) {
+  if (plan.ids.length === 0) {
     return NextResponse.json({ ok: false, error: "Pick at least one service." }, { status: 400 });
   }
 
-  const q = quote(ids);
-  const planLine = `${q.services.map((s) => s.name).join(", ")} | ${money(q.monthly)}/mo + ${money(q.setup)} setup`;
+  const q = quote(plan.ids, plan.channels);
+  const planLine = `${planLabel(q)} | ${money(q.monthly)}/mo + ${money(q.setup)} setup`;
   const id = `plan_${Date.now().toString(36)}_${Math.random().toString(36).slice(2, 8)}`;
 
   console.log("[start] new plan request", { id, services: q.ids, monthly: q.monthly });
@@ -176,10 +176,11 @@ export async function POST(req: Request) {
       `*Business:* ${escapeMarkdown(business)}\n` +
       `*Website:* ${escapeMarkdown(url || "none")}\n` +
       `*Email:* ${escapeMarkdown(email)}\n\n` +
-      `*Plan:* ${escapeMarkdown(q.services.map((s) => s.name).join(", "))}\n` +
+      `*Plan:* ${escapeMarkdown(planLabel(q))}\n` +
       `*Monthly:* ${money(q.monthly)}` +
       (q.saved > 0 ? ` (list ${money(q.listMonthly)}, ${q.discount * 100}% bundle)` : "") +
       `\n*Setup:* ${money(q.setup)}` +
+      (q.setup < q.setupList ? ` (capped, list ${money(q.setupList)})` : "") +
       (notes ? `\n\n*Their note:*\n${escapeMarkdown(notes)}` : "") +
       `\n\n_The site promised a reply within one business day._` +
       (stored ? "" : `\n⚠️ Not saved to the leads table. This message is the only copy.`),

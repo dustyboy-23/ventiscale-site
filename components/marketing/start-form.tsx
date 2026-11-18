@@ -2,13 +2,27 @@
 
 import { useEffect, useId, useMemo, useRef, useState } from "react";
 import { Check, Loader2 } from "lucide-react";
-import { DEFAULT_PLAN, SERVICES, money, parsePlan, quote, type ServiceId } from "@/lib/pricing";
+import {
+  AD_CHANNELS,
+  DEFAULT_CHANNELS,
+  DEFAULT_PLAN,
+  SERVICES,
+  money,
+  parsePlan,
+  planLabel,
+  planQuery,
+  quote,
+  unitsFor,
+  type AdChannelId,
+  type ServiceId,
+} from "@/lib/pricing";
 
 type Status = "idle" | "sending" | "sent" | "error";
 
 export function StartForm() {
   const uid = useId();
   const [ids, setIds] = useState<ServiceId[]>(DEFAULT_PLAN);
+  const [channels, setChannels] = useState<AdChannelId[]>(DEFAULT_CHANNELS);
   const [name, setName] = useState("");
   const [business, setBusiness] = useState("");
   const [url, setUrl] = useState("");
@@ -20,10 +34,13 @@ export function StartForm() {
 
   useEffect(() => {
     const fromUrl = parsePlan(new URLSearchParams(window.location.search).get("plan"));
-    if (fromUrl.length) setIds(fromUrl);
+    if (fromUrl.ids.length) {
+      setIds(fromUrl.ids);
+      if (fromUrl.channels.length) setChannels(fromUrl.channels);
+    }
   }, []);
 
-  const q = useMemo(() => quote(ids), [ids]);
+  const q = useMemo(() => quote(ids, channels), [ids, channels]);
 
   // The confirmation is shorter than the form, so without this the visitor is
   // left looking at the footer after sending.
@@ -36,6 +53,13 @@ export function StartForm() {
 
   function toggle(id: ServiceId) {
     setIds((cur) => (cur.includes(id) ? cur.filter((x) => x !== id) : [...cur, id]));
+  }
+
+  function toggleChannel(id: AdChannelId) {
+    setChannels((cur) => {
+      if (cur.includes(id)) return cur.length > 1 ? cur.filter((x) => x !== id) : cur;
+      return AD_CHANNELS.map((c) => c.id).filter((c) => c === id || cur.includes(c));
+    });
   }
 
   async function onSubmit(e: React.FormEvent) {
@@ -52,7 +76,15 @@ export function StartForm() {
       const res = await fetch("/api/start", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ name, business, email, url, notes, website, plan: ids.join(",") }),
+        body: JSON.stringify({
+          name,
+          business,
+          email,
+          url,
+          notes,
+          website,
+          plan: planQuery(q.ids, q.channels).replace("?plan=", ""),
+        }),
       });
       const data = await res.json().catch(() => null);
       if (!res.ok || !data?.ok) {
@@ -92,7 +124,7 @@ export function StartForm() {
             <span className="vs-leader" />
             <span className="vs-num">{money(q.setup)}</span>
           </div>
-          <p className="vs-small mt-2">{q.services.map((s) => s.name).join(", ")}</p>
+          <p className="vs-small mt-2">{planLabel(q)}</p>
         </div>
       </div>
     );
@@ -106,23 +138,39 @@ export function StartForm() {
         <div className="grid gap-2.5">
           {SERVICES.map((s) => {
             const on = ids.includes(s.id);
+            const units = on ? unitsFor(s, channels) : 1;
             return (
-              <label
-                key={s.id}
-                className="vs-line rounded-xl border border-line !py-3 !px-4"
-                style={{ borderTopWidth: 1 }}
-                data-on={on}
-              >
-                <input type="checkbox" checked={on} onChange={() => toggle(s.id)} />
-                <span className="vs-box" aria-hidden="true">
-                  <Check className="w-4 h-4" strokeWidth={3} />
-                </span>
-                <span className="vs-line-name">{s.name}</span>
-                <span className="vs-line-price vs-num">
-                  <span className="vs-mark">{money(s.monthly)}</span>
-                  <small>/mo</small>
-                </span>
-              </label>
+              <div key={s.id} className="rounded-xl border border-line">
+                <label className="vs-line !border-t-0 !py-3 !px-4 rounded-xl" data-on={on}>
+                  <input type="checkbox" checked={on} onChange={() => toggle(s.id)} />
+                  <span className="vs-box" aria-hidden="true">
+                    <Check className="w-4 h-4" strokeWidth={3} />
+                  </span>
+                  <span className="vs-line-name">{s.name}</span>
+                  <span className="vs-line-price vs-num">
+                    <span className="vs-mark">{money(s.monthly * units)}</span>
+                    <small>/mo</small>
+                    {s.perChannel && !on && <span className="vs-line-note">per channel</span>}
+                  </span>
+                </label>
+                {s.perChannel && on && (
+                  <div className="vs-chan !pl-[54px] !pr-4" role="group" aria-label="Ad channels">
+                    <span className="vs-chan-label">{money(s.monthly)} each:</span>
+                    {AD_CHANNELS.map((c) => (
+                      <button
+                        key={c.id}
+                        type="button"
+                        className="vs-preset vs-chan-chip"
+                        aria-pressed={channels.includes(c.id)}
+                        onClick={() => toggleChannel(c.id)}
+                        title={c.detail}
+                      >
+                        {c.name}
+                      </button>
+                    ))}
+                  </div>
+                )}
+              </div>
             );
           })}
         </div>
@@ -139,7 +187,12 @@ export function StartForm() {
           <div className="vs-leader-row">
             <span className="vs-small">Setup, one time</span>
             <span className="vs-leader" />
-            <span className="vs-num">{money(q.setup)}</span>
+            <span className="vs-num">
+              {q.setup < q.setupList && (
+                <s className="text-[14px] font-medium text-moss mr-2">{money(q.setupList)}</s>
+              )}
+              {money(q.setup)}
+            </span>
           </div>
         </div>
       </fieldset>
@@ -194,7 +247,8 @@ export function StartForm() {
           )}
         </button>
         <p className="vs-small mt-3 text-center">
-          Nothing is charged today. I reply personally within one business day.
+          Nothing is charged today. I reply personally within one business day. First month
+          refunded if you&apos;re not happy.
         </p>
       </fieldset>
     </form>

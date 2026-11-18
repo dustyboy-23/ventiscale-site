@@ -1,7 +1,7 @@
 import Link from "next/link";
 import { headers } from "next/headers";
 import { ClosingCta } from "@/components/marketing/sections";
-import { SERVICES, money, quote } from "@/lib/pricing";
+import { SERVICES, SETUP_CAP, money, quote } from "@/lib/pricing";
 
 const SITE_URL = "https://www.ventiscale.com";
 const SLUG = "vs-agency";
@@ -35,7 +35,7 @@ const ROWS: { aspect: string; agency: string; venti: string }[] = [
   {
     aspect: "Setup fee",
     agency: "Varies. Often not on the website.",
-    venti: `${money(Math.min(...setups))} to ${money(Math.max(...setups))} per service, once. Published next to the monthly price.`,
+    venti: `${money(Math.min(...setups))} to ${money(Math.max(...setups))} per service, once, capped at ${money(SETUP_CAP)} for three or more. Published next to the monthly price.`,
   },
   {
     aspect: "Contract",
@@ -66,6 +66,11 @@ const ROWS: { aspect: string; agency: string; venti: string }[] = [
     aspect: "Talking to someone",
     agency: "Through your account manager.",
     venti: "Email the person doing the work. Reply within one business day.",
+  },
+  {
+    aspect: "If you're not happy",
+    agency: "Usually you are still inside the contract.",
+    venti: "First month's fee refunded if you say so within 30 days.",
   },
   {
     aspect: "Cancelling",
@@ -99,7 +104,7 @@ export default async function VsAgencyPage() {
           <div className="max-w-[46em]">
             <h1 className="vs-h1">Venti Scale next to a traditional agency.</h1>
             <p className="vs-lede mt-6">
-              Nine things that matter when you hire someone to do your marketing. Agencies differ,
+              Ten things that matter when you hire someone to do your marketing. Agencies differ,
               so their column says &quot;often&quot; and &quot;usually&quot;. Mine doesn&apos;t
               need to.
             </p>
@@ -110,7 +115,7 @@ export default async function VsAgencyPage() {
       <section>
         <div className="vs-container vs-section">
           <div className="vs-table-wrap">
-            <table className="vs-table">
+            <table className="vs-table vs-table-stack">
               <thead>
                 <tr>
                   <th scope="col" style={{ width: "18%" }}> </th>
@@ -122,8 +127,8 @@ export default async function VsAgencyPage() {
                 {ROWS.map((r) => (
                   <tr key={r.aspect}>
                     <th scope="row" className="font-semibold">{r.aspect}</th>
-                    <td className="text-moss">{r.agency}</td>
-                    <td>{r.venti}</td>
+                    <td className="text-moss" data-label="A traditional agency">{r.agency}</td>
+                    <td data-label="Venti Scale">{r.venti}</td>
                   </tr>
                 ))}
               </tbody>

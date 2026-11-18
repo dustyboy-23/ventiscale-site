@@ -1,4 +1,6 @@
-import { BUNDLE_DISCOUNT } from "@/lib/pricing";
+import { AD_SPEND_CAP, BUNDLE_DISCOUNT, SERVICES, SETUP_CAP, money } from "@/lib/pricing";
+
+const ADS = SERVICES.find((s) => s.id === "ads")!;
 
 export interface Faq {
   q: string;
@@ -13,7 +15,11 @@ export const HOME_FAQ: Faq[] = [
   },
   {
     q: "What is the setup fee for?",
-    a: "The one-time work before anything can go out: learning your business and how you talk, connecting your accounts, building templates and tracking, and planning the first months. You pay it once per service. It never comes back.",
+    a: `The one-time work before anything can go out: learning your business and how you talk, connecting your accounts, building templates and tracking, and planning the first months. You pay it once per service and it never comes back. Take three or more services and the total is capped at ${money(SETUP_CAP)}. If your accounts are already set up and working, setup for that service is half price.`,
+  },
+  {
+    q: "What if I'm not happy with the work?",
+    a: "Tell me within your first 30 days and I refund that month's fee. You keep everything that was made. The setup fee isn't refunded, because that work is done and it's yours. After the first month you can still cancel any time.",
   },
   {
     q: "Who actually does the work? Is it just AI?",
@@ -52,7 +58,15 @@ export const PRICING_FAQ: Faq[] = [
   },
   {
     q: "How does the bundle discount work?",
-    a: `Pick two services and the monthly total drops ${BUNDLE_DISCOUNT[2] * 100}%. Pick three or more and it drops ${BUNDLE_DISCOUNT[3] * 100}%. Setup fees are not discounted. If you remove a service later, the discount adjusts the following month.`,
+    a: `Pick two services and the monthly total drops ${BUNDLE_DISCOUNT[2] * 100}%. Pick three or more and it drops ${BUNDLE_DISCOUNT[3] * 100}%, and your total setup is capped at ${money(SETUP_CAP)}. If you remove a service later, the discount adjusts the following month.`,
+  },
+  {
+    q: "How is ads management priced?",
+    a: `Per channel. Meta (Facebook and Instagram) is one channel and Google (Search, Maps and YouTube) is another. Each is ${money(ADS.monthly)} a month plus ${money(ADS.setup)} setup, and each covers up to ${money(AD_SPEND_CAP)} a month in ad spend. There's no minimum budget, but below about $500 a month on a channel the fee is hard to earn back, and I'll tell you that before you start.`,
+  },
+  {
+    q: "Is there a guarantee?",
+    a: "Yes, on the first month. If you're not happy with the work, tell me within your first 30 days and I refund that month's fee. You keep what was made. Setup fees aren't refunded, because that work is done and yours.",
   },
   {
     q: "Is ad spend included in ads management?",
@@ -64,11 +78,11 @@ export const PRICING_FAQ: Faq[] = [
   },
   {
     q: "What if I need more than the plan covers?",
-    a: "Tell me what you need and I'll give you a price for it in writing before any work starts. More articles, more posts, a second ad platform, ad spend above $3,000 a month and extra videos are the usual ones.",
+    a: "Tell me what you need and I'll give you a price for it in writing before any work starts. More articles, more posts, ad spend above $3,000 a month on a channel and extra videos are the usual ones.",
   },
   {
     q: "I already run ads or email. Do you start over?",
-    a: "No. I work inside the accounts you already have. What's working stays, and I fix or add what's missing. Tell me what you have in the start form and I'll say exactly what setup involves for you before you pay anything.",
+    a: "No. I work inside the accounts you already have. What's working stays, and I fix or add what's missing. When an account is already set up and working, setup for that service is half price. Tell me what you have in the start form and I'll confirm it before you pay anything.",
   },
   {
     q: "What happens if I cancel?",

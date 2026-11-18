@@ -11,7 +11,8 @@ import {
   Steps,
 } from "@/components/marketing/sections";
 import { FaqList, HOME_FAQ, faqJsonLd } from "@/components/marketing/faq";
-import { BUNDLE_DISCOUNT, CURRENCY, SERVICES } from "@/lib/pricing";
+import { SampleWork } from "@/components/marketing/samples";
+import { BUNDLE_DISCOUNT, CURRENCY, SERVICES, SETUP_CAP, money } from "@/lib/pricing";
 
 const SITE_URL = "https://www.ventiscale.com";
 
@@ -79,8 +80,8 @@ export default async function Home() {
             <div className="lg:col-start-1 lg:row-start-2 lg:self-start">
               <ul className="grid gap-2.5 text-[16.5px] font-medium">
                 {[
-                  "Month to month. Cancel any time.",
-                  "Every price published. No call to find out.",
+                  "No contract. Cancel any month.",
+                  "First month refunded if you're not happy.",
                   "Run by one person, not passed to a junior.",
                 ].map((t) => (
                   <li key={t} className="flex items-start gap-2.5">
@@ -122,6 +123,22 @@ export default async function Home() {
         </div>
       </section>
 
+      {/* ─── Sample work ─── */}
+      <section className="vs-rule">
+        <div className="vs-container vs-section">
+          <div className="max-w-[44em]">
+            <h2 className="vs-h2">What the work looks like.</h2>
+            <p className="vs-lede mt-4">
+              Four samples made for a pretend lawn care company, so you can judge the standard
+              before you spend anything. None of this is a client&apos;s.
+            </p>
+          </div>
+          <div className="mt-10 lg:mt-14">
+            <SampleWork />
+          </div>
+        </div>
+      </section>
+
       {/* ─── Bundles ─── */}
       <section className="vs-band">
         <div className="vs-container vs-section">
@@ -129,8 +146,8 @@ export default async function Home() {
             <h2 className="vs-h2">Take more than one and the price drops.</h2>
             <p className="vs-lede mt-4">
               Two services is {BUNDLE_DISCOUNT[2] * 100}% off the monthly. Three or more is{" "}
-              {BUNDLE_DISCOUNT[3] * 100}% off. These three bundles are the ones that make sense for
-              most small businesses.
+              {BUNDLE_DISCOUNT[3] * 100}% off, and setup is capped at {money(SETUP_CAP)} in total.
+              These three bundles are the ones that make sense for most small businesses.
             </p>
           </div>
           <div className="mt-10 lg:mt-14">
