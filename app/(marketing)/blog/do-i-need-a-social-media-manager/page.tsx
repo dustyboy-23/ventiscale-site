@@ -44,7 +44,7 @@ const IMAGE_URL = `https://www.ventiscale.com${IMAGE}`;
 const FAQ_DATA = [
   {
     q: "How much does a social media manager cost for a small business?",
-    a: "A freelance social media manager costs $800 to $2,500 per month for most small businesses. An in-house hire runs $60,000 to $75,000 per year before benefits and tools. An AI-powered agency like Venti Scale falls in the $500 to $1,500 range with broader coverage than a solo freelancer.",
+    a: "A freelance social media manager costs $800 to $2,500 per month for most small businesses. An in-house hire runs $60,000 to $75,000 per year before benefits and tools. An AI-powered service like Venti Scale charges a flat monthly price and covers more than a solo freelancer.",
   },
   {
     q: "What does a social media manager actually do?",
@@ -388,7 +388,7 @@ export default async function Post() {
             At Venti Scale, we run your entire social media operation. Strategy,
             content creation, scheduling, engagement, reporting. You get a{" "}
             <Link href="/#how">client portal</Link> showing exactly what&apos;s
-            happening and a weekly report proving it&apos;s working. No learning
+            happening and a monthly report proving it&apos;s working. No learning
             curve. No hiring process. Your social media goes from inconsistent to
             professional in a week. If you&apos;re weighing this against the
             broader category, here&apos;s the full picture on{" "}

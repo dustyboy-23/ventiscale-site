@@ -52,7 +52,7 @@ const FAQ_DATA = [
   },
   {
     q: "How long does done for you marketing take to show results?",
-    a: "Expect measurable results within 60 to 90 days. Early indicators include increased profile visits, follower growth, and website traffic from social channels. A good provider sends weekly reports with real numbers. If you're 3 months in and the only metric they share is impressions, something's wrong.",
+    a: "Expect measurable results within 60 to 90 days. Early indicators include increased profile visits, follower growth, and website traffic from social channels. A good provider sends regular reports with real numbers. If you're 3 months in and the only metric they share is impressions, something's wrong.",
   },
   {
     q: "Can I keep control of my brand voice with done for you marketing?",
@@ -198,7 +198,7 @@ export default async function Post() {
                 ones winning know exactly what they&apos;re paying for.
               </li>
               <li>
-                Demand weekly reports, real metrics, and a clear deliverable list
+                Demand regular reports, real metrics, and a clear deliverable list
                 before you sign anything.
               </li>
             </ul>
@@ -468,8 +468,7 @@ export default async function Post() {
             three, and month six.
           </p>
           <p>
-            <strong>Real reporting on a schedule.</strong> Weekly reports with
-            actual metrics. Follower growth, website traffic, conversions, ad
+            <strong>Real reporting on a schedule.</strong> Monthly reports with actual metrics. Follower growth, website traffic, conversions, ad
             performance. Numbers you can tie to revenue. The same way{" "}
             <Link href="/blog/why-coaches-need-social-media">
               coaches need visible proof their marketing works
@@ -491,12 +490,11 @@ export default async function Post() {
             team rates.
           </p>
           <p>
-            At Venti Scale, that&apos;s exactly how we work. AI handles daily
-            content creation and scheduling across every platform. Humans build
+            At Venti Scale, that&apos;s exactly how we work. AI handles the drafting and scheduling. Humans build
             the strategy, monitor performance, and make the decisions that
             algorithms can&apos;t. You get a{" "}
             <Link href="/#how">client portal</Link> showing exactly what&apos;s
-            happening. Weekly reports with real numbers. And you don&apos;t
+            happening. Monthly reports with real numbers. And you don&apos;t
             touch any of it unless you want to.
           </p>
 

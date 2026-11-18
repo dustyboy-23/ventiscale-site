@@ -437,8 +437,7 @@ export default async function Post() {
             Venti Scale. The pattern is almost always the same: founders can
             tell me how much each tool costs, but they can&apos;t tell me what
             any of them is returning. We fix that in the first 30 days. Every
-            AI tool in the stack feeds into a weekly report in your client
-            portal. Email revenue, ad ROAS, content conversion, and AI creative
+            AI tool in the stack feeds into a monthly report in your client portal. Email revenue, ad ROAS, content conversion, and AI creative
             performance sit in one view. You don&apos;t pull reports from four
             different dashboards. You see the full stack move week over week.
           </p>

@@ -1957,18 +1957,6 @@ export const posts: BlogPost[] = [
     image: "/blog/abandoned-cart-sequence.jpg",
   },
   {
-    slug: "venti-scale-vs-traditional-agency",
-    title:
-      "Venti Scale vs a traditional marketing agency: which one fits your stage in 2026?",
-    description:
-      "12-dimension comparison between an AI-powered done-for-you service (Venti Scale) and a traditional marketing agency. Honest breakdown including where agencies still win.",
-    date: "2026-04-29",
-    author: "Dustin Gilmour",
-    readTime: "9 min",
-    tags: ["agency comparison", "DFY marketing", "marketing services"],
-    image: "/blog/venti-scale-vs-agency.jpg",
-  },
-  {
     slug: "ai-marketing-service-vs-marketing-manager",
     title:
       "AI marketing service vs hiring a marketing manager: the real math for 2026",

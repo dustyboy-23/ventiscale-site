@@ -333,9 +333,9 @@ export default async function Post() {
             <Link href="/blog/what-done-for-you-marketing-includes">what a done-for-you marketing service covers</Link>.
           </p>
           <p>
-            At Venti Scale, we don&apos;t just set up your automations and walk away. We run the entire content and marketing engine. Daily social media posts. Email sequences that get updated monthly. Lead follow-up workflows. Analytics in your own{" "}
+            At Venti Scale, we don&apos;t just set up your automations and walk away. We run the entire content and marketing engine. Social media posts written and scheduled for you. Email sequences that get updated monthly. Lead follow-up workflows. Analytics in your own{" "}
             <Link href="/#how">client portal</Link>. You get a{" "}
-            <Link href="/#services">weekly report</Link>{" "}
+            <Link href="/#services">monthly report</Link>{" "}
             showing what happened and what&apos;s coming next. You don&apos;t touch anything. For the broader category overview on{" "}
             <Link href="/done-for-you-marketing-services">done-for-you marketing services</Link>, here&apos;s the full breakdown.
           </p>

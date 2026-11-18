@@ -449,8 +449,7 @@ export default async function Post() {
           </p>
           <p>
             That&apos;s the gap Venti Scale fills. You tell us who your customer
-            is, we pick the platforms, and we run them. Daily content, native to
-            each platform, a weekly report showing what&apos;s working. You get
+            is, we pick the platforms, and we run them. Content native to each platform, a monthly report showing what&apos;s working. You get
             back the 15 hours a week you were losing to social. For the broader
             picture on{" "}
             <Link href="/done-for-you-marketing-services">

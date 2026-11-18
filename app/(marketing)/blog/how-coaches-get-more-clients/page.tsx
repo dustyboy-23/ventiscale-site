@@ -474,8 +474,7 @@ export default async function Post() {
             At Venti Scale, that&apos;s what we do. We build the content engine,
             run the social media, set up the email sequences, and keep everything
             consistent. You get a{" "}
-            <Link href="/#how">client portal</Link> with real metrics. A weekly
-            report showing what&apos;s working. And you don&apos;t touch any of
+            <Link href="/#how">client portal</Link> with real metrics. A monthly report showing what&apos;s working. And you don&apos;t touch any of
             it.
           </p>
           <p>

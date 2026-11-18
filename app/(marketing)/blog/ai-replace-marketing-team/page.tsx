@@ -423,7 +423,7 @@ export default async function Post() {
           </p>
           <p>
             At Venti Scale, that&apos;s exactly how we run it. AI execution
-            layer, human strategy layer, daily content across every platform.
+            layer, human strategy layer, work going out every week.
             You focus on your business. We handle the rest. If you&apos;re
             weighing this against the broader category, here&apos;s the full
             picture on{" "}

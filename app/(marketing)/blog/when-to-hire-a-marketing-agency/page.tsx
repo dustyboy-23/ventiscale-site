@@ -48,7 +48,7 @@ const FAQ_DATA = [
   },
   {
     q: "How much does hiring a marketing agency cost compared to in-house?",
-    a: "A single full-time marketing hire costs $75,000 to $95,000 per year after salary, benefits, and tools. A traditional marketing agency runs $5,000 to $25,000 per month. AI-powered agencies like Venti Scale cost $500 to $1,500 per month and cover content creation, posting, and reporting. That makes agencies 50 to 70% cheaper than building an in-house team.",
+    a: "A single full-time marketing hire costs $75,000 to $95,000 per year after salary, benefits, and tools. A traditional marketing agency runs $5,000 to $25,000 per month. AI-powered services like Venti Scale publish flat monthly prices per service, which costs far less than building an in-house team.",
   },
   {
     q: "What is the difference between a traditional agency and an AI marketing agency?",
@@ -56,7 +56,7 @@ const FAQ_DATA = [
   },
   {
     q: "Can I hire a marketing agency on a small budget?",
-    a: "Yes. AI-powered agencies have dropped the entry point to $500 to $1,500 per month for full-service social media management. That includes daily content, scheduling, and performance reporting. Compare that to the 10 to 15 hours per week you are currently spending on DIY marketing. At most business owner hourly rates, the agency pays for itself in time savings alone.",
+    a: "Yes. AI-powered services have dropped the entry point to a few hundred dollars a month per service. Compare that to the 10 to 15 hours per week you are currently spending on DIY marketing. At most business owner hourly rates, the agency pays for itself in time savings alone.",
   },
 ];
 
@@ -200,8 +200,7 @@ export default async function Post() {
                 saving money. They&apos;re losing it slower.
               </li>
               <li>
-                A marketing hire costs $75K+ per year. An AI-powered agency runs
-                $500 to $1,500 per month. The math isn&apos;t close.
+                A marketing hire costs $75K+ per year. An AI-powered service costs a few hundred dollars a month per service. The math isn&apos;t close.
               </li>
             </ul>
           </div>
@@ -448,11 +447,8 @@ export default async function Post() {
             in a separate breakdown.
           </p>
           <p>
-            AI-powered agencies have changed the math entirely. At Venti Scale, we
-            run your entire social media presence for $500 to $1,500 per month.
-            Daily content across every platform. Real metrics in your own{" "}
-            <Link href="/#how">client portal</Link>. Weekly reports showing
-            what&apos;s working. The AI handles execution at scale. Humans handle
+            AI-powered agencies have changed the math entirely. At Venti Scale, every service has a flat monthly price you can see before you talk to anyone. Real metrics in your own{" "}
+            <Link href="/#how">client portal</Link>. A monthly report showing what&apos;s working. The AI handles execution at scale. Humans handle
             the strategy. You handle running your business.
           </p>
           <p>

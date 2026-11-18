@@ -440,7 +440,7 @@ export default async function Post() {
           </p>
 
           <p>
-            A few things worth checking before you compare prices across vendors: whether setup fees exist at all, whether the contract locks you in past month one, and whether the quoted price includes strategy and review or just raw AI output with nobody checking it. On our own model, setup fees are zero, onboarding is included in the monthly rate, and the arrangement is month-to-month with no lock-in.
+            A few things worth checking before you compare prices across vendors: whether setup fees exist at all, whether the contract locks you in past month one, and whether the quoted price includes strategy and review or just raw AI output with nobody checking it. On our own model, the monthly price and the setup fee are both published up front, and the arrangement is month-to-month with no lock-in.
           </p>
 
           <h3>What "full-service" should actually include</h3>

@@ -461,8 +461,7 @@ export default async function Post() {
           </p>
           <p>
             At Venti Scale, we handle the entire stack. Voice documentation, AI
-            content generation calibrated to your brand, scheduling across every
-            platform, human review on every post, and weekly reporting so you see
+            content generation calibrated to your brand, scheduling, human review on every post, and monthly reporting so you see
             exactly what&apos;s working. You don&apos;t learn the tools. You
             don&apos;t review drafts. You don&apos;t think about social media at
             all.

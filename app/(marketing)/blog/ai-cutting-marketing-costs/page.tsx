@@ -459,7 +459,7 @@ export default async function Post() {
           <h2>What this looks like when someone else runs it</h2>
           <p>
             At Venti Scale, we use AI to handle every piece of your marketing
-            execution. Daily content across all your platforms. Email campaigns
+            execution. Content written and scheduled for you. Email campaigns
             that personalize automatically. Ad optimization that gets smarter
             every week. All of it running without you lifting a finger.
           </p>
@@ -471,7 +471,7 @@ export default async function Post() {
             produces more content, and adapts faster.
           </p>
           <p>
-            You get a weekly report showing exactly what happened and what&apos;s
+            You get a monthly report showing exactly what happened and what&apos;s
             coming next through your own{" "}
             <Link href="/#how">client portal</Link>. No PDFs you can&apos;t
             read. No vanity metrics. Just the numbers that matter and the

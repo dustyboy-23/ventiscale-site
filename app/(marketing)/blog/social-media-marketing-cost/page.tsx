@@ -244,11 +244,7 @@ export default async function Post() {
             content, branded graphics, community management, and monthly
             reporting. You&apos;re paying for a team: a strategist, a writer,
             and a designer. This is where most small businesses start seeing
-            real growth numbers. It&apos;s also the tier where our{" "}
-            <Link href="/blog/done-for-you-social-media-management">
-              done-for-you social media management
-            </Link>{" "}
-            sits.
+            real growth numbers.
           </p>
 
           <p>
@@ -437,11 +433,9 @@ export default async function Post() {
 
           <h2>Why Venti Scale charges what we charge</h2>
           <p>
-            Our packages sit in the $500 to $1,500 range for most small
-            businesses because that&apos;s what the math says works. You get
-            daily content across every platform, AI-powered production that
+            Every service has a flat monthly price, published on our pricing page. You get posts written and designed for you, AI-powered production that
             keeps costs down, a human strategy layer that keeps the voice real,
-            and a weekly report showing what&apos;s working.
+            and a monthly report showing what&apos;s working.
           </p>
           <p>
             We&apos;re not the cheapest option. A generalist freelancer on

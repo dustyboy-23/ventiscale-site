@@ -311,7 +311,7 @@ export default async function Post() {
             combines the strategy of experienced marketers with AI execution that handles the daily grind. Your social gets posted. Your emails get sent. Your content gets published. You focus on running your business.
           </p>
           <p>
-            At Venti Scale, we run this exact playbook for ecommerce brands. Daily content across every platform you need. Email sequences that convert. Weekly reports in your own{" "}
+            At Venti Scale, we run this exact playbook for ecommerce brands. Content for the platforms you need. Email sequences that convert. Monthly reports in your own{" "}
             <Link href="/#how">client portal</Link>{" "}
             showing exactly what&apos;s working. No guessing. No hoping. Just a system that runs and grows your brand while you handle the product side. For the broader picture on{" "}
             <Link href="/ai-marketing-for-ecommerce">AI marketing for ecommerce</Link>, here&apos;s the full breakdown.

@@ -410,7 +410,7 @@ export default async function Post() {
           </p>
           <p>
             At Venti Scale, paid media, email, content, and creative briefing run from
-            the same strategy layer. Weekly reporting shows you the full funnel in a
+            the same strategy layer. Monthly reporting shows you the full funnel in a
             single dashboard — not three separate channel reports that don&apos;t
             reference each other. No vendor coordination overhead on your end. No
             alignment meetings between teams who don&apos;t share context.

@@ -466,10 +466,9 @@ export default async function Post() {
           </p>
           <p>
             That&apos;s the gap Venti Scale fills. We run your{" "}
-            <Link href="/#services">entire online presence</Link>. Daily social
-            media posts across every platform. Google Business Profile management.
+            <Link href="/#services">entire online presence</Link>. Social media posts written and scheduled for you. Google Business Profile management.
             Review generation campaigns. Local SEO optimization. You get a{" "}
-            <Link href="/#how">weekly report</Link> showing exactly
+            <Link href="/#how">monthly report</Link> showing exactly
             what&apos;s working. You don&apos;t touch anything. You focus on the
             work. We make sure people find you. For the broader picture on{" "}
             <Link href="/done-for-you-marketing-services">

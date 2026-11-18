@@ -387,12 +387,10 @@ export default async function Post() {
 
           <h2>What we do for coaches</h2>
           <p>
-            We take over your social media completely. Daily posts across every
-            platform that sound like you, teach your audience something, and build
+            We handle your social media posts. Posts that sound like you, teach your audience something, and build
             the kind of trust that turns followers into clients. You get a{" "}
             <Link href="/#how">client portal</Link> where you can see exactly
-            what&apos;s going out and how it&apos;s performing. Weekly reports. No
-            contracts.
+            what&apos;s going out and how it&apos;s performing. A monthly report. No contracts.
           </p>
           <p>
             You focus on coaching. We make sure people can find you. If you want

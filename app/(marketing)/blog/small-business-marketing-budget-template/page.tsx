@@ -476,7 +476,7 @@ export default async function Post() {
             you. Content, email, social, ads, tools, reporting. You set the
             monthly number, we allocate it across channels, track returns, and
             shift the mix when something isn&apos;t working. You get a{" "}
-            <Link href="/#how">weekly report</Link> showing what each dollar
+            <Link href="/#how">monthly report</Link> showing what each dollar
             did. No spreadsheets. No guessing.
           </p>
           <p>

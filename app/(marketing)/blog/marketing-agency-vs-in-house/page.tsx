@@ -471,7 +471,7 @@ export default async function Post() {
             employee cost and the real number is north of $170K.
           </p>
           <p>
-            An agency handles itself. You get a weekly report, you review the
+            An agency handles itself. You get a monthly report, you review the
             results, you give direction when you want to. That&apos;s 1-2 hours
             a week, not 10. It&apos;s the same reason{" "}
             <Link href="/blog/what-done-for-you-marketing-includes">

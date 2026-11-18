@@ -492,9 +492,7 @@ export default async function Post() {
             , here&apos;s the full breakdown.
           </p>
           <p>
-            At Venti Scale, that&apos;s what we build. Daily content across
-            every platform, email sequences, weekly performance reports in your
-            own{" "}
+            At Venti Scale, that&apos;s what we build. Content, email sequences and monthly performance reports in your own{" "}
             <Link href="/#how">client portal</Link>, and a strategy built
             around your niche. You coach. We make sure people know you exist. If
             you want to see exactly what that looks like month to month, check

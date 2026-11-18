@@ -214,8 +214,7 @@ export default async function Post() {
           <p>
             Done-for-you social media management means a professional team
             handles your entire social presence. Strategy, content, scheduling,
-            engagement, reporting. You don&apos;t touch it. You see the results
-            in a weekly report while you focus on running your business. It
+            engagement, reporting. You don&apos;t touch it. You see the results in a monthly report while you focus on running your business. It
             sits inside the broader category of{" "}
             <Link href="/done-for-you-marketing-services">
               done-for-you marketing services
@@ -446,10 +445,10 @@ export default async function Post() {
             That&apos;s exactly the problem we built{" "}
             <Link href="/#services">Venti Scale</Link> to solve. We combine
             AI-powered content creation with human strategy to run your social
-            media operation from end to end. Daily posts across every platform.
+            media operation from end to end. Posts written and scheduled for you.
             A{" "}
             <Link href="/#how">client portal</Link> where you see exactly
-            what&apos;s happening. Weekly reports showing what&apos;s working.
+            what&apos;s happening. A monthly report showing what&apos;s working.
             You don&apos;t learn a new tool. You don&apos;t approve every post.
             You just get your time back and watch your online presence grow.
           </p>

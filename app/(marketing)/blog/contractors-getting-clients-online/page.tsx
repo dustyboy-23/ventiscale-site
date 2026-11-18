@@ -401,16 +401,14 @@ export default async function Post() {
 
           <h2>What we do for contractors and home service businesses</h2>
           <p>
-            We take over your online presence. Daily posts across your
-            platforms, seasonal content that positions you as the local expert,
+            We take over your online presence. Regular posts, seasonal content that positions you as the local expert,
             before-and-after showcases, and tip posts that actually get shared
             in local Facebook groups.
           </p>
           <p>
             You get a{" "}
             <Link href="/#how">client portal</Link> where you can see
-            what&apos;s going out and how your numbers look. Weekly report so
-            you know what&apos;s working. No contracts. No buzzwords. No $5,000
+            what&apos;s going out and how your numbers look. A monthly report so you know what&apos;s working. No contracts. No buzzwords. No $5,000
             monthly invoices.
           </p>
           <p>

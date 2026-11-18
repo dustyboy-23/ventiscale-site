@@ -445,10 +445,8 @@ export default async function Post() {
           </p>
           <p>
             At Venti Scale, we build AI-powered marketing systems that run your
-            social media, content, and email on autopilot. You get daily posting
-            across every platform, real analytics in your own{" "}
-            <Link href="/#how">client portal</Link>, and a weekly report
-            showing what&apos;s working. The whole thing starts at a fraction
+            social media, content, and email on autopilot. You get regular posts on your main platforms, real analytics in your own{" "}
+            <Link href="/#how">client portal</Link>, and a monthly report showing what&apos;s working. The whole thing starts at a fraction
             of what a single marketing hire would cost. If you&apos;re weighing
             this against the broader category, here&apos;s the full picture on{" "}
             <Link href="/marketing-agency-alternatives">

@@ -407,10 +407,8 @@ export default async function Post() {
             those hours on the parts of your business only you can do.
           </p>
           <p>
-            That second version is what we do at Venti Scale. We build the content
-            pillars, the calendar, the posting cadence, and the entire production
-            system — then we run it every day. You see the results in a{" "}
-            <Link href="/#how">weekly report</Link>. You don&apos;t manage any of it.
+            That second version is what we do at Venti Scale. We build the content pillars, the calendar and the posting schedule, then we run it for you. You see the results in a{" "}
+            <Link href="/#how">monthly report</Link>. You don&apos;t manage any of it.
             For the broader picture on{" "}
             <Link href="/done-for-you-marketing-services">
               done-for-you marketing services

@@ -422,10 +422,7 @@ export default async function Post() {
             channel simultaneously.
           </p>
           <p>
-            Monthly output for a standard client: 90+ social posts, 4-8 email
-            campaigns, full automated flow stack, 40-100 ad creative variations
-            depending on ad spend, and weekly performance reporting with real
-            revenue numbers. No vanity metric decks. No discovery phases. No
+            Every service has a set monthly output, listed on the pricing page, and a monthly report with real revenue numbers. No vanity metric decks. No discovery phases. No
             12-month lock-in.
           </p>
           <p>

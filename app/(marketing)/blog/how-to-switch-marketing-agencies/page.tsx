@@ -533,7 +533,7 @@ export default async function Post() {
           </p>
           <p>
             At Venti Scale, every client gets admin access to their own accounts
-            from day one. Month-to-month terms. A weekly report in plain English.
+            from day one. Month-to-month terms. A monthly report in plain English.
             No discovery phase, no junior staff, no retainer theater. The audit
             takes 30 seconds to request.
           </p>

@@ -450,10 +450,7 @@ export default async function Post() {
             mix. And someone accountable for results.
           </p>
           <p>
-            At Venti Scale, that&apos;s what we run. We handle the full
-            Instagram operation for small businesses: Reels scripted and posted,
-            captions optimized for search, engagement covered, and a weekly
-            report showing exactly what&apos;s growing. You focus on your
+            At Venti Scale, that&apos;s what we run. We handle Instagram for small businesses: posts written and designed, your Reels posted, captions optimized for search, and a monthly report showing exactly what&apos;s growing. You focus on your
             business. Your Instagram grows in the background. If you&apos;re
             running a store, Instagram is one channel inside a bigger{" "}
             <Link href="/shopify-marketing-strategy">Shopify marketing strategy</Link>{" "}

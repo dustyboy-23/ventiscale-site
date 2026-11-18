@@ -43,6 +43,8 @@ const nextConfig: NextConfig = {
       // 2026-11 redesign: services and prices live on one page.
       { source: "/services", destination: "/pricing", permanent: true },
       { source: "/for-shopify", destination: "/pricing", permanent: true },
+      // Old comparison quoted retired prices and "zero setup". /vs-agency is the current one.
+      { source: "/blog/venti-scale-vs-traditional-agency", destination: "/vs-agency", permanent: true },
       // Anonymous, activity-only, and it described the April offer. Temporary so
       // a real client result can take the URL back.
       { source: "/case-studies", destination: "/pricing", permanent: false },

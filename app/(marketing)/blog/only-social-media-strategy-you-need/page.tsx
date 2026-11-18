@@ -388,8 +388,7 @@ export default async function Post() {
             that you can&apos;t do both alone indefinitely.
           </p>
           <p>
-            At Venti Scale, we run this exact system for small businesses. Daily content
-            across your platform, consistent voice, real metrics, and a weekly report
+            At Venti Scale, we run this exact system for small businesses. Regular content, consistent voice, real metrics, and a monthly report
             showing what&apos;s working. You don&apos;t have to become a content creator
             to grow online. You just need someone making sure it happens every week. For
             the broader picture on{" "}

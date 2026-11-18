@@ -453,8 +453,7 @@ export default async function Post() {
           </p>
           <p>
             At Venti Scale, we built this from scratch for small businesses.
-            Daily content across every platform. Weekly reports with real
-            numbers. Human strategy making sure everything stays on-brand. All
+            Content written and scheduled for you. Monthly reports with real numbers. Human strategy making sure everything stays on-brand. All
             powered by AI systems that run around the clock. You can see exactly{" "}
             <Link href="/#how">how it works</Link> or grab a{" "}
             <Link href="/#audit">free audit</Link> to see where you stand right

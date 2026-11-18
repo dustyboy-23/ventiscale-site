@@ -352,9 +352,8 @@ export default async function Post() {
             you exist.
           </p>
           <p>
-            At Venti Scale, that&apos;s what we do. Daily content across every
-            platform, real metrics in your own{" "}
-            <Link href="/#how">client portal</Link>, and a weekly report showing
+            At Venti Scale, that&apos;s what we do. Posts written and scheduled for you, real metrics in your own{" "}
+            <Link href="/#how">client portal</Link>, and a monthly report showing
             what&apos;s working. You don&apos;t touch anything. Your social media goes
             from dead to professional overnight. For the broader picture on{" "}
             <Link href="/ai-marketing-for-ecommerce">AI marketing for ecommerce</Link>,

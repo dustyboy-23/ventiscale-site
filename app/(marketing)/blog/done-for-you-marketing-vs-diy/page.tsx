@@ -436,7 +436,7 @@ export default async function Post() {
           </ul>
           <p>
             At Venti Scale, we run your entire marketing operation. Daily
-            content. Multi-platform posting. Weekly reports in your own{" "}
+            content. Multi-platform posting. Monthly reports in your own{" "}
             <Link href="/#how">client portal</Link>. AI-powered execution with
             human strategy. You don&apos;t touch anything. Your marketing just
             works.
