@@ -3,60 +3,69 @@ import { headers } from "next/headers";
 import { Eyebrow } from "@/components/marketing/eyebrow";
 import { BlogAuthorBio } from "@/components/marketing/blog-author-bio";
 import { BlogCta } from "@/components/marketing/blog-cta";
+import { SERVICES, money } from "@/lib/pricing";
 
 export const metadata = {
-  title: "How much does social media marketing really cost in 2026?",
+  title: "How Much Does Social Media Management Cost in 2026?",
   description:
-    "Honest numbers on social media marketing cost for small business in 2026. Freelancers, agencies, in-house, and what you actually get at each tier.",
+    "Social media management pricing for 2026: what agencies, freelancers and full-time hires cost, and what cheap packages leave out.",
   openGraph: {
-    title: "How much does social media marketing really cost in 2026?",
+    title: "Social media management pricing: what you'll pay in 2026",
     description:
-      "Honest numbers on social media marketing cost for small business in 2026. Freelancers, agencies, in-house, and what you actually get at each tier.",
+      "Social media management pricing for 2026: what agencies, freelancers and full-time hires cost, and what cheap packages leave out.",
     url: "https://www.ventiscale.com/blog/social-media-marketing-cost",
     type: "article",
     images: [
       {
-        url: "https://www.ventiscale.com/blog/social-media-marketing-cost.jpg",
+        url: "https://www.ventiscale.com/opengraph-image",
         width: 1200,
         height: 630,
-        alt: "Social media marketing cost breakdown for small business",
+        alt: "Venti Scale",
       },
     ],
   },
   twitter: {
     card: "summary_large_image" as const,
-    title: "How much does social media marketing really cost in 2026?",
+    title: "Social media management pricing: what you'll pay in 2026",
     description:
-      "Honest numbers on social media marketing cost for small business in 2026. Freelancers, agencies, in-house, and what you actually get at each tier.",
-    images: ["https://www.ventiscale.com/blog/social-media-marketing-cost.jpg"],
+      "Social media management pricing for 2026: what agencies, freelancers and full-time hires cost, and what cheap packages leave out.",
+    images: ["https://www.ventiscale.com/opengraph-image"],
   },
 };
 
 const SLUG = "social-media-marketing-cost";
-const TITLE =
-  "How much does social media marketing really cost in 2026? (Honest numbers)";
+const TITLE = "Social media management pricing: what you'll pay in 2026";
 const DESCRIPTION =
-  "Honest numbers on social media marketing cost for small business in 2026. Freelancers, agencies, in-house, and what you actually get at each tier.";
-const DATE = "2026-04-18";
-const IMAGE = "/blog/social-media-marketing-cost.jpg";
-const IMAGE_URL = `https://www.ventiscale.com${IMAGE}`;
+  "Social media management pricing for 2026: what agencies, freelancers and full-time hires cost, and what cheap packages leave out.";
+const PUBLISHED = "2026-04-18";
+const DATE = "2026-11-18";
+const IMAGE_URL = "https://www.ventiscale.com/opengraph-image";
+
+// Every Venti Scale number on this page comes from lib/pricing.ts.
+const social = SERVICES.find((s) => s.id === "social")!;
+const postsPerMonth = social.weeks.reduce((total, week) => total + week.units, 0);
+const costPerPost = Math.round(social.monthly / postsPerMonth);
 
 const FAQ_DATA = [
   {
-    q: "How much does social media marketing cost for a small business in 2026?",
-    a: "Most small businesses spend between $500 and $5,000 per month on social media marketing in 2026. The average sits around $1,500 to $2,500 per month for proper management across two to three platforms. Under $500 means you&apos;re buying consistency, not growth. Over $5,000 means you&apos;re paying for strategy, ads, and production quality on top.",
+    q: "How much does social media management cost per month?",
+    a: "Most agencies charge under $2,500 a month, with $1,000 to $2,499 the most common range. A freelancer's monthly cost depends on how many hours your account takes.",
   },
   {
-    q: "Is it cheaper to hire a freelancer or a social media agency?",
-    a: "A freelancer usually costs $500 to $3,000 per month and an agency costs $2,000 to $10,000 per month. Freelancers are cheaper on paper but harder to scale because you&apos;re hiring one person who does everything. Agencies cost more but bring a team with writers, designers, and strategists, so you get more output for the dollar once you&apos;re past the basic tier.",
+    q: "How much does a freelance social media manager charge?",
+    a: "Published estimates run from $20 to $150 an hour, depending on experience. Multiply the hourly rate by the hours your account needs each month to get your real cost.",
   },
   {
-    q: "Why is in-house social media more expensive than an agency?",
-    a: "A full-time social media manager costs $105,000 to $155,000 per year once you add salary, benefits, tools, and recruiting costs. That works out to $8,750 to $12,900 per month for one person. Most small businesses get better output from a $2,000 to $4,000 per month agency retainer because they&apos;re paying for a team, not a single hire.",
+    q: "Is hiring a full-time social media manager cheaper than an agency?",
+    a: "No. Median pay in a close federal job category is $78,760 a year before benefits, which is far more than most agency packages cost.",
   },
   {
-    q: "What should a small business marketing budget look like for social media?",
-    a: "Industry benchmarks say allocate 15 to 25 percent of your total marketing budget to social media. If your business does $500,000 per year and spends 8 percent on marketing, that&apos;s $40,000 annually, which puts social in the $6,000 to $10,000 per year range. Adjust up if social is your primary channel, down if it&apos;s secondary to SEO or paid search.",
+    q: "What should a social media management package include?",
+    a: "Content creation, scheduling and strategy should be in every package. Reporting and community management are common but not universal, so ask about both before you sign.",
+  },
+  {
+    q: "Why are some social media plans so cheap?",
+    a: "Cheap plans usually do less beyond the post itself. Customer replies, strategy and ads are often left out, so compare what's included and not just the price.",
   },
 ];
 
@@ -85,7 +94,7 @@ export default async function Post() {
               name: "Venti Scale",
               url: "https://www.ventiscale.com",
             },
-            datePublished: DATE,
+            datePublished: PUBLISHED,
             dateModified: DATE,
             mainEntityOfPage: {
               "@type": "WebPage",
@@ -146,308 +155,458 @@ export default async function Post() {
         </Link>
 
         <div className="mt-8 mb-10">
-          <Eyebrow>PRICING / SMALL BUSINESS</Eyebrow>
+          <Eyebrow>PRICING / SOCIAL MEDIA</Eyebrow>
           <h1 className="font-display text-[32px] lg:text-[42px] leading-[1.1] tracking-[-0.02em] text-white mt-4 mb-4">
-            How much does social media marketing really cost in 2026? (Honest numbers)
+            Social media management pricing: what you&apos;ll pay in 2026
           </h1>
           <div className="flex items-center gap-3">
             <span className="font-mono text-[11px] tracking-[0.12em] uppercase text-white/35">
-              April 18, 2026
+              Updated November 18, 2026
             </span>
             <span className="text-white/15">&middot;</span>
             <span className="font-mono text-[11px] tracking-[0.12em] uppercase text-white/35">
-              8 min read
+              7 min read
             </span>
           </div>
         </div>
 
-        <div className="blog-hero">
-          <img
-            src={IMAGE}
-            alt="Small business owner calculating social media marketing cost"
-          />
-        </div>
-
         <div className="prose-blog">
           <p>
-            Ask three agencies what social media marketing costs and you&apos;ll
-            get three different numbers. One says $500. One says $2,500. One says
-            $8,000. They&apos;re all selling different things and none of them
-            will tell you that up front.
+            Most agencies charge under $2,500 a month for social media
+            management, and the most common price is $1,000 to $2,499. That
+            comes from{" "}
+            <a
+              href="https://www.heyorca.com/blog/how-to-price-social-media-services-2026"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              HeyOrca&apos;s 2026 survey of almost 100 agencies
+            </a>
+            , where 49% landed in that range and another 31% charged under
+            $1,000. But social media management pricing only means something
+            once you know what the money buys.
           </p>
           <p>
-            So here&apos;s the actual breakdown. Real numbers, what you get at
-            each tier, and the trap most small business owners fall into.
+            Below you&apos;ll see what each type of provider charges, what gets
+            left out of cheap packages and how to compare two prices properly.
           </p>
 
           <div className="blog-tldr">
             <div className="callout-label">TL;DR</div>
             <ul>
               <li>
-                Most small businesses spend $500 to $5,000 per month on social
-                media marketing. The sweet spot for proper management sits
-                around $1,500 to $2,500.
+                <a
+                  href="https://www.heyorca.com/blog/how-to-price-social-media-services-2026"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  80% of the agencies HeyOrca surveyed
+                </a>{" "}
+                charge under $2,500 a month.
               </li>
               <li>
-                Freelancers run $500 to $3,000 per month. Agencies run $2,000 to
-                $10,000. In-house hires cost $105,000 to $155,000 per year all
-                in.
+                Freelancers tend to charge hourly.{" "}
+                <a
+                  href="https://sproutsocial.com/insights/social-media-management-cost/"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  Sprout Social
+                </a>{" "}
+                estimates $20 to $150 an hour.
               </li>
               <li>
-                Under $500 per month buys you consistency, not growth. If you
-                want results, plan to spend at least $1,500.
+                Hiring in-house costs far more. A close federal wage category
+                pays a median of{" "}
+                <a
+                  href="https://www.bls.gov/ooh/business-and-financial/market-research-analysts.htm"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  $78,760 a year
+                </a>{" "}
+                before benefits.
               </li>
               <li>
-                Industry benchmark is 15 to 25 percent of total marketing budget
-                on social. Most small businesses underspend here because the ROI
-                is slower than ads.
+                The gap comes down to the work involved, so ask who answers
+                your customers before you compare prices.
               </li>
             </ul>
           </div>
 
+          <h2 id="pricing-by-provider">
+            Social media management pricing by who does the work
+          </h2>
           <p>
-            The honest number for social media marketing cost for small business
-            in 2026 is somewhere between $1,500 and $2,500 per month for real
-            management. That&apos;s the tier where you&apos;re actually getting
-            strategy, content, and posting, not just a scheduled queue of
-            recycled posts.
-          </p>
-
-          <h2>What $500, $1,500, and $5,000 per month actually buy you</h2>
-          <p>
-            Most pricing pages show you a grid of packages without explaining
-            what you&apos;re really getting. Here&apos;s what each price point
-            looks like in practice.
-          </p>
-
-          <p>
-            <strong>$500 per month</strong> is the floor. At this price you&apos;re
-            hiring a generalist freelancer or a cheap template service. You
-            get 8 to 12 posts a month on one or two platforms. Captions are
-            written by someone who doesn&apos;t know your business. Engagement
-            replies take days. No strategy, no ads, no analytics worth reading.
-            It keeps your profile from looking dead. It doesn&apos;t grow it.
-          </p>
-
-          <p>
-            <strong>$1,500 per month</strong> is where things get serious. At
-            this tier you&apos;re getting 15 to 20 posts a month across two or
-            three platforms, actual content creation with branded graphics, a
-            real posting schedule, hashtag research, and basic engagement
-            management. A good freelancer with 3+ years experience lives here.
-            A junior person at a small agency lives here too.
-          </p>
-
-          <p>
-            <strong>$2,500 to $4,000 per month</strong> is standard agency
-            pricing. Daily posting across three to four platforms, custom video
-            content, branded graphics, community management, and monthly
-            reporting. You&apos;re paying for a team: a strategist, a writer,
-            and a designer. This is where most small businesses start seeing
-            real growth numbers.
-          </p>
-
-          <p>
-            <strong>$5,000 to $10,000+ per month</strong> is premium service.
-            All platforms, daily posting, original video production, influencer
-            coordination, paid ad management, and weekly reporting. If your
-            business does seven figures and social is a primary channel, this
-            tier pays for itself fast.
+            <strong>Agencies</strong>{" "}are the easiest group to pin down, because{" "}
+            <a
+              href="https://www.heyorca.com/blog/how-to-price-social-media-services-2026"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              HeyOrca asked them directly
+            </a>
+            . Most of the ranges you&apos;ll find online are estimates from
+            companies selling social media services or software. That&apos;s
+            why they&apos;re so wide. Agency prices break down like this.
           </p>
 
           <div className="blog-stat-row">
             <div className="blog-stat">
-              <div className="stat-number">$500-$5K</div>
-              <div className="stat-label">Monthly range for most small businesses</div>
+              <div className="stat-number">31%</div>
+              <div className="stat-label">
+                <a
+                  href="https://www.heyorca.com/blog/how-to-price-social-media-services-2026"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  under $1,000 a month
+                </a>
+              </div>
             </div>
             <div className="blog-stat">
-              <div className="stat-number">$1,500</div>
-              <div className="stat-label">Typical floor for real management</div>
+              <div className="stat-number">49%</div>
+              <div className="stat-label">
+                <a
+                  href="https://www.heyorca.com/blog/how-to-price-social-media-services-2026"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  $1,000 to $2,499
+                </a>
+              </div>
             </div>
             <div className="blog-stat">
-              <div className="stat-number">15-25%</div>
-              <div className="stat-label">Of marketing budget should go to social</div>
+              <div className="stat-number">9%</div>
+              <div className="stat-label">
+                <a
+                  href="https://www.heyorca.com/blog/how-to-price-social-media-services-2026"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  $2,500 to $4,999
+                </a>
+              </div>
+            </div>
+            <div className="blog-stat">
+              <div className="stat-number">3%</div>
+              <div className="stat-label">
+                <a
+                  href="https://www.heyorca.com/blog/how-to-price-social-media-services-2026"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  more than $5,000
+                </a>
+              </div>
             </div>
           </div>
 
-          <hr className="blog-divider" />
-
-          <h2>Freelancer vs agency vs in-house: the real math</h2>
           <p>
-            Every small business owner asks this. Here&apos;s the breakdown
-            without the agency bias.
+            <strong>Freelancers</strong>{" "}often bill by the hour.{" "}
+            <a
+              href="https://sproutsocial.com/insights/social-media-management-cost/"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              Sprout Social
+            </a>{" "}
+            puts freelance social media managers at $20 to $150 an hour, based
+            on experience. That&apos;s an estimate, so treat it as a rough
+            guide. Say a freelancer charges $50 an hour and spends 20 hours a
+            month on your account. That comes to $1,000 a month.
           </p>
-
           <p>
-            <strong>Freelancer: $500 to $3,000 per month.</strong> You get one
-            person. Cheaper, more flexible, but the output caps at what one
-            human can do. If they go on vacation, your content stops. If they
-            get busy, your posts slip. You&apos;re also the manager, because
-            nobody&apos;s above them telling them what to do. Good for
-            businesses with under $500K in revenue and one or two platforms to
-            cover.
+            <strong>Done-for-you plans</strong>{" "}are flat monthly packages with
+            a set number of posts. They&apos;re easy to compare, because you
+            can divide the price by the posts. Say one plan costs $600 a month
+            for 12 posts. That works out to $50 a post. Say another charges
+            $900 for 20 posts. That&apos;s $45 a post. Those numbers are made
+            up to show the math, but it works on any plan you&apos;re looking
+            at. So the bigger monthly bill can be the better deal, as long as
+            the work behind the posts is the same.
           </p>
-
           <p>
-            <strong>Agency: $2,000 to $10,000+ per month.</strong> You get a
-            team. A strategist sets direction, a writer handles copy, a
-            designer makes graphics, a manager coordinates. More output per
-            dollar once you&apos;re past the entry tier because specialists are
-            faster than generalists. No single person getting sick can tank
-            your month. Best for businesses with multiple platforms, specific
-            growth goals, or owners who want to be hands off.
-          </p>
-
-          <p>
-            <strong>In-house hire: $105,000 to $155,000 per year.</strong> That&apos;s
-            salary plus benefits plus tools plus recruiting costs. One person,
-            full time, deeply embedded in your brand. The upside is control.
-            The downside is you&apos;re paying $10,000+ per month for one
-            generalist instead of a specialist team. The real math on this is
-            covered in my{" "}
+            <strong>A full-time hire</strong>{" "}costs the most. A close match in
+            federal wage data is market research analysts and marketing
+            specialists, with{" "}
+            <a
+              href="https://www.bls.gov/ooh/business-and-financial/market-research-analysts.htm"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              median pay of $78,760 a year
+            </a>{" "}
+            in May 2025. Benefits come on top. Across private industry,{" "}
+            <a
+              href="https://www.bls.gov/news.release/ecec.nr0.htm"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              benefits made up 30% of what employers spent on workers
+            </a>{" "}
+            in June 2026. If your hire&apos;s benefits match that average,
+            $78,760 in pay turns into about $112,500 a year, or roughly $9,400
+            a month. It&apos;s a broad category and a junior hire can cost
+            less. But the gap is still big. Before you post a job, read{" "}
+            <Link href="/blog/do-i-need-a-social-media-manager">
+              whether you need a social media manager at all
+            </Link>{" "}
+            and the{" "}
             <Link href="/blog/marketing-agency-vs-in-house">
-              agency vs in-house cost breakdown
+              agency vs in-house math
             </Link>
             .
           </p>
-
-          <div className="blog-callout">
-            <div className="callout-label">Key insight</div>
-            <p>
-              Businesses that spend $2,000 to $5,000 per month tend to see
-              meaningfully higher engagement than those spending under
-              $1,000. The gap isn&apos;t about budget alone, it&apos;s about
-              what that budget buys in strategy and production quality.
-            </p>
-          </div>
-
-          <h2>Why the cheapest option is almost always the most expensive</h2>
           <p>
-            Here&apos;s the trap. You find a freelancer for $400 per month.
-            Deal of the century, right? Six months later you&apos;ve got 50
-            posts that nobody engaged with, 200 new followers that don&apos;t
-            convert, and you&apos;re still doing all the strategy yourself.
-            You&apos;ve spent $2,400 for nothing.
+            <strong>Doing it yourself</strong>{" "}looks cheapest because the tools
+            are cheap.{" "}
+            <a
+              href="https://buffer.com/pricing"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              Buffer&apos;s Essentials plan
+            </a>{" "}
+            is $5 a month per channel, billed yearly.{" "}
+            <a
+              href="https://later.com/pricing/"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              Later&apos;s Starter plan
+            </a>{" "}
+            is $18.75 a month, billed yearly.{" "}
+            <a
+              href="https://www.hootsuite.com/plans"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              Hootsuite&apos;s Standard plan
+            </a>{" "}
+            is $99 per user a month on annual billing. But your time is the
+            real bill. Say you spend 15 hours a month on it and your time&apos;s
+            worth $40 an hour. That&apos;s $600 a month of work you aren&apos;t
+            doing for customers.
+          </p>
+
+          <hr className="blog-divider" />
+
+          <h2 id="what-drives-the-price">What actually drives the price</h2>
+          <p>
+            <a
+              href="https://www.heyorca.com/blog/how-to-price-social-media-services-2026"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              HeyOrca&apos;s pricing guide
+            </a>{" "}
+            breaks a price down into the work behind it: how much content you
+            need, how many channels you&apos;re on, whether someone builds your
+            strategy and who replies to your customers. A package with eight
+            simple posts is a very different job from one with 30 posts,
+            short-form video and custom graphics.
           </p>
           <p>
-            Meanwhile the owner next door spent $2,500 per month for six months.
-            $15,000 total. They&apos;ve got 3,000 real followers, a consistent
-            brand voice, 80 pieces of quality content, and five new customers
-            a month from social. The $400 freelancer wasn&apos;t cheap. They
-            were expensive because nothing worked.
+            So a lower price usually means less work around each post. That
+            isn&apos;t automatically bad. If you&apos;re happy answering your
+            own comments, there&apos;s no reason to pay someone else to do it.
+            You just want to know what you&apos;re giving up before you sign.
           </p>
+
+          <hr className="blog-divider" />
+
+          <h2 id="what-cheap-packages-leave-out">
+            What cheap packages leave out
+          </h2>
+          <p>
+            <a
+              href="https://www.heyorca.com/blog/how-to-price-social-media-services-2026"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              HeyOrca&apos;s survey
+            </a>{" "}
+            also shows what agencies put in a package. Content creation (97%),
+            scheduling (96%) and strategy (93%) are in almost all of them.
+            After that the list gets shorter. And a low-priced plan has the
+            most reason to trim it. Check these six things first.
+          </p>
+          <ul>
+            <li>
+              <strong>Replies to comments and DMs.</strong>{" "}
+              <a
+                href="https://www.heyorca.com/blog/how-to-price-social-media-services-2026"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                75% of agencies
+              </a>{" "}
+              include community management, so about one in four don&apos;t.
+              It takes real time, which makes it an easy thing to cut from a
+              cheap plan.
+            </li>
+            <li>
+              <strong>Reporting.</strong>{" "}
+              <a
+                href="https://www.heyorca.com/blog/how-to-price-social-media-services-2026"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                81% of agencies
+              </a>{" "}
+              build it in, which leaves about one in five that don&apos;t.
+            </li>
+            <li>
+              <strong>Strategy.</strong>{" "}
+              <a
+                href="https://www.heyorca.com/blog/how-to-price-social-media-services-2026"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                93% of agencies
+              </a>{" "}
+              cover it. If your plan doesn&apos;t, you&apos;re the one
+              deciding what gets posted and why.
+            </li>
+            <li>
+              <strong>Ads.</strong>{" "}Only{" "}
+              <a
+                href="https://www.heyorca.com/blog/how-to-price-social-media-services-2026"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                18% of agencies
+              </a>{" "}
+              put paid social in the package. And the ad spend is a separate
+              bill on top of that.
+            </li>
+            <li>
+              <strong>Video and extra channels.</strong>{" "}
+              <a
+                href="https://www.heyorca.com/blog/how-to-price-social-media-services-2026"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                HeyOrca&apos;s respondents
+              </a>{" "}
+              named video and creative production, plus additional content or
+              profiles, as common extras. Ask what each one adds to your bill.
+            </li>
+            <li>
+              <strong>Setup fees.</strong>{" "}Many providers charge a one-time fee
+              to get your account started. Ask for the number up front so it
+              doesn&apos;t surprise you.
+            </li>
+          </ul>
 
           <div className="blog-warning">
             <div className="callout-label">Common mistake</div>
             <p>
-              Hiring the cheapest option and hoping they figure it out. Social
-              media doesn&apos;t work on budget mode. You&apos;re either paying
-              enough to get real output or you&apos;re paying to stay invisible.
-              There&apos;s no middle ground where $400 per month accidentally
-              produces agency-quality work.
+              Comparing two plans on the monthly price alone. A plan that looks
+              cheaper can cost more once you add setup, extra channels and the
+              hours you&apos;ll spend answering customers yourself.
             </p>
-          </div>
-
-          <p>
-            The right question isn&apos;t &quot;what&apos;s the cheapest option
-            that works?&quot; It&apos;s &quot;what&apos;s the smallest budget
-            that gets me real results?&quot; That number is almost always
-            $1,500 per month or higher. Anything under that is paying for a
-            pulse, not a strategy.
-          </p>
-
-          <h2>What affects the price besides the number of posts</h2>
-          <p>
-            Pricing pages make it look like you&apos;re buying a quantity of
-            posts. You&apos;re not. You&apos;re buying a bundle of things that
-            add up. Here&apos;s what actually moves the price.
-          </p>
-          <p>
-            <strong>Platforms.</strong> Each platform adds 20 to 40 percent to
-            the base price. One platform is cheap. Five platforms requires a
-            team.
-          </p>
-          <p>
-            <strong>Content format.</strong> Static graphics are cheapest.
-            Carousels are mid. Video content, especially short form, is
-            expensive because it needs filming, editing, and scripting.
-          </p>
-          <p>
-            <strong>Engagement depth.</strong> Scheduled posts cost less than
-            active community management where someone replies to comments and
-            DMs within an hour.
-          </p>
-          <p>
-            <strong>Strategy and reporting.</strong> A provider who just posts
-            is cheap. A provider who tracks what works, pivots based on data,
-            and sends weekly reports costs more because they&apos;re thinking,
-            not just executing.
-          </p>
-          <p>
-            <strong>Ad management.</strong> If paid ads are part of the scope,
-            most agencies charge 10 to 20 percent of ad spend as a management
-            fee on top of the retainer.
-          </p>
-
-          <div className="blog-stat-row">
-            <div className="blog-stat">
-              <div className="stat-number">$105K-$155K</div>
-              <div className="stat-label">In-house hire, fully loaded</div>
-            </div>
-            <div className="blog-stat">
-              <div className="stat-number">15-25%</div>
-              <div className="stat-label">Of marketing budget should go to social</div>
-            </div>
           </div>
 
           <hr className="blog-divider" />
 
-          <h2>How to pick the right budget for your business</h2>
+          <h2 id="how-to-compare">How to compare two prices</h2>
           <p>
-            Stop comparing packages. Start with what your business can afford
-            and work backwards.
+            Run every plan you&apos;re looking at through the same five checks.
+            It takes a few minutes and it&apos;ll show you which price is
+            really lower.
           </p>
+          <ol>
+            <li>
+              <strong>Get the cost per post.</strong>{" "}Divide what you&apos;d pay
+              each month by the number of posts.
+            </li>
+            <li>
+              <strong>Work out the first year.</strong>{" "}Say a plan costs $500 a
+              month with a $300 setup fee. Your first year costs $6,300.
+            </li>
+            <li>
+              <strong>Count your channels.</strong>{" "}Add the fee for any channel
+              the plan doesn&apos;t cover.
+            </li>
+            <li>
+              <strong>Find out who talks to your customers.</strong>{" "}If
+              that&apos;s still you, budget the hours.
+            </li>
+            <li>
+              <strong>Ask what you keep if you leave.</strong>{" "}Your accounts,
+              logins and content should stay yours.
+            </li>
+          </ol>
+
+          <hr className="blog-divider" />
+
+          <h2 id="which-option-fits">Which option fits your business</h2>
           <p>
-            <strong>If you do under $250K per year</strong>, budget $500 to
-            $1,500 per month and pick one platform to dominate. Don&apos;t try
-            to be everywhere. You can&apos;t afford it and you don&apos;t need
-            it.
+            The best pick depends on how much of the work you want off your
+            plate.
           </p>
+          <ul>
+            <li>
+              <strong>A flat posting plan</strong>{" "}works when you just need
+              your pages active and you&apos;re fine answering customers
+              yourself.
+            </li>
+            <li>
+              <strong>A freelancer</strong>{" "}suits you if having one person
+              learn your business matters and you&apos;ve got time to manage
+              them.
+            </li>
+            <li>
+              <strong>An agency</strong>{" "}makes sense when strategy, content,
+              reporting and replies all need to sit in one place.
+            </li>
+            <li>
+              <strong>A full-time hire</strong>{" "}only pays off if social media
+              is a main way you sell and there&apos;s a full week of work every
+              week.
+            </li>
+            <li>
+              <strong>Doing it yourself</strong>{" "}is the right call when
+              you&apos;ve got more time than money and you&apos;ll actually
+              keep it up.
+            </li>
+          </ul>
           <p>
-            <strong>If you do $250K to $1M per year</strong>, budget $1,500 to
-            $3,500 per month and cover two or three platforms well. This is
-            where most small businesses land and where agency retainers make
-            sense. If you&apos;re in this range and wondering about the switch,
-            check out my guide on{" "}
-            <Link href="/blog/signs-you-should-stop-diy-marketing">
-              signs you should stop DIY-ing your marketing
-            </Link>
-            .
-          </p>
-          <p>
-            <strong>If you do $1M+ per year</strong>, budget $3,500 to $8,000
-            per month. You&apos;re at the scale where social needs a dedicated
-            team, not a side project. Cutting corners here costs more in lost
-            revenue than the budget saves.
+            Still working out what you can afford? Start with a{" "}
+            <Link href="/blog/small-business-marketing-budget-template">
+              small business marketing budget
+            </Link>{" "}
+            and fit social media into it.
           </p>
 
-          <h2>What I charge and why</h2>
+          <hr className="blog-divider" />
+
+          <h2 id="what-my-plan-costs">What my plan costs</h2>
           <p>
-            <Link href="/social-media-management">My social media plan</Link> has one flat monthly price, published on the page. You get 12 posts
-            a month written and designed for you, plus up to 8 of your own videos posted.
+            My{" "}
+            <Link href="/social-media-management">
+              social media management pricing
+            </Link>{" "}
+            is one flat plan: {money(social.monthly)}{" "}a month, plus a one-time{" "}
+            {money(social.setup)}{" "}setup fee. At {postsPerMonth}{" "}posts a month,
+            that&apos;s about {money(costPerPost)}{" "}a post.
           </p>
+          <p>You get:</p>
+          <ul>
+            {social.includes.map((item) => (
+              <li key={item}>{item}</li>
+            ))}
+          </ul>
+          <p>What setup covers: {social.setupCovers}</p>
           <p>
-            I&apos;m not the cheapest option. A generalist freelancer on Fiverr will charge you less. I&apos;m
-            not the most expensive either. AI does the heavy lifting on production, and I check the work so it
-            doesn&apos;t sound like a robot wrote it.
-          </p>
-          <p>
-            The <Link href="/pricing">full price list</Link> is one click away. For the full breakdown on{" "}
-            <Link href="/ai-marketing-cost">what AI marketing actually costs</Link> in 2026, here are the
-            line-item numbers.
+            Not included: {social.notIncluded}{" "}If you want someone answering
+            your DMs every day, you&apos;ll want a plan that does it.
           </p>
 
-          {/* FAQ */}
+          <hr className="blog-divider" />
+
           <div className="blog-faq">
             <h2>Frequently asked questions</h2>
             {FAQ_DATA.map((faq) => (
@@ -458,36 +617,7 @@ export default async function Post() {
             ))}
           </div>
 
-          {/* Author bio */}
-          <BlogAuthorBio />
-
-          {/* Related posts */}
-          <div className="blog-related">
-            <h3>Keep reading</h3>
-            <div className="blog-related-grid">
-              <Link
-                href="/blog/marketing-agency-vs-in-house"
-                className="blog-related-card"
-              >
-                <div className="related-title">
-                  Marketing agency vs. hiring in-house: the real math for a
-                  small business
-                </div>
-                <div className="related-meta">7 min read</div>
-              </Link>
-              <Link
-                href="/blog/done-for-you-marketing-vs-diy"
-                className="blog-related-card"
-              >
-                <div className="related-title">
-                  Done-for-you marketing vs. DIY: the real cost comparison
-                </div>
-                <div className="related-meta">7 min read</div>
-              </Link>
-            </div>
-          </div>
-
-          {/* CTA */}
+          <BlogAuthorBio lastUpdated={DATE} />
           <BlogCta />
         </div>
       </article>

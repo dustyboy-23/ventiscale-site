@@ -210,12 +210,13 @@ export const posts: BlogPost[] = [
   },
   {
     slug: "social-media-marketing-cost",
-    title: "How much does social media marketing really cost in 2026? (Honest numbers)",
+    title: "Social media management pricing: what you'll pay in 2026",
     description:
-      "Honest numbers on social media marketing cost for small business in 2026. Freelancers, agencies, in-house, and what you actually get at each tier.",
+      "Social media management pricing for 2026: what agencies, freelancers and full-time hires cost, and what cheap packages leave out.",
     date: "2026-04-18",
+    updated: "2026-11-18",
     author: "Dustin Gilmour",
-    readTime: "8 min",
+    readTime: "7 min",
     tags: ["social media", "pricing", "small business", "marketing budget"],
     image: "/blog/social-media-marketing-cost.jpg",
   },
