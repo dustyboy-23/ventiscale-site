@@ -179,7 +179,7 @@ export default async function PillarPage() {
           <p>
             That&apos;s the default Shopify marketing experience. Five channels
             half-built, none of them working at full capacity, and no clear
-            view of where revenue actually comes from. <em>You&apos;re not
+            view of where revenue actually comes from.{" "}<em>You&apos;re not
             running a strategy. You&apos;re running a checklist.</em>
           </p>
           <p>
@@ -234,7 +234,7 @@ export default async function PillarPage() {
             across all of them.
           </p>
           <p>
-            The most important word is <em>sequenced</em>. The wrong sequence
+            The most important word is{" "}<em>sequenced</em>. The wrong sequence
             kills more Shopify stores than wrong channel choices. Founders
             launch on Shopify and go straight to paid social because that&apos;s
             what every podcast tells them to do. They burn $5,000 on Meta ads
@@ -274,19 +274,19 @@ export default async function PillarPage() {
 
           <h2>Channel 1: Email and behavioral flows (build first, always)</h2>
           <p>
-            <strong>Tools:</strong> Klaviyo ($30-150/month based on contact
+            <strong>Tools:</strong>{" "}Klaviyo ($30-150/month based on contact
             count). Shopify Email free tier works for basic but caps out fast.
           </p>
           <p>
             <strong>What to build, in order:</strong>
           </p>
           <p>
-            <strong>Welcome series.</strong> Triggered when a customer signs up
+            <strong>Welcome series.</strong>{" "}Triggered when a customer signs up
             without buying. 3 emails over 7 days. Average open rate 40-50%,
             conversion 4-8%. The single highest-ROI flow you&apos;ll ever build.
           </p>
           <p>
-            <strong>Abandoned cart sequence.</strong> 3 emails at 1 hour, 24
+            <strong>Abandoned cart sequence.</strong>{" "}3 emails at 1 hour, 24
             hours, and 72 hours after cart abandonment. Recovers 10-30% of lost
             revenue. We covered the full mechanics including subject lines and
             timing at{" "}
@@ -296,19 +296,19 @@ export default async function PillarPage() {
             .
           </p>
           <p>
-            <strong>Post-purchase flow.</strong> Triggered after order. 2-3
+            <strong>Post-purchase flow.</strong>{" "}Triggered after order. 2-3
             emails: shipping confirmation with cross-sell, product education
             (how to use it, care instructions), review request at day 14. This
             flow drives repeat purchase rate, which is more valuable than any
             new-customer channel.
           </p>
           <p>
-            <strong>Browse abandonment.</strong> Triggered when a customer
+            <strong>Browse abandonment.</strong>{" "}Triggered when a customer
             views a product 3+ times without adding to cart. One email,
             personalized to the product, with a soft CTA. Conversion rate 6-12%.
           </p>
           <p>
-            <strong>Winback campaign.</strong> Targeted at customers who
+            <strong>Winback campaign.</strong>{" "}Targeted at customers who
             haven&apos;t purchased in 60-90 days. 2 emails, the second with a
             reactivation discount. Lifts customer LTV by 10-20%.
           </p>
@@ -320,12 +320,12 @@ export default async function PillarPage() {
 
           <h2>Channel 2: SEO and content (build second, before paid)</h2>
           <p>
-            <strong>Tools:</strong> Google Search Console (free), an LLM
+            <strong>Tools:</strong>{" "}Google Search Console (free), an LLM
             ($20-200/month), optionally SurferSEO ($89/month) for keyword
             optimization.
           </p>
           <p>
-            <strong>Why before paid:</strong> Organic search traffic costs you
+            <strong>Why before paid:</strong>{" "}Organic search traffic costs you
             zero in CAC after the content is written. Paid traffic costs you on
             every click forever. A Shopify store with 50 strong blog posts
             ranking on page 1 is worth more than the same store with $50,000
@@ -335,21 +335,21 @@ export default async function PillarPage() {
             <strong>What to build:</strong>
           </p>
           <p>
-            <strong>Product page SEO.</strong> Title tags, meta descriptions,
+            <strong>Product page SEO.</strong>{" "}Title tags, meta descriptions,
             schema markup (Product schema is non-negotiable for Shopify), and
             internal linking. Most Shopify themes have 60% of this configured
             wrong by default. The fix takes 1 day and recovers 15-25% of
             organic traffic immediately.
           </p>
           <p>
-            <strong>Blog content cluster.</strong> 30-50 articles targeting
+            <strong>Blog content cluster.</strong>{" "}30-50 articles targeting
             buyer-intent and informational keywords in your category. Shopify&apos;s
             blog feature is decent. Most stores skip blogs because &quot;blogs
             are dead.&quot; They&apos;re not. They&apos;re the cheapest CAC
             channel that exists.
           </p>
           <p>
-            <strong>AI search optimization.</strong> ChatGPT, Perplexity, and
+            <strong>AI search optimization.</strong>{" "}ChatGPT, Perplexity, and
             Google AI Overviews now handle 12-18% of English-language queries.
             Comparison-format content earns a disproportionate share of AI
             citations. Add comparison-format articles to your content plan. We covered the full GEO playbook
@@ -366,18 +366,18 @@ export default async function PillarPage() {
 
           <h2>Channel 3: Paid social (build third, after email and content)</h2>
           <p>
-            <strong>Tools:</strong> Meta Ads Manager (Facebook + Instagram),
+            <strong>Tools:</strong>{" "}Meta Ads Manager (Facebook + Instagram),
             TikTok Ads, optionally Google Performance Max for retargeting.
           </p>
           <p>
-            <strong>Why third:</strong> Paid traffic only works profitably when
+            <strong>Why third:</strong>{" "}Paid traffic only works profitably when
             you can capture it (email flows from channel 1) and convert it
             (product pages optimized via channel 2). Skip those and your paid
             campaigns are subsidizing customers who would have bought anyway
             or who never come back.
           </p>
           <p>
-            <strong>The 2026 reality of Meta ads:</strong> CPM has roughly
+            <strong>The 2026 reality of Meta ads:</strong>{" "}CPM has roughly
             doubled since 2021 due to iOS attribution loss and increased
             competition. Average ROAS for ecommerce dropped from 4-5x in 2021
             to 2-2.5x in 2026. The brands beating these averages are the ones
@@ -386,7 +386,7 @@ export default async function PillarPage() {
             strong post-click flows (channel 1).
           </p>
           <p>
-            <strong>Budget guidance:</strong> Start with $20-50/day per ad
+            <strong>Budget guidance:</strong>{" "}Start with $20-50/day per ad
             account once you have 3-5 creative variations. Scale by 20% per
             week when ROAS holds above 2.5x. Most founders scale too fast and
             kill profitable campaigns by exhausting the audience too quickly.
@@ -402,11 +402,11 @@ export default async function PillarPage() {
 
           <h2>Channel 4: Organic social (build fourth, runs in parallel)</h2>
           <p>
-            <strong>Tools:</strong> Buffer or Postiz ($15-30/month) for
+            <strong>Tools:</strong>{" "}Buffer or Postiz ($15-30/month) for
             scheduling, native platform analytics for measurement.
           </p>
           <p>
-            <strong>Platforms:</strong> Pick 1-2 based on where your audience
+            <strong>Platforms:</strong>{" "}Pick 1-2 based on where your audience
             actually is. We covered the platform decision framework at{" "}
             <Link href="/blog/which-social-media-platform-for-business">
               which social media platform is best for your business
@@ -416,13 +416,13 @@ export default async function PillarPage() {
             if you sell home/aesthetic goods.
           </p>
           <p>
-            <strong>Content mix:</strong> 4 posts per week per platform is the
+            <strong>Content mix:</strong>{" "}4 posts per week per platform is the
             minimum viable cadence. Below that, the algorithm doesn&apos;t see
             enough signal to give you reach. Above 7-8 per week, marginal
             returns drop sharply for most ecommerce categories.
           </p>
           <p>
-            <strong>Format mix per Shopify:</strong> 40% product showcase
+            <strong>Format mix per Shopify:</strong>{" "}40% product showcase
             (lifestyle photography, customer photos), 30% education (how to
             use the product, behind-the-scenes), 20% community/UGC (customer
             features, reviews), 10% direct promotion (launches, discounts).
@@ -440,11 +440,11 @@ export default async function PillarPage() {
 
           <h2>Channel 5: SMS (build fifth, optional)</h2>
           <p>
-            <strong>Tools:</strong> Klaviyo SMS, Postscript, or Attentive
+            <strong>Tools:</strong>{" "}Klaviyo SMS, Postscript, or Attentive
             ($20-200/month based on volume).
           </p>
           <p>
-            <strong>Why fifth:</strong> SMS is the highest-ROI channel per
+            <strong>Why fifth:</strong>{" "}SMS is the highest-ROI channel per
             send (12-30% click rates vs 3-5% on email) but it&apos;s the most
             permission-sensitive. One bad SMS campaign loses 15% of your list
             in a single send. Build it after you have email flows mature
@@ -452,7 +452,7 @@ export default async function PillarPage() {
             and the segmentation more precise.
           </p>
           <p>
-            <strong>What to send:</strong> Order confirmations, shipping
+            <strong>What to send:</strong>{" "}Order confirmations, shipping
             updates, restock alerts, abandoned cart final push (after email
             sequence), and 1-2 promotional sends per month. Avoid frequent
             broadcasts. SMS works because it feels personal. It stops working
@@ -476,7 +476,7 @@ export default async function PillarPage() {
             platforms don&apos;t.
           </p>
           <p>
-            <strong>Native Klaviyo integration.</strong> Klaviyo built its
+            <strong>Native Klaviyo integration.</strong>{" "}Klaviyo built its
             email platform on Shopify first. The integration is deeper than
             any competing email tool. Customer data, product catalog, order
             history, and behavioral events flow into Klaviyo without manual
@@ -485,27 +485,27 @@ export default async function PillarPage() {
             badly.
           </p>
           <p>
-            <strong>Shop Pay checkout speed.</strong> Shopify&apos;s checkout
+            <strong>Shop Pay checkout speed.</strong>{" "}Shopify&apos;s checkout
             converts 1.7x better than third-party checkouts on average per
             Shopify&apos;s own data. The trick is making sure Shop Pay is
             actually enabled (some themes hide it), which is a 1-minute fix
             for a 1-2% lift in conversion rate.
           </p>
           <p>
-            <strong>Shopify Audiences.</strong> The platform&apos;s aggregated
+            <strong>Shopify Audiences.</strong>{" "}The platform&apos;s aggregated
             buyer behavior data, available to Shopify Plus or via the Audiences
             app for some Shopify Standard accounts. Lifts paid social
             performance 15-30% on average by helping ad platforms find
             higher-intent lookalikes.
           </p>
           <p>
-            <strong>Shop App browsing.</strong> Shopify&apos;s consumer app has
+            <strong>Shop App browsing.</strong>{" "}Shopify&apos;s consumer app has
             10M+ monthly active users browsing products. Setting up your store
             properly in Shop App is free traffic from a captive audience of
             buyers actively shopping. Most stores never configure this.
           </p>
           <p>
-            <strong>App Store ecosystem.</strong> 8,000+ apps. The right 4-6
+            <strong>App Store ecosystem.</strong>{" "}8,000+ apps. The right 4-6
             apps (review platform, upsell tool, shipping insurance, currency
             converter, page builder, search optimizer) lift conversion rate
             and AOV by 20-40% combined. The wrong 12 apps slow your site to

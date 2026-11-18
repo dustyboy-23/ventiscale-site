@@ -88,7 +88,7 @@ export default async function Post() {
             You can hire 3 freelancers on Upwork for less than a DFY service.
             That math works on day 1. By month 3, you&apos;ve spent 12 hours
             a week project-managing them and you&apos;re behind on marketing
-            anyway. <em>You didn&apos;t save money. You traded dollars for hours.</em>
+            anyway.{" "}<em>You didn&apos;t save money. You traded dollars for hours.</em>
           </p>
 
           <div className="blog-tldr">
@@ -164,19 +164,19 @@ export default async function Post() {
             brand:
           </p>
           <p>
-            <strong>Content writer:</strong> $50/hour × 10 hours/month = $500/month
+            <strong>Content writer:</strong>{" "}$50/hour × 10 hours/month = $500/month
           </p>
           <p>
-            <strong>Designer:</strong> $40/hour × 10 hours/month = $400/month
+            <strong>Designer:</strong>{" "}$40/hour × 10 hours/month = $400/month
           </p>
           <p>
-            <strong>Ad manager:</strong> $80/hour × 10 hours/month = $800/month
+            <strong>Ad manager:</strong>{" "}$80/hour × 10 hours/month = $800/month
           </p>
           <p>
-            <strong>Email/Klaviyo specialist:</strong> $60/hour × 5 hours/month = $300/month
+            <strong>Email/Klaviyo specialist:</strong>{" "}$60/hour × 5 hours/month = $300/month
           </p>
           <p>
-            <strong>Total:</strong> $2,000/month for ~35 hours of freelance time
+            <strong>Total:</strong>{" "}$2,000/month for ~35 hours of freelance time
             spread across 4 specialists.
           </p>
           <p>
@@ -206,25 +206,25 @@ export default async function Post() {
             is 6 months), you do it again.
           </p>
           <p>
-            <strong>3. Quality control overhead (2-4 hours/week).</strong> Reviewing
+            <strong>3. Quality control overhead (2-4 hours/week).</strong>{" "}Reviewing
             output for brand consistency, catching voice drift, sending revision
             requests. Each freelancer optimizes for their own scope. Nobody
             optimizes for holistic brand experience.
           </p>
           <p>
-            <strong>4. Tool overlap.</strong> Designer needs Figma, writer needs
+            <strong>4. Tool overlap.</strong>{" "}Designer needs Figma, writer needs
             Grammarly Pro and a research tool, ad manager needs Meta Business
             Suite + a reporting tool, Klaviyo specialist needs Klaviyo access.
             You pay for tools the team uses; some overlap, most don&apos;t.
             Add $200-400/month in tooling overhead.
           </p>
           <p>
-            <strong>5. Brand drift correction.</strong> Six months in, your
+            <strong>5. Brand drift correction.</strong>{" "}Six months in, your
             content sounds like 4 different people because it is. Customers
             notice. You spend hours rewriting drafts back to brand voice.
           </p>
           <p>
-            <em>The freelancer model trades dollars for hours.</em> If your
+            <em>The freelancer model trades dollars for hours.</em>{" "}If your
             time is worth $50+/hour, the all-in cost runs $3,500-5,000/month
             for what a $1,800/month DFY service handles cleanly.
           </p>
@@ -234,23 +234,23 @@ export default async function Post() {
             Specific scoped projects with clear start and end:
           </p>
           <p>
-            <strong>Brand identity refresh.</strong> One-time logo + visual
+            <strong>Brand identity refresh.</strong>{" "}One-time logo + visual
             system + brand guidelines. Defined deliverable, clear sign-off.
           </p>
           <p>
-            <strong>Website redesign.</strong> Project with timeline, milestones,
+            <strong>Website redesign.</strong>{" "}Project with timeline, milestones,
             and a finished output.
           </p>
           <p>
-            <strong>Video campaigns.</strong> Single video or short series with
+            <strong>Video campaigns.</strong>{" "}Single video or short series with
             a brief and final cut.
           </p>
           <p>
-            <strong>Custom illustration.</strong> Specific assets for specific
+            <strong>Custom illustration.</strong>{" "}Specific assets for specific
             uses.
           </p>
           <p>
-            <strong>Specialized contractor work.</strong> When you have an
+            <strong>Specialized contractor work.</strong>{" "}When you have an
             in-house senior marketer running ongoing operations and need to
             fill specific skill gaps (a Klaviyo expert for a complex flow build,
             a TikTok creative director for a launch).
@@ -289,11 +289,11 @@ export default async function Post() {
             For most ecommerce brands $30K-$200K/month, the optimal setup is:
           </p>
           <p>
-            <strong>DFY service for ongoing channels.</strong> Email, content,
+            <strong>DFY service for ongoing channels.</strong>{" "}Email, content,
             organic social, paid creative — running daily.
           </p>
           <p>
-            <strong>Freelancers for scoped projects.</strong> When you need a
+            <strong>Freelancers for scoped projects.</strong>{" "}When you need a
             video campaign, a brand refresh, or a specialized one-off, hire a
             freelancer for that specific scope.
           </p>

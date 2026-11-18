@@ -226,7 +226,7 @@ export default async function Post() {
             matter for DTC brands.
           </p>
           <p>
-            <strong>ChatGPT Shopping</strong> pulls product data from Bing&apos;s index
+            <strong>ChatGPT Shopping</strong>{" "}pulls product data from Bing&apos;s index
             and merchant feeds to display ranked product carousels with prices,
             ratings, and buy links. When a buyer asks &quot;best eco-friendly yoga mat
             under $80,&quot; ChatGPT returns a ranked list with specific products, not
@@ -234,14 +234,14 @@ export default async function Post() {
             signals, not ad bids.
           </p>
           <p>
-            <strong>Perplexity Shopping</strong> surfaces product results inline with
+            <strong>Perplexity Shopping</strong>{" "}surfaces product results inline with
             its answer, pulling from merchant feeds and review aggregators. Users can
             filter by price, compare options, and click through to purchase without
             leaving the conversation. The experience is more like talking to a
             knowledgeable friend who happens to have read every review on the internet.
           </p>
           <p>
-            <strong>Google AI Overviews</strong> now appear at the top of 25% of all
+            <strong>Google AI Overviews</strong>{" "}now appear at the top of 25% of all
             Google searches and frequently include product carousels positioned above
             traditional Shopping ads. Clean structured data can land you here without
             a single dollar in ad spend.
@@ -271,7 +271,7 @@ export default async function Post() {
             trustworthy, and a precise match to what the buyer asked for.
           </p>
           <p>
-            <strong>Schema.org Product markup</strong> is the foundation. If your
+            <strong>Schema.org Product markup</strong>{" "}is the foundation. If your
             Shopify store doesn&apos;t have structured data declaring product name,
             price, availability, and aggregate review rating, AI systems can&apos;t
             parse your catalog cleanly. Most Shopify themes output incomplete schema
@@ -279,7 +279,7 @@ export default async function Post() {
             review aggregates. The result: AI portals skip you.
           </p>
           <p>
-            <strong>Merchant feed completeness</strong> is next. Google Merchant
+            <strong>Merchant feed completeness</strong>{" "}is next. Google Merchant
             Center, Bing Shopping, and Shopify&apos;s AI channel all pull real-time
             pricing and availability from structured feeds. A stale or incomplete feed
             means your products show up with wrong prices or &quot;out of stock&quot;
@@ -288,7 +288,7 @@ export default async function Post() {
             flows there too.
           </p>
           <p>
-            <strong>Natural-language product descriptions</strong> are what separate
+            <strong>Natural-language product descriptions</strong>{" "}are what separate
             you from a competitor with identical pricing. When a buyer asks
             &quot;best magnesium for people who can&apos;t stay asleep,&quot; the AI
             reads your product page. If it says &quot;pure magnesium glycinate, 400mg,
@@ -308,7 +308,7 @@ export default async function Post() {
           </div>
 
           <p>
-            <strong>Review signals</strong> close the loop. ChatGPT and Perplexity
+            <strong>Review signals</strong>{" "}close the loop. ChatGPT and Perplexity
             pull aggregate ratings from Google, Trustpilot, and review aggregators to
             validate their recommendations. Products with fewer than 20 reviews or a
             rating below 4.2 stars rarely appear in AI recommendation lists regardless
@@ -414,7 +414,7 @@ export default async function Post() {
             gaps for most Shopify stores.
           </p>
           <p>
-            <strong>Fix your Schema.org Product markup.</strong> Run your top 20 SKUs
+            <strong>Fix your Schema.org Product markup.</strong>{" "}Run your top 20 SKUs
             through{" "}
             <a
               href="https://search.google.com/test/rich-results"
@@ -428,7 +428,7 @@ export default async function Post() {
             . Without clean schema, AI portals can&apos;t read your catalog.
           </p>
           <p>
-            <strong>Refresh your Google Merchant Center feed.</strong> If you&apos;re
+            <strong>Refresh your Google Merchant Center feed.</strong>{" "}If you&apos;re
             on Shopify, the Google &amp; YouTube channel app handles this. Verify the
             feed is syncing daily, prices match your live storefront, and no products
             are disapproved or flagged for policy issues. The Bing Shopping ecosystem
@@ -436,7 +436,7 @@ export default async function Post() {
             it once and it propagates.
           </p>
           <p>
-            <strong>Rewrite product descriptions for conversational queries.</strong>
+            <strong>Rewrite product descriptions for conversational queries.</strong>{" "}
             Stop writing descriptions optimized for keyword density. Write them to
             answer the questions buyers actually ask. &quot;Who is this for?&quot;
             &quot;What problem does it solve?&quot; &quot;What makes this different from
@@ -445,7 +445,7 @@ export default async function Post() {
             it doesn&apos;t, you don&apos;t.
           </p>
           <p>
-            <strong>Build review velocity on your top SKUs.</strong> If your
+            <strong>Build review velocity on your top SKUs.</strong>{" "}If your
             best-selling products have fewer than 20 reviews, that&apos;s the priority.
             A post-purchase email sequence sent 7 to 10 days after confirmed delivery
             moves this number faster than any other tactic. This
@@ -478,7 +478,7 @@ export default async function Post() {
           <p>
             Most stores have never tested their Schema, and most Merchant Center feeds get set up once and
             forgotten. If you&apos;d rather not do it yourself, my{" "}
-            <Link href="/seo-services-for-small-business">SEO + blog plan</Link> fixes your current pages and sets your site up so AI search can find
+            <Link href="/seo-services-for-small-business">SEO + blog plan</Link>{" "}fixes your current pages and sets your site up so AI search can find
             and quote you.
           </p>
 

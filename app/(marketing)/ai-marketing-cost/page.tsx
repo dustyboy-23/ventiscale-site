@@ -174,8 +174,8 @@ export default async function PillarPage() {
             services pricing it have an interest in keeping you confused.
           </p>
           <p>
-            Vague pricing protects bad services. <em>Specific pricing
-            protects buyers.</em> If a service won&apos;t tell you what
+            Vague pricing protects bad services.{" "}<em>Specific pricing
+            protects buyers.</em>{" "}If a service won&apos;t tell you what
             things cost upfront, you should assume the worst about why.
           </p>
           <p>
@@ -271,24 +271,24 @@ export default async function PillarPage() {
 
           <h2>Tier 1: DIY tool stack ($100-400/month)</h2>
           <p>
-            <strong>What it includes:</strong> An LLM subscription (Claude Max
+            <strong>What it includes:</strong>{" "}An LLM subscription (Claude Max
             $200 or ChatGPT Plus $20), an email platform (Klaviyo $0-30 free
             tier), a social scheduler (Buffer $15-30), AI image tools
             (Midjourney $10-30), optional SEO tools (Surfer $89). The full
             stack costs $135-400/month depending on which tools you pick.
           </p>
           <p>
-            <strong>What you don&apos;t get:</strong> Anyone running it for
+            <strong>What you don&apos;t get:</strong>{" "}Anyone running it for
             you. You operate every tool yourself. You write every prompt.
             You schedule every post. You review every output. Expect 8-15
             hours per week of operating time.
           </p>
           <p>
-            <strong>Best for:</strong> Founders under $30K/month revenue with
+            <strong>Best for:</strong>{" "}Founders under $30K/month revenue with
             time to operate the stack and curiosity to learn the craft.
           </p>
           <p>
-            <strong>Hidden costs:</strong> Time. The tools cost $300/month.
+            <strong>Hidden costs:</strong>{" "}Time. The tools cost $300/month.
             Your time costs more. We covered the full DIY-vs-DFY math at{" "}
             <Link href="/blog/done-for-you-marketing-vs-diy">
               done-for-you marketing vs DIY: which one fits your stage
@@ -298,24 +298,24 @@ export default async function PillarPage() {
 
           <h2>Tier 2: Freelancer hybrid ($700-1,500/month)</h2>
           <p>
-            <strong>What it includes:</strong> The DIY tool stack ($300/month)
+            <strong>What it includes:</strong>{" "}The DIY tool stack ($300/month)
             plus a freelancer or two handling the parts you don&apos;t want
             to do. Common splits: founder runs the tools and strategy, freelancer
             does design and image creation ($200-500/month). Or founder runs
             content, freelancer runs paid ad management ($400-800/month).
           </p>
           <p>
-            <strong>What you don&apos;t get:</strong> A unified strategy
+            <strong>What you don&apos;t get:</strong>{" "}A unified strategy
             across channels. Each freelancer covers their lane. You&apos;re
             still the orchestration layer. Time commitment drops from 10-15
             hours per week to 5-8.
           </p>
           <p>
-            <strong>Best for:</strong> Founders $20K-$50K/month who have
+            <strong>Best for:</strong>{" "}Founders $20K-$50K/month who have
             specific weak spots they want covered without going full DFY.
           </p>
           <p>
-            <strong>Hidden costs:</strong> Coordination overhead. Managing 2
+            <strong>Hidden costs:</strong>{" "}Coordination overhead. Managing 2
             freelancers + a tool stack consumes 3-5 hours per week of project
             management. If you don&apos;t track it, the freelancer hybrid
             ends up costing more total time than the DIY tier.
@@ -323,22 +323,22 @@ export default async function PillarPage() {
 
           <h2>Tier 3: Entry-level DFY ($500-1,000/month)</h2>
           <p>
-            <strong>What it includes:</strong> Single-channel DFY coverage.
+            <strong>What it includes:</strong>{" "}Single-channel DFY coverage.
             Usually social media OR email, not both. 12-20 pieces of content
             per month. Basic monthly reporting. Limited strategy involvement.
           </p>
           <p>
-            <strong>What you don&apos;t get:</strong> Multi-channel coordination.
+            <strong>What you don&apos;t get:</strong>{" "}Multi-channel coordination.
             If you need email AND social AND content, you stack tier 3
             services from different vendors and end up paying $1,500-2,000/month
             for what tier 4 mid-tier would deliver as one bundle.
           </p>
           <p>
-            <strong>Best for:</strong> Solo founders under $20K/month who
+            <strong>Best for:</strong>{" "}Solo founders under $20K/month who
             need help on one specific channel.
           </p>
           <p>
-            <strong>Hidden costs:</strong> Most tier 3 services use templated
+            <strong>Hidden costs:</strong>{" "}Most tier 3 services use templated
             output. If brand voice matters, you&apos;ll spend hours rewriting
             their drafts. The cost savings versus tier 4 disappear once you
             account for revision time.
@@ -346,25 +346,25 @@ export default async function PillarPage() {
 
           <h2>Tier 4: Mid-tier DFY ($1,500-2,500/month)</h2>
           <p>
-            <strong>What it includes:</strong> 3-4 channels including email,
+            <strong>What it includes:</strong>{" "}3-4 channels including email,
             content, and 1-2 social platforms. 30-50 pieces of content per
             month. Behavioral email flows. Weekly reporting. Active strategy
             involvement from a senior strategist or founder. AI trained on
             your specific brand voice.
           </p>
           <p>
-            <strong>What you don&apos;t get:</strong> Paid ad account
+            <strong>What you don&apos;t get:</strong>{" "}Paid ad account
             management or SMS at this tier. Those are tier 5 deliverables.
             You also don&apos;t get unlimited custom strategy meetings.
             Async communication is the norm.
           </p>
           <p>
-            <strong>Best for:</strong> Businesses $30K-$200K/month. This is
+            <strong>Best for:</strong>{" "}Businesses $30K-$200K/month. This is
             the sweet spot where AI-powered DFY genuinely replaces what a
             $4,000-5,000/month agency was doing in 2023.
           </p>
           <p>
-            <strong>What good looks like:</strong> onboarding measured in days, not weeks, a
+            <strong>What good looks like:</strong>{" "}onboarding measured in days, not weeks, a
             dashboard showing the work, direct access to
             whoever runs your account, month-to-month structure, brand-voice
             training that actually produces founder-sounding copy. We
@@ -377,24 +377,24 @@ export default async function PillarPage() {
 
           <h2>Tier 5: Full-service DFY ($2,500-5,000/month)</h2>
           <p>
-            <strong>What it includes:</strong> 5+ channels including email,
+            <strong>What it includes:</strong>{" "}5+ channels including email,
             content, paid social, organic social, and SMS. 50+ pieces of
             content per month. Behavioral flows for every customer journey
             stage. Active ad account management with creative testing. Weekly
             strategy meetings. Monthly deep-dive reports.
           </p>
           <p>
-            <strong>What you don&apos;t get:</strong> Above $5,000/month,
+            <strong>What you don&apos;t get:</strong>{" "}Above $5,000/month,
             you&apos;re paying agency-level pricing. At that point, evaluate
             against actual agencies (some of which now also use AI internally)
             instead of staying in the DFY category.
           </p>
           <p>
-            <strong>Best for:</strong> Businesses $200K-$500K/month or growing
+            <strong>Best for:</strong>{" "}Businesses $200K-$500K/month or growing
             fast and needing more than mid-tier handles.
           </p>
           <p>
-            <strong>The cost rationale:</strong> The increase from tier 4 to
+            <strong>The cost rationale:</strong>{" "}The increase from tier 4 to
             tier 5 isn&apos;t just more content. It&apos;s adding paid account
             management (which requires a senior media buyer) and adding SMS
             infrastructure (which requires permission management and platform
@@ -479,29 +479,29 @@ export default async function PillarPage() {
             Working budgets by monthly revenue:
           </p>
           <p>
-            <strong>$0-10K/month revenue:</strong> $100-300/month AI marketing
+            <strong>$0-10K/month revenue:</strong>{" "}$100-300/month AI marketing
             spend. DIY tools tier. Marketing is 3-10% of revenue here because
             you can&apos;t afford more and you have time to operate the stack.
           </p>
           <p>
-            <strong>$10K-30K/month revenue:</strong> $500-1,500/month spend.
+            <strong>$10K-30K/month revenue:</strong>{" "}$500-1,500/month spend.
             Either DIY + freelancer hybrid OR entry-level DFY. Marketing is
             10-15% of revenue.
           </p>
           <p>
-            <strong>$30K-100K/month revenue:</strong> $1,500-4,000/month spend.
+            <strong>$30K-100K/month revenue:</strong>{" "}$1,500-4,000/month spend.
             Mid-tier DFY plus paid ad budget. Marketing is 12-18% of revenue.
             This is where AI marketing genuinely beats traditional agencies on
             economics.
           </p>
           <p>
-            <strong>$100K-500K/month revenue:</strong> $5,000-15,000/month
+            <strong>$100K-500K/month revenue:</strong>{" "}$5,000-15,000/month
             spend. Full-service DFY plus fractional CMO plus paid ad budget.
             Marketing is 15-20% of revenue. Two-layer setup beats single agency
             here.
           </p>
           <p>
-            <strong>$500K+/month revenue:</strong> $15,000-50,000/month spend.
+            <strong>$500K+/month revenue:</strong>{" "}$15,000-50,000/month spend.
             In-house team plus DFY/agency hybrid. Marketing is 12-20% of
             revenue. At this scale, dedicated personnel start beating tooling.
           </p>

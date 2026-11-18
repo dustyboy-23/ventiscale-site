@@ -257,14 +257,14 @@ export default async function Post() {
             AI-powered agency.
           </p>
           <p>
-            <strong>Content creation.</strong> Not one post a day. Five to ten
+            <strong>Content creation.</strong>{" "}Not one post a day. Five to ten
             pieces of content across multiple platforms. Each one formatted for
             where it&apos;s going. Instagram gets carousels. LinkedIn gets
             thought leadership. Facebook gets engagement posts. All on-brand,
             on-message, on schedule.
           </p>
           <p>
-            <strong>Social media management.</strong> Posting, scheduling,
+            <strong>Social media management.</strong>{" "}Posting, scheduling,
             hashtag research, optimal timing analysis. The kind of work that
             takes a human social media manager 30+ hours a week happens
             automatically. Just like I break down in my guide to{" "}
@@ -274,18 +274,18 @@ export default async function Post() {
             , you&apos;re getting the whole operation handled for you.
           </p>
           <p>
-            <strong>Email marketing.</strong> Welcome sequences, newsletters,
+            <strong>Email marketing.</strong>{" "}Welcome sequences, newsletters,
             promotional campaigns, re-engagement flows. Written, tested, and
             sent without you drafting a single word.
           </p>
           <p>
-            <strong>Analytics and reporting.</strong> Weekly reports showing
+            <strong>Analytics and reporting.</strong>{" "}Weekly reports showing
             what&apos;s working, what&apos;s not, and what&apos;s changing. Real
             numbers. Not vanity metrics. Not &quot;impressions&quot; that mean
             nothing.
           </p>
           <p>
-            <strong>Ad optimization.</strong> If you&apos;re running paid ads,
+            <strong>Ad optimization.</strong>{" "}If you&apos;re running paid ads,
             AI continuously tests creative, adjusts targeting, and shifts budget
             toward what converts. It does this around the clock. Not just when a
             media buyer remembers to check.
@@ -371,24 +371,24 @@ export default async function Post() {
             tell them apart from agencies that actually deliver.
           </p>
           <p>
-            <strong>Real agencies show you systems.</strong> They can explain
+            <strong>Real agencies show you systems.</strong>{" "}They can explain
             their content pipeline, their quality control process, and their
             strategy framework. Fake ones say &quot;we use AI&quot; and leave it
             at that.
           </p>
           <p>
-            <strong>Real agencies give you data.</strong> Weekly reports with
+            <strong>Real agencies give you data.</strong>{" "}Weekly reports with
             actual metrics tied to your business goals. Not screenshots of likes
             and follows. Revenue attribution. Lead tracking. Conversion data.
           </p>
           <p>
-            <strong>Real agencies have a human strategy layer.</strong> Someone
+            <strong>Real agencies have a human strategy layer.</strong>{" "}Someone
             who understands your industry, your competitors, and your customers.
             Someone making decisions about what to create and why. Not just
             letting AI run on autopilot.
           </p>
           <p>
-            <strong>Real agencies scale without cutting corners.</strong> They
+            <strong>Real agencies scale without cutting corners.</strong>{" "}They
             handle 5 platforms because their systems are built for it. Not
             because they&apos;re copying the same post everywhere. If you&apos;re
             weighing this against the broader category, here&apos;s the full
@@ -451,8 +451,8 @@ export default async function Post() {
             wondering what to post.
           </p>
           <p>
-            That&apos;s how I run <Link href="/pricing">Venti Scale</Link>. AI does the heavy lifting and I check
-            the work before it goes out. You can see <Link href="/how-it-works">how it works</Link> and every
+            That&apos;s how I run{" "}<Link href="/pricing">Venti Scale</Link>. AI does the heavy lifting and I check
+            the work before it goes out. You can see{" "}<Link href="/how-it-works">how it works</Link>{" "}and every
             price before you talk to anyone.
           </p>
 

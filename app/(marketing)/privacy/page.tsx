@@ -72,8 +72,8 @@ export default function PrivacyPage() {
         </p>
         <p>You can opt out of any further commercial communications from us at any time:</p>
         <ul>
-          <li>Reply to any of our emails with the word <strong>STOP</strong>, or</li>
-          <li>Email <a href="mailto:hello@ventiscale.com">hello@ventiscale.com</a> and ask to be removed.</li>
+          <li>Reply to any of our emails with the word{" "}<strong>STOP</strong>, or</li>
+          <li>Email{" "}<a href="mailto:hello@ventiscale.com">hello@ventiscale.com</a>{" "}and ask to be removed.</li>
         </ul>
         <p>
           We process opt-out requests within 10 business days. Once you opt out, we will
@@ -118,7 +118,7 @@ export default function PrivacyPage() {
           <li>Request correction of inaccurate data</li>
           <li>
             Request deletion of your data (see{" "}
-            <a href="/data-deletion">/data-deletion</a> for instructions)
+            <a href="/data-deletion">/data-deletion</a>{" "}for instructions)
           </li>
           <li>Opt out of commercial communications (see Section 4)</li>
           <li>

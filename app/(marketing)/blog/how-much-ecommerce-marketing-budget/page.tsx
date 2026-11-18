@@ -270,13 +270,13 @@ export default async function Post() {
           </p>
           <ul>
             <li>
-              <strong>Organic social on one or two platforms.</strong> Free to
+              <strong>Organic social on one or two platforms.</strong>{" "}Free to
               run. Builds brand equity. Pick where your buyer actually spends
               time. Don&apos;t spread across six platforms and do all of them
               badly.
             </li>
             <li>
-              <strong>Email from day one.</strong> A welcome series, abandoned
+              <strong>Email from day one.</strong>{" "}A welcome series, abandoned
               cart sequence, and post-purchase flow can recover 15-20% of
               abandoned revenue automatically with zero ongoing ad spend. This is
               the same compounding logic behind the{" "}
@@ -286,7 +286,7 @@ export default async function Post() {
               .
             </li>
             <li>
-              <strong>SEO and blog content.</strong> Slow return but compounds.
+              <strong>SEO and blog content.</strong>{" "}Slow return but compounds.
               A post published today earns traffic for the next 24 months.
             </li>
           </ul>

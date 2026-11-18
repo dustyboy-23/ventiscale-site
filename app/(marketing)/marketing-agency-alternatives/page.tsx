@@ -178,7 +178,7 @@ export default async function PillarPage() {
             You signed a 12-month retainer at $4,500 a month. They promised
             a senior strategist. You got a 24-year-old account manager
             running templated content. The monthly report has 3 metrics
-            and a screenshot of a Canva graphic. <em>Your gut already knows.</em>
+            and a screenshot of a Canva graphic.{" "}<em>Your gut already knows.</em>
           </p>
           <p>
             You&apos;re not the only one. Agency cost and output quality
@@ -242,7 +242,7 @@ export default async function PillarPage() {
             Three things changed at once:
           </p>
           <p>
-            <strong>1. AI made content production cheap.</strong> A
+            <strong>1. AI made content production cheap.</strong>{" "}A
             $20/month ChatGPT subscription writes more content per
             day than a junior account manager who costs the agency
             $50,000 in salary. The agency&apos;s production line
@@ -250,14 +250,14 @@ export default async function PillarPage() {
             voice are.
           </p>
           <p>
-            <strong>2. Founders got more sophisticated.</strong> The
+            <strong>2. Founders got more sophisticated.</strong>{" "}The
             marketing playbooks that used to live in agency heads are
             now public. Every founder running a Shopify store can read
             the same case studies, listen to the same podcasts, and copy
             the same tactics. The information advantage agencies had is gone.
           </p>
           <p>
-            <strong>3. Retainer culture stopped making sense.</strong> Why
+            <strong>3. Retainer culture stopped making sense.</strong>{" "}Why
             sign a 12-month contract for a service you can replicate
             month-to-month with better tools and a different team
             structure?
@@ -265,7 +265,7 @@ export default async function PillarPage() {
           <p>
             The agency model that worked in 2015 is dying in 2026. The
             question is what to replace it with. We covered the
-            cost math in detail in <Link href="/blog/marketing-agency-vs-in-house">
+            cost math in detail in{" "}<Link href="/blog/marketing-agency-vs-in-house">
             marketing agency vs in-house: the math nobody shows you</Link>,
             but the short version is: most alternatives are now cheaper
             and faster than either path.
@@ -284,11 +284,11 @@ export default async function PillarPage() {
 
           <h2>Alternative 1: Hire an in-house marketing person</h2>
           <p>
-            <strong>Cost:</strong> $95,000 to $160,000 per year fully
+            <strong>Cost:</strong>{" "}$95,000 to $160,000 per year fully
             loaded (salary + benefits + payroll tax + tools + training).
           </p>
           <p>
-            <strong>Best for:</strong> Businesses doing $1M+ per year
+            <strong>Best for:</strong>{" "}Businesses doing $1M+ per year
             in revenue with consistent monthly marketing spend over $10,000.
           </p>
           <p>
@@ -321,12 +321,12 @@ export default async function PillarPage() {
 
           <h2>Alternative 2: Marketplace freelancers (Upwork, Fiverr, Contra)</h2>
           <p>
-            <strong>Cost:</strong> $25-$150 per hour for individual
+            <strong>Cost:</strong>{" "}$25-$150 per hour for individual
             freelancers, typically resulting in $1,500-$4,000/month for
             equivalent agency-level output.
           </p>
           <p>
-            <strong>Best for:</strong> One-off projects (logo, website,
+            <strong>Best for:</strong>{" "}One-off projects (logo, website,
             ad creative) and supplementing existing in-house or agency teams.
           </p>
           <p>
@@ -334,7 +334,7 @@ export default async function PillarPage() {
             a coordination problem. You hire one freelancer for content,
             another for design, another for ads, another for email. Each
             one has their own voice, their own quality bar, their own
-            availability. <em>You become the project manager.</em> That
+            availability.{" "}<em>You become the project manager.</em>{" "}That
             gig consumes 10-15 hours per week if you&apos;re running a
             multi-channel marketing operation.
           </p>
@@ -356,10 +356,10 @@ export default async function PillarPage() {
 
           <h2>Alternative 3: AI tools alone</h2>
           <p>
-            <strong>Cost:</strong> $100 to $400 per month total stack.
+            <strong>Cost:</strong>{" "}$100 to $400 per month total stack.
           </p>
           <p>
-            <strong>Best for:</strong> Founders under $30K/month revenue
+            <strong>Best for:</strong>{" "}Founders under $30K/month revenue
             who have time to operate the tools themselves.
           </p>
           <p>
@@ -392,7 +392,7 @@ export default async function PillarPage() {
             zero output.
           </p>
           <p>
-            <em>The tools work. Founders quit.</em> If you have 8-12 hours
+            <em>The tools work. Founders quit.</em>{" "}If you have 8-12 hours
             a week to dedicate to marketing operations, this is the
             cheapest viable alternative. If you don&apos;t, skip to alt 4.
           </p>
@@ -410,10 +410,10 @@ export default async function PillarPage() {
 
           <h2>Alternative 4: Done-for-you marketing services (the AI-powered tier)</h2>
           <p>
-            <strong>Cost:</strong> $1,000 to $2,500 per month for full-service.
+            <strong>Cost:</strong>{" "}$1,000 to $2,500 per month for full-service.
           </p>
           <p>
-            <strong>Best for:</strong> Founders $30K to $500K monthly revenue
+            <strong>Best for:</strong>{" "}Founders $30K to $500K monthly revenue
             who want hands-off output with founder-level taste.
           </p>
           <p>
@@ -457,11 +457,11 @@ export default async function PillarPage() {
 
           <h2>Alternative 5: Fractional CMO</h2>
           <p>
-            <strong>Cost:</strong> $5,000-$15,000 per month for 8-20 hours
+            <strong>Cost:</strong>{" "}$5,000-$15,000 per month for 8-20 hours
             of senior strategic time.
           </p>
           <p>
-            <strong>Best for:</strong> Businesses doing $500K+ per year
+            <strong>Best for:</strong>{" "}Businesses doing $500K+ per year
             with existing marketing function (in-house or agency) that
             needs senior oversight.
           </p>
@@ -483,7 +483,7 @@ export default async function PillarPage() {
           </p>
           <p>
             <em>Senior strategy at $7,000/month. Execution handled
-            separately. No retainer agency in the middle.</em> That&apos;s
+            separately. No retainer agency in the middle.</em>{" "}That&apos;s
             the modern stack.
           </p>
 
@@ -493,27 +493,27 @@ export default async function PillarPage() {
             quarter. Here&apos;s the framework:
           </p>
           <p>
-            <strong>$0-30K/month revenue:</strong> AI tools solo if you
+            <strong>$0-30K/month revenue:</strong>{" "}AI tools solo if you
             have 8+ hours/week. DFY service if you don&apos;t.
             Skip in-house, freelancer, and fractional CMO entirely. The
             economics don&apos;t work yet.
           </p>
           <p>
-            <strong>$30K-100K/month revenue:</strong> DFY service. This
+            <strong>$30K-100K/month revenue:</strong>{" "}DFY service. This
             is the sweet spot for AI-powered done-for-you because the
             cost ($1,500-2,500/month) is small relative to revenue, and
             the output quality matches what a $4,000/month agency
             delivered in 2023.
           </p>
           <p>
-            <strong>$100K-500K/month revenue:</strong> DFY + fractional
+            <strong>$100K-500K/month revenue:</strong>{" "}DFY + fractional
             CMO. The combination gives you senior strategic oversight
             ($7K) plus execution ($2K) for less than $10K/month total.
             That&apos;s less than the fully-loaded cost of one in-house
             marketer, with twice the seniority and more output.
           </p>
           <p>
-            <strong>$500K+/month revenue:</strong> In-house team plus
+            <strong>$500K+/month revenue:</strong>{" "}In-house team plus
             fractional or full-time CMO. At this size, you have the
             volume to justify dedicated personnel. We covered the
             specific math for the in-house transition at{" "}
@@ -557,8 +557,8 @@ export default async function PillarPage() {
           <p>
             Month-to-month is the only acceptable structure in 2026 for
             marketing services under $10,000/month. Long contracts exist
-            because services are afraid you&apos;ll leave. <em>If
-            they&apos;re afraid you&apos;ll leave, ask why.</em> A
+            because services are afraid you&apos;ll leave.{" "}<em>If
+            they&apos;re afraid you&apos;ll leave, ask why.</em>{" "}A
             confident service trusts the work to retain the client.
           </p>
           <p>

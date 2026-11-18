@@ -56,11 +56,11 @@ export default function SecurityPage() {
         </p>
         <ul>
           <li>
-            <strong>Vercel</strong> hosts the website and application. Vercel
+            <strong>Vercel</strong>{" "}hosts the website and application. Vercel
             is SOC 2 Type II and ISO 27001 certified.
           </li>
           <li>
-            <strong>Supabase</strong> provides our Postgres database,
+            <strong>Supabase</strong>{" "}provides our Postgres database,
             authentication, and file storage. Supabase is SOC 2 Type II and
             HIPAA-ready.
           </li>
@@ -102,7 +102,7 @@ export default function SecurityPage() {
         </ul>
         <p>
           Security researchers are welcome. If you discover a vulnerability,
-          email <a href="mailto:hello@ventiscale.com">hello@ventiscale.com</a>{" "}
+          email{" "}<a href="mailto:hello@ventiscale.com">hello@ventiscale.com</a>{" "}
           with details. We respond within 48 hours and work in good faith with
           reporters who follow responsible disclosure practices.
         </p>

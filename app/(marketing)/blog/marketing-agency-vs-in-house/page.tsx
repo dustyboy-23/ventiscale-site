@@ -388,12 +388,12 @@ export default async function Post() {
           </p>
           <ul>
             <li>
-              <strong>One marketing hire:</strong> 1-2 channels, limited design
+              <strong>One marketing hire:</strong>{" "}1-2 channels, limited design
               skills, no backup when sick or on vacation, single perspective on
               strategy
             </li>
             <li>
-              <strong>Marketing agency:</strong> 4-6 channels, dedicated
+              <strong>Marketing agency:</strong>{" "}4-6 channels, dedicated
               designers, coverage 365 days a year, multiple strategists who&apos;ve
               seen what works across dozens of businesses
             </li>
@@ -419,11 +419,11 @@ export default async function Post() {
           </p>
           <ul>
             <li>
-              <strong>You&apos;re above $2M in annual revenue</strong> and
+              <strong>You&apos;re above $2M in annual revenue</strong>{" "}and
               marketing is a core function, not a side project
             </li>
             <li>
-              <strong>You&apos;re spending $10,000+/month</strong> on agency
+              <strong>You&apos;re spending $10,000+/month</strong>{" "}on agency
               fees and need tighter integration with your team
             </li>
             <li>
@@ -431,7 +431,7 @@ export default async function Post() {
               that takes months to learn and changes constantly
             </li>
             <li>
-              <strong>You need someone on-site</strong> for events, photo
+              <strong>You need someone on-site</strong>{" "}for events, photo
               shoots, or real-time content
             </li>
           </ul>
@@ -489,27 +489,27 @@ export default async function Post() {
           </p>
           <ul>
             <li>
-              <strong>Revenue under $500K?</strong> Agency or{" "}
+              <strong>Revenue under $500K?</strong>{" "}Agency or{" "}
               <Link href="/blog/done-for-you-social-media-management">
                 done-for-you social media
               </Link>
               . No question.
             </li>
             <li>
-              <strong>Revenue $500K to $2M?</strong> Agency for everything.
+              <strong>Revenue $500K to $2M?</strong>{" "}Agency for everything.
               Reinvest the savings into growth.
             </li>
             <li>
-              <strong>Revenue $2M to $5M?</strong> Hybrid. One in-house
+              <strong>Revenue $2M to $5M?</strong>{" "}Hybrid. One in-house
               strategist plus an agency for execution.
             </li>
             <li>
-              <strong>Revenue above $5M?</strong> Build a small in-house team
+              <strong>Revenue above $5M?</strong>{" "}Build a small in-house team
               with agency support for specialized work.
             </li>
           </ul>
           <p>
-            <Link href="/pricing">Venti Scale</Link> is built for that first group: businesses that need
+            <Link href="/pricing">Venti Scale</Link>{" "}is built for that first group: businesses that need
             marketing done properly without the cost of a full-time hire. You pick the services, each one has a
             flat monthly price, and there&apos;s no contract.
           </p>

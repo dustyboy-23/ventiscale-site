@@ -229,20 +229,20 @@ export default async function Post() {
             Three things to find before you touch anything else.
           </p>
           <p>
-            <strong>Notice period.</strong> Most marketing agency contracts
+            <strong>Notice period.</strong>{" "}Most marketing agency contracts
             require 30-90 days written notice to terminate. The average is 60
             days. If yours requires 90 and you give 30, you may owe additional
             fees.
           </p>
           <p>
-            <strong>Auto-renewal clause.</strong> This is the one that catches
+            <strong>Auto-renewal clause.</strong>{" "}This is the one that catches
             most founders. Many agency contracts auto-renew annually and require
             written notice 30-60 days before the renewal date — not after. Miss
             that window and you&apos;re locked in for another 12 months at full
             rate. Check your renewal date today.
           </p>
           <p>
-            <strong>Asset ownership language.</strong> Look for who owns the ad
+            <strong>Asset ownership language.</strong>{" "}Look for who owns the ad
             accounts, email list, creative assets, and landing pages. A fair
             contract says your assets are yours. A bad one says the agency
             retains work product until final payment, or that campaigns built in
@@ -274,7 +274,7 @@ export default async function Post() {
             Here&apos;s every asset you need to verify and secure.
           </p>
           <p>
-            <strong>Ad accounts.</strong> You should be an admin on your own
+            <strong>Ad accounts.</strong>{" "}You should be an admin on your own
             Google Ads and Meta Business Manager accounts. If you&apos;re not —
             if the agency runs your ads through their own manager and you only
             have view access — request ownership transfer before giving notice.
@@ -282,7 +282,7 @@ export default async function Post() {
             telling you something about how the rest of this process will go.
           </p>
           <p>
-            <strong>Email platform.</strong> Confirm the Klaviyo or Mailchimp
+            <strong>Email platform.</strong>{" "}Confirm the Klaviyo or Mailchimp
             account is registered to your business email, not the
             agency&apos;s. Your email list is your most valuable owned marketing
             asset. Ecommerce lists commonly generate somewhere in the range of
@@ -292,25 +292,25 @@ export default async function Post() {
             conversation.
           </p>
           <p>
-            <strong>Analytics and tracking.</strong> Confirm you have GA4 admin
+            <strong>Analytics and tracking.</strong>{" "}Confirm you have GA4 admin
             access. Same for your Meta Pixel, any conversion event tracking, and
             Google Tag Manager. Without these, the new agency starts completely
             blind and your historical benchmark data is gone.
           </p>
           <p>
-            <strong>Social media accounts.</strong> Confirm your team has
+            <strong>Social media accounts.</strong>{" "}Confirm your team has
             owner-level access on every platform. Not contributor, not editor.
             Owner. Remove the agency&apos;s access after transition is complete,
             not before.
           </p>
           <p>
-            <strong>Website and domain.</strong> If the agency built your site,
+            <strong>Website and domain.</strong>{" "}If the agency built your site,
             confirm you own the domain registrar account and have hosting
             credentials. Some agencies host client sites on their own servers.
             You&apos;ll need to migrate before the relationship ends.
           </p>
           <p>
-            <strong>Creative assets.</strong> Request source files for every
+            <strong>Creative assets.</strong>{" "}Request source files for every
             logo variation, photo edit, ad creative, and branded template
             produced during the engagement. These are yours — you paid for them.
             Get the working files, not just the exports.
@@ -491,7 +491,7 @@ export default async function Post() {
             before you sign anything.
           </p>
           <p>
-            <strong>Month-to-month terms.</strong> A 30-day notice period means
+            <strong>Month-to-month terms.</strong>{" "}A 30-day notice period means
             the agency earns your business every month. A 12-month lock-in means
             they don&apos;t have to. The difference in service quality between
             these two structures is consistent and real. Read the full breakdown
@@ -502,20 +502,20 @@ export default async function Post() {
             if you want the full picture before your next conversation.
           </p>
           <p>
-            <strong>Asset ownership in writing.</strong> Your ad accounts, email
+            <strong>Asset ownership in writing.</strong>{" "}Your ad accounts, email
             list, creative files, and website belong to your business. Clause
             one of your contract should say so explicitly. Not buried in the
             fine print. Not subject to outstanding payment terms.
           </p>
           <p>
-            <strong>Founder-direct reporting.</strong> Not a dashboard you have
+            <strong>Founder-direct reporting.</strong>{" "}Not a dashboard you have
             to log into every week to get answers. A plain-English report that
             tells you what happened, what it cost, and what&apos;s next. If
             you&apos;re always waiting on an account manager to pull numbers for
             you, that&apos;s a structural problem.
           </p>
           <p>
-            <strong>Real-time account access.</strong> You should be able to see
+            <strong>Real-time account access.</strong>{" "}You should be able to see
             your ad account, email platform, and analytics in real time. If the
             agency ever restricts your access to your own accounts, end the
             conversation.
@@ -531,7 +531,7 @@ export default async function Post() {
             makes sense.
           </p>
           <p>
-            That&apos;s how I run <Link href="/pricing">Venti Scale</Link>. Your accounts stay yours, there&apos;s
+            That&apos;s how I run{" "}<Link href="/pricing">Venti Scale</Link>. Your accounts stay yours, there&apos;s
             no contract, and you get one plain monthly report.
           </p>
 

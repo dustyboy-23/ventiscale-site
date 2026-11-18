@@ -266,21 +266,21 @@ export default async function Post() {
           </p>
 
           <p>
-            <strong>1. Content and SEO (25-30%).</strong> Blog posts, landing
+            <strong>1. Content and SEO (25-30%).</strong>{" "}Blog posts, landing
             page copy, on-page SEO, technical SEO. Content costs 62% less than
             outbound marketing and produces 3x more leads. It&apos;s the
             highest-ROI thing you can do if you&apos;re playing a long game.
             Underfund this and you&apos;re renting all your traffic.
           </p>
           <p>
-            <strong>2. Email marketing (15-20%).</strong> List building, welcome
+            <strong>2. Email marketing (15-20%).</strong>{" "}List building, welcome
             sequences, newsletters, automated flows. Email returns $36 for every
             $1 spent. That&apos;s not a typo. If your email is &quot;we send a
             newsletter when we remember,&quot; you&apos;re leaving the
             highest-ROI channel on the table.
           </p>
           <p>
-            <strong>3. Paid ads (30-40%).</strong> Google, Meta, LinkedIn,
+            <strong>3. Paid ads (30-40%).</strong>{" "}Google, Meta, LinkedIn,
             YouTube. Paid is the faucet you turn on when you need customers this
             month. It&apos;s also the first thing people overspend on. Paid
             without a solid organic foundation is a treadmill.
@@ -349,20 +349,20 @@ export default async function Post() {
           </p>
 
           <p>
-            <strong>Early-stage (pre-revenue or under $100K):</strong> Spend
+            <strong>Early-stage (pre-revenue or under $100K):</strong>{" "}Spend
             10-20% of projected revenue. You&apos;re buying learning, not
             customers. You don&apos;t know which channels work yet, so the goal
             is to test enough to find out. Heavier on paid ads (faster data) and
             light on tools.
           </p>
           <p>
-            <strong>Growth stage ($100K-$1M):</strong> Spend 7-12% of revenue.
+            <strong>Growth stage ($100K-$1M):</strong>{" "}Spend 7-12% of revenue.
             You know what works. Now you&apos;re optimizing and scaling. Heavier
             weight on organic (SEO, email, content) because you&apos;re playing
             the long game.
           </p>
           <p>
-            <strong>Mature ($1M+):</strong> Spend 4-7% of revenue. Brand is
+            <strong>Mature ($1M+):</strong>{" "}Spend 4-7% of revenue. Brand is
             established, existing customers drive a lot of growth. Budget shifts
             toward retention, referral programs, and premium content that
             reinforces position.
@@ -377,7 +377,7 @@ export default async function Post() {
           </p>
           <p>
             <strong>1. You can&apos;t say what any line item returned last
-            quarter.</strong> If nobody knows what the $400/month tool actually
+            quarter.</strong>{" "}If nobody knows what the $400/month tool actually
             did for the business, cut it. The data should exist. If it
             doesn&apos;t, you don&apos;t have a marketing budget, you have a
             marketing habit.
@@ -388,14 +388,14 @@ export default async function Post() {
             acquisition. The day you pause ads, you have no pipeline.
           </p>
           <p>
-            <strong>3. You&apos;re paying for 6+ tools.</strong> Most small
+            <strong>3. You&apos;re paying for 6+ tools.</strong>{" "}Most small
             businesses can run on 3-4 tools max. An email platform, a social
             scheduler, an analytics tool, maybe a CRM. If you have 8 SaaS
             subscriptions and one of them has a 500-lead list sitting idle,
             you&apos;re leaking money.
           </p>
           <p>
-            <strong>4. Zero line item for content.</strong> No blog, no SEO, no
+            <strong>4. Zero line item for content.</strong>{" "}No blog, no SEO, no
             long-form content. You&apos;re fully dependent on paid traffic and
             whatever social algorithm is feeling generous this week.
           </p>
@@ -431,18 +431,18 @@ export default async function Post() {
             Cut in this order.
           </p>
           <p>
-            <strong>Cut first:</strong> paid ads. They stop producing the
+            <strong>Cut first:</strong>{" "}paid ads. They stop producing the
             second you stop paying. Pausing ads is reversible. You can turn them
             back on next month.
           </p>
           <p>
-            <strong>Cut second:</strong> tool bloat. Audit every SaaS
+            <strong>Cut second:</strong>{" "}tool bloat. Audit every SaaS
             subscription. Keep what you actually use, cancel the rest. Most
             small businesses can save $200-500/month doing this in one
             afternoon.
           </p>
           <p>
-            <strong>Cut last:</strong> content, SEO, and email. These are your
+            <strong>Cut last:</strong>{" "}content, SEO, and email. These are your
             compounding assets. A blog post you wrote in January keeps driving
             leads in November. Kill them and you kill the engine that keeps
             working when everything else is off. This is why I told people in{" "}
@@ -465,14 +465,14 @@ export default async function Post() {
             That&apos;s fine. You have two honest options.
           </p>
           <p>
-            <strong>Option one:</strong> spend 10% of revenue on a single
+            <strong>Option one:</strong>{" "}spend 10% of revenue on a single
             channel you can actually run. Pick email if you already have a list,
             paid ads if you have a good offer, or SEO if you&apos;re patient.
             Doing one thing well beats doing five things badly.
           </p>
           <p>
-            <strong>Option two:</strong> hand the work to someone who does this for a living.{" "}
-            <Link href="/pricing">Venti Scale</Link> has a flat monthly price for each service, so the number
+            <strong>Option two:</strong>{" "}hand the work to someone who does this for a living.{" "}
+            <Link href="/pricing">Venti Scale</Link>{" "}has a flat monthly price for each service, so the number
             you budget is the number you pay. Ad spend is separate and goes straight to Meta or Google.
           </p>
           <p>

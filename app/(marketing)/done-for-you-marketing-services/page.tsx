@@ -196,7 +196,7 @@ export default async function PillarPage() {
           <p>
             That ambiguity is on purpose. Vague service definitions let bad
             services hide. Founders sign up expecting end-to-end execution
-            and get a Trello board with content calendars. <em>The deliverables
+            and get a Trello board with content calendars.{" "}<em>The deliverables
             were always vapor.</em>
           </p>
           <p>
@@ -259,20 +259,20 @@ export default async function PillarPage() {
             structural, not output. Both ship work. The differences are:
           </p>
           <p>
-            <strong>Contract length.</strong> DFY is month-to-month. Agencies
+            <strong>Contract length.</strong>{" "}DFY is month-to-month. Agencies
             typically lock in for 6-12 months.
           </p>
           <p>
-            <strong>Communication.</strong> DFY puts the founder or senior
+            <strong>Communication.</strong>{" "}DFY puts the founder or senior
             strategist in direct contact with the client. Agencies route through
             an account manager.
           </p>
           <p>
-            <strong>Transparency.</strong> DFY usually has a real-time portal
+            <strong>Transparency.</strong>{" "}DFY usually has a real-time portal
             showing every output. Agencies usually send monthly PDF reports.
           </p>
           <p>
-            <strong>Cost structure.</strong> DFY services use AI for production, which usually makes them
+            <strong>Cost structure.</strong>{" "}DFY services use AI for production, which usually makes them
             cheaper. Agencies still bill hours through a junior team.
           </p>
           <p>
@@ -298,18 +298,18 @@ export default async function PillarPage() {
 
           <h2>Tier 1: Entry-level DFY ($500-1,000/month)</h2>
           <p>
-            <strong>What you get:</strong> Single-channel coverage. Usually
+            <strong>What you get:</strong>{" "}Single-channel coverage. Usually
             social media posting only OR email campaigns only. 12-20 pieces of
             content per month. Basic monthly reporting. Limited strategy
             involvement (mostly templated).
           </p>
           <p>
-            <strong>Best for:</strong> Solo founders under $10K/month revenue
+            <strong>Best for:</strong>{" "}Solo founders under $10K/month revenue
             who need help on one specific channel and have time to handle the
             others themselves.
           </p>
           <p>
-            <strong>Watch out for:</strong> Tier 1 is where most &quot;DFY social
+            <strong>Watch out for:</strong>{" "}Tier 1 is where most &quot;DFY social
             media&quot; services live, and most of them ship templated content
             that looks identical to what every other client of theirs gets. The
             ones worth using have real brand-voice training (1-2 hour intake,
@@ -327,18 +327,18 @@ export default async function PillarPage() {
 
           <h2>Tier 2: Mid-tier DFY ($1,500-2,500/month)</h2>
           <p>
-            <strong>What you get:</strong> 3-4 channels typically including
+            <strong>What you get:</strong>{" "}3-4 channels typically including
             email, content/blog, and 1-2 social platforms. 30-50 pieces of
             content per month. Behavioral email flow setup. Weekly reporting.
             Active strategy involvement from the senior strategist or founder.
           </p>
           <p>
-            <strong>Best for:</strong> Businesses doing $30K-$200K/month in
+            <strong>Best for:</strong>{" "}Businesses doing $30K-$200K/month in
             revenue. This is the sweet spot where AI-powered DFY genuinely
             replaces what a $4,000-5,000/month agency was doing in 2023.
           </p>
           <p>
-            <strong>What to expect:</strong> About a week of onboarding where
+            <strong>What to expect:</strong>{" "}About a week of onboarding where
             the service learns your brand voice, products, customers
             and visuals. Then weekly content shipping with founder or senior
             strategist review before publish. A dashboard showing the work.
@@ -347,20 +347,20 @@ export default async function PillarPage() {
 
           <h2>Tier 3: Full-service DFY ($2,500-5,000/month)</h2>
           <p>
-            <strong>What you get:</strong> 5+ channels. Email, content, paid
+            <strong>What you get:</strong>{" "}5+ channels. Email, content, paid
             social, organic social, SMS. 50+ pieces of content per month.
             Behavioral flows for every customer journey stage. Ad account
             management with creative testing. Weekly strategy meetings or
             async updates. Monthly deep-dive reports.
           </p>
           <p>
-            <strong>Best for:</strong> Businesses doing $200K-$500K/month or
+            <strong>Best for:</strong>{" "}Businesses doing $200K-$500K/month or
             growing fast and needing more than mid-tier handles. Above $500K/month,
             most businesses move to a fractional CMO + DFY hybrid setup or build
             in-house.
           </p>
           <p>
-            <strong>The pricing rationale:</strong> The cost increase from tier
+            <strong>The pricing rationale:</strong>{" "}The cost increase from tier
             2 to tier 3 isn&apos;t just more content. It&apos;s adding paid
             account management (which requires a senior media buyer who costs
             real money) and adding SMS (which requires careful permission
@@ -389,11 +389,11 @@ export default async function PillarPage() {
             before they&apos;ll tell you anything.
           </p>
           <p>
-            <strong>Red flag answer:</strong> &quot;Let&apos;s schedule a call
+            <strong>Red flag answer:</strong>{" "}&quot;Let&apos;s schedule a call
             and I&apos;ll walk you through it.&quot;
           </p>
           <p>
-            <strong>Green flag answer:</strong> &quot;Here&apos;s the dashboard
+            <strong>Green flag answer:</strong>{" "}&quot;Here&apos;s the dashboard
             you&apos;ll get. Here&apos;s exactly what
             ships each month, counted.&quot;
           </p>
@@ -402,16 +402,16 @@ export default async function PillarPage() {
           <p>
             Month-to-month is the standard for DFY services under $10K/month
             in 2026. Long contracts exist because the service is afraid you&apos;ll
-            leave. <em>If they&apos;re afraid you&apos;ll leave, ask why.</em>{" "}
+            leave.{" "}<em>If they&apos;re afraid you&apos;ll leave, ask why.</em>{" "}
             A confident service trusts the work to retain the client.
           </p>
           <p>
-            <strong>Red flag answer:</strong> &quot;We require a 6-month minimum
+            <strong>Red flag answer:</strong>{" "}&quot;We require a 6-month minimum
             for proper onboarding.&quot; (Translation: we lose money if you
             cancel before then because we under-priced the onboarding.)
           </p>
           <p>
-            <strong>Green flag answer:</strong> &quot;Cancel any month. We
+            <strong>Green flag answer:</strong>{" "}&quot;Cancel any month. We
             hand back your data, your accounts and everything we made.&quot;
           </p>
 
@@ -422,11 +422,11 @@ export default async function PillarPage() {
             production line.
           </p>
           <p>
-            <strong>Red flag answer:</strong> &quot;Our quality team handles
+            <strong>Red flag answer:</strong>{" "}&quot;Our quality team handles
             review.&quot; (Translation: more junior staff.)
           </p>
           <p>
-            <strong>Green flag answer:</strong> &quot;The founder personally
+            <strong>Green flag answer:</strong>{" "}&quot;The founder personally
             reviews every output before it ships. You&apos;ll talk to
             the founder directly.&quot;
           </p>
@@ -446,12 +446,12 @@ export default async function PillarPage() {
             customer data, and integration configurations are your IP.
           </p>
           <p>
-            <strong>Red flag answer:</strong> &quot;The proprietary AI stays
+            <strong>Red flag answer:</strong>{" "}&quot;The proprietary AI stays
             with us.&quot; (Translation: they&apos;re renting your own brand
             back to you.)
           </p>
           <p>
-            <strong>Green flag answer:</strong> &quot;We hand over the prompt
+            <strong>Green flag answer:</strong>{" "}&quot;We hand over the prompt
             library, training data, integration access, and a 30-day
             transition support window.&quot;
           </p>
@@ -462,11 +462,11 @@ export default async function PillarPage() {
             or 3. A real service tells you the number before you pay, so you can hold them to it.
           </p>
           <p>
-            <strong>Red flag answer:</strong> &quot;We&apos;ll take care of everything and adjust as we
+            <strong>Red flag answer:</strong>{" "}&quot;We&apos;ll take care of everything and adjust as we
             go.&quot; (Translation: you won&apos;t know what you paid for.)
           </p>
           <p>
-            <strong>Green flag answer:</strong> &quot;12 posts and 4 articles a month. Here&apos;s the list, and
+            <strong>Green flag answer:</strong>{" "}&quot;12 posts and 4 articles a month. Here&apos;s the list, and
             here&apos;s what isn&apos;t included.&quot;
           </p>
 
@@ -476,20 +476,20 @@ export default async function PillarPage() {
             distinction:
           </p>
           <p>
-            <strong>Virtual assistant (VA):</strong> Executes tasks you specify.
+            <strong>Virtual assistant (VA):</strong>{" "}Executes tasks you specify.
             You direct, they do. Cost: $500-2,000/month for 10-40 hours of
             generalist work. Best for repetitive tasks (data entry, scheduling,
             invoicing) where the strategy is yours.
           </p>
           <p>
-            <strong>Marketing agency:</strong> Hybrid of strategy and execution
+            <strong>Marketing agency:</strong>{" "}Hybrid of strategy and execution
             with a hierarchy (account manager + production team + occasional
             senior strategist). Cost: $3,000-15,000/month with 6-12 month
             contracts. Best for businesses needing complex multi-team campaigns
             or large ad budgets.
           </p>
           <p>
-            <strong>Done-for-you (DFY) marketing service:</strong> Combines
+            <strong>Done-for-you (DFY) marketing service:</strong>{" "}Combines
             strategy and execution under one service, usually with senior-only
             staff and AI-powered production. Cost: $500-5,000/month month-to-month.
             Best for businesses $5K-$500K/month who want hands-off execution

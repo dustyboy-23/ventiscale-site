@@ -446,7 +446,7 @@ export default async function Post() {
           <p>
             When you hit that point, you can hand it off one piece at a time.{" "}
             <Link href="/pricing">Every service and price is on one page</Link>, with no contract. If you&apos;re
-            weighing this against other options, here&apos;s the full picture on <Link href="/marketing-agency-alternatives">marketing agency alternatives</Link>.
+            weighing this against other options, here&apos;s the full picture on{" "}<Link href="/marketing-agency-alternatives">marketing agency alternatives</Link>.
           </p>
           <p>
             You can keep grinding through the Sunday night content planning

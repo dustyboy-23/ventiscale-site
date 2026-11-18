@@ -228,7 +228,7 @@ export default async function Post() {
           </p>
 
           <p>
-            <strong>Shopify Magic</strong> is free on every Shopify plan. It
+            <strong>Shopify Magic</strong>{" "}is free on every Shopify plan. It
             generates product descriptions, email subject lines, blog drafts,
             and ad copy directly inside your Shopify admin. Merchants using it
             consistently report saving 15-20 hours per week on content creation.
@@ -237,7 +237,7 @@ export default async function Post() {
           </p>
 
           <p>
-            <strong>Klaviyo email</strong> starts at $20/month for up to 500
+            <strong>Klaviyo email</strong>{" "}starts at $20/month for up to 500
             contacts. The AI features included in that base plan are send-time
             optimization (5-10% open rate lift over manual scheduling),
             predictive segments that identify customers likely to buy again, and
@@ -305,7 +305,7 @@ export default async function Post() {
           </p>
 
           <p>
-            <strong>Klaviyo email plus SMS</strong> combined starts at $35/month.
+            <strong>Klaviyo email plus SMS</strong>{" "}combined starts at $35/month.
             For a 50,000-contact list you&apos;re looking at $720-825+/month.
             The jump in cost is real, but so is what you get. Klaviyo&apos;s
             predictive segments identify which customers are likely to buy again.
@@ -315,7 +315,7 @@ export default async function Post() {
           </p>
 
           <p>
-            <strong>Postscript</strong> is the SMS tool built specifically for
+            <strong>Postscript</strong>{" "}is the SMS tool built specifically for
             Shopify. Their Growth plan runs $25/month. The feature worth paying
             for is Infinity Testing: AI automatically tests message variants and
             shifts send volume toward winners. Average lift is 38% more earnings
@@ -330,7 +330,7 @@ export default async function Post() {
           </p>
 
           <p>
-            <strong>Triple Whale</strong> is where most mid-market brands
+            <strong>Triple Whale</strong>{" "}is where most mid-market brands
             upgrade their attribution. Starter plan is $179/month. It
             consolidates Shopify, Meta, Google, and email into one dashboard
             showing real contribution margin instead of last-click ROAS. The
@@ -378,7 +378,7 @@ export default async function Post() {
           </p>
 
           <p>
-            <strong>Northbeam</strong> is the enterprise attribution platform.
+            <strong>Northbeam</strong>{" "}is the enterprise attribution platform.
             It starts at $1,000/month and is designed for brands doing $40M+
             GMV annually. The main advantage over Triple Whale at this tier is
             multi-touch attribution that handles TV, podcast, and influencer
@@ -387,7 +387,7 @@ export default async function Post() {
           </p>
 
           <p>
-            <strong>Klaviyo Customer Agent</strong> launched Spring 2026. It
+            <strong>Klaviyo Customer Agent</strong>{" "}launched Spring 2026. It
             handles email and WhatsApp customer support conversations with AI
             trained on your product catalog and brand voice. Pricing starts at
             $140/month (intro rate, regular $200/month) plus $0.70 per

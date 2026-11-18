@@ -321,21 +321,21 @@ export default async function Post() {
             Three email sequences every ecommerce brand needs:
           </p>
           <p>
-            <strong>Welcome sequence.</strong> Someone signs up for your list.
+            <strong>Welcome sequence.</strong>{" "}Someone signs up for your list.
             They get 3-4 emails over the next week introducing your brand, your
             story, and your best products. Automated welcome emails see a
             37.49% open rate and 2.91% conversion rate. That&apos;s customers
             on autopilot.
           </p>
           <p>
-            <strong>Cart abandonment.</strong> Someone adds a product to their
+            <strong>Cart abandonment.</strong>{" "}Someone adds a product to their
             cart and leaves. They get a reminder 1 hour later, then 24 hours,
             then 48 hours. This recovers 5-15% of abandoned carts. For most
             brands, that&apos;s thousands of dollars in revenue that would have
             walked out the door.
           </p>
           <p>
-            <strong>Post-purchase.</strong> Someone buys. They get a thank you,
+            <strong>Post-purchase.</strong>{" "}Someone buys. They get a thank you,
             a shipping update, a review request, and a related product
             suggestion. This is how you turn a one-time buyer into a repeat
             customer without lifting a finger.
@@ -459,9 +459,9 @@ export default async function Post() {
             always falls off.
           </p>
           <p>
-            If you&apos;d rather hand this off, I run all three: <Link href="/social-media-management">social media</Link>,{" "}
-            <Link href="/email-marketing-services">email</Link> and <Link href="/seo-services-for-small-business">SEO + blog</Link>, each at a flat monthly price. For the broader picture
-            on <Link href="/ai-marketing-for-ecommerce">AI marketing for ecommerce</Link>, here&apos;s the full
+            If you&apos;d rather hand this off, I run all three:{" "}<Link href="/social-media-management">social media</Link>,{" "}
+            <Link href="/email-marketing-services">email</Link>{" "}and{" "}<Link href="/seo-services-for-small-business">SEO + blog</Link>, each at a flat monthly price. For the broader picture
+            on{" "}<Link href="/ai-marketing-for-ecommerce">AI marketing for ecommerce</Link>, here&apos;s the full
             breakdown.
           </p>
 

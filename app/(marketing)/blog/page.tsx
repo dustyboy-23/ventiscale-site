@@ -27,7 +27,7 @@ export default function BlogIndex() {
         <div className="max-w-[44em]">
           <h1 className="vs-h1">Marketing that works, written down.</h1>
           <p className="vs-lede mt-6">
-            Practical advice for growing a business online. {posts.length} articles, newest first.
+            Practical advice for growing a business online. {posts.length}{" "}articles, newest first.
           </p>
         </div>
 

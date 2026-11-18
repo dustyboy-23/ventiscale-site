@@ -265,18 +265,18 @@ export default async function Post() {
             Here&apos;s how the math breaks down at each stage:
           </p>
           <p>
-            <strong>Below $10K/month:</strong> Learn the fundamentals. Post
+            <strong>Below $10K/month:</strong>{" "}Learn the fundamentals. Post
             consistently on one platform. Use free scheduling tools. Your marketing
             budget should be your time and $0 in agency fees.
           </p>
           <p>
-            <strong>$10K to $20K/month:</strong> The gray zone. If marketing is
+            <strong>$10K to $20K/month:</strong>{" "}The gray zone. If marketing is
             eating your evenings and weekends, it&apos;s probably time. If you can
             batch content in 5 hours a week and still grow, keep going. But be
             honest about whether it&apos;s actually working.
           </p>
           <p>
-            <strong>$20K+ per month:</strong> The math overwhelmingly says hire
+            <strong>$20K+ per month:</strong>{" "}The math overwhelmingly says hire
             help. Your time is too valuable to spend on content creation. Every hour
             on marketing is an hour not spent on sales, operations, or the work
             your clients are paying for.
@@ -354,32 +354,32 @@ export default async function Post() {
             apply, you&apos;re past the threshold:
           </p>
           <p>
-            <strong>1. Your last post was more than two weeks ago.</strong> The
+            <strong>1. Your last post was more than two weeks ago.</strong>{" "}The
             algorithm penalizes inconsistency. A dormant page looks worse than no
             page at all. Potential customers check your social before they call you.
             If it&apos;s dead, they call someone else.
           </p>
           <p>
-            <strong>2. You keep saying &quot;next week.&quot;</strong> Marketing
+            <strong>2. You keep saying &quot;next week.&quot;</strong>{" "}Marketing
             that keeps getting pushed to next week never happens. If it were going
             to happen, it would have happened already.
           </p>
           <p>
-            <strong>3. Your competitor looks way better online.</strong> You know
+            <strong>3. Your competitor looks way better online.</strong>{" "}You know
             the one. Their posts look professional. Their engagement is real. Their
             reviews are flowing in. They didn&apos;t suddenly get better at
             marketing. They hired someone.
           </p>
           <p>
             <strong>4. You&apos;ve tried tools and templates and still can&apos;t
-            stay consistent.</strong> Scheduling tools solve posting, not content
+            stay consistent.</strong>{" "}Scheduling tools solve posting, not content
             creation. If you can&apos;t create the content in the first place,
             automating the publishing doesn&apos;t help. That&apos;s like buying a
             treadmill and expecting it to run for you.
           </p>
           <p>
             <strong>5. You&apos;re spending money on ads with no content strategy
-            behind them.</strong> Paid ads without organic content is like paying
+            behind them.</strong>{" "}Paid ads without organic content is like paying
             for traffic to an empty store. People click, look around, see nothing
             interesting, and leave. You need content that converts, not just
             eyeballs.
@@ -402,13 +402,13 @@ export default async function Post() {
             what separates the good ones:
           </p>
           <p>
-            <strong>Transparent pricing.</strong> If you can&apos;t find pricing on
+            <strong>Transparent pricing.</strong>{" "}If you can&apos;t find pricing on
             their website, it&apos;s because it&apos;s high enough that they need
             to &quot;get you on a call&quot; first. Good agencies tell you what it
             costs up front.
           </p>
           <p>
-            <strong>Real deliverables.</strong> &quot;We&apos;ll manage your social
+            <strong>Real deliverables.</strong>{" "}&quot;We&apos;ll manage your social
             media&quot; means nothing. How many posts per week? On which platforms?
             What does reporting look like? Get specifics. I wrote a full breakdown
             of{" "}
@@ -418,11 +418,11 @@ export default async function Post() {
             if you want the checklist.
           </p>
           <p>
-            <strong>Deliverables they&apos;ll put a number on.</strong> What ships every month, counted and in
+            <strong>Deliverables they&apos;ll put a number on.</strong>{" "}What ships every month, counted and in
             writing. If they can&apos;t tell you that before you pay, move on.
           </p>
           <p>
-            <strong>No long-term contracts.</strong> Month-to-month means they have
+            <strong>No long-term contracts.</strong>{" "}Month-to-month means they have
             to earn your business every 30 days. Agencies that lock you into 12
             months know you&apos;d leave if you could.
           </p>
@@ -446,7 +446,7 @@ export default async function Post() {
             in a separate breakdown.
           </p>
           <p>
-            Flat-price services have changed the math. At <Link href="/pricing">Venti Scale</Link>, every service
+            Flat-price services have changed the math. At{" "}<Link href="/pricing">Venti Scale</Link>, every service
             has a monthly price you can see before you talk to anyone, plus one plain monthly report and a
             dashboard you can open any time.
           </p>

@@ -385,9 +385,9 @@ export default async function Post() {
             everything for a flat monthly fee.
           </p>
           <p>
-            <Link href="/social-media-management">My social media plan</Link> is the middle option. 12 posts a month written and designed for
+            <Link href="/social-media-management">My social media plan</Link>{" "}is the middle option. 12 posts a month written and designed for
             you, your videos posted, one flat monthly price and no hiring process. If you&apos;re weighing this
-            against other options, here&apos;s the full picture on <Link href="/marketing-agency-alternatives">marketing agency alternatives</Link>.
+            against other options, here&apos;s the full picture on{" "}<Link href="/marketing-agency-alternatives">marketing agency alternatives</Link>.
           </p>
 
           <div className="blog-faq">

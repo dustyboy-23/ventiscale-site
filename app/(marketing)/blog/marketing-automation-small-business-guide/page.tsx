@@ -263,18 +263,18 @@ export default async function Post() {
             Most guides list tools by their starting price and skip the fine print. Here&apos;s what you&apos;ll actually pay.
           </p>
           <p>
-            <strong>ActiveCampaign: $15/mo</strong> for up to 1,000 contacts. Includes real automation workflows with branching logic. Best value for small businesses that need actual automation, not just email blasts. This is what we recommend for most businesses under $500K revenue.
+            <strong>ActiveCampaign: $15/mo</strong>{" "}for up to 1,000 contacts. Includes real automation workflows with branching logic. Best value for small businesses that need actual automation, not just email blasts. This is what we recommend for most businesses under $500K revenue.
           </p>
           <p>
-            <strong>Mailchimp: $15/mo</strong> for the standard plan. Good for ecommerce with Shopify integration. But you&apos;ll outgrow it the moment you need branching logic or lead scoring. Then you&apos;re looking at $350/mo. And{" "}
+            <strong>Mailchimp: $15/mo</strong>{" "}for the standard plan. Good for ecommerce with Shopify integration. But you&apos;ll outgrow it the moment you need branching logic or lead scoring. Then you&apos;re looking at $350/mo. And{" "}
             <Link href="/ai-marketing-cost">AI is changing what these tools can do</Link>
             , so the landscape shifts fast.
           </p>
           <p>
-            <strong>HubSpot: $20/mo (starter).</strong> Here&apos;s the trap. The starter plan doesn&apos;t include workflows. For real automation, you need HubSpot Professional at $890/mo. Plus a mandatory $3,000 onboarding fee. That&apos;s $13,680 in year one for a tool most small businesses don&apos;t need.
+            <strong>HubSpot: $20/mo (starter).</strong>{" "}Here&apos;s the trap. The starter plan doesn&apos;t include workflows. For real automation, you need HubSpot Professional at $890/mo. Plus a mandatory $3,000 onboarding fee. That&apos;s $13,680 in year one for a tool most small businesses don&apos;t need.
           </p>
           <p>
-            <strong>Zoho: $15-30/mo</strong> all-in with CRM, email, and basic automation. The interface isn&apos;t winning design awards, but the math works for businesses under $500K revenue.
+            <strong>Zoho: $15-30/mo</strong>{" "}all-in with CRM, email, and basic automation. The interface isn&apos;t winning design awards, but the math works for businesses under $500K revenue.
           </p>
 
           <div className="blog-warning">
@@ -333,7 +333,7 @@ export default async function Post() {
             <Link href="/blog/what-done-for-you-marketing-includes">what a done-for-you marketing service covers</Link>.
           </p>
           <p>
-            If you&apos;d rather have it done for you, <Link href="/email-marketing-services">my email marketing plan</Link> writes and switches on
+            If you&apos;d rather have it done for you,{" "}<Link href="/email-marketing-services">my email marketing plan</Link>{" "}writes and switches on
             4 automatic email series, then sends 2 campaigns a month. For the broader category overview on{" "}
             <Link href="/done-for-you-marketing-services">done-for-you marketing services</Link>, here&apos;s the full breakdown.
           </p>

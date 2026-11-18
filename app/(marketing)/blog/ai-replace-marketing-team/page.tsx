@@ -422,9 +422,9 @@ export default async function Post() {
             is worth reading before you decide.
           </p>
           <p>
-            That&apos;s how I run <Link href="/pricing">Venti Scale</Link>. AI does the production, I do the
+            That&apos;s how I run{" "}<Link href="/pricing">Venti Scale</Link>. AI does the production, I do the
             thinking, and the work goes out every week. If you&apos;re weighing this against other options,
-            here&apos;s the full picture on <Link href="/marketing-agency-alternatives">marketing agency alternatives</Link>.
+            here&apos;s the full picture on{" "}<Link href="/marketing-agency-alternatives">marketing agency alternatives</Link>.
           </p>
 
           <div className="blog-faq">

@@ -267,27 +267,27 @@ export default async function Post() {
             It doesn&apos;t need to be fancy. It needs to answer five questions:
           </p>
           <p>
-            <strong>What&apos;s your tone?</strong> Are you casual and funny? Direct
+            <strong>What&apos;s your tone?</strong>{" "}Are you casual and funny? Direct
             and no-nonsense? Warm and supportive? Pick one lane and stay in it.
           </p>
           <p>
-            <strong>What words do you use?</strong> Every brand has phrases they
+            <strong>What words do you use?</strong>{" "}Every brand has phrases they
             lean on. A fitness coach might say &quot;show up for yourself.&quot; A
             contractor might say &quot;built right the first time.&quot; Write down
             your five to ten go-to phrases.
           </p>
           <p>
-            <strong>What words do you never use?</strong> This one matters more than
+            <strong>What words do you never use?</strong>{" "}This one matters more than
             you think. If you&apos;re a down-to-earth roofer, you probably don&apos;t
             say &quot;leverage synergies.&quot; List the words that sound wrong
             coming from your brand.
           </p>
           <p>
-            <strong>What topics are you an authority on?</strong> Stay in your lane.
+            <strong>What topics are you an authority on?</strong>{" "}Stay in your lane.
             A landscaper posting about cryptocurrency isn&apos;t building trust.
           </p>
           <p>
-            <strong>Show three example posts that nail your voice.</strong> These
+            <strong>Show three example posts that nail your voice.</strong>{" "}These
             become the reference point for everything you create or anything AI
             generates for you.
           </p>
@@ -320,12 +320,12 @@ export default async function Post() {
             tool could handle in seconds.
           </p>
           <p>
-            <strong>Safe to automate:</strong> Scheduling posts in advance.
+            <strong>Safe to automate:</strong>{" "}Scheduling posts in advance.
             Recycling evergreen content. Generating first drafts with AI. Pulling
             analytics reports. Cross-posting to multiple platforms.
           </p>
           <p>
-            <strong>Keep human:</strong> Replying to comments. Answering DMs.
+            <strong>Keep human:</strong>{" "}Replying to comments. Answering DMs.
             Handling complaints or negative feedback. Real-time engagement during
             trending conversations. Anything that requires reading the room.
           </p>
@@ -357,25 +357,25 @@ export default async function Post() {
             right combination of tools and making them work together.
           </p>
           <p>
-            <strong>Scheduling tool ($20 to $100/month):</strong> Buffer, Later, or
+            <strong>Scheduling tool ($20 to $100/month):</strong>{" "}Buffer, Later, or
             SocialBee for scheduling and queue management. Each has tradeoffs.
             Buffer is simple but limited on analytics. Later is great for visual
             planning but weaker on text-first platforms. SocialBee has category-based
             scheduling but takes longer to set up.
           </p>
           <p>
-            <strong>AI content tool ($30 to $100/month):</strong> ChatGPT, Jasper,
+            <strong>AI content tool ($30 to $100/month):</strong>{" "}ChatGPT, Jasper,
             or your scheduling tool&apos;s built-in AI for generating first drafts.
             You still need to edit every post against your brand voice document.
           </p>
           <p>
-            <strong>Analytics ($0 to $50/month):</strong> Native platform analytics
+            <strong>Analytics ($0 to $50/month):</strong>{" "}Native platform analytics
             are free but scattered. Sprout Social or Hootsuite give you unified
             reporting but cost more. You need to know what&apos;s working or
             you&apos;re flying blind.
           </p>
           <p>
-            <strong>Design tool ($0 to $15/month):</strong> Canva for graphics.
+            <strong>Design tool ($0 to $15/month):</strong>{" "}Canva for graphics.
             Non-negotiable unless you have a designer on staff.
           </p>
           <p>
@@ -460,7 +460,7 @@ export default async function Post() {
           </p>
           <p>
             If you&apos;d rather not run any of this yourself, that&apos;s what{" "}
-            <Link href="/social-media-management">my social media plan</Link> is for. I learn your brand and voice during setup, then write,
+            <Link href="/social-media-management">my social media plan</Link>{" "}is for. I learn your brand and voice during setup, then write,
             design and schedule 12 posts a month for you.
           </p>
           <p>

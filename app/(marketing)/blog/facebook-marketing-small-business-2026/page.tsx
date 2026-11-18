@@ -299,7 +299,7 @@ export default async function Post() {
           </p>
 
           <p>
-            <strong>1. Local community content, not promo posts.</strong> Posts
+            <strong>1. Local community content, not promo posts.</strong>{" "}Posts
             that get shared, tagged, or saved are the ones that signal to the
             algorithm you&apos;re worth showing to more people. A local
             contractor posting &quot;before and after&quot; of a basement they
@@ -314,7 +314,7 @@ export default async function Post() {
           </p>
 
           <p>
-            <strong>2. Ads targeted at warm audiences first.</strong> Cold
+            <strong>2. Ads targeted at warm audiences first.</strong>{" "}Cold
             prospecting ads on Facebook are brutal now. Costs are up, attention
             is down. The move is to run ads to people who already know you:
             past customers, Page engagers, website visitors, email lists.
@@ -324,7 +324,7 @@ export default async function Post() {
           </p>
 
           <p>
-            <strong>3. Messenger and reviews as the close.</strong> Facebook
+            <strong>3. Messenger and reviews as the close.</strong>{" "}Facebook
             isn&apos;t a direct-response channel for most small businesses.
             It&apos;s a trust channel. People see your ad, check your Page,
             scroll a few posts, read your reviews, then message you. If your
@@ -430,8 +430,8 @@ export default async function Post() {
             eventually either outsource it or let it die.
           </p>
           <p>
-            If you&apos;d rather not run this yourself, <Link href="/social-media-management">my social media plan</Link> covers your Facebook
-            posts and <Link href="/ads-management">my ads plan</Link> runs your Meta ads. For the broader picture on <Link href="/done-for-you-marketing-services">done-for-you marketing services</Link>, here&apos;s
+            If you&apos;d rather not run this yourself,{" "}<Link href="/social-media-management">my social media plan</Link>{" "}covers your Facebook
+            posts and{" "}<Link href="/ads-management">my ads plan</Link>{" "}runs your Meta ads. For the broader picture on{" "}<Link href="/done-for-you-marketing-services">done-for-you marketing services</Link>, here&apos;s
             the full breakdown.
           </p>
 

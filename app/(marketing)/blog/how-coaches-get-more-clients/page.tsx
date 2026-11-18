@@ -323,21 +323,21 @@ export default async function Post() {
             The content that converts for coaches falls into three buckets.
           </p>
           <p>
-            <strong>Educational content about the problem you solve.</strong> If
+            <strong>Educational content about the problem you solve.</strong>{" "}If
             you&apos;re a career transition coach, post about the signs someone
             should leave their job. If you&apos;re a business coach, break down
             why most service businesses plateau at $50K/month. Teach the what and
             the why. Save the how for paying clients.
           </p>
           <p>
-            <strong>Client results (anonymized).</strong> &quot;A client came to
+            <strong>Client results (anonymized).</strong>{" "}&quot;A client came to
             me stuck at $8K/month. We rebuilt her offer, fixed her pricing, and
             90 days later she hit $22K.&quot; That&apos;s not bragging.
             That&apos;s proof. People need to see the result is real before
             they&apos;ll invest.
           </p>
           <p>
-            <strong>Contrarian takes.</strong> Challenge something everyone in
+            <strong>Contrarian takes.</strong>{" "}Challenge something everyone in
             your space believes. &quot;Most business coaches tell you to scale. I
             tell most of my clients to shrink first.&quot; That stops the scroll.
             It starts conversations. Conversations become clients.
@@ -469,8 +469,8 @@ export default async function Post() {
             involves building systems, not doing everything yourself.
           </p>
           <p>
-            If you&apos;d rather coach than do all this, I can run it for you. <Link href="/social-media-management">Social media</Link> and{" "}
-            <Link href="/email-marketing-services">email</Link> are flat monthly plans, and every price is on the page.
+            If you&apos;d rather coach than do all this, I can run it for you.{" "}<Link href="/social-media-management">Social media</Link>{" "}and{" "}
+            <Link href="/email-marketing-services">email</Link>{" "}are flat monthly plans, and every price is on the page.
           </p>
           <p>
             Your job is coaching. Ours is making sure people find you. For the

@@ -248,14 +248,14 @@ export default async function Post() {
             you create should be one of these:
           </p>
           <p>
-            <strong>Educational content</strong> teaches your audience something they
+            <strong>Educational content</strong>{" "}teaches your audience something they
             actually care about. Sell pest control? Teach them the 3 signs of a termite
             infestation. Run a gym? Show them why most people plateau at the 3-month mark.
             The post has standalone value even if they never buy from you. That&apos;s
             what gets saved and shared.
           </p>
           <p>
-            <strong>Social proof</strong> is screenshots of reviews, client results,
+            <strong>Social proof</strong>{" "}is screenshots of reviews, client results,
             before-and-afters, testimonials, and case studies. You don&apos;t say your
             service is great. Your customers do. This is the content type most businesses
             underuse. If you&apos;ve got five-star reviews sitting on Google, turn them
@@ -263,7 +263,7 @@ export default async function Post() {
             never checks.
           </p>
           <p>
-            <strong>Personality content</strong> is behind-the-scenes. The story of why
+            <strong>Personality content</strong>{" "}is behind-the-scenes. The story of why
             you started. The rough week you had and what you learned from it. The opinion
             you hold that most people in your industry disagree with. This is what builds
             the connection that turns followers into buyers. People buy from people they
@@ -388,8 +388,8 @@ export default async function Post() {
             that you can&apos;t do both alone indefinitely.
           </p>
           <p>
-            If you&apos;d rather not become a content creator, <Link href="/social-media-management">my social media plan</Link> runs this for
-            you every week. For the broader picture on <Link href="/done-for-you-marketing-services">done-for-you marketing services</Link>, here&apos;s the full breakdown.
+            If you&apos;d rather not become a content creator,{" "}<Link href="/social-media-management">my social media plan</Link>{" "}runs this for
+            you every week. For the broader picture on{" "}<Link href="/done-for-you-marketing-services">done-for-you marketing services</Link>, here&apos;s the full breakdown.
           </p>
 
           <div className="blog-faq">

@@ -176,7 +176,7 @@ export default async function PillarPage() {
             Meanwhile, the smartest 1% of ecommerce founders fired their
             agency in 2024 and replaced it with an AI-powered marketing
             stack. They run more channels, ship more content, and pay
-            half the cost. <em>The gap is widening every quarter.</em>
+            half the cost.{" "}<em>The gap is widening every quarter.</em>
           </p>
           <p>
             This page is the full 2026 playbook for AI marketing in
@@ -266,7 +266,7 @@ export default async function PillarPage() {
             5 people at $500K/month. The tooling barely changes.
           </p>
           <p>
-            <strong>1. Foundation LLM ($20-200/month).</strong> Claude
+            <strong>1. Foundation LLM ($20-200/month).</strong>{" "}Claude
             Max ($200) or ChatGPT Plus ($20). This is the brain. Every
             piece of content, email, ad variation, and customer reply
             draft flows through this layer. The Pro tier of Claude or
@@ -274,7 +274,7 @@ export default async function PillarPage() {
             limits are too restrictive for daily operations.
           </p>
           <p>
-            <strong>2. Email + SMS platform ($0-50/month).</strong> Klaviyo
+            <strong>2. Email + SMS platform ($0-50/month).</strong>{" "}Klaviyo
             for ecommerce is the default. Free under 500 contacts, $30+/month
             after. Built specifically for ecommerce attribution and flow
             logic. The alternative is Beehiiv ($0-39/month) for newsletter-led
@@ -289,7 +289,7 @@ export default async function PillarPage() {
             anyway).
           </p>
           <p>
-            <strong>4. AI image tools ($10-30/month).</strong> Midjourney
+            <strong>4. AI image tools ($10-30/month).</strong>{" "}Midjourney
             ($10-30/month) for product lifestyle imagery, DALL-E 3 (included
             in ChatGPT Plus) for quick variations, or Adobe Firefly
             (included in Creative Cloud) for brand-safe commercial use.
@@ -297,14 +297,14 @@ export default async function PillarPage() {
             (Midjourney) or brand-licensed output (Firefly).
           </p>
           <p>
-            <strong>5. SEO content tools ($30-100/month).</strong> SurferSEO
+            <strong>5. SEO content tools ($30-100/month).</strong>{" "}SurferSEO
             ($89/month) or Frase ($30-60/month) for keyword research and
             content optimization. Optional: Ahrefs Webmaster Tools (free)
             for backlink monitoring. For small ecommerce, Google Search
             Console + an LLM can replace 80% of paid SEO tooling.
           </p>
           <p>
-            <strong>Total stack:</strong> $150-400/month at the high end.
+            <strong>Total stack:</strong>{" "}$150-400/month at the high end.
             That&apos;s less than 8% of what a comparable agency retainer
             costs in 2026. The detailed cost breakdown is at{" "}
             <Link href="/ai-marketing-cost">
@@ -321,26 +321,26 @@ export default async function PillarPage() {
             <strong>AI excels at:</strong>
           </p>
           <p>
-            <strong>Content production at volume.</strong> Writing 30
+            <strong>Content production at volume.</strong>{" "}Writing 30
             social captions, 5 product descriptions, 3 blog posts, and
             10 email subject lines in a single morning is genuinely
             faster with AI than any human team. Quality at scale is the
             killer use case.
           </p>
           <p>
-            <strong>Email flow logic.</strong> Welcome series, abandoned
+            <strong>Email flow logic.</strong>{" "}Welcome series, abandoned
             cart sequences, post-purchase nudges, winback campaigns. Once
             the templates are written and the segmentation is set, the
             AI handles personalization at scale.
           </p>
           <p>
-            <strong>Ad creative variations.</strong> Generating 20
+            <strong>Ad creative variations.</strong>{" "}Generating 20
             variations of a Meta ad headline + 20 variations of body copy
             + matching image prompts in 15 minutes. A human creative team
             takes a week to produce the same volume.
           </p>
           <p>
-            <strong>Reporting + analysis.</strong> Pulling GA4 data,
+            <strong>Reporting + analysis.</strong>{" "}Pulling GA4 data,
             summarizing trends, flagging anomalies, generating client-ready
             reports. AI is faster and more consistent than a junior
             analyst.
@@ -349,19 +349,19 @@ export default async function PillarPage() {
             <strong>AI is bad at:</strong>
           </p>
           <p>
-            <strong>Brand strategy.</strong> Deciding whether to launch a
+            <strong>Brand strategy.</strong>{" "}Deciding whether to launch a
             new product line, reposition the brand, change pricing, or
             enter a new market. These are judgment calls that require
             understanding context AI doesn&apos;t have.
           </p>
           <p>
-            <strong>Cultural moments.</strong> AI doesn&apos;t know that
+            <strong>Cultural moments.</strong>{" "}AI doesn&apos;t know that
             a competitor just had a PR crisis last week and that&apos;s
             an opportunity to reposition. It doesn&apos;t feel the cultural
             tide. Founders do.
           </p>
           <p>
-            <strong>Founder voice.</strong> The thing that makes a brand
+            <strong>Founder voice.</strong>{" "}The thing that makes a brand
             feel real. AI can mimic surface-level voice patterns (sentence
             length, vocabulary, italic flips) but can&apos;t generate the
             specific stories, decisions, and contradictions that give a
@@ -370,7 +370,7 @@ export default async function PillarPage() {
             Founder writing = best.
           </p>
           <p>
-            <strong>Conversion design.</strong> The visual + UX work of
+            <strong>Conversion design.</strong>{" "}The visual + UX work of
             turning traffic into customers. AI generates passable images
             but bad layouts. Conversion-rate optimization remains a
             human-led discipline.
@@ -393,7 +393,7 @@ export default async function PillarPage() {
             Two examples make the difference obvious:
           </p>
           <p>
-            <strong>Product description, generic AI:</strong> &quot;Discover
+            <strong>Product description, generic AI:</strong>{" "}&quot;Discover
             our premium leather jacket, crafted with attention to detail.
             Made from high-quality materials, this jacket is perfect for
             any occasion.&quot;
@@ -403,7 +403,7 @@ export default async function PillarPage() {
             Generic, voiceless, indistinguishable from a competitor.
           </p>
           <p>
-            <strong>Product description, brand-trained AI:</strong> &quot;The
+            <strong>Product description, brand-trained AI:</strong>{" "}&quot;The
             Cabin Field Jacket has been our most-returned item six months
             in a row. Not because it&apos;s bad. Because the leather softens
             into your specific shoulders after 30 days, and customers don&apos;t
@@ -548,7 +548,7 @@ export default async function PillarPage() {
             run themselves.
           </p>
           <p>
-            <strong>Pattern 2: Founders use AI generically.</strong> They
+            <strong>Pattern 2: Founders use AI generically.</strong>{" "}They
             type &quot;write me a product description for X&quot; and get
             template output. Six months later, every product page on the
             site sounds like every other ecommerce store. The brand
@@ -556,7 +556,7 @@ export default async function PillarPage() {
             the difference.
           </p>
           <p>
-            <strong>Pattern 3: Founders ship without review.</strong> They
+            <strong>Pattern 3: Founders ship without review.</strong>{" "}They
             put AI on autopilot to save time, then watch quality drift over
             3 months until the brand voice is gone. AI without human review
             converges to mediocre. The senior reviewer is non-negotiable

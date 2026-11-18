@@ -321,19 +321,19 @@ export default async function Post() {
 
           <h2>Side-by-side: where your money goes</h2>
           <p>
-            <strong>DIY marketing:</strong> 15 to 20 hours of your time per week
+            <strong>DIY marketing:</strong>{" "}15 to 20 hours of your time per week
             ($4,500 to $6,000/month in opportunity cost). $200 to $500/month in
             tools. Inconsistent posting schedule. No real strategy. Zero
             reporting.
           </p>
           <p>
-            <strong>Done-for-you marketing:</strong> $500 to $2,500/month flat
+            <strong>Done-for-you marketing:</strong>{" "}$500 to $2,500/month flat
             fee. Daily content across multiple platforms. Professional strategy
             and content calendar. Weekly or monthly reporting with real metrics.
             You touch nothing. Your marketing runs without you.
           </p>
           <p>
-            <strong>In-house hire:</strong> $7,500 to $13,000/month salary
+            <strong>In-house hire:</strong>{" "}$7,500 to $13,000/month salary
             before benefits. $500 to $2,000/month in software and tools.
             Management overhead. One person trying to cover everything. Two to
             three months before they&apos;re productive.
@@ -364,13 +364,13 @@ export default async function Post() {
           <h2>When DIY makes sense (and when it doesn&apos;t)</h2>
           <p>Done-for-you marketing isn&apos;t right for everyone.</p>
           <p>
-            <strong>DIY works if:</strong> you&apos;re pre-revenue or under
+            <strong>DIY works if:</strong>{" "}you&apos;re pre-revenue or under
             $5,000/month, you genuinely enjoy creating content, you have 15+
             free hours per week, or you&apos;re building a personal brand where
             your face and voice IS the product.
           </p>
           <p>
-            <strong>Switch to done-for-you when:</strong> revenue exceeds
+            <strong>Switch to done-for-you when:</strong>{" "}revenue exceeds
             $10,000/month, you&apos;re spending 10+ hours per week on marketing
             with flat results, your posting is inconsistent, or you&apos;d
             rather spend that time on sales, product, or customers.
@@ -431,7 +431,7 @@ export default async function Post() {
             </li>
           </ul>
           <p>
-            That&apos;s what <Link href="/pricing">Venti Scale</Link> is. You pick the services you want, each
+            That&apos;s what{" "}<Link href="/pricing">Venti Scale</Link>{" "}is. You pick the services you want, each
             one has a flat monthly price, and I do the work. You get one plain monthly report and a dashboard
             you can open any time.
           </p>

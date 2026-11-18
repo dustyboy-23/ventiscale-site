@@ -467,15 +467,15 @@ export default async function Post() {
             report on Friday and see what worked.
           </p>
           <p>
-            You don&apos;t have to pick one. I run <Link href="/email-marketing-services">email</Link> and <Link href="/social-media-management">social media</Link> as separate
+            You don&apos;t have to pick one. I run{" "}<Link href="/email-marketing-services">email</Link>{" "}and{" "}<Link href="/social-media-management">social media</Link>{" "}as separate
             plans, and taking both lowers the monthly price. If you&apos;re running a store, both channels live
             inside a bigger{" "}
-            <Link href="/shopify-marketing-strategy">Shopify marketing strategy</Link> that ties content, email
+            <Link href="/shopify-marketing-strategy">Shopify marketing strategy</Link>{" "}that ties content, email
             and ads together.
           </p>
           <p>
             If you&apos;re not sure how your current mix is performing, the{" "}
-            <a href="/#audit">free marketing audit</a> is the fastest way to
+            <a href="/#audit">free marketing audit</a>{" "}is the fastest way to
             find out. It takes thirty seconds and tells you exactly where
             you&apos;re leaving time and money on the table.
           </p>

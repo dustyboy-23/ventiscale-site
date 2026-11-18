@@ -227,7 +227,7 @@ export default async function Post() {
             people hesitate. So here&apos;s the full breakdown, week by week.
           </p>
           <p>
-            <strong>Week 1: Onboarding.</strong> Your team audits your current
+            <strong>Week 1: Onboarding.</strong>{" "}Your team audits your current
             social presence. They study your competitors, research your
             audience, and build a content strategy tailored to your business.
             They create a brand voice guide so every post sounds like you, not
@@ -236,7 +236,7 @@ export default async function Post() {
             everything else work.
           </p>
           <p>
-            <strong>Week 2: Content production.</strong> The team creates your
+            <strong>Week 2: Content production.</strong>{" "}The team creates your
             first batch of posts. Graphics, captions, hashtag research, and
             scheduling. For most small businesses, that&apos;s 12 to 20 posts
             across 2 to 3 platforms. Everything gets loaded into a scheduling
@@ -244,7 +244,7 @@ export default async function Post() {
             audience is online.
           </p>
           <p>
-            <strong>Weeks 3 and 4: Engagement and optimization.</strong> Posts
+            <strong>Weeks 3 and 4: Engagement and optimization.</strong>{" "}Posts
             go live daily. Your team monitors comments, responds to DMs, and
             engages with accounts in your target market. They track what&apos;s
             performing and adjust the content mix in real time. At the end of
@@ -285,14 +285,14 @@ export default async function Post() {
             most of these, you&apos;re overpaying.
           </p>
           <p>
-            <strong>Content strategy document.</strong> Not a vague &quot;we&apos;ll
+            <strong>Content strategy document.</strong>{" "}Not a vague &quot;we&apos;ll
             post good stuff&quot; promise. A real document that maps content
             themes to your business goals, identifies your target audience, and
             outlines the posting schedule for each platform. This is what
             separates a strategy from just winging it.
           </p>
           <p>
-            <strong>Original content creation.</strong> Custom graphics,
+            <strong>Original content creation.</strong>{" "}Custom graphics,
             written captions, and platform-specific formatting. Good teams
             create content that fits each platform&apos;s algorithm. What
             works on Instagram doesn&apos;t work on LinkedIn. If you&apos;re
@@ -300,19 +300,19 @@ export default async function Post() {
             that&apos;s a problem.
           </p>
           <p>
-            <strong>Scheduling and publishing.</strong> Posts go out at optimal
+            <strong>Scheduling and publishing.</strong>{" "}Posts go out at optimal
             times based on when your audience is active. You don&apos;t log in.
             You don&apos;t click publish. It just happens.
           </p>
           <p>
-            <strong>Community management.</strong> Someone responds to comments
+            <strong>Community management.</strong>{" "}Someone responds to comments
             and DMs within hours, not days. This is where most DIY efforts
             fall apart. You post something, a potential customer asks a
             question, and you don&apos;t see it until the next week. By then
             they bought from someone else.
           </p>
           <p>
-            <strong>Monthly reporting.</strong> Real numbers, not vanity
+            <strong>Monthly reporting.</strong>{" "}Real numbers, not vanity
             metrics. You want engagement rate, website clicks, follower growth,
             and which content types perform best. A good report tells you what
             worked, what didn&apos;t, and what&apos;s changing next month.
@@ -339,7 +339,7 @@ export default async function Post() {
             actually get.
           </p>
           <p>
-            <strong>Budget tier ($99 to $500/month):</strong> Automated or
+            <strong>Budget tier ($99 to $500/month):</strong>{" "}Automated or
             templated content. Minimal customization. No strategy. No community
             management. You get posts on a schedule, but they won&apos;t sound
             like your brand and nobody&apos;s engaging with your audience. For
@@ -347,7 +347,7 @@ export default async function Post() {
             your brand look generic.
           </p>
           <p>
-            <strong>Mid tier ($500 to $2,500/month):</strong> Custom content,
+            <strong>Mid tier ($500 to $2,500/month):</strong>{" "}Custom content,
             platform-specific strategy, community management, and monthly
             reporting. This is where most small businesses should land.
             It&apos;s enough to get real results without enterprise-level
@@ -358,7 +358,7 @@ export default async function Post() {
             , the math isn&apos;t close.
           </p>
           <p>
-            <strong>Premium tier ($2,500 to $7,500+/month):</strong> Everything
+            <strong>Premium tier ($2,500 to $7,500+/month):</strong>{" "}Everything
             above plus paid ad management, influencer outreach, video
             production, and multi-channel campaigns. Typically for businesses
             doing $500K+ in annual revenue that need aggressive growth across
@@ -440,7 +440,7 @@ export default async function Post() {
             between you and them is they stopped trying to do it alone.
           </p>
           <p>
-            That&apos;s the problem <Link href="/social-media-management">my social media plan</Link> solves. 12 posts a month written, designed
+            That&apos;s the problem{" "}<Link href="/social-media-management">my social media plan</Link>{" "}solves. 12 posts a month written, designed
             and scheduled for you on Facebook, Instagram and LinkedIn, plus up to 8 of your own videos posted.
             You get a dashboard you can open any time and one plain monthly report.
           </p>

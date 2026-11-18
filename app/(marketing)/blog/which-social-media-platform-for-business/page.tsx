@@ -258,7 +258,7 @@ export default async function Post() {
           </p>
 
           <p>
-            <strong>If you sell to consumers in a local area</strong> (plumbers,
+            <strong>If you sell to consumers in a local area</strong>{" "}(plumbers,
             roofers, restaurants, gyms, dentists), Facebook is your primary.
             It&apos;s where local search, reviews, community groups, and
             neighborhood word of mouth all collide. Instagram is your secondary
@@ -266,7 +266,7 @@ export default async function Post() {
           </p>
 
           <p>
-            <strong>If you sell physical products online</strong> (ecommerce,
+            <strong>If you sell physical products online</strong>{" "}(ecommerce,
             DTC brands, makers), Instagram is your primary and TikTok is your
             secondary. Facebook still works for ads. Focus the organic effort
             on the places where people discover products through visuals. This
@@ -279,7 +279,7 @@ export default async function Post() {
 
           <p>
             <strong>If you sell to other businesses or sell high-ticket
-            services</strong> ($5K+ engagements, B2B SaaS, consulting,
+            services</strong>{" "}($5K+ engagements, B2B SaaS, consulting,
             agencies), LinkedIn is your primary. Nothing else comes close for
             B2B decision makers. Your secondary is YouTube if you can do long
             form, or X if your audience is technical.
@@ -449,7 +449,7 @@ export default async function Post() {
           </p>
           <p>
             If you want that handled,{" "}
-            <Link href="/social-media-management">my social media plan</Link> covers 12 posts a month across Facebook, Instagram and LinkedIn,
+            <Link href="/social-media-management">my social media plan</Link>{" "}covers 12 posts a month across Facebook, Instagram and LinkedIn,
             written and designed for you, plus your videos posted.
           </p>
 

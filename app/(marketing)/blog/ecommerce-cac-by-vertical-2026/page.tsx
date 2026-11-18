@@ -401,7 +401,7 @@ export default async function Post() {
           </p>
 
           <p>
-            <strong>Multi-touch attribution is broken.</strong> Meta claims credit
+            <strong>Multi-touch attribution is broken.</strong>{" "}Meta claims credit
             for every customer who saw an ad before buying. Google claims credit
             for the same customer who searched your brand name afterward. Your
             email platform counts the click that happened between both. You end up
@@ -410,13 +410,13 @@ export default async function Post() {
           </p>
 
           <p>
-            <strong>Branded search eats acquisition budget.</strong> A lot of paid search
+            <strong>Branded search eats acquisition budget.</strong>{" "}A lot of paid search
             budget goes to people who already knew the brand name. That&apos;s not acquisition spend. That&apos;s
             retention spend in the wrong column.
           </p>
 
           <p>
-            <strong>Channel silos create a structural leak.</strong> If your paid
+            <strong>Channel silos create a structural leak.</strong>{" "}If your paid
             ads and email aren&apos;t coordinated, you&apos;re likely paying to
             acquire customers your retention system should have kept. The{" "}
             

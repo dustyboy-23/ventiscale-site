@@ -276,18 +276,18 @@ export default async function Post() {
           </p>
           <ul>
             <li>
-              <strong>15-30 seconds.</strong> The sweet spot. Reels in this
+              <strong>15-30 seconds.</strong>{" "}The sweet spot. Reels in this
               range average 5.8% engagement. Longer than 60 seconds and you
               start losing people.
             </li>
             <li>
-              <strong>Hook in the first 2 seconds.</strong> Something visual or
+              <strong>Hook in the first 2 seconds.</strong>{" "}Something visual or
               a text overlay that tells the viewer exactly why they should keep
               watching. If the first second doesn&apos;t grab them, they&apos;re
               gone.
             </li>
             <li>
-              <strong>Keyword in the caption.</strong> Instagram now functions
+              <strong>Keyword in the caption.</strong>{" "}Instagram now functions
               as a search engine. Captions with relevant keywords get discovered
               by people searching for that topic. Write your captions for search,
               not just for followers.
@@ -323,7 +323,7 @@ export default async function Post() {
             complicated. But most owners do it backwards.
           </p>
           <p>
-            <strong>Teach first, sell second.</strong> The brands that grow
+            <strong>Teach first, sell second.</strong>{" "}The brands that grow
             fastest share useful content related to what they sell. A plumber
             posts &quot;3 signs your water heater is about to fail.&quot; A
             skincare brand posts &quot;what actually causes large pores.&quot; A
@@ -332,14 +332,14 @@ export default async function Post() {
             earns the follow.
           </p>
           <p>
-            <strong>Show the process, not just the result.</strong> Behind the
+            <strong>Show the process, not just the result.</strong>{" "}Behind the
             scenes content outperforms polished product shots on almost every
             metric. People want to see how you work, how you think, what goes
             into what you do. A 20-second clip of you setting up a job site gets
             more saves than a finished before-and-after photo.
           </p>
           <p>
-            <strong>Social proof goes further than you think.</strong> Customer
+            <strong>Social proof goes further than you think.</strong>{" "}Customer
             wins, testimonials, and user-generated content are the highest-trust
             content you can post. Screenshot a good review. Film a quick
             reaction to a client result. These posts convert followers into
@@ -402,17 +402,17 @@ export default async function Post() {
           </p>
           <ul>
             <li>
-              <strong>Content creation:</strong> 3-5 Reels per week, each
+              <strong>Content creation:</strong>{" "}3-5 Reels per week, each
               taking 30-60 minutes to film, edit, and caption. That&apos;s 3-5
               hours minimum, assuming you&apos;re efficient.
             </li>
             <li>
-              <strong>Engagement:</strong> 30-45 minutes per day responding to
+              <strong>Engagement:</strong>{" "}30-45 minutes per day responding to
               comments, DMs, and engaging with other accounts. That&apos;s 3.5-5
               hours per week.
             </li>
             <li>
-              <strong>Strategy and analytics:</strong> 1-2 hours per week
+              <strong>Strategy and analytics:</strong>{" "}1-2 hours per week
               reviewing what worked, what didn&apos;t, and planning the next
               week&apos;s content.
             </li>
@@ -450,10 +450,10 @@ export default async function Post() {
             mix. And someone accountable for results.
           </p>
           <p>
-            If you want Instagram handled, <Link href="/social-media-management">my social media plan</Link> covers it: posts written and
+            If you want Instagram handled,{" "}<Link href="/social-media-management">my social media plan</Link>{" "}covers it: posts written and
             designed for you, your Reels posted, captions and hashtags done. If you&apos;re running a store,
             Instagram is one channel inside a bigger{" "}
-            <Link href="/shopify-marketing-strategy">Shopify marketing strategy</Link> that ties content, email
+            <Link href="/shopify-marketing-strategy">Shopify marketing strategy</Link>{" "}that ties content, email
             and ads together.
           </p>
 

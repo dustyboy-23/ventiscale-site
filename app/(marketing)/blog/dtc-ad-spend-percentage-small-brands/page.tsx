@@ -322,7 +322,7 @@ export default async function Post() {
             Real owned infrastructure for a DTC brand is four things.
           </p>
           <p>
-            <strong>Email flows that run without you.</strong> Welcome series,
+            <strong>Email flows that run without you.</strong>{" "}Welcome series,
             abandoned cart, post-purchase, win-back. These automated sequences
             are responsible for 30-40% of ecommerce email revenue without anyone
             touching a keyboard each week. The full setup is in the guide to{" "}
@@ -332,7 +332,7 @@ export default async function Post() {
             .
           </p>
           <p>
-            <strong>SMS list for launches and promos.</strong> SMS delivers
+            <strong>SMS list for launches and promos.</strong>{" "}SMS delivers
             $71-79 ROI per dollar spent in 2026, higher than email. Most DTC
             brands don&apos;t have an SMS list. The ones that do use it for
             product drops, back-in-stock, and VIP early access &mdash; a
@@ -341,14 +341,14 @@ export default async function Post() {
             Meta.
           </p>
           <p>
-            <strong>Review velocity that sustains conversion rate.</strong> 93%
+            <strong>Review velocity that sustains conversion rate.</strong>{" "}93%
             of shoppers read reviews before buying. If your most recent review
             is six months old, cold traffic converts at half the rate of stores
             with fresh, recent social proof. Getting reviews isn&apos;t a
             one-time push. It&apos;s an ongoing system.
           </p>
           <p>
-            <strong>SEO content that compounds organically.</strong> A product
+            <strong>SEO content that compounds organically.</strong>{" "}A product
             category blog post written today still drives traffic in two years.
             Paid ads stop the second you stop paying. Organic traffic is an
             asset on the balance sheet, not a monthly expense line.
@@ -423,7 +423,7 @@ export default async function Post() {
           </p>
           <p>
             If you want this handled, my{" "}
-            <Link href="/email-marketing-services">email marketing plan</Link> switches on your automatic emails and sends 2 campaigns a month.
+            <Link href="/email-marketing-services">email marketing plan</Link>{" "}switches on your automatic emails and sends 2 campaigns a month.
             The guide to{" "}
             <Link href="/done-for-you-marketing-services">done-for-you marketing services</Link>{" "}
             breaks down what each piece should cost.

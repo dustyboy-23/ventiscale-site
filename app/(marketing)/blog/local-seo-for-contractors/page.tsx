@@ -393,25 +393,25 @@ export default async function Post() {
             things that matter most.
           </p>
           <p>
-            <strong>NAP in the footer.</strong> Your business name, address, and
+            <strong>NAP in the footer.</strong>{" "}Your business name, address, and
             phone number should appear in the footer on every page. Match them exactly
             to your Google Business Profile. Word for word.
           </p>
           <p>
-            <strong>Location pages for each area you serve.</strong> One page for
+            <strong>Location pages for each area you serve.</strong>{" "}One page for
             &quot;roofing contractor in Phoenix&quot; and a separate page for
             &quot;roofing contractor in Scottsdale.&quot; Don&apos;t try to rank one
             page for every city you work in. Google needs dedicated pages to connect
             you to specific locations.
           </p>
           <p>
-            <strong>Mobile speed.</strong> Most homeowners search on their phones. If
+            <strong>Mobile speed.</strong>{" "}Most homeowners search on their phones. If
             your site takes more than 3 seconds to load, a big chunk of visitors are
             already gone. Run your site through Google&apos;s PageSpeed Insights tool
             (it&apos;s free) and fix the top issues it flags.
           </p>
           <p>
-            <strong>LocalBusiness schema.</strong> This is a small piece of code in
+            <strong>LocalBusiness schema.</strong>{" "}This is a small piece of code in
             your site&apos;s header that tells Google exactly who you are, what you
             do, and where you operate. Your web developer can add it in 20 minutes.
             It directly signals your local relevance and it&apos;s free.
@@ -462,8 +462,8 @@ export default async function Post() {
           </p>
           <p>
             If you&apos;re great at your trade but don&apos;t want to think about any of this,{" "}
-            <Link href="/seo-services-for-small-business">my SEO + blog plan</Link> keeps your site working while you&apos;re out on jobs. For the
-            broader picture on <Link href="/done-for-you-marketing-services">done-for-you marketing services</Link>, here&apos;s the full breakdown.
+            <Link href="/seo-services-for-small-business">my SEO + blog plan</Link>{" "}keeps your site working while you&apos;re out on jobs. For the
+            broader picture on{" "}<Link href="/done-for-you-marketing-services">done-for-you marketing services</Link>, here&apos;s the full breakdown.
           </p>
 
           <div className="blog-faq">

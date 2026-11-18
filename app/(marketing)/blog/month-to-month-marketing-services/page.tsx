@@ -463,20 +463,20 @@ export default async function Post() {
             few things to verify before you sign.
           </p>
           <p>
-            <strong>Ask about deliverable scope explicitly.</strong> If the
+            <strong>Ask about deliverable scope explicitly.</strong>{" "}If the
             month-to-month package has a materially different scope than their annual
             contract, you&apos;re looking at the B-product. Ask to see examples from
             clients in your revenue range and compare what&apos;s actually included.
           </p>
           <p>
-            <strong>Ask who actually runs your account.</strong> If
+            <strong>Ask who actually runs your account.</strong>{" "}If
             month-to-month clients get account coordinators while annual clients get
             strategists, that&apos;s the real answer. Junior staff with template
             workflows are why month-to-month clients report lower satisfaction in
             every agency survey.
           </p>
           <p>
-            <strong>Ask about asset ownership.</strong> A real month-to-month offer
+            <strong>Ask about asset ownership.</strong>{" "}A real month-to-month offer
             has no cancellation fee, no required notice period, and no asset
             retention. If they own your ad accounts, social profiles, or content until
             contract end, that isn&apos;t month-to-month. That&apos;s a retainer with

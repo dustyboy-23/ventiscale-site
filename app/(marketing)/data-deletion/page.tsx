@@ -20,7 +20,7 @@ export default function DataDeletionPage() {
         <h2>How to delete your data</h2>
         <p>
           If you want your data removed from Venti Scale systems, email{" "}
-          <a href="mailto:hello@ventiscale.com">hello@ventiscale.com</a> with the
+          <a href="mailto:hello@ventiscale.com">hello@ventiscale.com</a>{" "}with the
           subject line &quot;Data deletion request&quot; and include:
         </p>
         <ul>
@@ -55,7 +55,7 @@ export default function DataDeletionPage() {
 
         <h2>Questions</h2>
         <p>
-          Email <a href="mailto:hello@ventiscale.com">hello@ventiscale.com</a>.
+          Email{" "}<a href="mailto:hello@ventiscale.com">hello@ventiscale.com</a>.
         </p>
       </div>
     </article>
