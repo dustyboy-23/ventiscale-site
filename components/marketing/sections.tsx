@@ -74,7 +74,7 @@ export function BundleTable() {
             <div>
               <div className="flex items-center justify-between gap-3">
                 <h3 className="vs-h3">{b.name}</h3>
-                {b.recommended && <span className="vs-tag">Most pick this</span>}
+                {b.recommended && <span className="vs-tag">Good place to start</span>}
               </div>
               <p className="vs-small mt-2 min-h-[2.9em]">{b.forWho}</p>
             </div>

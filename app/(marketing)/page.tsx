@@ -186,8 +186,8 @@ export default async function Home() {
                 <h2 className="vs-h3">Hi, I&apos;m Dustin. I run every account.</h2>
                 <div className="mt-3 grid gap-3 vs-body">
                   <p>
-                    I started Venti Scale because small business owners kept telling me the same
-                    story: a big monthly bill, a report nobody read, and no idea what was actually
+                    I started Venti Scale because too many small business owners get the same
+                    deal: a big monthly bill, a report nobody reads, and no idea what was actually
                     done.
                   </p>
                   <p>
@@ -211,7 +211,7 @@ export default async function Home() {
         <div className="vs-container vs-section">
           <div className="grid gap-10 lg:grid-cols-[minmax(0,4fr)_minmax(0,7fr)] lg:gap-16">
             <div>
-              <h2 className="vs-h2">Questions people ask before they start.</h2>
+              <h2 className="vs-h2">Questions before you start.</h2>
               <p className="vs-body mt-4">
                 Something else on your mind? Email{" "}
                 <a href="mailto:hello@ventiscale.com" className="vs-link">
