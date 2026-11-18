@@ -185,6 +185,12 @@ export async function POST(req: Request) {
       (stored ? "" : `\n⚠️ Not saved to the leads table. This message is the only copy.`),
   );
 
+  // Record whether the ping went out, so the leads table shows it.
+  if (stored && db) {
+    const { error } = await db.from("audit_leads").update({ telegram_sent: pinged }).eq("id", id);
+    if (error) console.error("[start] telegram_sent update failed", error.message);
+  }
+
   if (!stored && !pinged) {
     console.error("[start] request reached neither the leads table nor Telegram", { id });
     return NextResponse.json(
