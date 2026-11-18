@@ -58,7 +58,7 @@ export default async function Home() {
 
       {/* ─── Hero: the price sheet is the picture ─── */}
       <section>
-        <div className="vs-container pt-10 pb-16 lg:pt-20 lg:pb-28">
+        <div className="vs-container vs-hero pt-10 pb-16 lg:pt-20 lg:pb-28">
           <div className="grid gap-9 lg:grid-cols-[minmax(0,1.12fr)_minmax(0,1fr)] lg:grid-rows-[auto_auto] lg:gap-x-16 lg:gap-y-8">
             <div className="lg:col-start-1 lg:row-start-1 lg:self-end">
               <h1 className="vs-h1">
@@ -66,9 +66,9 @@ export default async function Home() {
                 <span className="block">The prices are right here.</span>
               </h1>
               <p className="vs-lede mt-6">
-                SEO, social media, email, ads and video for small businesses. One setup fee, one
-                flat monthly price, no contract. Tick what you want off your plate and see your
-                total.
+                SEO, social media, email, ads and video, done for you. Built for local service
+                businesses, shops and small online stores. A flat monthly price, a one-time setup
+                fee per service, no contract.
               </p>
             </div>
 

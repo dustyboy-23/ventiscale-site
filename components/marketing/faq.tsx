@@ -16,8 +16,16 @@ export const HOME_FAQ: Faq[] = [
     a: "The one-time work before anything can go out: learning your business and how you talk, connecting your accounts, building templates and tracking, and planning the first months. You pay it once per service. It never comes back.",
   },
   {
-    q: "Who actually does the work?",
-    a: "I do, with a lot of help from software. AI handles the drafting, scheduling and reporting. I set the plan, check the work and answer your email. You never get handed to an account manager, because there isn't one.",
+    q: "Who actually does the work? Is it just AI?",
+    a: "Software writes first drafts and handles the scheduling and reporting. I decide what gets made, rewrite what's off, check the facts and check the work before it goes out. You never get handed to an account manager, because there isn't one. If software alone did this well, you wouldn't need me, and you'd be able to tell.",
+  },
+  {
+    q: "How will I know it's working?",
+    a: "Once a month you get one plain report. It starts with what you care about: calls, enquiries, bookings or sales, wherever they can be tracked. Rankings, clicks and opens come after that. If a service isn't earning its fee, I'll tell you before you have to ask.",
+  },
+  {
+    q: "What if you're away or busy?",
+    a: "The work is planned and scheduled ahead, so articles, posts and emails keep going out. I work from wherever I am and answer email within one business day. I keep the client list small so one person can do this properly.",
   },
   {
     q: "How fast will I see results?",
@@ -25,7 +33,11 @@ export const HOME_FAQ: Faq[] = [
   },
   {
     q: "What do you need from me?",
-    a: "About 30 minutes at the start: a short form, access to your accounts, and a few photos of your real work. After that, as little or as much as you like. You can approve things before they go out or let them run.",
+    a: "About 30 minutes in total at the start: a 20-minute form, then sharing access to your accounts and a few photos of your real work. After that, as little or as much as you like. You can approve things before they go out or let them run.",
+  },
+  {
+    q: "Do you work with businesses in my area?",
+    a: "Yes. Everything is done remotely, so it doesn't matter where you are. I'm based in British Columbia, Canada. Prices are in US dollars.",
   },
   {
     q: "Do you build websites?",
@@ -52,7 +64,11 @@ export const PRICING_FAQ: Faq[] = [
   },
   {
     q: "What if I need more than the plan covers?",
-    a: "Tell me what you need and I'll give you a price for it in writing before any work starts. More articles, more posts, a second ad platform and extra videos are the usual ones.",
+    a: "Tell me what you need and I'll give you a price for it in writing before any work starts. More articles, more posts, a second ad platform, ad spend above $3,000 a month and extra videos are the usual ones.",
+  },
+  {
+    q: "I already run ads or email. Do you start over?",
+    a: "No. I work inside the accounts you already have. What's working stays, and I fix or add what's missing. Tell me what you have in the start form and I'll say exactly what setup involves for you before you pay anything.",
   },
   {
     q: "What happens if I cancel?",

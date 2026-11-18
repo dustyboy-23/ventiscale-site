@@ -60,7 +60,7 @@ export const SERVICES: Service[] = [
   {
     id: "seo",
     name: "SEO + blog",
-    short: "4 articles a month, plus on-page fixes",
+    short: "4 articles a month, plus fixes to your pages",
     blurb:
       "Articles your customers are searching for, published on your site every week, plus the behind-the-scenes fixes that help Google and AI search show them.",
     monthly: 450,
@@ -68,12 +68,12 @@ export const SERVICES: Service[] = [
     includes: [
       "4 blog articles a month, written for the searches your customers make",
       "Keyword plan built around what you sell and where you sell it",
-      "On-page fixes: titles, descriptions, headings, internal links",
-      "Formatting that AI search tools can read and cite (FAQs, schema)",
-      "Monthly report: rankings, clicks, what moved",
+      "Fixes to the pages you already have, so Google understands them",
+      "Pages set up so ChatGPT and Google's AI answers can quote you",
+      "Monthly report: what search brought in, what moved, what's next",
     ],
     setupCovers:
-      "Site audit, keyword research, Search Console and Analytics hookup, first three months of topics planned.",
+      "A full check of your site, research into what your customers search for, Google's free tracking tools connected, and the first three months of topics planned.",
     notIncluded: "Building or redesigning your website.",
     needs: "A login to your website so articles can be published.",
     weeks: every(1, "1 article"),
@@ -104,27 +104,27 @@ export const SERVICES: Service[] = [
   {
     id: "email",
     name: "Email marketing",
-    short: "Automated flows, plus 2 campaigns a month",
+    short: "Automatic emails, plus 2 campaigns a month",
     blurb:
       "The emails that should already be going out, built and running: a welcome series, follow-ups, win-backs. Plus two fresh campaigns every month.",
     monthly: 350,
     setup: 400,
     includes: [
-      "4 automated flows built at setup: welcome, follow-up or abandoned cart, review ask, win-back",
+      "4 automatic email series built at setup: a welcome, a follow-up after an enquiry or unfinished checkout, a review request, and a come-back email for quiet customers",
       "2 campaigns a month: written, designed, sent",
       "List cleanup so your emails keep landing in inboxes",
-      "Works with Klaviyo, Mailchimp or the tool you already use",
-      "Monthly report: opens, clicks, sales or bookings",
+      "Works with the email tool you already have (Mailchimp, Klaviyo and the rest)",
+      "Monthly report: sales or bookings first, then opens and clicks",
     ],
     setupCovers:
-      "The four automated flows written, designed and switched on, signup forms connected, sending domain checked.",
+      "The four automatic email series written, designed and switched on, your signup form connected, and a check that your emails reach inboxes.",
     notIncluded:
       "Your email tool's own subscription. You pay that to them directly.",
-    needs: "Access to your email tool, or let me set one up with you.",
+    needs: "Access to your email tool. No tool or list yet? I set one up with you.",
     weeks: [
-      { units: 0, label: "Flows running" },
+      { units: 0, label: "Automatic emails" },
       { units: 1, label: "1 campaign" },
-      { units: 0, label: "Flows running" },
+      { units: 0, label: "Automatic emails" },
       { units: 1, label: "1 campaign" },
     ],
   },
@@ -140,11 +140,11 @@ export const SERVICES: Service[] = [
       "One platform: Meta (Facebook + Instagram) or Google",
       "Covers up to $3,000 a month in ad spend",
       "Ad copy and creative made for you, refreshed monthly",
-      "Weekly tuning: budgets, audiences, keywords, what to cut",
-      "Monthly report in plain numbers: spent, leads or sales, cost per result",
+      "Checked every week: what to spend more on, what to switch off",
+      "Monthly report in plain numbers: what you spent, the calls, enquiries or sales it brought, and the cost of each",
     ],
     setupCovers:
-      "Ad account and tracking set up properly, first campaigns built, conversion tracking tested end to end.",
+      "Your ad account set up properly, the first campaigns built, and tracking tested so you can see which ads bring calls, enquiries or sales.",
     notIncluded:
       "The ad spend itself. That is billed by the platform to your card, never through me.",
     needs: "Admin access to your ad account, or I create one in your name.",

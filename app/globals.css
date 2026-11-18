@@ -1554,3 +1554,32 @@ body.theme-cream ::-webkit-scrollbar-thumb:hover { background: rgba(27,27,27,0.2
   box-shadow: 0 1px 0 rgba(15, 46, 32, 0.05), 0 40px 80px -48px rgba(15, 46, 32, 0.45);
   background: var(--color-paper);
 }
+
+/* Phone-only bar: running total + the button, until the sheet's own button is on screen. */
+.vs-sticky { display: none; }
+@media (max-width: 767px) {
+  .vs-sticky[data-show="true"] {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 14px;
+    position: fixed;
+    left: 0; right: 0; bottom: 0;
+    z-index: 45;
+    padding: 10px 18px calc(10px + env(safe-area-inset-bottom, 0px));
+    background: rgba(255, 255, 255, 0.96);
+    backdrop-filter: saturate(1.4) blur(10px);
+    border-top: 1px solid var(--color-line-strong);
+    box-shadow: 0 -12px 30px -22px rgba(15, 46, 32, 0.5);
+  }
+  .vs-site:has(.vs-sticky[data-show="true"]) footer { padding-bottom: 78px; }
+}
+
+/* Short laptops (1366x768 is the most common): keep the sheet's button on the first screen. */
+@media (min-width: 1024px) and (max-height: 830px) {
+  .vs-hero { padding-top: 36px; padding-bottom: 72px; }
+  .vs-sheet-head { padding: 16px 24px 10px; }
+  .vs-presets { padding-bottom: 12px; }
+  .vs-line { padding-block: 11px; }
+  .vs-total { padding: 14px 24px 16px; }
+}

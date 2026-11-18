@@ -42,6 +42,7 @@ const nextConfig: NextConfig = {
       { source: "/data-deletion.html", destination: "/data-deletion", permanent: true },
       // 2026-11 redesign: services and prices live on one page.
       { source: "/services", destination: "/pricing", permanent: true },
+      { source: "/for-shopify", destination: "/pricing", permanent: true },
     ];
   },
   async headers() {

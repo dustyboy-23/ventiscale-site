@@ -1,3 +1,4 @@
+import { VentiToday } from "@/components/marketing/venti-today";
 import { BlogCta } from "@/components/marketing/blog-cta";
 import Link from "next/link";
 import { headers } from "next/headers";
@@ -621,35 +622,8 @@ export default async function PillarPage() {
             </p>
           </div>
 
-          <h2>What we built at Venti Scale</h2>
-          <p>
-            Venti Scale is a done-for-you AI marketing service for
-            ecommerce founders running $5,000 to $200,000 per month. We
-            sit in alternative 4 above. Every client gets a Custom AI
-            trained on their brand voice, offers, customers, and visuals.
-            That AI runs daily marketing output across content, email,
-            and social. I personally review every output before it ships.
-          </p>
-          <p>
-            Pricing is transparent. Month-to-month. Cancel any time. Five
-            days from audit submission to live portal. The founder (me)
-            reviews the work and answers Slack messages directly. There
-            is no junior account manager, no forced discovery call, no
-            12-month contract.
-          </p>
-          <p>
-            We picked this structure deliberately because every red flag
-            above is a thing I personally hated as an agency client. The
-            service exists because I wanted the thing none of my agencies
-            were willing to build.
-          </p>
-          <p>
-            If you&apos;re evaluating alternatives and want to see what
-            this looks like for your specific business, every price is on the pricing page. Pick the services you want and I&apos;ll reply personally within one business day.
-            No call required.
-          </p>
+          <VentiToday />
 
-          <hr className="blog-divider" />
 
           <div className="blog-faq">
             <h2>Frequently asked questions</h2>

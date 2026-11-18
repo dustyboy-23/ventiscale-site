@@ -16,7 +16,7 @@ const NEXT = [
   },
   {
     title: "You get a setup invoice and a short form",
-    body: "The form takes about 20 minutes: what you sell, who buys it, how you talk, and access to the accounts I'll work in.",
+    body: "You only pay if you want to go ahead. The form takes about 20 minutes: what you sell, who buys it, how you talk, and access to the accounts I'll work in.",
   },
   {
     title: "Setup week, then work goes out",

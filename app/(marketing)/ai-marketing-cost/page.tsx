@@ -1,3 +1,4 @@
+import { VentiToday } from "@/components/marketing/venti-today";
 import { BlogCta } from "@/components/marketing/blog-cta";
 import Link from "next/link";
 import { headers } from "next/headers";
@@ -25,7 +26,7 @@ const FAQ_DATA = [
   },
   {
     q: "What are the hidden costs in AI marketing services?",
-    a: "Five hidden costs to watch for: setup fees disguised as 'onboarding' ($500-3,000), per-channel add-on charges that weren't in the headline price ($200-500 per additional channel), platform fees passed through at markup (Klaviyo, ad spend, SMS), data export fees on cancellation, and 'premium' tier features that are actually basic table-stakes. Reputable services bundle these. Bad services disclose them only after you've signed.",
+    a: "Five hidden costs to watch for: setup fees that only appear on the contract ($500-3,000), per-channel add-on charges that weren't in the headline price ($200-500 per additional channel), platform fees passed through at markup (Klaviyo, ad spend, SMS), data export fees on cancellation, and 'premium' tier features that are actually basic table-stakes. Reputable services bundle these. Bad services disclose them only after you've signed.",
   },
   {
     q: "Is it cheaper to use AI tools yourself or hire a done-for-you service?",
@@ -200,7 +201,7 @@ export default async function PillarPage() {
                 rest on paid ad spend.
               </li>
               <li>
-                Hidden costs to watch for: onboarding/setup fees, per-channel
+                Hidden costs to watch for: setup fees that are not on the pricing page, per-channel
                 add-ons, platform fee markups, data-export charges on
                 cancellation, and &quot;premium&quot; features that are actually
                 table-stakes.
@@ -231,10 +232,10 @@ export default async function PillarPage() {
             They knew. They wanted you to anchor on $497.
           </p>
           <p>
-            <strong>2. Setup fees disguised as &quot;onboarding.&quot;</strong>{" "}
-            Real DFY services include onboarding in the monthly price. Bad
-            services tack on $500-3,000 setup fees that aren&apos;t mentioned
-            on the pricing page. You see them only when the contract arrives.
+            <strong>2. Setup fees you only see on the contract.</strong>{" "}
+            A setup fee is fair when it sits on the pricing page next to the
+            monthly price. The problem is the $500-3,000 one nobody mentioned.
+            You see it only when the contract arrives.
             By that point you&apos;ve invested time in the conversation and
             most founders sign anyway.
           </p>
@@ -367,8 +368,8 @@ export default async function PillarPage() {
             $4,000-5,000/month agency was doing in 2023.
           </p>
           <p>
-            <strong>What good looks like:</strong> 5-day onboarding, a
-            real-time portal showing every output, direct Slack access to
+            <strong>What good looks like:</strong> onboarding measured in days, not weeks, a
+            dashboard showing the work, direct access to
             whoever runs your account, month-to-month structure, brand-voice
             training that actually produces founder-sounding copy. We
             covered the full evaluation framework at{" "}
@@ -418,14 +419,14 @@ export default async function PillarPage() {
 
           <h2>The 5 hidden costs most services don&apos;t disclose</h2>
 
-          <h2>Hidden cost 1: Onboarding/setup fees</h2>
+          <h2>Hidden cost 1: Setup fees that are not published</h2>
           <p>
             Range: $500 to $3,000 added to your first month. Usually called
             &quot;brand voice training,&quot; &quot;account setup,&quot; or
-            &quot;integration fee.&quot; Reputable services include this in
-            the monthly rate. If a service charges separately for setup,
-            assume their per-month rate is 20% lower than transparent competitors
-            because they&apos;re recouping setup margin upfront.
+            &quot;integration fee.&quot; Reputable services either include this in
+            the monthly rate or publish it next to the monthly price. If a setup
+            fee only shows up after the sales call, treat the monthly number
+            you were quoted as incomplete.
           </p>
 
           <h2>Hidden cost 2: Per-channel add-ons</h2>
@@ -517,34 +518,8 @@ export default async function PillarPage() {
             .
           </p>
 
-          <h2>What we built at Venti Scale</h2>
-          <p>
-            Venti Scale is a tier 4 mid-tier DFY service for ecommerce founders
-            running $5,000 to $200,000 per month. Our pricing is published
-            publicly and transparent.
-          </p>
-          <p>
-            Onboarding is included in the monthly rate. No setup fee. Platform
-            fees are pass-through, never marked up. Cancellation includes full
-            data handover at no additional cost. Brand voice training, real-time
-            portal access, weekly reporting, and direct founder communication
-            are all baseline, not premium.
-          </p>
-          <p>
-            Pricing is month-to-month. Cancel any time. The 5 questions
-            framework from{" "}
-            <Link href="/done-for-you-marketing-services">
-              done-for-you marketing services
-            </Link>
-            {" "}all return green-flag answers because the service was built
-            specifically to fail none of those red flags.
-          </p>
-          <p>
-            If you want exact pricing for the channels you need, every price is on the pricing page. Build your plan there and I reply personally within one business day. No forced sales call. The
-            number you see is the number you pay.
-          </p>
+          <VentiToday />
 
-          <hr className="blog-divider" />
 
           <div className="blog-faq">
             <h2>Frequently asked questions</h2>

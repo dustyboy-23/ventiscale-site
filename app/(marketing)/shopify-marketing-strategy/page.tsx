@@ -1,3 +1,4 @@
+import { VentiToday } from "@/components/marketing/venti-today";
 import { BlogCta } from "@/components/marketing/blog-cta";
 import Link from "next/link";
 import { headers } from "next/headers";
@@ -561,32 +562,8 @@ export default async function PillarPage() {
             </p>
           </div>
 
-          <h2>What we built at Venti Scale for Shopify stores</h2>
-          <p>
-            Venti Scale runs the 5-channel Shopify marketing strategy described
-            above for ecommerce founders doing $5,000 to $200,000/month. Each
-            client gets a Custom AI trained on their brand voice, products,
-            and customer language. The AI handles daily output across email,
-            content, paid creative, organic social, and SMS.
-          </p>
-          <p>
-            The Shopify-native integrations (Klaviyo, Shop Pay setup, App
-            Store optimization) are part of the standard 5-day onboarding.
-            I personally review every output before it ships.
-          </p>
-          <p>
-            Pricing is month-to-month. Cancel any time. The audit form takes
-            60-90 seconds. I email back a custom plan within 2 business days
-            covering exactly which of the 5 channels to build first for your
-            specific revenue tier and product category. If you&apos;re
-            evaluating other options first, see how to compare them at{" "}
-            <Link href="/marketing-agency-alternatives">
-              marketing agency alternatives
-            </Link>
-            .
-          </p>
+          <VentiToday />
 
-          <hr className="blog-divider" />
 
           <div className="blog-faq">
             <h2>Frequently asked questions</h2>

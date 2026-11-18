@@ -1,3 +1,4 @@
+import { VentiToday } from "@/components/marketing/venti-today";
 import { BlogCta } from "@/components/marketing/blog-cta";
 import Link from "next/link";
 import { headers } from "next/headers";
@@ -618,36 +619,8 @@ export default async function PillarPage() {
             your own brand.
           </p>
 
-          <h2>What we built at Venti Scale for ecommerce</h2>
-          <p>
-            Venti Scale runs the AI marketing stack described above for
-            ecommerce founders doing $5,000 to $200,000/month in revenue.
-            Every client gets a Custom AI trained specifically on their
-            brand voice, products, customer language, and visual style.
-          </p>
-          <p>
-            That AI handles daily output across the 4 channels: email
-            flows, content + SEO, paid social creative, organic social
-            production. I personally review everything before it ships.
-            Clients see every output in a real-time portal.
-          </p>
-          <p>
-            Pricing is transparent and month-to-month. 5 days from intake
-            to live operations. The founder (me) communicates with every
-            client directly. No junior account manager. No 12-month contract.
-            No PDF reports.
-          </p>
-          <p>
-            If you want to see what this would look like for your specific
-            store, every price is on the pricing page. Pick the services you want and I&apos;ll reply personally within one business day. If you&apos;re evaluating multiple services,
-            see how to compare them with the framework at{" "}
-            <Link href="/marketing-agency-alternatives">
-              marketing agency alternatives: 5 options that beat the retainer trap
-            </Link>
-            .
-          </p>
+          <VentiToday />
 
-          <hr className="blog-divider" />
 
           <div className="blog-faq">
             <h2>Frequently asked questions</h2>

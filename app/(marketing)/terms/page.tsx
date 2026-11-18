@@ -13,7 +13,7 @@ export default function TermsPage() {
         Terms of Service
       </h1>
       <p className="font-mono text-[11px] tracking-[0.14em] uppercase text-white/45 mb-12">
-        Last updated: 2026-04-10
+        Last updated: 2026-11-17
       </p>
 
       <div className="prose-legal">
@@ -66,9 +66,9 @@ export default function TermsPage() {
 
         <h2>5. Cancellation</h2>
         <p>
-          You can cancel any time. There are no long-term contracts unless you
-          explicitly opt into our founding client program, which has a 12-month
-          lock in exchange for a discounted rate.
+          You can cancel any time by emailing hello@ventiscale.com. There are no
+          long-term contracts and no cancellation fee. Work stops at the end of the
+          month you have paid for.
         </p>
 
         <h2>6. Intellectual property</h2>

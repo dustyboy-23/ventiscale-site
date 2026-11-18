@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { useEffect, useMemo, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 import { Check } from "lucide-react";
 import {
   BUNDLES,
@@ -36,6 +36,18 @@ export function PlanBuilder({ title = "Your plan", animate = false }: Props) {
   }, []);
 
   const q = useMemo(() => quote(ids), [ids]);
+
+  // Phones: the sheet's own button sits a scroll and a half down, so a slim
+  // bar keeps the running total and the button on screen until it is in view.
+  const ctaRef = useRef<HTMLDivElement>(null);
+  const [ctaInView, setCtaInView] = useState(true);
+  useEffect(() => {
+    const el = ctaRef.current;
+    if (!el || typeof IntersectionObserver === "undefined") return;
+    const io = new IntersectionObserver(([e]) => setCtaInView(e.isIntersecting), { threshold: 0.6 });
+    io.observe(el);
+    return () => io.disconnect();
+  }, []);
 
   function toggle(id: ServiceId) {
     setIds((cur) => (cur.includes(id) ? cur.filter((x) => x !== id) : [...cur, id]));
@@ -123,18 +135,38 @@ export function PlanBuilder({ title = "Your plan", animate = false }: Props) {
         </div>
         <p className="vs-small mt-3">{nextHint}</p>
 
-        {ids.length > 0 ? (
-          <Link href={`/start${planQuery(q.ids)}`} className="vs-btn vs-btn-block mt-4">
-            Start my plan
-          </Link>
-        ) : (
-          <span className="vs-btn vs-btn-block mt-4" aria-disabled="true" style={{ opacity: 0.5 }}>
-            Start my plan
-          </span>
-        )}
+        <div ref={ctaRef}>
+          {ids.length > 0 ? (
+            <Link href={`/start${planQuery(q.ids)}`} className="vs-btn vs-btn-block mt-4">
+              Start my plan
+            </Link>
+          ) : (
+            <span className="vs-btn vs-btn-block mt-4" aria-disabled="true" style={{ opacity: 0.5 }}>
+              Start my plan
+            </span>
+          )}
+        </div>
         <p className="vs-small mt-3 text-center">
           No contract. Cancel any month. Nothing is charged today.
         </p>
+      </div>
+
+      <div className="vs-sticky" data-show={!ctaInView && ids.length > 0}>
+        <p className="leading-tight">
+          <span className="vs-small block">
+            Your plan, {ids.length} {ids.length === 1 ? "service" : "services"}
+          </span>
+          <span className="vs-num text-[20px]">
+            {money(q.monthly)}
+            <span className="text-[13.5px] font-medium text-moss" style={{ fontFamily: "var(--font-vs-body)" }}>
+              {" "}
+              /mo
+            </span>
+          </span>
+        </p>
+        <Link href={`/start${planQuery(q.ids)}`} className="vs-btn vs-btn-sm" tabIndex={ctaInView ? -1 : 0}>
+          Start my plan
+        </Link>
       </div>
     </div>
   );

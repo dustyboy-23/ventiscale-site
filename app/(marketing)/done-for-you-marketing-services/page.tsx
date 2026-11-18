@@ -1,3 +1,4 @@
+import { VentiToday } from "@/components/marketing/venti-today";
 import { BlogCta } from "@/components/marketing/blog-cta";
 import Link from "next/link";
 import { headers } from "next/headers";
@@ -345,11 +346,11 @@ export default async function PillarPage() {
             replaces what a $4,000-5,000/month agency was doing in 2023.
           </p>
           <p>
-            <strong>What to expect:</strong> A 5-day onboarding process where
-            the service trains its AI on your brand voice, products, customers,
+            <strong>What to expect:</strong> About a week of onboarding where
+            the service learns your brand voice, products, customers
             and visuals. Then weekly content shipping with founder or senior
-            strategist review before publish. A real-time portal showing every
-            output. Direct Slack or Discord access to whoever runs your account.
+            strategist review before publish. A dashboard showing the work.
+            Direct access to whoever runs your account.
           </p>
 
           <h2>Tier 3: Full-service DFY ($2,500-5,000/month)</h2>
@@ -402,10 +403,9 @@ export default async function PillarPage() {
             and I&apos;ll walk you through it.&quot;
           </p>
           <p>
-            <strong>Green flag answer:</strong> &quot;Here&apos;s our portal
-            from a current client (with permission). Here are 5 case studies
-            with real numbers. Here&apos;s a sample week of content we shipped
-            last month.&quot;
+            <strong>Green flag answer:</strong> &quot;Here&apos;s the dashboard
+            you&apos;ll get. Here&apos;s sample work. Here&apos;s exactly what
+            ships each month, counted.&quot;
           </p>
 
           <h2>Question 2: Is the contract month-to-month?</h2>
@@ -421,8 +421,8 @@ export default async function PillarPage() {
             cancel before then because we under-priced the onboarding.)
           </p>
           <p>
-            <strong>Green flag answer:</strong> &quot;Cancel any time. 30-day
-            notice. We hand back your data, prompt library, and integrations.&quot;
+            <strong>Green flag answer:</strong> &quot;Cancel any month. We
+            hand back your data, your accounts and everything we made.&quot;
           </p>
 
           <h2>Question 3: Who reviews work before it ships?</h2>
@@ -437,8 +437,8 @@ export default async function PillarPage() {
           </p>
           <p>
             <strong>Green flag answer:</strong> &quot;The founder personally
-            reviews every output before it ships. You&apos;ll communicate with
-            the founder directly through a Slack channel.&quot;
+            reviews every output before it ships. You&apos;ll talk to
+            the founder directly.&quot;
           </p>
           <p>
             We covered the deeper diagnostic at{" "}
@@ -547,42 +547,8 @@ export default async function PillarPage() {
             DFY.
           </p>
 
-          <h2>What we built at Venti Scale</h2>
-          <p>
-            Venti Scale is a tier 2 done-for-you marketing service for ecommerce
-            founders running $5,000 to $200,000 per month. Each client gets a
-            Custom AI trained on their brand voice, products, customers, and
-            visuals. The AI handles daily output across email, content, paid
-            social creative, and organic social. I personally review every
-            output before it ships.
-          </p>
-          <p>
-            Pricing is transparent and month-to-month. Cancel any time. 5-day
-            onboarding from intake form to live operations. The founder (me)
-            communicates with every client directly through a Slack channel.
-            Real-time portal showing every output as it&apos;s generated. No
-            junior account manager, no 12-month contract, no PDF reports.
-          </p>
-          <p>
-            We score 5/5 on the questions framework above by design. Every red
-            flag in this page is a thing I personally hated as an agency client,
-            so the service was built to fail none of them.
-          </p>
-          <p>
-            If you want to see what this looks like for your specific business,
-            every price is on the pricing page. Pick the services you want and I reply personally within one business day. No forced call. If you&apos;re evaluating other DFY services or
-            alternatives first, see the comparison framework at{" "}
-            <Link href="/marketing-agency-alternatives">
-              marketing agency alternatives
-            </Link>
-            {" "}or the AI-marketing breakdown at{" "}
-            <Link href="/ai-marketing-for-ecommerce">
-              AI marketing for ecommerce
-            </Link>
-            .
-          </p>
+          <VentiToday />
 
-          <hr className="blog-divider" />
 
           <div className="blog-faq">
             <h2>Frequently asked questions</h2>
@@ -595,7 +561,7 @@ export default async function PillarPage() {
           </div>
 
           <BlogAuthorBio
-            bioOverride="Founder of Venti Scale, a done-for-you marketing service for ecommerce. I built Venti Scale specifically to fail zero of the red flags listed on this page, because every red flag here was a thing I hated as an agency client myself."
+            bioOverride="Founder of Venti Scale, a done-for-you marketing service for small businesses. I built Venti Scale specifically to fail zero of the red flags listed on this page, because every red flag here was a thing I hated as an agency client myself."
             lastUpdated="2026-04-29"
           />
 

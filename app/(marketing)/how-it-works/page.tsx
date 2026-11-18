@@ -20,7 +20,7 @@ const TIMELINE = [
   {
     when: "Day 1",
     title: "I reply with next steps",
-    body: "A personal email from me with your setup invoice and a short onboarding form. If I think a different mix of services would serve you better, this is where I say it.",
+    body: "A personal email from me with your setup invoice and a short onboarding form. You only pay if you want to go ahead. If I think a different mix of services would serve you better, this is where I say it.",
   },
   {
     when: "Days 2 to 7",
@@ -111,7 +111,7 @@ export default function HowItWorksPage() {
             <div>
               <h2 className="vs-h2">What I need from you.</h2>
               <p className="vs-body mt-4">
-                About 30 minutes at the start. After that, only what you feel like giving.
+                About 30 minutes in total at the start. After that, only what you feel like giving.
               </p>
             </div>
             <div className="vs-table-wrap">
