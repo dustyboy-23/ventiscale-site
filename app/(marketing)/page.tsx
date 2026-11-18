@@ -2,7 +2,14 @@ import Link from "next/link";
 import { headers } from "next/headers";
 import { Check } from "lucide-react";
 import { PlanBuilder } from "@/components/marketing/plan-builder";
-import { BundleTable, ClosingCta, ServiceLedger, Steps } from "@/components/marketing/sections";
+import {
+  BundleTable,
+  ClosingCta,
+  DashboardProof,
+  MonthView,
+  ServiceLedger,
+  Steps,
+} from "@/components/marketing/sections";
 import { FaqList, HOME_FAQ, faqJsonLd } from "@/components/marketing/faq";
 import { BUNDLE_DISCOUNT, CURRENCY, SERVICES } from "@/lib/pricing";
 
@@ -141,13 +148,28 @@ export default async function Home() {
           <div className="mt-10 lg:mt-14">
             <Steps />
           </div>
-          <p className="mt-8">
-            <Link href="/how-it-works" className="vs-link">
-              The full walkthrough, day by day
-            </Link>
-          </p>
+
+          <div className="mt-16 lg:mt-24 grid gap-8 lg:grid-cols-[minmax(0,4fr)_minmax(0,7fr)] lg:gap-16">
+            <div>
+              <h3 className="vs-h2" style={{ fontSize: "clamp(26px, 3vw, 36px)" }}>
+                What a month looks like.
+              </h3>
+              <p className="vs-body mt-4">
+                Each green mark is one piece of work going out. No billable hours. You can count
+                what you paid for.
+              </p>
+              <p className="mt-6">
+                <Link href="/how-it-works" className="vs-link">
+                  The full walkthrough, day by day
+                </Link>
+              </p>
+            </div>
+            <MonthView />
+          </div>
         </div>
       </section>
+
+      <DashboardProof />
 
       {/* ─── Why the price is what it is + who runs it ─── */}
       <section className="vs-rule">

@@ -32,7 +32,27 @@ export interface Service {
   notIncluded: string;
   /** What we need from the client for this to work. */
   needs: string;
+  /**
+   * What ships in each of the four weeks of a normal month. `units` draws
+   * that many marks on the month view (0 = running in the background).
+   * KEEP IN STEP with `includes`: if 12 posts becomes 8, change this too.
+   */
+  weeks: [WeekSlot, WeekSlot, WeekSlot, WeekSlot];
+  /** Optional link to real work of this kind. */
+  sample?: { label: string; href: string };
 }
+
+export interface WeekSlot {
+  units: number;
+  label: string;
+}
+
+const every = (units: number, label: string): [WeekSlot, WeekSlot, WeekSlot, WeekSlot] => [
+  { units, label },
+  { units, label },
+  { units, label },
+  { units, label },
+];
 
 export const CURRENCY = "USD";
 
@@ -56,6 +76,8 @@ export const SERVICES: Service[] = [
       "Site audit, keyword research, Search Console and Analytics hookup, first three months of topics planned.",
     notIncluded: "Building or redesigning your website.",
     needs: "A login to your website so articles can be published.",
+    weeks: every(1, "1 article"),
+    sample: { label: "Read real articles on the blog", href: "/blog" },
   },
   {
     id: "social",
@@ -77,6 +99,7 @@ export const SERVICES: Service[] = [
     notIncluded:
       "Replying to comments and DMs, and Google Business Profile posts. Those stay with you.",
     needs: "Access to your pages, and a few photos of your real work.",
+    weeks: every(3, "3 posts"),
   },
   {
     id: "email",
@@ -98,6 +121,12 @@ export const SERVICES: Service[] = [
     notIncluded:
       "Your email tool's own subscription. You pay that to them directly.",
     needs: "Access to your email tool, or let me set one up with you.",
+    weeks: [
+      { units: 0, label: "Flows running" },
+      { units: 1, label: "1 campaign" },
+      { units: 0, label: "Flows running" },
+      { units: 1, label: "1 campaign" },
+    ],
   },
   {
     id: "ads",
@@ -119,6 +148,12 @@ export const SERVICES: Service[] = [
     notIncluded:
       "The ad spend itself. That is billed by the platform to your card, never through me.",
     needs: "Admin access to your ad account, or I create one in your name.",
+    weeks: [
+      { units: 1, label: "Fresh ads" },
+      { units: 1, label: "Tune-up" },
+      { units: 1, label: "Tune-up" },
+      { units: 1, label: "Tune-up" },
+    ],
   },
   {
     id: "video",
@@ -139,6 +174,7 @@ export const SERVICES: Service[] = [
       "Your editing style set (captions, fonts, pacing), a shared upload folder, accounts connected.",
     notIncluded: "Filming. You shoot it on your phone, I take it from there.",
     needs: "Raw clips dropped in a shared folder. Phone footage is fine.",
+    weeks: every(3, "3 videos"),
   },
 ];
 

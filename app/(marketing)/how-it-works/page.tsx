@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { ClosingCta, Steps } from "@/components/marketing/sections";
+import { ClosingCta, DashboardProof, MonthView, Steps } from "@/components/marketing/sections";
 import { SERVICES } from "@/lib/pricing";
 
 const SITE_URL = "https://www.ventiscale.com";
@@ -88,6 +88,22 @@ export default function HowItWorksPage() {
           </div>
         </div>
       </section>
+
+      <section>
+        <div className="vs-container vs-section">
+          <div className="grid gap-10 lg:grid-cols-[minmax(0,4fr)_minmax(0,7fr)] lg:gap-16">
+            <div>
+              <h2 className="vs-h2">What a month looks like.</h2>
+              <p className="vs-body mt-4">
+                Each green mark is one piece of work going out. You can count what you paid for.
+              </p>
+            </div>
+            <MonthView />
+          </div>
+        </div>
+      </section>
+
+      <DashboardProof />
 
       <section>
         <div className="vs-container vs-section">
